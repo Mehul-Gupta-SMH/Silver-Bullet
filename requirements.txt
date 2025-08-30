@@ -1,2 +1,3 @@
 transformers~=4.55.4
 tqdm~=4.67.1
+torch~=2.8.0

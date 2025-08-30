@@ -16,6 +16,10 @@ def split_txt(base_text: str) -> list:
 
     split_txt_list = re.split(regex_patter, base_text)
 
-    split_txt_list = [sentence.strip() for sentence in split_txt_list if len(sentence.strip())]
+    split_txt_list = [
+        sentence.strip()
+        for sentence in split_txt_list
+        if len(sentence.strip())
+    ]
 
     return split_txt_list
