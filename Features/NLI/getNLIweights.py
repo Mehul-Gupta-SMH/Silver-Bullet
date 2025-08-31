@@ -18,10 +18,10 @@ class NLIWeights:
 
     def __load_model__(self):
         tok = AutoTokenizer.from_pretrained(self.ModelName
-                                            , cache_dir=f"Features/NLI/model/{self.ModelName}/")
+                                            , cache_dir=f"/Features/NLI/model/{self.ModelName}/")
 
         mdl = AutoModelForSequenceClassification.from_pretrained(self.ModelName
-                                                                 , cache_dir=f"Features/NLI/model/{self.ModelName}/")
+                                                                 , cache_dir=f"/Features/NLI/model/{self.ModelName}/")
         mdl.eval()
         device = "cuda" if torch.cuda.is_available() else "cpu"
         mdl.to(device)

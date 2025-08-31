@@ -48,14 +48,14 @@ class LexicalWeights:
         }
 
     def __load_model__(self):
-        repo_id = "openai/gpt-oss-120b"
+        repo_id = "mixedbread-ai/mxbai-embed-large-v1"
         tokenizer = AutoTokenizer.from_pretrained(
             repo_id,
-            use_fast=True,                 # get the fast Rust tokenizer
+            # use_fast=True,                 # get the fast Rust tokenizer
             add_eos_token=False,           # we don't want special tokens for similarity
             add_bos_token=False,
-            token=None,                    # or your HF token string; or set HF_TOKEN env var
-            cache_dir=f'/Feature/Lexical/tokeniser_cache/{repo_id}'
+            # token=None,                    # or your HF token string; or set HF_TOKEN env var
+            cache_dir=f'/Features/Lexical/tokeniser_cache/{repo_id}'
         )
 
         self.tokenizer_cache = tokenizer
@@ -101,8 +101,8 @@ class LexicalWeights:
 
     def __compute_token_lists__(self):
         """Tokenizes the phrases in both lists using SentencePiece."""
-        self.phrase_tokens_list1 = [self.sp_tokenize(p) for p in self.phrase_list1]
-        self.phrase_tokens_list2 = [self.sp_tokenize(p) for p in self.phrase_list2]
+        self.phrase_tokens_list1 = [self.sp_tokenize(str(p)) for p in self.phrase_list1]
+        self.phrase_tokens_list2 = [self.sp_tokenize(str(p)) for p in self.phrase_list2]
 
     def __compute_weights__(self):
         """Computes the weight matrix for all phrase pairs using various similarity metrics."""
