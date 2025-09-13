@@ -48,14 +48,14 @@ class LexicalWeights:
         }
 
     def __load_model__(self):
-        repo_id = "openai/gpt-oss-120b"
+        repo_id = "mixedbread-ai/mxbai-embed-large-v1"
         tokenizer = AutoTokenizer.from_pretrained(
             repo_id,
             use_fast=True,                 # get the fast Rust tokenizer
             add_eos_token=False,           # we don't want special tokens for similarity
             add_bos_token=False,
             token=None,                    # or your HF token string; or set HF_TOKEN env var
-            cache_dir=f'/Feature/Lexical/tokeniser_cache/{repo_id}'
+            cache_dir=f'/Features/Lexical/tokeniser_cache/{repo_id}'
         )
 
         self.tokenizer_cache = tokenizer
@@ -106,12 +106,10 @@ class LexicalWeights:
 
     def __compute_weights__(self):
         """Computes the weight matrix for all phrase pairs using various similarity metrics."""
-        for ind1, tokens1 in tqdm(enumerate(self.phrase_tokens_list1)):
-            row_jaccard = []
-            row_dice = []
-            row_cosine = []
-            row_rouge = []
-            for ind2, tokens2 in enumerate(self.phrase_tokens_list2):
+        for tokens1 in self.phrase_tokens_list1:
+            row_jaccard, row_dice, row_cosine, row_rouge = [], [], [], []
+
+            for tokens2 in self.phrase_tokens_list2:
                 row_jaccard.append(self.jaccard(tokens1, tokens2))
                 row_dice.append(self.dice(tokens1, tokens2))
                 row_cosine.append(self.cosine_counts(tokens1, tokens2))
@@ -129,6 +127,7 @@ class LexicalWeights:
     def getFeatureMap(self, phrase_list1, phrase_list2):
         """Computes and returns the weight matrix for the phrase pairs."""
         self.__init__()
+
         self.phrase_list1, self.phrase_list2 = phrase_list1, phrase_list2
 
         self.__compute_token_lists__()
@@ -141,6 +140,6 @@ if __name__ == '__main__':
     s1 = "The quick brown fox jumps over the lazy dog."
     s2 = "A quick brown fox leaped over a very lazy dog."
     LexicalWeights_Obj = LexicalWeights()
-    print(LexicalWeights_Obj.getFeatureMap([s1, s2], [s1, s2]))
+    print(LexicalWeights_Obj.getFeatureMap([s1, s2], [s1, s2, s1]))
 
 

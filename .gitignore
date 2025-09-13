@@ -2,5 +2,6 @@
 .vscode
 *.iml
 __pycache__
-
+.sbvenv
 Features/Semantic/weights_cache
+resources/config.yaml

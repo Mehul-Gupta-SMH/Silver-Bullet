@@ -1,3 +1,7 @@
-transformers~=4.55.4
+transformers~=4.56.0
 tqdm~=4.67.1
 torch~=2.8.0
+gliner~=0.2.22
+PyYAML~=6.0.2
+huggingface-hub~=0.34.4
+openai~=1.107.2

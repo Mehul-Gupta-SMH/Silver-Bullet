@@ -1,12 +1,12 @@
 Silver Bullet
 ------
 <img src="assets/icon.png" alt="Project Banner" width="100%" style="max-width:600px; height:auto;">
------------------
+
 Silver Bullet is an evaluation framework that takes inspiration from Reward models used in Reinforcement Learning, especially in RLHF.
 The framework helps the user, based on the two texts to be compared, answer pertinent questions
-1. Question and Answer pair: Can be used to confirm if the answer covers points about the question
-2. Answer and Answer pair: Compare human preference for one of the answers
-3. Context and Answer pair: Compare answer faithfulness
+ 1. Question and Answer pair: Can be used to confirm if the answer covers points about the question
+ 2. Answer and Answer pair: Compare human preference for one of the answers
+ 3. Context and Answer pair: Compare answer faithfulness
 
 The final result is a score that depends upon pairs and use cases.
 e.g: For answer and answer pair, the score can be interpreted that the answers are comparable or just slightly different, but one of the model is cheaper to use. This can effectively be used to choose models and compare performance.
