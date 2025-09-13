@@ -18,10 +18,10 @@ class NLIWeights:
 
     def __load_model__(self):
         tok = AutoTokenizer.from_pretrained(self.ModelName
-                                            , cache_dir=f"Features/NLI/model/{self.ModelName}/")
+                                            , cache_dir=f"/Features/NLI/model/{self.ModelName}/")
 
         mdl = AutoModelForSequenceClassification.from_pretrained(self.ModelName
-                                                                 , cache_dir=f"Features/NLI/model/{self.ModelName}/")
+                                                                 , cache_dir=f"/Features/NLI/model/{self.ModelName}/")
         mdl.eval()
         device = "cuda" if torch.cuda.is_available() else "cpu"
         mdl.to(device)
@@ -39,15 +39,12 @@ class NLIWeights:
         mdl = self.__model_cache__["model"]
         device = self.__model_cache__["device"]
 
-        # Map logits -> probs in label order using the model's own id2label
-        id2label = mdl.config.id2label  # e.g., {0: 'contradiction', 1:'neutral', 2:'entailment'}
+        id2label = mdl.config.id2label
         label_to_idx = {v.lower(): k for k, v in id2label.items()}
 
         with torch.no_grad():
             for p1 in tqdm(self.phrase_list1, desc="NLI Weights - Phrase 1"):
-                row_e=[]
-                row_n=[]
-                row_c=[]
+                row_e, row_n, row_c = [], [], []
                 pairs = [(p1, p2) for p2 in self.phrase_list2]
                 # Process in batches
                 for start in range(0, len(pairs), self.__batch_size__):

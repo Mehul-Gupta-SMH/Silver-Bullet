@@ -30,7 +30,7 @@ class EntityMatch:
         """
         self.__model_cache__ = GLiNER.from_pretrained(
             self.MODEL,
-            cache_dir=f"./model/{self.MODEL}/",
+            cache_dir=f"/Features/EntityGroups/model/{self.MODEL}/",
         )
 
     def __get_entities__(self, text):

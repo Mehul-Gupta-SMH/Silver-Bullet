@@ -16,7 +16,7 @@ if __name__ == '__main__':
     para_pairs_list = [
         [
             "My Name is Mehul. Mehul is a good person.",
-            "My Name is Mehul. Mehul is a good person. But he can be bad sometimes."
+            "My Name is Mehul. Mehul is a good person. But Mehul can be bad sometimes."
         ],
         [
             "My Name is Mehul. Mehul is a good person.",
