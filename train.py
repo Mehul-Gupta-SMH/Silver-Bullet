@@ -125,7 +125,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'learning_rate':             learning_rate,
         'batch_size':                train_loader.batch_size,
         'optimizer':                 'Adam',
-        'loss_function':             'BCELoss',
+        'loss_function':             'MSELoss',
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
         'num_feature_channels':      num_features,
@@ -138,7 +138,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
     )
 
     model     = model.to(device)
-    criterion = nn.BCELoss()
+    criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
     best_val_loss      = float('inf')
