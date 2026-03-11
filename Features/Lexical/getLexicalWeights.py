@@ -29,17 +29,21 @@ class LexicalWeights:
         getFeatureMap() -> List[List[Dict[int, Dict[str, float]]]]:
             Computes and returns the weight matrix for the phrase pairs.
     """
+
+    _TOKENIZER_REPO = "mixedbread-ai/mxbai-embed-large-v1"
+
+    # Class-level tokenizer cache shared across all instances
+    _tokenizer_cache = None
+
     def __init__(self):
-        """
-        Initializes the LexicalWeights object with two lists of phrases.
-        :return: None
-        """
+        self._reset_state()
+
+    def _reset_state(self):
+        """Reset per-call data without discarding the tokenizer cache."""
         self.phrase_list1 = None
         self.phrase_tokens_list1 = None
-
         self.phrase_list2 = None
         self.phrase_tokens_list2 = None
-
         self.weight_matrix = {
             'jaccard': [],
             'dice': [],
@@ -48,22 +52,20 @@ class LexicalWeights:
         }
 
     def __load_model__(self):
-        repo_id = "mixedbread-ai/mxbai-embed-large-v1"
-        tokenizer = AutoTokenizer.from_pretrained(
-            repo_id,
-            use_fast=True,                 # get the fast Rust tokenizer
-            add_eos_token=False,           # we don't want special tokens for similarity
-            add_bos_token=False,
-            token=None,                    # or your HF token string; or set HF_TOKEN env var
-            cache_dir=f'/Features/Lexical/tokeniser_cache/{repo_id}'
-        )
-
-        self.tokenizer_cache = tokenizer
+        if LexicalWeights._tokenizer_cache is None:
+            LexicalWeights._tokenizer_cache = AutoTokenizer.from_pretrained(
+                self._TOKENIZER_REPO,
+                use_fast=True,
+                add_eos_token=False,
+                add_bos_token=False,
+                token=None,
+                cache_dir=f'Features/Lexical/tokeniser_cache/{self._TOKENIZER_REPO}'
+            )
 
     def sp_tokenize(self, text: str) -> List[str]:
         """SentencePiece tokens as strings (e.g., '▁quick', 'ly')."""
         self.__load_model__()
-        return self.tokenizer_cache.tokenize(text, add_special_tokens=False)
+        return LexicalWeights._tokenizer_cache.tokenize(text, add_special_tokens=False)
 
     @staticmethod
     def ngrams(tokens: List[str], n: int) -> List[Tuple[str, ...]]:
@@ -126,7 +128,7 @@ class LexicalWeights:
 
     def getFeatureMap(self, phrase_list1, phrase_list2):
         """Computes and returns the weight matrix for the phrase pairs."""
-        self.__init__()
+        self._reset_state()
 
         self.phrase_list1, self.phrase_list2 = phrase_list1, phrase_list2
 
@@ -141,5 +143,3 @@ if __name__ == '__main__':
     s2 = "A quick brown fox leaped over a very lazy dog."
     LexicalWeights_Obj = LexicalWeights()
     print(LexicalWeights_Obj.getFeatureMap([s1, s2], [s1, s2, s1]))
-
-
