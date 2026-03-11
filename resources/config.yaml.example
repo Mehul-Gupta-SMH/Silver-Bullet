@@ -1,0 +1,15 @@
+PRODUCTION:
+    url: "https://api.example.com"
+    api_key: ""
+    hf_token: ""
+
+STAGING:
+    url: "https://staging-api.example.com"
+    api_key: ""
+    hf_token: ""
+
+DEVELOPMENT:
+    url: "http://localhost:8000"
+    api_key: ""
+    openai_token: ""
+    hf_token: ""
