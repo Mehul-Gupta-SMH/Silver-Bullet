@@ -2,42 +2,51 @@ from typing import List
 import torch
 import torch.nn.functional as F
 
+MAX_SENTENCES = 64
 
-def pad_matrix(mat: List[list], target_size: int = 64, pad_value: int = 0) -> torch.tensor:
-    """
-    Pad a 2D matrix to a target size with a specified pad value.
+
+def pad_matrix(mat: List[list], target_size: int = MAX_SENTENCES, pad_value: int = 0) -> torch.Tensor:
+    """Pad (or truncate) a 2D matrix to a square target_size × target_size tensor.
+
+    If the input is larger than target_size in either dimension it is silently
+    truncated — the first target_size rows/columns are kept.  This avoids hard
+    crashes when a text has more than MAX_SENTENCES sentences.
+
     Args:
-        mat (list of list of int/float): The input 2D matrix.
-        target_size (int): The desired size for both dimensions after padding.
-        pad_value (int/float): The value to use for padding.
+        mat (list of list of float): The input 2D matrix (n rows × m cols).
+        target_size (int): Desired output size for both dimensions (default 64).
+        pad_value (int | float): Fill value for padding (default 0).
     Returns:
-        list of list of int/float: The padded 2D matrix.
+        torch.Tensor: Shape [target_size, target_size].
     Raises:
-        ValueError: If the input matrix is larger than the target size in any dimension.
+        ValueError: If mat is empty or not a proper 2D list.
     """
-    # Convert to tensor
-    x = torch.tensor(mat, dtype=torch.float32)  # shape [2, 2]
+    if not mat or not mat[0]:
+        raise ValueError("pad_matrix received an empty matrix.")
 
-    # Conv layers expect 4D: [batch, channel, height, width]
-    x = x.unsqueeze(0).unsqueeze(0)  # [1, 1, 2, 2]
+    # Truncate rows / cols that exceed target_size
+    rows = mat[:target_size]
+    rows = [row[:target_size] for row in rows]
 
-    # Pad: (left, right, top, bottom)
-    x_padded = F.pad(x,
-                     (0, target_size - len(mat[0]), 0, target_size-len(mat)),
-                     mode="constant",
-                     value=pad_value)
+    x = torch.tensor(rows, dtype=torch.float32)  # [n, m]  n,m <= target_size
 
-    return x_padded.squeeze(0).squeeze(0)  # [64, 64]
+    # Pad: F.pad order is (left, right, top, bottom)
+    pad_cols = target_size - x.shape[1]
+    pad_rows = target_size - x.shape[0]
+
+    x = x.unsqueeze(0).unsqueeze(0)  # [1, 1, n, m]
+    x_padded = F.pad(x, (0, pad_cols, 0, pad_rows), mode="constant", value=pad_value)
+
+    return x_padded.squeeze(0).squeeze(0)  # [target_size, target_size]
 
 
 if __name__ == "__main__":
-    # Example
-    matrix = [
-        [1, 2],
-        [3, 4]
-    ]
+    matrix = [[1, 2], [3, 4]]
+    padded = pad_matrix(matrix, 64, pad_value=0)
+    print(padded)
+    print(padded.shape)  # torch.Size([64, 64])
 
-    padded_matrix = pad_matrix(matrix, 64, pad_value=0)
-
-    print(padded_matrix)
-    print(padded_matrix.shape)  # Should be (64, 64)
+    # Truncation smoke test
+    big = [[float(i * 70 + j) for j in range(70)] for i in range(70)]
+    truncated = pad_matrix(big, 64)
+    print(truncated.shape)  # torch.Size([64, 64])
