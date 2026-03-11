@@ -5,24 +5,26 @@ import re
 from Preprocess.coref.resolveEntity import EntityResolver
 
 
-def split_txt(base_text: str, **kwargs) -> list:
+def split_txt(base_text: str, resolver: EntityResolver = None, **kwargs) -> list:
+    """Split text at sentence boundaries and optionally resolve coreferences.
+
+    Args:
+        base_text (str): The text to split.
+        resolver (EntityResolver | None): Pre-instantiated resolver to reuse.
+            If None, a new resolver is created using `kwargs['COREF_MODEL']`
+            (default 'gpt-4o-mini').  Pass an existing instance to avoid
+            re-loading the model on every call — critical during training.
+    Returns:
+        List[str]: Cleaned, coref-resolved sentences.
     """
-    Splits the input text at every occurrence of a period ('.') or newline ('\n').
+    if resolver is None:
+        resolver = EntityResolver(kwargs.get('COREF_MODEL', 'gpt-4o-mini'))
 
-    :param base_text: The text to be split.
-    :return: A list of substrings obtained after splitting the text.
-    """
-    split_txt_list = list()
-    EntityResolver_Obj = EntityResolver(kwargs.get('COREF_MODEL', 'gpt-4o-mini'))
+    regex_pattern = r"(?<!\d)\.(?!\d)|\n"
+    raw_sentences = re.split(regex_pattern, base_text)
 
-    regex_patter = r"(?<!\d)\.(?!\d)|\n"
-
-    split_txt_list = re.split(regex_patter, base_text)
-
-    split_txt_list = [
-        EntityResolver_Obj.resolve(sentence.strip())
-        for sentence in split_txt_list
+    return [
+        resolver.resolve(sentence.strip())
+        for sentence in raw_sentences
         if len(sentence.strip())
     ]
-
-    return split_txt_list
