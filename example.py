@@ -4,14 +4,16 @@ from Features.Semantic.getSemanticWeights import SemanticWeights
 from Features.Lexical.getLexicalWeights import LexicalWeights
 from Features.NLI.getNLIweights import NLIWeights
 from Features.EntityGroups.getOverlap import EntityMatch
+from Features.LCS.getLCSweights import LCSWeights
 
 from tqdm import tqdm
 
 if __name__ == '__main__':
-    LexicalWeights_Obj = LexicalWeights()
-    SemanticWeights_Obj = SemanticWeights()
-    NLIWeights_Obj = NLIWeights()
-    EntityMatch_Obj = EntityMatch()
+    lexical  = LexicalWeights()
+    semantic = SemanticWeights()
+    nli      = NLIWeights()
+    entity   = EntityMatch()
+    lcs      = LCSWeights()
 
     para_pairs_list = [
         [
@@ -22,25 +24,19 @@ if __name__ == '__main__':
             "My Name is Mehul. Mehul is a good person.",
             "My Name is Mehul. Mehul is a good person. But he can be bad sometimes."
         ],
-        [
-            "My Name is Mehul. Mehul is a good person.",
-            "My Name is Mehul. Mehul is a good person. But he can be bad sometimes."
-        ],
-    ]  # List to hold pairs of paragraphs
+    ]
 
-    for pairs in tqdm(para_pairs_list, 'Processing paragraph pairs'):
-        combined_feature_map = {}
-
+    for pairs in tqdm(para_pairs_list, desc='Processing paragraph pairs'):
         sentence_group1 = split_txt(pairs[0])
         sentence_group2 = split_txt(pairs[1])
 
-        combined_feature_map.update(LexicalWeights_Obj.getFeatureMap(sentence_group1, sentence_group2))
-        combined_feature_map.update(SemanticWeights_Obj.getFeatureMap(sentence_group1, sentence_group2))
-        combined_feature_map.update(NLIWeights_Obj.getFeatureMap(sentence_group1, sentence_group2))
-        combined_feature_map.update(EntityMatch_Obj.getFeatureMap(sentence_group1, sentence_group2))
+        combined_feature_map = {}
+        combined_feature_map.update(lexical.getFeatureMap(sentence_group1, sentence_group2))
+        combined_feature_map.update(semantic.getFeatureMap(sentence_group1, sentence_group2))
+        combined_feature_map.update(nli.getFeatureMap(sentence_group1, sentence_group2))
+        combined_feature_map.update(entity.getFeatureMap(sentence_group1, sentence_group2))
+        combined_feature_map.update(lcs.getFeatureMap(sentence_group1, sentence_group2))
 
-        print(combined_feature_map)
-
-
-    
-
+        print(f"\n--- Pair ---")
+        for k, v in combined_feature_map.items():
+            print(f"  {k}: shape={v.shape}  min={v.min():.3f}  max={v.max():.3f}")

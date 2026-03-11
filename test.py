@@ -202,8 +202,8 @@ if __name__ == '__main__':
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     checkpoint = torch.load('best_model.pth', map_location=device)
 
-    input_dim = len(test_dataset[0][0])
-    model = TextSimilarityCNN(input_dim=input_dim)
+    num_features = test_dataset.num_features
+    model = TextSimilarityCNN(num_features=num_features)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.to(device)
 
