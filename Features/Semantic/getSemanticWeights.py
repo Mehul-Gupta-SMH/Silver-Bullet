@@ -7,72 +7,51 @@ from tqdm import tqdm
 
 class SemanticWeights:
     def __init__(self):
-        """
-        1. Generate Semantic Features for both sentence groups
-        2. Compare the features and generate weights
-        3. Return the weights as a dictionary
-        4. The weights can be used to compare the two sentence groups
-        :param sentence_group1: List of sentences in group 1
-        :param sentence_group2: List of sentences in group 2
-        :return: Dictionary of weights
-        """
+        self._reset_state()
+
+    def _reset_state(self):
+        """Reset per-call data. Does not affect the shared SemanticFeatures model cache."""
         self.sentence_group1 = None
         self.sentence_group1_features = None
-
         self.sentence_group2 = None
         self.sentence_group2_features = None
-
         self.comparison_weights = {}
 
     def __generate_sematic_features__(self):
-        SemanticFeatures_Obj = SemanticFeatures(self.sentence_group1)
-        SemanticFeatures_Obj.run()
-        self.sentence_group1_features = SemanticFeatures_Obj.features_dict
+        obj1 = SemanticFeatures(self.sentence_group1)
+        obj1.run()
+        self.sentence_group1_features = obj1.features_dict
 
-        SemanticFeatures_Obj = SemanticFeatures(self.sentence_group2)
-        SemanticFeatures_Obj.run()
-        self.sentence_group2_features = SemanticFeatures_Obj.features_dict
+        obj2 = SemanticFeatures(self.sentence_group2)
+        obj2.run()
+        self.sentence_group2_features = obj2.features_dict
 
     def __calc_weights__(self):
-        """
-
-        :return:
-        """
-
-        feature_mapval_list = self.sentence_group1_features.keys()
-
-        for feature_mapval in feature_mapval_list:
-            g1 = self.sentence_group1_features[feature_mapval]
-            g2 = self.sentence_group2_features[feature_mapval]
+        for feature_key in self.sentence_group1_features.keys():
+            g1 = self.sentence_group1_features[feature_key]
+            g2 = self.sentence_group2_features[feature_key]
 
             rows = []
             for feature1 in tqdm(g1):
-                row = []
-                for feature2 in g2:  # inner tqdm not usually helpful
-                    row.append(cos_sim(feature1, feature2).item())
+                row = [cos_sim(feature1, feature2).item() for feature2 in g2]
                 rows.append(row)
 
-            self.comparison_weights[feature_mapval] = rows
+            self.comparison_weights[feature_key] = rows
 
     def __calc_soft_alignment__(self):
-        """
-        Calculate soft alignment between the two sentence groups
-        :return:
-        """
-        comparison_weights_inter = {}
-        for feature_mapval in tqdm(self.comparison_weights.keys()):
-            comparison_weights_inter[f'SOFT_ROW_{feature_mapval}'] = softmax(tensor(self.comparison_weights[feature_mapval],
-                                                                                   dtype=float), dim=1).tolist()
-            comparison_weights_inter[f'SOFT_COL_{feature_mapval}'] = softmax(tensor(self.comparison_weights[feature_mapval],
-                                                                                   dtype=float), dim=0).tolist()
-        self.comparison_weights.update(comparison_weights_inter)
+        inter = {}
+        for key in tqdm(self.comparison_weights.keys()):
+            t = tensor(self.comparison_weights[key], dtype=float)
+            inter[f'SOFT_ROW_{key}'] = softmax(t, dim=1).tolist()
+            inter[f'SOFT_COL_{key}'] = softmax(t, dim=0).tolist()
+        self.comparison_weights.update(inter)
 
     def __post_process_weights__(self):
         for key in self.comparison_weights:
             self.comparison_weights[key] = pad_matrix(self.comparison_weights[key])
 
     def getFeatureMap(self, sentence_group1, sentence_group2):
-        self.__init__()
+        self._reset_state()
         self.sentence_group1, self.sentence_group2 = sentence_group1, sentence_group2
         self.__generate_sematic_features__()
         self.__calc_weights__()
@@ -86,12 +65,5 @@ if __name__ == '__main__':
         'My Name is Mehul',
         'Mehul is a good person'
     ]
-
-    SampleObj = SemanticWeights()
-    print(SampleObj.getFeatureMap(sample_text, sample_text))
-
-    sample_text = [
-        'My Name is Mehul',
-        'Mehul is a good person',
-        'Mehul is sometimes good person, sometimes bad person'
-    ]
+    obj = SemanticWeights()
+    print(obj.getFeatureMap(sample_text, sample_text))
