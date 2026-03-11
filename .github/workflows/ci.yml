@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: flake8 fatal checks
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.sbvenv,__pycache__,.git
+
+      - name: flake8 style (non-blocking)
+        run: flake8 . --count --max-line-length=120 --statistics --exclude=.sbvenv,__pycache__,.git --exit-zero
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install smoke test dependencies
+        run: pip install pyyaml torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Smoke test model forward pass
+        run: python -c "from model import TextSimilarityCNN; import torch; m=TextSimilarityCNN(num_features=16); x=torch.rand(1,16,64,64); print('model OK:', m(x).shape)"
+
+      - name: Smoke test datasets present
+        run: python -c "import json; [json.load(open(f)) for f in ['data/train.json','data/validate.json','data/test.json']]; print('data OK')"
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        run: docker build -t silver-bullet:ci .
+
+      - name: Validate container import
+        run: docker run --rm silver-bullet:ci python -c "from model import TextSimilarityCNN; print('container import OK')"
