@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "text1": "The smartphone features a revolutionary camera system with advanced AI capabilities.",
+            "text2": "The new phone comes with an AI-powered camera for better photography.",
+            "label": 1.0
+        },
+        {
+            "text1": "Scientists discovered a new species of marine life in the deep ocean.",
+            "text2": "Researchers found evidence of ancient civilizations in the desert.",
+            "label": 0.0
+        },
+        {
+            "text1": "The software update includes important security patches and performance improvements.",
+            "text2": "The latest update brings security fixes and makes the system faster.",
+            "label": 1.0
+        },
+        {
+            "text1": "The coffee shop serves organic, locally-sourced beverages.",
+            "text2": "The hardware store sells construction materials and tools.",
+            "label": 0.0
+        },
+        {
+            "text1": "The policy proposal matches several points from last year's draft but omits a few key measures.",
+            "text2": "Compared to the previous version, the new plan keeps most ideas yet leaves out some important actions.",
+            "label": 0.75
+        },
+        {
+            "text1": "Customer satisfaction improved slightly after the UI refresh, though navigation issues remain.",
+            "text2": "Users report a small boost in experience with the redesigned interface but still mention confusing menus.",
+            "label": 0.6
+        },
+        {
+            "text1": "Analysts observed limited correlation between the two datasets in early analysis.",
+            "text2": "Initial results show a weak relationship across the paired samples.",
+            "label": 0.3
+        }
+    ]
+}
+

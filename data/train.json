@@ -1,0 +1,45 @@
+{
+    "data": [
+        {
+            "text1": "The new AI model has shown remarkable performance in natural language processing tasks. It can understand context and generate human-like responses.",
+            "text2": "The latest artificial intelligence system demonstrates impressive capabilities in NLP, including contextual understanding and human-like text generation.",
+            "label": 1.0
+        },
+        {
+            "text1": "Climate change is causing rising sea levels and extreme weather patterns globally.",
+            "text2": "Global warming has led to increased ocean levels and more frequent severe weather events worldwide.",
+            "label": 1.0
+        },
+        {
+            "text1": "The company reported strong quarterly earnings, exceeding market expectations.",
+            "text2": "The sports team won their championship game with a record-breaking score.",
+            "label": 0.0
+        },
+        {
+            "text1": "Renewable energy sources are becoming increasingly cost-effective alternatives to fossil fuels.",
+            "text2": "Solar and wind power are now cheaper than coal and natural gas in many regions.",
+            "label": 1.0
+        },
+        {
+            "text1": "The restaurant serves authentic Italian cuisine with fresh ingredients.",
+            "text2": "The bookstore has a wide selection of mystery novels and educational materials.",
+            "label": 0.0
+        },
+        {
+            "text1": "The quarterly report showed modest revenue growth but stagnant profit margins.",
+            "text2": "Earnings increased slightly while overall margins remained flat in the latest results.",
+            "label": 0.6
+        },
+        {
+            "text1": "The redesigned mobile app mostly mirrors the desktop layout with a few simplified menus.",
+            "text2": "The phone version closely follows the website's design, though some navigation items are condensed.",
+            "label": 0.75
+        },
+        {
+            "text1": "Participants experienced mild symptom relief after the first week of the clinical trial.",
+            "text2": "Early trial data shows a small reduction in symptoms but limited overall improvement.",
+            "label": 0.3
+        }
+    ]
+}
+

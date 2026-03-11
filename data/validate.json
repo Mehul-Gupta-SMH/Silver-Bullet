@@ -1,0 +1,30 @@
+{
+    "data": [
+        {
+            "text1": "Regular exercise and a balanced diet are key components of a healthy lifestyle.",
+            "text2": "Physical activity and proper nutrition are essential for maintaining good health.",
+            "label": 1.0
+        },
+        {
+            "text1": "The museum's new exhibition features ancient artifacts from Egypt.",
+            "text2": "The local cinema is showing the latest blockbuster movies.",
+            "label": 0.0
+        },
+        {
+            "text1": "Electric vehicles are becoming more popular due to environmental concerns.",
+            "text2": "More people are choosing EVs to reduce their carbon footprint.",
+            "label": 1.0
+        },
+        {
+            "text1": "The product update aligns with most customer feedback but leaves some requests unaddressed.",
+            "text2": "Recent changes cover many user suggestions, though a few popular features are still missing.",
+            "label": 0.6
+        },
+        {
+            "text1": "The report notes partial agreement among experts about the new policy's benefits.",
+            "text2": "Specialists are somewhat in favor of the regulation, but several remain unconvinced.",
+            "label": 0.3
+        }
+    ]
+}
+
