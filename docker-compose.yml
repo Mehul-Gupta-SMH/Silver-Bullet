@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    ports: ['8000:8000']
+    volumes:
+      - ./data:/app/data
+      - ./cache:/app/cache
+      - ./resources/config.yaml:/app/resources/config.yaml:ro
+    environment:
+      - MODEL_PATH=best_model.pth
+      - SB_HF_TOKEN=
+      - SB_OPENAI_TOKEN=
+    restart: unless-stopped
