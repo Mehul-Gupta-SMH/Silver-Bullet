@@ -5,3 +5,5 @@ gliner~=0.2.22
 PyYAML~=6.0.2
 huggingface-hub~=0.34.4
 openai~=1.107.2
+pytest>=8.0.0
+httpx>=0.27.0
