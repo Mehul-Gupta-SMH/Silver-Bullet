@@ -50,11 +50,25 @@ export function BatchScorer() {
       <button
         onClick={handleBatch}
         disabled={loading || pairCount === 0}
-        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
+        {loading && (
+          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        )}
         {loading ? `Scoring ${pairCount} pairs…` : `Score Batch${pairCount > 0 ? ` (${pairCount})` : ''}`}
       </button>
-      {error && <p className="text-red-600 text-sm">{error}</p>}
+      {error && (
+        <div className="flex items-start gap-2 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+          <span className="flex-1">{error}</span>
+          <button
+            className="text-red-500 hover:text-red-700 font-bold leading-none"
+            onClick={() => setError(null)}
+            aria-label="Dismiss error"
+          >
+            ×
+          </button>
+        </div>
+      )}
       {results.length > 0 && <ResultsTable results={results} />}
     </div>
   );
