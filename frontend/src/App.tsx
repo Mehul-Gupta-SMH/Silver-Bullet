@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PairScorer } from './components/PairScorer';
 import { BatchScorer } from './components/BatchScorer';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
 type Tab = 'pair' | 'batch';
@@ -34,7 +35,15 @@ function App() {
           ))}
         </div>
 
-        {tab === 'pair' ? <PairScorer /> : <BatchScorer />}
+        {tab === 'pair' ? (
+          <ErrorBoundary>
+            <PairScorer />
+          </ErrorBoundary>
+        ) : (
+          <ErrorBoundary>
+            <BatchScorer />
+          </ErrorBoundary>
+        )}
       </main>
     </div>
   );
