@@ -1,0 +1,11 @@
+.sbvenv/
+cache/
+training_reports/
+test_reports/
+*.pth
+.git/
+__pycache__/
+*.pyc
+.claude/
+research_paper/
+test_results.json

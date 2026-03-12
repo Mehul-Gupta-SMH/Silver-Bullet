@@ -41,3 +41,10 @@
 ## Pending
 | 2026-03-11 | [ ] | IMPROVEMENT: BCE → MSELoss on float labels for continuous faithfulness scoring | `model.py`, `train.py`, `data/*.json` |
 | 2026-03-11 | [ ] | NOTE: Delete `./cache/` before re-training — cached features are flat vectors from old architecture | `cache/` |
+
+
+## Backend Hardening
+| 2026-03-12 | [~] | FEATURE: FastAPI backend — CORS, request-ID middleware, structured logging, rate limiting | `api/main.py`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py`, `requirements.txt` |
+=======
+## Frontend CI Extension
+| 2026-03-12 | [x] | Add frontend lint/build job to GitHub Actions CI workflow | `.github/workflows/ci.yml` |

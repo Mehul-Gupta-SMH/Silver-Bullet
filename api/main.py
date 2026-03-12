@@ -1,6 +1,11 @@
 """SilverBullet FastAPI application factory."""
 
 import os
+from __future__ import annotations
+
+import os
+from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Request
@@ -25,11 +30,32 @@ from predict import SimilarityPredictor
 def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     """Return a JSON 429 response consistent with FastAPI's error envelope."""
     return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
+# ---------------------------------------------------------------------------
+# Lifespan — startup model check
+# ---------------------------------------------------------------------------
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    """Fail fast on startup if MODEL_PATH is explicitly set but the file is missing."""
+    model_env = os.environ.get("MODEL_PATH")
+    if model_env:
+        model_path = Path(model_env)
+        if not model_path.exists():
+            raise RuntimeError(
+                f"MODEL_PATH={model_env!r} does not exist or is not readable. "
+                "Ensure the file path points to a valid checkpoint."
+            )
+    yield
 
 
 # ---------------------------------------------------------------------------
 # Rate limiter
 # ---------------------------------------------------------------------------
+
+def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+    return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
+
+
 limiter = Limiter(key_func=get_remote_address)
 
 # ---------------------------------------------------------------------------
@@ -48,6 +74,46 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
 # ---------------------------------------------------------------------------
 # CORS
 # ---------------------------------------------------------------------------
+
+app = FastAPI(
+    title="SilverBullet Similarity API",
+    description=(
+        "Learned text similarity / faithfulness scorer. "
+        "Given two texts, returns a score in **[0, 1]**.\n\n"
+        "Interactive docs: `/api/v1/docs` · ReDoc: `/api/v1/redoc`"
+    ),
+    version="1.0.0",
+    contact={
+        "name": "SilverBullet",
+        "url": "https://github.com/Mehul-Gupta-SMH/Silver-Bullet",
+    },
+    openapi_tags=[
+        {"name": "health", "description": "Service health and readiness checks"},
+        {"name": "prediction", "description": "Text similarity scoring endpoints"},
+    ],
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json",
+    lifespan=lifespan,
+)
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
+
+
+@app.exception_handler(Exception)
+async def _global_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    request_id = getattr(getattr(request, "state", None), "request_id", None)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": str(exc), "request_id": request_id},
+    )
+
+
+# ---------------------------------------------------------------------------
+# CORS
+# ---------------------------------------------------------------------------
+
 _default_origins = ["http://localhost:5173"]
 _extra = os.environ.get("ALLOWED_ORIGINS", "")
 _allowed_origins = _default_origins + [o.strip() for o in _extra.split(",") if o.strip()]
@@ -74,6 +140,15 @@ app.add_middleware(RequestIDMiddleware)
 @app.get("/api/v1/health", response_model=HealthResponse, tags=["health"])
 async def health() -> HealthResponse:
     """Health-check endpoint — no rate limiting applied."""
+@app.get(
+    "/api/v1/health",
+    response_model=HealthResponse,
+    tags=["health"],
+    summary="Health check",
+    response_description="Service status and model load state",
+)
+async def health() -> HealthResponse:
+    """Return service status. No authentication required."""
     try:
         get_predictor()
         model_loaded = True
@@ -83,6 +158,14 @@ async def health() -> HealthResponse:
 
 
 @app.post("/api/v1/predict/pair", response_model=PairResponse, tags=["predict"])
+@app.post(
+    "/api/v1/predict/pair",
+    response_model=PairResponse,
+    tags=["prediction"],
+    summary="Score a single text pair",
+    response_description="Similarity score in [0, 1] with binary prediction",
+    responses={422: {"description": "Validation error — text empty or exceeds 10 000 characters"}},
+)
 @limiter.limit("30/minute")
 async def predict_pair(
     request: Request,
@@ -90,11 +173,20 @@ async def predict_pair(
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> PairResponse:
     """Score a single text pair. Rate-limited to 30 requests/minute per IP."""
+    """Score the similarity between two texts. Rate-limited to 30 req/min per IP."""
     result = predictor.predict_pair(body.text1, body.text2)
     return PairResponse(**result)
 
 
 @app.post("/api/v1/predict/batch", response_model=BatchResponse, tags=["predict"])
+@app.post(
+    "/api/v1/predict/batch",
+    response_model=BatchResponse,
+    tags=["prediction"],
+    summary="Score a batch of text pairs",
+    response_description="List of similarity scores, one per input pair",
+    responses={422: {"description": "Validation error — batch exceeds 100 pairs or pairs are malformed"}},
+)
 @limiter.limit("30/minute")
 async def predict_batch(
     request: Request,
@@ -102,5 +194,6 @@ async def predict_batch(
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BatchResponse:
     """Score a list of text pairs. Rate-limited to 30 requests/minute per IP."""
+    """Score a list of text pairs. Max 100 pairs per request. Rate-limited to 30 req/min per IP."""
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
