@@ -35,6 +35,9 @@
 ## Batch 4 — New Feature
 | 2026-03-11 | [x] | FEATURE: LCS extractor — `lcs_token` + `lcs_char` maps, no external deps | `Features/LCS/getLCSweights.py`, `train.py`, `example.py` |
 
+## Batch 5 — Hardening & Polish
+| 2026-03-12 | [x] | Unit 4: pytest API tests — conftest, fixtures, validation/CORS coverage | `tests/__init__.py`, `tests/conftest.py`, `tests/test_api.py`, `requirements.txt`, `api/main.py`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py` |
+
 ## Pending
 | 2026-03-11 | [ ] | IMPROVEMENT: BCE → MSELoss on float labels for continuous faithfulness scoring | `model.py`, `train.py`, `data/*.json` |
 | 2026-03-11 | [ ] | NOTE: Delete `./cache/` before re-training — cached features are flat vectors from old architecture | `cache/` |

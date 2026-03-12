@@ -1,5 +1,6 @@
 """SilverBullet FastAPI application factory."""
 
+import os
 from __future__ import annotations
 
 import os
@@ -26,6 +27,9 @@ from api.schemas import (
 from predict import SimilarityPredictor
 
 
+def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+    """Return a JSON 429 response consistent with FastAPI's error envelope."""
+    return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
 # ---------------------------------------------------------------------------
 # Lifespan — startup model check
 # ---------------------------------------------------------------------------
@@ -56,6 +60,19 @@ limiter = Limiter(key_func=get_remote_address)
 
 # ---------------------------------------------------------------------------
 # App factory
+# ---------------------------------------------------------------------------
+app = FastAPI(
+    title="SilverBullet",
+    description="Learned text-similarity / faithfulness scorer",
+    version="1.0.0",
+)
+
+# Attach the slowapi limiter and its 429 handler.
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
+
+# ---------------------------------------------------------------------------
+# CORS
 # ---------------------------------------------------------------------------
 
 app = FastAPI(
@@ -109,6 +126,9 @@ app.add_middleware(
     expose_headers=["X-Request-ID"],
 )
 
+# ---------------------------------------------------------------------------
+# Custom middleware (order matters: outermost = first to run)
+# ---------------------------------------------------------------------------
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RequestIDMiddleware)
 
@@ -117,6 +137,9 @@ app.add_middleware(RequestIDMiddleware)
 # Endpoints
 # ---------------------------------------------------------------------------
 
+@app.get("/api/v1/health", response_model=HealthResponse, tags=["health"])
+async def health() -> HealthResponse:
+    """Health-check endpoint — no rate limiting applied."""
 @app.get(
     "/api/v1/health",
     response_model=HealthResponse,
@@ -134,6 +157,7 @@ async def health() -> HealthResponse:
     return HealthResponse(status="ok", model_loaded=model_loaded)
 
 
+@app.post("/api/v1/predict/pair", response_model=PairResponse, tags=["predict"])
 @app.post(
     "/api/v1/predict/pair",
     response_model=PairResponse,
@@ -148,11 +172,13 @@ async def predict_pair(
     body: PairRequest,
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> PairResponse:
+    """Score a single text pair. Rate-limited to 30 requests/minute per IP."""
     """Score the similarity between two texts. Rate-limited to 30 req/min per IP."""
     result = predictor.predict_pair(body.text1, body.text2)
     return PairResponse(**result)
 
 
+@app.post("/api/v1/predict/batch", response_model=BatchResponse, tags=["predict"])
 @app.post(
     "/api/v1/predict/batch",
     response_model=BatchResponse,
@@ -167,6 +193,7 @@ async def predict_batch(
     body: BatchRequest,
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BatchResponse:
+    """Score a list of text pairs. Rate-limited to 30 requests/minute per IP."""
     """Score a list of text pairs. Max 100 pairs per request. Rate-limited to 30 req/min per IP."""
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
