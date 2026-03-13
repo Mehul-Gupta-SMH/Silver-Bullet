@@ -3,6 +3,43 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+class TextSimilarityCNNLegacy(nn.Module):
+    """Original Conv1D architecture (trained before the Conv2D refactor).
+
+    Kept for backwards-compatibility so that checkpoints trained with the old
+    architecture can still be loaded and used for inference without re-training.
+
+    Input shape: [batch, input_dim]  — flat concatenation of all feature maps.
+    """
+
+    def __init__(self, input_dim: int = 57344, hidden_dim: int = 128):
+        super().__init__()
+        self.fc_reduce1 = nn.Linear(input_dim, 4096)
+        self.fc_reduce2 = nn.Linear(4096, 1024)
+        self.fc_reduce3 = nn.Linear(1024, 256)
+        self.conv1 = nn.Conv1d(1, hidden_dim, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv1d(hidden_dim, hidden_dim // 2, kernel_size=3, padding=1)
+        self.fc1 = nn.Linear((hidden_dim // 2) * 64, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, 1)
+        self.dropout = nn.Dropout(0.3)
+        self.batch_norm1 = nn.BatchNorm1d(4096)
+        self.batch_norm2 = nn.BatchNorm1d(1024)
+        self.batch_norm3 = nn.BatchNorm1d(256)
+        self.batch_norm4 = nn.BatchNorm1d(hidden_dim)
+
+    def forward(self, x):
+        x = F.relu(self.fc_reduce1(x)); x = self.batch_norm1(x); x = self.dropout(x)
+        x = F.relu(self.fc_reduce2(x)); x = self.batch_norm2(x); x = self.dropout(x)
+        x = F.relu(self.fc_reduce3(x)); x = self.batch_norm3(x); x = self.dropout(x)
+        x = x.unsqueeze(1)
+        x = F.relu(self.conv1(x)); x = F.max_pool1d(x, 2, 2); x = self.dropout(x)
+        x = F.relu(self.conv2(x)); x = F.max_pool1d(x, 2, 2)
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x)); x = self.batch_norm4(x); x = self.dropout(x)
+        x = torch.sigmoid(self.fc2(x))
+        return x
+
+
 class TextSimilarityCNN(nn.Module):
     """CNN that operates on stacked 2D feature maps from the sentence-pair pipeline.
 
