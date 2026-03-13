@@ -13,8 +13,8 @@ import './index.css';
 type Tab = 'pair' | 'batch' | 'experiments';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'pair', label: 'Single Pair', icon: '⚡' },
-  { id: 'batch', label: 'Batch Scoring', icon: '📦' },
+  { id: 'pair', label: 'Single Eval', icon: '⚡' },
+  { id: 'batch', label: 'Batch Eval', icon: '📦' },
   { id: 'experiments', label: 'Experiments', icon: '🧪' },
 ];
 
@@ -68,7 +68,7 @@ function App() {
                 Silver<span className="text-violet-600">Bullet</span>
               </h1>
               <p className="text-[11px] text-slate-400 mt-0.5 leading-none">
-                Text similarity &amp; faithfulness scorer
+                LLM Evaluation Benchmark
               </p>
             </div>
           </div>
@@ -155,7 +155,7 @@ function App() {
       <footer className="border-t border-slate-200 mt-16 py-6">
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <span className="text-xs text-slate-400">
-            SilverBullet · Learned text similarity via Conv2D on multi-signal 64×64 feature maps
+            SilverBullet · LLM Evaluation Benchmark · Conv2D over 16 multi-signal feature maps
           </span>
           <a
             href="http://localhost:8000/api/v1/docs"
