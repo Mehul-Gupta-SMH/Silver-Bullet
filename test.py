@@ -1,5 +1,6 @@
 import torch
-from model import TextSimilarityCNN
+from model import TextSimilarityCNN, TextSimilarityCNNLegacy
+from predict import _load_model_from_checkpoint
 from train import TextSimilarityDataset, load_json_data
 from torch.utils.data import DataLoader
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, precision_recall_curve
@@ -130,9 +131,15 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
         feature_dim=test_loader.dataset.features.shape[1]
     )
 
+    is_legacy = isinstance(model, TextSimilarityCNNLegacy)
+
     with torch.no_grad():
         for i, (features, labels) in enumerate(test_loader):
             features, labels = features.to(device), labels.to(device)
+            if is_legacy:
+                trained_num_maps = model.fc_reduce1.in_features // (64 * 64)
+                features = features[:, :trained_num_maps, :, :]
+                features = features.view(features.size(0), -1)
             outputs = model(features)
             probs = outputs.cpu().numpy()
             preds = (outputs > 0.5).float()
@@ -198,14 +205,11 @@ if __name__ == '__main__':
     test_dataset = TextSimilarityDataset(test_pairs, test_labels, use_cache=True)
     test_loader = DataLoader(test_dataset, batch_size=16)
 
-    # Load the model
+    # Load the model (auto-detects legacy Conv1D vs current Conv2D architecture)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    checkpoint = torch.load('best_model.pth', map_location=device)
-
-    num_features = test_dataset.num_features
-    model = TextSimilarityCNN(num_features=num_features)
-    model.load_state_dict(checkpoint['model_state_dict'])
-    model.to(device)
+    checkpoint = torch.load('best_model.pth', map_location=device, weights_only=False)
+    model, arch = _load_model_from_checkpoint(checkpoint, device)
+    print(f"  architecture : {arch}")
 
     # Test the model and generate report
     metrics, report = test_model(model, test_loader, test_pairs, device=str(device))

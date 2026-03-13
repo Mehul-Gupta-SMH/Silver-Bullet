@@ -2,7 +2,7 @@ import torch
 import argparse
 import json
 from model import TextSimilarityCNN, TextSimilarityCNNLegacy
-from train import TextSimilarityDataset
+from train import TextSimilarityDataset, feature_map_to_tensor
 from pathlib import Path
 import numpy as np
 
@@ -57,6 +57,12 @@ class SimilarityPredictor:
         dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True)
         features = dataset.features  # always [N, F, 64, 64]
         if isinstance(self.model, TextSimilarityCNNLegacy):
+            # Truncate to the number of feature maps the legacy model was trained on.
+            # The checkpoint input_dim encodes exactly how many maps were used:
+            # input_dim = num_maps * 64 * 64.  New maps (e.g. LCS) are appended last
+            # by the feature pipeline, so slicing the channel dimension is safe.
+            trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
+            features = features[:, :trained_num_maps, :, :]
             features = features.view(features.size(0), -1)
         return features
 
@@ -73,6 +79,87 @@ class SimilarityPredictor:
             'probability': prob,
             'text1': text1,
             'text2': text2,
+        }
+
+    def predict_pair_breakdown(self, text1: str, text2: str) -> dict:
+        """Run the full pipeline and return per-sentence alignment + feature group scores.
+
+        Unlike predict_pair(), this method runs the feature extractors manually so
+        that intermediate per-sentence data (alignment matrix, feature maps) can be
+        inspected.  Model caching on the feature-extractor classes means the heavy
+        models are only loaded once per process.
+
+        Returns a dict compatible with api.schemas.BreakdownResponse.
+        """
+        from Splitter.sentence_splitter import split_txt
+        from Features.Semantic.getSemanticWeights import SemanticWeights
+        from Features.Lexical.getLexicalWeights import LexicalWeights
+        from Features.NLI.getNLIweights import NLIWeights
+        from Features.EntityGroups.getOverlap import EntityMatch
+        from Features.LCS.getLCSweights import LCSWeights
+
+        sent1 = split_txt(text1)
+        sent2 = split_txt(text2)
+        n, m = len(sent1), len(sent2)
+
+        feature_map: dict = {}
+        feature_map.update(LexicalWeights().getFeatureMap(sent1, sent2))
+        feature_map.update(SemanticWeights().getFeatureMap(sent1, sent2))
+        feature_map.update(NLIWeights().getFeatureMap(sent1, sent2))
+        feature_map.update(EntityMatch().getFeatureMap(sent1, sent2))
+        feature_map.update(LCSWeights().getFeatureMap(sent1, sent2))
+
+        # --- model score ---
+        stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, 64, 64]
+        if isinstance(self.model, TextSimilarityCNNLegacy):
+            trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
+            stacked = stacked[:, :trained_num_maps, :, :]
+            stacked = stacked.view(1, -1)
+
+        with torch.no_grad():
+            prob = self.model(stacked.to(self.device)).item()
+
+        # --- alignment matrix: mxbai cosine sim cropped to actual sentence count ---
+        sem_key = "mixedbread-ai/mxbai-embed-large-v1"
+        alignment: list[list[float]] = []
+        if n > 0 and m > 0 and sem_key in feature_map:
+            alignment = feature_map[sem_key].numpy()[:n, :m].tolist()
+
+        # --- divergence (sentences with no good counterpart) ---
+        THRESH = 0.5
+        divergent_in_1: list[int] = []
+        divergent_in_2: list[int] = []
+        if alignment:
+            max_row = [max(row) for row in alignment]
+            max_col = [max(alignment[i][j] for i in range(n)) for j in range(m)]
+            divergent_in_1 = [i for i, s in enumerate(max_row) if s < THRESH]
+            divergent_in_2 = [j for j, s in enumerate(max_col) if s < THRESH]
+
+        # --- per-feature group scores: mean best-match score across sentences in text1 ---
+        def _mean_max_row(key: str) -> float:
+            if key not in feature_map or n == 0 or m == 0:
+                return 0.0
+            mat = feature_map[key].numpy()[:n, :m]
+            return float(np.mean([mat[i].max() for i in range(n)]))
+
+        feature_scores = {
+            "Semantic (mxbai)": _mean_max_row("mixedbread-ai/mxbai-embed-large-v1"),
+            "Semantic (Qwen3)": _mean_max_row("Qwen/Qwen3-Embedding-0.6B"),
+            "Lexical ROUGE":    _mean_max_row("rouge"),
+            "Lexical Jaccard":  _mean_max_row("jaccard"),
+            "NLI Entailment":   _mean_max_row("entailment"),
+            "LCS Token":        _mean_max_row("lcs_token"),
+        }
+
+        return {
+            "prediction":     int(prob >= 0.5),
+            "probability":    prob,
+            "sentences1":     sent1,
+            "sentences2":     sent2,
+            "alignment":      alignment,
+            "divergent_in_1": divergent_in_1,
+            "divergent_in_2": divergent_in_2,
+            "feature_scores": feature_scores,
         }
 
     def predict_batch(self, pairs):

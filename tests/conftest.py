@@ -3,6 +3,10 @@
 import pytest
 from unittest.mock import MagicMock, patch
 from fastapi.testclient import TestClient
+import huggingface_hub
+
+# Prevent network login during test collection; resolveEntity imports `login` at module import time.
+huggingface_hub.login = lambda *args, **kwargs: None
 
 # Import app and the original get_predictor at module level — BEFORE any test
 # patches are applied.  This ensures that:
