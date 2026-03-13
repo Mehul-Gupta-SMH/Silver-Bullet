@@ -35,16 +35,15 @@
 ## Batch 4 — New Feature
 | 2026-03-11 | [x] | FEATURE: LCS extractor — `lcs_token` + `lcs_char` maps, no external deps | `Features/LCS/getLCSweights.py`, `train.py`, `example.py` |
 
-## Batch 5 — Hardening & Polish
-| 2026-03-12 | [x] | Unit 4: pytest API tests — conftest, fixtures, validation/CORS coverage | `tests/__init__.py`, `tests/conftest.py`, `tests/test_api.py`, `requirements.txt`, `api/main.py`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py` |
+## Batch 5 — Hardening & Polish (PRs #17–#21, all merged 2026-03-12)
+| 2026-03-12 | [x] | Unit 1+2: API input validation + OpenAPI docs — max_length, batch cap, startup check, global exception handler, Field descriptions, tags, redoc | `api/main.py`, `api/schemas.py`, `api/dependencies.py` |
+| 2026-03-12 | [x] | Unit 3: Docker HEALTHCHECK + .env.example + env_file in compose | `Dockerfile`, `docker-compose.yml`, `.env.example` |
+| 2026-03-12 | [x] | Unit 4: pytest API tests — conftest fixtures (mock predictor, TestClient), 7 tests covering health/pair/batch/CORS/validation | `tests/__init__.py`, `tests/conftest.py`, `tests/test_api.py`, `requirements.txt` |
+| 2026-03-12 | [x] | Unit 5: Frontend error UX — ErrorBoundary, loading spinner, dismissible error alert, .env.example | `frontend/src/components/ErrorBoundary.tsx`, `frontend/src/components/PairScorer.tsx`, `frontend/src/components/BatchScorer.tsx`, `frontend/src/App.tsx`, `frontend/.env.example` |
+| 2026-03-12 | [x] | Unit 6: Frontend vitest tests — ScoreGauge (5 tests), PairScorer (5 tests), jsdom setup | `frontend/vite.config.ts`, `frontend/src/test/setup.ts`, `frontend/src/components/ScoreGauge.test.tsx`, `frontend/src/components/PairScorer.test.tsx`, `frontend/package.json` |
+| 2026-03-12 | [x] | Post-merge fix: rewrote api/main.py, schemas.py, dependencies.py (duplicate code from sequential PR merges); fixed conftest.py import ordering (pytest 7/7); fixed ErrorBoundary import type (vitest 10/10) | `api/main.py`, `api/schemas.py`, `api/dependencies.py`, `tests/conftest.py`, `frontend/src/components/ErrorBoundary.tsx` |
 
 ## Pending
 | 2026-03-11 | [ ] | IMPROVEMENT: BCE → MSELoss on float labels for continuous faithfulness scoring | `model.py`, `train.py`, `data/*.json` |
 | 2026-03-11 | [ ] | NOTE: Delete `./cache/` before re-training — cached features are flat vectors from old architecture | `cache/` |
-
-
-## Backend Hardening
-| 2026-03-12 | [~] | FEATURE: FastAPI backend — CORS, request-ID middleware, structured logging, rate limiting | `api/main.py`, `api/schemas.py`, `api/dependencies.py`, `api/middleware.py`, `requirements.txt` |
-=======
-## Frontend CI Extension
-| 2026-03-12 | [x] | Add frontend lint/build job to GitHub Actions CI workflow | `.github/workflows/ci.yml` |
+| 2026-03-12 | [ ] | IMPROVEMENT: Re-enable per-endpoint rate limiting via SlowAPIMiddleware (removed `@limiter.limit` due to slowapi/FastAPI signature-inspection incompatibility causing 422s) | `api/main.py` |
