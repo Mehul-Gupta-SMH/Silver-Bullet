@@ -4,15 +4,6 @@ from pydantic import BaseModel, Field
 
 
 class PairRequest(BaseModel):
-    text1: str = Field(..., description="First text input", min_length=1, max_length=10_000)
-    text2: str = Field(..., description="Second text input", min_length=1, max_length=10_000)
-
-
-class PairResponse(BaseModel):
-    prediction: int = Field(..., description="Binary prediction: 1=similar, 0=not similar")
-    probability: float = Field(..., description="Similarity score in [0, 1]")
-    text1: str
-    text2: str
     text1: str = Field(
         ...,
         min_length=1,
@@ -45,9 +36,6 @@ class PairResponse(BaseModel):
 class BatchRequest(BaseModel):
     pairs: list[list[str]] = Field(
         ...,
-        description="List of [text1, text2] pairs",
-        min_length=1,
-        max_length=100,
         min_length=1,
         max_length=100,
         description="List of [text1, text2] string pairs to score (max 100 per request)",
@@ -56,12 +44,6 @@ class BatchRequest(BaseModel):
 
 
 class BatchResponse(BaseModel):
-    results: list[PairResponse]
-
-
-class HealthResponse(BaseModel):
-    status: str
-    model_loaded: bool
     results: list[PairResponse] = Field(
         ...,
         description="Similarity scores, one per input pair",

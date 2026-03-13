@@ -1,6 +1,5 @@
 """SilverBullet FastAPI application factory."""
 
-import os
 from __future__ import annotations
 
 import os
@@ -27,9 +26,6 @@ from api.schemas import (
 from predict import SimilarityPredictor
 
 
-def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
-    """Return a JSON 429 response consistent with FastAPI's error envelope."""
-    return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
 # ---------------------------------------------------------------------------
 # Lifespan — startup model check
 # ---------------------------------------------------------------------------
@@ -49,7 +45,8 @@ async def lifespan(_: FastAPI):
 
 
 # ---------------------------------------------------------------------------
-# Rate limiter
+# Rate limiter (infrastructure kept; per-endpoint decorators omitted due to
+# slowapi/FastAPI signature-inspection incompatibility — add middleware later)
 # ---------------------------------------------------------------------------
 
 def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
@@ -60,19 +57,6 @@ limiter = Limiter(key_func=get_remote_address)
 
 # ---------------------------------------------------------------------------
 # App factory
-# ---------------------------------------------------------------------------
-app = FastAPI(
-    title="SilverBullet",
-    description="Learned text-similarity / faithfulness scorer",
-    version="1.0.0",
-)
-
-# Attach the slowapi limiter and its 429 handler.
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
-
-# ---------------------------------------------------------------------------
-# CORS
 # ---------------------------------------------------------------------------
 
 app = FastAPI(
@@ -126,9 +110,6 @@ app.add_middleware(
     expose_headers=["X-Request-ID"],
 )
 
-# ---------------------------------------------------------------------------
-# Custom middleware (order matters: outermost = first to run)
-# ---------------------------------------------------------------------------
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RequestIDMiddleware)
 
@@ -137,9 +118,6 @@ app.add_middleware(RequestIDMiddleware)
 # Endpoints
 # ---------------------------------------------------------------------------
 
-@app.get("/api/v1/health", response_model=HealthResponse, tags=["health"])
-async def health() -> HealthResponse:
-    """Health-check endpoint — no rate limiting applied."""
 @app.get(
     "/api/v1/health",
     response_model=HealthResponse,
@@ -157,7 +135,6 @@ async def health() -> HealthResponse:
     return HealthResponse(status="ok", model_loaded=model_loaded)
 
 
-@app.post("/api/v1/predict/pair", response_model=PairResponse, tags=["predict"])
 @app.post(
     "/api/v1/predict/pair",
     response_model=PairResponse,
@@ -166,19 +143,16 @@ async def health() -> HealthResponse:
     response_description="Similarity score in [0, 1] with binary prediction",
     responses={422: {"description": "Validation error — text empty or exceeds 10 000 characters"}},
 )
-@limiter.limit("30/minute")
 async def predict_pair(
     request: Request,
     body: PairRequest,
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> PairResponse:
-    """Score a single text pair. Rate-limited to 30 requests/minute per IP."""
-    """Score the similarity between two texts. Rate-limited to 30 req/min per IP."""
+    """Score the similarity between two texts."""
     result = predictor.predict_pair(body.text1, body.text2)
     return PairResponse(**result)
 
 
-@app.post("/api/v1/predict/batch", response_model=BatchResponse, tags=["predict"])
 @app.post(
     "/api/v1/predict/batch",
     response_model=BatchResponse,
@@ -187,13 +161,11 @@ async def predict_pair(
     response_description="List of similarity scores, one per input pair",
     responses={422: {"description": "Validation error — batch exceeds 100 pairs or pairs are malformed"}},
 )
-@limiter.limit("30/minute")
 async def predict_batch(
     request: Request,
     body: BatchRequest,
     predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BatchResponse:
-    """Score a list of text pairs. Rate-limited to 30 requests/minute per IP."""
-    """Score a list of text pairs. Max 100 pairs per request. Rate-limited to 30 req/min per IP."""
+    """Score a list of text pairs. Max 100 pairs per request."""
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
