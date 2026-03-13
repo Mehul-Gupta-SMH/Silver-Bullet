@@ -3,8 +3,11 @@ import { predictBatch } from '../services/api';
 import { ResultsTable } from './ResultsTable';
 import { BatchDistribution } from './BatchDistribution';
 import { ModelConfig } from './ModelConfig';
+import { TestCasePanel } from './TestCasePanel';
+import { SaveExperimentForm } from './SaveExperimentForm';
 import { getModeConfig } from '../config/modes';
 import type { TextMeta } from './ModelConfig';
+import type { BatchTestCase } from '../data/testCases';
 import type { ComparisonMode, PredictionResult } from '../types';
 
 interface JsonRecord {
@@ -14,6 +17,14 @@ interface JsonRecord {
 
 interface Props {
   mode: ComparisonMode;
+  onSave: (opts: {
+    name: string;
+    notes: string;
+    mode: ComparisonMode;
+    modelMeta: TextMeta;
+    fileName: string;
+    results: PredictionResult[];
+  }) => void;
 }
 
 function parseJson(raw: string): Array<[string, string]> {
@@ -32,7 +43,7 @@ function parseJson(raw: string): Array<[string, string]> {
   });
 }
 
-export function BatchScorer({ mode }: Props) {
+export function BatchScorer({ mode, onSave }: Props) {
   const [pairs, setPairs] = useState<Array<[string, string]>>([]);
   const [fileName, setFileName] = useState<string | null>(null);
   const [meta, setMeta] = useState<TextMeta>({ name1: '', name2: '', baseline: null });
@@ -62,6 +73,15 @@ export function BatchScorer({ mode }: Props) {
       }
     };
     reader.readAsText(file);
+  };
+
+  const handleLoadTestCase = (tc: BatchTestCase) => {
+    const loaded: Array<[string, string]> = tc.pairs.map((p) => [p.text1, p.text2]);
+    setPairs(loaded);
+    setFileName(`${tc.title} (example)`);
+    setMeta({ name1: tc.name1 ?? '', name2: tc.name2 ?? '', baseline: null });
+    setResults([]);
+    setError(null);
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -95,7 +115,6 @@ export function BatchScorer({ mode }: Props) {
     }
   };
 
-  // Build a cfg variant with overridden labels when names are provided
   const resolvedCfg = {
     ...cfg,
     text1Label: meta.name1
@@ -110,9 +129,14 @@ export function BatchScorer({ mode }: Props) {
       : cfg.text2Label,
   };
 
+  const defaultExpName = `Batch · ${cfg.label} · ${new Date().toLocaleDateString()}`;
+
   return (
     <div className="space-y-5">
-      {/* Model / source labels */}
+      {/* Test cases */}
+      <TestCasePanel scope="batch" mode={mode} onLoad={handleLoadTestCase} />
+
+      {/* Model labels */}
       <ModelConfig
         mode={mode}
         meta={meta}
@@ -204,6 +228,19 @@ export function BatchScorer({ mode }: Props) {
         <>
           <BatchDistribution results={results} cfg={resolvedCfg} />
           <ResultsTable results={results} cfg={resolvedCfg} />
+          <SaveExperimentForm
+            defaultName={defaultExpName}
+            onSave={(name, notes) =>
+              onSave({
+                name,
+                notes,
+                mode,
+                modelMeta: meta,
+                fileName: fileName ?? 'unknown',
+                results,
+              })
+            }
+          />
         </>
       )}
     </div>

@@ -2,12 +2,31 @@ import { useState } from 'react';
 import { predictPair } from '../services/api';
 import { ScoreGauge } from './ScoreGauge';
 import { ModelConfig } from './ModelConfig';
+import { TestCasePanel } from './TestCasePanel';
+import { SaveExperimentForm } from './SaveExperimentForm';
 import { getModeConfig } from '../config/modes';
 import type { TextMeta } from './ModelConfig';
+import type { PairTestCase } from '../data/testCases';
 import type { ComparisonMode, PredictionResult } from '../types';
+
+export interface PairInitData {
+  text1: string;
+  text2: string;
+  meta: TextMeta;
+}
 
 interface Props {
   mode: ComparisonMode;
+  initData?: PairInitData;
+  onSave: (opts: {
+    name: string;
+    notes: string;
+    mode: ComparisonMode;
+    modelMeta: TextMeta;
+    text1: string;
+    text2: string;
+    result: { prediction: number; probability: number };
+  }) => void;
 }
 
 const interpBg = { green: 'bg-emerald-50 border-emerald-200', yellow: 'bg-amber-50 border-amber-200', red: 'bg-red-50 border-red-200' } as const;
@@ -16,10 +35,12 @@ const interpBody = { green: 'text-emerald-600', yellow: 'text-amber-600', red: '
 const interpDivider = { green: 'border-emerald-200', yellow: 'border-amber-200', red: 'border-red-200' } as const;
 const interpMuted = { green: 'text-emerald-500', yellow: 'text-amber-500', red: 'text-red-500' } as const;
 
-export function PairScorer({ mode }: Props) {
-  const [text1, setText1] = useState('');
-  const [text2, setText2] = useState('');
-  const [meta, setMeta] = useState<TextMeta>({ name1: '', name2: '', baseline: null });
+export function PairScorer({ mode, initData, onSave }: Props) {
+  const [text1, setText1] = useState(initData?.text1 ?? '');
+  const [text2, setText2] = useState(initData?.text2 ?? '');
+  const [meta, setMeta] = useState<TextMeta>(
+    initData?.meta ?? { name1: '', name2: '', baseline: null },
+  );
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,15 +63,31 @@ export function PairScorer({ mode }: Props) {
     }
   };
 
-  const interpretation = result ? cfg.interpret(result.probability) : null;
+  const handleLoadTestCase = (tc: PairTestCase) => {
+    setText1(tc.text1);
+    setText2(tc.text2);
+    setMeta({
+      name1: tc.name1 ?? '',
+      name2: tc.name2 ?? '',
+      baseline: null,
+    });
+    setResult(null);
+    setError(null);
+  };
 
+  const interpretation = result ? cfg.interpret(result.probability) : null;
   const comparisonLabel =
     mode === 'model-vs-model' && (meta.name1 || meta.name2)
       ? `${meta.baseline === '1' ? `${label1} (baseline)` : label1} vs ${meta.baseline === '2' ? `${label2} (baseline)` : label2}`
       : cfg.label;
 
+  const defaultExpName = `${cfg.label} · ${new Date().toLocaleDateString()}`;
+
   return (
     <div className="space-y-5">
+      {/* Test case examples */}
+      <TestCasePanel scope="pair" mode={mode} onLoad={handleLoadTestCase} />
+
       {/* Model / source name config */}
       <ModelConfig
         mode={mode}
@@ -114,22 +151,32 @@ export function PairScorer({ mode }: Props) {
       )}
 
       {result && interpretation && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ScoreGauge probability={result.probability} prediction={result.prediction} />
-          <div className={`rounded-2xl border p-5 flex flex-col justify-center ${interpBg[interpretation.color]}`}>
-            <div className={`text-xl font-bold mb-2 ${interpHeading[interpretation.color]}`}>
-              {interpretation.headline}
-            </div>
-            <p className={`text-sm leading-relaxed ${interpBody[interpretation.color]}`}>
-              {interpretation.detail}
-            </p>
-            <div className={`mt-4 pt-3 border-t ${interpDivider[interpretation.color]}`}>
-              <span className={`text-xs font-mono font-semibold uppercase tracking-wide ${interpMuted[interpretation.color]}`}>
-                {comparisonLabel} · Score {result.probability.toFixed(3)}
-              </span>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ScoreGauge probability={result.probability} prediction={result.prediction} />
+            <div className={`rounded-2xl border p-5 flex flex-col justify-center ${interpBg[interpretation.color]}`}>
+              <div className={`text-xl font-bold mb-2 ${interpHeading[interpretation.color]}`}>
+                {interpretation.headline}
+              </div>
+              <p className={`text-sm leading-relaxed ${interpBody[interpretation.color]}`}>
+                {interpretation.detail}
+              </p>
+              <div className={`mt-4 pt-3 border-t ${interpDivider[interpretation.color]}`}>
+                <span className={`text-xs font-mono font-semibold uppercase tracking-wide ${interpMuted[interpretation.color]}`}>
+                  {comparisonLabel} · Score {result.probability.toFixed(3)}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+
+          {/* Save to experiments */}
+          <SaveExperimentForm
+            defaultName={defaultExpName}
+            onSave={(name, notes) =>
+              onSave({ name, notes, mode, modelMeta: meta, text1, text2, result })
+            }
+          />
+        </>
       )}
     </div>
   );
