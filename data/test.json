@@ -1,0 +1,154 @@
+{
+  "data": [
+    {
+      "text1": "The central limit theorem: sample means approach a normal distribution as sample size increases.",
+      "text2": "The central limit theorem states that population distributions become normal as the number of observations increases, regardless of the sample size used.",
+      "label": 0
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "In George Orwell's 1984, the totalitarian Party led by Big Brother uses constant surveillance, propaganda, and psychological manipulation to control citizens.",
+      "text2": "Orwell's 1984 portrays a dystopian state where the all-powerful Party maintains control through pervasive surveillance, propaganda, and psychological coercion.",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "The Berlin Wall was demolished in 1991 following the formal dissolution of the Soviet Union, marking the official end of the Cold War.",
+      "label": 0
+    },
+    {
+      "text1": "Osmosis moves water from low to high solute concentration across a semi-permeable membrane.",
+      "text2": "The Industrial Revolution began in Britain and transitioned economies from agrarian to manufacturing.",
+      "label": 0
+    },
+    {
+      "text1": "GDP measures the total monetary value of goods and services produced within a country.",
+      "text2": "Recursion is a programming technique where a function calls itself to solve smaller sub-problems.",
+      "label": 0
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023, driven primarily by human greenhouse gas emissions.",
+      "text2": "As of 2023, the Earth is roughly 1.1 degrees Celsius warmer than it was before industrialisation, largely due to CO₂ and other greenhouse gases released by human activity.",
+      "label": 1
+    },
+    {
+      "text1": "The First Amendment protects free speech, religion, press, and assembly.",
+      "text2": "The Second Amendment protects the right to keep and bear arms, and has been the subject of significant US Supreme Court interpretation regarding individual versus collective rights.",
+      "label": 0
+    },
+    {
+      "text1": "The placebo-controlled randomised trial is the gold standard for evaluating medical interventions.",
+      "text2": "Recursion without a base case leads to infinite recursion and a stack overflow.",
+      "label": 0
+    },
+    {
+      "text1": "The James Webb Space Telescope was launched in December 2021 and observes the universe in infrared.",
+      "text2": "The James Webb Space Telescope was launched in March 2022 and observes the universe in ultraviolet and visible light, complementing the Hubble Space Telescope.",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "A Mediterranean diet, rich in vegetables, whole grains, olive oil, and fish, is associated with reduced risk of heart disease and longer lifespan.",
+      "text2": "Research links the Mediterranean diet — high in vegetables, whole grains, fish, and olive oil — with lower cardiovascular risk and improved longevity.",
+      "label": 1
+    },
+    {
+      "text1": "Operant conditioning is a learning process where behaviour is shaped by rewards (positive reinforcement) and punishments.",
+      "text2": "In operant conditioning, behaviours increase when followed by rewards and decrease when followed by punishments — a key concept in behavioural psychology.",
+      "label": 1
+    },
+    {
+      "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
+      "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule composed of nucleotides, with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "The DNA molecule has a double-helix structure; its base-pairing rules are A–T and G–C.",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis is cell division that produces two genetically identical daughter cells, each with the same number of chromosomes as the parent cell.",
+      "text2": "During mitosis, a single cell divides to form two daughter cells that are genetically identical to the original and contain the same chromosome count.",
+      "label": 1
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023.",
+      "text2": "Global average temperatures have risen approximately 2.5 °C above pre-industrial levels as of 2023, already exceeding the Paris Agreement target.",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
+      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "label": 0
+    },
+    {
+      "text1": "A hash table stores key-value pairs and provides average O(1) time complexity for insertions, deletions, and lookups using a hash function.",
+      "text2": "Hash maps use a hash function to map keys to bucket indices, enabling constant-time average-case insertions, deletions, and lookups.",
+      "label": 1
+    },
+    {
+      "text1": "The derivative measures the rate of change of a function's output with respect to its input.",
+      "text2": "The integral computes the area under a curve, representing the accumulation of a quantity over an interval — the inverse operation of differentiation.",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem updates belief in a hypothesis given new evidence: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Deforestation destroys habitats, reduces biodiversity, and contributes to climate change.",
+      "label": 0
+    },
+    {
+      "text1": "Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem until a base case is reached.",
+      "text2": "A recursive function solves a problem by breaking it into smaller sub-problems of the same type and calling itself until it hits a stopping condition (base case).",
+      "label": 1
+    },
+    {
+      "text1": "Statins are medications that lower LDL cholesterol by inhibiting the HMG-CoA reductase enzyme responsible for cholesterol synthesis in the liver.",
+      "text2": "By blocking HMG-CoA reductase — the liver enzyme that makes cholesterol — statins reduce LDL ('bad') cholesterol levels in the blood.",
+      "label": 1
+    },
+    {
+      "text1": "Shakespeare's Hamlet explores themes of revenge, mortality, indecision, and the corruption of power through the story of a Danish prince.",
+      "text2": "Hamlet by Shakespeare follows a Danish prince navigating revenge, existential doubt, and the moral corruption of those around him.",
+      "label": 1
+    },
+    {
+      "text1": "Gradient descent is an optimisation algorithm that iteratively updates model parameters in the direction that minimises the loss function.",
+      "text2": "In gradient descent, model weights are repeatedly adjusted in the opposite direction of the gradient of the loss, gradually reducing the error.",
+      "label": 1
+    },
+    {
+      "text1": "Black holes are regions of spacetime where gravity is so strong that nothing — not even light — can escape once it crosses the event horizon.",
+      "text2": "A black hole's gravity is intense enough to trap everything within its event horizon, including light, making it invisible by definition.",
+      "label": 1
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "CRISPR-Cas9 allows precise gene editing by cutting DNA at targeted locations.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
+      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
+      "label": 1
+    },
+    {
+      "text1": "Docker containers package an application and its dependencies together, ensuring it runs consistently across different environments.",
+      "text2": "A Docker container bundles code with all its libraries and configuration so the same image runs identically on any host machine.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries 20% of the world's freshwater discharge.",
+      "text2": "Reinforcement learning trains agents through reward and punishment signals.",
+      "label": 0
+    }
+  ]
+}

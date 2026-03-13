@@ -50,6 +50,29 @@ class BatchResponse(BaseModel):
     )
 
 
+class BreakdownResponse(BaseModel):
+    prediction: int = Field(..., description="Binary prediction: 1 = similar, 0 = different")
+    probability: float = Field(..., description="Overall similarity score in [0, 1]")
+    sentences1: list[str] = Field(..., description="Sentences split from text1")
+    sentences2: list[str] = Field(..., description="Sentences split from text2")
+    alignment: list[list[float]] = Field(
+        ...,
+        description="n×m semantic cosine-similarity matrix (sentences1 × sentences2)",
+    )
+    divergent_in_1: list[int] = Field(
+        ...,
+        description="Indices into sentences1 whose best alignment to any sentence in text2 is below 0.5",
+    )
+    divergent_in_2: list[int] = Field(
+        ...,
+        description="Indices into sentences2 whose best alignment to any sentence in text1 is below 0.5",
+    )
+    feature_scores: dict[str, float] = Field(
+        ...,
+        description="Per-feature-group mean best-match score (higher = more similar)",
+    )
+
+
 class HealthResponse(BaseModel):
     status: str = Field(..., description="Service status", examples=["ok"])
     model_loaded: bool = Field(..., description="Whether the model is loaded and ready")

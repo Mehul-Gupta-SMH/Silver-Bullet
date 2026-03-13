@@ -1,0 +1,149 @@
+{
+  "data": [
+    {
+      "text1": "Regular aerobic exercise for at least 150 minutes per week significantly reduces the risk of cardiovascular disease, type 2 diabetes, and depression.",
+      "text2": "Getting at least 150 minutes of moderate aerobic activity weekly substantially lowers the risk of heart disease, diabetes, and mental health disorders.",
+      "label": 1
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "label": 0
+    },
+    {
+      "text1": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides: a² + b² = c².",
+      "text2": "For any right-angled triangle, a² + b² = c², where c is the hypotenuse — this is the Pythagorean theorem.",
+      "label": 1
+    },
+    {
+      "text1": "# Python list comprehension\nsquares = [x**2 for x in range(10)]",
+      "text2": "# Equivalent using map\nsquares = list(map(lambda x: x**2, range(10)))",
+      "label": 1
+    },
+    {
+      "text1": "The greenhouse effect occurs when gases like CO₂, methane, and water vapour trap heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Greenhouse gases — CO₂, methane, water vapour — absorb outgoing infrared radiation and re-radiate it back toward the surface, raising global temperatures.",
+      "label": 1
+    },
+    {
+      "text1": "The internet is a global system of interconnected computer networks that enables communication, commerce, and access to information for billions of people.",
+      "text2": "Billions of people use the internet — a worldwide network of interconnected computers — to communicate, conduct business, and access information.",
+      "label": 1
+    },
+    {
+      "text1": "Inflation is the rate at which the general price level rises over time, eroding purchasing power.",
+      "text2": "Deflation is the rate at which the general price level falls over time, increasing purchasing power but often signalling economic contraction.",
+      "label": 0
+    },
+    {
+      "text1": "Euler's identity, e^(iπ) + 1 = 0, is widely regarded as the most beautiful equation in mathematics because it links five fundamental constants.",
+      "text2": "e^(iπ) + 1 = 0, known as Euler's identity, elegantly connects e, i, π, 1, and 0 — five of mathematics' most important constants.",
+      "label": 1
+    },
+    {
+      "text1": "Public key cryptography uses a pair of mathematically linked keys — a public key to encrypt and a private key to decrypt — enabling secure communication without sharing a secret.",
+      "text2": "In asymmetric cryptography, a public key encrypts data while only the paired private key can decrypt it, allowing secure exchange without a pre-shared secret.",
+      "label": 1
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes that works by decreasing hepatic glucose production and improving insulin sensitivity.",
+      "text2": "As the primary drug for type 2 diabetes management, metformin reduces the liver's glucose output and helps cells respond more effectively to insulin.",
+      "label": 1
+    },
+    {
+      "text1": "TCP/IP governs how data is packaged, addressed, transmitted, routed, and received across the internet.",
+      "text2": "UDP/IP governs how data is packaged and transmitted across the internet, with guaranteed delivery and error correction built in.",
+      "label": 0
+    },
+    {
+      "text1": "Gradient descent updates model parameters in the direction that minimises the loss function.",
+      "text2": "Gradient ascent updates model parameters in the direction that maximises the loss function, commonly used in generative adversarial networks for the discriminator.",
+      "label": 0
+    },
+    {
+      "text1": "CRISPR-Cas9 is a gene-editing tool that allows scientists to precisely modify DNA sequences in living organisms.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms, making it a powerful tool for genetic engineering.",
+      "label": 1
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution, not the defendant, in criminal trials.",
+      "text2": "In criminal law, defendants are presumed innocent; it is the prosecution's responsibility to prove guilt beyond reasonable doubt.",
+      "label": 1
+    },
+    {
+      "text1": "Bayes' theorem describes the probability of an event based on prior knowledge of conditions related to the event: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Bayes' theorem updates the probability of a hypothesis given new evidence: P(A|B) = P(B|A) × P(A) / P(B).",
+      "label": 1
+    },
+    {
+      "text1": "In Python, list comprehensions provide a concise way to create lists: [expression for item in iterable if condition].",
+      "text2": "Python list comprehensions let you build lists in a single line: [expr for elem in sequence if predicate], replacing verbose for-loop constructs.",
+      "label": 1
+    },
+    {
+      "text1": "REST APIs communicate over HTTP using standard methods — GET, POST, PUT, DELETE — and return data typically in JSON or XML format.",
+      "text2": "A RESTful API uses HTTP verbs (GET, POST, PUT, DELETE) to expose resources and exchange data, commonly serialised as JSON.",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process requires that scientific findings be evaluated by other experts in the field before publication, ensuring quality and validity.",
+      "text2": "Before a scientific paper is published, peer review subjects it to scrutiny by independent experts who assess its methodology, results, and conclusions.",
+      "label": 1
+    },
+    {
+      "text1": "CNNs apply convolutional filters to detect spatial features in images.",
+      "text2": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "label": 0
+    },
+    {
+      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
+      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "label": 0
+    },
+    {
+      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
+      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
+      "label": 1
+    },
+    {
+      "text1": "The central limit theorem guarantees convergence of sample means to a normal distribution.",
+      "text2": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "label": 0
+    },
+    {
+      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
+      "label": 1
+    },
+    {
+      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
+      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "label": 0
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
+      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "label": 1
+    },
+    {
+      "text1": "SQL JOINs combine rows from multiple tables based on a shared column.",
+      "text2": "The placebo effect describes real symptom improvement after inert treatment, driven by expectation.",
+      "label": 0
+    },
+    {
+      "text1": "The Apollo 11 mission successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon on 20 July 1969, with Armstrong becoming the first human to walk on the lunar surface.",
+      "text2": "On 20 July 1969, Apollo 11 touched down on the Moon; Neil Armstrong stepped onto the surface first, followed by Buzz Aldrin — making history as the first crewed lunar landing.",
+      "label": 1
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Wall of China stretches over 21,000 kilometres and was built to protect Chinese states from nomadic invasions.",
+      "text2": "Spanning more than 21,000 km, the Great Wall was constructed over centuries to defend Chinese territories against northern nomadic incursions.",
+      "label": 1
+    }
+  ]
+}
