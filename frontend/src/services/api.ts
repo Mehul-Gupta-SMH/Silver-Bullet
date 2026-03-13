@@ -23,5 +23,5 @@ export const predictPair = (text1: string, text2: string): Promise<PredictionRes
 export const predictBatch = (pairs: Array<[string, string]>): Promise<BatchResponse> =>
   request('/predict/batch', {
     method: 'POST',
-    body: JSON.stringify({ pairs: pairs.map(([text1, text2]) => ({ text1, text2 })) }),
+    body: JSON.stringify({ pairs }),
   });
