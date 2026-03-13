@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { predictPair } from '../services/api';
 import { ScoreGauge } from './ScoreGauge';
+import { ModelConfig } from './ModelConfig';
 import { getModeConfig } from '../config/modes';
+import type { TextMeta } from './ModelConfig';
 import type { ComparisonMode, PredictionResult } from '../types';
 
 interface Props {
@@ -17,11 +19,14 @@ const interpMuted = { green: 'text-emerald-500', yellow: 'text-amber-500', red: 
 export function PairScorer({ mode }: Props) {
   const [text1, setText1] = useState('');
   const [text2, setText2] = useState('');
+  const [meta, setMeta] = useState<TextMeta>({ name1: '', name2: '', baseline: null });
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const cfg = getModeConfig(mode);
+  const label1 = meta.name1 || cfg.text1Label;
+  const label2 = meta.name2 || cfg.text2Label;
 
   const handleScore = async () => {
     if (!text1.trim() || !text2.trim()) return;
@@ -39,11 +44,26 @@ export function PairScorer({ mode }: Props) {
 
   const interpretation = result ? cfg.interpret(result.probability) : null;
 
+  const comparisonLabel =
+    mode === 'model-vs-model' && (meta.name1 || meta.name2)
+      ? `${meta.baseline === '1' ? `${label1} (baseline)` : label1} vs ${meta.baseline === '2' ? `${label2} (baseline)` : label2}`
+      : cfg.label;
+
   return (
     <div className="space-y-5">
+      {/* Model / source name config */}
+      <ModelConfig
+        mode={mode}
+        meta={meta}
+        onChange={setMeta}
+        label1={cfg.text1Label}
+        label2={cfg.text2Label}
+      />
+
+      {/* Text inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-slate-700">{cfg.text1Label}</label>
+          <label className="block text-sm font-semibold text-slate-700">{label1}</label>
           <textarea
             className="w-full h-44 p-3.5 border border-slate-200 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent placeholder:text-slate-300 font-mono leading-relaxed transition-shadow"
             placeholder={cfg.text1Placeholder}
@@ -56,7 +76,7 @@ export function PairScorer({ mode }: Props) {
         </div>
 
         <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-slate-700">{cfg.text2Label}</label>
+          <label className="block text-sm font-semibold text-slate-700">{label2}</label>
           <textarea
             className="w-full h-44 p-3.5 border border-slate-200 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent placeholder:text-slate-300 font-mono leading-relaxed transition-shadow"
             placeholder={cfg.text2Placeholder}
@@ -105,7 +125,7 @@ export function PairScorer({ mode }: Props) {
             </p>
             <div className={`mt-4 pt-3 border-t ${interpDivider[interpretation.color]}`}>
               <span className={`text-xs font-mono font-semibold uppercase tracking-wide ${interpMuted[interpretation.color]}`}>
-                {cfg.label} · Score {result.probability.toFixed(3)}
+                {comparisonLabel} · Score {result.probability.toFixed(3)}
               </span>
             </div>
           </div>

@@ -2,7 +2,9 @@ import { useState, useRef } from 'react';
 import { predictBatch } from '../services/api';
 import { ResultsTable } from './ResultsTable';
 import { BatchDistribution } from './BatchDistribution';
+import { ModelConfig } from './ModelConfig';
 import { getModeConfig } from '../config/modes';
+import type { TextMeta } from './ModelConfig';
 import type { ComparisonMode, PredictionResult } from '../types';
 
 interface JsonRecord {
@@ -33,6 +35,7 @@ function parseJson(raw: string): Array<[string, string]> {
 export function BatchScorer({ mode }: Props) {
   const [pairs, setPairs] = useState<Array<[string, string]>>([]);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [meta, setMeta] = useState<TextMeta>({ name1: '', name2: '', baseline: null });
   const [results, setResults] = useState<PredictionResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -92,8 +95,32 @@ export function BatchScorer({ mode }: Props) {
     }
   };
 
+  // Build a cfg variant with overridden labels when names are provided
+  const resolvedCfg = {
+    ...cfg,
+    text1Label: meta.name1
+      ? mode === 'model-vs-model' && meta.baseline === '1'
+        ? `${meta.name1} (baseline)`
+        : meta.name1
+      : cfg.text1Label,
+    text2Label: meta.name2
+      ? mode === 'model-vs-model' && meta.baseline === '2'
+        ? `${meta.name2} (baseline)`
+        : meta.name2
+      : cfg.text2Label,
+  };
+
   return (
     <div className="space-y-5">
+      {/* Model / source labels */}
+      <ModelConfig
+        mode={mode}
+        meta={meta}
+        onChange={setMeta}
+        label1={cfg.text1Label}
+        label2={cfg.text2Label}
+      />
+
       {/* Drop zone */}
       <div>
         <label className="block text-sm font-semibold text-slate-700 mb-2">Upload JSON File</label>
@@ -175,8 +202,8 @@ export function BatchScorer({ mode }: Props) {
 
       {results.length > 0 && (
         <>
-          <BatchDistribution results={results} cfg={cfg} />
-          <ResultsTable results={results} cfg={cfg} />
+          <BatchDistribution results={results} cfg={resolvedCfg} />
+          <ResultsTable results={results} cfg={resolvedCfg} />
         </>
       )}
     </div>
