@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { predictPair } from '../services/api';
+import { predictPair, predictPairBreakdown } from '../services/api';
 import { ScoreGauge } from './ScoreGauge';
+import { BreakdownPanel } from './BreakdownPanel';
 import { ModelConfig } from './ModelConfig';
 import { TestCasePanel } from './TestCasePanel';
 import { SaveExperimentForm } from './SaveExperimentForm';
 import { getModeConfig } from '../config/modes';
 import type { TextMeta } from './ModelConfig';
 import type { PairTestCase } from '../data/testCases';
-import type { ComparisonMode, PredictionResult } from '../types';
+import type { BreakdownResult, ComparisonMode, PredictionResult } from '../types';
 
 export interface PairInitData {
   text1: string;
@@ -44,6 +45,10 @@ export function PairScorer({ mode, initData, onSave }: Props) {
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [breakdown, setBreakdown] = useState<BreakdownResult | null>(null);
+  const [breakdownLoading, setBreakdownLoading] = useState(false);
+  const [breakdownError, setBreakdownError] = useState<string | null>(null);
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
   const cfg = getModeConfig(mode);
   const label1 = meta.name1 || cfg.text1Label;
@@ -54,12 +59,36 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     setLoading(true);
     setError(null);
     setResult(null);
+    setBreakdown(null);
+    setShowBreakdown(false);
     try {
       setResult(await predictPair(text1, text2));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Unknown error');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDrillDown = async () => {
+    if (showBreakdown) {
+      setShowBreakdown(false);
+      return;
+    }
+    if (breakdown) {
+      setShowBreakdown(true);
+      return;
+    }
+    setBreakdownLoading(true);
+    setBreakdownError(null);
+    try {
+      const bd = await predictPairBreakdown(text1, text2);
+      setBreakdown(bd);
+      setShowBreakdown(true);
+    } catch (e) {
+      setBreakdownError(e instanceof Error ? e.message : 'Unknown error');
+    } finally {
+      setBreakdownLoading(false);
     }
   };
 
@@ -73,6 +102,8 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     });
     setResult(null);
     setError(null);
+    setBreakdown(null);
+    setShowBreakdown(false);
   };
 
   const interpretation = result ? cfg.interpret(result.probability) : null;
@@ -168,6 +199,30 @@ export function PairScorer({ mode, initData, onSave }: Props) {
               </div>
             </div>
           </div>
+
+          {/* Drill-down trigger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleDrillDown}
+              disabled={breakdownLoading}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-violet-300 bg-white text-violet-700 text-sm font-semibold hover:bg-violet-50 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+            >
+              {breakdownLoading ? (
+                <span className="w-3.5 h-3.5 border-2 border-violet-400 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <span className="text-base">{showBreakdown ? '▲' : '▼'}</span>
+              )}
+              {breakdownLoading ? 'Running deep analysis…' : showBreakdown ? 'Hide Breakdown' : 'Drill Down — Impact & Divergence'}
+            </button>
+            {breakdownError && (
+              <span className="text-xs text-red-600">{breakdownError}</span>
+            )}
+          </div>
+
+          {/* Breakdown panel */}
+          {showBreakdown && breakdown && (
+            <BreakdownPanel breakdown={breakdown} />
+          )}
 
           {/* Save to experiments */}
           <SaveExperimentForm

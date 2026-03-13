@@ -1,4 +1,4 @@
-import type { PredictionResult, BatchResponse, HealthResponse } from '../types';
+import type { PredictionResult, BatchResponse, BreakdownResult, HealthResponse } from '../types';
 
 const BASE_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api/v1';
 
@@ -16,6 +16,12 @@ export const healthCheck = (): Promise<HealthResponse> =>
 
 export const predictPair = (text1: string, text2: string): Promise<PredictionResult> =>
   request('/predict/pair', {
+    method: 'POST',
+    body: JSON.stringify({ text1, text2 }),
+  });
+
+export const predictPairBreakdown = (text1: string, text2: string): Promise<BreakdownResult> =>
+  request('/predict/pair/breakdown', {
     method: 'POST',
     body: JSON.stringify({ text1, text2 }),
   });

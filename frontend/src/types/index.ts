@@ -26,6 +26,17 @@ export interface PredictionResult {
   text2?: string;
 }
 
+export interface BreakdownResult {
+  prediction: number;
+  probability: number;
+  sentences1: string[];
+  sentences2: string[];
+  alignment: number[][];
+  divergent_in_1: number[];
+  divergent_in_2: number[];
+  feature_scores: Record<string, number>;
+}
+
 export interface BatchResponse {
   results: { prediction: number; probability: number }[];
 }
