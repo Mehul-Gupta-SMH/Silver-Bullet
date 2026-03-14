@@ -12,6 +12,7 @@ const noop = () => {};
 describe('PairScorer', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it('Analyse button is disabled when both textareas are empty', () => {

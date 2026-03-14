@@ -5,7 +5,16 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from huggingface_hub import login
 from resources.getConfig import getVal
 from openai import OpenAI
-login(token=getVal()['hf_token'])
+
+_hf_logged_in = False
+
+
+def _ensure_hf_login() -> None:
+    """Login to HuggingFace Hub on first call (deferred — no side effects on import)."""
+    global _hf_logged_in
+    if not _hf_logged_in:
+        login(token=getVal()['hf_token'])
+        _hf_logged_in = True
 
 
 class EntityResolver:
@@ -27,6 +36,7 @@ class EntityResolver:
         if self.MODEL_TYPE == 'api':
             self.model = OpenAI(api_key=self.__config__['openai_token'])
         elif self.MODEL_TYPE == 'local':
+            _ensure_hf_login()
             self.tokenizer = AutoTokenizer.from_pretrained(
                 self.MODEL,
                 use_fast=True,

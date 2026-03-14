@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { predictPair, predictPairBreakdown } from '../services/api';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { ScoreGauge } from './ScoreGauge';
 import { BreakdownPanel } from './BreakdownPanel';
 import { ModelConfig } from './ModelConfig';
@@ -37,11 +38,21 @@ const interpDivider = { green: 'border-emerald-200', yellow: 'border-amber-200',
 const interpMuted = { green: 'text-emerald-500', yellow: 'text-amber-500', red: 'text-red-500' } as const;
 
 export function PairScorer({ mode, initData, onSave }: Props) {
-  const [text1, setText1] = useState(initData?.text1 ?? '');
-  const [text2, setText2] = useState(initData?.text2 ?? '');
-  const [meta, setMeta] = useState<TextMeta>(
+  // When initData is provided (re-run from experiments), use it directly and persist it.
+  // Otherwise restore from localStorage so the draft survives page refreshes.
+  const [text1, setText1] = useLocalStorage<string>(
+    'sb_pair_text1',
+    initData?.text1 ?? '',
+  );
+  const [text2, setText2] = useLocalStorage<string>(
+    'sb_pair_text2',
+    initData?.text2 ?? '',
+  );
+  const [meta, setMeta] = useLocalStorage<TextMeta>(
+    'sb_pair_meta',
     initData?.meta ?? { name1: '', name2: '', baseline: null },
   );
+
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

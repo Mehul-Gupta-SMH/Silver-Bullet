@@ -3,6 +3,7 @@ import argparse
 import json
 from model import TextSimilarityCNN, TextSimilarityCNNLegacy
 from train import TextSimilarityDataset, feature_map_to_tensor
+from feature_registry import validate_manifest
 from pathlib import Path
 import numpy as np
 
@@ -17,12 +18,13 @@ def _load_model_from_checkpoint(checkpoint, device):
         model = TextSimilarityCNNLegacy(input_dim=input_dim)
         arch = f'legacy Conv1D (input_dim={input_dim})'
     else:
-        # Current Conv2D checkpoint — num_features must be present
+        # Current Conv2D checkpoint — validate manifest then load
         if 'num_features' not in checkpoint:
             raise KeyError(
                 "Checkpoint does not contain 'num_features'. "
                 "Re-train the model to generate a compatible checkpoint."
             )
+        validate_manifest(checkpoint.get('manifest'))
         num_features = checkpoint['num_features']
         model = TextSimilarityCNN(num_features=num_features)
         arch = f'Conv2D (num_features={num_features})'

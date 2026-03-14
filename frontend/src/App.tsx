@@ -7,6 +7,7 @@ import { ComparisonModeSelector } from './components/ComparisonModeSelector';
 import { FeaturePanel } from './components/FeaturePanel';
 import { ExperimentsPanel } from './components/ExperimentsPanel';
 import { useExperiments } from './hooks/useExperiments';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import type { ComparisonMode } from './types';
 import './index.css';
 
@@ -19,8 +20,8 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 ];
 
 function App() {
-  const [tab, setTab] = useState<Tab>('pair');
-  const [mode, setMode] = useState<ComparisonMode>('reference-vs-generated');
+  const [tab, setTab] = useLocalStorage<Tab>('sb_tab', 'pair');
+  const [mode, setMode] = useLocalStorage<ComparisonMode>('sb_mode', 'reference-vs-generated');
   const [pairInit, setPairInit] = useState<PairInitData | undefined>(undefined);
   const [pairKey, setPairKey] = useState(0);
 
@@ -42,6 +43,10 @@ function App() {
     name2: string;
     baseline: '1' | '2' | null;
   }) => {
+    // Write to localStorage before remount so PairScorer reads the correct values.
+    localStorage.setItem('sb_pair_text1', JSON.stringify(data.text1));
+    localStorage.setItem('sb_pair_text2', JSON.stringify(data.text2));
+    localStorage.setItem('sb_pair_meta', JSON.stringify({ name1: data.name1, name2: data.name2, baseline: data.baseline }));
     setMode(data.mode);
     setPairInit({
       text1: data.text1,
