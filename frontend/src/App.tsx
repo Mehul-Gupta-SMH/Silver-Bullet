@@ -7,20 +7,21 @@ import { ComparisonModeSelector } from './components/ComparisonModeSelector';
 import { FeaturePanel } from './components/FeaturePanel';
 import { ExperimentsPanel } from './components/ExperimentsPanel';
 import { useExperiments } from './hooks/useExperiments';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import type { ComparisonMode } from './types';
 import './index.css';
 
 type Tab = 'pair' | 'batch' | 'experiments';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'pair', label: 'Single Pair', icon: '⚡' },
-  { id: 'batch', label: 'Batch Scoring', icon: '📦' },
+  { id: 'pair', label: 'Single Eval', icon: '⚡' },
+  { id: 'batch', label: 'Batch Eval', icon: '📦' },
   { id: 'experiments', label: 'Experiments', icon: '🧪' },
 ];
 
 function App() {
-  const [tab, setTab] = useState<Tab>('pair');
-  const [mode, setMode] = useState<ComparisonMode>('reference-vs-generated');
+  const [tab, setTab] = useLocalStorage<Tab>('sb_tab', 'pair');
+  const [mode, setMode] = useLocalStorage<ComparisonMode>('sb_mode', 'reference-vs-generated');
   const [pairInit, setPairInit] = useState<PairInitData | undefined>(undefined);
   const [pairKey, setPairKey] = useState(0);
 
@@ -42,6 +43,10 @@ function App() {
     name2: string;
     baseline: '1' | '2' | null;
   }) => {
+    // Write to localStorage before remount so PairScorer reads the correct values.
+    localStorage.setItem('sb_pair_text1', JSON.stringify(data.text1));
+    localStorage.setItem('sb_pair_text2', JSON.stringify(data.text2));
+    localStorage.setItem('sb_pair_meta', JSON.stringify({ name1: data.name1, name2: data.name2, baseline: data.baseline }));
     setMode(data.mode);
     setPairInit({
       text1: data.text1,
@@ -68,7 +73,7 @@ function App() {
                 Silver<span className="text-violet-600">Bullet</span>
               </h1>
               <p className="text-[11px] text-slate-400 mt-0.5 leading-none">
-                Text similarity &amp; faithfulness scorer
+                LLM Evaluation Benchmark
               </p>
             </div>
           </div>
@@ -155,7 +160,7 @@ function App() {
       <footer className="border-t border-slate-200 mt-16 py-6">
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <span className="text-xs text-slate-400">
-            SilverBullet · Learned text similarity via Conv2D on multi-signal 64×64 feature maps
+            SilverBullet · LLM Evaluation Benchmark · Conv2D over 16 multi-signal feature maps
           </span>
           <a
             href="http://localhost:8000/api/v1/docs"

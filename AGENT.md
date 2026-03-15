@@ -6,15 +6,14 @@ and `TASK.md` for current work items.
 
 ---
 
-## Project Purpose
+## Project Identity
 
-SilverBullet learns to score the similarity or faithfulness between two text passages.
-It works by splitting texts into sentences, computing cross-sentence feature matrices
-using multiple NLP signals, and feeding those matrices to a trained CNN classifier.
+SilverBullet is a **real-time LLM evaluation benchmark** — not a generic text similarity tool.
+It scores faithfulness, model agreement, and RAG groundedness between two texts using a
+Conv2D model trained on 16 multi-signal sentence-pair feature maps.
 
-The key insight is the **n×m sentence-pair matrix**: rather than comparing two texts as
-whole embeddings, every sentence in text1 is compared against every sentence in text2,
-capturing fine-grained alignment information.
+**Positioning:** Designed for near-real-time use inside LLM pipelines (hallucination guards,
+model comparison, RL reward signals). The API adds ~100–200 ms on cached pairs.
 
 ---
 
@@ -30,8 +29,9 @@ sentences = split_txt("My name is Mehul. He is a good person.")
 ```
 
 - Splits on `(?<!\d)\.(?!\d)` and `\n`
-- Each sentence is passed through `EntityResolver.resolve()` to replace pronouns with named entities
-- **Performance note:** Creates a new `EntityResolver` on every call — this triggers model load + API calls. In batch contexts, instantiate `EntityResolver` once and pass it in, or disable coref during training.
+- Each sentence passed through `EntityResolver.resolve()` — pronoun → named entity
+- **Performance:** Creates a new `EntityResolver` per call. Expensive in batch contexts —
+  instantiate resolver once and pass it in, or disable coref during training.
 
 ---
 
@@ -39,15 +39,13 @@ sentences = split_txt("My name is Mehul. He is a good person.")
 **Coreference resolution via LLM.**
 
 ```python
-resolver = EntityResolver(model="gpt-4o-mini")   # or "google/gemma-3-270m" for local
+resolver = EntityResolver(model="gpt-4o-mini")   # or local Gemma
 resolved = resolver.resolve("He went to the store.")
 ```
 
-- `model` in `['gpt-4o', 'gpt-4o-mini', ...]` → `MODEL_TYPE = 'api'` (uses OpenAI client)
-- Any other model string → `MODEL_TYPE = 'local'` (loads via `AutoModelForCausalLM`)
-- API key sourced from `resources/config.yaml` via `getVal()['openai_token']`
-- HF token sourced from `getVal()['hf_token']`
-- Module-level `login(token=...)` runs on import — ensure HF token is valid before importing
+- `gpt-4o`, `gpt-4o-mini` etc. → `MODEL_TYPE = 'api'` (OpenAI client)
+- Any other string → `MODEL_TYPE = 'local'` (HuggingFace causal LM)
+- HF `login()` runs at import — ensure `hf_token` is valid before importing
 
 ---
 
@@ -58,28 +56,25 @@ resolved = resolver.resolve("He went to the store.")
 weights = SemanticWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "mixedbread-ai/mxbai-embed-large-v1",
 #       "Qwen/Qwen3-Embedding-0.6B",
-#       "SOFT_ROW_<model>", "SOFT_COL_<model>"  (softmax alignments)
+#       "SOFT_ROW_<model>", "SOFT_COL_<model>"
 # values: torch.Tensor shape [64, 64]
 ```
 
-Internal flow: `SemanticFeatures.run()` → encode both groups → `cos_sim` pairwise → softmax along rows and cols → `pad_matrix`.
-
-`SemanticFeatures` uses a **class-level `_model_cache`** — models are loaded once per process and shared across all instances. Do not clear this cache unless necessary.
+- `SemanticFeatures` uses a **class-level `_model_cache`** — loaded once per process.
+- `_reset_state()` clears sentence data but never touches `_model_cache`.
 
 ---
 
 ### `Features/Lexical/getLexicalWeights.py`
-**Produces 4 feature maps from token overlap metrics.**
+**Produces 4 feature maps from SentencePiece token overlap.**
 
 ```python
 weights = LexicalWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "jaccard", "dice", "cosine", "rouge"
-# values: torch.Tensor shape [64, 64]
 ```
 
-- Uses `mxbai-embed-large-v1` tokenizer (SentencePiece) — tokenizer only, no model weights
-- **Bug:** `sp_tokenize()` calls `__load_model__()` unconditionally — tokenizer reloads every call. Fix: add `if not hasattr(self, 'tokenizer_cache')` guard.
-- Metrics operate on token sets/counts, not embeddings
+- Class-level `_tokenizer_cache` — tokenizer loaded once per process.
+- Metrics operate on token sets/counts, not embeddings — zero inference cost.
 
 ---
 
@@ -89,13 +84,11 @@ weights = LexicalWeights().getFeatureMap(sent_group1, sent_group2)
 ```python
 weights = NLIWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "entailment", "neutral", "contradiction"
-# values: torch.Tensor shape [64, 64]
 ```
 
 - Model: `FacebookAI/roberta-large-mnli`
-- Processes in batches of 64 pairs (configurable via `self.__batch_size__`)
-- Model cached in `__model_cache__` instance attribute (set only once due to `hasattr` guard)
-- **Note:** `getFeatureMap` calls `self.__init__()` which resets `self.comparison_weights = {}` but does NOT delete `__model_cache__` — model survives. Do not change `__init__` without verifying this.
+- Batched inference (batch_size=64). Model stored in `__model_cache__` (instance attr).
+- `_reset_state()` clears buffers but leaves `__model_cache__` intact.
 
 ---
 
@@ -104,14 +97,25 @@ weights = NLIWeights().getFeatureMap(sent_group1, sent_group2)
 
 ```python
 weights = EntityMatch().getFeatureMap(sent_group1, sent_group2)
-# keys: "EntityMismatch"
-# values: torch.Tensor shape [64, 64]   (values are negative integers, 0 = perfect match)
+# keys: "EntityMismatch"   (values are ≤ 0; 0 = perfect entity match)
 ```
 
-- Uses GLiNER model `knowledgator/modern-gliner-bi-base-v1.0`
-- Entity types: person, organization, location, date, event, art, work_of_art, law, language
-- Score per cell = `sum(-abs(count_A[entity] - count_B[entity]) for entity in types)` — closer to 0 is better
-- Same `__init__` / `__model_cache__` pattern as NLI
+- GLiNER model `knowledgator/modern-gliner-bi-base-v1.0`
+- Entity types: person, org, location, date, event, art, work_of_art, law, language
+- Cell value = `sum(-abs(countA[e] - countB[e]) for e in entity_types)`
+
+---
+
+### `Features/LCS/getLCSweights.py`
+**Produces 2 feature maps via dynamic-programming LCS (no model).**
+
+```python
+weights = LCSWeights().getFeatureMap(sent_group1, sent_group2)
+# keys: "lcs_token", "lcs_char"
+# score = len(LCS) / max(len(seq1), len(seq2))  ∈ [0, 1]
+```
+
+- No model load, O(n·m) DP in pure Python. Cheapest extractor.
 
 ---
 
@@ -120,71 +124,77 @@ weights = EntityMatch().getFeatureMap(sent_group1, sent_group2)
 
 ```python
 from Postprocess.__addpad import pad_matrix
-t = pad_matrix([[1,2],[3,4]], target_size=64, pad_value=0)
+t = pad_matrix([[1,2],[3,4]], target_size=64)
 # → torch.Tensor shape [64, 64]
 ```
 
-- **Hard constraint:** Input matrix must not exceed 64 rows or 64 columns. Raises `IndexError` (via F.pad negative pad values) if it does.
-- This means texts are limited to **64 sentences each**.
+- Truncates inputs with > 64 rows or > 64 columns (silently drops overflow sentences).
+- **Hard constraint:** texts are limited to 64 sentences each.
 
 ---
 
 ### `feature_cache.py`
-**Disk-based feature cache.**
+**Disk-based feature cache keyed by MD5 of text pair.**
 
 ```python
 cache = FeatureCache(cache_dir='cache')
-cached = cache.get_features(text1, text2)   # None if not found
-cache.save_features(text1, text2, feature_vector_list)
+cached = cache.get_features(text1, text2)   # None if miss
+cache.save_features(text1, text2, stacked_tensor.tolist())
 ```
 
-- Key = `md5(text1 + "|||" + text2)`
-- Stored as JSON in `cache/{key}.json`
-- Cache is **order-sensitive**: `get_features(A, B) != get_features(B, A)`
-- Safe to delete `./cache/` to force full recompute
+- Cache stores the full stacked `[F, 64, 64]` tensor as a JSON list.
+- Order-sensitive: `(A, B)` ≠ `(B, A)`.
+- Delete `./cache/` to force full recompute (required after changing feature set).
 
 ---
 
-### `model.py` — `TextSimilarityCNN`
+### `model.py` — `TextSimilarityCNN` (current) + `TextSimilarityCNNLegacy`
 
+**Current architecture (Conv2D):**
 ```python
-model = TextSimilarityCNN(input_dim=45056)   # dynamic, set from first training sample
-output = model(feature_tensor)               # → scalar in [0, 1]
+model = TextSimilarityCNN(num_features=16)
+# Input:  [batch, num_features, 64, 64]
+# Output: [batch, 1]  sigmoid → [0, 1]
 ```
 
-Architecture:
 ```
-FC(input_dim → 4096) + BN + Dropout
-FC(4096 → 1024)      + BN + Dropout
-FC(1024 → 256)       + BN + Dropout
-unsqueeze(1)  →  [batch, 1, 256]
-Conv1d(1→128, k=3) + ReLU + MaxPool(2)
-Conv1d(128→64, k=3) + ReLU + MaxPool(2)
-flatten  →  [batch, 64*64]
-FC(4096 → 128)       + BN + Dropout
-FC(128 → 1)
-sigmoid → [0, 1]
+Conv2d(F→128, k=3) + BN + MaxPool(2) → [B, 128, 32, 32]
+Conv2d(128→64, k=3) + BN + MaxPool(2) → [B, 64,  16, 16]
+Conv2d(64→32,  k=3) + BN + MaxPool(2) → [B, 32,   8,  8]
+flatten → [B, 2048]
+FC(2048→128) + BN + Dropout
+FC(128→1) → sigmoid
 ```
 
-**Known issue:** The architecture calls itself a CNN but processes a 1D sequence after flattening 2D matrices. The spatial n×m structure is lost. Correct fix is `Conv2d` over a `[batch, F, 64, 64]` input where F = number of feature maps.
+**Legacy architecture (Conv1D)** — `TextSimilarityCNNLegacy`:
+Kept for backward-compatibility so old `best_model.pth` checkpoints still load.
+Auto-detected in `predict.py` via presence of `fc_reduce1.weight` in state dict.
+
+**Checkpoint format:**
+```python
+{
+    'epoch': int,
+    'model_state_dict': ...,
+    'optimizer_state_dict': ...,
+    'loss': float,
+    'num_features': int,   # required for Conv2D; absent in legacy checkpoints
+}
+```
 
 ---
 
 ### `train.py`
 
-**Key classes/functions:**
-- `load_json_data(path)` → `(pairs, labels)`
-- `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction at init, stores flat tensors
+Key classes/functions:
+- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks all maps in insertion order
+- `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction, stores `[N, F, 64, 64]`
 - `train_model(model, train_loader, val_loader, num_epochs=50, patience=5)` — Adam + BCELoss + early stopping
 
 Checkpoints saved:
-- `best_model.pth` — best validation loss checkpoint (overwritten each improvement)
-- `model_weights_{timestamp}_final.pth` — final epoch weights
-- `model_weights_{timestamp}_best.pth` — best epoch weights (copy at training end)
-- `training_reports/training_report_{timestamp}_current.json` — updated each epoch
-- `training_reports/training_report_{timestamp}_final.json` — at end
+- `best_model.pth` — best val-loss checkpoint, overwritten each improvement
+- `model_weights_{ts}_final.pth` / `model_weights_{ts}_best.pth` — archived at end
 
-**`input_dim` is dynamic** — it is derived from `len(train_dataset[0][0])` and passed to `TextSimilarityCNN`. Never hardcode it.
+`num_features` is derived from `train_dataset.num_features` and serialised into every checkpoint.
 
 ---
 
@@ -192,71 +202,118 @@ Checkpoints saved:
 
 ```python
 predictor = SimilarityPredictor("best_model.pth")
+
+# Fast path (uses feature cache)
 result = predictor.predict_pair(text1, text2)
 # → {"prediction": 0|1, "probability": float, "text1": ..., "text2": ...}
 
+# Batch
 results = predictor.predict_batch([[t1, t2], ...])
+
+# Breakdown (slow — reruns pipeline, extracts intermediate data)
+bd = predictor.predict_pair_breakdown(text1, text2)
+# → {
+#     "prediction": int, "probability": float,
+#     "sentences1": [...], "sentences2": [...],
+#     "alignment": [[float]], "divergent_in_1": [int], "divergent_in_2": [int],
+#     "feature_scores": {"Semantic (mxbai)": float, ...}
+#   }
 ```
 
-**Known issue:** Constructor creates `TextSimilarityDataset([["temp", "temp"]], [0])` just to infer `input_dim`. This triggers the full feature pipeline on garbage input. Should serialize `input_dim` into the checkpoint instead.
+`_load_model_from_checkpoint(checkpoint, device)` auto-detects legacy vs Conv2D via state dict keys.
 
 ---
 
-### `resources/getConfig.py`
+### `api/` — FastAPI application
 
-```python
-from resources.getConfig import getVal
-cfg = getVal(env='DEVELOPMENT')
-# cfg['hf_token'], cfg['openai_token'], cfg['api_key']
+```
+GET  /api/v1/health                   → HealthResponse
+POST /api/v1/predict/pair             → PairResponse          (fast, uses cache)
+POST /api/v1/predict/pair/breakdown   → BreakdownResponse     (slow, full pipeline)
+POST /api/v1/predict/batch            → BatchResponse         (up to 100 pairs)
 ```
 
-- Falls back to a hardcoded absolute path on failure — this must be removed
-- Until secrets are moved to env vars, keep `resources/config.yaml` out of commits
+- `get_predictor()` in `dependencies.py` is `@lru_cache` — singleton per process
+- `MODEL_PATH` env var overrides default `best_model.pth`
+- Structured JSON logging via `LoggingMiddleware`; request IDs via `RequestIDMiddleware`
+- CORS: `localhost:5173` + `ALLOWED_ORIGINS` env var
+- Docs: `/api/v1/docs` (Swagger), `/api/v1/redoc`
+
+---
+
+### `frontend/`
+
+Stack: React + TypeScript + Vite + TailwindCSS
+
+Key components:
+- `PairScorer` — single eval form; after scoring shows "Drill Down — Impact & Divergence" button
+- `BreakdownPanel` — renders divergence analysis: two-column sentence list (colour-coded by max alignment), orphaned-sentence summary, feature-score bars
+- `BatchScorer` — up to 100 pairs, distribution chart
+- `ScoreGauge` — visual score bar + Similar/Different badge
+- `TestCasePanel` — pre-built test cases incl. `ex-1`/`ex-2` (from `example.py`)
+- `ExperimentsPanel` — save, annotate, re-run scored pairs
+
+Vite proxy: `/api` → `http://localhost:8000` (configured in `frontend/vite.config.ts`).
+
+---
+
+### `generate_data.py`
+
+Generates `data/train.json`, `data/validate.json`, `data/test.json` from hardcoded pairs.
+
+```
+python generate_data.py
+```
+
+Pair taxonomy:
+- `positive` (label=1): paraphrases, faithful summaries, equivalent code — 14 domains
+- `hard_neg` (label=0): same topic, wrong number/date/entity, negated claim, partial hallucination
+- `soft_neg` (label=0): completely different domains
+
+Run this before training whenever you want to change the dataset. Delete `./cache/` too.
 
 ---
 
 ## Common Patterns & Pitfalls
 
-### Pattern: Feature extractor with lazy model loading
+### Pattern: Feature extractor lazy model loading
 ```python
 def __calc_weights__(self):
     if not hasattr(self, "__model_cache__"):
         self.__load_model__()
     # use self.__model_cache__
 ```
-All feature extractors follow this pattern. The model survives `getFeatureMap` calls because `self.__init__()` does not set `__model_cache__`, so the `hasattr` guard prevents reload.
+All extractors use this. `_reset_state()` never sets `__model_cache__`, so the model survives between `getFeatureMap` calls.
 
-### Pitfall: Adding attributes in `__init__` that shadow model cache
-If you add `self.__model_cache__ = None` to any `__init__`, the lazy-load guard will break and the model will reload on every `getFeatureMap` call.
+### PITFALL: Do not set `self.__model_cache__ = None` in `__init__`
+This breaks the hasattr guard — model reloads on every call.
 
 ### Pattern: Consistent `getFeatureMap` interface
-Every feature extractor exposes:
 ```python
 def getFeatureMap(self, list1: List[str], list2: List[str]) -> Dict[str, torch.Tensor]:
+    self._reset_state()
+    ...
+    return self.comparison_weights   # dict of {name: Tensor[64,64]}
 ```
-Returns dict of `{feature_name: torch.Tensor[64, 64]}`. The keys must be unique across all extractors since `train.py` merges them with `feature_map.update(...)`.
 
-### Pitfall: Key collisions in feature_map.update()
-If two extractors return the same key, one will silently overwrite the other in `train.py`. All current keys are unique but verify when adding new extractors.
+### PITFALL: Key collisions in `feature_map.update()`
+`train.py` merges all extractor outputs with `.update()`. If two extractors share a key, one silently overwrites the other. Verify uniqueness when adding a new extractor.
 
-### Pitfall: Feature vector length must be consistent between train and predict
-The model's `input_dim` is fixed at training time. Adding or removing feature extractors invalidates saved checkpoints. When changing features, retrain from scratch.
+### PITFALL: Feature set changes invalidate cached tensors AND checkpoints
+Changing which extractors run (or their key order) invalidates:
+1. `./cache/` — delete to force recompute
+2. `best_model.pth` — retrain from scratch (`num_features` changes)
 
 ---
 
 ## Adding a New Feature Extractor
 
 1. Create `Features/{Name}/get{Name}Weights.py`
-2. Implement class with:
-   - `__init__`: initialize state vars (NO model loading here)
-   - `__load_model__`: lazy model load, stores in `self.__model_cache__`
-   - `__calc_weights__`: builds `self.comparison_weights` dict
-   - `__post_process_weights__`: calls `pad_matrix` on each entry
-   - `getFeatureMap(list1, list2) -> dict`: calls `self.__init__()` to reset, then runs pipeline
-3. Add to `train.py`, `predict.py` (via `TextSimilarityDataset`), and `example.py`
-4. Verify key names don't collide with existing feature keys
-5. Delete `./cache/` to force recompute with new features
-6. Retrain model (new features change `input_dim`)
+2. Implement with `_reset_state()`, `__load_model__()`, `getFeatureMap()` following existing pattern
+3. Import and call in `train.py` (`TextSimilarityDataset.__init__`) and `predict.py` (`predict_pair_breakdown`)
+4. Add to `example.py` for manual testing
+5. Verify no key collision with existing feature names
+6. Delete `./cache/`, retrain model
 
 ---
 
@@ -264,16 +321,16 @@ The model's `input_dim` is fixed at training time. Adding or removing feature ex
 
 | Path | Created By | Contents |
 |------|-----------|----------|
-| `./cache/` | `FeatureCache` | `{md5}.json` — flat feature vectors per text pair |
-| `./training_reports/` | `TrainingReport` | `training_report_{ts}_{current|final}.{json|md}` |
-| `./test_reports/` | `TestReport` | `test_report_{ts}.{json|md}` |
+| `./cache/` | `FeatureCache` | `{md5}.json` — stacked `[F,64,64]` tensors per text pair |
+| `./training_reports/` | `TrainingReport` | `training_report_{ts}_{current\|final}.{json\|md}` |
+| `./test_reports/` | `TestReport` | `test_report_{ts}.{json\|md}` |
 | `best_model.pth` | `train.py` | Best validation checkpoint |
-| `model_weights_{ts}_{final|best}.pth` | `train.py` | Final/best weights per run |
+| `model_weights_{ts}_{final\|best}.pth` | `train.py` | Archived weights per run |
 
 ---
 
 ## Security Notes
 
-- `resources/config.yaml` contains live API tokens — **do not commit changes to this file**
-- `getConfig.py` contains a hardcoded absolute Windows path as a fallback — do not replicate this pattern
-- Model cache directories (`/Features/.../weights_cache/`) use absolute-style paths starting with `/` — on Windows these resolve relative to the drive root. Verify paths work on target OS before deploying.
+- `resources/config.yaml` contains live API tokens — **do not commit**
+- `getConfig.py` has a hardcoded Windows absolute path fallback — do not replicate
+- Model cache dirs use relative paths from project root — verify on target OS

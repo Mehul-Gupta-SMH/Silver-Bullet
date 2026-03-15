@@ -16,7 +16,7 @@ export function ScoreGauge({ probability, prediction }: Props) {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-5">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-semibold text-slate-600">Similarity Score</span>
+        <span className="text-sm font-semibold text-slate-600">Evaluation Score</span>
         <span
           className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-white ${badgeBg}`}
         >

@@ -5,4 +5,10 @@ __pycache__
 .sbvenv
 Features/Semantic/weights_cache
 resources/config.yaml
-data
+*.pth
+*.pth.bak
+model_weights_*.pth
+cache/
+training_reports/
+test_reports/
+test_results.json

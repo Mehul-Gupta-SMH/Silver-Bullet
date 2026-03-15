@@ -1,0 +1,679 @@
+{
+  "data": [
+    {
+      "text1": "Gradient descent minimises the loss function by adjusting model weights iteratively.",
+      "text2": "The Berlin Wall fell on 9 November 1989, symbolising the end of the Cold War.",
+      "label": 0
+    },
+    {
+      "text1": "Inflation is the rate at which the general price level of goods and services rises over time, eroding purchasing power.",
+      "text2": "When inflation rises, the same amount of money buys fewer goods and services — it represents a sustained increase in the overall price level.",
+      "label": 1
+    },
+    {
+      "text1": "Einstein's mass-energy equivalence formula E = mc² states that energy equals mass multiplied by the square of the speed of light.",
+      "text2": "The equation E = mc² expresses that mass and energy are interconvertible: a small amount of mass corresponds to an enormous amount of energy, scaled by c².",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content.",
+      "text2": "Dark matter makes up approximately 5% of the universe's total energy content; dark energy accounts for the remaining 68%.",
+      "label": 0
+    },
+    {
+      "text1": "Overfitting occurs when a model memorises training noise and fails to generalise.",
+      "text2": "Blood pressure is measured as systolic over diastolic pressure in millimetres of mercury.",
+      "label": 0
+    },
+    {
+      "text1": "The mitochondria are often called the powerhouse of the cell because they produce ATP through cellular respiration.",
+      "text2": "Mitochondria generate ATP — the cell's primary energy currency — via cellular respiration, earning them the nickname 'powerhouse of the cell'.",
+      "label": 1
+    },
+    {
+      "text1": "The stock market allows companies to raise capital by selling shares to public investors, who then own a fraction of the company.",
+      "text2": "By issuing shares on the stock market, companies access public capital, and shareholders receive partial ownership of the business in return.",
+      "label": 1
+    },
+    {
+      "text1": "mRNA vaccines work by delivering messenger RNA into cells, instructing them to produce a protein that triggers an immune response.",
+      "text2": "In mRNA vaccination, synthetic messenger RNA is introduced into the body's cells; the cells read it and produce an antigen that primes the immune system.",
+      "label": 1
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564.",
+      "text2": "Shakespeare was born in London in 1564 and later moved to Stratford-upon-Avon, where he retired and died.",
+      "label": 0
+    },
+    {
+      "text1": "The James Webb Space Telescope, launched in December 2021, observes the universe in infrared light and can detect galaxies formed shortly after the Big Bang.",
+      "text2": "Launched in December 2021, JWST uses infrared imaging to peer at the earliest galaxies, offering views of the universe from just a few hundred million years after the Big Bang.",
+      "label": 1
+    },
+    {
+      "text1": "Gravity pulls objects toward each other with a force proportional to their masses and inversely proportional to the square of the distance between them.",
+      "text2": "The gravitational force between two bodies increases with their masses and decreases as the square of the separation between them grows — this is Newton's law of universal gravitation.",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
+      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "label": 0
+    },
+    {
+      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
+      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "label": 1
+    },
+    {
+      "text1": "Inflation erodes purchasing power by raising the general price level.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect traps heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Abstract classes cannot be instantiated and serve as templates for subclasses.",
+      "label": 0
+    },
+    {
+      "text1": "The pH scale measures the acidity or alkalinity of a solution on a logarithmic scale from 0 to 14, with 7 being neutral.",
+      "text2": "pH is a logarithmic measure of hydrogen ion concentration: 0–6 is acidic, 7 is neutral, and 8–14 is alkaline.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Wall of China stretches over 21,000 kilometres.",
+      "text2": "The Great Wall of China stretches over 8,000 kilometres — the 21,000 km figure includes all branches and natural barriers incorporated into the defensive system.",
+      "label": 0
+    },
+    {
+      "text1": "Vaccines stimulate the immune system to recognise and destroy a specific pathogen by exposing it to a weakened or inactivated form of the disease agent.",
+      "text2": "Vaccination trains the immune system to fight a pathogen by introducing a harmless version (weakened or inactivated) that triggers antibody production without causing disease.",
+      "label": 1
+    },
+    {
+      "text1": "Binary search achieves O(log n) time complexity by halving the search interval each step.",
+      "text2": "Binary search achieves O(n log n) time complexity, similar to merge sort, because it must re-sort the remaining elements at each step.",
+      "label": 0
+    },
+    {
+      "text1": "Supply and demand determines market price: when supply exceeds demand, prices fall; when demand exceeds supply, prices rise.",
+      "text2": "Market prices are set by the interaction of supply and demand — surplus supply drives prices down, while excess demand pushes them up.",
+      "label": 1
+    },
+    {
+      "text1": "Sound travels faster in denser media; it moves at approximately 343 m/s in air and about 1,480 m/s in water at room temperature.",
+      "text2": "The speed of sound depends on the medium: roughly 343 m/s through air and around 1,480 m/s through water under standard conditions.",
+      "label": 1
+    },
+    {
+      "text1": "Cognitive dissonance is the mental discomfort experienced when a person holds two or more contradictory beliefs, values, or ideas simultaneously.",
+      "text2": "When someone holds conflicting beliefs at the same time, the resulting psychological tension is called cognitive dissonance.",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "Sleep is essential for memory consolidation, immune function, and emotional regulation; adults generally need 7–9 hours per night.",
+      "text2": "Adults typically need 7 to 9 hours of sleep nightly to support memory formation, immune health, and emotional well-being.",
+      "label": 1
+    },
+    {
+      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+      "label": 1
+    },
+    {
+      "text1": "The Eiffel Tower was built between 1887 and 1889 as the entrance arch for the 1889 World's Fair, designed by Gustave Eiffel.",
+      "text2": "Designed by Gustave Eiffel and constructed from 1887 to 1889, the Eiffel Tower was originally the grand entrance gate for the Paris World's Fair of 1889.",
+      "label": 1
+    },
+    {
+      "text1": "The French Revolution began in 1789 and transformed France from an absolute monarchy into a republic, culminating in the execution of Louis XVI in 1793.",
+      "text2": "Starting in 1789, the French Revolution overthrew the absolute monarchy, established a republic, and led to King Louis XVI being executed in 1793.",
+      "label": 1
+    },
+    {
+      "text1": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen.",
+      "text2": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen. It takes place primarily in the roots of plants, where chlorophyll is most concentrated.",
+      "label": 0
+    },
+    {
+      "text1": "Statins lower LDL cholesterol by inhibiting the HMG-CoA reductase enzyme in the liver.",
+      "text2": "Statins lower LDL cholesterol by binding directly to LDL particles in the bloodstream and breaking them down before they reach the liver.",
+      "label": 0
+    },
+    {
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "label": 0
+    },
+    {
+      "text1": "Transformer models use self-attention to process sequences in parallel, outperforming RNNs on long-range dependencies.",
+      "text2": "Transformer models process sequences token-by-token, like RNNs, but use an attention mechanism instead of recurrence to capture dependencies.",
+      "label": 0
+    },
+    {
+      "text1": "Mount Everest, located in the Himalayas on the border of Nepal and Tibet, is the highest peak on Earth at 8,848.86 metres above sea level.",
+      "text2": "At 8,848.86 m, Mount Everest in the Nepal–Tibet Himalayas is the tallest mountain on Earth measured from sea level.",
+      "label": 1
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes. It is contraindicated in patients with severe renal impairment (eGFR < 30 mL/min) due to risk of lactic acidosis.",
+      "text2": "Metformin is a first-line treatment for type 2 diabetes. It is generally safe for patients with kidney disease of any severity and is also effective for type 1 diabetes.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis: light-dependent reactions occur in the thylakoid membranes; the Calvin cycle occurs in the stroma.",
+      "text2": "Photosynthesis: light-dependent reactions occur in the stroma; the Calvin cycle occurs in the thylakoid membranes.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold or influenza.",
+      "text2": "Antibiotic drugs target bacterial cells and are useless against viruses — colds and flu, caused by viruses, do not respond to antibiotic treatment.",
+      "label": 1
+    },
+    {
+      "text1": "Deforestation removes trees that absorb CO₂, contributing to climate change while also destroying habitats and reducing biodiversity.",
+      "text2": "When forests are cleared, carbon-absorbing trees are lost, which accelerates climate change; deforestation also destroys ecosystems and threatens biodiversity.",
+      "label": 1
+    },
+    {
+      "text1": "Blockchain records transactions in cryptographically linked blocks across a distributed network.",
+      "text2": "The law of conservation of energy: energy cannot be created or destroyed, only converted.",
+      "label": 0
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells with the same chromosome count as the parent.",
+      "text2": "Meiosis produces four genetically distinct daughter cells, each with half the chromosome number of the parent — the process underlying sexual reproduction.",
+      "label": 0
+    },
+    {
+      "text1": "Evolution by natural selection is the process by which heritable traits that increase survival and reproduction become more common in a population over generations.",
+      "text2": "Natural selection drives evolution: traits that improve an organism's ability to survive and reproduce spread through the population across generations.",
+      "label": 1
+    },
+    {
+      "text1": "Transformer models use self-attention mechanisms to process sequences in parallel, enabling them to capture long-range dependencies more efficiently than RNNs.",
+      "text2": "Unlike RNNs, Transformers process entire sequences simultaneously through self-attention, making them better at modelling relationships between distant tokens.",
+      "label": 1
+    },
+    {
+      "text1": "Osmosis is the movement of water molecules across a semi-permeable membrane from a region of lower solute concentration to a region of higher solute concentration.",
+      "text2": "Water moves by osmosis from a dilute solution to a more concentrated one through a semi-permeable membrane, equalising solute concentrations on both sides.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "Metformin works by decreasing hepatic glucose production and improving insulin sensitivity. It does NOT stimulate insulin secretion.",
+      "text2": "Metformin works primarily by stimulating the pancreas to secrete more insulin, which lowers blood glucose levels in type 2 diabetes patients.",
+      "label": 0
+    },
+    {
+      "text1": "Machine translation systems like Google Translate use neural networks trained on large bilingual corpora to convert text from one language to another.",
+      "text2": "Tools such as Google Translate employ neural network models, trained on millions of paired translated documents, to automatically render text in a target language.",
+      "label": 1
+    },
+    {
+      "text1": "Natural selection drives evolution by favouring heritable traits that increase reproductive success.",
+      "text2": "The SOLID principles are five design guidelines that promote maintainable object-oriented software.",
+      "label": 0
+    },
+    {
+      "text1": "The French Revolution began in 1789 and culminated in the execution of Louis XVI in 1793.",
+      "text2": "The French Revolution began in 1799 with Napoleon's coup and culminated in the execution of Louis XVI, who had already died in 1793.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law states that objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "Newton's third law states that for every action there is an equal and opposite reaction, explaining how rockets propel themselves in space.",
+      "label": 0
+    },
+    {
+      "text1": "The placebo-controlled randomised trial is the gold standard for evaluating the effectiveness of medical interventions.",
+      "text2": "Randomised controlled trials with placebo comparison groups are the highest-quality evidence for determining whether a medical treatment works.",
+      "label": 1
+    },
+    {
+      "text1": "TCP/IP is the foundational protocol suite of the internet, governing how data is packaged, addressed, transmitted, routed, and received.",
+      "text2": "The internet runs on TCP/IP — a set of rules that defines how data is broken into packets, addressed, transmitted across networks, and reassembled at the destination.",
+      "label": 1
+    },
+    {
+      "text1": "Overfitting occurs when a machine learning model learns the training data too well, including noise, and performs poorly on unseen data.",
+      "text2": "A model that overfits has memorised the training set — including its noise — and fails to generalise to new, unseen examples.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "According to Newton's first law, any object maintains its current state of motion — stationary or moving at constant speed — unless a net external force acts on it.",
+      "label": 1
+    },
+    {
+      "text1": "Confirmation bias leads people to favour information confirming their existing beliefs.",
+      "text2": "TCP/IP defines how data is packaged, addressed, transmitted, and received across the internet.",
+      "label": 0
+    },
+    {
+      "text1": "Oxidation involves the loss of electrons, while reduction involves the gain of electrons — together they form redox reactions.",
+      "text2": "In redox chemistry, oxidation is the loss of electrons and reduction is the gain of electrons; the two always occur together.",
+      "label": 1
+    },
+    {
+      "text1": "Machine learning is a branch of artificial intelligence in which systems learn from data to improve their performance on tasks without being explicitly programmed.",
+      "text2": "ML is a subset of AI where algorithms learn patterns from data and improve over time without requiring hand-coded rules for every scenario.",
+      "label": 1
+    },
+    {
+      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
+      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
+      "label": 0
+    },
+    {
+      "text1": "Binary search achieves O(log n) time complexity on sorted arrays.",
+      "text2": "Shakespeare's Hamlet explores themes of revenge, mortality, and indecision.",
+      "label": 0
+    },
+    {
+      "text1": "Renewable energy sources do not emit greenhouse gases during operation.",
+      "text2": "Cognitive dissonance is the mental discomfort of holding two contradictory beliefs.",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter is detectable only through its gravitational effects and accounts for 27% of the universe.",
+      "text2": "Operant conditioning shapes behaviour through rewards and punishments.",
+      "label": 0
+    },
+    {
+      "text1": "The Pythagorean theorem: a² + b² = c² for right triangles.",
+      "text2": "Regular aerobic exercise significantly reduces risk of cardiovascular disease and depression.",
+      "label": 0
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "The Second World War, fought from 1939 to 1945, drew in nations from across the globe and caused an estimated 70 to 85 million fatalities.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
+      "label": 0
+    },
+    {
+      "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+      "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+      "label": 1
+    },
+    {
+      "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
+      "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
+      "label": 0
+    },
+    {
+      "text1": "Mount Everest is the highest peak on Earth at 8,848.86 metres above sea level.",
+      "text2": "Mount Everest stands at 8,611 metres above sea level, making it the world's tallest mountain — slightly shorter than K2 which peaks at 8,848 metres.",
+      "label": 0
+    },
+    {
+      "text1": "The derivative of a function measures the rate of change of the function's output with respect to its input.",
+      "text2": "In calculus, a derivative represents how rapidly a function's value changes as its input varies.",
+      "label": 1
+    },
+    {
+      "text1": "Water is a polar molecule with the chemical formula H₂O, consisting of two hydrogen atoms covalently bonded to one oxygen atom.",
+      "text2": "H₂O — water — is a polar covalent molecule formed by two hydrogen atoms bonded to a single oxygen atom.",
+      "label": 1
+    },
+    {
+      "text1": "Cross-entropy loss measures divergence between predicted and true probability distributions.",
+      "text2": "The French Revolution began in 1789 and transformed France from monarchy to republic.",
+      "label": 0
+    },
+    {
+      "text1": "Cognitive dissonance is the discomfort of holding two contradictory beliefs simultaneously.",
+      "text2": "Cognitive dissonance is the pleasure experienced when two beliefs reinforce each other, creating a consistent and harmonious worldview.",
+      "label": 0
+    },
+    {
+      "text1": "Black holes are regions where gravity is so strong that not even light can escape past the event horizon.",
+      "text2": "Black holes are regions where gravity is so strong that light is slowed but not stopped — it can escape, but significantly redshifted.",
+      "label": 0
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
+      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
+      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
+      "label": 1
+    },
+    {
+      "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+      "text2": "SOLID is an acronym for five OOP design principles — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion — that promote clean, maintainable code.",
+      "label": 1
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotics resistance arises when bacteria evolve mechanisms to survive exposure to drugs that previously killed them.",
+      "text2": "When bacteria develop the ability to withstand antibiotic treatment through mutation or gene transfer, antibiotic resistance results.",
+      "label": 1
+    },
+    {
+      "text1": "The confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms one's pre-existing beliefs.",
+      "text2": "Confirmation bias leads people to favour information that supports what they already believe and to discount evidence that contradicts it.",
+      "label": 1
+    },
+    {
+      "text1": "Reinforcement learning trains an agent by rewarding desired behaviours and penalising undesired ones.",
+      "text2": "Reinforcement learning trains an agent using labelled training examples and a supervised loss function, similar to standard classification.",
+      "label": 0
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "The speed of light in a vacuum is approximately 300,000 kilometres per hour, or about 186 miles per second.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold.",
+      "text2": "Antibiotics are highly effective against viral infections such as the common cold and flu, and are routinely prescribed for these illnesses.",
+      "label": 0
+    },
+    {
+      "text1": "Recursion without a proper base case leads to infinite recursion and a stack overflow error.",
+      "text2": "If a recursive function never reaches its base case, it calls itself indefinitely until the call stack overflows.",
+      "label": 1
+    },
+    {
+      "text1": "The Apollo 11 mission landed astronauts on the Moon on 20 July 1969.",
+      "text2": "The Apollo 13 mission successfully landed astronauts on the Moon in April 1970, completing the second crewed lunar landing.",
+      "label": 0
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure is recorded as two values: systolic pressure (when the heart beats) and diastolic pressure (when the heart rests between beats).",
+      "text2": "A blood pressure reading consists of the systolic value (pressure during heartbeats) over the diastolic value (pressure between beats).",
+      "label": 1
+    },
+    {
+      "text1": "A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.",
+      "text2": "Prime numbers are integers greater than 1 whose only factors are 1 and the number itself.",
+      "label": 1
+    },
+    {
+      "text1": "Compound interest grows on both the principal and previously accumulated interest.",
+      "text2": "Compound interest grows only on the principal amount, recalculated at the end of each period without accumulating previous interest.",
+      "label": 0
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    return s == s[1:]",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotic resistance develops when bacteria evolve to survive drug treatment.",
+      "text2": "Compound interest accumulates on both principal and previously earned interest.",
+      "label": 0
+    },
+    {
+      "text1": "Reinforcement learning trains an agent to make decisions by rewarding desired behaviours and penalising undesired ones through trial and error.",
+      "text2": "An RL agent learns an optimal policy by interacting with its environment — earning rewards for good actions and penalties for bad ones.",
+      "label": 1
+    },
+    {
+      "text1": "The central limit theorem states that the distribution of sample means approaches a normal distribution as sample size increases, regardless of the population's distribution.",
+      "text2": "As sample size grows, the CLT guarantees that the sampling distribution of the mean converges to a normal distribution, no matter what the underlying population looks like.",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells.",
+      "text2": "The Eiffel Tower was designed by Gustave Eiffel and completed in 1889.",
+      "label": 0
+    },
+    {
+      "text1": "A convolution neural network (CNN) uses learnable filters to detect local patterns such as edges and textures in images, enabling spatial feature extraction.",
+      "text2": "CNNs apply trainable convolutional filters to input images to identify spatial features like edges, corners, and textures at various scales.",
+      "label": 1
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564 and is widely considered the greatest playwright in the English language.",
+      "text2": "Born in Stratford-upon-Avon in 1564, William Shakespeare is broadly regarded as the most important writer in the English literary tradition.",
+      "label": 1
+    },
+    {
+      "text1": "SQL's JOIN clause combines rows from two or more tables based on a related column, enabling relational queries across multiple datasets.",
+      "text2": "In SQL, JOIN merges records from multiple tables using a shared column, allowing queries to retrieve related data from different tables simultaneously.",
+      "label": 1
+    },
+    {
+      "text1": "Linked lists store data in nodes, each pointing to the next node in the sequence.",
+      "text2": "Antibiotics are ineffective against viral infections such as colds and influenza.",
+      "label": 0
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "World War II lasted from 1941 to 1945 — after the US entered the conflict — and resulted in approximately 40 million deaths, most of them military personnel.",
+      "label": 0
+    },
+    {
+      "text1": "Renewable energy sources such as solar and wind do not emit greenhouse gases during operation and are key to reducing carbon emissions.",
+      "text2": "Solar and wind power generate electricity without emitting CO₂ during operation, making them essential tools in the transition to a low-carbon energy system.",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of innate and adaptive components.",
+      "text2": "Docker containers package applications and dependencies for consistent deployment across environments.",
+      "label": 0
+    },
+    {
+      "text1": "Thermodynamics' second law states that the total entropy of an isolated system can never decrease over time.",
+      "text2": "According to the second law of thermodynamics, entropy in a closed system always tends to increase or remain constant — it cannot spontaneously decrease.",
+      "label": 1
+    },
+    {
+      "text1": "Big-O notation describes the upper-bound worst-case time or space complexity of an algorithm as a function of input size.",
+      "text2": "Big-O expresses how an algorithm's resource usage scales in the worst case as the input grows larger.",
+      "label": 1
+    },
+    {
+      "text1": "Transformer models use self-attention to process sequences in parallel.",
+      "text2": "The Great Wall of China was built to protect against nomadic invasions and spans over 21,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
+      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "label": 1
+    },
+    {
+      "text1": "The Industrial Revolution, which began in Britain in the late 18th century, marked the transition from agrarian economies to manufacturing-based ones, powered by steam and coal.",
+      "text2": "Beginning in late-18th-century Britain, the Industrial Revolution shifted economies from farming to factory production, driven primarily by steam engines and coal.",
+      "label": 1
+    },
+    {
+      "text1": "Vaccines stimulate the immune system by exposing it to a weakened or inactivated form of the pathogen.",
+      "text2": "Vaccines work by introducing live, fully active pathogens into the body, which then directly infect cells to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "A prime number has no divisors other than 1 and itself.",
+      "text2": "The James Webb Space Telescope observes in infrared and can detect early galaxies.",
+      "label": 0
+    },
+    {
+      "text1": "Public key cryptography enables secure communication without sharing a secret key.",
+      "text2": "World War II lasted from 1939 to 1945 and caused approximately 70–85 million deaths.",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure: systolic (during heartbeat) over diastolic (between heartbeats).",
+      "text2": "Blood pressure: diastolic (during heartbeat) over systolic (between heartbeats) — both measured in mmHg.",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines instruct cells to produce a protein that triggers immune response.",
+      "text2": "Supply and demand determines market price: surplus lowers prices, scarcity raises them.",
+      "label": 0
+    },
+    {
+      "text1": "The Eiffel Tower was designed by Gustave Eiffel and built between 1887 and 1889.",
+      "text2": "The Eiffel Tower was designed by architect Henri Labrouste and built between 1892 and 1894 for the Paris Olympics.",
+      "label": 0
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC LIMIT 100;",
+      "label": 1
+    },
+    {
+      "text1": "A hash table provides average O(1) time complexity for lookups using a hash function.",
+      "text2": "A hash table provides O(n) time complexity for lookups in the average case, since collisions require scanning the entire chain.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
+      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "label": 0
+    },
+    {
+      "text1": "Abstract classes define a template for subclasses and cannot be instantiated directly.",
+      "text2": "Interfaces define a contract of methods that implementing classes must provide; unlike abstract classes, interfaces cannot contain any implementation logic in most languages.",
+      "label": 0
+    },
+    {
+      "text1": "The peer-review process ensures that scientific findings are evaluated by experts before publication.",
+      "text2": "The peer-review process ensures that scientific findings are evaluated by experts before publication. Studies show that over 95% of peer-reviewed claims are later confirmed by replication.",
+      "label": 0
+    },
+    {
+      "text1": "GDPR requires organisations to obtain explicit consent before collecting personal data and gives individuals the right to access, correct, or delete their data.",
+      "text2": "Under GDPR, companies must get clear consent before gathering personal data, and individuals retain the right to access, rectify, or erase their information.",
+      "label": 1
+    },
+    {
+      "text1": "A binary search algorithm finds a target value in a sorted array by repeatedly halving the search interval, achieving O(log n) time complexity.",
+      "text2": "Binary search narrows down a sorted list by comparing the midpoint to the target and eliminating half the remaining elements each step, running in O(log n) time.",
+      "label": 1
+    },
+    {
+      "text1": "Blockchain is a distributed ledger technology that records transactions in a chain of cryptographically linked blocks, making it tamper-resistant.",
+      "text2": "A blockchain stores data as a chain of cryptographically secured blocks across a distributed network, making historic records extremely difficult to alter.",
+      "label": 1
+    },
+    {
+      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
+      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "label": 1
+    },
+    {
+      "text1": "The human body contains approximately 37 trillion cells, each performing specialised functions to maintain life.",
+      "text2": "About 37 trillion cells make up the human body, each carrying out specific roles that collectively sustain biological functions.",
+      "label": 1
+    },
+    {
+      "text1": "Abstract classes in object-oriented programming define a template for subclasses but cannot be instantiated directly.",
+      "text2": "In OOP, an abstract class provides a blueprint that child classes must implement; it cannot be used to create objects directly.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
+      "label": 0
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
+      "label": 0
+    },
+    {
+      "text1": "Antibody tests detect the presence of antibodies in the blood, indicating past exposure or immune response to a pathogen or vaccine.",
+      "text2": "Serological (antibody) tests look for immune proteins in the bloodstream that signal prior infection or vaccination.",
+      "label": 1
+    },
+    {
+      "text1": "The placebo effect is when a patient experiences a real improvement in symptoms after receiving an inactive treatment, due to the belief that it will work.",
+      "text2": "Placebo effect describes genuine symptom improvement following an inert treatment, driven by the patient's expectation of benefit.",
+      "label": 1
+    },
+    {
+      "text1": "The First Amendment to the US Constitution protects freedom of speech, religion, press, peaceful assembly, and the right to petition the government.",
+      "text2": "Under the First Amendment, Americans have constitutional protection for free speech, religious freedom, freedom of the press, peaceful protest, and the right to petition.",
+      "label": 1
+    },
+    {
+      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
+      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "label": 0
+    },
+    {
+      "text1": "Gross domestic product (GDP) is the total monetary value of all goods and services produced within a country's borders in a given period.",
+      "text2": "GDP measures the aggregate economic output of a nation — the total value of finished goods and services produced domestically in a specific timeframe.",
+      "label": 1
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1; right -= 1\n    return True",
+      "label": 1
+    },
+    {
+      "text1": "Overfitting occurs when a model learns noise in training data and performs poorly on unseen data.",
+      "text2": "Overfitting occurs when a model is too simple to capture patterns in training data, so it performs poorly on both training and test sets.",
+      "label": 0
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "Every choice carries an opportunity cost — the benefit you give up by not choosing the next best option.",
+      "label": 1
+    },
+    {
+      "text1": "The greenhouse effect warms the Earth by trapping heat in the atmosphere.",
+      "text2": "The greenhouse effect cools the Earth by reflecting solar radiation back into space before it can warm the surface.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis converts light energy into glucose using CO₂ and water.",
+      "text2": "The Federal Reserve adjusts interest rates to control inflation and stimulate or cool economic growth.",
+      "label": 0
+    },
+    {
+      "text1": "Public key cryptography: public key encrypts, private key decrypts.",
+      "text2": "Public key cryptography: private key encrypts, public key decrypts — this is how digital signatures work in practice.",
+      "label": 0
+    },
+    {
+      "text1": "A neural network is a computational model inspired by the brain, consisting of layers of interconnected nodes (neurons) that learn patterns from data.",
+      "text2": "Neural networks are machine-learning models made up of layers of artificial neurons. They learn by adjusting weights based on training data.",
+      "label": 1
+    },
+    {
+      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
+      "text2": "Git is a distributed version control system that tracks changes in source code.",
+      "label": 0
+    },
+    {
+      "text1": "GDPR requires explicit consent before collecting personal data and gives rights to access or delete data.",
+      "text2": "CCPA (California Consumer Privacy Act) requires businesses to disclose data collection practices and allows consumers to opt out of data sales, applying only to California residents.",
+      "label": 0
+    },
+    {
+      "text1": "Vaccines have eradicated smallpox and dramatically reduced the incidence of polio, measles, and other infectious diseases worldwide.",
+      "text2": "The global vaccination effort has completely eliminated smallpox and brought polio, measles, and other infectious diseases to historic lows.",
+      "label": 1
+    }
+  ]
+}

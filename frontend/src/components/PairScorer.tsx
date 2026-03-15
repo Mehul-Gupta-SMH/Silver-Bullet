@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { predictPair } from '../services/api';
+import { predictPair, predictPairBreakdown } from '../services/api';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { ScoreGauge } from './ScoreGauge';
+import { BreakdownPanel } from './BreakdownPanel';
 import { ModelConfig } from './ModelConfig';
 import { TestCasePanel } from './TestCasePanel';
 import { SaveExperimentForm } from './SaveExperimentForm';
 import { getModeConfig } from '../config/modes';
 import type { TextMeta } from './ModelConfig';
 import type { PairTestCase } from '../data/testCases';
-import type { ComparisonMode, PredictionResult } from '../types';
+import type { BreakdownResult, ComparisonMode, PredictionResult } from '../types';
 
 export interface PairInitData {
   text1: string;
@@ -36,14 +38,28 @@ const interpDivider = { green: 'border-emerald-200', yellow: 'border-amber-200',
 const interpMuted = { green: 'text-emerald-500', yellow: 'text-amber-500', red: 'text-red-500' } as const;
 
 export function PairScorer({ mode, initData, onSave }: Props) {
-  const [text1, setText1] = useState(initData?.text1 ?? '');
-  const [text2, setText2] = useState(initData?.text2 ?? '');
-  const [meta, setMeta] = useState<TextMeta>(
+  // When initData is provided (re-run from experiments), use it directly and persist it.
+  // Otherwise restore from localStorage so the draft survives page refreshes.
+  const [text1, setText1] = useLocalStorage<string>(
+    'sb_pair_text1',
+    initData?.text1 ?? '',
+  );
+  const [text2, setText2] = useLocalStorage<string>(
+    'sb_pair_text2',
+    initData?.text2 ?? '',
+  );
+  const [meta, setMeta] = useLocalStorage<TextMeta>(
+    'sb_pair_meta',
     initData?.meta ?? { name1: '', name2: '', baseline: null },
   );
+
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [breakdown, setBreakdown] = useState<BreakdownResult | null>(null);
+  const [breakdownLoading, setBreakdownLoading] = useState(false);
+  const [breakdownError, setBreakdownError] = useState<string | null>(null);
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
   const cfg = getModeConfig(mode);
   const label1 = meta.name1 || cfg.text1Label;
@@ -54,12 +70,36 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     setLoading(true);
     setError(null);
     setResult(null);
+    setBreakdown(null);
+    setShowBreakdown(false);
     try {
       setResult(await predictPair(text1, text2));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Unknown error');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDrillDown = async () => {
+    if (showBreakdown) {
+      setShowBreakdown(false);
+      return;
+    }
+    if (breakdown) {
+      setShowBreakdown(true);
+      return;
+    }
+    setBreakdownLoading(true);
+    setBreakdownError(null);
+    try {
+      const bd = await predictPairBreakdown(text1, text2);
+      setBreakdown(bd);
+      setShowBreakdown(true);
+    } catch (e) {
+      setBreakdownError(e instanceof Error ? e.message : 'Unknown error');
+    } finally {
+      setBreakdownLoading(false);
     }
   };
 
@@ -73,6 +113,8 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     });
     setResult(null);
     setError(null);
+    setBreakdown(null);
+    setShowBreakdown(false);
   };
 
   const interpretation = result ? cfg.interpret(result.probability) : null;
@@ -168,6 +210,30 @@ export function PairScorer({ mode, initData, onSave }: Props) {
               </div>
             </div>
           </div>
+
+          {/* Drill-down trigger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleDrillDown}
+              disabled={breakdownLoading}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-violet-300 bg-white text-violet-700 text-sm font-semibold hover:bg-violet-50 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+            >
+              {breakdownLoading ? (
+                <span className="w-3.5 h-3.5 border-2 border-violet-400 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <span className="text-base">{showBreakdown ? '▲' : '▼'}</span>
+              )}
+              {breakdownLoading ? 'Running deep analysis…' : showBreakdown ? 'Hide Breakdown' : 'Drill Down — Impact & Divergence'}
+            </button>
+            {breakdownError && (
+              <span className="text-xs text-red-600">{breakdownError}</span>
+            )}
+          </div>
+
+          {/* Breakdown panel */}
+          {showBreakdown && breakdown && (
+            <BreakdownPanel breakdown={breakdown} />
+          )}
 
           {/* Save to experiments */}
           <SaveExperimentForm

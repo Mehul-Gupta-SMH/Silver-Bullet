@@ -13,12 +13,8 @@ from Features.NLI.getNLIweights import NLIWeights
 from Features.EntityGroups.getOverlap import EntityMatch
 from Features.LCS.getLCSweights import LCSWeights
 from feature_cache import FeatureCache
+from feature_registry import FEATURE_KEYS, build_manifest
 from training_report import TrainingReport
-
-
-# Ordered list of feature extractor keys — must stay consistent between runs.
-# Adding/removing extractors invalidates existing caches and saved checkpoints.
-FEATURE_ORDER = None  # populated from the first computed sample
 
 
 def load_json_data(file_path):
@@ -32,15 +28,25 @@ def load_json_data(file_path):
 def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
     """Stack all feature maps into a single [F, 64, 64] tensor.
 
-    Each value in feature_map is expected to be a torch.Tensor of shape [64, 64]
-    as produced by pad_matrix().  The maps are stacked in insertion order so
-    that the channel index is stable across calls.
+    Maps are stacked in the canonical order defined by FEATURE_KEYS so that
+    the channel index is always stable regardless of dict insertion order.
+
+    Raises:
+        KeyError: If feature_map contains unknown keys or is missing expected keys.
 
     Returns:
         torch.Tensor: shape [num_features, 64, 64]
     """
+    unknown = set(feature_map) - set(FEATURE_KEYS)
+    if unknown:
+        raise KeyError(f"feature_map contains keys not in FEATURE_KEYS: {sorted(unknown)}")
+    missing = set(FEATURE_KEYS) - set(feature_map)
+    if missing:
+        raise KeyError(f"feature_map is missing expected keys: {sorted(missing)}")
+
     maps = []
-    for key, val in feature_map.items():
+    for key in FEATURE_KEYS:
+        val = feature_map[key]
         if isinstance(val, torch.Tensor):
             maps.append(val.float())
         else:
@@ -81,11 +87,6 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.nli.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
-
-            # Record stable key order on first sample
-            if FEATURE_ORDER is None:
-                FEATURE_ORDER = list(feature_map.keys())
-                print(f"Feature channels ({len(FEATURE_ORDER)}): {FEATURE_ORDER}")
 
             stacked = feature_map_to_tensor(feature_map)  # [F, 64, 64]
 
@@ -200,6 +201,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'loss':                 avg_val_loss,
                 'accuracy':             accuracy,
                 'num_features':         num_features,
+                'manifest':             build_manifest(),
             }, 'best_model.pth')
         else:
             patience_counter += 1
@@ -214,6 +216,8 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
     final_model_path  = f'model_weights_{ts}_final.pth'
     best_model_path   = f'model_weights_{ts}_best.pth'
 
+    manifest = build_manifest()
+
     torch.save({
         'epoch':                epoch,
         'model_state_dict':     model.state_dict(),
@@ -222,6 +226,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'best_loss':            best_val_loss,
         'final_accuracy':       accuracy,
         'num_features':         num_features,
+        'manifest':             manifest,
     }, final_model_path)
 
     torch.save({
@@ -230,11 +235,12 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'optimizer_state_dict': best_optimizer_state,
         'loss':                 best_val_loss,
         'num_features':         num_features,
+        'manifest':             manifest,
     }, best_model_path)
 
-    print(f"Final model  → {final_model_path}")
-    print(f"Best model   → {best_model_path}")
-    print(f"Report       → {report.save_report(intermediate=False)}")
+    print(f"Final model  -> {final_model_path}")
+    print(f"Best model   -> {best_model_path}")
+    print(f"Report       -> {report.save_report(intermediate=False)}")
 
     return model, report.report_data['training_metrics']
 

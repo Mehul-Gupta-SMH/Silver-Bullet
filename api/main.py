@@ -19,6 +19,7 @@ from api.middleware import LoggingMiddleware, RequestIDMiddleware
 from api.schemas import (
     BatchRequest,
     BatchResponse,
+    BreakdownResponse,
     HealthResponse,
     PairRequest,
     PairResponse,
@@ -60,10 +61,13 @@ limiter = Limiter(key_func=get_remote_address)
 # ---------------------------------------------------------------------------
 
 app = FastAPI(
-    title="SilverBullet Similarity API",
+    title="SilverBullet — LLM Evaluation API",
     description=(
-        "Learned text similarity / faithfulness scorer. "
-        "Given two texts, returns a score in **[0, 1]**.\n\n"
+        "Real-time LLM evaluation benchmark. "
+        "Given two texts, returns a faithfulness / agreement score in **[0, 1]** "
+        "using a Conv2D model trained on 16 multi-signal feature maps "
+        "(semantic, lexical, NLI, entity, LCS).\n\n"
+        "**Use cases:** hallucination detection, model-vs-model agreement, RAG groundedness.\n\n"
         "Interactive docs: `/api/v1/docs` · ReDoc: `/api/v1/redoc`"
     ),
     version="1.0.0",
@@ -73,7 +77,7 @@ app = FastAPI(
     },
     openapi_tags=[
         {"name": "health", "description": "Service health and readiness checks"},
-        {"name": "prediction", "description": "Text similarity scoring endpoints"},
+        {"name": "prediction", "description": "LLM evaluation scoring endpoints"},
     ],
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
@@ -139,8 +143,8 @@ async def health() -> HealthResponse:
     "/api/v1/predict/pair",
     response_model=PairResponse,
     tags=["prediction"],
-    summary="Score a single text pair",
-    response_description="Similarity score in [0, 1] with binary prediction",
+    summary="Evaluate a single LLM output",
+    response_description="Faithfulness / agreement score in [0, 1] with binary verdict",
     responses={422: {"description": "Validation error — text empty or exceeds 10 000 characters"}},
 )
 async def predict_pair(
@@ -154,11 +158,33 @@ async def predict_pair(
 
 
 @app.post(
+    "/api/v1/predict/pair/breakdown",
+    response_model=BreakdownResponse,
+    tags=["prediction"],
+    summary="Sentence-level divergence analysis for a text pair",
+    response_description=(
+        "Per-sentence alignment matrix, divergence indices, and feature-group scores. "
+        "More expensive than /predict/pair — runs the full feature pipeline without cache."
+    ),
+    responses={422: {"description": "Validation error — text empty or exceeds 10 000 characters"}},
+)
+async def predict_pair_breakdown(
+    request: Request,
+    body: PairRequest,
+    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
+) -> BreakdownResponse:
+    """Return a full divergence breakdown: sentence splits, alignment matrix,
+    divergent sentence indices, and per-feature-group similarity scores."""
+    result = predictor.predict_pair_breakdown(body.text1, body.text2)
+    return BreakdownResponse(**result)
+
+
+@app.post(
     "/api/v1/predict/batch",
     response_model=BatchResponse,
     tags=["prediction"],
-    summary="Score a batch of text pairs",
-    response_description="List of similarity scores, one per input pair",
+    summary="Evaluate a batch of LLM outputs",
+    response_description="List of faithfulness / agreement scores, one per input pair",
     responses={422: {"description": "Validation error — batch exceeds 100 pairs or pairs are malformed"}},
 )
 async def predict_batch(
