@@ -164,15 +164,19 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
     true_labels = np.array(true_labels)
     probabilities = np.array(probabilities)
 
+    # Binarise true labels at 0.5 so sklearn metrics work with both binary (0/1)
+    # and continuous float labels (e.g. 0.7 faithfulness scores).
+    binary_true = (true_labels >= 0.5).astype(int)
+
     # Calculate metrics
-    conf_matrix = confusion_matrix(true_labels, predictions)
-    class_report = classification_report(true_labels, predictions, target_names=['Not Similar', 'Similar'])
-    roc_auc = roc_auc_score(true_labels, probabilities)
-    precision, recall, _ = precision_recall_curve(true_labels, probabilities)
+    conf_matrix = confusion_matrix(binary_true, predictions)
+    class_report = classification_report(binary_true, predictions, target_names=['Not Similar', 'Similar'])
+    roc_auc = roc_auc_score(binary_true, probabilities)
+    precision, recall, _ = precision_recall_curve(binary_true, probabilities)
     avg_precision = np.mean(precision)
 
     metrics = {
-        'accuracy': (predictions == true_labels).mean(),
+        'accuracy': (predictions == binary_true).mean(),
         'confusion_matrix': conf_matrix.tolist(),
         'classification_report_str': class_report,
         'roc_auc': float(roc_auc),
