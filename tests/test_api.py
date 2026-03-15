@@ -149,6 +149,33 @@ def test_predict_batch_happy_path(client, mock_predictor):
 
 
 # ---------------------------------------------------------------------------
+# Predict batch breakdown
+# ---------------------------------------------------------------------------
+
+def test_predict_batch_breakdown_happy_path(client, mock_predictor):
+    """POST /api/v1/predict/batch/breakdown should return mocked breakdown results."""
+    payload = [["Hello world", "Hi there"]]
+    response = client.post("/api/v1/predict/batch/breakdown", json={"pairs": payload})
+
+    assert response.status_code == 200
+    body = response.json()
+    assert "results" in body
+    assert len(body["results"]) == 1
+    result = body["results"][0]
+    assert "alignment" in result
+    assert "divergent_in_1" in result
+    assert "feature_scores" in result
+    mock_predictor.predict_batch_breakdown.assert_called_once_with(payload)
+
+
+def test_predict_batch_breakdown_too_many_pairs_returns_422(client):
+    """POST /api/v1/predict/batch/breakdown with 11 pairs should be rejected with 422."""
+    pairs = [["text one", "text two"]] * 11
+    response = client.post("/api/v1/predict/batch/breakdown", json={"pairs": pairs})
+    assert response.status_code == 422
+
+
+# ---------------------------------------------------------------------------
 # CORS
 # ---------------------------------------------------------------------------
 

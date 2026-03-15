@@ -17,6 +17,8 @@ from slowapi.util import get_remote_address
 from api.dependencies import get_predictor
 from api.middleware import LoggingMiddleware, RequestIDMiddleware
 from api.schemas import (
+    BatchBreakdownRequest,
+    BatchBreakdownResponse,
     BatchRequest,
     BatchResponse,
     BreakdownResponse,
@@ -195,3 +197,24 @@ async def predict_batch(
     """Score a list of text pairs. Max 100 pairs per request."""
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
+
+
+@app.post(
+    "/api/v1/predict/batch/breakdown",
+    response_model=BatchBreakdownResponse,
+    tags=["prediction"],
+    summary="Sentence-level divergence analysis for a batch of text pairs",
+    response_description=(
+        "Per-sentence alignment matrix, divergence indices, and feature-group scores for each pair. "
+        "Expensive — reruns the full feature pipeline per pair. Max 10 pairs."
+    ),
+    responses={422: {"description": "Validation error — batch exceeds 10 pairs or pairs are malformed"}},
+)
+async def predict_batch_breakdown(
+    request: Request,
+    body: BatchBreakdownRequest,
+    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
+) -> BatchBreakdownResponse:
+    """Return full divergence breakdowns for up to 10 text pairs. Max 10 pairs per request."""
+    results = predictor.predict_batch_breakdown(body.pairs)
+    return BatchBreakdownResponse(results=[BreakdownResponse(**r) for r in results])
