@@ -269,6 +269,34 @@ def test_predict_batch_breakdown_empty_pairs_returns_422(client):
 
 
 # ---------------------------------------------------------------------------
+# Rate limiting
+# ---------------------------------------------------------------------------
+
+def test_rate_limit_handler_returns_429():
+    """_rate_limit_handler should return 429 with the expected body."""
+    import json
+    from unittest.mock import MagicMock
+    from starlette.requests import Request
+
+    from api.main import _rate_limit_handler
+
+    scope = {
+        "type": "http",
+        "method": "POST",
+        "path": "/api/v1/predict/pair",
+        "query_string": b"",
+        "headers": [],
+    }
+    fake_request = Request(scope)
+    fake_exc = MagicMock()  # any exception object — handler ignores its details
+
+    response = _rate_limit_handler(fake_request, fake_exc)
+
+    assert response.status_code == 429
+    assert json.loads(response.body) == {"detail": "Rate limit exceeded"}
+
+
+# ---------------------------------------------------------------------------
 # CORS
 # ---------------------------------------------------------------------------
 
