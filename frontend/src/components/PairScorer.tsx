@@ -73,7 +73,7 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     setBreakdown(null);
     setShowBreakdown(false);
     try {
-      setResult(await predictPair(text1, text2));
+      setResult(await predictPair(text1, text2, mode));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Unknown error');
     } finally {
@@ -93,7 +93,7 @@ export function PairScorer({ mode, initData, onSave }: Props) {
     setBreakdownLoading(true);
     setBreakdownError(null);
     try {
-      const bd = await predictPairBreakdown(text1, text2);
+      const bd = await predictPairBreakdown(text1, text2, mode);
       setBreakdown(bd);
       setShowBreakdown(true);
     } catch (e) {

@@ -1,4 +1,4 @@
-"""Singleton model loader for the SilverBullet API."""
+"""Singleton model loaders for the SilverBullet API — one per evaluation mode."""
 
 from __future__ import annotations
 
@@ -15,13 +15,45 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from predict import SimilarityPredictor  # noqa: E402
 
+# Env-var name for each mode's model checkpoint.
+# Falls back to MODEL_PATH (legacy) then best_model.pth if unset or file absent.
+_MODE_ENV: dict[str, str] = {
+    "model-vs-model":         "MODEL_PATH_MODEL_VS_MODEL",
+    "reference-vs-generated": "MODEL_PATH_REFERENCE_VS_GENERATED",
+    "context-vs-generated":   "MODEL_PATH_CONTEXT_VS_GENERATED",
+}
 
-@lru_cache(maxsize=1)
-def get_predictor() -> SimilarityPredictor:
-    """Load and cache the SimilarityPredictor singleton.
+# Default checkpoint names used when the env var is not set
+_MODE_DEFAULT: dict[str, str] = {
+    "model-vs-model":         "models/model-vs-model.pth",
+    "reference-vs-generated": "models/reference-vs-generated.pth",
+    "context-vs-generated":   "models/context-vs-generated.pth",
+}
 
-    Model path is read from MODEL_PATH env var, defaulting to 'best_model.pth'
-    relative to the working directory.
+# General fallback (backwards compat)
+_FALLBACK = os.environ.get("MODEL_PATH", "best_model.pth")
+
+
+def _resolve_model_path(mode: str) -> str:
+    """Return the checkpoint path for *mode*, falling back to the general model."""
+    env_key = _MODE_ENV.get(mode)
+    if env_key and os.environ.get(env_key):
+        return os.environ[env_key]
+    mode_default = Path(_MODE_DEFAULT.get(mode, _FALLBACK))
+    if mode_default.exists():
+        return str(mode_default)
+    return _FALLBACK
+
+
+@lru_cache(maxsize=3)
+def get_predictor(mode: str = "context-vs-generated") -> SimilarityPredictor:
+    """Load and cache the SimilarityPredictor for *mode* (one instance per mode).
+
+    Resolution order for the checkpoint path:
+      1. Env var  MODEL_PATH_{MODE_UPPER}  (e.g. MODEL_PATH_CONTEXT_VS_GENERATED)
+      2. models/{mode}.pth  (default per-mode path, created by train.py --mode)
+      3. best_model.pth / MODEL_PATH  (legacy general model — used when a mode-specific
+         checkpoint has not been trained yet)
     """
-    model_path = Path(os.environ.get("MODEL_PATH", "best_model.pth"))
-    return SimilarityPredictor(model_path=str(model_path))
+    path = _resolve_model_path(mode)
+    return SimilarityPredictor(model_path=path)

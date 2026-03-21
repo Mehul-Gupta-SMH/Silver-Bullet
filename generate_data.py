@@ -838,33 +838,276 @@ PAIRS = [
 
 ]  # end PAIRS
 
-# ---------------------------------------------------------------------------
-# Split
-# ---------------------------------------------------------------------------
-random.shuffle(PAIRS)
 
-n      = len(PAIRS)
-n_train = int(0.70 * n)
-n_val   = int(0.15 * n)
+# ---------------------------------------------------------------------------
+# Mode-specific pairs
+# Each tuple: (text1, text2, label, kind)
+# ---------------------------------------------------------------------------
 
-train_raw = PAIRS[:n_train]
-val_raw   = PAIRS[n_train:n_train + n_val]
-test_raw  = PAIRS[n_train + n_val:]
+# ── model-vs-model ────────────────────────────────────────────────────────────
+# text1 = Model A output, text2 = Model B output for the same prompt.
+# label=1: models agree (similar substance).  label=0: models diverge.
+MODE_PAIRS_MODEL_VS_MODEL = [
+
+# Positives — models produce equivalent answers
+("The Python GIL prevents true parallel thread execution for CPU-bound tasks; use multiprocessing instead.",
+ "Due to Python's Global Interpreter Lock, CPU-intensive code should run in separate processes rather than threads to achieve real parallelism.",
+ 1, "positive"),
+
+("Regular exercise reduces the risk of cardiovascular disease, improves insulin sensitivity, and supports mental health.",
+ "Consistent physical activity lowers heart disease risk, helps regulate blood sugar, and has well-established benefits for mood and mental well-being.",
+ 1, "positive"),
+
+("The transformer architecture relies on self-attention mechanisms that allow the model to weigh all input tokens against each other simultaneously.",
+ "Transformers use self-attention to compute relationships between every token in the input in parallel, which is the key difference from recurrent networks.",
+ 1, "positive"),
+
+("Kubernetes orchestrates containerised workloads by scheduling pods on nodes, managing restarts, and exposing services.",
+ "K8s manages container deployment, automatically restarts failed pods, load-balances traffic, and abstracts underlying infrastructure from applications.",
+ 1, "positive"),
+
+("Inflation erodes purchasing power; central banks raise interest rates to cool demand and bring inflation back toward target.",
+ "When prices rise faster than the target rate, central banks typically hike interest rates to reduce borrowing, dampen spending, and slow inflation.",
+ 1, "positive"),
+
+# Hard negatives — models diverge on key facts or conclusions
+("The Higgs boson was first observed experimentally at CERN in 2012.",
+ "The Higgs boson was theoretically predicted in the 1960s but was not detected until experiments at Fermilab confirmed it in 2008.",
+ 0, "hard_neg"),
+
+("Type 1 diabetes is an autoimmune condition where the immune system destroys insulin-producing beta cells.",
+ "Type 1 diabetes develops when the pancreas produces insufficient insulin due to chronic inflammation from a high-sugar diet.",
+ 0, "hard_neg"),
+
+("The time complexity of merge sort is O(n log n) in all cases.",
+ "Merge sort has O(n²) average-case complexity, making it less efficient than quicksort for large datasets.",
+ 0, "hard_neg"),
+
+("Photovoltaic cells convert sunlight directly into electricity through the photoelectric effect.",
+ "Solar thermal panels convert sunlight into electricity by heating water to drive a steam turbine — the same principle as nuclear or coal plants.",
+ 0, "hard_neg"),
+
+("The French Revolution began in 1789 and ended with Napoleon's rise to power in 1799.",
+ "The French Revolution started in 1789 and concluded in 1815 with Napoleon's defeat at Waterloo.",
+ 0, "hard_neg"),
+
+("Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+ "Statins work by blocking bile acid reabsorption in the gut, which forces the liver to use cholesterol to make more bile, reducing serum LDL.",
+ 0, "hard_neg"),
+
+("REST APIs are stateless; each request carries all information the server needs to process it.",
+ "REST APIs maintain session state on the server side between requests, which is what distinguishes them from older RPC-style protocols.",
+ 0, "hard_neg"),
+
+("Python is an interpreted, dynamically typed language.",
+ "Python is a compiled, statically typed language that compiles to bytecode before execution, similar to Java.",
+ 0, "hard_neg"),
+
+("The speed of sound in air at 20 °C is approximately 343 m/s.",
+ "Sound travels at approximately 1,484 m/s in air at room temperature, which is why supersonic aircraft can exceed it.",
+ 0, "hard_neg"),
+
+("Quantum entanglement allows instantaneous correlation between particles regardless of distance.",
+ "Quantum entanglement enables faster-than-light communication between entangled particles, which is the basis for quantum cryptography key exchange.",
+ 0, "hard_neg"),
+
+]  # end MODE_PAIRS_MODEL_VS_MODEL
+
+
+# ── reference-vs-generated ────────────────────────────────────────────────────
+# text1 = reference (ground-truth answer), text2 = generated answer.
+# label=1: faithful.  label=0: unfaithful (wrong facts, omissions, hallucinations).
+MODE_PAIRS_REFERENCE_VS_GENERATED = [
+
+# Positives — generated answer faithfully represents the reference
+("Aspirin inhibits cyclooxygenase enzymes (COX-1 and COX-2), reducing prostaglandin synthesis and thereby decreasing inflammation, pain, and fever.",
+ "Aspirin works by blocking COX-1 and COX-2 enzymes, which lowers prostaglandin production and produces its anti-inflammatory, analgesic, and antipyretic effects.",
+ 1, "positive"),
+
+("The Big Bang theory holds that the universe began approximately 13.8 billion years ago from an extremely hot, dense singularity and has been expanding ever since.",
+ "According to the Big Bang model, the universe originated around 13.8 billion years ago from a hot, dense initial state and continues to expand.",
+ 1, "positive"),
+
+("In Python, list comprehensions provide a concise syntax for creating lists: [expr for item in iterable if condition].",
+ "Python list comprehensions let you build lists in a single line: [expression for element in iterable if filter], making code more readable than equivalent for-loops.",
+ 1, "positive"),
+
+("The median is the middle value of an ordered dataset; for even-length sets, it is the mean of the two central values.",
+ "To find the median, sort the data and take the middle element. If there's an even number of values, average the two middle ones.",
+ 1, "positive"),
+
+("The Paris Agreement set a goal of limiting global warming to well below 2 °C above pre-industrial levels, with efforts to limit it to 1.5 °C.",
+ "Under the Paris Agreement, signatory nations committed to keeping the global temperature rise well under 2 °C compared to pre-industrial times, aiming for 1.5 °C.",
+ 1, "positive"),
+
+# Hard negatives — generated answer diverges from reference
+("The boiling point of water at sea level is 100 °C (212 °F).",
+ "Water boils at 98 °C at sea level under standard atmospheric pressure.",
+ 0, "hard_neg"),
+
+("Shakespeare wrote 37 plays, 154 sonnets, and several longer poems.",
+ "Shakespeare authored 39 plays, 154 sonnets, and a number of narrative poems including Venus and Adonis.",
+ 0, "hard_neg"),
+
+("Insulin is produced by beta cells in the islets of Langerhans in the pancreas.",
+ "Insulin is secreted by alpha cells in the pancreas in response to rising blood glucose levels.",
+ 0, "hard_neg"),
+
+("The Roman Empire fell in 476 CE when the last Western emperor, Romulus Augustulus, was deposed.",
+ "The Roman Empire collapsed in 410 CE when the Visigoths sacked Rome, marking the definitive end of Roman power in the West.",
+ 0, "hard_neg"),
+
+("HTTP/2 introduced multiplexing, allowing multiple requests over a single TCP connection simultaneously.",
+ "HTTP/2 introduced multiplexing and also switched from TCP to UDP as its underlying transport protocol for lower latency.",
+ 0, "hard_neg"),
+
+("DNA replication is semi-conservative: each new double helix contains one original strand and one newly synthesised strand.",
+ "DNA replication is conservative: both strands of the original double helix are preserved intact while an entirely new double helix is synthesised.",
+ 0, "hard_neg"),
+
+("The normal resting heart rate for adults is 60–100 beats per minute.",
+ "A normal adult resting heart rate is 40–60 beats per minute; values above 60 may indicate mild tachycardia.",
+ 0, "hard_neg"),
+
+("Carbon dioxide is a greenhouse gas that absorbs and re-emits infrared radiation, trapping heat in the atmosphere.",
+ "CO₂ is a greenhouse gas that reflects ultraviolet radiation back to Earth, preventing it from escaping into space.",
+ 0, "hard_neg"),
+
+("The mitochondria produce ATP through oxidative phosphorylation in the inner membrane.",
+ "The mitochondria generate ATP through glycolysis, which occurs in the mitochondrial matrix and does not require oxygen.",
+ 0, "hard_neg"),
+
+("The Treaty of Versailles (1919) ended World War I and imposed reparations, territorial losses, and military restrictions on Germany.",
+ "The Treaty of Versailles (1918) concluded World War II, with Germany accepting full blame and paying reparations to France and Britain.",
+ 0, "hard_neg"),
+
+]  # end MODE_PAIRS_REFERENCE_VS_GENERATED
+
+
+# ── context-vs-generated ──────────────────────────────────────────────────────
+# text1 = source context (document / retrieved chunk), text2 = generated answer.
+# label=1: answer is grounded in context.  label=0: answer introduces hallucinated content.
+MODE_PAIRS_CONTEXT_VS_GENERATED = [
+
+# Positives — answer is fully supported by the context
+("The Eiffel Tower was built by engineer Gustave Eiffel and completed in 1889 for the World's Fair held in Paris to celebrate the centennial of the French Revolution.",
+ "The Eiffel Tower was designed by Gustave Eiffel and finished in 1889, serving as a centrepiece for the Paris World's Fair marking 100 years since the French Revolution.",
+ 1, "positive"),
+
+("The study enrolled 1,200 participants aged 40–65. After 12 weeks of a Mediterranean diet, LDL cholesterol dropped by an average of 18 mg/dL compared to the control group.",
+ "Following 12 weeks on a Mediterranean diet, the 1,200 participants aged 40–65 showed an average LDL reduction of 18 mg/dL relative to controls.",
+ 1, "positive"),
+
+("Python's asyncio library provides an event loop that enables concurrent I/O-bound operations without multi-threading. Coroutines defined with 'async def' are scheduled on the event loop.",
+ "Python's asyncio uses an event loop to run I/O-bound tasks concurrently. Functions declared with 'async def' become coroutines that the event loop can schedule.",
+ 1, "positive"),
+
+("The company reported Q3 revenue of $4.2 billion, up 11% year-over-year, driven by a 23% increase in cloud services. Operating margin improved to 28% from 24% in Q3 last year.",
+ "Q3 revenue reached $4.2 billion, an 11% year-on-year increase, with cloud services growing 23%. Operating margin expanded from 24% to 28% compared to the prior year quarter.",
+ 1, "positive"),
+
+("Mount Everest, located in the Himalayas on the Nepal–Tibet border, stands at 8,849 metres above sea level — the highest point on Earth.",
+ "Mount Everest is situated on the Nepal–Tibet border in the Himalayas and is the world's highest peak at 8,849 metres.",
+ 1, "positive"),
+
+# Hard negatives — answer adds content not supported by the context
+("The report states that the project was completed in Q2 2023 with a budget of $2.4 million, under the supervision of Project Manager Jane Lee.",
+ "The project was completed in Q2 2023 with a budget of $2.4 million under Jane Lee. It was later recognised with an industry award for innovation in Q4 2023.",
+ 0, "hard_neg"),
+
+("The drug trial showed a 34% reduction in tumour size in patients receiving the experimental treatment over 8 weeks.",
+ "The drug trial demonstrated a 34% reduction in tumour size over 8 weeks. The treatment was subsequently approved by the FDA and became commercially available.",
+ 0, "hard_neg"),
+
+("The contract specifies a delivery deadline of 15 March and a penalty clause of 2% per week for late delivery.",
+ "Under the contract, delivery is due by 15 March. Late delivery incurs a penalty of 2% per week, and repeated delays allow the client to terminate the contract.",
+ 0, "hard_neg"),
+
+("The server logs show 3,412 failed login attempts between 02:00 and 03:00 UTC, all originating from IP range 192.168.44.0/24.",
+ "Between 02:00 and 03:00 UTC there were 3,412 failed login attempts from 192.168.44.0/24. The attack pattern matches the TTPs of the Lazarus Group.",
+ 0, "hard_neg"),
+
+("The annual report states total assets of $18.7 billion and total liabilities of $11.2 billion as of 31 December.",
+ "As of 31 December, total assets were $18.7 billion and liabilities $11.2 billion, giving a debt-to-equity ratio of 0.6. The company has maintained investment-grade credit since 2015.",
+ 0, "hard_neg"),
+
+("The paper's abstract notes that the model achieved 91.3% accuracy on the benchmark dataset.",
+ "The model achieved 91.3% accuracy on the benchmark, surpassing the previous state-of-the-art of 89.7% set by GPT-4 in 2023.",
+ 0, "hard_neg"),
+
+("The recipe requires 250 g of flour, 2 eggs, 150 ml of milk, and 30 g of butter, baked at 180 °C for 25 minutes.",
+ "Combine 250 g flour, 2 eggs, 150 ml milk, and 30 g butter, then bake at 180 °C for 25 minutes. Let the cake rest for 10 minutes before serving to allow it to set.",
+ 0, "hard_neg"),
+
+("The regulation requires companies with more than 500 employees to submit an annual diversity report.",
+ "Companies with over 500 employees must file an annual diversity report. Non-compliance results in fines of up to €50,000 per violation under the latest amendment.",
+ 0, "hard_neg"),
+
+("According to the transcript, the CEO said the company plans to expand into Southeast Asia in 2025.",
+ "The CEO announced plans to expand into Southeast Asia in 2025. This was driven by strong demand signals from Vietnam and Indonesia, where the company already has distribution partners.",
+ 0, "hard_neg"),
+
+("The patient was prescribed metformin 500 mg twice daily and advised to follow a low-carbohydrate diet.",
+ "The patient was prescribed metformin 500 mg twice daily alongside a low-carb diet. Metformin was chosen over insulin because the patient expressed a preference for oral medication.",
+ 0, "hard_neg"),
+
+]  # end MODE_PAIRS_CONTEXT_VS_GENERATED
+
+
+# ---------------------------------------------------------------------------
+# Split helpers
+# ---------------------------------------------------------------------------
+
+def split_dataset(pairs, seed=42):
+    """Shuffle and split into 70 / 15 / 15 (train / validate / test)."""
+    rng = random.Random(seed)
+    shuffled = list(pairs)
+    rng.shuffle(shuffled)
+    n = len(shuffled)
+    n_train = int(0.70 * n)
+    n_val   = int(0.15 * n)
+    return shuffled[:n_train], shuffled[n_train:n_train + n_val], shuffled[n_train + n_val:]
 
 
 def to_records(rows):
     return [{"text1": t1, "text2": t2, "label": lbl} for t1, t2, lbl, _ in rows]
 
 
-os.makedirs("data", exist_ok=True)
+def save_split(train_raw, val_raw, test_raw, out_dir):
+    os.makedirs(out_dir, exist_ok=True)
+    for name, rows in [("train", train_raw), ("validate", val_raw), ("test", test_raw)]:
+        path = f"{out_dir}/{name}.json"
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"data": to_records(rows)}, f, indent=2, ensure_ascii=False)
+        pos  = sum(1 for _, _, lbl, _ in rows if lbl == 1)
+        neg  = len(rows) - pos
+        hard = sum(1 for _, _, lbl, k in rows if lbl == 0 and k == "hard_neg")
+        soft = sum(1 for _, _, lbl, k in rows if lbl == 0 and k == "soft_neg")
+        print(f"  {name:10s}: {len(rows):4d} pairs  |  pos={pos}  neg={neg} "
+              f"(hard={hard}, soft={soft})  -> {path}")
 
-for name, rows in [("train", train_raw), ("validate", val_raw), ("test", test_raw)]:
-    path = f"data/{name}.json"
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump({"data": to_records(rows)}, f, indent=2, ensure_ascii=False)
 
-    pos = sum(1 for _, _, lbl, _ in rows if lbl == 1)
-    neg = len(rows) - pos
-    hard = sum(1 for _, _, lbl, k in rows if lbl == 0 and k == "hard_neg")
-    soft = sum(1 for _, _, lbl, k in rows if lbl == 0 and k == "soft_neg")
-    print(f"{name:10s}: {len(rows):4d} pairs  |  pos={pos}  neg={neg} (hard={hard}, soft={soft})  -> {path}")
+# ---------------------------------------------------------------------------
+# Generate datasets
+# ---------------------------------------------------------------------------
+
+# General dataset (backwards compat) — all 194 pairs unchanged
+random.shuffle(PAIRS)
+n       = len(PAIRS)
+n_train = int(0.70 * n)
+n_val   = int(0.15 * n)
+print("\n=== General dataset ===")
+save_split(PAIRS[:n_train], PAIRS[n_train:n_train + n_val], PAIRS[n_train + n_val:], "data")
+
+# Per-mode datasets — general pairs + mode-specific pairs
+MODE_EXTRA = {
+    "model-vs-model":         MODE_PAIRS_MODEL_VS_MODEL,
+    "reference-vs-generated": MODE_PAIRS_REFERENCE_VS_GENERATED,
+    "context-vs-generated":   MODE_PAIRS_CONTEXT_VS_GENERATED,
+}
+
+for mode, extra in MODE_EXTRA.items():
+    combined = PAIRS + extra
+    tr, va, te = split_dataset(combined, seed=42)
+    print(f"\n=== {mode} ({len(combined)} pairs) ===")
+    save_split(tr, va, te, f"data/{mode}")

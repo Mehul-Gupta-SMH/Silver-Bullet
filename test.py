@@ -197,12 +197,46 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
     return metrics, report
 
 if __name__ == '__main__':
+    import argparse
+
+    VALID_MODES = ["model-vs-model", "reference-vs-generated", "context-vs-generated"]
+
+    parser = argparse.ArgumentParser(description="Evaluate a SilverBullet checkpoint on test data.")
+    parser.add_argument(
+        "--mode",
+        choices=VALID_MODES,
+        default=None,
+        help=(
+            "Evaluation mode to test. If given, loads data from data/{mode}/test.json and "
+            "checkpoint from models/{mode}.pth. "
+            "If omitted, loads from data/test.json and best_model.pth (general model)."
+        ),
+    )
+    parser.add_argument(
+        "--checkpoint",
+        default=None,
+        help="Explicit path to checkpoint file (overrides --mode default).",
+    )
+    args = parser.parse_args()
+
     # Create necessary directories
     os.makedirs('cache', exist_ok=True)
     os.makedirs('test_reports', exist_ok=True)
 
+    if args.checkpoint:
+        ckpt_path = args.checkpoint
+        data_dir  = f'data/{args.mode}' if args.mode else 'data'
+    elif args.mode:
+        ckpt_path = f'models/{args.mode}.pth'
+        data_dir  = f'data/{args.mode}'
+        print(f"Mode: {args.mode}  |  Data: {data_dir}/  |  Checkpoint: {ckpt_path}")
+    else:
+        ckpt_path = 'best_model.pth'
+        data_dir  = 'data'
+        print("Mode: general  |  Data: data/  |  Checkpoint: best_model.pth")
+
     # Load test data
-    test_pairs, test_labels = load_json_data('data/test.json')
+    test_pairs, test_labels = load_json_data(f'{data_dir}/test.json')
     print(f"Loaded {len(test_pairs)} test pairs")
 
     # Create dataset with feature caching enabled
@@ -211,7 +245,7 @@ if __name__ == '__main__':
 
     # Load the model (auto-detects legacy Conv1D vs current Conv2D architecture)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    checkpoint = torch.load('best_model.pth', map_location=device, weights_only=False)
+    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
     model, arch = _load_model_from_checkpoint(checkpoint, device)
     print(f"  architecture : {arch}")
 

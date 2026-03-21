@@ -100,7 +100,7 @@ export function BatchScorer({ mode, onSave }: Props) {
     setLoading(true);
     setError(null);
     try {
-      const res = await predictBatch(pairs);
+      const res = await predictBatch(pairs, mode);
       setResults(
         res.results.map((r, i) => ({
           ...r,

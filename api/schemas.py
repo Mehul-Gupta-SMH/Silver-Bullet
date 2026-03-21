@@ -1,6 +1,23 @@
 """Pydantic request/response models for the SilverBullet API."""
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+# Evaluation mode — controls which trained model is used for scoring.
+# Each mode targets a distinct use case with its own training distribution.
+EvaluationMode = Literal[
+    "model-vs-model",          # Agreement between two LLM outputs (same prompt)
+    "reference-vs-generated",  # Faithfulness of generated answer vs ground-truth reference
+    "context-vs-generated",    # Groundedness of generated answer against source context (RAG/hallucination)
+]
+
+_MODE_DESCRIPTION = (
+    "Evaluation mode — selects the mode-specific trained model.\n"
+    "• `model-vs-model`: score agreement between two LLM outputs for the same prompt\n"
+    "• `reference-vs-generated`: score faithfulness of a generated answer against a reference\n"
+    "• `context-vs-generated`: detect hallucinations by checking if an answer is grounded in context"
+)
 
 
 class PairRequest(BaseModel):
@@ -8,7 +25,7 @@ class PairRequest(BaseModel):
         ...,
         min_length=1,
         max_length=10_000,
-        description="First text (source / reference)",
+        description="First text (source / reference / context)",
         examples=["The sky is blue."],
     )
     text2: str = Field(
@@ -18,17 +35,21 @@ class PairRequest(BaseModel):
         description="Second text (hypothesis / generated output)",
         examples=["The sky appears blue in colour."],
     )
+    mode: EvaluationMode = Field(
+        "context-vs-generated",
+        description=_MODE_DESCRIPTION,
+    )
 
 
 class PairResponse(BaseModel):
     prediction: int = Field(
         ...,
-        description="Binary prediction: 1 = similar, 0 = different",
+        description="Binary prediction: 1 = similar/faithful/grounded, 0 = different/unfaithful/hallucinated",
         examples=[1],
     )
     probability: float = Field(
         ...,
-        description="Similarity score in [0, 1]",
+        description="Score in [0, 1]",
         examples=[0.87],
     )
 
@@ -40,6 +61,10 @@ class BatchRequest(BaseModel):
         max_length=100,
         description="List of [text1, text2] string pairs to score (max 100 per request)",
         examples=[[["The sky is blue.", "The sky appears blue in colour."]]]
+    )
+    mode: EvaluationMode = Field(
+        "context-vs-generated",
+        description=_MODE_DESCRIPTION,
     )
 
 
@@ -81,6 +106,10 @@ class BatchBreakdownRequest(BaseModel):
         description="List of [text1, text2] string pairs (max 10 per request — breakdown reruns the full pipeline per pair)",
         examples=[[["The sky is blue.", "The sky appears blue in colour."]]]
     )
+    mode: EvaluationMode = Field(
+        "context-vs-generated",
+        description=_MODE_DESCRIPTION,
+    )
 
 
 class BatchBreakdownResponse(BaseModel):
@@ -92,4 +121,9 @@ class BatchBreakdownResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str = Field(..., description="Service status", examples=["ok"])
-    model_loaded: bool = Field(..., description="Whether the model is loaded and ready")
+    model_loaded: bool = Field(..., description="Whether at least one mode model is loaded and ready")
+    models: dict[str, bool] = Field(
+        default_factory=dict,
+        description="Per-mode model load state — keys are evaluation mode IDs",
+        examples=[{"model-vs-model": True, "reference-vs-generated": True, "context-vs-generated": True}],
+    )
