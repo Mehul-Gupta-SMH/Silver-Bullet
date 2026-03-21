@@ -5,9 +5,7 @@ from __future__ import annotations
 import os
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Annotated
-
-from fastapi import Depends, FastAPI, Request
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
@@ -15,7 +13,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 
-from api.dependencies import get_predictor
+from api.dependencies import _MODE_ENV, get_predictor
 from api.middleware import LoggingMiddleware, RequestIDMiddleware
 from api.schemas import (
     BatchBreakdownRequest,
@@ -27,7 +25,6 @@ from api.schemas import (
     PairRequest,
     PairResponse,
 )
-from predict import SimilarityPredictor
 
 
 # ---------------------------------------------------------------------------
@@ -135,13 +132,15 @@ app.add_middleware(RequestIDMiddleware)
     response_description="Service status and model load state",
 )
 async def health() -> HealthResponse:
-    """Return service status. No authentication required."""
-    try:
-        get_predictor()
-        model_loaded = True
-    except Exception:
-        model_loaded = False
-    return HealthResponse(status="ok", model_loaded=model_loaded)
+    """Return service status and per-mode model load state. No authentication required."""
+    models: dict[str, bool] = {}
+    for mode in _MODE_ENV:
+        try:
+            get_predictor(mode)
+            models[mode] = True
+        except Exception:
+            models[mode] = False
+    return HealthResponse(status="ok", model_loaded=any(models.values()), models=models)
 
 
 @app.post(
@@ -155,9 +154,9 @@ async def health() -> HealthResponse:
 async def predict_pair(
     request: Request,
     body: PairRequest,
-    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> PairResponse:
-    """Score the similarity between two texts."""
+    """Score the similarity between two texts using the model for the requested evaluation mode."""
+    predictor = get_predictor(body.mode)
     result = predictor.predict_pair(body.text1, body.text2)
     return PairResponse(**result)
 
@@ -177,10 +176,10 @@ async def predict_pair(
 async def predict_pair_breakdown(
     request: Request,
     body: PairRequest,
-    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BreakdownResponse:
     """Return a full divergence breakdown: sentence splits, alignment matrix,
     divergent sentence indices, and per-feature-group similarity scores."""
+    predictor = get_predictor(body.mode)
     result = predictor.predict_pair_breakdown(body.text1, body.text2)
     return BreakdownResponse(**result)
 
@@ -196,9 +195,9 @@ async def predict_pair_breakdown(
 async def predict_batch(
     request: Request,
     body: BatchRequest,
-    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BatchResponse:
-    """Score a list of text pairs. Max 100 pairs per request."""
+    """Score a list of text pairs using the model for the requested evaluation mode. Max 100 pairs."""
+    predictor = get_predictor(body.mode)
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
 
@@ -218,8 +217,8 @@ async def predict_batch(
 async def predict_batch_breakdown(
     request: Request,
     body: BatchBreakdownRequest,
-    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
 ) -> BatchBreakdownResponse:
-    """Return full divergence breakdowns for up to 10 text pairs. Max 10 pairs per request."""
+    """Return full divergence breakdowns for up to 10 text pairs using the mode-specific model."""
+    predictor = get_predictor(body.mode)
     results = predictor.predict_batch_breakdown(body.pairs)
     return BatchBreakdownResponse(results=[BreakdownResponse(**r) for r in results])

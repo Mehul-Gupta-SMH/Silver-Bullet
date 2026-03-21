@@ -115,7 +115,7 @@ class TextSimilarityDataset(Dataset):
 
 
 def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.001,
-                patience=5, min_delta=0.001):
+                patience=5, min_delta=0.001, best_ckpt='best_model.pth'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -202,7 +202,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'accuracy':             accuracy,
                 'num_features':         num_features,
                 'manifest':             build_manifest(),
-            }, 'best_model.pth')
+            }, best_ckpt)
         else:
             patience_counter += 1
 
@@ -246,11 +246,39 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
 
 
 if __name__ == '__main__':
+    import argparse
+
+    VALID_MODES = ["model-vs-model", "reference-vs-generated", "context-vs-generated"]
+
+    parser = argparse.ArgumentParser(description="Train a SilverBullet evaluation model.")
+    parser.add_argument(
+        "--mode",
+        choices=VALID_MODES,
+        default=None,
+        help=(
+            "Evaluation mode to train. If given, loads data from data/{mode}/ and saves "
+            "checkpoint to models/{mode}.pth. "
+            "If omitted, loads from data/ and saves to best_model.pth (general model)."
+        ),
+    )
+    args = parser.parse_args()
+
     os.makedirs('cache', exist_ok=True)
     os.makedirs('training_reports', exist_ok=True)
 
-    train_pairs, train_labels = load_json_data('data/train.json')
-    val_pairs,   val_labels   = load_json_data('data/validate.json')
+    if args.mode:
+        data_dir       = f'data/{args.mode}'
+        checkpoint_dir = 'models'
+        os.makedirs(checkpoint_dir, exist_ok=True)
+        best_ckpt = f'{checkpoint_dir}/{args.mode}.pth'
+        print(f"Mode: {args.mode}  |  Data: {data_dir}/  |  Checkpoint: {best_ckpt}")
+    else:
+        data_dir  = 'data'
+        best_ckpt = 'best_model.pth'
+        print("Mode: general  |  Data: data/  |  Checkpoint: best_model.pth")
+
+    train_pairs, train_labels = load_json_data(f'{data_dir}/train.json')
+    val_pairs,   val_labels   = load_json_data(f'{data_dir}/validate.json')
     print(f"Train: {len(train_pairs)}  Val: {len(val_pairs)}")
 
     train_dataset = TextSimilarityDataset(train_pairs, train_labels, use_cache=True)
@@ -260,5 +288,7 @@ if __name__ == '__main__':
     val_loader    = DataLoader(val_dataset,   batch_size=16)
 
     model = TextSimilarityCNN(num_features=train_dataset.num_features)
-    trained_model, metrics = train_model(model, train_loader, val_loader)
+    trained_model, metrics = train_model(
+        model, train_loader, val_loader, best_ckpt=best_ckpt
+    )
     print("Training complete.")

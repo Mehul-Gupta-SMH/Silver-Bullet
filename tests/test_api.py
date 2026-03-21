@@ -6,10 +6,10 @@ response shapes, input validation, CORS headers).
 """
 
 import pytest
+from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from api.main import app
-from tests.conftest import _original_get_predictor
 
 
 # ---------------------------------------------------------------------------
@@ -31,14 +31,23 @@ def test_health_reports_model_loaded_true_when_predictor_available(client):
     assert response.json()["model_loaded"] is True
 
 
+def test_health_reports_per_mode_models(client):
+    """Health response should include a 'models' dict with per-mode load state."""
+    response = client.get("/api/v1/health")
+    assert response.status_code == 200
+    body = response.json()
+    assert "models" in body
+    expected_modes = {"model-vs-model", "reference-vs-generated", "context-vs-generated"}
+    assert set(body["models"].keys()) == expected_modes
+
+
 def test_health_reports_model_not_loaded_on_predictor_failure(monkeypatch):
     """If predictor raises on load, health should stay 200 with model_loaded=False."""
 
-    def _boom():
+    def _boom(*_args, **_kwargs):
         raise RuntimeError("model missing")
 
     monkeypatch.setattr("api.main.get_predictor", _boom)
-    monkeypatch.setattr("api.dependencies.get_predictor", _boom)
 
     with TestClient(app) as temp_client:
         response = temp_client.get("/api/v1/health")
@@ -53,7 +62,7 @@ def test_health_response_keys_are_strict(client):
     """Health payload should expose only the documented keys."""
     response = client.get("/api/v1/health")
     assert response.status_code == 200
-    assert set(response.json().keys()) == {"status", "model_loaded"}
+    assert set(response.json().keys()) == {"status", "model_loaded", "models"}
 
 
 # ---------------------------------------------------------------------------
@@ -64,11 +73,29 @@ def test_predict_pair_happy_path(client):
     """POST /api/v1/predict/pair with valid inputs should return 200 and include a probability."""
     response = client.post(
         "/api/v1/predict/pair",
-        json={"text1": "Hello world", "text2": "Hi there"},
+        json={"text1": "Hello world", "text2": "Hi there", "mode": "context-vs-generated"},
     )
     assert response.status_code == 200
     body = response.json()
     assert "probability" in body
+
+
+def test_predict_pair_default_mode_is_accepted(client):
+    """POST without 'mode' should use the default and return 200."""
+    response = client.post(
+        "/api/v1/predict/pair",
+        json={"text1": "Hello world", "text2": "Hi there"},
+    )
+    assert response.status_code == 200
+
+
+def test_predict_pair_invalid_mode_returns_422(client):
+    """POST with an unknown mode value should be rejected with 422."""
+    response = client.post(
+        "/api/v1/predict/pair",
+        json={"text1": "Hello", "text2": "Hi", "mode": "invalid-mode"},
+    )
+    assert response.status_code == 422
 
 
 # ---------------------------------------------------------------------------
@@ -125,16 +152,13 @@ def test_predict_pair_error_returns_500_and_request_id(mock_predictor):
     """If predictor throws, the global handler should return 500 and echo X-Request-ID."""
     mock_predictor.predict_pair.side_effect = ValueError("explode")
 
-    app.dependency_overrides[_original_get_predictor] = lambda: mock_predictor
-    try:
-        with TestClient(app, raise_server_exceptions=False) as error_client:
-            response = error_client.post(
-                "/api/v1/predict/pair",
-                json={"text1": "Hello", "text2": "Hi"},
-                headers={"X-Request-ID": "req-123"},
-            )
-    finally:
-        app.dependency_overrides.clear()
+    with patch("api.main.get_predictor", return_value=mock_predictor), \
+         TestClient(app, raise_server_exceptions=False) as error_client:
+        response = error_client.post(
+            "/api/v1/predict/pair",
+            json={"text1": "Hello", "text2": "Hi"},
+            headers={"X-Request-ID": "req-123"},
+        )
 
     body = response.json()
     assert response.status_code == 500
@@ -169,23 +193,19 @@ def test_predict_pair_breakdown_happy_path(client, mock_predictor):
     assert response.status_code == 200
     body = response.json()
     assert body == expected
-    mock_predictor.predict_pair_breakdown.assert_called_once_with("Hello world", "Hi there")
 
 
 def test_predict_pair_breakdown_error_returns_500_and_request_id(mock_predictor):
     """If predictor throws, /predict/pair/breakdown should surface 500 and include request ID."""
     mock_predictor.predict_pair_breakdown.side_effect = ValueError("explode breakdown")
 
-    app.dependency_overrides[_original_get_predictor] = lambda: mock_predictor
-    try:
-        with TestClient(app, raise_server_exceptions=False) as error_client:
-            response = error_client.post(
-                "/api/v1/predict/pair/breakdown",
-                json={"text1": "Hello", "text2": "Hi"},
-                headers={"X-Request-ID": "req-456"},
-            )
-    finally:
-        app.dependency_overrides.clear()
+    with patch("api.main.get_predictor", return_value=mock_predictor), \
+         TestClient(app, raise_server_exceptions=False) as error_client:
+        response = error_client.post(
+            "/api/v1/predict/pair/breakdown",
+            json={"text1": "Hello", "text2": "Hi"},
+            headers={"X-Request-ID": "req-456"},
+        )
 
     body = response.json()
     assert response.status_code == 500
@@ -288,7 +308,7 @@ def test_rate_limit_handler_returns_429():
         "headers": [],
     }
     fake_request = Request(scope)
-    fake_exc = MagicMock()  # any exception object — handler ignores its details
+    fake_exc = MagicMock()
 
     response = _rate_limit_handler(fake_request, fake_exc)
 

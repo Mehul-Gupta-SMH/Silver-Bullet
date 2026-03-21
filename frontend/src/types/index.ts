@@ -44,4 +44,5 @@ export interface BatchResponse {
 export interface HealthResponse {
   status: string;
   model_loaded: boolean;
+  models: Record<ComparisonMode, boolean>;
 }
