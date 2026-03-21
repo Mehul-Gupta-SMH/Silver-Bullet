@@ -1,14 +1,45 @@
+# IDEs
 .idea
 .vscode
 *.iml
-__pycache__
-.sbvenv
-Features/Semantic/weights_cache
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtualenv
+.sbvenv/
+
+# Secrets
 resources/config.yaml
+
+# Model weights & checkpoints
 *.pth
 *.pth.bak
 model_weights_*.pth
+Features/Semantic/weights_cache/
+Features/NLI/model/
+Features/EntityGroups/model/
+Features/Lexical/tokeniser_cache/
+
+# Runtime caches & reports
 cache/
 training_reports/
 test_reports/
 test_results.json
+
+# Claude Code session data
+.claude/
+
+# Stray pip artefacts
+=*
+
+# Local git config overrides
+.gitconfig
+.gitconfig_global
+
+# Research / scratch
+research_paper/
