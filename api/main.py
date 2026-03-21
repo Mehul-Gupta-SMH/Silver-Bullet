@@ -12,11 +12,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 
 from api.dependencies import get_predictor
 from api.middleware import LoggingMiddleware, RequestIDMiddleware
 from api.schemas import (
+    BatchBreakdownRequest,
+    BatchBreakdownResponse,
     BatchRequest,
     BatchResponse,
     BreakdownResponse,
@@ -46,15 +49,16 @@ async def lifespan(_: FastAPI):
 
 
 # ---------------------------------------------------------------------------
-# Rate limiter (infrastructure kept; per-endpoint decorators omitted due to
-# slowapi/FastAPI signature-inspection incompatibility — add middleware later)
+# Rate limiter
+#   Global default: 60/minute (all prediction endpoints)
+#   Breakdown endpoints override to a tighter limit (expensive — reruns pipeline)
 # ---------------------------------------------------------------------------
 
 def _rate_limit_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
 
 
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_remote_address, default_limits=["60/minute"])
 
 # ---------------------------------------------------------------------------
 # App factory
@@ -87,6 +91,7 @@ app = FastAPI(
 
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 
 @app.exception_handler(Exception)
@@ -168,6 +173,7 @@ async def predict_pair(
     ),
     responses={422: {"description": "Validation error — text empty or exceeds 10 000 characters"}},
 )
+@limiter.limit("20/minute")
 async def predict_pair_breakdown(
     request: Request,
     body: PairRequest,
@@ -195,3 +201,25 @@ async def predict_batch(
     """Score a list of text pairs. Max 100 pairs per request."""
     results = predictor.predict_batch(body.pairs)
     return BatchResponse(results=[PairResponse(**r) for r in results])
+
+
+@app.post(
+    "/api/v1/predict/batch/breakdown",
+    response_model=BatchBreakdownResponse,
+    tags=["prediction"],
+    summary="Sentence-level divergence analysis for a batch of text pairs",
+    response_description=(
+        "Per-sentence alignment matrix, divergence indices, and feature-group scores for each pair. "
+        "Expensive — reruns the full feature pipeline per pair. Max 10 pairs."
+    ),
+    responses={422: {"description": "Validation error — batch exceeds 10 pairs or pairs are malformed"}},
+)
+@limiter.limit("10/minute")
+async def predict_batch_breakdown(
+    request: Request,
+    body: BatchBreakdownRequest,
+    predictor: Annotated[SimilarityPredictor, Depends(get_predictor)],
+) -> BatchBreakdownResponse:
+    """Return full divergence breakdowns for up to 10 text pairs. Max 10 pairs per request."""
+    results = predictor.predict_batch_breakdown(body.pairs)
+    return BatchBreakdownResponse(results=[BreakdownResponse(**r) for r in results])

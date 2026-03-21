@@ -29,6 +29,18 @@ def mock_predictor():
     mock_instance.predict_batch.return_value = [
         {"prediction": 1, "probability": 0.85}
     ]
+    mock_instance.predict_batch_breakdown.return_value = [
+        {
+            "prediction": 1,
+            "probability": 0.85,
+            "sentences1": ["Hello world"],
+            "sentences2": ["Hi there"],
+            "alignment": [[0.9]],
+            "divergent_in_1": [],
+            "divergent_in_2": [],
+            "feature_scores": {"Semantic (mxbai)": 0.9},
+        }
+    ]
 
     with patch("api.dependencies.get_predictor", return_value=mock_instance), \
          patch("api.main.get_predictor", return_value=mock_instance):

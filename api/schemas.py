@@ -73,6 +73,23 @@ class BreakdownResponse(BaseModel):
     )
 
 
+class BatchBreakdownRequest(BaseModel):
+    pairs: list[list[str]] = Field(
+        ...,
+        min_length=1,
+        max_length=10,
+        description="List of [text1, text2] string pairs (max 10 per request — breakdown reruns the full pipeline per pair)",
+        examples=[[["The sky is blue.", "The sky appears blue in colour."]]]
+    )
+
+
+class BatchBreakdownResponse(BaseModel):
+    results: list[BreakdownResponse] = Field(
+        ...,
+        description="Breakdown analysis, one per input pair",
+    )
+
+
 class HealthResponse(BaseModel):
     status: str = Field(..., description="Service status", examples=["ok"])
     model_loaded: bool = Field(..., description="Whether the model is loaded and ready")

@@ -164,6 +164,10 @@ class SimilarityPredictor:
             "feature_scores": feature_scores,
         }
 
+    def predict_batch_breakdown(self, pairs: list[list[str]]) -> list[dict]:
+        """Run predict_pair_breakdown for each pair in the batch."""
+        return [self.predict_pair_breakdown(pair[0], pair[1]) for pair in pairs]
+
     def predict_batch(self, pairs):
         """Make predictions for a list of [text1, text2] pairs."""
         features = self._extract_features(pairs)
