@@ -9,10 +9,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Runtime environment
+# Runtime environment — tokens must be injected at container run time:
+#   docker run -e SB_HF_TOKEN=... -e SB_OPENAI_TOKEN=...
 ENV MODEL_PATH=best_model.pth
-ENV SB_HF_TOKEN=''
-ENV SB_OPENAI_TOKEN=''
 
 EXPOSE 8000
 
