@@ -1,143 +1,1003 @@
 {
   "data": [
     {
-      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
-      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
       "label": 1
     },
     {
-      "text1": "A prime number has no divisors other than 1 and itself.",
-      "text2": "The James Webb Space Telescope observes in infrared and can detect early galaxies.",
+      "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
+      "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
       "label": 0
     },
     {
-      "text1": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides: a² + b² = c².",
-      "text2": "For any right-angled triangle, a² + b² = c², where c is the hypotenuse — this is the Pythagorean theorem.",
-      "label": 1
-    },
-    {
-      "text1": "The placebo effect is when a patient experiences a real improvement in symptoms after receiving an inactive treatment, due to the belief that it will work.",
-      "text2": "Placebo effect describes genuine symptom improvement following an inert treatment, driven by the patient's expectation of benefit.",
-      "label": 1
-    },
-    {
-      "text1": "Oxidation involves the loss of electrons, while reduction involves the gain of electrons — together they form redox reactions.",
-      "text2": "In redox chemistry, oxidation is the loss of electrons and reduction is the gain of electrons; the two always occur together.",
-      "label": 1
-    },
-    {
-      "text1": "OKRs should be set quarterly, reviewed in weekly check-ins, and scored at the end of each cycle on a 0–1 scale; objectives scoring below 0.6 should trigger a root-cause retrospective before the next planning round.",
-      "text2": "OKRs are set quarterly and scored at cycle-end on a 0–1 scale; scores below 0.6 indicate underperformance.",
+      "text1": "A man is playing on his keyboard.",
+      "text2": "A man is playing a guitar.",
       "label": 0
     },
     {
-      "text1": "The Higgs boson was first observed experimentally at CERN in 2012.",
-      "text2": "The Higgs boson was theoretically predicted in the 1960s but was not detected until experiments at Fermilab confirmed it in 2008.",
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
       "label": 0
     },
     {
-      "text1": "Reinforcement learning trains an agent by rewarding desired behaviours and penalising undesired ones.",
-      "text2": "Reinforcement learning trains an agent using labelled training examples and a supervised loss function, similar to standard classification.",
+      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
       "label": 0
     },
     {
-      "text1": "REST APIs communicate over HTTP using standard methods — GET, POST, PUT, DELETE — and return data typically in JSON or XML format.",
-      "text2": "A RESTful API uses HTTP verbs (GET, POST, PUT, DELETE) to expose resources and exchange data, commonly serialised as JSON.",
+      "text1": "Water is a polar molecule with the chemical formula H₂O, consisting of two hydrogen atoms covalently bonded to one oxygen atom.",
+      "text2": "H₂O — water — is a polar covalent molecule formed by two hydrogen atoms bonded to a single oxygen atom.",
       "label": 1
     },
     {
-      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
-      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "text1": "Which is best: Bamboo or Jenkins CI?",
+      "text2": "How Jenkins is useful?",
       "label": 0
     },
     {
-      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
-      "text2": "Every choice carries an opportunity cost — the benefit you give up by not choosing the next best option.",
+      "text1": "Is it better to sleep with or without a pillow?",
+      "text2": "Is sleeping on a pillow better than sleeping without a pillow?",
       "label": 1
     },
     {
-      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
-      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "text1": "A man and women sitting on a sofa holding a small baby.",
+      "text2": "a woman sitting on a sofa holding a baby.",
       "label": 0
     },
     {
-      "text1": "The growth strategy should prioritise international expansion into Southeast Asia and product line extension into SMB, with a partnership programme and cost efficiency drive rounding out the four pillars.",
-      "text2": "The growth strategy should focus on Southeast Asia expansion and SMB product extension. A cost efficiency programme may be worth exploring but is not a primary lever at this stage.",
+      "text1": "Should I remove my wisdom teeth?",
+      "text2": "Should I have my wisdom tooth removed?",
+      "label": 1
+    },
+    {
+      "text1": "What are some really good PTO softwares that integrate with Harvest?",
+      "text2": "What are some good PTO softwares that integrate with Harvest?",
+      "label": 1
+    },
+    {
+      "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+      "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+      "label": 1
+    },
+    {
+      "text1": "Part of it is now devoted to the Museo de Caza (Hunting Museum), with stuffed animals and ancient weapons.",
+      "text2": "Part of it is devoted to the Hunting Museum.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
       "label": 0
     },
     {
-      "text1": "A balanced scorecard translates strategic objectives into measurable KPIs across four perspectives: financial, customer, internal processes, and learning and growth.",
-      "text2": "The balanced scorecard framework links strategic goals to specific metrics across financial performance, customer outcomes, operational processes, and organisational learning and development.",
-      "label": 1
-    },
-    {
-      "text1": "Blockchain records transactions in cryptographically linked blocks across a distributed network.",
-      "text2": "The law of conservation of energy: energy cannot be created or destroyed, only converted.",
+      "text1": "A woman is playing a guitar.",
+      "text2": "A man plays a guitar.",
       "label": 0
     },
     {
-      "text1": "The First Amendment protects free speech, religion, press, and assembly.",
-      "text2": "The Second Amendment protects the right to keep and bear arms, and has been the subject of significant US Supreme Court interpretation regarding individual versus collective rights.",
+      "text1": "bombing occurred in afghanistan as attacks by anti-government insurgents increase in recent days.",
+      "text2": "a bombing occurred in afghanistan but police have not yet stated who is responsible.",
       "label": 0
     },
     {
-      "text1": "A convolution neural network (CNN) uses learnable filters to detect local patterns such as edges and textures in images, enabling spatial feature extraction.",
-      "text2": "CNNs apply trainable convolutional filters to input images to identify spatial features like edges, corners, and textures at various scales.",
+      "text1": "Syria Regime Agrees to Attend Peace Conference",
+      "text2": "Russia: Syria Agrees to Participate in Conference",
       "label": 1
     },
     {
-      "text1": "Vaccines stimulate the immune system to recognise and destroy a specific pathogen by exposing it to a weakened or inactivated form of the disease agent.",
-      "text2": "Vaccination trains the immune system to fight a pathogen by introducing a harmless version (weakened or inactivated) that triggers antibody production without causing disease.",
-      "label": 1
-    },
-    {
-      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
-      "text2": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1; right -= 1\n    return True",
-      "label": 1
-    },
-    {
-      "text1": "Inflation is the rate at which the general price level of goods and services rises over time, eroding purchasing power.",
-      "text2": "When inflation rises, the same amount of money buys fewer goods and services — it represents a sustained increase in the overall price level.",
-      "label": 1
-    },
-    {
-      "text1": "Public key cryptography uses a pair of mathematically linked keys — a public key to encrypt and a private key to decrypt — enabling secure communication without sharing a secret.",
-      "text2": "In asymmetric cryptography, a public key encrypts data while only the paired private key can decrypt it, allowing secure exchange without a pre-shared secret.",
-      "label": 1
-    },
-    {
-      "text1": "# Python list comprehension\nsquares = [x**2 for x in range(10)]",
-      "text2": "# Equivalent using map\nsquares = list(map(lambda x: x**2, range(10)))",
-      "label": 1
-    },
-    {
-      "text1": "Statins lower LDL cholesterol by inhibiting the HMG-CoA reductase enzyme in the liver.",
-      "text2": "Statins lower LDL cholesterol by binding directly to LDL particles in the bloodstream and breaking them down before they reach the liver.",
+      "text1": "to uh to get out and uh go for the swim i think uh there is something to this endorphins",
+      "text2": "When I go swimming I feel such fatigue afterwards.",
       "label": 0
     },
     {
-      "text1": "The Industrial Revolution, which began in Britain in the late 18th century, marked the transition from agrarian economies to manufacturing-based ones, powered by steam and coal.",
-      "text2": "Beginning in late-18th-century Britain, the Industrial Revolution shifted economies from farming to factory production, driven primarily by steam engines and coal.",
+      "text1": "How many times can one have sex in a week?",
+      "text2": "How many times a week should one have sex?",
       "label": 1
     },
     {
-      "text1": "Quantum entanglement allows instantaneous correlation between particles regardless of distance.",
-      "text2": "Quantum entanglement enables faster-than-light communication between entangled particles, which is the basis for quantum cryptography key exchange.",
+      "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
+      "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
       "label": 0
     },
     {
-      "text1": "Inflation erodes purchasing power by raising the general price level.",
-      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
-      "label": 0
-    },
-    {
-      "text1": "Einstein's mass-energy equivalence formula E = mc² states that energy equals mass multiplied by the square of the speed of light.",
-      "text2": "The equation E = mc² expresses that mass and energy are interconvertible: a small amount of mass corresponds to an enormous amount of energy, scaled by c².",
+      "text1": "The power of his work is attributed to its scale and his meticulous method.",
+      "text2": "His work power is a result of scale and meticulous method.",
       "label": 1
     },
     {
-      "text1": "The peer-review process ensures that scientific findings are evaluated by experts before publication.",
-      "text2": "The peer-review process ensures that scientific findings are evaluated by experts before publication. Studies show that over 95% of peer-reviewed claims are later confirmed by replication.",
+      "text1": "What's the best method to get meth out of your system?",
+      "text2": "How long does meth stay detectable in the body through testing?",
+      "label": 0
+    },
+    {
+      "text1": "(Click to read the question--but in brief, it had to do with why one guy named Bill had managed to discourage unwanted pursuit by a gal named Janet, when another guy named Bill had not.)",
+      "text2": "There are two Bills who had different experiences with Janet.",
+      "label": 1
+    },
+    {
+      "text1": "A red and gray train is going through a tunnel.",
+      "text2": "A red and gray train travels through a tunnel amongst the trees.",
+      "label": 1
+    },
+    {
+      "text1": "How do you convert HTML to JSP? What are some tips?",
+      "text2": "How can I change html pages to jsp?",
+      "label": 0
+    },
+    {
+      "text1": "Two dead, more trapped in latest Mumbai building collapse",
+      "text2": "Two are trapped as US building collapses",
+      "label": 0
+    },
+    {
+      "text1": "Assuming the bare-bones basic functions of government are to be maintained, where then will be the room for any border-control guards or anti-terrorism measures, or Head Start or education grants or peanut subsidies or national parks, or disaster relief--let alone the enhancements that Congress deemed so necessary this October?",
+      "text2": "There is not any room for anymore functions.",
+      "label": 0
+    },
+    {
+      "text1": "How does a vagina feel?",
+      "text2": "What does a normal vulva look like?",
+      "label": 0
+    },
+    {
+      "text1": "Is it true that sleeping with your phone under your pillow gives you radiation and can cause brain tumor?",
+      "text2": "Can sleeping with phone under pillow cause brain tumor?",
+      "label": 1
+    },
+    {
+      "text1": "What are the prerequisites for Allen Distance Learning Program?",
+      "text2": "What is the DLP (Distance Learning Program) started by ALLEN Coaching Institute?",
+      "label": 0
+    },
+    {
+      "text1": "Imran blames rival for colleague murder",
+      "text2": "Pakistans Imran blames rival for killing party member",
+      "label": 1
+    },
+    {
+      "text1": "What are the opinions of people around the world on California's affirmative laws for sex?",
+      "text2": "What do people think about California's new affirmative consent law?",
+      "label": 1
+    },
+    {
+      "text1": "Jon stared off for a while, appearing in deep thought.",
+      "text2": "Jon was so tired from the recent events that he could hardly think.",
+      "label": 0
+    },
+    {
+      "text1": "I hope everything is OK!",
+      "text2": "I hope everything is okay.",
+      "label": 1
+    },
+    {
+      "text1": "Two dogs run side-by-side on the grass.",
+      "text2": "Two dogs running on grass.",
+      "label": 1
+    },
+    {
+      "text1": "What is the Fibonacci sequence?",
+      "text2": "What is Fibonacci sequence?",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "Francisco de Goya painted a court portrait of the next king, Charles IV, in which he looked strangely like George Washington.",
+      "text2": "de Goya painted a portrait that made him look strange and angered him.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
+      "label": 0
+    },
+    {
+      "text1": "What do Americans think about workarounds of life which can be used only by Indians?",
+      "text2": "CAN U PLZ GUIDE ME for CLEARING POSTPAYMENT SCALE 1 exam?",
+      "label": 0
+    },
+    {
+      "text1": "Is it illegal to impersonate the President of the United States?",
+      "text2": "Who was the first U.S. President?",
+      "label": 0
+    },
+    {
+      "text1": "Iran dissidents 'killed in Iraq'",
+      "text2": "France loses influence in Europe",
+      "label": 0
+    },
+    {
+      "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+      "text2": "SOLID is an acronym for five OOP design principles — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion — that promote clean, maintainable code.",
+      "label": 1
+    },
+    {
+      "text1": "A boy whacks a man with a sword.",
+      "text2": "A boy spanks a man with a plastic sword.",
+      "label": 0
+    },
+    {
+      "text1": "In 1649, Ireland's most hated conqueror, Oliver Cromwell, arrived in Dublin.",
+      "text2": "Oliver Cromwell came to Dublin in 1649.",
+      "label": 1
+    },
+    {
+      "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
+      "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
+      "label": 1
+    },
+    {
+      "text1": "The woman is dicing onions.",
+      "text2": "A woman is cutting an onion.",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
+      "label": 1
+    },
+    {
+      "text1": "Yet she almost went back to put the curtain aside and make sure… .",
+      "text2": "She was unsure of what to do",
+      "label": 0
+    },
+    {
+      "text1": "you know you don't feel it so strapped",
+      "text2": "You feel more comfortable.",
+      "label": 1
+    },
+    {
+      "text1": "What is best movies to watch?",
+      "text2": "What is the best movies to watch?",
+      "label": 1
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
+      "label": 1
+    },
+    {
+      "text1": "How often can I put coconut oil on my hair?",
+      "text2": "Should I apply coconut oil to my hair daily?",
+      "label": 1
+    },
+    {
+      "text1": "Find the equation of a circle which touches the coordinate axes and whose centre lies on a line x-2y=3 ?",
+      "text2": "Find the equation of a circle which touches the coordinate axes and whose centre lies on the line x-2y=3?",
+      "label": 1
+    },
+    {
+      "text1": "kashmir is divided between india and pakistan.",
+      "text2": "kashmir is claimed by both india and pakistan.",
+      "label": 1
+    },
+    {
+      "text1": "(George W. Bush kills Gore in poll questions about leadership.",
+      "text2": "George W. Bush goes against Gore in a debate.",
+      "label": 1
+    },
+    {
+      "text1": "How do you legally immigrate to America from Guatemala? How can I ease up this process?",
+      "text2": "How can I immigrate to the US?",
+      "label": 0
+    },
+    {
+      "text1": "What is your favourite answer from some of your favourite users on Quora?",
+      "text2": "What are some of the best answers on Quora?",
+      "label": 0
+    },
+    {
+      "text1": "What are the top 5 skills of a top management or strategy consultant (e.g., McKinsey, Bain, BCG, etc.)?",
+      "text2": "What is a typical day in the office of a consultant in a firm like BCG, McKinsey, Bain or any top notch consulting company?",
+      "label": 0
+    },
+    {
+      "text1": "What does it feel like to have a child addicted to video games?",
+      "text2": "What do you do if your child is addicted to video games?",
+      "label": 0
+    },
+    {
+      "text1": "The broader Standard & Poor's 500 Index <.SPX> was 0.46 points lower, or 0.05 percent, at 997.02.",
+      "text2": "The technology-laced Nasdaq Composite Index .IXIC was up 7.42 points, or 0.45 percent, at 1,653.44.",
+      "label": 0
+    },
+    {
+      "text1": "the 5 permanent united nations security council members are britain, china, france, russia and the united states.",
+      "text2": "p5+1 members are britain, china, france, russia, germany and the united states.",
+      "label": 1
+    },
+    {
+      "text1": "Is Magical Girl anime genre underrated in America?",
+      "text2": "Why us Magical Girl anime genre underrated in America?",
+      "label": 1
+    },
+    {
+      "text1": "Outrage after reports emerge about 6-year-old Indian girl raped at school",
+      "text2": "Outrage After Indian Girl, 6, Raped at Her School",
+      "label": 1
+    },
+    {
+      "text1": "Python is an interpreted, dynamically typed language.",
+      "text2": "Python is a compiled, statically typed language that compiles to bytecode before execution, similar to Java.",
+      "label": 0
+    },
+    {
+      "text1": "Iran's president condemns use of chemical weapons in Syria",
+      "text2": "Probe alleged use of chemical weapons in Syria",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
+      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
+      "label": 1
+    },
+    {
+      "text1": "that's what i'm looking for now that's why i was just trying to talk without having to think about what i was saying and uh trying to look over this thing",
+      "text2": "That's not what I'm looking for.",
+      "label": 0
+    },
+    {
+      "text1": "Elegant dining room with wood furniture.",
+      "text2": "An elegant pink dining room with wooden furniture.",
+      "label": 1
+    },
+    {
+      "text1": "This is another game in which lessons and lots of spare money are recommended.",
+      "text2": "They don't offer lessons.",
+      "label": 0
+    },
+    {
+      "text1": "Instead, prosecutors dismissed charges and Rucker left the courtroom a free man.",
+      "text2": "Instead he left the courtroom a free man after authorities dismissed criminal charges.",
+      "label": 0
+    },
+    {
+      "text1": "Restaurants in India: What are the best places for Biryani in Mumbai?",
+      "text2": "Which is the best biryani in India?",
+      "label": 0
+    },
+    {
+      "text1": "How do pure atheists know what is right from wrong? In other words, what is their moral compass?",
+      "text2": "To fellow atheists, agnostics, and deists, do you think there is objective morality, and if so, from what?",
+      "label": 0
+    },
+    {
+      "text1": "Which are the best qualities a person could have?",
+      "text2": "What are some of the best qualities a person should have?",
+      "label": 0
+    },
+    {
+      "text1": "Why was Myanmar separated from India?",
+      "text2": "Why did Myanmar separate from India in 1937?",
+      "label": 1
+    },
+    {
+      "text1": "James Murdoch quits BSkyB",
+      "text2": "James Murdoch quits role at BSkyB",
+      "label": 1
+    },
+    {
+      "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
+      "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
+      "label": 1
+    },
+    {
+      "text1": "What is the meaning of cc in engine?",
+      "text2": "What does CC of an engine indicate?",
+      "label": 1
+    },
+    {
+      "text1": "The center's president, Joseph Torsella, was struck on the head but was able to walk to an ambulance.",
+      "text2": "National Constitution Center President Joseph Torsella was hit in the head and knocked to his knees.",
+      "label": 0
+    },
+    {
+      "text1": "How can someone measure IQ?",
+      "text2": "What is the most accurate way to measure IQ?",
+      "label": 1
+    },
+    {
+      "text1": "The armored man howled in his helm as the hand enclosed, twisting metal and crushing bone.",
+      "text2": "The armored man whooped as his armor failed, and watched as it dropped from his body ineffectively at the unarmed attack.",
+      "label": 0
+    },
+    {
+      "text1": "How and where can I find fuck buddies in Delhi?",
+      "text2": "Where can I find fuck buddies in Delhi?",
+      "label": 1
+    },
+    {
+      "text1": "Only one system of government has ever dealt adequately with the incentive problem for the chief executive, and that's hereditary monarchy.",
+      "text2": "Only a hereditary monarchy has appropriately addressed the competition for chief executive.",
+      "label": 1
+    },
+    {
+      "text1": "Here's what Hatfield writes about what Eufaula told",
+      "text2": "Hatfield wrote about Eufaula s words.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "How can one develop logical thinking?",
+      "text2": "What is the best way to develop logical thinking?",
+      "label": 1
+    },
+    {
+      "text1": "If any possible way available to conduct our sport?",
+      "text2": "What happens if citizens continue to use old 500 and 100 notes after Nov 9? We can still exchange those notes till Dec 30.",
+      "label": 0
+    },
+    {
+      "text1": "Man, 19, quizzed over teen murder",
+      "text2": "Man quizzed over Megan-Leigh murder",
+      "label": 1
+    },
+    {
+      "text1": "If someone put a gun to your head and asked you to change your religion, then what would you do?",
+      "text2": "Would police let the criminal get away if he had a gun to someone's head?",
+      "label": 0
+    },
+    {
+      "text1": "A small plane parked at an airfield with a cloudy sky overhead.",
+      "text2": "A small white plane parked in an airport on a cloudy day.",
+      "label": 1
+    },
+    {
+      "text1": "The judge also refused to postpone the trial date of Sept. 29.",
+      "text2": "Obus also denied a defense motion to postpone the Sept. 29 trial date.",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
+      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotic resistance develops when bacteria evolve to survive drug treatment.",
+      "text2": "Compound interest accumulates on both principal and previously earned interest.",
+      "label": 0
+    },
+    {
+      "text1": "and maybe and i knew i wanted to be in engineering so i was looking for a good engineering school so i ended up going to Tech in Lubbock",
+      "text2": "Tech in Lubbock was my first choice for college.",
+      "label": 0
+    },
+    {
+      "text1": "What do non-Indians think about PM ND Modi?",
+      "text2": "What do people of other countries think of Narendra Modi?",
+      "label": 1
+    },
+    {
+      "text1": "Red double decker bus taking on passengers.",
+      "text2": "A red double decker bus is picking up more passengers in a city.",
+      "label": 1
+    },
+    {
+      "text1": "What is the average salary of front-end developer in India?",
+      "text2": "What is the average salary of a UI/UX designer and a front-end developer in India?",
+      "label": 0
+    },
+    {
+      "text1": "The Court in Rust did not place explicit reliance on the rationale that the counseling activities of the doctors under Title X amounted to governmental speech; when interpreting the holding in later cases, however, we have explained Rust on this understanding.",
+      "text2": "The court found no explicit reliance for the rationale.",
+      "label": 1
+    },
+    {
+      "text1": "that's never i mean i understand that they're talking about the job  not the person in the job that's that's always that's always been strange i thought but some women like to fight it",
+      "text2": "I believe they are talking about the individual and not the job.",
+      "label": 0
+    },
+    {
+      "text1": "What if Quora were a country?",
+      "text2": "If Quora were a country, what would it be like?",
+      "label": 1
+    },
+    {
+      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
+      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
+      "label": 0
+    },
+    {
+      "text1": "Have you ever come across a jealous co-worker? If so, how did you handle him/her?",
+      "text2": "How do I handle co-workers who are jealous of me?",
+      "label": 1
+    },
+    {
+      "text1": "The black and white cows pause in front of the gate.",
+      "text2": "The white airplane is flying in the sky.",
+      "label": 0
+    },
+    {
+      "text1": "What do you think about first head transplant surgery?",
+      "text2": "What do you think of the baffling consequences of human head transplant?",
+      "label": 1
+    },
+    {
+      "text1": "Were any TED talks effective at convincing people to volunteer for a cause?",
+      "text2": "Assuming you want to measure a social phenomena, how do you proceed to create a new measurement? Where do you start?",
+      "label": 0
+    },
+    {
+      "text1": "Rebels kill 21 civilians in Syria Alawite village",
+      "text2": "Bomb kills 18 civilians in Afghanistan",
+      "label": 0
+    },
+    {
+      "text1": "Have you ever had sex with an escort?",
+      "text2": "Why do people write so much on Quora while answering the questions?",
+      "label": 0
+    },
+    {
+      "text1": "The girl is riding the horse.",
+      "text2": "The girl is spraying the plants with water.",
+      "label": 0
+    },
+    {
+      "text1": "The little girl played on the grass with a dog and a ball.",
+      "text2": "A baby plays with a dog and ball.",
+      "label": 1
+    },
+    {
+      "text1": "The basilica's highlight, and generally accepted as the work of a young Giotto, the Life of Francis (1296-1304) is movingly celebrated in 28 scenes along the lower tier (starting from the right transept), while 32 frescoes in the upper tier illustrate scenes from the Old and New Testament.",
+      "text2": "The scenes in the lower tier were created by Giotto near the end of his life.",
+      "label": 0
+    },
+    {
+      "text1": "Who are the worst Doctors in KIMS Hospital Hyderabad?",
+      "text2": "What about sony experience?",
+      "label": 0
+    },
+    {
+      "text1": "you know the height that you you set it at so i set it very high and it just picks or it skims the grass it doesn't dig way down deep so i don't have a lot of grass that i uh that i collect",
+      "text2": "I don't have to collect a lot of grass because it just skims the top of it.",
+      "label": 1
+    },
+    {
+      "text1": "The French Revolution began in 1789 and ended with Napoleon's rise to power in 1799.",
+      "text2": "The French Revolution started in 1789 and concluded in 1815 with Napoleon's defeat at Waterloo.",
+      "label": 0
+    },
+    {
+      "text1": "Man convicted in Vatican leaks case",
+      "text2": "Butler to be tried in \"Vatileaks\" case",
+      "label": 0
+    },
+    {
+      "text1": "The church is dominated by the massive nave and graceful flying buttresses linking the five chapels to the chancel.",
+      "text2": "The five chapels are linked to the chancel.",
+      "label": 1
+    },
+    {
+      "text1": "Why is scientific notation useful?",
+      "text2": "What are the practical uses of scientific notation? Why is scientific notation so important in modern-day society?",
+      "label": 1
+    },
+    {
+      "text1": "The proportion of people covered by employers dropped from 62.3 percent in 2001 to 61.3 percent last year.",
+      "text2": "The proportion of Americans with insurance from employers declined to 61.3 percent, from 62.6 percent in 2001 and 63.6 percent in 2000.",
+      "label": 0
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
+      "label": 0
+    },
+    {
+      "text1": "News of Terrorism and the Israeli-Palestinian Conflict (January 22 ‚Äď 28, 2014)",
+      "text2": "News of Terrorism and the Israeli-Palestinian Conflict (July 31 ‚Äď August 6, 2013)",
+      "label": 0
+    },
+    {
+      "text1": "It would serve no real purpose.",
+      "text2": "It could be done, but it wouldn't do anything for us.",
+      "label": 0
+    },
+    {
+      "text1": "In 1670 the Spanish officially ceded Jamaica to British rule as part of the Treaty of Madrid, and the British began a systematic process of settlement, offering land and aid to prospective settlers.",
+      "text2": "Britain rewarded Jamaican settlers with land after Spain ceded the island in 1670.",
+      "label": 1
+    },
+    {
+      "text1": "What Jimmy Wales think about Quora?",
+      "text2": "\"What does Jimmy Wales think of all the \"\"What does Jimmy Wales think of\"\" questions on Quora?\"",
+      "label": 0
+    },
+    {
+      "text1": "Five more human cases of West Nile virus, were reported by the Mesa County Health Department on Wednesday.",
+      "text2": "As of this week, 103 human West Nile cases in 45 counties had been reported to the health department.",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
+      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "label": 1
+    },
+    {
+      "text1": "Many worksharing discounts evoke responses based on more than one of the situations described above.",
+      "text2": "Several of the described situations reflect the responses.",
+      "label": 1
+    },
+    {
+      "text1": "Four Asian young people sitting in a den or living room.",
+      "text2": "A girl sitting in a living chair.",
+      "label": 0
+    },
+    {
+      "text1": "When does it make sense to purchase travel insurance?",
+      "text2": "What are some situations where it definitely makes sense to buy travel insurance?",
+      "label": 1
+    },
+    {
+      "text1": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) flute?",
+      "text2": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) Violin?",
+      "label": 0
+    },
+    {
+      "text1": "Son of top Muslim Brotherhood leader killed",
+      "text2": "Egypt arrests Muslim Brotherhood leader Badie",
+      "label": 0
+    },
+    {
+      "text1": "Resurrect all the Presidents.",
+      "text2": "Bring back every President.",
+      "label": 1
+    },
+    {
+      "text1": "Kilims are small rugs that are woven rather than knotted, and have no pile; a cicim is a kilim with embroidered decoration.",
+      "text2": "Kilim rugs are always very small in size.",
+      "label": 0
+    },
+    {
+      "text1": "A man and woman are driving down the street in a jeep.",
+      "text2": "A man and woman are driving down the road in an open air vehicle.",
+      "label": 1
+    },
+    {
+      "text1": "What is the difference between an air cooler and an air conditioner?",
+      "text2": "What is the difference between an air conditioner and a refrigerator?",
+      "label": 0
+    },
+    {
+      "text1": "What's the creepiest thing you have heard a child say?",
+      "text2": "What's the creepiest thing that a child has ever said to you?",
+      "label": 1
+    },
+    {
+      "text1": "Now, Blanca's American husband, 63-year-old Roger Lawrence Strunk, faces a murder indictment issued in February by the Philippine government, which says he's the leading suspect.",
+      "text2": "Now, Blanca's husband, 63-year-old Roger Lawrence Strunk of Tracy, faces a murder indictment issued by the Philippine government in February.",
+      "label": 1
+    },
+    {
+      "text1": "How can the structure of the villi in animals be described?",
+      "text2": "How can the structure of the villi in humans be described?",
+      "label": 0
+    },
+    {
+      "text1": "What is the latest research topic in cloud computing security?",
+      "text2": "What are the latest research topics on cloud computing?",
+      "label": 0
+    },
+    {
+      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
+      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
+      "label": 0
+    },
+    {
+      "text1": "If a Trump/Hitler type of politician emerged in Mexico, what would he do to amplify México?",
+      "text2": "What would happen, legally speaking, if Mexico overthrew its government and requested to be a part of the United States?",
+      "label": 0
+    },
+    {
+      "text1": "Further out the curve, the benchmark 10-year note US10YT=RR shed 25/32 in price, taking its yield to 3.26 percent from 3.17 percent.",
+      "text2": "Early Wednesday, the benchmark 10-year US10YT=RR had lost 16/32 in price, driving its yield up to 3.33 percent from 3.26 percent late Tuesday.",
+      "label": 0
+    },
+    {
+      "text1": "In Vienna, the IAEA said ElBaradei would accept the invitation, although no date had yet been set.",
+      "text2": "In Vienna, the International Atomic Energy Agency said on Monday ElBaradei had accepted Iran's invitation, but said no date had yet been set.",
+      "label": 0
+    },
+    {
+      "text1": "yeah and then he'd have to pay it all",
+      "text2": "He would have to pay the whole thing.",
+      "label": 1
+    },
+    {
+      "text1": "Why bother with the art on its terms when you can have it on your own?",
+      "text2": "Isn't taking art on your terms the best thing to do?",
+      "label": 1
+    },
+    {
+      "text1": "US Election: Mitt Romney concedes defeat as Barack Obama wins second term",
+      "text2": "Romney concedes election to Obama in phone call",
+      "label": 1
+    },
+    {
+      "text1": "yeah yeah Show Biz that's the name of it",
+      "text2": "Yeah, Show Biz that's the name",
+      "label": 1
+    },
+    {
+      "text1": "Why Indore is fashionable women?",
+      "text2": "What is the appeal of handbags?",
+      "label": 0
+    },
+    {
+      "text1": "France, on the other hand, has densely populated cities but no areas as sparsely settled as in the United States.",
+      "text2": "There are no sparsely settled areas in France.",
+      "label": 0
+    },
+    {
+      "text1": "When can we expect global warming to be the most pertinent threat to destroy life on Earth?",
+      "text2": "What does global warming mean?",
+      "label": 0
+    },
+    {
+      "text1": "What it the total number of domains registered with Infibeam's .ooo gTLD?",
+      "text2": "Is there any big drawback to registering a new gTLD domain for my startup, like .direct?",
+      "label": 0
+    },
+    {
+      "text1": "Natural selection drives evolution by favouring heritable traits that increase reproductive success.",
+      "text2": "The SOLID principles are five design guidelines that promote maintainable object-oriented software.",
+      "label": 0
+    },
+    {
+      "text1": "Why does Omegle always make me solve a Captcha before every chat?",
+      "text2": "How do I find girls on Omegle always?",
+      "label": 0
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "label": 0
+    },
+    {
+      "text1": "North Korea's Kim hails execution of powerful uncle",
+      "text2": "North Korean intrigue: The execution of power",
+      "label": 0
+    },
+    {
+      "text1": "A yellow dog is playing in a grassy area near flowers.",
+      "text2": "A girl is playing on a swing.",
+      "label": 0
+    },
+    {
+      "text1": "\"Why is \"\"Best Regards\"\" or \"\"Kind Regards\"\" considered to be bad English?\"",
+      "text2": "What is the best way of English writing? Kindly explain KISS principle in detail?",
+      "label": 0
+    },
+    {
+      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
+      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
+      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "label": 0
+    },
+    {
+      "text1": "No, I show you are willfully ignorant.",
+      "text2": "LOL, you are so ignorant.",
+      "label": 1
+    },
+    {
+      "text1": "How do I quit smoking?",
+      "text2": "How did you quit/stop smoking?",
+      "label": 1
+    },
+    {
+      "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
+      "text2": "I knew that he would understand what I was saying.",
+      "label": 1
+    },
+    {
+      "text1": "Which is the best line/phrase/para of Madhushala by Harivansh Rai Bachchan?",
+      "text2": "Urdu Poetry: What is the best two liner by Rahat Indori?",
+      "label": 0
+    },
+    {
+      "text1": "Where should I move my iTunes library?",
+      "text2": "How do I move my iTunes library to an external drive?",
+      "label": 0
+    },
+    {
+      "text1": "A boy is playing piano and singing.",
+      "text2": "A pig is agitating a lion.",
+      "label": 0
+    },
+    {
+      "text1": "Is creating satelite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
+      "text2": "Is creating satellite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
+      "label": 1
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "label": 0
+    },
+    {
+      "text1": "4 million - the amount of funding Mayor Bloomberg proposed for the Legal Aid Society by sharply curtailing compensation for court-appointed lawyers under the 18-B program.",
+      "text2": "Mayor Bloomberg proposed 4 million dollars for funding for the Legal Aid Society.",
+      "label": 1
+    },
+    {
+      "text1": "\"There is no doubt about the chemical programme, biological programme, indeed nuclear programme, indeed all that was documented by the UN,\" he said.",
+      "text2": "He added: \"There is no doubt about the chemical programme, the biological programme and indeed the nuclear weapons programme.",
+      "label": 1
+    },
+    {
+      "text1": "What is the weirdest question you have come across on Quora?",
+      "text2": "What are some of the weirdest questions asked in Quora?",
+      "label": 1
+    },
+    {
+      "text1": "4 million in annual state funding for civil legal services - nearly half of the state's yearly contribution to legal services programs statewide.",
+      "text2": "There is no funding available for civil legal services.",
+      "label": 0
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564 and is widely considered the greatest playwright in the English language.",
+      "text2": "Born in Stratford-upon-Avon in 1564, William Shakespeare is broadly regarded as the most important writer in the English literary tradition.",
+      "label": 1
+    },
+    {
+      "text1": "Regulation get the government into everything.",
+      "text2": "\"Get the government into everything?\"",
+      "label": 0
+    },
+    {
+      "text1": "Should I stay friends with her ?",
+      "text2": "Is it a good idea to remain friends with ex-girlfriends or boyfriends?",
+      "label": 0
+    },
+    {
+      "text1": "XII  It was twilight.",
+      "text2": "It was nearly night time.",
+      "label": 1
+    },
+    {
+      "text1": "Henri maintained a reputation as a worthy and brave leader ' and at the same time as an incorrigible womanizer ' until his assassination in 1610 by a religious zealot.",
+      "text2": "In 1610, Henri was assassinated by a religious zealot.",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
+      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "label": 0
+    },
+    {
+      "text1": "Hanson got up and moved forward.",
+      "text2": "Hanson got up and moved.",
+      "label": 1
+    },
+    {
+      "text1": "Bayes' theorem updates belief in a hypothesis given new evidence: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Deforestation destroys habitats, reduces biodiversity, and contributes to climate change.",
+      "label": 0
+    },
+    {
+      "text1": "Can mutual funds make you rich?",
+      "text2": "How much I can make in mutual fund by investing every month?",
+      "label": 0
+    },
+    {
+      "text1": "Something in their eyes put Ca'daan on guard.",
+      "text2": "There was something sinister in their eyes and Ca'daan was on guard.",
+      "label": 1
+    },
+    {
+      "text1": "Somalia's Shebab claims responsibility for Nairobi mall attack",
+      "text2": "Syrian rebels claim responsibility for killings in Lebanon",
+      "label": 0
+    },
+    {
+      "text1": "Rocks, Tear Gas Fly as Thai Protests Heat Up",
+      "text2": "Rocks, tear gas fly as Thai protests heat up",
+      "label": 1
+    },
+    {
+      "text1": "How do I become a good listener in school?",
+      "text2": "How do l become a good listener?",
+      "label": 0
+    },
+    {
+      "text1": "But they draft the applications in a way to say that these facts meet the requirements, and by the time the application reaches the court, it is unlikely that the court really gets to notice deficiencies.",
+      "text2": "The way they draft the applications shows how these facts meet requirements.",
+      "label": 1
+    },
+    {
+      "text1": "A lush site set high on a hillside with excellent views over the sea.",
+      "text2": "The site has no plants.",
+      "label": 0
+    },
+    {
+      "text1": "Woman in blue shift dress cutting into food.",
+      "text2": "A woman in a blue dress cuts a cake.",
+      "label": 1
+    },
+    {
+      "text1": "mRNA vaccines work by delivering messenger RNA into cells, instructing them to produce a protein that triggers an immune response.",
+      "text2": "In mRNA vaccination, synthetic messenger RNA is introduced into the body's cells; the cells read it and produce an antigen that primes the immune system.",
+      "label": 1
+    },
+    {
+      "text1": "Man in red shorts and white shirt kicking a soccer ball.",
+      "text2": "A black dog stands in the surf holding a red rubber ball.",
+      "label": 0
+    },
+    {
+      "text1": "Does DNA change during the life?",
+      "text2": "Does a person's DNA SEQUENCE change through the course of their life?",
+      "label": 1
+    },
+    {
+      "text1": "Thirty-one years later, their old neighborhood is being replaced by sandstone-hued luxury homes encircling the Cherry Creek shopping district.",
+      "text2": "The sandstone-colored luxury homes aren't replacing the old neighborhood 31 years later.",
+      "label": 0
+    },
+    {
+      "text1": "A pot of liquid is at the center of a tinfoil covered plate.",
+      "text2": "A pot of food is placed in the center of a red tablecloth.",
+      "label": 0
+    },
+    {
+      "text1": "but uh all right well thank you for calling and nice and have a good weekend",
+      "text2": "This call is not appreciated.",
+      "label": 0
+    },
+    {
+      "text1": "I stopped liking my girlfriend, but she is amazing. Should I leave her?",
+      "text2": "My girlfriend said she is not having the feeling to love me anymore. Should I leave her?",
+      "label": 0
+    },
+    {
+      "text1": "Does TRUNC (date or numeric) is equal to ROUND DOWN (date or numeric) in SQL since rounding down always return to the same values as truncating?",
+      "text2": "Are numeric values in scriptures meant to be taken literally or symbolically?",
+      "label": 0
+    },
+    {
+      "text1": "the iranian government stated-- the iranian nuclear program remains peaceful.",
+      "text2": "the iranian government says the nuclear program is peaceful.",
+      "label": 1
+    },
+    {
+      "text1": "How could I start my business?",
+      "text2": "How do I start business from nothing?",
+      "label": 1
+    },
+    {
+      "text1": "The confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms one's pre-existing beliefs.",
+      "text2": "Confirmation bias leads people to favour information that supports what they already believe and to discount evidence that contradicts it.",
+      "label": 1
+    },
+    {
+      "text1": "Should you follow your CEO on Twitter?",
+      "text2": "Where can I get real active Instagram followers?",
+      "label": 0
+    },
+    {
+      "text1": "Is there risk of phishing if I clicked on a web link on an answer on Quora?",
+      "text2": "Is there risk of phishing if I click on a link on an answer in Quora?",
+      "label": 1
+    },
+    {
+      "text1": "After Hughes refused to rehire Hernandez, he complained to the Equal Employment Opportunity Commission.",
+      "text2": "Hernandez filed an Equal Employment Opportunity Commission complaint and sued.",
+      "label": 0
+    },
+    {
+      "text1": "Navy jet crashes into US apartments, pilots eject",
+      "text2": "U.S. Navy Jet Crashes Into Virginia Apartment Buildings",
       "label": 0
     },
     {
@@ -146,38 +1006,78 @@
       "label": 0
     },
     {
-      "text1": "TCP/IP governs how data is packaged, addressed, transmitted, routed, and received across the internet.",
-      "text2": "UDP/IP governs how data is packaged and transmitted across the internet, with guaranteed delivery and error correction built in.",
-      "label": 0
-    },
-    {
-      "text1": "Evolution by natural selection is the process by which heritable traits that increase survival and reproduction become more common in a population over generations.",
-      "text2": "Natural selection drives evolution: traits that improve an organism's ability to survive and reproduce spread through the population across generations.",
+      "text1": "Overfitting occurs when a machine learning model learns the training data too well, including noise, and performs poorly on unseen data.",
+      "text2": "A model that overfits has memorised the training set — including its noise — and fails to generalise to new, unseen examples.",
       "label": 1
     },
     {
-      "text1": "The human immune system consists of innate and adaptive components.",
-      "text2": "Docker containers package applications and dependencies for consistent deployment across environments.",
-      "label": 0
-    },
-    {
-      "text1": "Porter's Five Forces framework analyses competitive intensity through supplier power, buyer power, threat of substitutes, threat of new entrants, and rivalry among existing competitors.",
-      "text2": "Antibiotic resistance develops when bacteria evolve mechanisms to survive drug treatment, rendering medications ineffective.",
-      "label": 0
-    },
-    {
-      "text1": "Gross domestic product (GDP) is the total monetary value of all goods and services produced within a country's borders in a given period.",
-      "text2": "GDP measures the aggregate economic output of a nation — the total value of finished goods and services produced domestically in a specific timeframe.",
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
+      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
       "label": 1
     },
     {
-      "text1": "The Eiffel Tower was built between 1887 and 1889 as the entrance arch for the 1889 World's Fair, designed by Gustave Eiffel.",
-      "text2": "Designed by Gustave Eiffel and constructed from 1887 to 1889, the Eiffel Tower was originally the grand entrance gate for the Paris World's Fair of 1889.",
+      "text1": "yeah that that's that's kind of what happened on Twin Peaks they did all this big building up building up building up and then the the solution was ridiculous i had it figured out by the third",
+      "text2": "The build up was leaving behind too many clues.",
+      "label": 0
+    },
+    {
+      "text1": "How can I boost my immune system?",
+      "text2": "What can a person do to strengthen their immune system?",
       "label": 1
     },
     {
-      "text1": "Public key cryptography enables secure communication without sharing a secret key.",
-      "text2": "World War II lasted from 1939 to 1945 and caused approximately 70–85 million deaths.",
+      "text1": "Inflation erodes purchasing power by raising the general price level.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
+      "label": 0
+    },
+    {
+      "text1": "What is the best gre book?",
+      "text2": "What is the best book for GRE exam?",
+      "label": 1
+    },
+    {
+      "text1": "What is the Cold War, and when did it end?",
+      "text2": "Did the Cold War end?",
+      "label": 0
+    },
+    {
+      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
+      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "label": 0
+    },
+    {
+      "text1": "Atlas Shrugged It's also a stellar performer in terms of blithering idiocy.",
+      "text2": "It's also a stellar performer in terms of blithering idiocy.",
+      "label": 1
+    },
+    {
+      "text1": "Two Australians killed in Kenya after bus crashed into river",
+      "text2": "Permalink to Two killed in Germany train accident",
+      "label": 0
+    },
+    {
+      "text1": "An elderly woman rides a bicycle along a city street.",
+      "text2": "An elderly woman walking uphill crossing the street.",
+      "label": 0
+    },
+    {
+      "text1": "Syrian opposition agree to landmark peace talks",
+      "text2": "Syria opposition pressed to attend talks",
+      "label": 0
+    },
+    {
+      "text1": "Renewable energy sources such as solar and wind do not emit greenhouse gases during operation and are key to reducing carbon emissions.",
+      "text2": "Solar and wind power generate electricity without emitting CO₂ during operation, making them essential tools in the transition to a low-carbon energy system.",
+      "label": 1
+    },
+    {
+      "text1": "Mob kills man for burning Quran",
+      "text2": "Pakistani Mob Kills Man 'for Burning Koran'",
+      "label": 1
+    },
+    {
+      "text1": "What time does Billy Joel go on (2015 tour)?",
+      "text2": "When is Bruce Springsteen next going on tour in the U.S.?",
       "label": 0
     }
   ]

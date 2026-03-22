@@ -173,18 +173,18 @@ def _load_halueval(max_n: int, rng: random.Random) -> list[dict]:
         except Exception:
             continue
     if ds is None:
-        print("  [HaluEval] WARNING: dataset not found on HuggingFace — skipping.")
+        print("  [HaluEval] WARNING: dataset not found on HuggingFace -- skipping.")
         return []
 
     pairs = []
     for r in ds:
+        # pminervini/HaluEval: knowledge + answer + hallucination ('yes'/'no')
         knowledge = str(r.get("knowledge", "")).strip()
-        right = str(r.get("right_answer", "")).strip()
-        hallucinated = str(r.get("hallucinated_answer", "")).strip()
-        if knowledge and right:
-            pairs.append({"text1": knowledge, "text2": right, "label": 1})
-        if knowledge and hallucinated:
-            pairs.append({"text1": knowledge, "text2": hallucinated, "label": 0})
+        answer = str(r.get("answer", "")).strip()
+        hallucination = str(r.get("hallucination", "")).strip().lower()
+        if knowledge and answer and hallucination in ("yes", "no"):
+            pairs.append({"text1": knowledge, "text2": answer,
+                          "label": 0 if hallucination == "yes" else 1})
 
     pairs = _filter(pairs)
     sampled = _balanced_sample(pairs, max_n, rng)
@@ -273,11 +273,11 @@ def main() -> None:
         _save_cache(cache, pairs)
         return pairs
 
-    print("\n── General datasets ────────────────────────────────────────────────")
+    print("\n-- General datasets ----------------------------------------------------")
     stsb = _get("stsb", _load_stsb)
     mnli = _get("mnli", _load_mnli)
 
-    print("\n── Mode-specific datasets ──────────────────────────────────────────")
+    print("\n-- Mode-specific datasets ----------------------------------------------")
     qqp      = _get("qqp",      _load_qqp)
     qnli     = _get("qnli",     _load_qnli)
     halueval = _get("halueval", _load_halueval)
@@ -299,7 +299,7 @@ def main() -> None:
 
     # ── Merge & save ─────────────────────────────────────────────────────────
 
-    print("\n── General splits ──────────────────────────────────────────────────")
+    print("\n-- General splits ------------------------------------------------------")
     general_all = handcrafted + general_external
     print(f"  Total: {len(general_all)} pairs  "
           f"(hand-crafted={len(handcrafted)}, external={len(general_external)})")
@@ -307,13 +307,13 @@ def main() -> None:
 
     for mode in ("model-vs-model", "reference-vs-generated", "context-vs-generated"):
         mode_all = handcrafted + general_external + mode_handcrafted[mode] + mode_external[mode]
-        print(f"\n── {mode} splits {'─' * max(1, 52 - len(mode))}")
+        print(f"\n-- {mode} splits {'-' * max(1, 52 - len(mode))}")
         print(f"  Total: {len(mode_all)} pairs  "
               f"(hand-crafted={len(handcrafted) + len(mode_handcrafted[mode])}, "
               f"external={len(general_external) + len(mode_external[mode])})")
         _split_and_save(mode_all, DATA_DIR / mode, random.Random(args.seed))
 
-    print("\n✓ Done. Retrain with:  python -m backend.train --mode <mode>")
+    print("\nDone. Retrain with:  python -m backend.train --mode <mode>")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,2004 @@
+{
+  "data": [
+    {
+      "text1": "What is respiratory depression? What are some symptoms you need to watch out for?",
+      "text2": "What is respiratory depression?",
+      "label": 1
+    },
+    {
+      "text1": "How can I be a better person and improve my questions on Quora?",
+      "text2": "What are the 3 best things you would recommend to improve your questions on Quora?",
+      "label": 1
+    },
+    {
+      "text1": "What is/was your favourite subject at school and why?",
+      "text2": "What was the reason your favourite subject in school was your favourite subject?",
+      "label": 1
+    },
+    {
+      "text1": "Is there risk of phishing if I clicked on a web link on an answer on Quora?",
+      "text2": "Is there risk of phishing if I click on a link on an answer in Quora?",
+      "label": 1
+    },
+    {
+      "text1": "I don't know anything about credit cards. How can I use a credit card?",
+      "text2": "Everything I need to know about credit card and how to use it?",
+      "label": 1
+    },
+    {
+      "text1": "How do I gain access to a private Instagram account?",
+      "text2": "How do I gain access to a person's instagram photos, if their account is private?",
+      "label": 1
+    },
+    {
+      "text1": "How will the ban of old 500 and 1000 rs notes help in bringing out the black money?",
+      "text2": "How will scraping of 500 and 1000 rupees notes help in curbing corruption and black money?",
+      "label": 1
+    },
+    {
+      "text1": "How can I make money online for job?",
+      "text2": "How can I earn money online easily?",
+      "label": 1
+    },
+    {
+      "text1": "Is Magical Girl anime genre underrated in America?",
+      "text2": "Why us Magical Girl anime genre underrated in America?",
+      "label": 1
+    },
+    {
+      "text1": "How can I improve my decision making skills?",
+      "text2": "I am very poor in taking decisions in my life and my past experience proved it. How can I improve my decision making skills?",
+      "label": 1
+    },
+    {
+      "text1": "How can you learn fast?",
+      "text2": "How can l learn faster?",
+      "label": 1
+    },
+    {
+      "text1": "Have you ever seen ghost?",
+      "text2": "Have you ever seen a ghost/spirit while totally awake?",
+      "label": 1
+    },
+    {
+      "text1": "What do non-Indians think about PM ND Modi?",
+      "text2": "What do people of other countries think of Narendra Modi?",
+      "label": 1
+    },
+    {
+      "text1": "What are the objective of commercial banking?",
+      "text2": "What are the objectives of commercial banks?",
+      "label": 1
+    },
+    {
+      "text1": "Do Quora questions marked as needing improvement still reach the entire Quora user community?",
+      "text2": "How do I talk to the moderators who marked my questions as needing improvements in Quora?",
+      "label": 1
+    },
+    {
+      "text1": "What are blue reflectors?",
+      "text2": "What are blue road reflectors?",
+      "label": 1
+    },
+    {
+      "text1": "Where can I get affordable shared office space in Indiranagar, Bangalore?",
+      "text2": "Where is the best shared office space in Bangalore Indiranagar?",
+      "label": 1
+    },
+    {
+      "text1": "Is education really important in making money?",
+      "text2": "Is education really important to make money?",
+      "label": 1
+    },
+    {
+      "text1": "How do I be an actor?",
+      "text2": "How do I became an actor?",
+      "label": 1
+    },
+    {
+      "text1": "How do I start playing guitar?",
+      "text2": "How can I get Start With playing guitar?",
+      "label": 1
+    },
+    {
+      "text1": "Would the US really support Taiwan if China invaded?",
+      "text2": "Will the U.S. back Taiwan if China invades?",
+      "label": 1
+    },
+    {
+      "text1": "Can we time travel anyhow?",
+      "text2": "Is backward time travel possible?",
+      "label": 1
+    },
+    {
+      "text1": "Why is helium placed in the p-block?",
+      "text2": "Why is helium a p-block element?",
+      "label": 1
+    },
+    {
+      "text1": "What is your normal morning routine?",
+      "text2": "What are your daily morning routines?",
+      "label": 1
+    },
+    {
+      "text1": "What's the quickest and most painless way to commit suicide?",
+      "text2": "What is best way to commit suicide painlessly?",
+      "label": 1
+    },
+    {
+      "text1": "What is the algorithm used for random number generation?",
+      "text2": "What's the algorithm with which random numbers are generated?",
+      "label": 1
+    },
+    {
+      "text1": "What are some things that impress people, but are easy to learn?",
+      "text2": "What is something that looks impressive but is easy to learn?",
+      "label": 1
+    },
+    {
+      "text1": "I know nothing about programming. What is the best way and the best language to start learning how to program?",
+      "text2": "What is best way to start learning programming?",
+      "label": 1
+    },
+    {
+      "text1": "How many times can one have sex in a week?",
+      "text2": "How many times a week should one have sex?",
+      "label": 1
+    },
+    {
+      "text1": "Why don't we have Presidential debate in India like America for PM candidates?",
+      "text2": "Why don't India go for Prime Ministerial debate on the basis of US presidential debate?",
+      "label": 1
+    },
+    {
+      "text1": "What makes a Labrador/Pug mix such a loyal companion?",
+      "text2": "What makes a German Shepherd/Great Pyrenees mix such a loyal companion?",
+      "label": 1
+    },
+    {
+      "text1": "How can I see who my boyfriend views on instagram?",
+      "text2": "Can you really see who viewed your pics or profile on instagram?",
+      "label": 1
+    },
+    {
+      "text1": "Which is the best laptop to buy under 40000 INR?",
+      "text2": "Which are the best laptops under 40000?",
+      "label": 1
+    },
+    {
+      "text1": "I am a commerce graduate, can we prepare for CDSE and AFCAT simultaneously?",
+      "text2": "I am a commerce graduate, can we prepare simultaneously for CDSE and AFCAT exam?",
+      "label": 1
+    },
+    {
+      "text1": "Is it true that cancer is not a disease but business?",
+      "text2": "Is it true that cancer is not a disease its a business?",
+      "label": 1
+    },
+    {
+      "text1": "Why should one be married? Is that really necessary?",
+      "text2": "Is getting married really necessary?",
+      "label": 1
+    },
+    {
+      "text1": "Has Jawaharlal Nehru done enough to celebrate his birthday as children's day?",
+      "text2": "Why we celebrate Nehru's birthday as children's day?",
+      "label": 1
+    },
+    {
+      "text1": "What are some good open source projects for undergraduate beginners?",
+      "text2": "What's a good open source project on GitHub for beginners to contribute to?",
+      "label": 1
+    },
+    {
+      "text1": "How much does it take to start a business?",
+      "text2": "How much money do you need to start a business?",
+      "label": 1
+    },
+    {
+      "text1": "What would ISPs block if we didnt have net neutrality?",
+      "text2": "What would happen if ISPs blocked something like Facebook or Google in the absence of net neutrality?",
+      "label": 1
+    },
+    {
+      "text1": "What would you do as the President of the United States if you were somehow elected?",
+      "text2": "What will you do if you were elected as the President of United States?",
+      "label": 1
+    },
+    {
+      "text1": "How can I access Google services from China?",
+      "text2": "How do you access Google when you are in China?",
+      "label": 1
+    },
+    {
+      "text1": "How I develop thinking ability?",
+      "text2": "How can one develop thinking skills?",
+      "label": 1
+    },
+    {
+      "text1": "Should the Indian education system be revamped?",
+      "text2": "Should the Indian education system be changed?",
+      "label": 1
+    },
+    {
+      "text1": "How do you remove pilling from a sweater?",
+      "text2": "How do you remove fuzz from a sweater?",
+      "label": 1
+    },
+    {
+      "text1": "How can I help or encourage my mother to lose weight?",
+      "text2": "How do I help my mom lose weight?",
+      "label": 1
+    },
+    {
+      "text1": "How do I crack JEE Advanced 2017 without coaching?",
+      "text2": "Is it possible to crack JEE advanced without coaching?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best compliment you have ever received?",
+      "text2": "What's the best compliment you've got?",
+      "label": 1
+    },
+    {
+      "text1": "How can one becomes an investment banker?",
+      "text2": "What is the best way to be an investment banker?",
+      "label": 1
+    },
+    {
+      "text1": "Is it true that sleeping with your phone under your pillow gives you radiation and can cause brain tumor?",
+      "text2": "Can sleeping with phone under pillow cause brain tumor?",
+      "label": 1
+    },
+    {
+      "text1": "What are the best TV series all around the world in 2014?",
+      "text2": "What were the best TV series of 2014?",
+      "label": 1
+    },
+    {
+      "text1": "How is Donald Trump viewed in Japan?",
+      "text2": "Is Donald Trump popular in Japan?",
+      "label": 1
+    },
+    {
+      "text1": "How can someone measure IQ?",
+      "text2": "What is the most accurate way to measure IQ?",
+      "label": 1
+    },
+    {
+      "text1": "How do I delete my question from Quora?",
+      "text2": "Can I delete all the questions I asked on Quora?",
+      "label": 1
+    },
+    {
+      "text1": "Where can I get best quality fire sprinkler system in Sydney?",
+      "text2": "Where can I found best quality commercial and residential fire sprinkler systems in Sydney?",
+      "label": 1
+    },
+    {
+      "text1": "How often can I put coconut oil on my hair?",
+      "text2": "Should I apply coconut oil to my hair daily?",
+      "label": 1
+    },
+    {
+      "text1": "Do you think Global warming will end the world?",
+      "text2": "Do you think the end is near? Global Warming!",
+      "label": 1
+    },
+    {
+      "text1": "How do I prepare for MBBS first year?",
+      "text2": "What are some study plans for the MBBS 1st year?",
+      "label": 1
+    },
+    {
+      "text1": "Are there any benefits of sleeping nude?",
+      "text2": "What are the benefit of sleeping naked?",
+      "label": 1
+    },
+    {
+      "text1": "What is the Fibonacci sequence?",
+      "text2": "What is Fibonacci sequence?",
+      "label": 1
+    },
+    {
+      "text1": "The tone of my face is a lot darker than the rest of the body. How could I improve it?",
+      "text2": "My face and neck are getting really darker then the rest of my body. How can I get it back to its original colour?",
+      "label": 1
+    },
+    {
+      "text1": "What is the colour of jealousy?",
+      "text2": "What is the color of jealousy?",
+      "label": 1
+    },
+    {
+      "text1": "What's the creepiest thing you have heard a child say?",
+      "text2": "What's the creepiest thing that a child has ever said to you?",
+      "label": 1
+    },
+    {
+      "text1": "What good did the Hindi language do to the country India?",
+      "text2": "What good did Hindi do to India?",
+      "label": 1
+    },
+    {
+      "text1": "How does one become a video game designer or developer?",
+      "text2": "What should we do to become a game designer?",
+      "label": 1
+    },
+    {
+      "text1": "How can you rapidly lose weight in 14days?",
+      "text2": "How can I lose weight quickly?",
+      "label": 1
+    },
+    {
+      "text1": "How can I make 20 dollars an hour online?",
+      "text2": "How can I make 20$ an hour online?",
+      "label": 1
+    },
+    {
+      "text1": "What is the weirdest question you have come across on Quora?",
+      "text2": "What are some of the weirdest questions asked in Quora?",
+      "label": 1
+    },
+    {
+      "text1": "Why was Myanmar separated from India?",
+      "text2": "Why did Myanmar separate from India in 1937?",
+      "label": 1
+    },
+    {
+      "text1": "Who will win the US election?",
+      "text2": "Who do you think is going to win the 2016 presidential election?",
+      "label": 1
+    },
+    {
+      "text1": "What are the best universities for doing MS in Structural Engineering?",
+      "text2": "What is the best college for structural engineering?",
+      "label": 1
+    },
+    {
+      "text1": "How did the Renaissance change Europe?",
+      "text2": "How did the Renaissance change the European culture & society?",
+      "label": 1
+    },
+    {
+      "text1": "What do you think about first head transplant surgery?",
+      "text2": "What do you think of the baffling consequences of human head transplant?",
+      "label": 1
+    },
+    {
+      "text1": "Find the equation of a circle which touches the coordinate axes and whose centre lies on a line x-2y=3 ?",
+      "text2": "Find the equation of a circle which touches the coordinate axes and whose centre lies on the line x-2y=3?",
+      "label": 1
+    },
+    {
+      "text1": "Why does my urine smells like garlic?",
+      "text2": "Why does my urine smell like garlic?",
+      "label": 1
+    },
+    {
+      "text1": "Are there any other websites like Quora?",
+      "text2": "Are there any alternative question and answer websites to Quora?",
+      "label": 1
+    },
+    {
+      "text1": "What's the decision that changed your whole life?",
+      "text2": "Which incident has changed your life?",
+      "label": 1
+    },
+    {
+      "text1": "What should I do to enjoy my life?",
+      "text2": "How do I enjoy the life?",
+      "label": 1
+    },
+    {
+      "text1": "Camping: Where can I buy a luxury tent?",
+      "text2": "Where can I buy luxury tents?",
+      "label": 1
+    },
+    {
+      "text1": "Can Russia with China defeat the USA?",
+      "text2": "Could the US defeat Russia and China in the 3rd war?",
+      "label": 1
+    },
+    {
+      "text1": "What kind of person would you need to be to do a PhD?",
+      "text2": "What kind of person should go for a PhD at a graduate school?",
+      "label": 1
+    },
+    {
+      "text1": "What does Postmates do? Who should use this service?",
+      "text2": "What does Postmates exactly do?",
+      "label": 1
+    },
+    {
+      "text1": "Has China officially banned Islam?",
+      "text2": "Why did China ban Islam?",
+      "label": 1
+    },
+    {
+      "text1": "How can I become a Top Question Writer on Quora?",
+      "text2": "What are the prerequisites to becoming a Top Question Writer in the Quora community?",
+      "label": 1
+    },
+    {
+      "text1": "How do I speak English fluently?",
+      "text2": "How do I speak English properly and confidently?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best gre book?",
+      "text2": "What is the best book for GRE exam?",
+      "label": 1
+    },
+    {
+      "text1": "Can anyone solve this trigonometry problem?",
+      "text2": "How can I solve this trigonometry problem?",
+      "label": 1
+    },
+    {
+      "text1": "Why do antibiotics cause acne?",
+      "text2": "How could antibiotics cause acne?",
+      "label": 1
+    },
+    {
+      "text1": "Can I start my business with no money?",
+      "text2": "How do I start business, if I have no money?",
+      "label": 1
+    },
+    {
+      "text1": "What are some animals that live in the desert?",
+      "text2": "What are examples of animals that live in the desert?",
+      "label": 1
+    },
+    {
+      "text1": "How do I Recondition batteries for a while?",
+      "text2": "How do you recondition a battery?",
+      "label": 1
+    },
+    {
+      "text1": "What are some of the funniest jokes you've ever heard?",
+      "text2": "What is the best hilarious joke you have ever heard?",
+      "label": 1
+    },
+    {
+      "text1": "How can you relate science to philosophy?",
+      "text2": "How does philosophy relate to science?",
+      "label": 1
+    },
+    {
+      "text1": "What are best business plan to invest?",
+      "text2": "What are the best new business idea in india with less investment?",
+      "label": 1
+    },
+    {
+      "text1": "What are the opinions of people around the world on California's affirmative laws for sex?",
+      "text2": "What do people think about California's new affirmative consent law?",
+      "label": 1
+    },
+    {
+      "text1": "How much depth can radio waves penetrate in a wrinkled aluminium foil ball?",
+      "text2": "How much depth will radio waves penetrate in a wrinkled aluminium foil ball?",
+      "label": 1
+    },
+    {
+      "text1": "Who won the second debate?",
+      "text2": "What are your thoghts on the second presidential debate?",
+      "label": 1
+    },
+    {
+      "text1": "How does the HP OfficeJet 4620 Airprint compare to the HP DesignJet Z3200 24-in PostScript Photo Printer?",
+      "text2": "How does the HP OfficeJet 4620 Airprint compare to the HP Color LaserJet Enterprise M553x?",
+      "label": 1
+    },
+    {
+      "text1": "Which women have iinie outie belly button?",
+      "text2": "Which actresses have innie belly button?",
+      "label": 1
+    },
+    {
+      "text1": "Is creating satelite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
+      "text2": "Is creating satellite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
+      "label": 1
+    },
+    {
+      "text1": "Which company offers better job location comparing IOCL and HPCL for an officer?",
+      "text2": "Which company is better to work for: HPCL or IOCL?",
+      "label": 1
+    },
+    {
+      "text1": "Who is your favorite male singer?",
+      "text2": "Who are your favorite male singers?",
+      "label": 1
+    },
+    {
+      "text1": "What is the meaning of cc in engine?",
+      "text2": "What does CC of an engine indicate?",
+      "label": 1
+    },
+    {
+      "text1": "Should I remove my wisdom teeth?",
+      "text2": "Should I have my wisdom tooth removed?",
+      "label": 1
+    },
+    {
+      "text1": "What are your favorite documentaries?",
+      "text2": "What are your favorite documentaries of all time?",
+      "label": 1
+    },
+    {
+      "text1": "How would I benefit from studying a computer science degree?",
+      "text2": "What are the benefits of studying Computer Science?",
+      "label": 1
+    },
+    {
+      "text1": "What's the best music or sound to fall asleep to?",
+      "text2": "What's the best sound that helps you fall asleep?",
+      "label": 1
+    },
+    {
+      "text1": "How can one become emotionally and mentally strong in life?",
+      "text2": "What is a way to become mentally stable and strong?",
+      "label": 1
+    },
+    {
+      "text1": "Which movies or TV shows would you recommend on Netflix?",
+      "text2": "What are the best three movies you have seen on Netflix?",
+      "label": 1
+    },
+    {
+      "text1": "When does it make sense to purchase travel insurance?",
+      "text2": "What are some situations where it definitely makes sense to buy travel insurance?",
+      "label": 1
+    },
+    {
+      "text1": "Do most people think that they're attractive?",
+      "text2": "Do most unattractive people think that they are attractive? If so, why do they overestimate their attractiveness?",
+      "label": 1
+    },
+    {
+      "text1": "Which is the best smartphone 2016?",
+      "text2": "Which best smartphone in world?",
+      "label": 1
+    },
+    {
+      "text1": "Is there any way to recover e-mails that were deleted from a Gmail account?",
+      "text2": "How can I recover my old mail from a Gmail account?",
+      "label": 1
+    },
+    {
+      "text1": "What are the areas that can be improved in any organization?",
+      "text2": "What are the areas that can be improved in any organizations?",
+      "label": 1
+    },
+    {
+      "text1": "What is the world's highest battlefield by altitude?",
+      "text2": "Which is the highest battlefield in world?",
+      "label": 1
+    },
+    {
+      "text1": "When and how are covalent bonds formed?",
+      "text2": "When are covalent bonds formed?",
+      "label": 1
+    },
+    {
+      "text1": "What are some tips for starting a small restaurant?",
+      "text2": "How do I start a small restaurant?",
+      "label": 1
+    },
+    {
+      "text1": "What are the ideal growth stocks to invest in right now?",
+      "text2": "What are the best stocks to invest in right now?",
+      "label": 1
+    },
+    {
+      "text1": "How could I start my business?",
+      "text2": "How do I start business from nothing?",
+      "label": 1
+    },
+    {
+      "text1": "What year did the Civil war begin?",
+      "text2": "When did the Civil War begin?",
+      "label": 1
+    },
+    {
+      "text1": "What's the difference between an official language and a national language?",
+      "text2": "What is the difference between official language and national language?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best poem you have written or read?",
+      "text2": "What is the best poem you have ever written?",
+      "label": 1
+    },
+    {
+      "text1": "What are coherent sources?",
+      "text2": "What is coherent source?",
+      "label": 1
+    },
+    {
+      "text1": "Is time travel to 2010 possible?",
+      "text2": "Is time travel possible? If yes? How?",
+      "label": 1
+    },
+    {
+      "text1": "Was Hitler good or bad?",
+      "text2": "Was Hitler a bad person?",
+      "label": 1
+    },
+    {
+      "text1": "What do you think is the best solution for the Kashmir issue?",
+      "text2": "What is the possible solution for Kashmir issue?",
+      "label": 1
+    },
+    {
+      "text1": "What is the scope of Human Resources Management in Australia?",
+      "text2": "What is the scope of Human resource management in Australia?",
+      "label": 1
+    },
+    {
+      "text1": "How was the KVPY 2016 SA paper? What is the expected cutoff?",
+      "text2": "How was KVPY SA 2016?",
+      "label": 1
+    },
+    {
+      "text1": "What is a Sequence in SQL?",
+      "text2": "What is the Sequence in sql cursor?",
+      "label": 1
+    },
+    {
+      "text1": "Can I crack IIT JEE 2017 if I am starting now?",
+      "text2": "Can I crack IIT JEE 2017 if I start now?",
+      "label": 1
+    },
+    {
+      "text1": "Why is scientific notation useful?",
+      "text2": "What are the practical uses of scientific notation? Why is scientific notation so important in modern-day society?",
+      "label": 1
+    },
+    {
+      "text1": "Should I trust Apple or Google with my information?",
+      "text2": "Can I trust Apple or Google with my data?",
+      "label": 1
+    },
+    {
+      "text1": "How did you get into Cambridge University?",
+      "text2": "How do I get into the Uniersity of Cambridge ?",
+      "label": 1
+    },
+    {
+      "text1": "How do you know when you start to fall in love with someone?",
+      "text2": "How can you know if you're in love or just attracted to someone?",
+      "label": 1
+    },
+    {
+      "text1": "Which is the weirdest name that you ever heard?",
+      "text2": "What are some of the weirdest names you ever heard of?",
+      "label": 1
+    },
+    {
+      "text1": "What do you guys think of all the predictions made by Baba Vanga?",
+      "text2": "What do you think about Baba Vanga's predictions?",
+      "label": 1
+    },
+    {
+      "text1": "How does CouponDunia actually work?",
+      "text2": "How does coupondunia.in work?",
+      "label": 1
+    },
+    {
+      "text1": "What is it like to work for the BBC?",
+      "text2": "What is it like to work for BBC?",
+      "label": 1
+    },
+    {
+      "text1": "How does sex feel like for the first time?",
+      "text2": "How did you feel first time sex as a virgin?",
+      "label": 1
+    },
+    {
+      "text1": "Why are so many people convinced that global warming is a man made phenomenon?",
+      "text2": "Why do so many people blindly accept the global warming hypothesis without making any unbiased research?",
+      "label": 1
+    },
+    {
+      "text1": "What are the best C++ books?",
+      "text2": "What are the best books for c++?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best gift you ever received?",
+      "text2": "What is the best tangible gift you've ever received?",
+      "label": 1
+    },
+    {
+      "text1": "Do animals talk to each other?",
+      "text2": "Can different kinds of animals communicate with each other?",
+      "label": 1
+    },
+    {
+      "text1": "How should I start learning Python?",
+      "text2": "How do I start learning python web programming from scratch to advanced?",
+      "label": 1
+    },
+    {
+      "text1": "When did you have your first orgasm?",
+      "text2": "When did you first have an orgasm?",
+      "label": 1
+    },
+    {
+      "text1": "\"What is need of introducing 2000 /- in India \"\"we hard get the change of 1000/-\"\"?\"",
+      "text2": "What is the rationale behind introducing 2000 rupee note by India Government?",
+      "label": 1
+    },
+    {
+      "text1": "Why doesn't ISIS have terrorist attacks in Israel?",
+      "text2": "Why does not isis attack Israel? Whatare the stakes of israel in ISIS?",
+      "label": 1
+    },
+    {
+      "text1": "How does Vaseline help heal cuts?",
+      "text2": "Does Vaseline help heal cuts more quickly?",
+      "label": 1
+    },
+    {
+      "text1": "How can you make yourself shorter?",
+      "text2": "Is there a way to make yourself shorter?",
+      "label": 1
+    },
+    {
+      "text1": "What are some of the rarely mentioned facts of the Roman empire?",
+      "text2": "What are some rarely known facts of the roman empire?",
+      "label": 1
+    },
+    {
+      "text1": "What product should I use for my hair?",
+      "text2": "What products should be applied on hair?",
+      "label": 1
+    },
+    {
+      "text1": "How do I quit smoking?",
+      "text2": "How did you quit/stop smoking?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best way to suicide?",
+      "text2": "What is the easiest way to commite suicide?",
+      "label": 1
+    },
+    {
+      "text1": "Is there any life form outside earth?",
+      "text2": "Is there life beyond earth?",
+      "label": 1
+    },
+    {
+      "text1": "How can I recover my hacked Instagram account having 6k+ followers?",
+      "text2": "How do I recover hacked Instagram account?",
+      "label": 1
+    },
+    {
+      "text1": "How does Prof. Brijesh Kumar feel when a student bunks his class?",
+      "text2": "How do Brijesh Kumar feel when students bunk his class?",
+      "label": 1
+    },
+    {
+      "text1": "What is the most crucial lessons life has taught you?",
+      "text2": "What has your life taught you so far?",
+      "label": 1
+    },
+    {
+      "text1": "How do I make butter chicken?",
+      "text2": "How do I cook butter chicken?",
+      "label": 1
+    },
+    {
+      "text1": "Can a person be in love with two persons at a same time?",
+      "text2": "Is it possible to love more than one person at the same time?",
+      "label": 1
+    },
+    {
+      "text1": "If alien civilizations are thought to be much more advanced than us, why haven't they made contact with us yet?",
+      "text2": "If there are super intelligent alien beings somewhere in the Galaxy why haven't they tried to contact us yet?",
+      "label": 1
+    },
+    {
+      "text1": "Who all are the seven kingdoms?",
+      "text2": "What are the seven kingdoms? Who rules them? Is there a chance that they will be reunited at the end of the book/series?",
+      "label": 1
+    },
+    {
+      "text1": "What are the good places to visit in Europe in November?",
+      "text2": "Which countries are the best to visit in Europe in November?",
+      "label": 1
+    },
+    {
+      "text1": "How do I get my own personal email?",
+      "text2": "How do I get my own personal email Address?",
+      "label": 1
+    },
+    {
+      "text1": "What is your favourite magic trick?",
+      "text2": "What are your favourite magic tricks and why?",
+      "label": 1
+    },
+    {
+      "text1": "What if Quora were a country?",
+      "text2": "If Quora were a country, what would it be like?",
+      "label": 1
+    },
+    {
+      "text1": "What are the strange phobias people have?",
+      "text2": "What are the different kinds of phobia that people have?",
+      "label": 1
+    },
+    {
+      "text1": "Have you ever come across a jealous co-worker? If so, how did you handle him/her?",
+      "text2": "How do I handle co-workers who are jealous of me?",
+      "label": 1
+    },
+    {
+      "text1": "Why does Ernest W. Adams always disable comments?",
+      "text2": "Why does Ernest W. Adams disable comments in his answers?",
+      "label": 1
+    },
+    {
+      "text1": "What is nuclear fusion? How can you describe the process?",
+      "text2": "What is nuclear fusion?",
+      "label": 1
+    },
+    {
+      "text1": "Is the UK better than the USA?",
+      "text2": "Why is the USA better than the UK?",
+      "label": 1
+    },
+    {
+      "text1": "What are the employment prospects for an electrical engineer in Silicon Valley?",
+      "text2": "Is there any jobs in Silicon Valley for electrical engineers?",
+      "label": 1
+    },
+    {
+      "text1": "Why is Hillary Clinton losing polls again?",
+      "text2": "Will Hillary Clinton lose?",
+      "label": 1
+    },
+    {
+      "text1": "Why is Saltwater taffy candy imported in the Philippines?",
+      "text2": "Why is Saltwater taffy candy imported in Mongolia?",
+      "label": 1
+    },
+    {
+      "text1": "What are some really good PTO softwares that integrate with Harvest?",
+      "text2": "What are some good PTO softwares that integrate with Harvest?",
+      "label": 1
+    },
+    {
+      "text1": "Is it better to sleep with or without a pillow?",
+      "text2": "Is sleeping on a pillow better than sleeping without a pillow?",
+      "label": 1
+    },
+    {
+      "text1": "Does DNA change during the life?",
+      "text2": "Does a person's DNA SEQUENCE change through the course of their life?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best way to meet new people?",
+      "text2": "What are some of the best ways to meet new people?",
+      "label": 1
+    },
+    {
+      "text1": "What is religion? Why do so many people choose to believe it when there is always a conflict between science and religion?",
+      "text2": "Why do people believe in religion in this era of science and technology?",
+      "label": 1
+    },
+    {
+      "text1": "How can I boost my immune system?",
+      "text2": "What can a person do to strengthen their immune system?",
+      "label": 1
+    },
+    {
+      "text1": "What is the importance of a trial balance?",
+      "text2": "Why is a trial balance important?",
+      "label": 1
+    },
+    {
+      "text1": "How do I hack someone's Instagram account?",
+      "text2": "Is there a way to hack someone's Instagram?",
+      "label": 1
+    },
+    {
+      "text1": "What's the easiest way to make money online?",
+      "text2": "How could I make money online?",
+      "label": 1
+    },
+    {
+      "text1": "What is your favorite romantic comedy and why?",
+      "text2": "What are some good romantic comedy movies?",
+      "label": 1
+    },
+    {
+      "text1": "How do I book an airplane ticket online?",
+      "text2": "How do I book airline tickets through online?",
+      "label": 1
+    },
+    {
+      "text1": "What is the trick to maintaining long distance relationships?",
+      "text2": "How do I cope with a long distance relationship?",
+      "label": 1
+    },
+    {
+      "text1": "Can Hillary Clinton still become President of the United States?",
+      "text2": "Can Hillary Clinton still become president?",
+      "label": 1
+    },
+    {
+      "text1": "Why are Iranian people so religious?",
+      "text2": "Do you consider Iranian people as religious? What is your source?",
+      "label": 1
+    },
+    {
+      "text1": "Why do we need initramfs/initrd to boot a Linux system? Can't we store all device and FS drivers directly into the Kernel?",
+      "text2": "Why don't we store device and FS drivers directly into the Linux kernel instead of keeping them in the initramfs?",
+      "label": 1
+    },
+    {
+      "text1": "What are the best ways to improve my English because I'm not good in English?",
+      "text2": "How can I improve fluency in English?",
+      "label": 1
+    },
+    {
+      "text1": "How and where can I find fuck buddies in Delhi?",
+      "text2": "Where can I find fuck buddies in Delhi?",
+      "label": 1
+    },
+    {
+      "text1": "How can one develop logical thinking?",
+      "text2": "What is the best way to develop logical thinking?",
+      "label": 1
+    },
+    {
+      "text1": "How shall a girl who is 55 kg shall reduce weight up to 50 kg within 15 days?",
+      "text2": "How do I lose 5 kg weight within 7 days?",
+      "label": 1
+    },
+    {
+      "text1": "How can I recover my Gmail account when I don't remember the password or phone number I started it with?",
+      "text2": "How can I change my password to my gmail account when I cant rember the phone number or old password?",
+      "label": 1
+    },
+    {
+      "text1": "What's the best perfume for men?",
+      "text2": "Which is the best branded perfume for men?",
+      "label": 1
+    },
+    {
+      "text1": "What should I do if I have purple fingernails?",
+      "text2": "What does it mean when you have purple fingernails?",
+      "label": 1
+    },
+    {
+      "text1": "What is best movies to watch?",
+      "text2": "What is the best movies to watch?",
+      "label": 1
+    },
+    {
+      "text1": "How do I never be jealous?",
+      "text2": "How do I not be jealous?",
+      "label": 1
+    },
+    {
+      "text1": "What is the theory of how evolution occurs?",
+      "text2": "If evolution is an observable fact, then what is the theory of evolution? How do I differentiate between the two?",
+      "label": 1
+    },
+    {
+      "text1": "How should I prepare for a TCS interview?",
+      "text2": "How should I prepare for TCS interview?",
+      "label": 1
+    },
+    {
+      "text1": "I want to participate in the next Google Summer of Code (GSoC). Where should I start from and what should I do?",
+      "text2": "I want to get into Google summer code 2017.How do I prepare?",
+      "label": 1
+    },
+    {
+      "text1": "What is the best place to learn French in Tokyo?",
+      "text2": "Is there any place I can learn French in Kuala Lumpur?",
+      "label": 0
+    },
+    {
+      "text1": "Should you follow your CEO on Twitter?",
+      "text2": "Where can I get real active Instagram followers?",
+      "label": 0
+    },
+    {
+      "text1": "What do you think about Donald Trump and Hillary Clinton?",
+      "text2": "\"Do you think Hillary Clinton and Donald Trump could ever be \"\"together\"\"?\"",
+      "label": 0
+    },
+    {
+      "text1": "Can a software engineer with 7+ yrs of experience switch to mgmt consulting (at McK, BCG or Strategy&) after doing an MBA at schools like ISB or IIMs?",
+      "text2": "I have 7.5 yrs. of unsuccessful work experience as a mech. engineer in a mfg. industry. Is it wothy to leave the field and do MBA through GMAT?",
+      "label": 0
+    },
+    {
+      "text1": "How many people convert to Islam every year?",
+      "text2": "How many people go partying in the US/worldwide every year?",
+      "label": 0
+    },
+    {
+      "text1": "Should I stay friends with her ?",
+      "text2": "Is it a good idea to remain friends with ex-girlfriends or boyfriends?",
+      "label": 0
+    },
+    {
+      "text1": "What do you think about Edward Snowden?",
+      "text2": "Who is Edward Snowden?",
+      "label": 0
+    },
+    {
+      "text1": "If you can't feel someone's emotions does that mean you can't empathize?",
+      "text2": "Does it mean that you are tired or ill if you can't get your energy back in minutes?",
+      "label": 0
+    },
+    {
+      "text1": "Should I Leave my new job?",
+      "text2": "How do you know when it's time to leave your current company and move on?",
+      "label": 0
+    },
+    {
+      "text1": "How do you calculate the hash rate of a GPU?",
+      "text2": "How do I calculate the scrap rate of a product?",
+      "label": 0
+    },
+    {
+      "text1": "What is the EU model in Android smartphone? Is it possible to change an Android smartphone from non EU to EU model?",
+      "text2": "How can I get Airline Friends and Family Discounts, without having a friend or family in the airline industry?",
+      "label": 0
+    },
+    {
+      "text1": "How does a vagina feel?",
+      "text2": "What does a normal vulva look like?",
+      "label": 0
+    },
+    {
+      "text1": "What is a suitable inpatient drug and alcohol rehab center near Spalding County GA?",
+      "text2": "Which is a good inpatient drug and alcohol rehab center near Lamar County GA?",
+      "label": 0
+    },
+    {
+      "text1": "If God is omnipotent, can he cease to exist and then start existing again by his own will?",
+      "text2": "Can god make a rock so heavy that he couldn’t lift it?",
+      "label": 0
+    },
+    {
+      "text1": "If AI becomes more intelligent than man, doesn't that probabilistically mean that there must be creatures way more intelligent than AI? God?",
+      "text2": "Anyone ever falsify what you did at a previous job, to get hired at a new one?",
+      "label": 0
+    },
+    {
+      "text1": "Did anyone use Fabao 101 to regrow hair?",
+      "text2": "Does hair regrow after the age of 18?",
+      "label": 0
+    },
+    {
+      "text1": "What is the latest research topic in cloud computing security?",
+      "text2": "What are the latest research topics on cloud computing?",
+      "label": 0
+    },
+    {
+      "text1": "What were some of the early key insights that have led to BirchBox's success?",
+      "text2": "What are the best PG courses for BCA (bachelor of computer applications) apart from MCA and I did intermediate in Commerce (Civics, economics, Commerce)?",
+      "label": 0
+    },
+    {
+      "text1": "Is it possible to skip a grade in Italian high schools?",
+      "text2": "School: Can I skip a grade?",
+      "label": 0
+    },
+    {
+      "text1": "What is/was the most promising blessing-in-disguise happening/experience in your life?",
+      "text2": "What is a very bad thing that happened in your life that turned out to be a blessing in disguise?",
+      "label": 0
+    },
+    {
+      "text1": "What is the worst answer on Quora?",
+      "text2": "Which question on Quora had the worst answer?",
+      "label": 0
+    },
+    {
+      "text1": "What is a Stanford professor's favorite quote or motto?",
+      "text2": "Are Stanford professors happy people?",
+      "label": 0
+    },
+    {
+      "text1": "If I send a message on Instagram and I hide it and not delete it, how can I know if the person opened it? Will it reappear in my box?",
+      "text2": "How do I get more followers on Instagram?",
+      "label": 0
+    },
+    {
+      "text1": "What are some things new employees should know going into their first day at Spirit Realty?",
+      "text2": "What are some things new employees should know going into their first day at Realty Income?",
+      "label": 0
+    },
+    {
+      "text1": "When will iOS 11 be released?",
+      "text2": "When was iOS 5 released?",
+      "label": 0
+    },
+    {
+      "text1": "How can you find scanned documents on your computer?",
+      "text2": "What is the best way to scan a document into a computer?",
+      "label": 0
+    },
+    {
+      "text1": "Who do you think is the most inspirational person of the week? Why do you think so?",
+      "text2": "What is the best moment of the epics Mahabharata or Ramayana that inspired or made you think twice of that situation?",
+      "label": 0
+    },
+    {
+      "text1": "\"What does \"\"email CV\"\" mean?\"",
+      "text2": "\"What is the meaning of \"\"CV\"\"?\"",
+      "label": 0
+    },
+    {
+      "text1": "What is the chemical structure of Lysine?",
+      "text2": "Can can you determine what is the isoelectric point of lysine?",
+      "label": 0
+    },
+    {
+      "text1": "Which US credit card charges no foreign transaction fees?",
+      "text2": "Do I need to pay any monthly charges to credit card if I don't make any transactions?",
+      "label": 0
+    },
+    {
+      "text1": "Can you be forgiven for blasphemy of the Holy Spirit?",
+      "text2": "Do God the Father, the Son, and the Holy Spirit live in separate bodies?",
+      "label": 0
+    },
+    {
+      "text1": "Can gay people serve in the Indian army or navy?",
+      "text2": "What is it like to have a father serving in the Indian Navy?",
+      "label": 0
+    },
+    {
+      "text1": "How is petrol stored at a petrol pump? How much petrol does a petrol pump store on an average?",
+      "text2": "How much money is needed to set a petrol pump?",
+      "label": 0
+    },
+    {
+      "text1": "How would you make eating something really philosophical?",
+      "text2": "How can Asian people eat rice three times a day?",
+      "label": 0
+    },
+    {
+      "text1": "Did you like Khal Drogo or not?",
+      "text2": "Why is Khal Drogo so awesome?",
+      "label": 0
+    },
+    {
+      "text1": "Which is the best line/phrase/para of Madhushala by Harivansh Rai Bachchan?",
+      "text2": "Urdu Poetry: What is the best two liner by Rahat Indori?",
+      "label": 0
+    },
+    {
+      "text1": "Does Netflix have Black Butler season 3?",
+      "text2": "Will there be a season 3 of Black Butler?",
+      "label": 0
+    },
+    {
+      "text1": "How do you convert HTML to JSP? What are some tips?",
+      "text2": "How can I change html pages to jsp?",
+      "label": 0
+    },
+    {
+      "text1": "If you had to choose one song from you phone's playlist, which one would you choose?",
+      "text2": "If you have to choose one Hindi instrumental song, what would you pick?",
+      "label": 0
+    },
+    {
+      "text1": "What is it like to be the AIIMS topper?",
+      "text2": "How can I be AIIMS topper?",
+      "label": 0
+    },
+    {
+      "text1": "I'm a UX designer who feels burned out after working in the tech industry for several years. What should I do?",
+      "text2": "Will I go to jail if I pay someone to hack a mobile phone?",
+      "label": 0
+    },
+    {
+      "text1": "Will the path shown by Mahdi Mirza Ghulam Ahmad (RA) end the Wahabi influence that has spawned terrorism by Muslims?",
+      "text2": "What are some examples that show that Quentin Tarantino has been largely influenced by the French cinema?",
+      "label": 0
+    },
+    {
+      "text1": "What can US$1 buy around the world?",
+      "text2": "Where can I buy Jordan 1 shoes?",
+      "label": 0
+    },
+    {
+      "text1": "\"During a job interview, if an interviewer/HR says \"\"good luck\"\" after finishing the interview, is that a bad sign with regard to getting an offer, or is that normal?\"",
+      "text2": "What are some tell-tale signs that you are failing in a job interview?",
+      "label": 0
+    },
+    {
+      "text1": "What is the best non-vegetarian hotel in Chennai?",
+      "text2": "Best places to eat in Chennai?",
+      "label": 0
+    },
+    {
+      "text1": "Why did the astronaut have two shadows on the moon?",
+      "text2": "What are the shadows seen on the moon?",
+      "label": 0
+    },
+    {
+      "text1": "What does it feel like to have a child addicted to video games?",
+      "text2": "What do you do if your child is addicted to video games?",
+      "label": 0
+    },
+    {
+      "text1": "What career advice would you give to someone who wants to become a fashion designer?",
+      "text2": "What career advice would you give to someone who wants to become a librarian?",
+      "label": 0
+    },
+    {
+      "text1": "What are some tips on making it through the job interview process at Penske Automotive Group?",
+      "text2": "What are some tips on making it through the job interview process at Group I Automotive?",
+      "label": 0
+    },
+    {
+      "text1": "How does jumping off a bridge into water kill you?",
+      "text2": "If you jump from a high bridge and shoot a grenade and it explodes on the surface of water just before you hit, will it break the surface tension so you don't take any damage?",
+      "label": 0
+    },
+    {
+      "text1": "How does Gmail spam detection work?",
+      "text2": "What do you do to spy on Hangouts on another phone?",
+      "label": 0
+    },
+    {
+      "text1": "\"A girl was going to college and a boy asked her name. The girl said: \"\"20 years 6 months\"\". What could the girl's name be?\"",
+      "text2": "What is the game I'm talking about that is a browser based 2 player strategy game where (I think it's a boy and a girl, 1 was purple) you solve puzzles?",
+      "label": 0
+    },
+    {
+      "text1": "Why do people with Asperger's/autism often like animals so much?",
+      "text2": "Is 'autism' an offensive word to describe Asperger's?",
+      "label": 0
+    },
+    {
+      "text1": "How do I prepare for programming interviews?",
+      "text2": "How do I prepare for a software engineering job interview?",
+      "label": 0
+    },
+    {
+      "text1": "If someone put a gun to your head and asked you to change your religion, then what would you do?",
+      "text2": "Would police let the criminal get away if he had a gun to someone's head?",
+      "label": 0
+    },
+    {
+      "text1": "What was the production of artwork intended for in Hawaii and how is it compared to the one intended for in Massachusetts?",
+      "text2": "What was the production of artwork intended for in Hawaii and how is it compared to the one intended for in Washington?",
+      "label": 0
+    },
+    {
+      "text1": "Where should I move my iTunes library?",
+      "text2": "How do I move my iTunes library to an external drive?",
+      "label": 0
+    },
+    {
+      "text1": "What happens if you are caught driving alone with just your permit?",
+      "text2": "What is a city permit for driving a cab?",
+      "label": 0
+    },
+    {
+      "text1": "Human Physiology: What concentration of salt water will induce vomiting?",
+      "text2": "Human Physiology: Which finger out of the five is most important?",
+      "label": 0
+    },
+    {
+      "text1": "What is Farmville 2?",
+      "text2": "What is Farmville good for?",
+      "label": 0
+    },
+    {
+      "text1": "What are the main differences between Messi and Cristiano Ronaldo?",
+      "text2": "What if Messi and Ronaldo played in the same team?",
+      "label": 0
+    },
+    {
+      "text1": "How much does it cost to register a trademark in the U.S.?",
+      "text2": "How much does it cost to trademark a name?",
+      "label": 0
+    },
+    {
+      "text1": "How do I find a cell phone number free of charge?",
+      "text2": "How can I find a recent cell phone number for free?",
+      "label": 0
+    },
+    {
+      "text1": "What should everyone know about Alibaba?",
+      "text2": "What are the best stories about Jeff Bezos?",
+      "label": 0
+    },
+    {
+      "text1": "Why is USA the biggest threat to the global economy and Germany is not?",
+      "text2": "What is the biggest threat to the global economy over the next year (in 2011)?",
+      "label": 0
+    },
+    {
+      "text1": "At a party, everyone shook hands with everybody else. There were 66 handshakes. How many people were at the party?",
+      "text2": "How many hairs do people have on their head?",
+      "label": 0
+    },
+    {
+      "text1": "Can I make a good body working out at home instead of going to gym?",
+      "text2": "What are good ways to work out in the gym as a woman?",
+      "label": 0
+    },
+    {
+      "text1": "Are taxes too high in the U.S.?",
+      "text2": "Are taxes globally too high?",
+      "label": 0
+    },
+    {
+      "text1": "What kind of a person is someone who does not give up on people easily, quickly?",
+      "text2": "What kind of a person is someone who gives up on people easily, quickly?",
+      "label": 0
+    },
+    {
+      "text1": "How can the structure of the villi in animals be described?",
+      "text2": "How can the structure of the villi in humans be described?",
+      "label": 0
+    },
+    {
+      "text1": "Why Indore is fashionable women?",
+      "text2": "What is the appeal of handbags?",
+      "label": 0
+    },
+    {
+      "text1": "What is the difference between core and processor?",
+      "text2": "What is the difference between core and logical processor?",
+      "label": 0
+    },
+    {
+      "text1": "What are some fun things to do?",
+      "text2": "What are some fun things to do in Mumbai?",
+      "label": 0
+    },
+    {
+      "text1": "How do you legally immigrate to America from Guatemala? How can I ease up this process?",
+      "text2": "How can I immigrate to the US?",
+      "label": 0
+    },
+    {
+      "text1": "I constantly feel tired after work. How do I get energized again for a productive evening?",
+      "text2": "Why do we feel tired after taking a hot shower?",
+      "label": 0
+    },
+    {
+      "text1": "What is student life like at University of Surrey?",
+      "text2": "What is life like as a doctoral student in Aalto University?",
+      "label": 0
+    },
+    {
+      "text1": "What is a routable IP address? How can I determine if I am using one?",
+      "text2": "How can one get a WiFi password using an IP address in an Android mobile?",
+      "label": 0
+    },
+    {
+      "text1": "I haven't had a girlfriend all my life. I'm pissed off and 25 now. I like one girl in my college, but I fear to confess this to her. What should I do?",
+      "text2": "I'm a very shy guy, aged 19. I've never had a girlfriend. There is this pretty girl in my class at college. I want to introduce myself to her, but I don't want to come off creepy. How do I approach her? After class? Before class?",
+      "label": 0
+    },
+    {
+      "text1": "What time does Billy Joel go on (2015 tour)?",
+      "text2": "When is Bruce Springsteen next going on tour in the U.S.?",
+      "label": 0
+    },
+    {
+      "text1": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) flute?",
+      "text2": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) Violin?",
+      "label": 0
+    },
+    {
+      "text1": "How do you live your life?",
+      "text2": "How should I live life to the maximum?",
+      "label": 0
+    },
+    {
+      "text1": "How can one make a moving and pick and place robot at home?",
+      "text2": "I am a 24 year old guy with no job and on the edge of breaking due to depression, I need a fresh start or a push toward the right road, any advices?",
+      "label": 0
+    },
+    {
+      "text1": "What's the best method to get meth out of your system?",
+      "text2": "How long does meth stay detectable in the body through testing?",
+      "label": 0
+    },
+    {
+      "text1": "With a salary of only Rs 12,000/month, how can one afford to live in Bengaluru?",
+      "text2": "With a salary of only Rs 22,000/month, how can one afford to live in Bengaluru?",
+      "label": 0
+    },
+    {
+      "text1": "What would a dream about a red snake mean?",
+      "text2": "What does it mean to have a dream of a snake (cobra) biting your tongue?",
+      "label": 0
+    },
+    {
+      "text1": "Who are the worst Doctors in KIMS Hospital Hyderabad?",
+      "text2": "What about sony experience?",
+      "label": 0
+    },
+    {
+      "text1": "How do kinetic and thermal energy relate?",
+      "text2": "How is thermal energy related to friction?",
+      "label": 0
+    },
+    {
+      "text1": "What is melting? What are some examples?",
+      "text2": "\"What does \"\"high melting point\"\" mean?\"",
+      "label": 0
+    },
+    {
+      "text1": "Are there any common trends among the administrations or policies of Harvard educated US Presidents?",
+      "text2": "Are there any common trends among the administrations or policies of Yale educated US Presidents?",
+      "label": 0
+    },
+    {
+      "text1": "What should I do if Amazon delivers a package to my door and then the package disappears (presumably because a passer-by might have taken it)?",
+      "text2": "Does Amazon lost my package?",
+      "label": 0
+    },
+    {
+      "text1": "How much to hire a butler in Canada?",
+      "text2": "What is the scope of PhD in data analytics in India?",
+      "label": 0
+    },
+    {
+      "text1": "What are the prerequisites for Allen Distance Learning Program?",
+      "text2": "What is the DLP (Distance Learning Program) started by ALLEN Coaching Institute?",
+      "label": 0
+    },
+    {
+      "text1": "What are the signs of a poorly-written scientific paper?",
+      "text2": "What are some examples of well-written CS papers?",
+      "label": 0
+    },
+    {
+      "text1": "What are the types of job in MNC/any IT Company.If you have done B.E (IT) and MBA (IT).?",
+      "text2": "Do muslims actually need to annoy other people during prayer calls?",
+      "label": 0
+    },
+    {
+      "text1": "My caste is NT-C. What branch will I get with 110 marks (MH CET 2016) in CoEP? . Can I change my branch in second year?",
+      "text2": "My MHT CET 2016 score is 174,which branches can I get at CoEP?",
+      "label": 0
+    },
+    {
+      "text1": "Can I get an IP a phone number?",
+      "text2": "How do I get the IP address for phone number?",
+      "label": 0
+    },
+    {
+      "text1": "If a Trump/Hitler type of politician emerged in Mexico, what would he do to amplify México?",
+      "text2": "What would happen, legally speaking, if Mexico overthrew its government and requested to be a part of the United States?",
+      "label": 0
+    },
+    {
+      "text1": "How can I become a rich person?",
+      "text2": "How is becoming a billionaire even possible, chronologically?",
+      "label": 0
+    },
+    {
+      "text1": "Can men ever understand what women want?",
+      "text2": "How can we men understand what women want?",
+      "label": 0
+    },
+    {
+      "text1": "Does TRUNC (date or numeric) is equal to ROUND DOWN (date or numeric) in SQL since rounding down always return to the same values as truncating?",
+      "text2": "Are numeric values in scriptures meant to be taken literally or symbolically?",
+      "label": 0
+    },
+    {
+      "text1": "What are the hardest and most useful skills to learn?",
+      "text2": "What are some of the most useful Java coding skills a person can learn?",
+      "label": 0
+    },
+    {
+      "text1": "Discount rate inflation rate?",
+      "text2": "What is the best advice for the newly rich?",
+      "label": 0
+    },
+    {
+      "text1": "Is Harvard better than Oxford in law studies?",
+      "text2": "Is group study better than self study?",
+      "label": 0
+    },
+    {
+      "text1": "Is this article describing india and indians accurate? Are indians so status obsessed, brainwashed, and fanatically patriotic?",
+      "text2": "Why is Indian education system so rank obsessed?",
+      "label": 0
+    },
+    {
+      "text1": "Why do you love living in Georgia?",
+      "text2": "What do you love about the state of Georgia?",
+      "label": 0
+    },
+    {
+      "text1": "If I enjoy singing and I know I have a good voice, should I pursue music as a career?",
+      "text2": "Why do people hate corporations?",
+      "label": 0
+    },
+    {
+      "text1": "What about the return stock in distribution ?",
+      "text2": "What's the most return you've made in a stock/options/futures investment/trade?",
+      "label": 0
+    },
+    {
+      "text1": "Who is Princess Rajyashree of Bikaner's husband?",
+      "text2": "Why don't the S W Monsoons shed their moisture on Rajasthan and Punjab in the same way they shed on UP and Bihar?",
+      "label": 0
+    },
+    {
+      "text1": "What are the main imports and exports of Venezuela, and how does Venezuela's industry compare to Chile's?",
+      "text2": "What are the main imports and exports of Venezuela, and how does Venezuela's industry compare to Honduras'?",
+      "label": 0
+    },
+    {
+      "text1": "What is the average salary of front-end developer in India?",
+      "text2": "What is the average salary of a UI/UX designer and a front-end developer in India?",
+      "label": 0
+    },
+    {
+      "text1": "What are some interesting facts about Mukesh Ambani?",
+      "text2": "Do Neeta Ambani cook for Mukesh?",
+      "label": 0
+    },
+    {
+      "text1": "What is formal science?",
+      "text2": "What's formal language?",
+      "label": 0
+    },
+    {
+      "text1": "What is the most important topic in data structure and algorithms in C programming?",
+      "text2": "If god gave us hair on our head to grow why are men getting haircuts and cutting it off?",
+      "label": 0
+    },
+    {
+      "text1": "Which area was more important to the Ottoman empire, the Balkans or Anatolia?",
+      "text2": "What was the impact of the Balkan wars on the internal policy in the Ottoman Empire?",
+      "label": 0
+    },
+    {
+      "text1": "How can I view all the source code of WhatsApp?",
+      "text2": "What is the source code of WhatsApp?",
+      "label": 0
+    },
+    {
+      "text1": "What is the difference between molecular weight and molar mass?",
+      "text2": "How do molar mass and mole ratio differ?",
+      "label": 0
+    },
+    {
+      "text1": "\"Which is appropriate to say when someone is good at writing, \"\"Has a good writing skill\"\" or \"\"Has good writing skills\"\"?\"",
+      "text2": "\"Is using \"\"at\"\" before \"\"any minute\"\" necessary in the sentence, \"\"My parents will be home (at) any minute\"\"?\"",
+      "label": 0
+    },
+    {
+      "text1": "What are some of the best time-saving tips for PHP?",
+      "text2": "What are some of the best time-saving tips for C language?",
+      "label": 0
+    },
+    {
+      "text1": "Can I make a voice call from my iPad using Jio SIM?",
+      "text2": "Can I use a non-VOLTE phone with a Jio Sim to make voice calls over my home wifi?",
+      "label": 0
+    },
+    {
+      "text1": "How can I integrate (tanx) ^5?",
+      "text2": "How do I integrate root of tanx?",
+      "label": 0
+    },
+    {
+      "text1": "What are the top 5 skills of a top management or strategy consultant (e.g., McKinsey, Bain, BCG, etc.)?",
+      "text2": "What is a typical day in the office of a consultant in a firm like BCG, McKinsey, Bain or any top notch consulting company?",
+      "label": 0
+    },
+    {
+      "text1": "Is there any site where new game makers can post their games and recieve tips ,advice etc on how to make it better?",
+      "text2": "Is there any site where I can share my thoughts about SEO, blogging etc. and get feedback on it?",
+      "label": 0
+    },
+    {
+      "text1": "After Electrical engineering what Masters field can I go for to learn about renewable energy producing materials like piezoelectric materials etc?",
+      "text2": "I have taken the CSC math group. I don't want to go to science fields like engineering, etc. What can I do after my 12th?",
+      "label": 0
+    },
+    {
+      "text1": "\"Why is \"\"Best Regards\"\" or \"\"Kind Regards\"\" considered to be bad English?\"",
+      "text2": "What is the best way of English writing? Kindly explain KISS principle in detail?",
+      "label": 0
+    },
+    {
+      "text1": "What is the best way to know if I have to pay taxes?",
+      "text2": "How do I pay my taxes?",
+      "label": 0
+    },
+    {
+      "text1": "Why is chloroform stored in dark coloured bottles?",
+      "text2": "Why are rain-bearing clouds usually dark in colour?",
+      "label": 0
+    },
+    {
+      "text1": "What is it like on Google's campus?",
+      "text2": "What is Google Campus London?",
+      "label": 0
+    },
+    {
+      "text1": "Which university is the best for computer engineering in the world?",
+      "text2": "Which is the best undergraduate computer engineering college in the world?",
+      "label": 0
+    },
+    {
+      "text1": "What are some good books to study for UPSEE MBA entrance exam?",
+      "text2": "Which are the best books for the MD entrance examination?",
+      "label": 0
+    },
+    {
+      "text1": "What characteristics define a materialistic person?",
+      "text2": "What defines a persistent person?",
+      "label": 0
+    },
+    {
+      "text1": "When will Game of Thrones Season 7 air in India?",
+      "text2": "How will India watch the Game of Thrones Season 6?",
+      "label": 0
+    },
+    {
+      "text1": "Which is better LPU or VIT for computer science engineering?",
+      "text2": "Which college is better for engineering NIT or LPU?",
+      "label": 0
+    },
+    {
+      "text1": "What happened to Destiny's Child's fourth member?",
+      "text2": "Did Destiny's Child break up?",
+      "label": 0
+    },
+    {
+      "text1": "Why is vodka the preferred alcoholic drink by women?",
+      "text2": "Is vodka and whiskey a good drink?",
+      "label": 0
+    },
+    {
+      "text1": "Is there a way to sign in into flickr again if I don't have a Yahoo account?",
+      "text2": "What should I do if I cannot access my Yahoo account?",
+      "label": 0
+    },
+    {
+      "text1": "What is basic difference between strength and hardness?",
+      "text2": "What is the difference between strength, hardness and toughness?",
+      "label": 0
+    },
+    {
+      "text1": "Interstellar (2014 film): On Planet Miller, did Cooper, Amelia and Doyle spend 3.3 hours (approximately), equating in 23 years and some months, or did they spend just 15 minutes?",
+      "text2": "On Miller's planet, how were Amelia, Doyle, etc. walking on the surface of the water if the gravity was 130% that of Earth's?",
+      "label": 0
+    },
+    {
+      "text1": "Why are votes kept secret when a public listing could help establish whether elections have been carried out properly or not?",
+      "text2": "Why the Andhraites at Pilani don't vote for non-Andhra candidates (at least a 95%) in elections? Are they hypocrites or narrow minded?",
+      "label": 0
+    },
+    {
+      "text1": "Which are the best qualities a person could have?",
+      "text2": "What are some of the best qualities a person should have?",
+      "label": 0
+    },
+    {
+      "text1": "What color goes well with a turquoise dress?",
+      "text2": "What color goes well with turquoise?",
+      "label": 0
+    },
+    {
+      "text1": "Is there a non-surgical way to permanently and naturally change your voice?",
+      "text2": "Is there a way, surgically or otherwise, to lower the volume of your voice?",
+      "label": 0
+    },
+    {
+      "text1": "Is it possible to study in Seoul if I graduate from vocational school and not high school?",
+      "text2": "I am in 12th class, I have little life achievements and not great high school grades. Is it still possible for me to get admission in MIT?",
+      "label": 0
+    },
+    {
+      "text1": "Have you ever tried to write/read from right to left in your own language? What did you learn from this experiment?",
+      "text2": "What would you write in the letter that you want to write to your daddy heaven above assuming he will read it from where ever he is?",
+      "label": 0
+    },
+    {
+      "text1": "What happens to VAT?",
+      "text2": "What happens when a cask of aging scotch (or any other type of whisky) fall below 40% abv and no longer can be legally called whisky? Are they discarded or vatted with other casks to bring up the abv?",
+      "label": 0
+    },
+    {
+      "text1": "What should I do if my girlfriend love me the way she loved her ex?",
+      "text2": "What do I do when my girlfriend still loves her ex?",
+      "label": 0
+    },
+    {
+      "text1": "What is your review of Silkworms?",
+      "text2": "What is your review of The Silkworm?",
+      "label": 0
+    },
+    {
+      "text1": "What are good gifts for a foreign visitor to bring when they're invited to someone's home in Hungary for the first time?",
+      "text2": "What are good gifts for a foreign visitor to bring when they're invited to someone's home in Turkey for the first time?",
+      "label": 0
+    },
+    {
+      "text1": "How can one maintain the population of pink dolphins?",
+      "text2": "What is the phylogeny of protochordates?",
+      "label": 0
+    },
+    {
+      "text1": "What do Americans think about workarounds of life which can be used only by Indians?",
+      "text2": "CAN U PLZ GUIDE ME for CLEARING POSTPAYMENT SCALE 1 exam?",
+      "label": 0
+    },
+    {
+      "text1": "What was Nikola Tesla's IQ?",
+      "text2": "Did Nikola Tesla have children?",
+      "label": 0
+    },
+    {
+      "text1": "I am in 10th grade. My subject is computer.Which courses should I take in the future to have better life?",
+      "text2": "What should I do in order to maintain healthy hair and scalp?",
+      "label": 0
+    },
+    {
+      "text1": "How can I draw a cartoon human face?",
+      "text2": "How do I draw a human face?",
+      "label": 0
+    },
+    {
+      "text1": "Who destroyed Nalanda University and why?",
+      "text2": "Can we find anywhere, the list of books that were in the library of Nalanda before it was burnt down?",
+      "label": 0
+    },
+    {
+      "text1": "Have you had any love/hate relationships?",
+      "text2": "What do you have a love-hate relationship with?",
+      "label": 0
+    },
+    {
+      "text1": "What is the Cold War, and when did it end?",
+      "text2": "Did the Cold War end?",
+      "label": 0
+    },
+    {
+      "text1": "What are the best undergraduate computer science program for focus in cyber-security/hacking?",
+      "text2": "My daughter is an USA citizen ,she is 14 year old ,her dad is not taking care of her since 8 years ,according to USA law what action can we take?",
+      "label": 0
+    },
+    {
+      "text1": "How did Harley Quinn die?",
+      "text2": "Who is Harley Quinn?",
+      "label": 0
+    },
+    {
+      "text1": "What is ethical imperialism?",
+      "text2": "Do Muslim women have a right to divorce men?",
+      "label": 0
+    },
+    {
+      "text1": "What's the difference between D-Methionine and DL-methionine?",
+      "text2": "What is the difference between Calcium and Calcium Sulfate?",
+      "label": 0
+    },
+    {
+      "text1": "What it the total number of domains registered with Infibeam's .ooo gTLD?",
+      "text2": "Is there any big drawback to registering a new gTLD domain for my startup, like .direct?",
+      "label": 0
+    },
+    {
+      "text1": "\"How did Jeremy Clarkson of TV's \"\"Top Gear\"\" walk through Chernobyl without becoming contaminated?\"",
+      "text2": "Why does the History Channel think the American version of Top Gear can be successful without Jeremy Clarkson?",
+      "label": 0
+    },
+    {
+      "text1": "How often are winning lotto numbers picked versus randomly generated by the machine?",
+      "text2": "Can a computer generate a truly random number?",
+      "label": 0
+    },
+    {
+      "text1": "How do I make $2000 in a week in NY?",
+      "text2": "How do I make $2000 a week?",
+      "label": 0
+    },
+    {
+      "text1": "How do I become a linguistic anthropologist?",
+      "text2": "What is a Linguistic Anthropologist?",
+      "label": 0
+    },
+    {
+      "text1": "What is a suitable inpatient drug and alcohol rehab center near Lee County IL?",
+      "text2": "Which is a good inpatient drug and alcohol rehab center near Hancock County IL?",
+      "label": 0
+    },
+    {
+      "text1": "When can we expect global warming to be the most pertinent threat to destroy life on Earth?",
+      "text2": "What does global warming mean?",
+      "label": 0
+    },
+    {
+      "text1": "How do pure atheists know what is right from wrong? In other words, what is their moral compass?",
+      "text2": "To fellow atheists, agnostics, and deists, do you think there is objective morality, and if so, from what?",
+      "label": 0
+    },
+    {
+      "text1": "Is Jon's direwolf the only one left? I really hope if that's the case they don't kill it off too, the direwolf deaths make me the most upset.",
+      "text2": "Are the dragons the only hope left for Westeros?",
+      "label": 0
+    },
+    {
+      "text1": "How does Cognizant manage to send more folks to onsite esp with H1B as compared to its peers like TCS, Accenture, Infy etc?",
+      "text2": "How much programming knowledge is required to get placed as a fresher in software companies like TCS, Infosys, Syntel, Wipro, Cognizant, and Accenture?",
+      "label": 0
+    },
+    {
+      "text1": "Why do some people refer to themselves in the third person?",
+      "text2": "How do I refer to myself in the third person?",
+      "label": 0
+    },
+    {
+      "text1": "How do I become a good listener in school?",
+      "text2": "How do l become a good listener?",
+      "label": 0
+    },
+    {
+      "text1": "I'm trying to cut her off, but recently she has been acting sweet, wanting to talk to me and complimenting me. Telling me she misses me. Idk what's up",
+      "text2": "Which countries used Android ANPR Apps?",
+      "label": 0
+    },
+    {
+      "text1": "Do the Swiss and belgians hate each other?",
+      "text2": "What is it like to be lonely your whole life?",
+      "label": 0
+    },
+    {
+      "text1": "Which is best: Bamboo or Jenkins CI?",
+      "text2": "How Jenkins is useful?",
+      "label": 0
+    },
+    {
+      "text1": "Is it safe to take antibiotics and Benadryl together?",
+      "text2": "What are some safe ways to give Benadryl to my cats?",
+      "label": 0
+    },
+    {
+      "text1": "How do I relieve gas pain during my period?",
+      "text2": "Is Legion or beings like Lilith or the serpent mentioned in the Roman Biblical cannon, Jinn?",
+      "label": 0
+    },
+    {
+      "text1": "Is it illegal to impersonate the President of the United States?",
+      "text2": "Who was the first U.S. President?",
+      "label": 0
+    },
+    {
+      "text1": "What is your favourite answer from some of your favourite users on Quora?",
+      "text2": "What are some of the best answers on Quora?",
+      "label": 0
+    },
+    {
+      "text1": "Were any TED talks effective at convincing people to volunteer for a cause?",
+      "text2": "Assuming you want to measure a social phenomena, how do you proceed to create a new measurement? Where do you start?",
+      "label": 0
+    },
+    {
+      "text1": "Why doesn’t Aravind Kejriwal take a stand against Sonia Gandhi when Rahul Gandhi refused the request to play Gilli-danda with Arvind Kejriwal?",
+      "text2": "Why does Aravind Kejriwal doesn't take a stand against Sonia Gandhi when Rahul Gandhi refused the request to Play Tambola with Arvind Kejriwal?",
+      "label": 0
+    },
+    {
+      "text1": "How do you use an American Express gift card on Amazon?",
+      "text2": "Can I use an Amazon Gift card to make a purchase without an account?",
+      "label": 0
+    },
+    {
+      "text1": "What does the RPM indicator in bikes actually mean?",
+      "text2": "What is the meaning of torque and power in a car in layman terms?",
+      "label": 0
+    },
+    {
+      "text1": "Why does Omegle always make me solve a Captcha before every chat?",
+      "text2": "How do I find girls on Omegle always?",
+      "label": 0
+    },
+    {
+      "text1": "Who would win in a war between China and Russia?",
+      "text2": "Who would win in a Twitter war, NATO, Russia or China?",
+      "label": 0
+    },
+    {
+      "text1": "Can consciousness cause Spontaneous Human Combustion?",
+      "text2": "How does spontaneous human combustion occur?",
+      "label": 0
+    },
+    {
+      "text1": "Do I need to count calories if I only eat fruit and vegetables?",
+      "text2": "If a high sugar diet is bad for you, then how can it be healthy to eat a lot of fruit every day?",
+      "label": 0
+    },
+    {
+      "text1": "What Jimmy Wales think about Quora?",
+      "text2": "\"What does Jimmy Wales think of all the \"\"What does Jimmy Wales think of\"\" questions on Quora?\"",
+      "label": 0
+    },
+    {
+      "text1": "If any possible way available to conduct our sport?",
+      "text2": "What happens if citizens continue to use old 500 and 100 notes after Nov 9? We can still exchange those notes till Dec 30.",
+      "label": 0
+    },
+    {
+      "text1": "What do you / people often complain of? Give some examples.",
+      "text2": "What is random walk based algorithms? Can you give some examples of random walk based algorithms?",
+      "label": 0
+    },
+    {
+      "text1": "How do I get a ticket number from a record locator on American Airlines?",
+      "text2": "How do airlines currently price their tickets?",
+      "label": 0
+    },
+    {
+      "text1": "I stopped liking my girlfriend, but she is amazing. Should I leave her?",
+      "text2": "My girlfriend said she is not having the feeling to love me anymore. Should I leave her?",
+      "label": 0
+    },
+    {
+      "text1": "What's the meaning of this?",
+      "text2": "What is the meaning of this?",
+      "label": 0
+    },
+    {
+      "text1": "Can mutual funds make you rich?",
+      "text2": "How much I can make in mutual fund by investing every month?",
+      "label": 0
+    },
+    {
+      "text1": "Have you ever had sex with an escort?",
+      "text2": "Why do people write so much on Quora while answering the questions?",
+      "label": 0
+    },
+    {
+      "text1": "How legit is www.magnumcashadvance.com?",
+      "text2": "How legit is www.wtsof.com?",
+      "label": 0
+    },
+    {
+      "text1": "What is the difference between an air cooler and an air conditioner?",
+      "text2": "What is the difference between an air conditioner and a refrigerator?",
+      "label": 0
+    },
+    {
+      "text1": "How do students at IIIT-H have time to do competitive programming and train for the same, even though they are stacked with heaps of H.W. and projects?",
+      "text2": "Are there any top female coders active from IIIT-H?",
+      "label": 0
+    },
+    {
+      "text1": "Why do black men have big penises?",
+      "text2": "\"Why are \"\"bad boys\"\" so attractive?\"",
+      "label": 0
+    },
+    {
+      "text1": "Restaurants in India: What are the best places for Biryani in Mumbai?",
+      "text2": "Which is the best biryani in India?",
+      "label": 0
+    },
+    {
+      "text1": "What are the powers of president of India?",
+      "text2": "What are all the responsibilities, powers and rights of the president of India?",
+      "label": 0
+    }
+  ]
+}

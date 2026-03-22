@@ -1212,23 +1212,28 @@ def save_split(train_raw, val_raw, test_raw, out_dir):
 # Generate datasets
 # ---------------------------------------------------------------------------
 
-# General dataset (backwards compat) — all 194 pairs unchanged
-random.shuffle(PAIRS)
-n       = len(PAIRS)
-n_train = int(0.70 * n)
-n_val   = int(0.15 * n)
-print("\n=== General dataset ===")
-save_split(PAIRS[:n_train], PAIRS[n_train:n_train + n_val], PAIRS[n_train + n_val:], "data")
+def main() -> None:
+    # General dataset
+    random.shuffle(PAIRS)
+    n       = len(PAIRS)
+    n_train = int(0.70 * n)
+    n_val   = int(0.15 * n)
+    print("\n=== General dataset ===")
+    save_split(PAIRS[:n_train], PAIRS[n_train:n_train + n_val], PAIRS[n_train + n_val:], "data")
 
-# Per-mode datasets — general pairs + mode-specific pairs
-MODE_EXTRA = {
-    "model-vs-model":         MODE_PAIRS_MODEL_VS_MODEL,
-    "reference-vs-generated": MODE_PAIRS_REFERENCE_VS_GENERATED,
-    "context-vs-generated":   MODE_PAIRS_CONTEXT_VS_GENERATED,
-}
+    # Per-mode datasets — general pairs + mode-specific pairs
+    MODE_EXTRA = {
+        "model-vs-model":         MODE_PAIRS_MODEL_VS_MODEL,
+        "reference-vs-generated": MODE_PAIRS_REFERENCE_VS_GENERATED,
+        "context-vs-generated":   MODE_PAIRS_CONTEXT_VS_GENERATED,
+    }
 
-for mode, extra in MODE_EXTRA.items():
-    combined = PAIRS + extra
-    tr, va, te = split_dataset(combined, seed=42)
-    print(f"\n=== {mode} ({len(combined)} pairs) ===")
-    save_split(tr, va, te, f"data/{mode}")
+    for mode, extra in MODE_EXTRA.items():
+        combined = PAIRS + extra
+        tr, va, te = split_dataset(combined, seed=42)
+        print(f"\n=== {mode} ({len(combined)} pairs) ===")
+        save_split(tr, va, te, f"data/{mode}")
+
+
+if __name__ == "__main__":
+    main()
