@@ -12,18 +12,24 @@ SilverBullet is a **real-time LLM evaluation benchmark** — not a generic text 
 It scores faithfulness, model agreement, and RAG groundedness between two texts using a
 Conv2D model trained on 16 multi-signal sentence-pair feature maps.
 
-**Positioning:** Designed for near-real-time use inside LLM pipelines (hallucination guards,
-model comparison, RL reward signals). The API adds ~100–200 ms on cached pairs.
+**Three evaluation modes, each with its own trained model:**
+- `context-vs-generated` — hallucination detection / RAG groundedness
+- `reference-vs-generated` — faithfulness against a reference answer
+- `model-vs-model` — agreement between two LLM outputs
+
+**Positioning:** Designed for near-real-time use inside LLM pipelines. The API adds ~100–200 ms on cached pairs.
+
+**All Python backend code is under `backend/`.** Import with `from backend.X import Y`.
 
 ---
 
 ## Module Reference
 
-### `Splitter/sentence_splitter.py`
+### `backend/Splitter/sentence_splitter.py`
 **Entry point for text preprocessing.**
 
 ```python
-from Splitter.sentence_splitter import split_txt
+from backend.Splitter.sentence_splitter import split_txt
 sentences = split_txt("My name is Mehul. He is a good person.")
 # → ["My name is Mehul.", "Mehul is a good person."]  (coref resolved)
 ```
@@ -35,24 +41,26 @@ sentences = split_txt("My name is Mehul. He is a good person.")
 
 ---
 
-### `Preprocess/coref/resolveEntity.py`
+### `backend/Preprocess/coref/resolveEntity.py`
 **Coreference resolution via LLM.**
 
 ```python
+from backend.Preprocess.coref.resolveEntity import EntityResolver
 resolver = EntityResolver(model="gpt-4o-mini")   # or local Gemma
 resolved = resolver.resolve("He went to the store.")
 ```
 
 - `gpt-4o`, `gpt-4o-mini` etc. → `MODEL_TYPE = 'api'` (OpenAI client)
 - Any other string → `MODEL_TYPE = 'local'` (HuggingFace causal LM)
-- HF `login()` runs at import — ensure `hf_token` is valid before importing
+- HF `login()` is deferred to first local model load via `_ensure_hf_login()`
 
 ---
 
-### `Features/Semantic/getSemanticWeights.py`
+### `backend/Features/Semantic/getSemanticWeights.py`
 **Produces 6 feature maps from sentence embeddings.**
 
 ```python
+from backend.Features.Semantic.getSemanticWeights import SemanticWeights
 weights = SemanticWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "mixedbread-ai/mxbai-embed-large-v1",
 #       "Qwen/Qwen3-Embedding-0.6B",
@@ -65,10 +73,11 @@ weights = SemanticWeights().getFeatureMap(sent_group1, sent_group2)
 
 ---
 
-### `Features/Lexical/getLexicalWeights.py`
+### `backend/Features/Lexical/getLexicalWeights.py`
 **Produces 4 feature maps from SentencePiece token overlap.**
 
 ```python
+from backend.Features.Lexical.getLexicalWeights import LexicalWeights
 weights = LexicalWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "jaccard", "dice", "cosine", "rouge"
 ```
@@ -78,10 +87,11 @@ weights = LexicalWeights().getFeatureMap(sent_group1, sent_group2)
 
 ---
 
-### `Features/NLI/getNLIweights.py`
+### `backend/Features/NLI/getNLIweights.py`
 **Produces 3 feature maps from textual entailment probabilities.**
 
 ```python
+from backend.Features.NLI.getNLIweights import NLIWeights
 weights = NLIWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "entailment", "neutral", "contradiction"
 ```
@@ -92,10 +102,11 @@ weights = NLIWeights().getFeatureMap(sent_group1, sent_group2)
 
 ---
 
-### `Features/EntityGroups/getOverlap.py`
+### `backend/Features/EntityGroups/getOverlap.py`
 **Produces 1 feature map from named entity count differences.**
 
 ```python
+from backend.Features.EntityGroups.getOverlap import EntityMatch
 weights = EntityMatch().getFeatureMap(sent_group1, sent_group2)
 # keys: "EntityMismatch"   (values are ≤ 0; 0 = perfect entity match)
 ```
@@ -106,10 +117,11 @@ weights = EntityMatch().getFeatureMap(sent_group1, sent_group2)
 
 ---
 
-### `Features/LCS/getLCSweights.py`
+### `backend/Features/LCS/getLCSweights.py`
 **Produces 2 feature maps via dynamic-programming LCS (no model).**
 
 ```python
+from backend.Features.LCS.getLCSweights import LCSWeights
 weights = LCSWeights().getFeatureMap(sent_group1, sent_group2)
 # keys: "lcs_token", "lcs_char"
 # score = len(LCS) / max(len(seq1), len(seq2))  ∈ [0, 1]
@@ -119,11 +131,11 @@ weights = LCSWeights().getFeatureMap(sent_group1, sent_group2)
 
 ---
 
-### `Postprocess/__addpad.py`
+### `backend/Postprocess/__addpad.py`
 **Pads any n×m matrix to 64×64.**
 
 ```python
-from Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import pad_matrix
 t = pad_matrix([[1,2],[3,4]], target_size=64)
 # → torch.Tensor shape [64, 64]
 ```
@@ -133,10 +145,11 @@ t = pad_matrix([[1,2],[3,4]], target_size=64)
 
 ---
 
-### `feature_cache.py`
+### `backend/feature_cache.py`
 **Disk-based feature cache keyed by MD5 of text pair.**
 
 ```python
+from backend.feature_cache import FeatureCache
 cache = FeatureCache(cache_dir='cache')
 cached = cache.get_features(text1, text2)   # None if miss
 cache.save_features(text1, text2, stacked_tensor.tolist())
@@ -148,10 +161,26 @@ cache.save_features(text1, text2, stacked_tensor.tolist())
 
 ---
 
-### `model.py` — `TextSimilarityCNN` (current) + `TextSimilarityCNNLegacy`
+### `backend/feature_registry.py`
+**Canonical feature key ordering + checkpoint manifest.**
+
+```python
+from backend.feature_registry import FEATURE_KEYS, build_manifest, validate_manifest
+# FEATURE_KEYS: list of 16 strings in stable order
+# build_manifest() → dict with version, feature_keys, timestamp
+# validate_manifest(checkpoint_manifest) → raises if incompatible
+```
+
+- `feature_map_to_tensor()` in `train.py` stacks maps in `FEATURE_KEYS` order — channel index is always stable.
+- Every checkpoint embeds `manifest` dict. `predict.py` calls `validate_manifest` on load.
+
+---
+
+### `backend/model.py` — `TextSimilarityCNN` + `TextSimilarityCNNLegacy`
 
 **Current architecture (Conv2D):**
 ```python
+from backend.model import TextSimilarityCNN
 model = TextSimilarityCNN(num_features=16)
 # Input:  [batch, num_features, 64, 64]
 # Output: [batch, 1]  sigmoid → [0, 1]
@@ -167,40 +196,43 @@ FC(128→1) → sigmoid
 ```
 
 **Legacy architecture (Conv1D)** — `TextSimilarityCNNLegacy`:
-Kept for backward-compatibility so old `best_model.pth` checkpoints still load.
+Kept for backward-compatibility with old checkpoints.
 Auto-detected in `predict.py` via presence of `fc_reduce1.weight` in state dict.
 
-**Checkpoint format:**
-```python
-{
-    'epoch': int,
-    'model_state_dict': ...,
-    'optimizer_state_dict': ...,
-    'loss': float,
-    'num_features': int,   # required for Conv2D; absent in legacy checkpoints
-}
+---
+
+### `backend/train.py`
+
+```bash
+python -m backend.train                          # general model → best_model.pth
+python -m backend.train --mode context-vs-generated  # → models/context-vs-generated.pth
 ```
 
----
-
-### `train.py`
-
 Key classes/functions:
-- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks all maps in insertion order
-- `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction, stores `[N, F, 64, 64]`
-- `train_model(model, train_loader, val_loader, num_epochs=50, patience=5)` — Adam + BCELoss + early stopping
+- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks maps in `FEATURE_KEYS` order
+- `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction
+- `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth')` — MSELoss + Adam + early stopping
 
-Checkpoints saved:
-- `best_model.pth` — best val-loss checkpoint, overwritten each improvement
-- `model_weights_{ts}_final.pth` / `model_weights_{ts}_best.pth` — archived at end
-
-`num_features` is derived from `train_dataset.num_features` and serialised into every checkpoint.
+Data loaded from `data/{mode}/` if `--mode` given, else `data/`.
 
 ---
 
-### `predict.py` — `SimilarityPredictor`
+### `backend/test.py`
+
+```bash
+python -m backend.test                           # data/test.json + best_model.pth
+python -m backend.test --mode context-vs-generated  # data/context-vs-generated/test.json + models/context-vs-generated.pth
+python -m backend.test --checkpoint path/to/model.pth  # explicit checkpoint override
+```
+
+Outputs: accuracy, ROC-AUC, average precision, confusion matrix, per-sample predictions → `test_reports/`.
+
+---
+
+### `backend/predict.py` — `SimilarityPredictor`
 
 ```python
+from backend.predict import SimilarityPredictor
 predictor = SimilarityPredictor("best_model.pth")
 
 # Fast path (uses feature cache)
@@ -210,7 +242,7 @@ result = predictor.predict_pair(text1, text2)
 # Batch
 results = predictor.predict_batch([[t1, t2], ...])
 
-# Breakdown (slow — reruns pipeline, extracts intermediate data)
+# Breakdown (slow — reruns pipeline without cache)
 bd = predictor.predict_pair_breakdown(text1, text2)
 # → {
 #     "prediction": int, "probability": float,
@@ -218,59 +250,47 @@ bd = predictor.predict_pair_breakdown(text1, text2)
 #     "alignment": [[float]], "divergent_in_1": [int], "divergent_in_2": [int],
 #     "feature_scores": {"Semantic (mxbai)": float, ...}
 #   }
-```
 
-`_load_model_from_checkpoint(checkpoint, device)` auto-detects legacy vs Conv2D via state dict keys.
+# Batch breakdown (up to 10 pairs)
+bds = predictor.predict_batch_breakdown([[t1, t2], ...])
+```
 
 ---
 
-### `api/` — FastAPI application
+### `backend/api/` — FastAPI application
 
 ```
-GET  /api/v1/health                   → HealthResponse
-POST /api/v1/predict/pair             → PairResponse          (fast, uses cache)
-POST /api/v1/predict/pair/breakdown   → BreakdownResponse     (slow, full pipeline)
-POST /api/v1/predict/batch            → BatchResponse         (up to 100 pairs)
+GET  /api/v1/health                        → HealthResponse  (per-mode model load state)
+POST /api/v1/predict/pair                  → PairResponse    (60/min)
+POST /api/v1/predict/pair/breakdown        → BreakdownResponse  (20/min — slow)
+POST /api/v1/predict/batch                 → BatchResponse   (60/min, max 100 pairs)
+POST /api/v1/predict/batch/breakdown       → BatchBreakdownResponse  (10/min, max 10 pairs)
 ```
 
-- `get_predictor()` in `dependencies.py` is `@lru_cache` — singleton per process
-- `MODEL_PATH` env var overrides default `best_model.pth`
-- Structured JSON logging via `LoggingMiddleware`; request IDs via `RequestIDMiddleware`
-- CORS: `localhost:5173` + `ALLOWED_ORIGINS` env var
-- Docs: `/api/v1/docs` (Swagger), `/api/v1/redoc`
+All POST endpoints accept `mode: EvaluationMode` (default `"context-vs-generated"`).
+
+**`backend/api/dependencies.py`** — `get_predictor(mode: str)`:
+- `@lru_cache(maxsize=3)` — one `SimilarityPredictor` per mode, cached for the process lifetime
+- Checkpoint resolution order: `MODEL_PATH_<MODE>` env var → `models/{mode}.pth` → `MODEL_PATH` / `best_model.pth`
+- No `sys.path` manipulation needed — `backend` is a proper package on the project root path
+
+**`backend/api/schemas.py`** — `EvaluationMode = Literal["model-vs-model", "reference-vs-generated", "context-vs-generated"]`
+
+Entry point for uvicorn: `uvicorn backend.api.main:app --reload`
 
 ---
 
-### `frontend/`
+### `backend/generate_data.py`
 
-Stack: React + TypeScript + Vite + TailwindCSS
-
-Key components:
-- `PairScorer` — single eval form; after scoring shows "Drill Down — Impact & Divergence" button
-- `BreakdownPanel` — renders divergence analysis: two-column sentence list (colour-coded by max alignment), orphaned-sentence summary, feature-score bars
-- `BatchScorer` — up to 100 pairs, distribution chart
-- `ScoreGauge` — visual score bar + Similar/Different badge
-- `TestCasePanel` — pre-built test cases incl. `ex-1`/`ex-2` (from `example.py`)
-- `ExperimentsPanel` — save, annotate, re-run scored pairs
-
-Vite proxy: `/api` → `http://localhost:8000` (configured in `frontend/vite.config.ts`).
-
----
-
-### `generate_data.py`
-
-Generates `data/train.json`, `data/validate.json`, `data/test.json` from hardcoded pairs.
-
-```
-python generate_data.py
+```bash
+python -m backend.generate_data
 ```
 
-Pair taxonomy:
-- `positive` (label=1): paraphrases, faithful summaries, equivalent code — 14 domains
-- `hard_neg` (label=0): same topic, wrong number/date/entity, negated claim, partial hallucination
-- `soft_neg` (label=0): completely different domains
+Generates:
+- `data/{train,validate,test}.json` — 194 general pairs (70/15/15 split)
+- `data/{mode}/{train,validate,test}.json` — 209 pairs per mode (general + 15 mode-specific hard negatives)
 
-Run this before training whenever you want to change the dataset. Delete `./cache/` too.
+Pair taxonomy: `positive` (label=1), `hard_neg` (label=0), `soft_neg` (label=0).
 
 ---
 
@@ -286,7 +306,7 @@ def __calc_weights__(self):
 All extractors use this. `_reset_state()` never sets `__model_cache__`, so the model survives between `getFeatureMap` calls.
 
 ### PITFALL: Do not set `self.__model_cache__ = None` in `__init__`
-This breaks the hasattr guard — model reloads on every call.
+This breaks the `hasattr` guard — model reloads on every call.
 
 ### Pattern: Consistent `getFeatureMap` interface
 ```python
@@ -297,23 +317,23 @@ def getFeatureMap(self, list1: List[str], list2: List[str]) -> Dict[str, torch.T
 ```
 
 ### PITFALL: Key collisions in `feature_map.update()`
-`train.py` merges all extractor outputs with `.update()`. If two extractors share a key, one silently overwrites the other. Verify uniqueness when adding a new extractor.
+`train.py` merges all extractor outputs with `.update()`. If two extractors share a key, one silently overwrites the other. Verify uniqueness in `FEATURE_KEYS` when adding a new extractor.
 
-### PITFALL: Feature set changes invalidate cached tensors AND checkpoints
+### PITFALL: Feature set changes invalidate cache AND checkpoints
 Changing which extractors run (or their key order) invalidates:
 1. `./cache/` — delete to force recompute
-2. `best_model.pth` — retrain from scratch (`num_features` changes)
+2. `best_model.pth` / `models/*.pth` — retrain from scratch (`num_features` changes, manifest mismatch)
 
 ---
 
 ## Adding a New Feature Extractor
 
-1. Create `Features/{Name}/get{Name}Weights.py`
-2. Implement with `_reset_state()`, `__load_model__()`, `getFeatureMap()` following existing pattern
-3. Import and call in `train.py` (`TextSimilarityDataset.__init__`) and `predict.py` (`predict_pair_breakdown`)
-4. Add to `example.py` for manual testing
-5. Verify no key collision with existing feature names
-6. Delete `./cache/`, retrain model
+1. Create `backend/Features/{Name}/get{Name}Weights.py`
+2. Implement with `_reset_state()`, `__load_model__()`, `getFeatureMap()` following the existing pattern
+3. Add new key(s) to `FEATURE_KEYS` in `backend/feature_registry.py`
+4. Import and call in `backend/train.py` (`TextSimilarityDataset.__init__`) and `backend/predict.py`
+5. Add to `backend/example.py` for manual testing
+6. Delete `./cache/`, retrain all mode-specific models
 
 ---
 
@@ -324,13 +344,14 @@ Changing which extractors run (or their key order) invalidates:
 | `./cache/` | `FeatureCache` | `{md5}.json` — stacked `[F,64,64]` tensors per text pair |
 | `./training_reports/` | `TrainingReport` | `training_report_{ts}_{current\|final}.{json\|md}` |
 | `./test_reports/` | `TestReport` | `test_report_{ts}.{json\|md}` |
-| `best_model.pth` | `train.py` | Best validation checkpoint |
-| `model_weights_{ts}_{final\|best}.pth` | `train.py` | Archived weights per run |
+| `best_model.pth` | `backend/train.py` | General fallback checkpoint |
+| `models/{mode}.pth` | `backend/train.py --mode` | Per-mode checkpoint |
+| `model_weights_{ts}_{final\|best}.pth` | `backend/train.py` | Archived weights per run |
 
 ---
 
 ## Security Notes
 
-- `resources/config.yaml` contains live API tokens — **do not commit**
-- `getConfig.py` has a hardcoded Windows absolute path fallback — do not replicate
+- `backend/resources/config.yaml` contains live API tokens — **do not commit** (gitignored)
+- Prefer env vars: `SB_HF_TOKEN`, `SB_OPENAI_TOKEN`, `MODEL_PATH_*`
 - Model cache dirs use relative paths from project root — verify on target OS
