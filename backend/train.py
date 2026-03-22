@@ -36,6 +36,8 @@ class _Tracker:
         self._registry = None
         self._mode = mode or "general"
         self._run_name = f"{self._mode}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        self._params = params
+        self._history: list[dict] = []   # buffers every epoch regardless of MLflow state
 
         # --- MLflow ---
         try:
@@ -48,7 +50,7 @@ class _Tracker:
             self._mlflow = mlflow
             print(f"[MLflow] tracking at {uri}  run={self._run_name}")
         except Exception as exc:
-            print(f"[MLflow] not available ({exc}) — skipping.")
+            print(f"[MLflow] not available ({exc}) — will retry import at finish.")
 
         # --- Prometheus pushgateway ---
         try:
@@ -66,6 +68,9 @@ class _Tracker:
             print(f"[Prometheus] not available ({exc}) — skipping.")
 
     def log_epoch(self, epoch: int, train_loss: float, val_loss: float, accuracy: float):
+        self._history.append(
+            {"epoch": epoch, "train_loss": train_loss, "val_loss": val_loss, "accuracy": accuracy}
+        )
         if self._mlflow:
             try:
                 self._mlflow.log_metrics(
@@ -95,6 +100,28 @@ class _Tracker:
                 pass
 
     def finish(self, best_val_loss: float, best_epoch: int):
+        # If MLflow wasn't reachable at startup, try once more now that training is done.
+        if self._mlflow is None:
+            try:
+                import mlflow
+                uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+                mlflow.set_tracking_uri(uri)
+                mlflow.set_experiment(self._mode)
+                mlflow.start_run(run_name=self._run_name)
+                mlflow.log_params(self._params)
+                # Replay all buffered epoch metrics
+                for row in self._history:
+                    mlflow.log_metrics(
+                        {"train_loss": row["train_loss"],
+                         "val_loss":   row["val_loss"],
+                         "accuracy":   row["accuracy"]},
+                        step=row["epoch"],
+                    )
+                self._mlflow = mlflow
+                print(f"[MLflow] late-connect succeeded — replayed {len(self._history)} epochs.")
+            except Exception as exc:
+                print(f"[MLflow] finish import failed ({exc}) — no experiment recorded.")
+
         if self._mlflow:
             try:
                 self._mlflow.log_metrics(
