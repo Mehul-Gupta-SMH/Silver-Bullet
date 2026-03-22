@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install lint dependencies
         run: pip install flake8
@@ -33,14 +33,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: pip
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Import check
-        run: python -c "import model; import feature_cache; import training_report; import feature_registry"
+        run: python -c "from backend import model, feature_cache, training_report, feature_registry"
 
   api-tests:
     name: API Tests (pytest)
@@ -52,7 +52,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: pip
 
       - name: Install dependencies
@@ -75,7 +75,6 @@ jobs:
   frontend:
     name: Frontend Lint & Build
     runs-on: ubuntu-latest
-    if: hashFiles('frontend/package.json') != ''
     defaults:
       run:
         working-directory: frontend

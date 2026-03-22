@@ -5,6 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import json
 import os
+from datetime import datetime
 from backend.model import TextSimilarityCNN
 from backend.Splitter.sentence_splitter import split_txt
 from backend.Features.Semantic.getSemanticWeights import SemanticWeights
@@ -15,6 +16,134 @@ from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, build_manifest
 from backend.training_report import TrainingReport
+
+
+class _Tracker:
+    """Optional MLflow + Prometheus pushgateway tracker.
+
+    Both backends are opt-in and fail silently — training continues even if
+    MLflow or the pushgateway is unreachable.
+
+    Environment variables:
+        MLFLOW_TRACKING_URI          default: http://localhost:5000
+        PROMETHEUS_PUSHGATEWAY_URL   default: http://localhost:9091
+    """
+
+    def __init__(self, mode: str, params: dict):
+        self._mlflow = None
+        self._push_url = None
+        self._gauges = {}
+        self._registry = None
+        self._mode = mode or "general"
+        self._run_name = f"{self._mode}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        self._params = params
+        self._history: list[dict] = []   # buffers every epoch regardless of MLflow state
+        self._run_id: str | None = None
+
+        # --- MLflow ---
+        try:
+            import mlflow
+            uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+            mlflow.set_tracking_uri(uri)
+            mlflow.set_experiment(self._mode)
+            mlflow.start_run(run_name=self._run_name)
+            self._run_id = mlflow.active_run().info.run_id
+            mlflow.log_params(params)
+            self._mlflow = mlflow
+            print(f"[MLflow] tracking at {uri}  run={self._run_name}  id={self._run_id}")
+        except Exception as exc:
+            print(f"[MLflow] not available ({exc}) — will retry import at finish.")
+
+        # --- Prometheus pushgateway ---
+        try:
+            from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
+            self._push_url = os.environ.get("PROMETHEUS_PUSHGATEWAY_URL", "http://localhost:9091")
+            self._registry = CollectorRegistry()
+            for name in ("train_loss", "val_loss", "accuracy", "epoch"):
+                self._gauges[name] = Gauge(
+                    f"silverbullet_{name}", f"SilverBullet training {name}",
+                    ["mode", "run"], registry=self._registry,
+                )
+            self._push_fn = push_to_gateway
+            print(f"[Prometheus] pushgateway at {self._push_url}")
+        except Exception as exc:
+            print(f"[Prometheus] not available ({exc}) — skipping.")
+
+    def log_epoch(self, epoch: int, train_loss: float, val_loss: float, accuracy: float):
+        self._history.append(
+            {"epoch": epoch, "train_loss": train_loss, "val_loss": val_loss, "accuracy": accuracy}
+        )
+        if self._mlflow:
+            try:
+                self._mlflow.log_metrics(
+                    {"train_loss": train_loss, "val_loss": val_loss, "accuracy": accuracy},
+                    step=epoch,
+                )
+            except Exception:
+                pass
+
+        if self._registry:
+            try:
+                labels = {"mode": self._mode, "run": self._run_name}
+                self._gauges["epoch"].labels(**labels).set(epoch)
+                self._gauges["train_loss"].labels(**labels).set(train_loss)
+                self._gauges["val_loss"].labels(**labels).set(val_loss)
+                self._gauges["accuracy"].labels(**labels).set(accuracy)
+                self._push_fn(self._push_url, job="silverbullet_training",
+                              registry=self._registry)
+            except Exception:
+                pass
+
+    def log_artifact(self, path: str):
+        if self._mlflow:
+            try:
+                self._mlflow.log_artifact(path)
+            except Exception:
+                pass
+
+    def finish(self, best_val_loss: float, best_epoch: int, model=None):
+        # If MLflow wasn't reachable at startup, try once more now that training is done.
+        if self._mlflow is None:
+            try:
+                import mlflow
+                uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+                mlflow.set_tracking_uri(uri)
+                mlflow.set_experiment(self._mode)
+                mlflow.start_run(run_name=self._run_name)
+                self._run_id = mlflow.active_run().info.run_id
+                mlflow.log_params(self._params)
+                # Replay all buffered epoch metrics
+                for row in self._history:
+                    mlflow.log_metrics(
+                        {"train_loss": row["train_loss"],
+                         "val_loss":   row["val_loss"],
+                         "accuracy":   row["accuracy"]},
+                        step=row["epoch"],
+                    )
+                self._mlflow = mlflow
+                print(f"[MLflow] late-connect succeeded — replayed {len(self._history)} epochs.")
+            except Exception as exc:
+                print(f"[MLflow] finish import failed ({exc}) — no experiment recorded.")
+
+        if self._mlflow:
+            try:
+                self._mlflow.log_metrics(
+                    {"best_val_loss": best_val_loss, "best_epoch": best_epoch}
+                )
+                # --- Model Registry ---
+                if model is not None and self._run_id:
+                    try:
+                        self._mlflow.pytorch.log_model(model, "model")
+                        model_name = f"silverbullet-{self._mode}"
+                        self._mlflow.register_model(
+                            f"runs:/{self._run_id}/model", model_name
+                        )
+                        print(f"[MLflow] model registered as '{model_name}'")
+                    except Exception as reg_exc:
+                        print(f"[MLflow] model registration failed ({reg_exc}) — skipped.")
+                self._mlflow.end_run()
+            except Exception:
+                pass
 
 
 def load_json_data(file_path):
@@ -58,7 +187,6 @@ class TextSimilarityDataset(Dataset):
     """Extract features for every text pair and store as [F, 64, 64] tensors."""
 
     def __init__(self, paragraph_pairs, labels, use_cache=True):
-        global FEATURE_ORDER
         self.labels = labels
         self.cache  = FeatureCache() if use_cache else None
 
@@ -115,7 +243,7 @@ class TextSimilarityDataset(Dataset):
 
 
 def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.001,
-                patience=5, min_delta=0.001, best_ckpt='best_model.pth'):
+                patience=5, min_delta=0.001, best_ckpt='best_model.pth', mode='general'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -130,7 +258,9 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
         'num_feature_channels':      num_features,
+        'mode':                      mode,
     }
+    tracker = _Tracker(mode, training_params)
     report = TrainingReport(model, training_params)
     report.update_dataset_info(
         train_size=len(train_loader.dataset),
@@ -182,6 +312,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         accuracy     = 100 * correct / total
 
         report.update_epoch_metrics(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
+        tracker.log_epoch(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
 
         print(f'Epoch [{epoch+1}/{num_epochs}]  '
               f'Train: {avg_train_loss:.4f}  Val: {avg_val_loss:.4f}  Acc: {accuracy:.2f}%')
@@ -238,6 +369,15 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'manifest':             manifest,
     }, best_model_path)
 
+    tracker.log_artifact(final_model_path)
+    tracker.log_artifact(best_model_path)
+
+    # Restore best weights so the registered model reflects the best checkpoint
+    if best_model_state is not None:
+        model.load_state_dict(best_model_state)
+
+    tracker.finish(best_val_loss=best_val_loss, best_epoch=best_epoch + 1, model=model)
+
     print(f"Final model  -> {final_model_path}")
     print(f"Best model   -> {best_model_path}")
     print(f"Report       -> {report.save_report(intermediate=False)}")
@@ -289,6 +429,7 @@ if __name__ == '__main__':
 
     model = TextSimilarityCNN(num_features=train_dataset.num_features)
     trained_model, metrics = train_model(
-        model, train_loader, val_loader, best_ckpt=best_ckpt
+        model, train_loader, val_loader, best_ckpt=best_ckpt,
+        mode=args.mode or "general",
     )
     print("Training complete.")

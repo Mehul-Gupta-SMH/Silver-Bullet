@@ -93,15 +93,15 @@ class SimilarityPredictor:
 
         Returns a dict compatible with api.schemas.BreakdownResponse.
         """
-        from Splitter.sentence_splitter import split_txt
-        from Features.Semantic.getSemanticWeights import SemanticWeights
-        from Features.Lexical.getLexicalWeights import LexicalWeights
-        from Features.NLI.getNLIweights import NLIWeights
-        from Features.EntityGroups.getOverlap import EntityMatch
-        from Features.LCS.getLCSweights import LCSWeights
+        from backend.Splitter.sentence_splitter import split_txt
+        from backend.Features.Semantic.getSemanticWeights import SemanticWeights
+        from backend.Features.Lexical.getLexicalWeights import LexicalWeights
+        from backend.Features.NLI.getNLIweights import NLIWeights
+        from backend.Features.EntityGroups.getOverlap import EntityMatch
+        from backend.Features.LCS.getLCSweights import LCSWeights
 
-        sent1 = split_txt(text1)
-        sent2 = split_txt(text2)
+        sent1 = split_txt(text1, resolve_coref=True)
+        sent2 = split_txt(text2, resolve_coref=True)
         n, m = len(sent1), len(sent2)
 
         feature_map: dict = {}

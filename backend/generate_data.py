@@ -325,6 +325,75 @@ PAIRS = [
  "A black hole's gravity is intense enough to trap everything within its event horizon, including light, making it invisible by definition.",
  1, "positive"),
 
+# ── Business Strategy ────────────────────────────────────────────────────────
+("Porter's Five Forces framework evaluates competitive intensity across five dimensions: bargaining power of suppliers, bargaining power of buyers, threat of substitute products, threat of new entrants, and rivalry among existing competitors.",
+ "The Five Forces model analyses an industry's competitive landscape by examining supplier leverage, buyer leverage, substitute threats, barriers to new entry, and the intensity of existing competitive rivalry.",
+ 1, "positive"),
+
+("A SWOT analysis identifies a company's internal Strengths and Weaknesses alongside external Opportunities and Threats to inform strategic decision-making.",
+ "SWOT analysis is a strategic planning tool that maps internal capabilities (strengths and weaknesses) against external market conditions (opportunities and threats) to guide business decisions.",
+ 1, "positive"),
+
+("Market penetration strategy aims to increase market share for existing products in existing markets through competitive pricing, increased promotion, or improved distribution.",
+ "Penetrating an existing market with current product offerings — via price adjustments, advertising spend, or expanded distribution — is a market penetration approach designed to grow share without entering new segments.",
+ 1, "positive"),
+
+("Blue Ocean Strategy advocates creating uncontested market space by making the competition irrelevant through value innovation, rather than competing in saturated red ocean markets.",
+ "Instead of fighting for share in overcrowded markets (red oceans), Blue Ocean Strategy encourages companies to open new demand through value innovation — simultaneously lowering costs and raising buyer value.",
+ 1, "positive"),
+
+("A balanced scorecard translates strategic objectives into measurable KPIs across four perspectives: financial, customer, internal processes, and learning and growth.",
+ "The balanced scorecard framework links strategic goals to specific metrics across financial performance, customer outcomes, operational processes, and organisational learning and development.",
+ 1, "positive"),
+
+("Economies of scale reduce per-unit costs as production volume increases, giving larger firms a cost advantage over smaller competitors.",
+ "As output grows, fixed costs are spread across more units and operational efficiencies compound — this reduction in average cost with scale is the basis of economies of scale.",
+ 1, "positive"),
+
+# ── Business Strategy — partial overlap (hard negatives) ─────────────────────
+# Pairs sharing domain vocabulary and partial substance but diverging on scope,
+# mechanism, or conclusion — should be label=0 (not fully faithful/aligned).
+
+("Our three-year growth strategy focuses on four pillars: geographic expansion into Southeast Asia, product line extension into SMB segments, a strategic partnership programme with system integrators, and an operational efficiency drive targeting 15% cost reduction.",
+ "The company's growth plan centres on two main thrusts: expanding into Southeast Asia and extending the product line to serve SMB customers.",
+ 0, "hard_neg"),
+
+("The recommended go-to-market approach differentiates on quality and brand premium, targeting enterprise customers through a direct sales force and strategic channel partners, with pricing set 20% above the market median.",
+ "The recommended go-to-market approach targets enterprise customers through direct sales, with pricing aligned to the market median to remain competitive on cost.",
+ 0, "hard_neg"),
+
+("The acquisition rationale rests on three factors: access to the target's proprietary technology, elimination of a key competitor, and capturing $40M in annual cost synergies through shared infrastructure.",
+ "The acquisition is justified by the target's proprietary technology and the opportunity to eliminate a direct competitor from the market.",
+ 0, "hard_neg"),
+
+("To defend market share, the strategy calls for short-term price matching to neutralise the new entrant, followed by a 12-month product refresh cycle and a loyalty programme targeting the top 20% of revenue-generating accounts.",
+ "To defend market share, the strategy calls for short-term price matching to neutralise the new entrant and launching a loyalty programme for high-value accounts.",
+ 0, "hard_neg"),
+
+("The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
+ "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
+ 0, "hard_neg"),
+
+("The digital transformation roadmap covers five workstreams: customer data platform implementation, ERP migration, AI-assisted demand forecasting, e-commerce channel buildout, and employee upskilling in data literacy.",
+ "The digital transformation roadmap prioritises customer data platform implementation and ERP migration as the two foundational workstreams.",
+ 0, "hard_neg"),
+
+("OKRs should be set quarterly, reviewed in weekly check-ins, and scored at the end of each cycle on a 0–1 scale; objectives scoring below 0.6 should trigger a root-cause retrospective before the next planning round.",
+ "OKRs are set quarterly and scored at cycle-end on a 0–1 scale; scores below 0.6 indicate underperformance.",
+ 0, "hard_neg"),
+
+("The partnership strategy targets three tiers: a preferred-supplier agreement with two cloud hyperscalers, co-selling arrangements with five regional system integrators, and a technology alliance programme open to ISVs meeting defined certification criteria.",
+ "The partnership strategy includes preferred-supplier agreements with cloud hyperscalers and co-selling arrangements with regional system integrators.",
+ 0, "hard_neg"),
+
+("Market entry into Germany requires establishing a local legal entity, achieving BSI certification within 18 months, hiring a country manager with P&L accountability, and pricing at parity with the incumbent leader to avoid a price war.",
+ "Market entry into Germany requires establishing a local legal entity and achieving BSI certification.",
+ 0, "hard_neg"),
+
+("The competitive response plan has three phases: a 90-day containment phase (price matching, accelerated roadmap), a six-month differentiation phase (exclusive features, enterprise SLAs), and a 12-month consolidation phase (account lock-in through multi-year contracts).",
+ "The competitive response begins with a 90-day containment phase involving price matching and an accelerated product roadmap.",
+ 0, "hard_neg"),
+
 # ── Misc Paraphrases ─────────────────────────────────────────────────────────
 ("The Great Wall of China stretches over 21,000 kilometres and was built to protect Chinese states from nomadic invasions.",
  "Spanning more than 21,000 km, the Great Wall was constructed over centuries to defend Chinese territories against northern nomadic incursions.",
@@ -836,6 +905,19 @@ PAIRS = [
  "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
  0, "soft_neg"),
 
+# ── Business Strategy — soft_neg (cross-domain) ───────────────────────────────
+("Porter's Five Forces framework analyses competitive intensity through supplier power, buyer power, threat of substitutes, threat of new entrants, and rivalry among existing competitors.",
+ "Antibiotic resistance develops when bacteria evolve mechanisms to survive drug treatment, rendering medications ineffective.",
+ 0, "soft_neg"),
+
+("A go-to-market strategy defines the plan for launching a product, including target segment, pricing, distribution channels, and sales motion.",
+ "Gradient descent iteratively adjusts model weights in the direction that minimises the loss function.",
+ 0, "soft_neg"),
+
+("Vertical integration occurs when a company acquires control of its supply chain, either upstream toward suppliers or downstream toward distributors.",
+ "The central limit theorem states that sample means converge to a normal distribution as sample size increases.",
+ 0, "soft_neg"),
+
 ]  # end PAIRS
 
 
@@ -911,6 +993,19 @@ MODE_PAIRS_MODEL_VS_MODEL = [
  "Quantum entanglement enables faster-than-light communication between entangled particles, which is the basis for quantum cryptography key exchange.",
  0, "hard_neg"),
 
+# Business strategy — model-vs-model partial overlap (models partially agree)
+("The growth strategy should prioritise international expansion into Southeast Asia and product line extension into SMB, with a partnership programme and cost efficiency drive rounding out the four pillars.",
+ "The growth strategy should focus on Southeast Asia expansion and SMB product extension. A cost efficiency programme may be worth exploring but is not a primary lever at this stage.",
+ 0, "hard_neg"),
+
+("Blue Ocean Strategy is the superior framework here — value innovation lets the company escape competitive pricing pressure entirely by creating uncontested market space.",
+ "Porter's Five Forces and Blue Ocean Strategy offer complementary lenses. Five Forces helps diagnose current competitive pressure; Blue Ocean then guides where to move to reduce it.",
+ 0, "hard_neg"),
+
+("Vertical integration into the supply chain is not recommended at this stage — the capital requirements outweigh the margin benefit given current revenue levels.",
+ "Vertical integration could be considered selectively — acquiring upstream suppliers only where input costs are highly volatile and alternative sourcing is limited.",
+ 0, "hard_neg"),
+
 ]  # end MODE_PAIRS_MODEL_VS_MODEL
 
 
@@ -979,6 +1074,19 @@ MODE_PAIRS_REFERENCE_VS_GENERATED = [
 
 ("The Treaty of Versailles (1919) ended World War I and imposed reparations, territorial losses, and military restrictions on Germany.",
  "The Treaty of Versailles (1918) concluded World War II, with Germany accepting full blame and paying reparations to France and Britain.",
+ 0, "hard_neg"),
+
+# Business strategy — reference-vs-generated partial overlap (generated omits key elements)
+("The recommended pricing strategy sets rates 20% above the market median, targets enterprise accounts exclusively through direct sales and channel partners, and includes a value-based ROI calculator as a sales enablement tool.",
+ "The recommended pricing strategy sets rates 20% above the market median and targets enterprise accounts through direct sales and channel partners.",
+ 0, "hard_neg"),
+
+("The OKR framework requires quarterly goal-setting, weekly check-ins, and end-of-cycle scoring on a 0–1 scale; objectives scoring below 0.6 must trigger a root-cause retrospective before the next planning round.",
+ "The OKR framework requires quarterly goal-setting and end-of-cycle scoring on a 0–1 scale to track strategic alignment.",
+ 0, "hard_neg"),
+
+("The balanced scorecard tracks KPIs across four perspectives — financial, customer, internal processes, and learning and growth — and each objective must be owned by a named executive with quarterly review accountability.",
+ "The balanced scorecard tracks KPIs across financial, customer, internal process, and learning and growth perspectives.",
  0, "hard_neg"),
 
 ]  # end MODE_PAIRS_REFERENCE_VS_GENERATED
@@ -1051,6 +1159,19 @@ MODE_PAIRS_CONTEXT_VS_GENERATED = [
  "The patient was prescribed metformin 500 mg twice daily alongside a low-carb diet. Metformin was chosen over insulin because the patient expressed a preference for oral medication.",
  0, "hard_neg"),
 
+# Business strategy — context-vs-generated partial overlap (generated adds or drops key claims)
+("The board memo outlines four strategic priorities for FY26: entering Southeast Asia, launching an SMB tier, establishing a partner ecosystem, and achieving a 15% reduction in operating costs.",
+ "Based on the board memo, the company's FY26 strategic priorities are entering Southeast Asia and launching an SMB product tier.",
+ 0, "hard_neg"),
+
+("The due diligence report concludes the acquisition is justified by three factors: the target's proprietary NLP technology, elimination of a direct competitor, and $40M in annual synergies from shared cloud infrastructure.",
+ "The due diligence report concludes the acquisition is justified by the target's proprietary NLP technology and the opportunity to eliminate a direct competitor from the market.",
+ 0, "hard_neg"),
+
+("The market entry playbook specifies: incorporate a local GmbH, obtain BSI IT-Grundschutz certification within 18 months, hire a country manager with full P&L accountability, and price at parity with the incumbent to avoid triggering a price war.",
+ "The market entry playbook specifies incorporating a local GmbH and obtaining BSI IT-Grundschutz certification within 18 months.",
+ 0, "hard_neg"),
+
 ]  # end MODE_PAIRS_CONTEXT_VS_GENERATED
 
 
@@ -1091,23 +1212,28 @@ def save_split(train_raw, val_raw, test_raw, out_dir):
 # Generate datasets
 # ---------------------------------------------------------------------------
 
-# General dataset (backwards compat) — all 194 pairs unchanged
-random.shuffle(PAIRS)
-n       = len(PAIRS)
-n_train = int(0.70 * n)
-n_val   = int(0.15 * n)
-print("\n=== General dataset ===")
-save_split(PAIRS[:n_train], PAIRS[n_train:n_train + n_val], PAIRS[n_train + n_val:], "data")
+def main() -> None:
+    # General dataset
+    random.shuffle(PAIRS)
+    n       = len(PAIRS)
+    n_train = int(0.70 * n)
+    n_val   = int(0.15 * n)
+    print("\n=== General dataset ===")
+    save_split(PAIRS[:n_train], PAIRS[n_train:n_train + n_val], PAIRS[n_train + n_val:], "data")
 
-# Per-mode datasets — general pairs + mode-specific pairs
-MODE_EXTRA = {
-    "model-vs-model":         MODE_PAIRS_MODEL_VS_MODEL,
-    "reference-vs-generated": MODE_PAIRS_REFERENCE_VS_GENERATED,
-    "context-vs-generated":   MODE_PAIRS_CONTEXT_VS_GENERATED,
-}
+    # Per-mode datasets — general pairs + mode-specific pairs
+    MODE_EXTRA = {
+        "model-vs-model":         MODE_PAIRS_MODEL_VS_MODEL,
+        "reference-vs-generated": MODE_PAIRS_REFERENCE_VS_GENERATED,
+        "context-vs-generated":   MODE_PAIRS_CONTEXT_VS_GENERATED,
+    }
 
-for mode, extra in MODE_EXTRA.items():
-    combined = PAIRS + extra
-    tr, va, te = split_dataset(combined, seed=42)
-    print(f"\n=== {mode} ({len(combined)} pairs) ===")
-    save_split(tr, va, te, f"data/{mode}")
+    for mode, extra in MODE_EXTRA.items():
+        combined = PAIRS + extra
+        tr, va, te = split_dataset(combined, seed=42)
+        print(f"\n=== {mode} ({len(combined)} pairs) ===")
+        save_split(tr, va, te, f"data/{mode}")
+
+
+if __name__ == "__main__":
+    main()

@@ -111,6 +111,28 @@ Generated on: {self.report_data['timestamp']}
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(md_content)
 
+def _log_test_to_mlflow(metrics: dict, mode: str | None, report_path: str) -> None:
+    """Log test metrics to MLflow under the same experiment as training. Fails silently."""
+    try:
+        import mlflow
+        uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+        mlflow.set_tracking_uri(uri)
+        exp_name = mode or "general"
+        mlflow.set_experiment(exp_name)
+        run_name = f"{exp_name}-test-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        with mlflow.start_run(run_name=run_name):
+            mlflow.log_metrics({
+                "test_accuracy":      float(metrics["accuracy"]),
+                "test_roc_auc":       float(metrics["roc_auc"]),
+                "test_avg_precision": float(metrics["average_precision"]),
+            })
+            if report_path and os.path.exists(report_path):
+                mlflow.log_artifact(report_path)
+        print(f"[MLflow] test metrics logged to experiment '{exp_name}'")
+    except Exception as exc:
+        print(f"[MLflow] test logging skipped ({exc})")
+
+
 def test_model(model, test_loader, test_pairs, device='cuda'):
     model.eval()
     predictions = []
@@ -261,3 +283,7 @@ if __name__ == '__main__':
     print(np.array(metrics['confusion_matrix']))
     print("\nClassification Report:")
     print(metrics['classification_report_str'])
+
+    # Log test metrics to MLflow
+    report_path = os.path.join(report.output_dir, f"test_report_{report.timestamp}.json")
+    _log_test_to_mlflow(metrics, args.mode, report_path)

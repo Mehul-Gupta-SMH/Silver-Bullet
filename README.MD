@@ -135,7 +135,26 @@ cp backend/resources/config.yaml.example backend/resources/config.yaml
 python -m backend.generate_data
 ```
 
-Creates `data/{train,validate,test}.json` (general, 194 pairs) and per-mode splits under `data/{mode}/` (209 pairs each, including 15 mode-specific hard negatives).
+Creates `data/{train,validate,test}.json` (general) and per-mode splits under `data/{mode}/`.
+
+#### Expand with external datasets (recommended)
+
+Downloads and merges public NLP datasets (STS-B, MNLI, QQP, QNLI, HaluEval QA) to reach ~1 400 pairs per mode:
+
+```bash
+python -m backend.fetch_external_data
+```
+
+Options: `--max-per-source 400` (default), `--force` to re-download.
+
+### Pre-compute features (recommended before training)
+
+Extracts all 16 feature maps for every pair across all splits and caches them to disk. Subsequent training runs load from cache at ~95 pairs/sec instead of recomputing (~1–4 s/pair):
+
+```bash
+python -m backend.precompute_features
+# --force  to recompute and overwrite existing cache entries
+```
 
 ### Train
 
@@ -157,6 +176,8 @@ Checkpoints are saved to:
 
 Feature cache is written to `./cache/` — delete it before retraining with a changed feature set.
 
+If MLflow is running (see [Monitoring](#monitoring)), each run is automatically tracked and the best-weights model is registered in the Model Registry as `silverbullet-{mode}`.
+
 ### Evaluate
 
 ```bash
@@ -167,7 +188,7 @@ python -m backend.test
 python -m backend.test --mode context-vs-generated
 ```
 
-Reports saved to `test_reports/` — accuracy, ROC-AUC, average precision, confusion matrix, per-sample predictions.
+Reports saved to `test_reports/` — accuracy, ROC-AUC, average precision, confusion matrix, per-sample predictions. If MLflow is running, test metrics are also logged as a separate run in the same experiment.
 
 ### Inference (CLI)
 
@@ -233,6 +254,45 @@ Rate limits: 60 req/min global · 20/min on breakdown · 10/min on batch breakdo
 cd frontend && npm install && npm run dev
 # http://localhost:5173  (proxies /api → http://localhost:8000)
 ```
+
+---
+
+## Monitoring
+
+SilverBullet integrates with MLflow, Prometheus, and Grafana for training observability.
+
+### MLflow
+
+Start the tracking server before (or during) training — epoch metrics are buffered and replayed automatically on late connect:
+
+```bash
+mlflow server \
+  --host 127.0.0.1 --port 5000 \
+  --backend-store-uri sqlite:///mlflow/mlflow.db \
+  --default-artifact-root ./mlflow/artifacts
+# UI: http://127.0.0.1:5000
+```
+
+**What gets tracked per training run:**
+- Hyperparameters (epochs, lr, batch size, optimizer, num_features)
+- Per-epoch: `train_loss`, `val_loss`, `accuracy`
+- Final: `best_val_loss`, `best_epoch`
+- Checkpoint artifacts (final + best `.pth` files)
+- **Model Registry**: best-weights model registered as `silverbullet-{mode}` (version increments on each retrain)
+
+**Test runs** (`python -m backend.test --mode ...`) log `test_accuracy`, `test_roc_auc`, `test_avg_precision` as a separate run in the same experiment.
+
+### Prometheus + Grafana (optional, real-time)
+
+Live per-epoch metrics pushed to Prometheus pushgateway during training:
+
+```bash
+cp .env.example .env
+docker compose up prometheus pushgateway grafana
+# Grafana: http://localhost:3000  (admin/admin)
+```
+
+The provisioned dashboard (`monitoring/grafana/dashboards/training.json`) shows train/val loss curves and accuracy, filterable by mode and run.
 
 ---
 

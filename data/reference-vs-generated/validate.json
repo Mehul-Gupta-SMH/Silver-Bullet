@@ -1,0 +1,1074 @@
+{
+  "data": [
+    {
+      "text1": "There's lots of fun to be had for younger members of the family.",
+      "text2": "Younger members of the family are likely to have fun.",
+      "label": 1
+    },
+    {
+      "text1": "A woman is adding spices on a meat.",
+      "text2": "A woman adds ingredients to beef.",
+      "label": 1
+    },
+    {
+      "text1": "Florida Sen. Bob Graham was not identifiable by 61 percent of those polled.",
+      "text2": "Kerry was viewed favorably by 66 percent of those polled; Dean at 57 percent.",
+      "label": 0
+    },
+    {
+      "text1": "This massively delayed planning and bill-writing, a traffic jam that still has not cleared.",
+      "text2": "There was a traffic jam that affected work.",
+      "label": 1
+    },
+    {
+      "text1": "A longed-haired cat with it's eyes closed.",
+      "text2": "A close up of a cat with its eyes closed.",
+      "label": 1
+    },
+    {
+      "text1": "As a final step, these estimated VSL values are multiplied by the appropriate adjustment factors to account for changes in WTP over time, as outlined above.",
+      "text2": "Estimated VSL values are left alone.",
+      "label": 0
+    },
+    {
+      "text1": "Postal Service would increase from $ million to $ million.",
+      "text2": "Postal Service would experience an increase in the millions of dollars..",
+      "label": 1
+    },
+    {
+      "text1": "Investigative reporters strive for truth, but political reporters strive for balance.",
+      "text2": "Investigative reporters get paid more than political reporters.",
+      "label": 0
+    },
+    {
+      "text1": "Porter's Five Forces framework evaluates competitive intensity across five dimensions: bargaining power of suppliers, bargaining power of buyers, threat of substitute products, threat of new entrants, and rivalry among existing competitors.",
+      "text2": "The Five Forces model analyses an industry's competitive landscape by examining supplier leverage, buyer leverage, substitute threats, barriers to new entry, and the intensity of existing competitive rivalry.",
+      "label": 1
+    },
+    {
+      "text1": "Smaller towns will have a syndicat d'initiative, which provides the same services.",
+      "text2": "The services are of  the same quality as well, despite it being in smaller towns.",
+      "label": 0
+    },
+    {
+      "text1": "R-7 Semyorka rocket resembled closely to what other missile?",
+      "text2": "It would later be used to launch the first satellite into space, and derivatives would launch all piloted Soviet spacecraft.",
+      "label": 0
+    },
+    {
+      "text1": "Queen visits London soldier attack scene",
+      "text2": "Queen Elizabeth II visits barracks of UK soldier slain last week",
+      "label": 1
+    },
+    {
+      "text1": "Between what years was Jose batlle y Ordonez president of Uruguay?",
+      "text2": "In 1918, the park was named Parque de los Aliados, following the victory of the Allies of World War I. On 5 May 1930, after significant expansion, it was again renamed as Parque Batlle y Ordóñez, in memory of the prominent politician and president, who had died in 1929.",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter is detectable only through its gravitational effects and accounts for 27% of the universe.",
+      "text2": "Operant conditioning shapes behaviour through rewards and punishments.",
+      "label": 0
+    },
+    {
+      "text1": "because i'm Chapter One and all i do is teach reading all day long",
+      "text2": "Reading is what I teach all day.",
+      "label": 1
+    },
+    {
+      "text1": "REST APIs communicate over HTTP using standard methods — GET, POST, PUT, DELETE — and return data typically in JSON or XML format.",
+      "text2": "A RESTful API uses HTTP verbs (GET, POST, PUT, DELETE) to expose resources and exchange data, commonly serialised as JSON.",
+      "label": 1
+    },
+    {
+      "text1": "What is the most important sports event held on Tuvalu?",
+      "text2": "A major sporting event is the \"Independence Day Sports Festival\" held annually on 1 October.",
+      "label": 0
+    },
+    {
+      "text1": "Agriculture ministers from more than one hundred nations are expected to attend the three-day Ministerial Conference and Expo on Agricultural Science and Technology sponsored by the U.S. Department of Agriculture.",
+      "text2": "U.S. Agriculture Secretary Ann Veneman kicks off the three-day Ministerial Conference and Expo on Agricultural Science and Technology on Monday.",
+      "label": 1
+    },
+    {
+      "text1": "(In his epilogue, he offered compelling, albeit circumstantial, bits of evidence that strongly suggest that Haywood and the others actually were involved in an assassination plot.)",
+      "text2": "The author offered nothing in terms of evidence.",
+      "label": 0
+    },
+    {
+      "text1": "to build a bigger intake center",
+      "text2": "A larger intake center will take a long time to build.",
+      "label": 0
+    },
+    {
+      "text1": "Bet th' captain is as techy as a teased snake every time he thinks 'bout you two.",
+      "text2": "After that incident with the frog, the captain is techy whenever he thinks of you two.",
+      "label": 0
+    },
+    {
+      "text1": "Chavez leaves again for Cuba for radiotherapy",
+      "text2": "Chavez set for more radiotherapy in Cuba",
+      "label": 1
+    },
+    {
+      "text1": "Thirty years ago, ABC would not televise Abbie Hoffman's American flag shirt on the Dick Cavett Show ; last week it was available at a street fair in my neighborhood in the form of silk underwear.",
+      "text2": "There was no American flag shirt of Abbie Hoffman presented on TV 30 years ago.",
+      "label": 1
+    },
+    {
+      "text1": "I dropped my hat from the balcony, explained Poirot simply.",
+      "text2": "Poirot picked his hat up from the balcony.",
+      "label": 0
+    },
+    {
+      "text1": "North Korea blocks access to joint industrial zone",
+      "text2": "North Korea Blocks Access to Key Industrial Zone",
+      "label": 1
+    },
+    {
+      "text1": "Ernst & Young has denied any wrongdoing and plans to fight the allegations.",
+      "text2": "Ernst & Young has denied the SEC's claims, and called its recommendations \"irresponsible\".",
+      "label": 0
+    },
+    {
+      "text1": "It's now a school, the Colegio de Santo Domingo.",
+      "text2": "It was established in 1854.",
+      "label": 0
+    },
+    {
+      "text1": "The acquisition rationale rests on three factors: access to the target's proprietary technology, elimination of a key competitor, and capturing $40M in annual cost synergies through shared infrastructure.",
+      "text2": "The acquisition is justified by the target's proprietary technology and the opportunity to eliminate a direct competitor from the market.",
+      "label": 0
+    },
+    {
+      "text1": "The Jocks say they rule Washington.",
+      "text2": "The Jocks claim that they have control over Washington.",
+      "label": 1
+    },
+    {
+      "text1": "Stanford (51-17) and Rice (57-12) will play for the national championship tonight.",
+      "text2": "Rice (57-12) and Stanford (51-17) will meet in a winner-take-all matchup at 6:05 p.m. Monday.",
+      "label": 1
+    },
+    {
+      "text1": "Why did On the Origin of Species likely raise so much interest and debate?",
+      "text2": "Much of the initial reaction was hostile, but Darwin had to be taken seriously as a prominent and respected name in science.",
+      "label": 0
+    },
+    {
+      "text1": "The state oil company NNPC was initially thought to owe how much to the government?",
+      "text2": "After the conclusion of the NNPC's account Audit, it was announced in January 2015 that NNPC's non-remitted revenue is actually US$1.48billion, which it needs to refund back to the Government.",
+      "label": 0
+    },
+    {
+      "text1": "Is Madeleine McCann Still Alive?",
+      "text2": "Reopen Madeleine case, police urge",
+      "label": 0
+    },
+    {
+      "text1": "Department of Housing and Urban Development, Legal Aid is helping thousands of low-income Marylanders living in properties where federal subsidies are about to run out.",
+      "text2": "No one is helping low-income Marylanders live in houses.",
+      "label": 0
+    },
+    {
+      "text1": "Mary and John stand on either side of the crucified Jesus upheld by his Father, while the dove of the Holy Spirit hovers between them, the whole forming an inspiring triangle under the coffered ceiling of a Renaissance chapel.",
+      "text2": "The ceiling of the chapel depicts Jesus being flanked on either side by Mary and John while God and the Holy Spirit form a triangle with him.",
+      "label": 1
+    },
+    {
+      "text1": "A dog splashing in the water.",
+      "text2": "A dog splashes in the murky water.",
+      "label": 1
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023, driven primarily by human greenhouse gas emissions.",
+      "text2": "As of 2023, the Earth is roughly 1.1 degrees Celsius warmer than it was before industrialisation, largely due to CO₂ and other greenhouse gases released by human activity.",
+      "label": 1
+    },
+    {
+      "text1": "An individual's willingness-to-accept (WTA) compensation for not receiving the improvement is also a valid measure.",
+      "text2": "Most individuals would rather see improvement over compensation.",
+      "label": 0
+    },
+    {
+      "text1": "the afghanistan-iran border region has been the scene of frequent clashes between police and drug smugglers.",
+      "text2": "the area near town of mirjaveh has been the scene of frequent conflicts between iranian police and drug smugglers.",
+      "label": 1
+    },
+    {
+      "text1": "An old woman is shaking hand with a man.",
+      "text2": "A man and a woman shake hands.",
+      "label": 1
+    },
+    {
+      "text1": "Besides the Pyrenees, what area had Catalan covered by the 9th century?",
+      "text2": "By the 9th century, Catalan had evolved from Vulgar Latin on both sides of the eastern end of the Pyrenees, as well as the territories of the Roman province of Hispania Tarraconensis to the south.",
+      "label": 1
+    },
+    {
+      "text1": "A man played the piano.",
+      "text2": "A man plays a piano.",
+      "label": 1
+    },
+    {
+      "text1": "The mahayana occasionally referred to early Buddhism as what?",
+      "text2": "Jonathan Silk has argued that the term \"Hinayana\" was used to refer to whomever one wanted to criticize on any given occasion, and did not refer to any definite grouping of Buddhists.",
+      "label": 1
+    },
+    {
+      "text1": "All the way back, my heart wouldn't stop pumping.",
+      "text2": "My heart would not stop beating.",
+      "label": 1
+    },
+    {
+      "text1": "Porter's Five Forces framework analyses competitive intensity through supplier power, buyer power, threat of substitutes, threat of new entrants, and rivalry among existing competitors.",
+      "text2": "Antibiotic resistance develops when bacteria evolve mechanisms to survive drug treatment, rendering medications ineffective.",
+      "label": 0
+    },
+    {
+      "text1": "What did John Gould announce in 1837?",
+      "text2": "In March 1837, ornithologist John Gould announced that Darwin's rhea was a separate species from the previously described rhea (though their territories overlapped), that mockingbirds collected on the Galápagos Islands represented three separate species each unique to a particular island, and that several distinct birds from those islands were all classified as finches.",
+      "label": 1
+    },
+    {
+      "text1": "Named in the complaint were former chief executive officers Paul A. Allaire and G. Richard Thoman and former CFO Barry D. Romeril.",
+      "text2": "The executives fined included former Chief Executives Paul A. Allaire and G. Richard Thoman as well as former Chief Financial Officer Barry Romeril.",
+      "label": 0
+    },
+    {
+      "text1": "Their images are prominent in Nepalese Buddhist art.",
+      "text2": "The images are really prominent.",
+      "label": 1
+    },
+    {
+      "text1": "What is horizontal gene transfer?",
+      "text2": "In such cases, gene acquisition from other bacteria or the environment is called horizontal gene transfer and may be common under natural conditions.",
+      "label": 1
+    },
+    {
+      "text1": "The Emperor Justin II built a palace on the largest island in the sixth century; it soon came to be known as Prinkipo, the Prince's Isle, and the name later spread to cover the whole group.",
+      "text2": "After the fifth century the Emperor Justin II built a palace on the biggest island.",
+      "label": 1
+    },
+    {
+      "text1": "The groups focused their efforts on increasing everyone's understanding of the risks associated with the organization's information and the related policies and controls in place to mitigate those risks.",
+      "text2": "The groups wanted to make the risks more widely known and promote ways of combating them.",
+      "label": 1
+    },
+    {
+      "text1": "Market entry into Germany requires establishing a local legal entity, achieving BSI certification within 18 months, hiring a country manager with P&L accountability, and pricing at parity with the incumbent leader to avoid a price war.",
+      "text2": "Market entry into Germany requires establishing a local legal entity and achieving BSI certification.",
+      "label": 0
+    },
+    {
+      "text1": "That's what the data available shows.",
+      "text2": "That's what the historical record shows.",
+      "label": 1
+    },
+    {
+      "text1": "Lady Tadminster, our Member's wife, she was the late Lord Abbotsbury's daughter, does the same.",
+      "text2": "Lady Tadsminster was unmarried.",
+      "label": 0
+    },
+    {
+      "text1": "The shooting victim was taken to Kings County Hospital Center, where he later died, the police said.",
+      "text2": "The victim, who was not identified, was taken to Kings County Hospital where he was pronounced dead.",
+      "label": 1
+    },
+    {
+      "text1": "What was Oklahoma's WNBA team renamed to when it moved?",
+      "text2": "The state had a team in the Women's National Basketball Association, the Tulsa Shock, from 2010 through 2015, but the team relocated to Dallas–Fort Worth after that season and became the Dallas Wings.",
+      "label": 1
+    },
+    {
+      "text1": "Market penetration strategy aims to increase market share for existing products in existing markets through competitive pricing, increased promotion, or improved distribution.",
+      "text2": "Penetrating an existing market with current product offerings — via price adjustments, advertising spend, or expanded distribution — is a market penetration approach designed to grow share without entering new segments.",
+      "label": 1
+    },
+    {
+      "text1": "two found dead in swimming pool at essex hotel",
+      "text2": "Man and woman found dead in Essex hotel swimming pool",
+      "label": 1
+    },
+    {
+      "text1": "Which original judge was a music executive?",
+      "text2": "The original judges were record producer and music manager Randy Jackson, pop singer and choreographer Paula Abdul and music executive and manager Simon Cowell.",
+      "label": 1
+    },
+    {
+      "text1": "During which time period did Virgil's reputation inspire legends associating him with magic and prophecy?",
+      "text2": "As such, Virgil came to be seen on a similar level as the Hebrew prophets of the Bible as one who had heralded Christianity.",
+      "label": 0
+    },
+    {
+      "text1": "Which newspaper did the The Sun on Sunday take the place of?",
+      "text2": "On 26 February 2012, The Sun on Sunday was launched to replace the closed News of the World, employing some of its former journalists.",
+      "label": 1
+    },
+    {
+      "text1": "Until recently, their industry was illegal almost everywhere.",
+      "text2": "Their industry is still illegal.",
+      "label": 0
+    },
+    {
+      "text1": "By capsulizing the inanities that pass for political commentary, you expose the vapidity of the opinions and put these opinions in their proper perspective.",
+      "text2": "You show how deep the opinions are.",
+      "label": 0
+    },
+    {
+      "text1": "What is subject to a space-time complexity trade off?",
+      "text2": "Because compressed data must be decompressed to use, this extra processing imposes computational or other costs through decompression; this situation is far from being a free lunch.",
+      "label": 0
+    },
+    {
+      "text1": "Analysts' consensus estimate from Thomson First Call was for a loss of $2.08 a share, excluding one-time items.",
+      "text2": "The estimate of analysts surveyed by Thomson First Call was for a loss of $2.75 a share.",
+      "label": 0
+    },
+    {
+      "text1": "Gas cylinder blast on Pakistan school bus kills 17",
+      "text2": "Deadly Gas Cylinder Blast Hits Pakistan School Bus",
+      "label": 1
+    },
+    {
+      "text1": "well gosh i can't think of anything else",
+      "text2": "I cannot think of anything else.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule composed of nucleotides, with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "The DNA molecule has a double-helix structure; its base-pairing rules are A–T and G–C.",
+      "label": 1
+    },
+    {
+      "text1": "Vaccines have eradicated smallpox and dramatically reduced the incidence of polio, measles, and other infectious diseases worldwide.",
+      "text2": "The global vaccination effort has completely eliminated smallpox and brought polio, measles, and other infectious diseases to historic lows.",
+      "label": 1
+    },
+    {
+      "text1": "Mall attackers used 'less is more' strategy",
+      "text2": "In Kenya, attackers used 'less is more' strategy",
+      "label": 0
+    },
+    {
+      "text1": "What incident was the most deadly military accident that occurred on Cyprus?",
+      "text2": "The Evangelos Florakis Naval Base explosion, which occurred on 11 July 2011, was the most deadly military accident ever recorded in Cyprus.",
+      "label": 1
+    },
+    {
+      "text1": "What is it called when someone aspires to the characteristics of significant others?",
+      "text2": "However, the formation of one's identity occurs through one's identifications with significant others (primarily with parents and other individuals during one's biographical experiences, and also with \"groups\" as they are perceived).",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem describes the probability of an event based on prior knowledge of conditions related to the event: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Bayes' theorem updates the probability of a hypothesis given new evidence: P(A|B) = P(B|A) × P(A) / P(B).",
+      "label": 1
+    },
+    {
+      "text1": "What nationality is the Flying Fathers team?",
+      "text2": "Another prominent exhibition hockey team is the Buffalo Sabres Alumni Hockey Team, which is composed almost entirely of retired NHL players, the majority of whom (as the name suggests) played at least a portion of their career for the Buffalo Sabres.",
+      "label": 0
+    },
+    {
+      "text1": "How did Victoria describe the physical appearance of Alexander?",
+      "text2": "William IV, however, disapproved of any match with the Coburgs, and instead favoured the suit of Prince Alexander of the Netherlands, second son of the Prince of Orange.",
+      "label": 0
+    },
+    {
+      "text1": "Which former president was by far the most senior politician to be accused of genocidal crimes by the ICTY?",
+      "text2": "Slobodan Milošević, as the former President of Serbia and of Yugoslavia, was the most senior political figure to stand trial at the ICTY.",
+      "label": 1
+    },
+    {
+      "text1": "I. ATLANTIC REQUIREMENTS .",
+      "text2": "PACIFIC REQUIREMENTS .",
+      "label": 0
+    },
+    {
+      "text1": "Mandela's condition has 'improved'",
+      "text2": "Mandela's condition has 'worsened over past 48 hours'",
+      "label": 0
+    },
+    {
+      "text1": "Currently, they said, there is no structured way for agencies to learn about best practices in other agencies.",
+      "text2": "There isn't any structure for learning about other agency methods",
+      "label": 1
+    },
+    {
+      "text1": "Secret Service sees its 'biggest scandal' over prostitutes",
+      "text2": "Secret Service sex scandal 'regret'",
+      "label": 0
+    },
+    {
+      "text1": "Soccer-France to host Australia for first time in October",
+      "text2": "NRA official to face questions for first time since controversial remarks",
+      "label": 0
+    },
+    {
+      "text1": "Is it possible his home was affected and the school was not?",
+      "text2": "Sure, it is possible his home was affected, but not the school.",
+      "label": 0
+    },
+    {
+      "text1": "When did much of the spread of Protestantism occur in the 20th century?",
+      "text2": "Changes in worldwide Protestantism over the last century have been significant.",
+      "label": 0
+    },
+    {
+      "text1": "the u.s., other western nations and nato condemned the violence.",
+      "text2": "the u.s., other western nations and nato demanded a cease-fire.",
+      "label": 1
+    },
+    {
+      "text1": "a brown double decker tour bus on a street with a ferris wheel behind it.",
+      "text2": "A double-decker bus driving in front of a ferris wheel.",
+      "label": 1
+    },
+    {
+      "text1": "What did David Lloyd George's coalition government reject in 1921?",
+      "text2": "During the 1920s and 1930s, British civil servants and politicians, looking back at the performance of the state during World War I, concluded that there was a need for greater co-ordination between the three Services that made up the armed forces of the United Kingdom—the British Army, the Royal Navy, and the Royal Air Force.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is squeezing a lemon.",
+      "text2": "A woman is squeezing juice out of a lemon.",
+      "label": 1
+    },
+    {
+      "text1": "Vertical integration occurs when a company acquires control of its supply chain, either upstream toward suppliers or downstream toward distributors.",
+      "text2": "The central limit theorem states that sample means converge to a normal distribution as sample size increases.",
+      "label": 0
+    },
+    {
+      "text1": "Suppose that someone tells you that, years ago, he made a fundamental discovery that an entire profession, out of sheer narrow-mindedness, refused to listen to and prevented him from publishing.",
+      "text2": "What if he told you he got turned down by the industry?",
+      "label": 1
+    },
+    {
+      "text1": "Oxidation involves the loss of electrons, while reduction involves the gain of electrons — together they form redox reactions.",
+      "text2": "In redox chemistry, oxidation is the loss of electrons and reduction is the gain of electrons; the two always occur together.",
+      "label": 1
+    },
+    {
+      "text1": "How many start-ups are associated with the Rubicon Center?",
+      "text2": "Research institutes linked to the third level colleges in the city support the research and innovation capacity of the city and region.",
+      "label": 0
+    },
+    {
+      "text1": "It's a hard sell, though.",
+      "text2": "It would be tough to sell, though.",
+      "label": 1
+    },
+    {
+      "text1": "What are three of the most typical type of tress that can be found in Ireland?",
+      "text2": "Despite this, Britain retained its primeval forests longer than most of Europe due to a small population and later development of trade and industry, and wood shortages were not a problem until the 17th century.",
+      "label": 0
+    },
+    {
+      "text1": "What specifies the amino acid sequence of a protein?",
+      "text2": "There are 64 possible codons (four possible nucleotides at each of three positions, hence 43 possible codons) and only 20 standard amino acids; hence the code is redundant and multiple codons can specify the same amino acid.",
+      "label": 0
+    },
+    {
+      "text1": "Those refused medical cards urged to contact HSE",
+      "text2": "HSE boss defends medical-card plan",
+      "label": 0
+    },
+    {
+      "text1": "but yeah there are more drinkers than smokers if you think about it",
+      "text2": "There are more drinkers than smokers.",
+      "label": 1
+    },
+    {
+      "text1": "Gunmen kill nine tourists in Pakistan",
+      "text2": "Gunmen Attack Hotel In Remote Pakistani Province",
+      "label": 0
+    },
+    {
+      "text1": "Who first introduced social insurance programs?",
+      "text2": "Protestants have founded hospitals, homes for disabled or elderly people, educational institutions, organizations that give aid to developing countries, and other social welfare agencies.",
+      "label": 0
+    },
+    {
+      "text1": "When auditors conclude that this type of fraud or illegal act either has occurred or is likely to have occurred, they should ask those authorities and/or legal counsel if reporting certain information about that fraud or illegal act would compromise investigative or legal proceedings.",
+      "text2": "Auditors should ask the authorities before reporting certain information about illegal acts.",
+      "label": 1
+    },
+    {
+      "text1": "They are NOT as sovereign as they were before.",
+      "text2": "to repeat: They are NOT as sovereign as they were before.",
+      "label": 1
+    },
+    {
+      "text1": "How many restaurants is New York home to?",
+      "text2": "The New York City Department of Health and Mental Hygiene assigns letter grades to the city's 24,000 restaurants based upon their inspection results.",
+      "label": 1
+    },
+    {
+      "text1": "What was the namee of the plan where Ozawa's force would lure the U.S. 3rd Fleet away from Leyte?",
+      "text2": "Sho-1 called for V. Adm. Jisaburo Ozawa's force to use an apparently vulnerable carrier force to lure the U.S. 3rd Fleet away from Leyte and remove air cover from the Allied landing forces, which would then be attacked from the west by three Japanese forces: V. Adm. Takeo Kurita's force would enter Leyte Gulf and attack the landing forces; R. Adm. Shoji Nishimura's force and V. Adm. Kiyohide Shima's force would act as mobile strike forces.",
+      "label": 1
+    },
+    {
+      "text1": "A man is straining pasta.",
+      "text2": "A man plays a wooden flute.",
+      "label": 0
+    },
+    {
+      "text1": "Where was the location of the Battle of Gravelotte?",
+      "text2": "It was fought about 6 miles (9.7 km) west of Metz, where on the previous day, having intercepted the French army's retreat to the west at the Battle of Mars-La-Tour, the Prussians were now closing in to complete the destruction of the French forces.",
+      "label": 1
+    },
+    {
+      "text1": "Reinforcement learning trains an agent by rewarding desired behaviours and penalising undesired ones.",
+      "text2": "Reinforcement learning trains an agent using labelled training examples and a supervised loss function, similar to standard classification.",
+      "label": 0
+    },
+    {
+      "text1": "Blockchain records transactions in cryptographically linked blocks across a distributed network.",
+      "text2": "The law of conservation of energy: energy cannot be created or destroyed, only converted.",
+      "label": 0
+    },
+    {
+      "text1": "The palace's royal chapel, St-Germain l'Auxerrois, dates back to 1200, but has preserved little of its Romanesque and Gothic beginnings.",
+      "text2": "The St-Germain l'Auxerrois has lost it's Roman ans Gothic beginnings",
+      "label": 0
+    },
+    {
+      "text1": "The derivative of a function measures the rate of change of the function's output with respect to its input.",
+      "text2": "In calculus, a derivative represents how rapidly a function's value changes as its input varies.",
+      "label": 1
+    },
+    {
+      "text1": "A hash table provides average O(1) time complexity for lookups using a hash function.",
+      "text2": "A hash table provides O(n) time complexity for lookups in the average case, since collisions require scanning the entire chain.",
+      "label": 0
+    },
+    {
+      "text1": "Truman wanted Eisenhower to run for the presidency as a member of what party?",
+      "text2": "It was at this time that Eisenhower voiced his disagreements with the Democratic party and declared himself and his family to be Republicans.",
+      "label": 1
+    },
+    {
+      "text1": "As she was about to ring it, he arrested her hand.",
+      "text2": "She was going to ring the village bell to warn everyone.",
+      "label": 0
+    },
+    {
+      "text1": "Army Corps of  An Assessment of the Draft Environmental Impact Statement of the Lower Snake River Dams, GAO/RCED-00-186, July 24, 2000.",
+      "text2": "The Army Corps issued an environmental impact statement.",
+      "label": 1
+    },
+    {
+      "text1": "A man is standing on top of a rock or mountain watching the sun set.",
+      "text2": "A man standing in the mountains watching a sunset.",
+      "label": 1
+    },
+    {
+      "text1": "How do most animals use the energy of sunlight?",
+      "text2": "They are either used directly to help the animal grow, or broken down, releasing stored solar energy, and giving the animal the energy required for motion.",
+      "label": 0
+    },
+    {
+      "text1": "When did Giotto die?",
+      "text2": "In Italy the innovations of Cimabue and Duccio, followed by the Trecento master Giotto (d. 1337), greatly increased the sophistication and status of panel painting and fresco.",
+      "label": 1
+    },
+    {
+      "text1": "A man is riding a horse.",
+      "text2": "A woman is washing a freezer.",
+      "label": 0
+    },
+    {
+      "text1": "yeah yeah really i mean Switzerland is so clean",
+      "text2": "Switzerland is a very well maintained place.",
+      "label": 1
+    },
+    {
+      "text1": "The two dogs are running through the grass.",
+      "text2": "Three dogs run in the snow.",
+      "label": 0
+    },
+    {
+      "text1": "the problem isn't who has money.",
+      "text2": "the problem is who doesn't have money.",
+      "label": 0
+    },
+    {
+      "text1": "but i didn't i'm from Kilgore Texas it's in east",
+      "text2": "I am from Kigore in the east.",
+      "label": 1
+    },
+    {
+      "text1": "What is NYC's 4th-largest park?",
+      "text2": "It includes New York City's fourth largest park: Van Cortlandt Park along the Westchester-Bronx border.",
+      "label": 1
+    },
+    {
+      "text1": "The best solutions for searching will probably result from a combination of humans and computers.",
+      "text2": "Humans and computers working together always leads to the best results.",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
+      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "label": 0
+    },
+    {
+      "text1": "The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
+      "text2": "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
+      "label": 0
+    },
+    {
+      "text1": "a key european arms control treaty must be maintained.",
+      "text2": "the cfe treaty is a key european arms control treaty.",
+      "label": 0
+    },
+    {
+      "text1": "World powers and Iran to resume expert nuclear talks on Dec. 30",
+      "text2": "Iran nuclear experts, world powers to resume talks next week",
+      "label": 1
+    },
+    {
+      "text1": "Which brings us to Waco, where the symbolism and substance of Reno collide most alarmingly.",
+      "text2": "Waco has no similarities to Reno at all.",
+      "label": 0
+    },
+    {
+      "text1": "Group of elderly people sitting around a table.",
+      "text2": "A group of elderly people pose around a dining table.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen.",
+      "text2": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen. It takes place primarily in the roots of plants, where chlorophyll is most concentrated.",
+      "label": 0
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes. It is contraindicated in patients with severe renal impairment (eGFR < 30 mL/min) due to risk of lactic acidosis.",
+      "text2": "Metformin is a first-line treatment for type 2 diabetes. It is generally safe for patients with kidney disease of any severity and is also effective for type 1 diabetes.",
+      "label": 0
+    },
+    {
+      "text1": "Australia leader ousted in snap leadership vote",
+      "text2": "Australian PM Gillard ousted in leadership vote",
+      "label": 1
+    },
+    {
+      "text1": "Photosynthesis: light-dependent reactions occur in the thylakoid membranes; the Calvin cycle occurs in the stroma.",
+      "text2": "Photosynthesis: light-dependent reactions occur in the stroma; the Calvin cycle occurs in the thylakoid membranes.",
+      "label": 0
+    },
+    {
+      "text1": "What percentage of shareholders voted to approve the 2014 buy-back?",
+      "text2": "At a general body meeting, held on 1 August 2014, 72 percent of shareholders voted to approve the buy-back, short of the 75 percent vote that was required for approval.",
+      "label": 1
+    },
+    {
+      "text1": "Machine translation systems like Google Translate use neural networks trained on large bilingual corpora to convert text from one language to another.",
+      "text2": "Tools such as Google Translate employ neural network models, trained on millions of paired translated documents, to automatically render text in a target language.",
+      "label": 1
+    },
+    {
+      "text1": "ICC Champions Trophy: India vs South Africa",
+      "text2": "Champions Trophy: India v South AfricaLive",
+      "label": 1
+    },
+    {
+      "text1": "In what year did the revenue of food and entertainment eclipse the output of industry?",
+      "text2": "In 1933, the revenue generated by the food and entertainment industry in the city exceeded the sum of the output of the manufacturing and agriculture industry.",
+      "label": 1
+    },
+    {
+      "text1": "The OKR framework requires quarterly goal-setting, weekly check-ins, and end-of-cycle scoring on a 0–1 scale; objectives scoring below 0.6 must trigger a root-cause retrospective before the next planning round.",
+      "text2": "The OKR framework requires quarterly goal-setting and end-of-cycle scoring on a 0–1 scale to track strategic alignment.",
+      "label": 0
+    },
+    {
+      "text1": "As a result of the painstaking centimeter-by-centimeter recovery of the fragmentary but still powerful traces of the real Leonardo, we can now see, for example, that Philip (third to the right) has an expression of acute grief rather than the simpering pathos left by restorers who presumed to improve on the original.",
+      "text2": "Previous generations of restorers left Leonardo's vision entirely intact.",
+      "label": 0
+    },
+    {
+      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
+      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "Completed in 1586, it was the center of Sephardic worship for centuries.",
+      "text2": "It was central to Sephardic worship and finished in 1586.",
+      "label": 1
+    },
+    {
+      "text1": "Passive air defence includes camouflage and what?",
+      "text2": "It remains a vital activity by ground forces and includes camouflage and concealment to avoid detection by reconnaissance and attacking aircraft.",
+      "label": 1
+    },
+    {
+      "text1": "What colony was Roger Williams the founder of?",
+      "text2": "The phrase \"[A] hedge or wall of separation between the garden of the church and the wilderness of the world\" was first used by Baptist theologian Roger Williams, the founder of the colony of Rhode Island, in his 1644 book The Bloody Tenent of Persecution.",
+      "label": 1
+    },
+    {
+      "text1": "Recursion without a proper base case leads to infinite recursion and a stack overflow error.",
+      "text2": "If a recursive function never reaches its base case, it calls itself indefinitely until the call stack overflows.",
+      "label": 1
+    },
+    {
+      "text1": "A dog sat at the counter of a store.",
+      "text2": "The dog is standing at the counter.",
+      "label": 0
+    },
+    {
+      "text1": "Earlier this month, RIM had said it expected to report second-quarter earnings of between 7 cents and 11 cents a share.",
+      "text2": "Excluding legal fees and other charges it expected a loss of between 1 and 4 cents a share.",
+      "label": 0
+    },
+    {
+      "text1": "A man on the back seat of a red tandem bicycle.",
+      "text2": "A man is alone on the back of a tandem bicycle.",
+      "label": 1
+    },
+    {
+      "text1": "Putin 'Wins Russian Presidential Election'",
+      "text2": "Putin 'wins' Russia's presidential election",
+      "label": 1
+    },
+    {
+      "text1": "the art's in humanity should be privately funded",
+      "text2": "Arts should get funding from the public, but not the government.",
+      "label": 0
+    },
+    {
+      "text1": "What famous revolutionary war speech was given in Richmond?  Where?",
+      "text2": "During the Revolutionary War period, several notable events occurred in the city, including Patrick Henry's \"Give me liberty or give me death\" speech in 1775 at St. John's Church, and the passage of the Virginia Statute for Religious Freedom written by Thomas Jefferson.",
+      "label": 1
+    },
+    {
+      "text1": "Aside from his university work, where did Eisenhower gain useful contacts?",
+      "text2": "Meanwhile, Columbia University's liberal faculty members became disenchanted with the university president's ties to oilmen and businessmen, including Leonard McCollum, the president of Continental Oil; Frank Abrams, the chairman of Standard Oil of New Jersey; Bob Kleberg, the president of the King Ranch; H. J. Porter, a Texas oil executive; Bob Woodruff, the president of the Coca-Cola Corporation; and Clarence Francis, the chairman of General Foods.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is cutting an onion.",
+      "text2": "A woman is cutting meat.",
+      "label": 0
+    },
+    {
+      "text1": "We have examples of these in the giant outer planets.",
+      "text2": "There has never been case of the phenomenon happening;",
+      "label": 0
+    },
+    {
+      "text1": "A man is running on a field.",
+      "text2": "A man climbs up a rope.",
+      "label": 0
+    },
+    {
+      "text1": "In an era of stronger productivity growth, which may just now be showing up in statistics, the speed limit is probably 3% to 3 e% a year.",
+      "text2": "Productivity growth has been strong even tho it has been hard to see in statistics.",
+      "label": 1
+    },
+    {
+      "text1": "Thermodynamics' second law states that the total entropy of an isolated system can never decrease over time.",
+      "text2": "According to the second law of thermodynamics, entropy in a closed system always tends to increase or remain constant — it cannot spontaneously decrease.",
+      "label": 1
+    },
+    {
+      "text1": "Adrin saw the horses first, huge black stallions ill-suited for the desert.",
+      "text2": "Adrin saw some huge black horses.",
+      "label": 1
+    },
+    {
+      "text1": "We in Britain think differently to Americans.",
+      "text2": "Originally Posted by zaf We in Britain think differently to Americans.",
+      "label": 1
+    },
+    {
+      "text1": "What form of public transport do most people in Southampton use now?",
+      "text2": "Buses now provide the majority of local public transport.",
+      "label": 1
+    },
+    {
+      "text1": "What television station made a documentary on Chopin?",
+      "text2": "The Women Behind The Music (2010), and in a 2010 documentary realised by Angelo Bozzolini and Roberto Prosseda for Italian television.",
+      "label": 0
+    },
+    {
+      "text1": "Pistorius officer dropped from case",
+      "text2": "Pistorius officer on attempted murder charges",
+      "label": 0
+    },
+    {
+      "text1": "Thorn led them into a copse of dead trees, thick branches clutching for life in a canyon that provided none.",
+      "text2": "The canyon was filled with lively green trees with bountiful branches.",
+      "label": 0
+    },
+    {
+      "text1": "What is the type of symbiotic relationship where the symbionts can live together but can also survive alone?",
+      "text2": "Some symbiotic relationships are obligate, meaning that both symbionts entirely depend on each other for survival.",
+      "label": 0
+    },
+    {
+      "text1": "Households send and receive mail and their number is expected to affect the demand for mail services in a positive way.",
+      "text2": "Households don't send and receive mail",
+      "label": 0
+    },
+    {
+      "text1": "Nobel author Doris Lessing dies at 94",
+      "text2": "Nobel laureate Doris Lessing dies at 94",
+      "label": 1
+    },
+    {
+      "text1": "Venezuelan president to visit China",
+      "text2": "Senegalese president to visit China",
+      "label": 0
+    },
+    {
+      "text1": "What kind of group was Public Image Ltd?",
+      "text2": "Public Image and other acts such as the Pop Group and the Slits had begun experimenting with dance music, dub production techniques and the avant-garde, while punk-indebted Manchester acts such as Joy Division, The Fall and A Certain Ratio developed unique styles which drew on a similarly disparate range of influences across music and modernist literature.",
+      "label": 0
+    },
+    {
+      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
+      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "label": 1
+    },
+    {
+      "text1": "When an animal eats plants or another animal that has eaten plants, what happens to the reduced carbon compounds in the food?",
+      "text2": "When an animal eats plants (or eats other animals which have eaten plants), the reduced carbon compounds in the food become a source of energy and building materials for the animal.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
+      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "label": 1
+    },
+    {
+      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
+      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "label": 0
+    },
+    {
+      "text1": "What is the range of average elevation in the Sichuan Basin?",
+      "text2": "Average elevation ranges from 2,000 to 3,500 meters; average temperatures range from 0 to 15 °C.",
+      "label": 1
+    },
+    {
+      "text1": "Projections based on intermediate assumptions of the 2001 HI Trustees' Report.",
+      "text2": "Projections are based on attendee numbers of Disney Land.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law states that objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "Newton's third law states that for every action there is an equal and opposite reaction, explaining how rockets propel themselves in space.",
+      "label": 0
+    },
+    {
+      "text1": "I've never accused him of over-milligraming, nothing.",
+      "text2": "I've never accused him of doctoring a baseball.",
+      "label": 0
+    },
+    {
+      "text1": "The preamble to the final rule indicates that EPA evaluated three different methodologies for implementation.",
+      "text2": "Is indicated that EPA evaluated, for implementation, four different methodologies.",
+      "label": 0
+    },
+    {
+      "text1": "What other rights were equal to orthodox nobles?",
+      "text2": "The Orthodox nobles' rights were nominally equal to those enjoyed by Polish and Lithuanian nobility, but there was a cultural pressure to convert to Catholicism, that was greatly eased in 1596 by the Union of Brest.",
+      "label": 1
+    },
+    {
+      "text1": "Two kids are playing in a swimming pool with a green colored crocodile float.",
+      "text2": "Two kids push an inflatable crocodile around in a pool.",
+      "label": 1
+    },
+    {
+      "text1": "What is provided by transmitting four bits that represent the packet type twice, in a single PID byte using complemented form?",
+      "text2": "Handshake packets consist of only a single PID byte, and are generally sent in response to data packets.",
+      "label": 0
+    },
+    {
+      "text1": "\"We believe that it is not necessary to have a divisive confirmation fight over a Supreme Court appointment,\" Daschle wrote.",
+      "text2": "\"We believe that it is not necessary to have a divisive confirmation fight,\" Daschle of South Dakota wrote the Republican president.",
+      "label": 1
+    },
+    {
+      "text1": "During summer, the terrain is parched, while at other times of the year it's often covered with snow.",
+      "text2": "All year round, the area is dry and desert-like.",
+      "label": 0
+    },
+    {
+      "text1": "What language does Russian treat hard consonants similar to?",
+      "text2": "The language possesses five vowels (or six, under the St. Petersburg Phonological School), which are written with different letters depending on whether or not the preceding consonant is palatalized.",
+      "label": 0
+    },
+    {
+      "text1": "What was the reason given for the closing of the SaberCats?",
+      "text2": "On November 12, the league announced the defending champion San Jose SaberCats would be ceasing operations due to \"reasons unrelated to League operations\".",
+      "label": 1
+    },
+    {
+      "text1": "A woman is peeling a potato.",
+      "text2": "A woman peels a potato.",
+      "label": 1
+    },
+    {
+      "text1": "That's not the Moloch scene, though.",
+      "text2": "This is the Moloch scene.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is grating onion.",
+      "text2": "A woman grates onions.",
+      "label": 1
+    },
+    {
+      "text1": "That is, as Reischauer quickly adds, if budget balance is your prime desire and you believe that cuts in discretionary spending are the way to go.",
+      "text2": "Cutting discretionary spending is what you believe in if your primary interest is balancing the budget according to Reischauer.",
+      "label": 1
+    },
+    {
+      "text1": "i know it was the s tupidest thing i why didn't someone tell me that",
+      "text2": "I feel stupid for not knowing that.",
+      "label": 0
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023.",
+      "text2": "Global average temperatures have risen approximately 2.5 °C above pre-industrial levels as of 2023, already exceeding the Paris Agreement target.",
+      "label": 0
+    },
+    {
+      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
+      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics resistance arises when bacteria evolve mechanisms to survive exposure to drugs that previously killed them.",
+      "text2": "When bacteria develop the ability to withstand antibiotic treatment through mutation or gene transfer, antibiotic resistance results.",
+      "label": 1
+    },
+    {
+      "text1": "I dare say he soaked fly paper, as I told you at the beginning.\"",
+      "text2": "He didn't use soaked fly paper.",
+      "label": 0
+    },
+    {
+      "text1": "Not to accuse anyone of Stephen Glassism, but I'd love to see Wolff post those copious notes on his promotional Web site, www.burnrate.com.",
+      "text2": "If Wolff does not provide us with his notes, it means that he is in the same category as Stephen Glass.",
+      "label": 0
+    },
+    {
+      "text1": "In 1981, when Royko moved to a condominium in a lakefront high-rise, he cast himself as a bungalow-bred Margaret Mead, studying yuppies by living among them.",
+      "text2": "Royko lived in a small city apartment for his entire life.",
+      "label": 0
+    },
+    {
+      "text1": "Of these, the Dordogne has carved a particularly beautiful winding valley of gentle greenery.",
+      "text2": "There is a valley of gentle greenery carved by the Dordogne.",
+      "label": 1
+    },
+    {
+      "text1": "But the Army shows the process can work, and can help.",
+      "text2": "The army promises that it can help if the process is used.",
+      "label": 0
+    },
+    {
+      "text1": "What are three types of minerals Portugal is a notable producer of?",
+      "text2": "Portugal is a significant European minerals producer and is ranked among Europe's leading copper producers.",
+      "label": 0
+    },
+    {
+      "text1": "CNNs apply convolutional filters to detect spatial features in images.",
+      "text2": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "label": 0
+    },
+    {
+      "text1": "Iran Nuclear Talks Enter Third Day",
+      "text2": "Iran nuclear talks enter crucial third day",
+      "label": 1
+    },
+    {
+      "text1": "With cooling sea breezes and good sandy beaches it offers all the basic ingredients needed for a relaxing vacation; Egyptian hoteliers and restaurateurs are working hard to provide the rest.",
+      "text2": "The food in Egypt is good.",
+      "label": 0
+    },
+    {
+      "text1": "Who suggested that the Free Trade Agreement amounted to an American takeover of Canada?",
+      "text2": "In the 1988 federal election, the Liberals asserted that the proposed Free Trade Agreement amounted to an American takeover of Canada—notably, the party ran an ad in which Progressive Conservative (PC) strategists, upon the adoption of the agreement, slowly erased the Canada-U.S. border from a desktop map of North America.",
+      "label": 1
+    },
+    {
+      "text1": "many of those executed in iran are hanged in public.",
+      "text2": "many of the people executed are hanged in public.",
+      "label": 0
+    },
+    {
+      "text1": "and always thought you know that being raised in the midwest you really didn't see any crimes really any more heinous than uh shoplifting",
+      "text2": "I was raised in the Midwest which is pretty wholesome. Most of the crimes in our town were minor.",
+      "label": 0
+    },
+    {
+      "text1": "When was the Second Opium War?",
+      "text2": "In 1860, during the Second Opium War, the capital Beijing was captured and the Summer Palace sacked by a relatively small Anglo-French coalition force numbering 25,000.",
+      "label": 1
+    },
+    {
+      "text1": "How often does Namibia conduct a census?",
+      "text2": "Namibia conducts a census every ten years.",
+      "label": 1
+    },
+    {
+      "text1": "During a period of nearly a decade, Telemarketing Associates raised more than $7 million.",
+      "text2": "Telemarketing Associates, hired by VietNow, raised $7.1 million from 1987 to 1995.",
+      "label": 1
+    },
+    {
+      "text1": "What are six companies that made some of the first peripherals for the iPod?",
+      "text2": "Many accessories have been made for the iPod line.",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing a guitar.",
+      "text2": "Someone is handling a bun.",
+      "label": 0
+    },
+    {
+      "text1": "Nearby, the fine National Maritime Museum in Allenby Street charts 5,000 years of Red Sea and Mediterranean seafaring, while the Clandestine Immigration and Naval Museum documents the defiance of the British blockade to smuggle immigrants into Israel.",
+      "text2": "The National Maritime Museum was built in 1978 by the British.",
+      "label": 0
+    },
+    {
+      "text1": "A man wearing an orange coat speaks to another as they walk in the snow.",
+      "text2": "A man and woman dressedin old fashion clothing sit outside at a table.",
+      "label": 0
+    },
+    {
+      "text1": "Seven Filipinos slain in Yemen attack",
+      "text2": "Syrian soldiers killed in bomb attack",
+      "label": 0
+    },
+    {
+      "text1": "What branch of physics might support a worldview similar to Platonic dualism?",
+      "text2": "Plato was therefore a metaphysical and epistemological dualist, an outlook that modern idealism has striven to avoid: Plato's thought cannot therefore be counted as idealist in the modern sense, although quantum physics' assertion that man's consciousness is an immutable and primary requisite for not merely perceiving but shaping matter, and thus his reality, would give more credence to Plato's dualist position.[citation needed]",
+      "label": 1
+    },
+    {
+      "text1": "How many people die per year from asthma?",
+      "text2": "As of 2011, 235–330 million people worldwide are affected by asthma, and approximately 250,000–345,000 people die per year from the disease.",
+      "label": 1
+    },
+    {
+      "text1": "you know don't like the way you look don't like the way you dress don't like your hair don't like you know it's just something that always sets people off you know you either like someone or you don't like someone or you're just completely indifferent",
+      "text2": "many people will find something about your appearance to dislike",
+      "label": 1
+    }
+  ]
+}

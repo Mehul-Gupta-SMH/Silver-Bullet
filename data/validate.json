@@ -1,23 +1,493 @@
 {
   "data": [
     {
-      "text1": "Regular aerobic exercise for at least 150 minutes per week significantly reduces the risk of cardiovascular disease, type 2 diabetes, and depression.",
-      "text2": "Getting at least 150 minutes of moderate aerobic activity weekly substantially lowers the risk of heart disease, diabetes, and mental health disorders.",
-      "label": 1
-    },
-    {
-      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
-      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "text1": "The men are playing a guitar and having a drink.",
+      "text2": "There is a young boy with a red and blue jacket on feeding a sheep.",
       "label": 0
     },
     {
-      "text1": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides: a² + b² = c².",
-      "text2": "For any right-angled triangle, a² + b² = c², where c is the hypotenuse — this is the Pythagorean theorem.",
+      "text1": "While opposition parties have welcomed the cabinet's decision on anti-retroviral treatment, some said Health Minister Manto Tshabalala-Msimang was not fit to preside over a rollout plan.",
+      "text2": "Health Minister Manto-Tshabalala Msimang is not fit to preside over an anti-retroviral treatment rollout plan, according to some opposition parties.",
+      "label": 0
+    },
+    {
+      "text1": "Auditors should prepare audit reports communicating the results of each audit.",
+      "text2": "Auditors should communicate the results of the audit.",
       "label": 1
     },
     {
-      "text1": "# Python list comprehension\nsquares = [x**2 for x in range(10)]",
-      "text2": "# Equivalent using map\nsquares = list(map(lambda x: x**2, range(10)))",
+      "text1": "the afghanistan-iran border region has been the scene of frequent clashes between police and drug smugglers.",
+      "text2": "the area near town of mirjaveh has been the scene of frequent conflicts between iranian police and drug smugglers.",
+      "label": 1
+    },
+    {
+      "text1": "A man in a blue cap is sitting on a stool under a tree.",
+      "text2": "A dog standing on a beach with a ball nearby.",
+      "label": 0
+    },
+    {
+      "text1": "A pleasant fish and vegetarian restaurant with a nice atmosphere, inventive dishes, outdoor dining; open very late.",
+      "text2": "The restaurant serves vegetarian dishes such as fish in inventive ways, and customers can enjoy the late hours and outdoor dining in a nice atmosphere.",
+      "label": 1
+    },
+    {
+      "text1": "huh um-hum um-hum yeah i wouldn't i i would think they'd spend at least that as the at the cost of clothes",
+      "text2": "They spend more on food than on clothes.",
+      "label": 0
+    },
+    {
+      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
+      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
+      "label": 1
+    },
+    {
+      "text1": "Transformer models use self-attention to process sequences in parallel.",
+      "text2": "The Great Wall of China was built to protect against nomadic invasions and spans over 21,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "Mandela's condition has 'improved'",
+      "text2": "Mandela's condition has 'worsened over past 48 hours'",
+      "label": 0
+    },
+    {
+      "text1": "I'm sorry if you don't like the way you look.",
+      "text2": "I am glad you don't like the way you look.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is frying fish.",
+      "text2": "A woman is cooking fish.",
+      "label": 1
+    },
+    {
+      "text1": "Venezuelan president to visit China",
+      "text2": "Senegalese president to visit China",
+      "label": 0
+    },
+    {
+      "text1": "If you leap up to make a hit, you're getting a penalty.",
+      "text2": "If your stick hits a guy in the face, you're getting a penalty.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is cutting an onion.",
+      "text2": "A woman is cutting meat.",
+      "label": 0
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
+      "label": 0
+    },
+    {
+      "text1": "(George W. Bush kills Gore in poll questions about leadership.",
+      "text2": "George W. Bush goes against Gore in a debate.",
+      "label": 1
+    },
+    {
+      "text1": "the u.s., other western nations and nato condemned the violence.",
+      "text2": "the u.s., other western nations and nato demanded a cease-fire.",
+      "label": 1
+    },
+    {
+      "text1": "If you wish to access the encrypted guide on GAO's Web site, please send your request via e-mail to digitalguide@gao.gov.",
+      "text2": "You can request access the encrypted guide by sending an email.",
+      "label": 1
+    },
+    {
+      "text1": "Thorn heard something tear, deep in the earth.",
+      "text2": "Thorn heard a noise in the ground.",
+      "label": 1
+    },
+    {
+      "text1": "Atlas Shrugged It's also a stellar performer in terms of blithering idiocy.",
+      "text2": "It's also a stellar performer in terms of blithering idiocy.",
+      "label": 1
+    },
+    {
+      "text1": "Strong new quake hits shattered Pak region",
+      "text2": "Powerful new earthquake hits shattered Pakistan region",
+      "label": 1
+    },
+    {
+      "text1": "Quotations in the News",
+      "text2": "Quotations of the day",
+      "label": 0
+    },
+    {
+      "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
+      "text2": "I knew that he would understand what I was saying.",
+      "label": 1
+    },
+    {
+      "text1": "Imran blames rival for colleague murder",
+      "text2": "Pakistans Imran blames rival for killing party member",
+      "label": 1
+    },
+    {
+      "text1": "The pride and joy of the neighborhood is the Meganebashi, a double-arched stone bridge across the Nakajima River.",
+      "text2": "Meganebashi is a stone bridge that had a lot of effort put into it.",
+      "label": 0
+    },
+    {
+      "text1": "The James Webb Space Telescope, launched in December 2021, observes the universe in infrared light and can detect galaxies formed shortly after the Big Bang.",
+      "text2": "Launched in December 2021, JWST uses infrared imaging to peer at the earliest galaxies, offering views of the universe from just a few hundred million years after the Big Bang.",
+      "label": 1
+    },
+    {
+      "text1": "'Wherever your leader is,' White said.",
+      "text2": "White said to take the weapon to your leader.",
+      "label": 0
+    },
+    {
+      "text1": "Transformer models use self-attention mechanisms to process sequences in parallel, enabling them to capture long-range dependencies more efficiently than RNNs.",
+      "text2": "Unlike RNNs, Transformers process entire sequences simultaneously through self-attention, making them better at modelling relationships between distant tokens.",
+      "label": 1
+    },
+    {
+      "text1": "In 1670 the Spanish officially ceded Jamaica to British rule as part of the Treaty of Madrid, and the British began a systematic process of settlement, offering land and aid to prospective settlers.",
+      "text2": "Britain rewarded Jamaican settlers with land after Spain ceded the island in 1670.",
+      "label": 1
+    },
+    {
+      "text1": "All the way back, my heart wouldn't stop pumping.",
+      "text2": "My heart would not stop beating.",
+      "label": 1
+    },
+    {
+      "text1": "A SWOT analysis identifies a company's internal Strengths and Weaknesses alongside external Opportunities and Threats to inform strategic decision-making.",
+      "text2": "SWOT analysis is a strategic planning tool that maps internal capabilities (strengths and weaknesses) against external market conditions (opportunities and threats) to guide business decisions.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule composed of nucleotides, with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "The DNA molecule has a double-helix structure; its base-pairing rules are A–T and G–C.",
+      "label": 1
+    },
+    {
+      "text1": "Nothing doing, said Julius.",
+      "text2": "Julius was now discouraged.",
+      "label": 0
+    },
+    {
+      "text1": "well i i didn't have to go down there but uh uh driving on the freeway was uh made it difficult because everybody couldn't get off and they'd get off somewhere else",
+      "text2": "It was difficult because the freeway was overcrowded and people had to get off.",
+      "label": 0
+    },
+    {
+      "text1": "estonian officials stated that some of the cyber attacks that caused estonian government websites to shut down temporarily came from computers in the administration of russia including in the office of president vladimir putin.",
+      "text2": "officials in estonia including prime minister andrus ansip have claimed that some of the cyber attacks came from russian government computers including computers in the office of russian president vladimir putin.",
+      "label": 1
+    },
+    {
+      "text1": "A woman is picking tomatoes.",
+      "text2": "A woman is pouring batter into a bowl.",
+      "label": 0
+    },
+    {
+      "text1": "Gunners fire but fail to advance in Champions League",
+      "text2": "EPL clubs out to avoid Champions League woes",
+      "label": 0
+    },
+    {
+      "text1": "A binary search algorithm finds a target value in a sorted array by repeatedly halving the search interval, achieving O(log n) time complexity.",
+      "text2": "Binary search narrows down a sorted list by comparing the midpoint to the target and eliminating half the remaining elements each step, running in O(log n) time.",
+      "label": 1
+    },
+    {
+      "text1": "British stuntman fell to his death in wing suit mishap",
+      "text2": "British stuntman dies in wingsuit mishap in Alps",
+      "label": 1
+    },
+    {
+      "text1": "since i am home with them and so i get a lot of time with them he needs to have um some time with them so he when he comes home he um you know it's his job at night he puts the kids to bed and he reads",
+      "text2": "He works at night, so it is my duty to put the kids to bed.",
+      "label": 0
+    },
+    {
+      "text1": "Egypt 'freezes Muslim Brotherhood assets'",
+      "text2": "Egypt freezes Muslim Brotherhood funds",
+      "label": 1
+    },
+    {
+      "text1": "ISAF soldier killed in Afghan 'insider attack'",
+      "text2": "British soldier shot dead in Afghan ‘insider attack’",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "The Berlin Wall was demolished in 1991 following the formal dissolution of the Soviet Union, marking the official end of the Cold War.",
+      "label": 0
+    },
+    {
+      "text1": "A black dog is walking on the grass with a stick in it's mouth.",
+      "text2": "The black dog is running on the grass with a toy in it's mouth.",
+      "label": 0
+    },
+    {
+      "text1": "15 killed and scores injured in suicide bombing at Russian train station",
+      "text2": "Suicide bomber kills 14 at Russian train station",
+      "label": 0
+    },
+    {
+      "text1": "BBC veteran Hall admits child sex abuse",
+      "text2": "Stuart Hall Admits Sex Assaults On Children",
+      "label": 0
+    },
+    {
+      "text1": "In an era of stronger productivity growth, which may just now be showing up in statistics, the speed limit is probably 3% to 3 e% a year.",
+      "text2": "Productivity growth has been strong even tho it has been hard to see in statistics.",
+      "label": 1
+    },
+    {
+      "text1": "Oh! said Tuppence thoughtfully.",
+      "text2": "Tuppence thought before speaking as not to offend anyone.",
+      "label": 0
+    },
+    {
+      "text1": "A favorite sight with visiting photographers is the Cervantes A stone sculpture honoring the author looms behind bronze statues of his immortal characters, Don Quixote and Sancho Panza, astride their horse and donkey, respectively.",
+      "text2": "Behind the stone sculpture lie bronze statues of famous literary characters.",
+      "label": 1
+    },
+    {
+      "text1": "Smaller towns will have a syndicat d'initiative, which provides the same services.",
+      "text2": "The services of the smaller towns are the same, but less expensive.",
+      "label": 0
+    },
+    {
+      "text1": "One of the 14 Kurds pointed at the word \"refugee\" in an English/Turkish dictionary.",
+      "text2": "One man had brandished an English-Turkish dictionary and pointed to the word \"refugee\".",
+      "label": 1
+    },
+    {
+      "text1": "Train due in three minutes.",
+      "text2": "The train arrives in three minutes.",
+      "label": 1
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "CRISPR-Cas9 allows precise gene editing by cutting DNA at targeted locations.",
+      "label": 0
+    },
+    {
+      "text1": "Among the most important elements for effectively implementing the new cabinet department will be close adherence to the key success factors.",
+      "text2": "Closely adhering to the key success factors will be an important for implementing the new cabinet department effectively.",
+      "label": 1
+    },
+    {
+      "text1": "On the second floor are heavy timbered ceilings and walls covered with works of art, mostly of religious or royal significance.",
+      "text2": "A selection of the art pieces normally kept on the second floor are regularly rotated for display on the first floor.",
+      "label": 0
+    },
+    {
+      "text1": "because uh my father and i in like back in eighty three we went camping uh camping down the Appalachian Trail",
+      "text2": "My dad and I camped along the Appalachian Trail.",
+      "label": 1
+    },
+    {
+      "text1": "Jon felt his heart throbbing in his chest.",
+      "text2": "Jon's heartbeat was steady and normal.",
+      "label": 0
+    },
+    {
+      "text1": "Two dead, more trapped in latest Mumbai building collapse",
+      "text2": "Two are trapped as US building collapses",
+      "label": 0
+    },
+    {
+      "text1": "Determine whether users or managers identify new or changed requirements not included in the RFP.",
+      "text2": "Figure out if some of the requirements are different.",
+      "label": 1
+    },
+    {
+      "text1": "I. ATLANTIC REQUIREMENTS .",
+      "text2": "PACIFIC REQUIREMENTS .",
+      "label": 0
+    },
+    {
+      "text1": "Poor Mexican street fighters are brought to the United States by unscrupulous promoters to serve as patsies for American boxers.",
+      "text2": "Almost all patsies are street fighters from Mexico.",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content.",
+      "text2": "Dark matter makes up approximately 5% of the universe's total energy content; dark energy accounts for the remaining 68%.",
+      "label": 0
+    },
+    {
+      "text1": "the countries oppose the weaponization of space and an arms race in space.",
+      "text2": "china stressed that opposition of weaponization and an arms race in outer space.",
+      "label": 0
+    },
+    {
+      "text1": "Yolanda death toll climbs to 3,621",
+      "text2": "Kenya Red Cross says death toll rises to 68",
+      "label": 0
+    },
+    {
+      "text1": "because i'm Chapter One and all i do is teach reading all day long",
+      "text2": "Reading is what I teach all day.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold.",
+      "text2": "Antibiotics are highly effective against viral infections such as the common cold and flu, and are routinely prescribed for these illnesses.",
+      "label": 0
+    },
+    {
+      "text1": "A group of people sitting around a desk.",
+      "text2": "A group of girls on a beach.",
+      "label": 0
+    },
+    {
+      "text1": "Black holes are regions of spacetime where gravity is so strong that nothing — not even light — can escape once it crosses the event horizon.",
+      "text2": "A black hole's gravity is intense enough to trap everything within its event horizon, including light, making it invisible by definition.",
+      "label": 1
+    },
+    {
+      "text1": "many of those executed in iran are hanged in public.",
+      "text2": "many of the people executed are hanged in public.",
+      "label": 0
+    },
+    {
+      "text1": "It also includes rate differences due to weight and to whether the piece is non-standard in shape.",
+      "text2": "Due to weight, rate differences have been included.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Wall of China stretches over 21,000 kilometres and was built to protect Chinese states from nomadic invasions.",
+      "text2": "Spanning more than 21,000 km, the Great Wall was constructed over centuries to defend Chinese territories against northern nomadic incursions.",
+      "label": 1
+    },
+    {
+      "text1": "and he left TI about eight or nine years ago and went elsewhere and he's he came through town and visited with me and bottom line is i'm going to retire and go to work for him",
+      "text2": "I will have to relocate in order to take the job",
+      "label": 0
+    },
+    {
+      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
+      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
+      "label": 0
+    },
+    {
+      "text1": "Barclays hit by fresh U.S. investigations",
+      "text2": "Barclays hit by fresh US probe",
+      "label": 1
+    },
+    {
+      "text1": "A Mediterranean diet, rich in vegetables, whole grains, olive oil, and fish, is associated with reduced risk of heart disease and longer lifespan.",
+      "text2": "Research links the Mediterranean diet — high in vegetables, whole grains, fish, and olive oil — with lower cardiovascular risk and improved longevity.",
+      "label": 1
+    },
+    {
+      "text1": "World powers and Iran to resume expert nuclear talks on Dec. 30",
+      "text2": "Iran nuclear experts, world powers to resume talks next week",
+      "label": 1
+    },
+    {
+      "text1": "A man is standing next to a yellow sports car.",
+      "text2": "A man stands next to a yellow Corvette.",
+      "label": 1
+    },
+    {
+      "text1": "Dozens injured as Boeing 777 jet crash lands at San Francisco airport",
+      "text2": "Asiana Air Boeing 777 crash lands at San Francisco airport",
+      "label": 1
+    },
+    {
+      "text1": "For example, investors do not understand terminology such as reportable conditions,8 which could result in investors over- or under-reacting to problems.",
+      "text2": "Not understanding the terminology helps keep the market stable.",
+      "label": 0
+    },
+    {
+      "text1": "The derivative of a function measures the rate of change of the function's output with respect to its input.",
+      "text2": "In calculus, a derivative represents how rapidly a function's value changes as its input varies.",
+      "label": 1
+    },
+    {
+      "text1": "Gunmen kill nine tourists in Pakistan",
+      "text2": "Gunmen Attack Hotel In Remote Pakistani Province",
+      "label": 0
+    },
+    {
+      "text1": "Snowden's father arrives in Moscow",
+      "text2": "Edward Snowden's father in Moscow",
+      "label": 1
+    },
+    {
+      "text1": "Suppose that someone tells you that, years ago, he made a fundamental discovery that an entire profession, out of sheer narrow-mindedness, refused to listen to and prevented him from publishing.",
+      "text2": "What if he told you he got turned down by the industry?",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "According to Newton's first law, any object maintains its current state of motion — stationary or moving at constant speed — unless a net external force acts on it.",
+      "label": 1
+    },
+    {
+      "text1": "A man is running on a field.",
+      "text2": "A man climbs up a rope.",
+      "label": 0
+    },
+    {
+      "text1": "Son of top Muslim Brotherhood leader killed",
+      "text2": "Egypt arrests Muslim Brotherhood leader Badie",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure: systolic (during heartbeat) over diastolic (between heartbeats).",
+      "text2": "Blood pressure: diastolic (during heartbeat) over systolic (between heartbeats) — both measured in mmHg.",
+      "label": 0
+    },
+    {
+      "text1": "you know the height that you you set it at so i set it very high and it just picks or it skims the grass it doesn't dig way down deep so i don't have a lot of grass that i uh that i collect",
+      "text2": "I don't have to collect a lot of grass because it just skims the top of it.",
+      "label": 1
+    },
+    {
+      "text1": "A women holds a small baby while sitting on a sofa.",
+      "text2": "a woman sitting on a sofa holding a baby.",
+      "label": 1
+    },
+    {
+      "text1": "The cloud of glowing stuff from the rising air column was spreading out now, reflecting the light and heat back to the earth.",
+      "text2": "The cloud flickered a strange orange color, as if controlled by an unseen force.",
+      "label": 0
+    },
+    {
+      "text1": "Because combination of SCR and FGD are expected to have high mercury removal due to the SCR and FGD systems, those facilities that are so equipped are not expected to add ACI systems.",
+      "text2": "The mercury removal will be at 100 percent rate.",
+      "label": 0
+    },
+    {
+      "text1": "The basilica's highlight, and generally accepted as the work of a young Giotto, the Life of Francis (1296-1304) is movingly celebrated in 28 scenes along the lower tier (starting from the right transept), while 32 frescoes in the upper tier illustrate scenes from the Old and New Testament.",
+      "text2": "The scenes in the lower tier were created by Giotto near the end of his life.",
+      "label": 0
+    },
+    {
+      "text1": "Don't ruin the evening, Jonofi.",
+      "text2": "Jonofi do not ruin the evening.",
+      "label": 1
+    },
+    {
+      "text1": "To receive facsimile copies of the daily list or any list from the past 30 days, please call (202) 5126000 using a touch tone phone.",
+      "text2": "Call (202) 5126000 if you want to receive information on the TV show.",
+      "label": 0
+    },
+    {
+      "text1": "two found dead in swimming pool at essex hotel",
+      "text2": "Man and woman found dead in Essex hotel swimming pool",
+      "label": 1
+    },
+    {
+      "text1": "The capital of ParoseParikia, serves the port, and although it is extremely busy throughout the peak season, it still retains the feel of a Greek town.",
+      "text2": "The town is busy but it still has the feel of a Greek town.",
       "label": 1
     },
     {
@@ -26,38 +496,118 @@
       "label": 1
     },
     {
-      "text1": "The internet is a global system of interconnected computer networks that enables communication, commerce, and access to information for billions of people.",
-      "text2": "Billions of people use the internet — a worldwide network of interconnected computers — to communicate, conduct business, and access information.",
-      "label": 1
-    },
-    {
-      "text1": "Inflation is the rate at which the general price level rises over time, eroding purchasing power.",
-      "text2": "Deflation is the rate at which the general price level falls over time, increasing purchasing power but often signalling economic contraction.",
+      "text1": "the panamanian foreign ministry communique stated that the task force will facilitate the technological transfer and promote the biofuel production and consumption.",
+      "text2": "the panamanian foreign ministry communique stated that panama and brazil signed 3 juridical-issue treaties that included an extradition",
       "label": 0
     },
     {
-      "text1": "Euler's identity, e^(iπ) + 1 = 0, is widely regarded as the most beautiful equation in mathematics because it links five fundamental constants.",
-      "text2": "e^(iπ) + 1 = 0, known as Euler's identity, elegantly connects e, i, π, 1, and 0 — five of mathematics' most important constants.",
-      "label": 1
-    },
-    {
-      "text1": "Public key cryptography uses a pair of mathematically linked keys — a public key to encrypt and a private key to decrypt — enabling secure communication without sharing a secret.",
-      "text2": "In asymmetric cryptography, a public key encrypts data while only the paired private key can decrypt it, allowing secure exchange without a pre-shared secret.",
-      "label": 1
-    },
-    {
-      "text1": "Metformin is a first-line treatment for type 2 diabetes that works by decreasing hepatic glucose production and improving insulin sensitivity.",
-      "text2": "As the primary drug for type 2 diabetes management, metformin reduces the liver's glucose output and helps cells respond more effectively to insulin.",
-      "label": 1
-    },
-    {
-      "text1": "TCP/IP governs how data is packaged, addressed, transmitted, routed, and received across the internet.",
-      "text2": "UDP/IP governs how data is packaged and transmitted across the internet, with guaranteed delivery and error correction built in.",
+      "text1": "GDP measures the total monetary value of goods and services produced within a country.",
+      "text2": "Recursion is a programming technique where a function calls itself to solve smaller sub-problems.",
       "label": 0
     },
     {
-      "text1": "Gradient descent updates model parameters in the direction that minimises the loss function.",
-      "text2": "Gradient ascent updates model parameters in the direction that maximises the loss function, commonly used in generative adversarial networks for the discriminator.",
+      "text1": "and yes well right outside in uh Falls Church Virginia",
+      "text2": "Close to Falls Church.",
+      "label": 1
+    },
+    {
+      "text1": "Mandela released from hospital",
+      "text2": "Israeli president released from hospital",
+      "label": 0
+    },
+    {
+      "text1": "it's just a real fancy decorated boot it's like Texas Gardening and it talks about you know different problems that your lawn can have and how to recognize it and it goes into the full gamut of gardening you know everything from flowers to bulbs to perennials to grass to weeds to trees and to uh how to prune but one of the things i do remember was when it talked about the grass and there being the shade tolerant types of grass and i think one of them was a blend of two types of grass that they had used",
+      "text2": "Texas Gardening is a great resource for someone just getting into gardening.",
+      "label": 0
+    },
+    {
+      "text1": "MoMA's story of modern art, beginning with Cezanne and ending with abstraction, has been confirmed, but at a cost.",
+      "text2": "People in the art world have confirmed MoMA's story of modern art.",
+      "label": 1
+    },
+    {
+      "text1": "the ones we haven't papered we've done in uh uh latex uh uh pastels",
+      "text2": "We did the ones we haven't papered with latex.",
+      "label": 1
+    },
+    {
+      "text1": "Gravity pulls objects toward each other with a force proportional to their masses and inversely proportional to the square of the distance between them.",
+      "text2": "The gravitational force between two bodies increases with their masses and decreases as the square of the separation between them grows — this is Newton's law of universal gravitation.",
+      "label": 1
+    },
+    {
+      "text1": "and if you take uh little pieces of pork and you fry them like little cubes of pork",
+      "text2": "When pork is cubed it cooks very evenly in the wok.",
+      "label": 0
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "label": 0
+    },
+    {
+      "text1": "A dog sat at the counter of a store.",
+      "text2": "The dog is standing at the counter.",
+      "label": 0
+    },
+    {
+      "text1": "You will send a personal demand to me here, and the money, in notes, shall be sent by return of post.",
+      "text2": "You will ask for a lot of money.",
+      "label": 0
+    },
+    {
+      "text1": "As a final step, these estimated VSL values are multiplied by the appropriate adjustment factors to account for changes in WTP over time, as outlined above.",
+      "text2": "Estimated VSL values are left alone.",
+      "label": 0
+    },
+    {
+      "text1": "and always thought you know that being raised in the midwest you really didn't see any crimes really any more heinous than uh shoplifting",
+      "text2": "I was raised in the Midwest which is pretty wholesome. Most of the crimes in our town were minor.",
+      "label": 0
+    },
+    {
+      "text1": "This massively delayed planning and bill-writing, a traffic jam that still has not cleared.",
+      "text2": "There was a traffic jam that affected work.",
+      "label": 1
+    },
+    {
+      "text1": "Besides, in another mood, he writes, It seemed to me that I was surrounded by braveries without number, that I had been inducted into a phalanx of the wildly-alive-even-if-dying, and I felt honored that I would, so to speak, die in the company of such people.",
+      "text2": "He changed his moods every time he writes a paragraph.",
+      "label": 1
+    },
+    {
+      "text1": "Unfortunately, it had been several months since I'd last listened to common sense.",
+      "text2": "I always listened to common sense.",
+      "label": 0
+    },
+    {
+      "text1": "He has lived the past four years at Creston Plaza with his wife, Tammy, and his daughter, Precious, 3. In recent months, Robertson was pleased to see casual drug use at the complex diminish with the installation of security cameras.",
+      "text2": "Drug use in the complex decreased with installation of security cameras.",
+      "label": 1
+    },
+    {
+      "text1": "oh we have had uh as i've said we've had variable weather uh",
+      "text2": "We haven't had much variation in weather patterns lately.",
+      "label": 0
+    },
+    {
+      "text1": "For a new perspective on the wonders of the deep, all you need is a mask and breathing tube; the fins are optional.",
+      "text2": "If you want to look at the wonders of the deep in a different way, fins are optional, all you need is a breathing tube and a mask.",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "Although it has the dour look of a barracks building, it houses many of the finest statuary and artifacts found at the site, and they bring to life the bare bones of the temple buildings and houses.",
+      "text2": "The barracks building has a common barracks look.",
+      "label": 1
+    },
+    {
+      "text1": "and i love the mystery series",
+      "text2": "I hate the mystery genre.",
       "label": 0
     },
     {
@@ -66,84 +616,144 @@
       "label": 1
     },
     {
-      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution, not the defendant, in criminal trials.",
-      "text2": "In criminal law, defendants are presumed innocent; it is the prosecution's responsibility to prove guilt beyond reasonable doubt.",
-      "label": 1
-    },
-    {
-      "text1": "Bayes' theorem describes the probability of an event based on prior knowledge of conditions related to the event: P(A|B) = P(B|A)·P(A)/P(B).",
-      "text2": "Bayes' theorem updates the probability of a hypothesis given new evidence: P(A|B) = P(B|A) × P(A) / P(B).",
-      "label": 1
-    },
-    {
-      "text1": "In Python, list comprehensions provide a concise way to create lists: [expression for item in iterable if condition].",
-      "text2": "Python list comprehensions let you build lists in a single line: [expr for elem in sequence if predicate], replacing verbose for-loop constructs.",
-      "label": 1
-    },
-    {
-      "text1": "REST APIs communicate over HTTP using standard methods — GET, POST, PUT, DELETE — and return data typically in JSON or XML format.",
-      "text2": "A RESTful API uses HTTP verbs (GET, POST, PUT, DELETE) to expose resources and exchange data, commonly serialised as JSON.",
-      "label": 1
-    },
-    {
-      "text1": "The peer-review process requires that scientific findings be evaluated by other experts in the field before publication, ensuring quality and validity.",
-      "text2": "Before a scientific paper is published, peer review subjects it to scrutiny by independent experts who assess its methodology, results, and conclusions.",
-      "label": 1
-    },
-    {
-      "text1": "CNNs apply convolutional filters to detect spatial features in images.",
-      "text2": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text1": "Mall attackers used 'less is more' strategy",
+      "text2": "In Kenya, attackers used 'less is more' strategy",
       "label": 0
     },
     {
-      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
-      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "text1": "Two dogs run side-by-side on the grass.",
+      "text2": "Two dogs running on grass.",
+      "label": 1
+    },
+    {
+      "text1": "Regulation get the government into everything.",
+      "text2": "\"Get the government into everything?\"",
       "label": 0
     },
     {
-      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
-      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
-      "label": 1
-    },
-    {
-      "text1": "The central limit theorem guarantees convergence of sample means to a normal distribution.",
-      "text2": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "text1": "Egypt announces arrest of 1,004 Muslim Brotherhood supporters",
+      "text2": "Egypt orders arrest of Brotherhood chief Badie",
       "label": 0
     },
     {
-      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
-      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
-      "label": 1
-    },
-    {
-      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
-      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "text1": "Bet th' captain is as techy as a teased snake every time he thinks 'bout you two.",
+      "text2": "After that incident with the frog, the captain is techy whenever he thinks of you two.",
       "label": 0
     },
     {
-      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
-      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "text1": "Officer injured in India anti-rape protests dies",
+      "text2": "Indian policeman injured in gang-rape protest dies",
       "label": 1
     },
     {
-      "text1": "SQL JOINs combine rows from multiple tables based on a shared column.",
-      "text2": "The placebo effect describes real symptom improvement after inert treatment, driven by expectation.",
+      "text1": "He explained that he found Antetonitrus when he came to Wits in 2001 as a post-doctoral research assistant at England's University of Bristol.",
+      "text2": "He explained that he found antetonitrus when he came to Wits in 2001 while a post-doctoral research assistant at Bristol University in Britain.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
+      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
+      "label": 1
+    },
+    {
+      "text1": "Israel, Palestinians seek another meeting Monday: U.S. official",
+      "text2": "Palestinians: We Don't Want Kerry Mission to Fail",
       "label": 0
     },
     {
-      "text1": "The Apollo 11 mission successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon on 20 July 1969, with Armstrong becoming the first human to walk on the lunar surface.",
-      "text2": "On 20 July 1969, Apollo 11 touched down on the Moon; Neil Armstrong stepped onto the surface first, followed by Buzz Aldrin — making history as the first crewed lunar landing.",
+      "text1": "The mags discover the same  the exodus to exurbia.",
+      "text2": "The mags two things that were different in all aspects.",
+      "label": 0
+    },
+    {
+      "text1": "But they draft the applications in a way to say that these facts meet the requirements, and by the time the application reaches the court, it is unlikely that the court really gets to notice deficiencies.",
+      "text2": "The way they draft the applications shows how these facts meet requirements.",
       "label": 1
     },
     {
-      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
-      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
+      "text1": "It was finally consecrated in 1842.",
+      "text2": "It was consecrated in 1842.",
       "label": 1
     },
     {
-      "text1": "The Great Wall of China stretches over 21,000 kilometres and was built to protect Chinese states from nomadic invasions.",
-      "text2": "Spanning more than 21,000 km, the Great Wall was constructed over centuries to defend Chinese territories against northern nomadic incursions.",
+      "text1": "My publishers will kill me if I don't mention my own biography of D.P.",
+      "text2": "My publishers want me to talk about all my other works.",
+      "label": 0
+    },
+    {
+      "text1": "Completed in 1586, it was the center of Sephardic worship for centuries.",
+      "text2": "It was central to Sephardic worship and finished in 1586.",
       "label": 1
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells with the same chromosome count as the parent.",
+      "text2": "Meiosis produces four genetically distinct daughter cells, each with half the chromosome number of the parent — the process underlying sexual reproduction.",
+      "label": 0
+    },
+    {
+      "text1": "Public key cryptography uses a pair of mathematically linked keys — a public key to encrypt and a private key to decrypt — enabling secure communication without sharing a secret.",
+      "text2": "In asymmetric cryptography, a public key encrypts data while only the paired private key can decrypt it, allowing secure exchange without a pre-shared secret.",
+      "label": 1
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC LIMIT 100;",
+      "label": 1
+    },
+    {
+      "text1": "Even if the place had nothing else, it would be worth the trip, for the Taj, as one calls it affectionately, is a sight that awakens the wonder and enthusiasm of the most blas??, world-weary traveller.",
+      "text2": "Even world-weary travellers will be enthused by the Taj Mahal.",
+      "label": 1
+    },
+    {
+      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
+      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "label": 1
+    },
+    {
+      "text1": "Rebels kill 21 civilians in Syria Alawite village",
+      "text2": "Bomb kills 18 civilians in Afghanistan",
+      "label": 0
+    },
+    {
+      "text1": "Florida Sen. Bob Graham was not identifiable by 61 percent of those polled.",
+      "text2": "Kerry was viewed favorably by 66 percent of those polled; Dean at 57 percent.",
+      "label": 0
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "The Model combines IPM and EIA cost elements that use similar -- but not identical -- assumptions on capital recovery and aggregate cost data in a similar -- but not identical -- regional manner that needs adjustment.",
+      "text2": "The Model does not combine IPM and EIA costs.",
+      "label": 0
+    },
+    {
+      "text1": "If she actually believed that millions of human lives were at stake, the former head of the Red Cross surely wouldn't try to build a holy crusade around refusal to discuss the matter.",
+      "text2": "The Red Cross is run by democratic vote, and therefore has no, and has had no, head.",
+      "label": 0
+    },
+    {
+      "text1": "North Korea blocks access to joint industrial zone",
+      "text2": "North Korea Blocks Access to Key Industrial Zone",
+      "label": 1
+    },
+    {
+      "text1": "The stock rose $2.11, or about 11 percent, to close on Friday at $21.51 on the New York Stock Exchange.",
+      "text2": "PG&E Corp. shares jumped $1.63 or 8 percent to $21.03 on the New York Stock Exchange on Friday.",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing a guitar.",
+      "text2": "Someone is handling a bun.",
+      "label": 0
+    },
+    {
+      "text1": "And that's why you're yelling at me and refusing to answer my questions?",
+      "text2": "Still refusing to answer my questions?",
+      "label": 0
     }
   ]
 }

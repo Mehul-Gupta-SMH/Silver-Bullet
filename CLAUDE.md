@@ -58,13 +58,15 @@ Silver-Bullet/
 │   │   └── getConfig.py              # getVal(env='DEVELOPMENT') → dict
 │   │
 │   ├── model.py                      # TextSimilarityCNN (Conv2D) + TextSimilarityCNNLegacy (Conv1D compat)
-│   ├── train.py                      # TextSimilarityDataset + train_model(); --mode arg
-│   ├── test.py                       # TestReport + test_model(); --mode arg
+│   ├── train.py                      # TextSimilarityDataset + train_model(); --mode arg; MLflow _Tracker
+│   ├── test.py                       # TestReport + test_model(); --mode arg; MLflow test metric logging
 │   ├── predict.py                    # SimilarityPredictor — single/batch/breakdown inference
 │   ├── feature_cache.py              # FeatureCache — MD5-keyed JSON cache in ./cache/
 │   ├── feature_registry.py           # FEATURE_KEYS (16 ordered keys) + build_manifest() + validate_manifest()
 │   ├── training_report.py            # TrainingReport — per-epoch JSON + Markdown reports
-│   ├── generate_data.py              # Generates data/ + data/{mode}/ splits
+│   ├── generate_data.py              # Generates data/ + data/{mode}/ splits (hand-crafted pairs)
+│   ├── fetch_external_data.py        # Downloads STS-B/MNLI/QQP/QNLI/HaluEval; merges into data splits
+│   ├── precompute_features.py        # Pre-fills feature cache for all splits before training
 │   └── example.py                    # Manual feature pipeline demo (no model)
 │
 ├── frontend/                         # React + TypeScript + Vite UI
@@ -204,19 +206,21 @@ All prediction endpoints require a `mode` field (default: `context-vs-generated`
 # Activate virtualenv (Windows)
 .\.sbvenv\Scripts\activate
 
-# Generate training data (general + per-mode splits)
+# 1. Generate hand-crafted training data
 python -m backend.generate_data
 
-# Train — general model
-python -m backend.train
+# 2. (Optional but recommended) Expand with external datasets — ~1400 pairs per mode
+python -m backend.fetch_external_data
 
-# Train — mode-specific models
-python -m backend.train --mode model-vs-model
-python -m backend.train --mode reference-vs-generated
+# 3. Pre-compute feature cache (avoids recomputing during every train run)
+python -m backend.precompute_features
+
+# 4. Train
 python -m backend.train --mode context-vs-generated
+python -m backend.train --mode reference-vs-generated
+python -m backend.train --mode model-vs-model
 
-# Evaluate
-python -m backend.test
+# 5. Evaluate (also logs test metrics to MLflow if server is running)
 python -m backend.test --mode context-vs-generated
 
 # Predict (batch CLI)
@@ -234,27 +238,49 @@ cd frontend && npm run dev
 # Proxies /api → http://localhost:8000
 ```
 
+### MLflow tracking
+
+Start before (or during) training — epoch metrics buffer and replay automatically:
+
+```bash
+mlflow server --host 127.0.0.1 --port 5000 \
+  --backend-store-uri sqlite:///mlflow/mlflow.db \
+  --default-artifact-root ./mlflow/artifacts
+```
+
+Each completed training run registers the best-weights model in the Model Registry as `silverbullet-{mode}`. Test runs log `test_accuracy`, `test_roc_auc`, `test_avg_precision` in the same experiment.
+
 ---
 
-## Training Data (`backend/generate_data.py`)
+## Training Data
 
-General dataset: 194 pairs (70/15/15 split):
+### Hand-crafted pairs (`backend/generate_data.py`)
+
+~213 pairs across 15 domains, 70/15/15 split:
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| `positive` (label=1) | ~104 | Paraphrases, faithful summaries, equivalent code — 14 domains |
-| `hard_neg` (label=0) | ~54 | Same topic/structure but wrong numbers, negated claims, hallucinated additions |
-| `soft_neg` (label=0) | ~36 | Clearly unrelated domain pairs |
+| `positive` (label=1) | ~110 | Paraphrases, faithful summaries, equivalent code — 15 domains incl. business strategy |
+| `hard_neg` (label=0) | ~64 | Same topic/structure but wrong numbers, negated claims, partial-overlap business strategy |
+| `soft_neg` (label=0) | ~39 | Clearly unrelated domain pairs |
 
-Per-mode datasets: 209 pairs each (general + 15 mode-specific hard negatives):
+Per-mode datasets add 15–18 mode-specific hard negatives on top of the general set.
 
-| Mode | Hard negative characteristics |
-|------|-------------------------------|
-| `model-vs-model` | Models diverge on key facts, contradictory conclusions |
-| `reference-vs-generated` | Generated answer adds wrong facts or wrong numbers |
-| `context-vs-generated` | Answer introduces entities/claims not in context |
+### External datasets (`backend/fetch_external_data.py`)
 
-To regenerate: `python -m backend.generate_data` → overwrites `data/` and `data/{mode}/`.
+Downloads and merges public NLP corpora, balanced 50/50 label=0/label=1:
+
+| Source | Mapped to | Mode |
+|--------|-----------|------|
+| STS-B (score ≥ 3.5 → 1) | general | all |
+| MNLI (entailment → 1) | general | all |
+| QQP (duplicate → 1) | model-vs-model | model agreement |
+| QNLI (entailment → 1) | reference-vs-generated | faithfulness |
+| HaluEval QA (hallucination=yes → 0) | context-vs-generated | hallucination |
+
+After fetch, each mode has ~1 400 pairs (1001 train / 214 val / 216 test).
+
+To rebuild: `python -m backend.generate_data && python -m backend.fetch_external_data`.
 Delete `./cache/` before retraining if feature extractors changed.
 
 ---

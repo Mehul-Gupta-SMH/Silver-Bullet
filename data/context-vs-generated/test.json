@@ -1,0 +1,1084 @@
+{
+  "data": [
+    {
+      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+      "label": 1
+    },
+    {
+      "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
+      "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing on his keyboard.",
+      "text2": "A man is playing a guitar.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "Water is a polar molecule with the chemical formula H₂O, consisting of two hydrogen atoms covalently bonded to one oxygen atom.",
+      "text2": "H₂O — water — is a polar covalent molecule formed by two hydrogen atoms bonded to a single oxygen atom.",
+      "label": 1
+    },
+    {
+      "text1": "Dikran Kelekian (1868–1951), was a notable collector and dealer of Islamic art.Anna Der-Vartanian (December 6, 1920 – August 4, 2011) was the first woman promoted to Master Chief Petty Officer (E-9), the highest enlisted rate in the United States Navy.",
+      "text2": "Anna Der-Vartanian was born first.",
+      "label": 0
+    },
+    {
+      "text1": "The Best: Make the Music Go Bang! The album includes liner notes by Tony Alva, K. K. Barrett, Elissa Bello, Tito Larriva, Ray Manzarek, Paul Reubens, and Henry Rollins among others.Tony Alva (born September 2, 1957) is an American skateboard legend, entrepreneur, and musician, most prominently known as a pioneer of vertical skateboarding and as one of the original members of the Zephyr Competition Skateboarding Team, famously known as the Z-Boys.",
+      "text2": "vertical skateboarding",
+      "label": 1
+    },
+    {
+      "text1": "A man and women sitting on a sofa holding a small baby.",
+      "text2": "a woman sitting on a sofa holding a baby.",
+      "label": 0
+    },
+    {
+      "text1": "Holiday Inn New Delhi / Mayur Vihar / NOIDA is a hotel in East Delhi, India, near NOIDA.InterContinental Hotels Group PLC, informally InterContinental Hotels or IHG, is a British multinational hotels company headquartered in Denham, UK.",
+      "text2": "InterContinental Hotels Group",
+      "label": 1
+    },
+    {
+      "text1": "The Minister of State for Policing, Fire and Criminal Justice is a ministerial position held jointly at the Home Office and the Ministry of Justice in the Government of the United Kingdom.Michael Alan Penning (born 28 September 1957) is a British Conservative Party politician, who has served as Member of Parliament for Hemel Hempstead since 2005.",
+      "text2": "Michael Alan Penning",
+      "label": 1
+    },
+    {
+      "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+      "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+      "label": 1
+    },
+    {
+      "text1": "Part of it is now devoted to the Museo de Caza (Hunting Museum), with stuffed animals and ancient weapons.",
+      "text2": "Part of it is devoted to the Hunting Museum.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is playing a guitar.",
+      "text2": "A man plays a guitar.",
+      "label": 0
+    },
+    {
+      "text1": "bombing occurred in afghanistan as attacks by anti-government insurgents increase in recent days.",
+      "text2": "a bombing occurred in afghanistan but police have not yet stated who is responsible.",
+      "label": 0
+    },
+    {
+      "text1": "Syria Regime Agrees to Attend Peace Conference",
+      "text2": "Russia: Syria Agrees to Participate in Conference",
+      "label": 1
+    },
+    {
+      "text1": "to uh to get out and uh go for the swim i think uh there is something to this endorphins",
+      "text2": "When I go swimming I feel such fatigue afterwards.",
+      "label": 0
+    },
+    {
+      "text1": "Dixit Dominus is a psalm setting by George Frideric Handel (catalogued as HWV 232).George Frideric (or Frederick) Handel ( ; born Georg Friedrich Händel ] ; 23 February 1685 (O.S.) [(N.S.) 5 March] – 14 April 1759) was a German, later British, baroque composer who spent the bulk of his career in London, becoming well known for his operas, oratorios, anthems, and organ concertos. Handel received important training in Halle and worked as a composer in Hamburg and Italy before settling in London in 1712; he became a naturalised British subject in 1727.",
+      "text2": "George Frideric Handel",
+      "label": 1
+    },
+    {
+      "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
+      "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
+      "label": 0
+    },
+    {
+      "text1": "The power of his work is attributed to its scale and his meticulous method.",
+      "text2": "His work power is a result of scale and meticulous method.",
+      "label": 1
+    },
+    {
+      "text1": "The Badgeman were a four-piece indie rock band from Salisbury, Wiltshire formed in 1988, although music journalist Pete Frame claims in his book \"Rockin Around Britain\" that the band hailed from Melksham.Finger Eleven is a Canadian rock band from Burlington, Ontario, formed in 1990.",
+      "text2": "The Badgeman and Finger Eleven come from different cities.",
+      "label": 0
+    },
+    {
+      "text1": "(Click to read the question--but in brief, it had to do with why one guy named Bill had managed to discourage unwanted pursuit by a gal named Janet, when another guy named Bill had not.)",
+      "text2": "There are two Bills who had different experiences with Janet.",
+      "label": 1
+    },
+    {
+      "text1": "A red and gray train is going through a tunnel.",
+      "text2": "A red and gray train travels through a tunnel amongst the trees.",
+      "label": 1
+    },
+    {
+      "text1": "Children’s National Medical Center (formerly DC Children’s Hospital) is ranked among the top 10 children’s hospitals in the country by \"U.S. News & World Report.\"MedStar Washington Hospital Center is the largest private hospital in Washington, D.C. A member of MedStar Health, the not-for-profit Hospital Center is licensed for 926 beds.",
+      "text2": "Children's National Medical Center is a top-ranked hospital.",
+      "label": 0
+    },
+    {
+      "text1": "Two dead, more trapped in latest Mumbai building collapse",
+      "text2": "Two are trapped as US building collapses",
+      "label": 0
+    },
+    {
+      "text1": "Assuming the bare-bones basic functions of government are to be maintained, where then will be the room for any border-control guards or anti-terrorism measures, or Head Start or education grants or peanut subsidies or national parks, or disaster relief--let alone the enhancements that Congress deemed so necessary this October?",
+      "text2": "There is not any room for anymore functions.",
+      "label": 0
+    },
+    {
+      "text1": "Among its best-known customers are the Duchess of Cambridge and her sister, Pippa Middleton.Philippa Charlotte Middleton ( ; born 6 September 1983) is an English socialite, author, columnist, and the younger sister of Catherine, Duchess of Cambridge. Middleton began receiving media attention with her appearance as the maid of honour at her sister's wedding to Prince William.",
+      "text2": "The Maid of Honour at the Duchess of Cambridge's wedding was not Pippa Middleton.",
+      "label": 0
+    },
+    {
+      "text1": "In information theory, the Cheung–Marks theorem, named after K. F. Cheung and Robert J. Marks II, specifies conditions where restoration of a signal by the sampling theorem can become ill-posed.Robert Jackson Marks II is a polymath electrical engineer.",
+      "text2": "polymath electrical engineer",
+      "label": 1
+    },
+    {
+      "text1": "The University of South Alabama (USA), officially nicknamed \"South\" is a public, national research university in Mobile, Alabama, United States.The University of Southern Queensland (USQ) is a medium-sized, regional university based in Toowoomba, Queensland, Australia, with three university campuses at Toowoomba, Springfield and Ipswich.",
+      "text2": "The University of South Alabama and University of Southern Queensland are located in different hemispheres.",
+      "label": 0
+    },
+    {
+      "text1": "Imran blames rival for colleague murder",
+      "text2": "Pakistans Imran blames rival for killing party member",
+      "label": 1
+    },
+    {
+      "text1": "U.S. Route 95 (US 95) is a major U.S. highway traversing the U.S. state of Nevada from north to south directly through Las Vegas and providing connections to both Carson City (via US 50) and Reno (via Interstate 80). It is in Northern Nevada, approximately 22 mi from Lake Tahoe.",
+      "text2": "U.S. Route 95 (US 95) is a major U.S. highway traversing the U.S. state of Nevada from north to south",
+      "label": 1
+    },
+    {
+      "text1": "Jon stared off for a while, appearing in deep thought.",
+      "text2": "Jon was so tired from the recent events that he could hardly think.",
+      "label": 0
+    },
+    {
+      "text1": "I hope everything is OK!",
+      "text2": "I hope everything is okay.",
+      "label": 1
+    },
+    {
+      "text1": "Two dogs run side-by-side on the grass.",
+      "text2": "Two dogs running on grass.",
+      "label": 1
+    },
+    {
+      "text1": "Riding for Harley-Davidson and later Indian, he won multiple races in California and later the east coast and the midwest.Harley-Davidson, Inc. (H-D), or Harley, is an American motorcycle manufacturer, founded in Milwaukee, Wisconsin in 1903.",
+      "text2": "Harley-Davidson, Inc.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "Francisco de Goya painted a court portrait of the next king, Charles IV, in which he looked strangely like George Washington.",
+      "text2": "de Goya painted a portrait that made him look strange and angered him.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
+      "label": 0
+    },
+    {
+      "text1": "Ellie is a fictional character in the 2013 video game \"The Last of Us\", and the main protagonist of the upcoming video game \"The Last of Us Part II\".The Last of Us Part II is an upcoming action-adventure survival horror video game developed by Naughty Dog and published by Sony Interactive Entertainment for PlayStation 4.",
+      "text2": "Rockstar Games also published the game.",
+      "label": 0
+    },
+    {
+      "text1": "He is known for playing Jay Cartwright in the BAFTA-winning E4 sitcom \"The Inbetweeners.\"The Inbetweeners is a British coming of age sitcom television series originally aired on E4 from 2008–2010, created and written by Damon Beesley and Iain Morris.",
+      "text2": "James Buckley played a lead character in a popular TV show set in a British high school.",
+      "label": 0
+    },
+    {
+      "text1": "Iran dissidents 'killed in Iraq'",
+      "text2": "France loses influence in Europe",
+      "label": 0
+    },
+    {
+      "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+      "text2": "SOLID is an acronym for five OOP design principles — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion — that promote clean, maintainable code.",
+      "label": 1
+    },
+    {
+      "text1": "A boy whacks a man with a sword.",
+      "text2": "A boy spanks a man with a plastic sword.",
+      "label": 0
+    },
+    {
+      "text1": "In 1649, Ireland's most hated conqueror, Oliver Cromwell, arrived in Dublin.",
+      "text2": "Oliver Cromwell came to Dublin in 1649.",
+      "label": 1
+    },
+    {
+      "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
+      "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
+      "label": 1
+    },
+    {
+      "text1": "The woman is dicing onions.",
+      "text2": "A woman is cutting an onion.",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
+      "label": 1
+    },
+    {
+      "text1": "Yet she almost went back to put the curtain aside and make sure… .",
+      "text2": "She was unsure of what to do",
+      "label": 0
+    },
+    {
+      "text1": "you know you don't feel it so strapped",
+      "text2": "You feel more comfortable.",
+      "label": 1
+    },
+    {
+      "text1": "Donald Seaton Cammell (17 January 1934 – 24 April 1996) was a Scottish film director who has a cult reputation thanks to his debut film \"Performance\", which he co-directed with Nicolas Roeg.Peter Bogdanovich (Serbian: Петар Богдановић, \"Petar Bogdanović\", born July 30, 1939) is an American director, writer, actor, producer, critic and film historian.",
+      "text2": "Donald Seaton Cammell (17 January 1934 – 24 April 1996) was a Scottish film director who has a cult reputation thanks to his debut film \"Performance\", which he co-directed with Nicolas Roeg.",
+      "label": 1
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
+      "label": 1
+    },
+    {
+      "text1": "Michael Kenji Shinoda ( , born February 11, 1977) is an American musician, songwriter, record producer and graphic designer.Julien-K is an electronic rock band based in Long Beach, California, that began as a side project for electronic music created by Amir Derakh and Ryan Shuck from Orgy, alongside Anthony 'Fu' Valcic.",
+      "text2": "Michael Kenji Shinoda",
+      "label": 1
+    },
+    {
+      "text1": "It is one of nine dams on the Tennessee River owned and operated by the Tennessee Valley Authority, which built the dam in the mid-1960s to replace the outdated Hales Bar Dam 6 mi upstream.The Tennessee Valley Authority (TVA) is a federally owned corporation in the United States created by congressional charter on May 18, 1933 to provide navigation, flood control, electricity generation, fertilizer manufacturing, and economic development to the Tennessee Valley, a region particularly affected by the Great Depression.",
+      "text2": "Tennessee Valley Authority",
+      "label": 1
+    },
+    {
+      "text1": "kashmir is divided between india and pakistan.",
+      "text2": "kashmir is claimed by both india and pakistan.",
+      "label": 1
+    },
+    {
+      "text1": "(George W. Bush kills Gore in poll questions about leadership.",
+      "text2": "George W. Bush goes against Gore in a debate.",
+      "label": 1
+    },
+    {
+      "text1": "David Michael Draiman (born March 13, 1973) is an American songwriter and the vocalist for the band Disturbed as well as for the band Device.Charles Frederick Kip Winger (born June 21, 1961) is an American rock musician, a member of the rock band Winger, and a solo artist.",
+      "text2": "David Draiman is a musician but Kip Winger is not a vocalist.",
+      "label": 0
+    },
+    {
+      "text1": "\"Shareholder Meeting\" is the 11th episode of the sixth season of the U.S. comedy series \"The Office\" and the show's 111th episode overall.The Office is an American television comedy series that aired on NBC from March 24, 2005, to May 16, 2013.",
+      "text2": "The \"Shareholder Meeting\" episode did not air on NBC.",
+      "label": 0
+    },
+    {
+      "text1": "Trevor Coppola is an actor, musician from Santa Monica, California. The films he has acted in include \"Little Blue Pill\", \"The Hunchback\", \"Matilda\", \"The Bank Job\", \"Lucky Numbers\" and \"3:10 to Yuma\" and \"Vikingdom\".Matilda is a 1996 American children's fantasy comedy film directed by Danny DeVito, who also produced with Michael Shamberg, Stacey Sher, and Lucy Dahl. Mara Wilson, DeVito, Rhea Perlman, Embeth Davidtz, and Pam Ferris star. The film is about a young genius named Matilda, who uses telekinesis to deal with her parents, who do not value education, and Agatha Trunchbull, the oppressive principal of Crunchem Hall Elementary School.",
+      "text2": "The film was directed by Tim Burton.",
+      "label": 0
+    },
+    {
+      "text1": "Doctor Minerva is a Kree geneticist.The Kree, briefly known as the Ruul, are a fictional scientifically and technologically advanced militaristic alien race appearing in American comic books published by Marvel Comics.",
+      "text2": "Doctor Minerva and Rauul both appear in Marvel Comics, but in completely different universes.",
+      "label": 0
+    },
+    {
+      "text1": "The broader Standard & Poor's 500 Index <.SPX> was 0.46 points lower, or 0.05 percent, at 997.02.",
+      "text2": "The technology-laced Nasdaq Composite Index .IXIC was up 7.42 points, or 0.45 percent, at 1,653.44.",
+      "label": 0
+    },
+    {
+      "text1": "the 5 permanent united nations security council members are britain, china, france, russia and the united states.",
+      "text2": "p5+1 members are britain, china, france, russia, germany and the united states.",
+      "label": 1
+    },
+    {
+      "text1": "The title is a parody of \"All Quiet on the Western Front\", an Academy Award-winning Universal film released in the same year.All Quiet on the Western Front is a 1930 American epic Pre-Code war film based on the Erich Maria Remarque novel of the same name.",
+      "text2": "Erich Maria Remarque",
+      "label": 1
+    },
+    {
+      "text1": "Outrage after reports emerge about 6-year-old Indian girl raped at school",
+      "text2": "Outrage After Indian Girl, 6, Raped at Her School",
+      "label": 1
+    },
+    {
+      "text1": "The regulation requires companies with more than 500 employees to submit an annual diversity report.",
+      "text2": "Companies with over 500 employees must file an annual diversity report. Non-compliance results in fines of up to €50,000 per violation under the latest amendment.",
+      "label": 0
+    },
+    {
+      "text1": "Iran's president condemns use of chemical weapons in Syria",
+      "text2": "Probe alleged use of chemical weapons in Syria",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
+      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
+      "label": 1
+    },
+    {
+      "text1": "that's what i'm looking for now that's why i was just trying to talk without having to think about what i was saying and uh trying to look over this thing",
+      "text2": "That's not what I'm looking for.",
+      "label": 0
+    },
+    {
+      "text1": "Elegant dining room with wood furniture.",
+      "text2": "An elegant pink dining room with wooden furniture.",
+      "label": 1
+    },
+    {
+      "text1": "This is another game in which lessons and lots of spare money are recommended.",
+      "text2": "They don't offer lessons.",
+      "label": 0
+    },
+    {
+      "text1": "Instead, prosecutors dismissed charges and Rucker left the courtroom a free man.",
+      "text2": "Instead he left the courtroom a free man after authorities dismissed criminal charges.",
+      "label": 0
+    },
+    {
+      "text1": "The iBook is a line of laptop computers designed, manufactured, and sold by Apple Inc. from 1999 to 2006.AirPort is the name given to a series of products by Apple Inc. using the (Wi-Fi) protocols (802.11b, 802.11g, 802.11n and 802.11ac).",
+      "text2": "The iBook is able to connect to the internet via AirPort.",
+      "label": 0
+    },
+    {
+      "text1": "Bonk is the debut studio album by Australian rock band Big Pig. \"Breakaway\" was also featured in Season 1, Episode 4 of \"Glitch (TV series)\".Glitch is an Australian paranormal television program which premiered on 9 July 2015, on ABC1. It is produced by Noah Burnett and Noah Fox, with Tony Ayres serving as an Executive Producer.",
+      "text2": "The rock band with the song featured on a television program produced by Noah Burnett and Noah Fox is Big Pig.",
+      "label": 0
+    },
+    {
+      "text1": "It featured Karl Malone, Jason Williams, Reggie Miller, Jason Kidd, Latrell Sprewell, and Scottie Pippen on the coverScottie Maurice Pippen (born September 25, 1965) is an American former professional basketball player who played in the National Basketball Association. Pippen, along with Michael Jordan, played an important role in transforming the Bulls team into a championship team and for popularizing the NBA around the world during the 1990s.",
+      "text2": "Michael Jordan was featured in NBA Jam 2001.",
+      "label": 0
+    },
+    {
+      "text1": "The Broncos were led by eighth year head coach Chris Petersen and played their home games at Bronco Stadium.Christopher Scott Petersen (born October 13, 1964) is an American football coach who is currently the head coach at the University of Washington.",
+      "text2": "University of Washington",
+      "label": 1
+    },
+    {
+      "text1": "James Murdoch quits BSkyB",
+      "text2": "James Murdoch quits role at BSkyB",
+      "label": 1
+    },
+    {
+      "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
+      "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
+      "label": 1
+    },
+    {
+      "text1": "Il trionfo dell'onore (\"The Triumph of Honour\") is an operatic 'commedia' in three acts by the Italian composer Alessandro Scarlatti, with a libretto by . It was first performed at the Teatro dei Fiorentini, Naples on 26 November 1718.Pietro Alessandro Gaspare Scarlatti (2 May 1660 – 22 October 1725) was an Italian Baroque composer, especially famous for his operas and chamber cantatas.",
+      "text2": "Teatro dei Fiorentini",
+      "label": 1
+    },
+    {
+      "text1": "The center's president, Joseph Torsella, was struck on the head but was able to walk to an ambulance.",
+      "text2": "National Constitution Center President Joseph Torsella was hit in the head and knocked to his knees.",
+      "label": 0
+    },
+    {
+      "text1": "George Weston Limited, often referred to as Weston or Weston's, is a Canadian food processing and distribution company. Founded by George Weston in 1882, the company today consists of Weston Foods, a wholly owned subsidiary, and Loblaw Companies Limited, the country's largest supermarket retailer, in which it maintains controlling interest.Wonder Bread is the name of a brand of bread. It is sold in North American stores and produced by three distinct companies: in Canada by Weston Bakeries Limited, a subsidiary of George Weston Limited, in the United States of America by Flowers Foods, and in Mexico by Grupo Bimbo.",
+      "text2": "George Weston Limited",
+      "label": 1
+    },
+    {
+      "text1": "The armored man howled in his helm as the hand enclosed, twisting metal and crushing bone.",
+      "text2": "The armored man whooped as his armor failed, and watched as it dropped from his body ineffectively at the unarmed attack.",
+      "label": 0
+    },
+    {
+      "text1": "Growing up in New York City, he studied Film at Tisch School of the Arts. It is located at 721 Broadway in Manhattan, New York City.",
+      "text2": "Tisch School of the Arts",
+      "label": 1
+    },
+    {
+      "text1": "Only one system of government has ever dealt adequately with the incentive problem for the chief executive, and that's hereditary monarchy.",
+      "text2": "Only a hereditary monarchy has appropriately addressed the competition for chief executive.",
+      "label": 1
+    },
+    {
+      "text1": "Here's what Hatfield writes about what Eufaula told",
+      "text2": "Hatfield wrote about Eufaula s words.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "It was last assigned to the 57th Adversary Tactics Group at Nellis Air Force Base, Nevada.) is a United States Air Force installation in southern Nevada with military schools and more squadrons than any other USAF base.",
+      "text2": "Nellis Air Force Base",
+      "label": 1
+    },
+    {
+      "text1": "Lucrezia Borgia is a melodramatic opera in a prologue and two acts by Gaetano Donizetti.Il pirata (\"The Pirate\") is an opera in two acts by Vincenzo Bellini to an Italian libretto by Felice Romani which was based on a three-act mélodrame from 1826, \"Bertram, ou le Pirate\" (\"Bertram, or The Pirate\") by Charles Nodier and \"Raimonde\" (actually Isidore Justin Séverin Taylor).",
+      "text2": "Lucrezia Borgia, not Il pirata.",
+      "label": 0
+    },
+    {
+      "text1": "Man, 19, quizzed over teen murder",
+      "text2": "Man quizzed over Megan-Leigh murder",
+      "label": 1
+    },
+    {
+      "text1": "The team was coached by Art Briles. Briles was formerly the head coach at Baylor University from 2008 through 2015, from which he was fired in the wake of a major sexual assault scandal in his football program.",
+      "text2": "Briles was formerly fired in 2016.",
+      "label": 0
+    },
+    {
+      "text1": "A small plane parked at an airfield with a cloudy sky overhead.",
+      "text2": "A small white plane parked in an airport on a cloudy day.",
+      "label": 1
+    },
+    {
+      "text1": "The judge also refused to postpone the trial date of Sept. 29.",
+      "text2": "Obus also denied a defense motion to postpone the Sept. 29 trial date.",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
+      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotic resistance develops when bacteria evolve to survive drug treatment.",
+      "text2": "Compound interest accumulates on both principal and previously earned interest.",
+      "label": 0
+    },
+    {
+      "text1": "and maybe and i knew i wanted to be in engineering so i was looking for a good engineering school so i ended up going to Tech in Lubbock",
+      "text2": "Tech in Lubbock was my first choice for college.",
+      "label": 0
+    },
+    {
+      "text1": "The Pacifier is a 2005 American family comedy film directed by Adam Shankman, written by Thomas Lennon and Robert Ben Garant and stars Vin Diesel.Adam Michael Shankman (born November 27, 1964) is an American film director, producer, dancer, author, actor, and choreographer. He was a judge on seasons 3-10 of the television program \"So You Think You Can Dance\" He began his professional career in musical theater, and was a dancer in music videos for Paula Abdul and Janet Jackson.",
+      "text2": "Adam Michael Shankman",
+      "label": 1
+    },
+    {
+      "text1": "Red double decker bus taking on passengers.",
+      "text2": "A red double decker bus is picking up more passengers in a city.",
+      "label": 1
+    },
+    {
+      "text1": "He is known for appearing on television shows, such as \"Celebrity Deathmatch\", \"Kenny the Shark\" and \"Fetch!Kenny the Shark is an American animated television series produced by Discovery Kids. The show premiered on NBC's Discovery Kids on NBC from November 1, 2003 and ended February 18, 2006 with two seasons and 26 episodes in total having aired.",
+      "text2": "Jim Conroy voiced characters on animated television shows on NBC.",
+      "label": 0
+    },
+    {
+      "text1": "The Court in Rust did not place explicit reliance on the rationale that the counseling activities of the doctors under Title X amounted to governmental speech; when interpreting the holding in later cases, however, we have explained Rust on this understanding.",
+      "text2": "The court found no explicit reliance for the rationale.",
+      "label": 1
+    },
+    {
+      "text1": "that's never i mean i understand that they're talking about the job  not the person in the job that's that's always that's always been strange i thought but some women like to fight it",
+      "text2": "I believe they are talking about the individual and not the job.",
+      "label": 0
+    },
+    {
+      "text1": "David Pastrňák (] ; born 25 May 1996) is a Czech professional ice hockey right winger currently playing for the Boston Bruins of the National Hockey League (NHL). He was selected by the Bruins in the first round, 25th overall, of the 2014 NHL Entry Draft.The 2014 NHL Entry Draft was the 52nd NHL Entry Draft. The draft was held on June 27–28, 2014 at the Wells Fargo Center in Philadelphia, Pennsylvania.",
+      "text2": "Philadelphia, Pennsylvania",
+      "label": 1
+    },
+    {
+      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
+      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
+      "label": 0
+    },
+    {
+      "text1": "Albert Celades López (born 29 September 1975) is a Spanish retired footballer who played as a defensive midfielder, and the current manager of the Spanish under-21 team.The Spain national under-21 football team is the national under-21 football team of Spain and is controlled by the Royal Spanish Football Federation. The team, nicknamed La Rojita (The Little Red [One]), competes in the biennial UEFA European Under-21 Championship.",
+      "text2": "Albert Celades López",
+      "label": 1
+    },
+    {
+      "text1": "The black and white cows pause in front of the gate.",
+      "text2": "The white airplane is flying in the sky.",
+      "label": 0
+    },
+    {
+      "text1": "Christopher Lynch is an Australian businessman and former CEO of Transurban Ltd and also a member of the AFL Commission.Transurban manages and develops urban toll road networks in Australia and North America.",
+      "text2": "Australia and North America",
+      "label": 1
+    },
+    {
+      "text1": "Breakout Labs is a grant-making body operating as part of the Thiel Foundation (a philanthropic organization created by Peter Thiel).Peter Andreas Thiel ( ; born October 11, 1967) is an American entrepreneur, venture capitalist, philanthropist, political activist, and author.",
+      "text2": "The founder of Breakout Labs is Elon Musk.",
+      "label": 0
+    },
+    {
+      "text1": "Rebels kill 21 civilians in Syria Alawite village",
+      "text2": "Bomb kills 18 civilians in Afghanistan",
+      "label": 0
+    },
+    {
+      "text1": "Alisha Daniels is a fictional character from the British Channel 4 science fiction comedy-drama \"Misfits\", portrayed by Antonia Thomas.Channel 4 is a British public-service television broadcaster that began transmission on 2 November 1982.",
+      "text2": "Alisha Daniels is a fictional character from the British sci-fi that aired on E4.",
+      "label": 0
+    },
+    {
+      "text1": "The girl is riding the horse.",
+      "text2": "The girl is spraying the plants with water.",
+      "label": 0
+    },
+    {
+      "text1": "The little girl played on the grass with a dog and a ball.",
+      "text2": "A baby plays with a dog and ball.",
+      "label": 1
+    },
+    {
+      "text1": "The basilica's highlight, and generally accepted as the work of a young Giotto, the Life of Francis (1296-1304) is movingly celebrated in 28 scenes along the lower tier (starting from the right transept), while 32 frescoes in the upper tier illustrate scenes from the Old and New Testament.",
+      "text2": "The scenes in the lower tier were created by Giotto near the end of his life.",
+      "label": 0
+    },
+    {
+      "text1": "The SJ series Jeep Cherokee is a full-size SUV that was produced from 1974 through 1983 by Jeep. It was based on the Wagoneer that was originally designed by Brooks Stevens in 1963.The Jeep Wagoneer is the first luxury 4x4, sold and produced for Jeep through numerous marques from 1963 to 1991.",
+      "text2": "The first luxury 4x4 was designed by Mary Stevens.",
+      "label": 0
+    },
+    {
+      "text1": "you know the height that you you set it at so i set it very high and it just picks or it skims the grass it doesn't dig way down deep so i don't have a lot of grass that i uh that i collect",
+      "text2": "I don't have to collect a lot of grass because it just skims the top of it.",
+      "label": 1
+    },
+    {
+      "text1": "The annual report states total assets of $18.7 billion and total liabilities of $11.2 billion as of 31 December.",
+      "text2": "As of 31 December, total assets were $18.7 billion and liabilities $11.2 billion, giving a debt-to-equity ratio of 0.6. The company has maintained investment-grade credit since 2015.",
+      "label": 0
+    },
+    {
+      "text1": "Man convicted in Vatican leaks case",
+      "text2": "Butler to be tried in \"Vatileaks\" case",
+      "label": 0
+    },
+    {
+      "text1": "The church is dominated by the massive nave and graceful flying buttresses linking the five chapels to the chancel.",
+      "text2": "The five chapels are linked to the chancel.",
+      "label": 1
+    },
+    {
+      "text1": "Isaac S. D. Sassoon is an observant Sephardic rabbi (hakham), scholar and educator.The Sassoon family, known as \"Rothschilds of the East\" due to the great wealth they accumulated in trade, is of Baghdadi Jewish descent and international renown.",
+      "text2": "\"Rothschilds of the East\"",
+      "label": 1
+    },
+    {
+      "text1": "The proportion of people covered by employers dropped from 62.3 percent in 2001 to 61.3 percent last year.",
+      "text2": "The proportion of Americans with insurance from employers declined to 61.3 percent, from 62.6 percent in 2001 and 63.6 percent in 2000.",
+      "label": 0
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
+      "label": 0
+    },
+    {
+      "text1": "News of Terrorism and the Israeli-Palestinian Conflict (January 22 ‚Äď 28, 2014)",
+      "text2": "News of Terrorism and the Israeli-Palestinian Conflict (July 31 ‚Äď August 6, 2013)",
+      "label": 0
+    },
+    {
+      "text1": "It would serve no real purpose.",
+      "text2": "It could be done, but it wouldn't do anything for us.",
+      "label": 0
+    },
+    {
+      "text1": "In 1670 the Spanish officially ceded Jamaica to British rule as part of the Treaty of Madrid, and the British began a systematic process of settlement, offering land and aid to prospective settlers.",
+      "text2": "Britain rewarded Jamaican settlers with land after Spain ceded the island in 1670.",
+      "label": 1
+    },
+    {
+      "text1": "Its mayor is Laurids Rudebeck, a member of the Venstre (Liberal Party) political party.Jutland ( ; Danish: \"Jylland\" ] ; German: \"Jütland\" ] ), also known as the Cimbric or Cimbrian Peninsula (Latin: \"Cimbricus Chersonesus\" ; Danish: \"Den Kimbriske Halvø\" ; German: \"Kimbrische Halbinsel\" ), is a peninsula of Northern Europe that forms the continental portion of Denmark and part of northern Germany.",
+      "text2": "The political leader of the Danish town on the Northern European peninsula which partially comprises Germany is Laurids Rudebeck.",
+      "label": 0
+    },
+    {
+      "text1": "Five more human cases of West Nile virus, were reported by the Mesa County Health Department on Wednesday.",
+      "text2": "As of this week, 103 human West Nile cases in 45 counties had been reported to the health department.",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
+      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "label": 1
+    },
+    {
+      "text1": "Many worksharing discounts evoke responses based on more than one of the situations described above.",
+      "text2": "Several of the described situations reflect the responses.",
+      "label": 1
+    },
+    {
+      "text1": "Four Asian young people sitting in a den or living room.",
+      "text2": "A girl sitting in a living chair.",
+      "label": 0
+    },
+    {
+      "text1": "Sir Francis Nethersole (1587–1659) was an English diplomat, secretary to the Electress Elizabeth, Member of Parliament for Corfe Castle, Dorset, and a Civil War political pamphleteer.Elizabeth Stuart (19 August 1596 – 13 February 1662) was Electress of the Palatinate and briefly Queen of Bohemia as the wife of Frederick V of the Palatinate.",
+      "text2": "Sir Francis Nethersole",
+      "label": 1
+    },
+    {
+      "text1": "Yoon Sang-hyun (born September 21, 1973) is a South Korean actor and singer. He is best known for his roles in \"Queen of Housewives\" (2009), \"My Fair Lady\" (2009), \"Secret Garden\" (2011) and \"I Can Hear Your Voice\" (2013).I Can Hear Your Voice () is a 2013 South Korean television series starring Lee Bo-young, Lee Jong-suk, Yoon Sang-hyun and Lee Da-hee. It aired on SBS from June 5 to August 1, 2013, on Wednesdays and Thursdays at 21:55 for 18 episodes.",
+      "text2": "All the actors played in \"My Fair Lady\" and \"I Can Hear Your Voice\" on KBS.",
+      "label": 0
+    },
+    {
+      "text1": "Son of top Muslim Brotherhood leader killed",
+      "text2": "Egypt arrests Muslim Brotherhood leader Badie",
+      "label": 0
+    },
+    {
+      "text1": "Resurrect all the Presidents.",
+      "text2": "Bring back every President.",
+      "label": 1
+    },
+    {
+      "text1": "Kilims are small rugs that are woven rather than knotted, and have no pile; a cicim is a kilim with embroidered decoration.",
+      "text2": "Kilim rugs are always very small in size.",
+      "label": 0
+    },
+    {
+      "text1": "A man and woman are driving down the street in a jeep.",
+      "text2": "A man and woman are driving down the road in an open air vehicle.",
+      "label": 1
+    },
+    {
+      "text1": "It was owned by the Cologne-Minden Railway Company and named after the Cologne Cathedral, which is located on the same longitudinal axis. As the Cathedral Bridge could not bolster the increased traffic of the new Köln Hauptbahnhof in 1894, it was replaced by the Hohenzollern Bridge in 1911. It is Germany's most visited landmark, attracting an average of 20,000 people a day and currently the tallest twin-spired church at 157 m tall.",
+      "text2": "The Bridge was not replaced.",
+      "label": 0
+    },
+    {
+      "text1": "The film stars Michael Keaton as businessman Ray Kroc, and portrays the story of his creation of the McDonald's fast food chain. He joined the Californian chain McDonald's in 1954 and built it into a nationwide and eventually global franchise, making it the most successful fast food corporation in the world.",
+      "text2": "McDonald's fast food chain",
+      "label": 1
+    },
+    {
+      "text1": "Now, Blanca's American husband, 63-year-old Roger Lawrence Strunk, faces a murder indictment issued in February by the Philippine government, which says he's the leading suspect.",
+      "text2": "Now, Blanca's husband, 63-year-old Roger Lawrence Strunk of Tracy, faces a murder indictment issued by the Philippine government in February.",
+      "label": 1
+    },
+    {
+      "text1": "Universities and university colleges normally use the ECTS grading scale.The ECTS grading scale is a grading system defined in the European Credit Transfer and Accumulation System (ECTS) framework by the European Commission.",
+      "text2": "The ECTS grading scale is only used in the European countries.",
+      "label": 0
+    },
+    {
+      "text1": "The film stars Vivek Oberoi opposite Neha Sharma in lead roles.Neha Sharma (] ; born 21 November 1987) is an Indian film actress and model. A native of Bihar, Sharma attended the Mount Carmel School in Bhagalpur and pursued a course in fashion design from the National Institute of Fashion Technology (NIFT) in New Delhi.",
+      "text2": "Neha Sharma is from Bhagalpur.",
+      "label": 0
+    },
+    {
+      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
+      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
+      "label": 0
+    },
+    {
+      "text1": "Bryan Greenberg (born May 24, 1978) is an American actor and singer, known for his starring role as Ben Epstein in the HBO original series \"How to Make It in America\" as well as a recurring role as Jake Jagielski in the WB series \"One Tree Hill\" and as Nick Garrett on the short-lived ABC drama \"October Road\".Prime is a 2005 American romantic comedy-drama film starring Uma Thurman, Meryl Streep and Bryan Greenberg.",
+      "text2": "The movie Prime starred Jake Jagielski.",
+      "label": 0
+    },
+    {
+      "text1": "Further out the curve, the benchmark 10-year note US10YT=RR shed 25/32 in price, taking its yield to 3.26 percent from 3.17 percent.",
+      "text2": "Early Wednesday, the benchmark 10-year US10YT=RR had lost 16/32 in price, driving its yield up to 3.33 percent from 3.26 percent late Tuesday.",
+      "label": 0
+    },
+    {
+      "text1": "In Vienna, the IAEA said ElBaradei would accept the invitation, although no date had yet been set.",
+      "text2": "In Vienna, the International Atomic Energy Agency said on Monday ElBaradei had accepted Iran's invitation, but said no date had yet been set.",
+      "label": 0
+    },
+    {
+      "text1": "yeah and then he'd have to pay it all",
+      "text2": "He would have to pay the whole thing.",
+      "label": 1
+    },
+    {
+      "text1": "Why bother with the art on its terms when you can have it on your own?",
+      "text2": "Isn't taking art on your terms the best thing to do?",
+      "label": 1
+    },
+    {
+      "text1": "US Election: Mitt Romney concedes defeat as Barack Obama wins second term",
+      "text2": "Romney concedes election to Obama in phone call",
+      "label": 1
+    },
+    {
+      "text1": "yeah yeah Show Biz that's the name of it",
+      "text2": "Yeah, Show Biz that's the name",
+      "label": 1
+    },
+    {
+      "text1": "Dead Sara is an American hard rock band from Los Angeles, consisting of Emily Armstrong (lead vocals, rhythm guitar), Siouxsie Medley (lead guitar, backing vocals), Sean Friday (drums, backing vocals) and Chris Null (bass guitar, backing vocals) currently best known for their single \"Weatherman\" from their debut eponymous album \"Dead Sara\" (2012).Young Guns are an English alternative rock band from High Wycombe, Buckinghamshire.",
+      "text2": "Young Guns is known for \"Weatherman\".",
+      "label": 0
+    },
+    {
+      "text1": "France, on the other hand, has densely populated cities but no areas as sparsely settled as in the United States.",
+      "text2": "There are no sparsely settled areas in France.",
+      "label": 0
+    },
+    {
+      "text1": "Briggs is best remembered as founder and editor of \"The Crusader,\" a seminal New York magazine of the New Negro Movement of the 1920s and as founder of the African Blood Brotherhood, a small but historically important radical organization dedicated to advancing the cause of Pan-Africanism.Pan-Africanism is a worldwide intellectual movement that aims to encourage and strengthen bonds of solidarity between all people of African descent.",
+      "text2": "Cyril Briggs dedicated himself to the upliftment of African diaspora through Pan-Africanism.",
+      "label": 0
+    },
+    {
+      "text1": "His mythologies and powers are similar, though not identical to those of the Indo-European deities such as Zeus, Jupiter, Perun, Thor, and Odin (Wotan).Zeus ( ; Greek: Ζεύς \"Zeús\" ] ) is the sky and thunder god in ancient Greek religion, who ruled as king of the gods of Mount Olympus.",
+      "text2": "Indra's mythologies and powers are similar to those of Thor.",
+      "label": 0
+    },
+    {
+      "text1": "Natural selection drives evolution by favouring heritable traits that increase reproductive success.",
+      "text2": "The SOLID principles are five design guidelines that promote maintainable object-oriented software.",
+      "label": 0
+    },
+    {
+      "text1": "Princess Alexandrine of Baden (Alexandrine Luise Amalie Friederike Elisabeth Sophie; 6 December 1820 – 20 December 1904) was the Duchess of Saxe-Coburg and Gotha as the wife of Ernest II. She was born the eldest child of Leopold, Grand Duke of Baden and his wife Princess Sophie of Sweden.Ernest II (German: \"Ernst August Karl Johann Leopold Alexander Eduard\"; 21 June 1818 – 22 August 1893) was the sovereign duke of the Duchy of Saxe-Coburg and Gotha, reigning from 1844 to his death.",
+      "text2": "The grandma of the wife of Ernest II, Duke of Saxe-Coburg and Gotha was from Austria.",
+      "label": 0
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "label": 0
+    },
+    {
+      "text1": "North Korea's Kim hails execution of powerful uncle",
+      "text2": "North Korean intrigue: The execution of power",
+      "label": 0
+    },
+    {
+      "text1": "A yellow dog is playing in a grassy area near flowers.",
+      "text2": "A girl is playing on a swing.",
+      "label": 0
+    },
+    {
+      "text1": "Linda Bernadette Carter is a fictional character from the BBC soap opera \"EastEnders\", played by Kellie Bright. She first appeared on 19 December 2013 and her casting was announced alongside her on-screen partner, Mick Carter (Danny Dyer).Daniel John \"Danny\" Dyer (born 24 July 1977) is an English actor who has worked in television, film and theatre. Dyer's breakthrough role was as Moff in \"Human Traffic\", with other notable roles as Billy the Limpet in \"Mean Machine\", and as Tommy Johnson in \"The Football Factory\".",
+      "text2": "Daniel John \"Danny\" Dyer played Moff in Human Traffic, who was a drug dealer.",
+      "label": 0
+    },
+    {
+      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
+      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
+      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "label": 0
+    },
+    {
+      "text1": "No, I show you are willfully ignorant.",
+      "text2": "LOL, you are so ignorant.",
+      "label": 1
+    },
+    {
+      "text1": "The American Video Awards (19831987) was an annual music video award show taped for distribution to television. \"The\" \"First Annual American Video Awards\" was hosted by radio personality Casey Kasem, and Kasem continued in his role as emcee of the show in succeeding years. The first (1983), second (1984) and third (April 1985) shows were syndicated to television channels across the country.Kemal Amin \"Casey\" Kasem (April 27, 1932 – June 15, 2014) was an American disc jockey, music historian, radio personality, voice actor, and actor, known for being the host of several music radio countdown programs, most notably \"American Top 40\", from 1970 until his retirement in 2009, and for providing the voice of Norville \"Shaggy\" Rogers in the \"Scooby-Doo\" franchise from 1969 to 1997, and again from 2002 until 2009.",
+      "text2": "Kemal Amin \"Casey\" Kasem",
+      "label": 1
+    },
+    {
+      "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
+      "text2": "I knew that he would understand what I was saying.",
+      "label": 1
+    },
+    {
+      "text1": "The Attica Prison riot, also known as the Attica Prison rebellion or Attica Prison uprising, occurred at the Attica Correctional Facility in Attica, New York, United States in 1971. On September 9, 1971, two weeks after the killing of George Jackson at San Quentin State Prison, about 1,000 of the Attica prison's approximately 2,200 inmates rioted and took control of the prison, taking 42 staff hostage. In 1970, he was charged, along with two other Soledad Brothers, with the murder of prison guard John Vincent Mills in the aftermath of a prison fight.",
+      "text2": "The prison riot occurred at San Quentin State Prison.",
+      "label": 0
+    },
+    {
+      "text1": "She played the leading role in the series \"Don't Hesitate\" (2009), as well as supporting roles in the movies \"Days of Wrath\" (2013) and \"For the Emperor\" (2014).For the Emperor () is a 2014 South Korean action noir film directed by Park Sang-jun, starring Lee Min-ki and Park Sung-woong.",
+      "text2": "Lee Tae-im had a role in the 2014 action noir film directed by Lee Min-ki.",
+      "label": 0
+    },
+    {
+      "text1": "A boy is playing piano and singing.",
+      "text2": "A pig is agitating a lion.",
+      "label": 0
+    },
+    {
+      "text1": "Seven Pillars of Wisdom is the autobiographical account of the experiences of British soldier T. E. Lawrence (\"Lawrence of Arabia\"), while serving as a liaison officer with rebel forces during the Arab Revolt against the Ottoman Turks of 1916 to 1918.Thomas Edward Lawrence, (16 August 1888 – 19 May 1935) was a British archaeologist, military officer, diplomat, and writer. He was renowned for his liaison role during the Sinai and Palestine Campaign and the Arab Revolt against the Ottoman Empire during the First World War.",
+      "text2": "Sinai and Palestine Campaign",
+      "label": 1
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "label": 0
+    },
+    {
+      "text1": "4 million - the amount of funding Mayor Bloomberg proposed for the Legal Aid Society by sharply curtailing compensation for court-appointed lawyers under the 18-B program.",
+      "text2": "Mayor Bloomberg proposed 4 million dollars for funding for the Legal Aid Society.",
+      "label": 1
+    },
+    {
+      "text1": "\"There is no doubt about the chemical programme, biological programme, indeed nuclear programme, indeed all that was documented by the UN,\" he said.",
+      "text2": "He added: \"There is no doubt about the chemical programme, the biological programme and indeed the nuclear weapons programme.",
+      "label": 1
+    },
+    {
+      "text1": "My Fellow Americans is a 1996 American comedy film starring Jack Lemmon and James Garner as feuding ex-presidents.Jeffrey Brian \"Jeff\" Yagher (born January 18, 1961) is an American actor.",
+      "text2": "Jeffrey Brian \"Jeff\" Yagher",
+      "label": 1
+    },
+    {
+      "text1": "4 million in annual state funding for civil legal services - nearly half of the state's yearly contribution to legal services programs statewide.",
+      "text2": "There is no funding available for civil legal services.",
+      "label": 0
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564 and is widely considered the greatest playwright in the English language.",
+      "text2": "Born in Stratford-upon-Avon in 1564, William Shakespeare is broadly regarded as the most important writer in the English literary tradition.",
+      "label": 1
+    },
+    {
+      "text1": "Regulation get the government into everything.",
+      "text2": "\"Get the government into everything?\"",
+      "label": 0
+    },
+    {
+      "text1": "American entertainer Michael Jackson (1958–2009) debuted on the professional music scene at age five as a member of The Jackson 5 and began a solo career in 1971 while still part of the group.The Jackson 5, or Jackson Five, currently known as The Jacksons, is a popular American family music group. Formed in 1964 under the name the Jackson Brothers, the founding members were elder brothers Jackie, Tito and Jermaine.",
+      "text2": "Michael Jackson pursued a solo career in early 1970.",
+      "label": 0
+    },
+    {
+      "text1": "XII  It was twilight.",
+      "text2": "It was nearly night time.",
+      "label": 1
+    },
+    {
+      "text1": "Henri maintained a reputation as a worthy and brave leader ' and at the same time as an incorrigible womanizer ' until his assassination in 1610 by a religious zealot.",
+      "text2": "In 1610, Henri was assassinated by a religious zealot.",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
+      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "label": 0
+    },
+    {
+      "text1": "Hanson got up and moved forward.",
+      "text2": "Hanson got up and moved.",
+      "label": 1
+    },
+    {
+      "text1": "Bayes' theorem updates belief in a hypothesis given new evidence: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Deforestation destroys habitats, reduces biodiversity, and contributes to climate change.",
+      "label": 0
+    },
+    {
+      "text1": "Ride a Wild Pony is a 1975 American-Australian family adventure film produced by Walt Disney Productions, directed by Don Chaffey and based on the novel \"A Sporting Proposition\" by James Aldridge.A Goofy Movie is a 1995 American animated musical road comedy-drama film, produced by DisneyToon Studios and Walt Disney Television Animation.",
+      "text2": "A Goofy Movie and Ride a Wild Pony were produced by affiliated companies.",
+      "label": 0
+    },
+    {
+      "text1": "Something in their eyes put Ca'daan on guard.",
+      "text2": "There was something sinister in their eyes and Ca'daan was on guard.",
+      "label": 1
+    },
+    {
+      "text1": "Somalia's Shebab claims responsibility for Nairobi mall attack",
+      "text2": "Syrian rebels claim responsibility for killings in Lebanon",
+      "label": 0
+    },
+    {
+      "text1": "Rocks, Tear Gas Fly as Thai Protests Heat Up",
+      "text2": "Rocks, tear gas fly as Thai protests heat up",
+      "label": 1
+    },
+    {
+      "text1": "Dating Agency: Cyrano () is a 2013 South Korean television series starring Lee Jong-hyuk, Choi Sooyoung, Lee Chun-hee, Hong Jong-hyun and Cho Yoon-woo. Based on the 2010 romantic comedy film \"Cyrano Agency\", the series is about a dating agency that orchestrates romantic scenarios for paying clients, all in an effort to raise enough money to save an old theater.Cyrano Agency (; lit. Produced by Myung Films and distributed by Lotte Entertainment, the film was released on September 16, 2010 and ran for 121 minutes.",
+      "text2": "The South Korean romantic comedy is \"Cyrano Agency\"",
+      "label": 0
+    },
+    {
+      "text1": "But they draft the applications in a way to say that these facts meet the requirements, and by the time the application reaches the court, it is unlikely that the court really gets to notice deficiencies.",
+      "text2": "The way they draft the applications shows how these facts meet requirements.",
+      "label": 1
+    },
+    {
+      "text1": "A lush site set high on a hillside with excellent views over the sea.",
+      "text2": "The site has no plants.",
+      "label": 0
+    },
+    {
+      "text1": "Woman in blue shift dress cutting into food.",
+      "text2": "A woman in a blue dress cuts a cake.",
+      "label": 1
+    },
+    {
+      "text1": "mRNA vaccines work by delivering messenger RNA into cells, instructing them to produce a protein that triggers an immune response.",
+      "text2": "In mRNA vaccination, synthetic messenger RNA is introduced into the body's cells; the cells read it and produce an antigen that primes the immune system.",
+      "label": 1
+    },
+    {
+      "text1": "Man in red shorts and white shirt kicking a soccer ball.",
+      "text2": "A black dog stands in the surf holding a red rubber ball.",
+      "label": 0
+    },
+    {
+      "text1": "DoubleDave's Pizzaworks is a chain of pizza restaurants based in Austin, Texas.Uncle Maddio's Pizza Joint is a fast casual restaurant chain serving pizzas, salads and sandwiches with its headquarters in Atlanta, Georgia.",
+      "text2": "DoubleDave's Pizzaworks",
+      "label": 1
+    },
+    {
+      "text1": "Thirty-one years later, their old neighborhood is being replaced by sandstone-hued luxury homes encircling the Cherry Creek shopping district.",
+      "text2": "The sandstone-colored luxury homes aren't replacing the old neighborhood 31 years later.",
+      "label": 0
+    },
+    {
+      "text1": "A pot of liquid is at the center of a tinfoil covered plate.",
+      "text2": "A pot of food is placed in the center of a red tablecloth.",
+      "label": 0
+    },
+    {
+      "text1": "but uh all right well thank you for calling and nice and have a good weekend",
+      "text2": "This call is not appreciated.",
+      "label": 0
+    },
+    {
+      "text1": "Irving Kahn (December 19, 1905 – February 24, 2015) was an American investor and philanthropist.Benjamin Graham ( ; born Benjamin Grossbaum; May 9, 1894 – September 21, 1976) was a British-born American investor, economist, and professor.",
+      "text2": "Irving Kahn is older, surprisingly.",
+      "label": 0
+    },
+    {
+      "text1": "Larry is the 10 Downing Street cat and is Chief Mouser to the Cabinet Office.The Chief Mouser to the Cabinet Office is the title of the official resident cat of the Prime Minister of the United Kingdom at 10 Downing Street.",
+      "text2": "The official name for Larry, the 10 Downing Street cat, is \"Cat Chancellor\".",
+      "label": 0
+    },
+    {
+      "text1": "the iranian government stated-- the iranian nuclear program remains peaceful.",
+      "text2": "the iranian government says the nuclear program is peaceful.",
+      "label": 1
+    },
+    {
+      "text1": "The Kingdom of Slavonia (Croatian: \"Kraljevina Slavonija\" ; German: \"Königreich Slawonien\" ; Latin: \"Regnum Sclavoniae\" ; Hungarian: \"Szlavón Királyság\" ) was a province of the Habsburg Monarchy and the Austrian Empire that existed from 1699 to 1868. The southern parts of these regions were part of the Slavonian Military Frontier, which was a section of the Military Frontier.The Military Frontier was a province straddling the southern borderland of the Habsburg Monarchy and later the Austrian and Austro-Hungarian Empire.",
+      "text2": "The Military Frontier",
+      "label": 1
+    },
+    {
+      "text1": "The confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms one's pre-existing beliefs.",
+      "text2": "Confirmation bias leads people to favour information that supports what they already believe and to discount evidence that contradicts it.",
+      "label": 1
+    },
+    {
+      "text1": "USS \"Kentucky\" (BB-66) was an uncompleted battleship originally intended to be the second ship of the \"Montana\" class . Five were approved for construction during World War II, but changes in wartime building priorities resulted in their cancellation in favor of the \"Essex\"-class aircraft carrier and \"Iowa\" class before any \"Montana\"-class keels were laid.",
+      "text2": "The USS \"Mississippi\"",
+      "label": 0
+    },
+    {
+      "text1": "\"Mandrake Root\" is a song by Deep Purple that is featured on their debut album \"Shades of Deep Purple\".Deep Purple are an English rock band formed in Hertford in 1968. They were listed in the 1975 \"Guinness Book of World Records\" as \"the globe's loudest band\" for a 1972 concert at London's Rainbow Theatre, and have sold over 100 million albums worldwide.",
+      "text2": "Guinness Book of World Records",
+      "label": 1
+    },
+    {
+      "text1": "After Hughes refused to rehire Hernandez, he complained to the Equal Employment Opportunity Commission.",
+      "text2": "Hernandez filed an Equal Employment Opportunity Commission complaint and sued.",
+      "label": 0
+    },
+    {
+      "text1": "Navy jet crashes into US apartments, pilots eject",
+      "text2": "U.S. Navy Jet Crashes Into Virginia Apartment Buildings",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
+      "text2": "Git is a distributed version control system that tracks changes in source code.",
+      "label": 0
+    },
+    {
+      "text1": "Overfitting occurs when a machine learning model learns the training data too well, including noise, and performs poorly on unseen data.",
+      "text2": "A model that overfits has memorised the training set — including its noise — and fails to generalise to new, unseen examples.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
+      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
+      "label": 1
+    },
+    {
+      "text1": "yeah that that's that's kind of what happened on Twin Peaks they did all this big building up building up building up and then the the solution was ridiculous i had it figured out by the third",
+      "text2": "The build up was leaving behind too many clues.",
+      "label": 0
+    },
+    {
+      "text1": "\"If My Friends Could See Me Now\", with music by Cy Coleman and lyrics by Dorothy Fields, is a song from the 1966 Broadway musical \"Sweet Charity\". In the musical the character of Charity, played in the original New York cast by Gwen Verdon, reflects on her marvellous luck as she spends time with Vittorio. In the 1969 film adaptation of \"Sweet Charity\", \"If My Friends Could See Me Now\" is performed by Shirley MacLaine. It was directed and choreographed for Broadway by Bob Fosse starring his wife and muse Gwen Verdon alongside John McMartin.",
+      "text2": "If My Friends Could See Me Now",
+      "label": 1
+    },
+    {
+      "text1": "Inflation erodes purchasing power by raising the general price level.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
+      "label": 0
+    },
+    {
+      "text1": "Damien Lamont Wilkins (born January 11, 1980) is an American professional basketball player for the Indiana Pacers of the National Basketball Association (NBA). A 6'6\" (1.98 m) shooting guard/small forward, who played collegiately at Moberly Area Community College and the University of Tennessee at Chattanooga before a career in the NBA.",
+      "text2": "National Basketball Association",
+      "label": 1
+    },
+    {
+      "text1": "The 2015 Diamond Head Classic was a mid-season eight-team college basketball tournament that was played on December 22, 23, and 25 at the Stan Sheriff Center in Honolulu, Hawaii. It was the seventh annual Diamond Head Classic tournament and was part of the 2015–16 NCAA Division I men's basketball season. Buddy Hield was named the tournament's MVP.Chavano Rainier \"Buddy\" Hield (born December 17, 1993) is a Bahamian professional basketball player for the Sacramento Kings of the National Basketball Association (NBA). He was named the Big 12 Conference Men's Basketball Player of the Year in 2015 and 2016, and in 2016, he received four major national player of the year awards—the John R. Wooden Award, the Naismith Award, \"Sporting News\" Player of the Year, and the Oscar Robertson Trophy.",
+      "text2": "Buddy Hield played at the 2015 Diamond Head Classic and is now playing for Sacramento Kings.",
+      "label": 0
+    },
+    {
+      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
+      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "label": 0
+    },
+    {
+      "text1": "Atlas Shrugged It's also a stellar performer in terms of blithering idiocy.",
+      "text2": "It's also a stellar performer in terms of blithering idiocy.",
+      "label": 1
+    },
+    {
+      "text1": "Two Australians killed in Kenya after bus crashed into river",
+      "text2": "Permalink to Two killed in Germany train accident",
+      "label": 0
+    },
+    {
+      "text1": "An elderly woman rides a bicycle along a city street.",
+      "text2": "An elderly woman walking uphill crossing the street.",
+      "label": 0
+    },
+    {
+      "text1": "Syrian opposition agree to landmark peace talks",
+      "text2": "Syria opposition pressed to attend talks",
+      "label": 0
+    },
+    {
+      "text1": "Renewable energy sources such as solar and wind do not emit greenhouse gases during operation and are key to reducing carbon emissions.",
+      "text2": "Solar and wind power generate electricity without emitting CO₂ during operation, making them essential tools in the transition to a low-carbon energy system.",
+      "label": 1
+    },
+    {
+      "text1": "Mob kills man for burning Quran",
+      "text2": "Pakistani Mob Kills Man 'for Burning Koran'",
+      "label": 1
+    },
+    {
+      "text1": "It was situated 2 mi southeast of Tonopah.Tonopah is an unincorporated town in and the county seat of Nye County, Nevada, United States. In the 2010 census, the population was 2,478.",
+      "text2": "Archermining camp was situated 2 miles southeast of an unincorporated town that had a population of fewer than 3,000.",
+      "label": 0
+    }
+  ]
+}

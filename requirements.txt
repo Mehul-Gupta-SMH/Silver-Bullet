@@ -3,6 +3,7 @@ torch==2.8.0
 transformers==4.51.0
 sentence-transformers==5.1.0
 huggingface-hub==0.34.4
+datasets>=2.0
 scikit-learn==1.7.1
 numpy==2.3.2
 tqdm==4.67.1
@@ -25,6 +26,10 @@ slowapi==0.1.9
 limits==5.8.0
 starlette==0.52.1
 httpx==0.28.1
+
+# Experiment tracking & monitoring
+mlflow>=2.0
+prometheus-client>=0.20
 
 # Testing
 pytest==9.0.2

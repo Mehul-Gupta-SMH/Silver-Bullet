@@ -1,17 +1,72 @@
 version: '3.9'
 
 services:
+
+  # ── SilverBullet API ───────────────────────────────────────────────────────
   api:
     build: .
     ports: ['8000:8000']
-    # Copy .env.example to .env and fill in your values
     env_file: .env
     volumes:
       - ./data:/app/data
       - ./cache:/app/cache
-      - ./resources/config.yaml:/app/resources/config.yaml:ro
+      - ./models:/app/models
     environment:
       - MODEL_PATH=best_model.pth
-      - SB_HF_TOKEN=
-      - SB_OPENAI_TOKEN=
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - PROMETHEUS_PUSHGATEWAY_URL=http://pushgateway:9091
+    depends_on: [mlflow, pushgateway]
     restart: unless-stopped
+
+  # ── MLflow tracking server ─────────────────────────────────────────────────
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    ports: ['5000:5000']
+    command: >
+      mlflow server
+        --host 0.0.0.0
+        --port 5000
+        --backend-store-uri sqlite:///mlflow/mlflow.db
+        --default-artifact-root /mlflow/artifacts
+    volumes:
+      - mlflow_data:/mlflow
+    restart: unless-stopped
+
+  # ── Prometheus pushgateway (receives training metrics) ─────────────────────
+  pushgateway:
+    image: prom/pushgateway:latest
+    ports: ['9091:9091']
+    restart: unless-stopped
+
+  # ── Prometheus (scrapes pushgateway) ──────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    ports: ['9090:9090']
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+    restart: unless-stopped
+
+  # ── Grafana (visualises Prometheus metrics) ────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    ports: ['3000:3000']
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+volumes:
+  mlflow_data:
+  prometheus_data:
+  grafana_data:
