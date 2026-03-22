@@ -142,7 +142,7 @@ short inputs.
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
-| 2026-03-22 | [~] | FIX P1 (Normalised pooling): multiply each feature map by `(64×64)/(n×m)` in `feature_map_to_tensor()` so signal density is uniform; delete cache and retrain | `backend/train.py` (`feature_map_to_tensor`), `backend/predict.py` (`_build_feature_tensor`), delete `./cache/`, retrain all 3 modes |
+| 2026-03-22 | [x] | FIX P1 (Normalised pooling): `_apply_density_normalisation(tensor,n,m)` scales by `(64*64)/(n*m)`; TextSimilarityDataset always splits for n/m + normalises; cache stores raw; predict_pair_breakdown normalises manually | `backend/train.py`, `backend/predict.py`, `AGENT.md` — **delete ./cache/ and retrain all 3 modes** |
 | 2026-03-22 | [ ] | FIX P2 (Adaptive crop): replace zero-pad with adaptive avg-pool to fixed size in `model.py` so only the n×m signal region is used; avoids zero-inflation entirely; requires architecture change + full retrain | `backend/model.py`, `backend/Postprocess/__addpad.py`, retrain |
 | 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
 
