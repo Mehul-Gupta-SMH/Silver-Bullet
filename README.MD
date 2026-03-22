@@ -1,205 +1,273 @@
- # Silver Bullet
-------
-<img src="assets/icon.png" alt="Project Banner" width="100%" style="max-width:600px; height:auto;">
+# SilverBullet — LLM Evaluation Benchmark
 
-Silver Bullet is an evaluation framework inspired by Reward Models used in RLHF.
-Given two text passages, it produces a similarity / faithfulness score in **[0, 1]** that can be interpreted differently depending on the use case:
+<img src="assets/icon.png" alt="SilverBullet" width="100%" style="max-width:600px; height:auto;">
 
-| Pair type | Score interpretation |
-|-----------|----------------------|
-| Context + LLM answer | Faithfulness — does the answer stay true to the source? |
-| LLM-A answer + LLM-B answer | Comparability — how interchangeable are the two models? |
-| Generated answer + Ground truth | Alignment — how close is the output to the accepted answer? |
+Real-time faithfulness and agreement scoring for LLM outputs.
+Given two texts it returns a score in **[0, 1]** using a Conv2D model trained on 16 multi-signal sentence-pair feature maps.
 
------------------
+| Evaluation mode | text1 | text2 | Score meaning |
+|-----------------|-------|-------|---------------|
+| `context-vs-generated` | Source context / RAG chunk | LLM-generated answer | Groundedness — is the answer supported by the context? |
+| `reference-vs-generated` | Ground-truth reference answer | Generated answer | Faithfulness — does the answer match the reference? |
+| `model-vs-model` | Model A output | Model B output | Agreement — do the models produce equivalent responses? |
+
+Each mode has its own trained model checkpoint for best accuracy.
+
+---
 
 ## How It Works
 
-Silver Bullet compares texts at the **sentence level**, not as whole-document embeddings.
-
-1. Both texts are split into sentences and coreference-resolved (pronouns → named entities).
-2. Every sentence in text 1 is compared against every sentence in text 2, producing an **n×m similarity matrix** per feature type.
-3. All matrices are padded to **64×64** and stacked as `[F, 64, 64]` feature channels.
-4. A trained **Conv2D CNN** classifies the stacked maps into a score.
+SilverBullet compares texts at the **sentence level**, not as whole-document embeddings.
 
 ```
-Text pair
-  │
-  ▼
-split_txt()  —  sentence split + coref resolution (GPT-4o-mini / local LLM)
-  │
-  ▼
-Feature extractors  →  n×m matrices  →  pad to [64×64]
-  ├─ Semantic  (mxbai-embed-large-v1, Qwen3-Embedding-0.6B)  →  6 maps
-  ├─ Lexical   (Jaccard, Dice, Cosine, ROUGE)                 →  4 maps
-  ├─ NLI       (RoBERTa-large-MNLI)                           →  3 maps
-  ├─ Entity    (GLiNER NER — entity count mismatch)           →  1 map
-  └─ LCS       (token-level + char-level LCS similarity)      →  2 maps
-                                                    TOTAL: 16 channels
-  │
-  ▼
+Text pair  (text1, text2)
+     │
+     ▼
+split_txt()  ──  sentence split + coreference resolution (GPT-4o-mini / local LLM)
+     │
+     ▼
+Feature extractors  →  n×m matrices  →  pad to 64×64
+  ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  6 maps
+  ├─ Lexical    Jaccard · Dice · Cosine · ROUGE                 →  4 maps
+  ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps
+  ├─ Entity     GLiNER NER — entity count mismatch              →  1 map
+  └─ LCS        token-level + char-level LCS similarity         →  2 maps
+                                                       TOTAL: 16 channels
+     │
+     ▼
 TextSimilarityCNN  [B, 16, 64, 64]
-  Conv2d × 3  →  MaxPool × 3  →  FC  →  sigmoid
-  │
-  ▼
-Score  ∈ [0, 1]
+  Conv2d × 3 + MaxPool × 3  →  flatten  →  FC  →  sigmoid
+     │
+     ▼
+Score ∈ [0, 1]
 ```
 
------------------
+---
 
-## Features
+## Repository Layout
 
-- **Semantic Analysis** — cosine similarity + soft row/column alignment over two transformer embedding models
-- **Lexical Analysis** — token-overlap metrics (Jaccard, Dice, Cosine, ROUGE) via SentencePiece tokenisation
-- **NLI Analysis** — entailment / neutral / contradiction probabilities per sentence pair
-- **Entity Overlap** — GLiNER-based named entity count mismatch
-- **LCS Similarity** — normalised Longest Common Subsequence at token and character level
-- **Coreference Resolution** — pronoun → named entity substitution before feature extraction
-- **Spatial CNN** — Conv2D model preserves the 2D alignment structure of sentence-pair matrices
-- **Feature Caching** — MD5-keyed disk cache avoids recomputing expensive features mid-training
-- **Training Reports** — per-epoch JSON + Markdown reports with loss, accuracy, hardware info
-- **Early Stopping** — configurable patience with best-checkpoint saving
+```
+Silver-Bullet/
+├── backend/                        # All Python backend code
+│   ├── api/                        # FastAPI application
+│   │   ├── main.py                 # App factory, endpoints, rate limiting
+│   │   ├── schemas.py              # Pydantic request/response models
+│   │   ├── dependencies.py         # Per-mode predictor singleton (lru_cache)
+│   │   └── middleware.py           # RequestID + structured JSON logging
+│   ├── Features/
+│   │   ├── Semantic/               # 6 maps — embedding cosine + soft alignment
+│   │   ├── Lexical/                # 4 maps — token overlap (SentencePiece)
+│   │   ├── NLI/                    # 3 maps — entailment probabilities
+│   │   ├── EntityGroups/           # 1 map  — GLiNER entity mismatch
+│   │   └── LCS/                    # 2 maps — token + char LCS
+│   ├── Splitter/
+│   │   └── sentence_splitter.py    # split_txt() — regex split + coref per sentence
+│   ├── Preprocess/coref/
+│   │   └── resolveEntity.py        # EntityResolver — GPT-4o-mini or local Gemma
+│   ├── Postprocess/
+│   │   └── __addpad.py             # pad_matrix() — n×m → 64×64 (truncates at 64)
+│   ├── resources/
+│   │   ├── config.yaml             # API keys (gitignored — use env vars instead)
+│   │   ├── config.yaml.example     # Template — commit this, not config.yaml
+│   │   └── getConfig.py            # getVal(env) → dict
+│   ├── model.py                    # TextSimilarityCNN (Conv2D)
+│   ├── predict.py                  # SimilarityPredictor — single / batch / breakdown
+│   ├── train.py                    # Training pipeline with early stopping + MSELoss
+│   ├── test.py                     # Evaluation pipeline — metrics + TestReport
+│   ├── feature_cache.py            # MD5-keyed JSON cache in ./cache/
+│   ├── feature_registry.py         # FEATURE_KEYS + checkpoint manifest
+│   ├── training_report.py          # Per-epoch JSON + Markdown reports
+│   ├── generate_data.py            # Generates data/ + data/{mode}/ splits
+│   └── example.py                  # Feature pipeline demo (no model)
+├── frontend/                       # React + TypeScript + Vite UI
+├── tests/                          # pytest API tests (mocked predictor)
+├── data/                           # train.json, validate.json, test.json
+│   ├── model-vs-model/             # Mode-specific splits
+│   ├── reference-vs-generated/
+│   └── context-vs-generated/
+├── models/                         # Per-mode checkpoints (gitignored)
+├── cache/                          # Feature cache (gitignored)
+├── training_reports/               # Training reports (gitignored)
+└── test_reports/                   # Test reports (gitignored)
+```
 
------------------
+---
 
 ## Installation
 
 ```bash
 git clone https://github.com/Mehul-Gupta-SMH/Silver-Bullet.git
 cd Silver-Bullet
+
+python -m venv .sbvenv
+# Windows
+.sbvenv\Scripts\activate
+# macOS / Linux
+source .sbvenv/bin/activate
+
 pip install -r requirements.txt
-mkdir -p data cache training_reports test_reports
+mkdir -p data models cache training_reports test_reports
 ```
 
 ### Configuration
 
-Copy the example config and fill in your tokens:
+Tokens are read from environment variables (recommended) or a YAML file.
 
 ```bash
-cp resources/config.yaml.example resources/config.yaml
-# edit resources/config.yaml with your keys
-```
-
-Or set environment variables (these take precedence over the YAML file):
-
-```bash
+# Recommended — environment variables
 export SB_HF_TOKEN=hf_...
 export SB_OPENAI_TOKEN=sk-...
+
+# Alternative — YAML file (gitignored)
+cp backend/resources/config.yaml.example backend/resources/config.yaml
+# edit backend/resources/config.yaml
 ```
 
-> **Security:** `resources/config.yaml` is gitignored. Never commit real tokens.
+> **Security:** `backend/resources/config.yaml` is gitignored. Never commit real tokens.
 
------------------
+---
 
 ## Usage
 
-### Feature Extraction Demo
+### Generate training data
 
 ```bash
-python example.py
+python -m backend.generate_data
 ```
 
-Runs the full feature pipeline on sample paragraph pairs and prints each feature map's shape and value range.
+Creates `data/{train,validate,test}.json` (general, 194 pairs) and per-mode splits under `data/{mode}/` (209 pairs each, including 15 mode-specific hard negatives).
 
-### Training
+### Train
 
-Prepare `data/train.json` and `data/validate.json` in this format:
-
-```json
-{
-  "data": [
-    { "text1": "...", "text2": "...", "label": 1 },
-    { "text1": "...", "text2": "...", "label": 0 }
-  ]
-}
-```
-
-Then:
+Train the general model or a mode-specific model:
 
 ```bash
-python train.py
+# General model (fallback for all modes)
+python -m backend.train
+
+# Mode-specific models (recommended — better accuracy per use case)
+python -m backend.train --mode model-vs-model
+python -m backend.train --mode reference-vs-generated
+python -m backend.train --mode context-vs-generated
 ```
 
-- Feature cache is written to `./cache/` (delete it before retraining with a changed feature set)
-- Best checkpoint saved to `best_model.pth`
-- Training reports saved to `training_reports/`
+Checkpoints are saved to:
+- General: `best_model.pth`
+- Per-mode: `models/{mode}.pth`
 
-### Testing
+Feature cache is written to `./cache/` — delete it before retraining with a changed feature set.
+
+### Evaluate
 
 ```bash
-python test.py
+# General model
+python -m backend.test
+
+# Mode-specific model
+python -m backend.test --mode context-vs-generated
 ```
 
-Produces accuracy, ROC-AUC, average precision, confusion matrix, and per-sample predictions in `test_reports/`.
+Reports saved to `test_reports/` — accuracy, ROC-AUC, average precision, confusion matrix, per-sample predictions.
 
-### Inference
+### Inference (CLI)
 
 ```bash
-python predict.py --model best_model.pth --input input.json --output predictions.json [--device cuda|cpu]
+python -m backend.predict --model best_model.pth --input input.json --output predictions.json
 ```
 
-Input JSON accepts either format:
-
+Input format (either):
 ```json
 [["text1", "text2"], ["text3", "text4"]]
 ```
-
 ```json
 { "data": [{ "text1": "...", "text2": "..." }] }
 ```
 
-Output:
+### Feature extraction demo
 
+```bash
+python -m backend.example
+```
+
+---
+
+## API Server
+
+```bash
+uvicorn backend.api.main:app --reload
+# Docs: http://localhost:8000/api/v1/docs
+```
+
+### Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/health` | Service health + per-mode model load state |
+| POST | `/api/v1/predict/pair` | Single pair → score |
+| POST | `/api/v1/predict/pair/breakdown` | Single pair → sentence-level divergence analysis |
+| POST | `/api/v1/predict/batch` | Up to 100 pairs → scores |
+| POST | `/api/v1/predict/batch/breakdown` | Up to 10 pairs → breakdown (expensive) |
+
+All prediction endpoints accept a `mode` field (default: `context-vs-generated`):
+
+```bash
+curl -X POST http://localhost:8000/api/v1/predict/pair \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text1": "The sky is blue.",
+    "text2": "The sky appears blue in colour.",
+    "mode": "context-vs-generated"
+  }'
+```
+
+Response:
 ```json
-[
-  { "prediction": 1, "probability": 0.92, "text1": "...", "text2": "..." }
-]
+{ "prediction": 1, "probability": 0.91 }
 ```
 
------------------
+Rate limits: 60 req/min global · 20/min on breakdown · 10/min on batch breakdown.
 
-## Project Structure
+### Frontend
 
-```
-Silver-Bullet/
-├── data/                         # train.json, validate.json, test.json
-├── resources/
-│   ├── config.yaml               # secrets (gitignored)
-│   ├── config.yaml.example       # template — commit this, not config.yaml
-│   └── getConfig.py
-├── Preprocess/coref/
-│   └── resolveEntity.py          # EntityResolver — coreference via GPT-4o-mini or local LLM
-├── Splitter/
-│   └── sentence_splitter.py      # split_txt(text, resolver=None)
-├── Features/
-│   ├── Semantic/                 # 6 maps — embedding cosine sim + soft alignment
-│   ├── Lexical/                  # 4 maps — token overlap metrics
-│   ├── NLI/                      # 3 maps — entailment probabilities
-│   ├── EntityGroups/             # 1 map  — entity count mismatch
-│   └── LCS/                      # 2 maps — token + char LCS similarity
-├── Postprocess/
-│   └── __addpad.py               # pad_matrix() — n×m → 64×64, truncates if larger
-├── model.py                      # TextSimilarityCNN — Conv2D over [F, 64, 64]
-├── train.py                      # training pipeline
-├── test.py                       # evaluation pipeline
-├── predict.py                    # inference
-├── example.py                    # feature extraction demo
-├── feature_cache.py              # MD5-keyed disk cache
-├── training_report.py            # JSON + Markdown report generation
-├── CLAUDE.md                     # architecture reference for Claude Code
-├── AGENT.md                      # per-module API reference for AI agents
-└── TASK.md                       # task log
+```bash
+cd frontend && npm install && npm run dev
+# http://localhost:5173  (proxies /api → http://localhost:8000)
 ```
 
------------------
+---
+
+## Docker
+
+```bash
+docker build -t silver-bullet .
+docker run -p 8000:8000 \
+  -e SB_HF_TOKEN=hf_... \
+  -e SB_OPENAI_TOKEN=sk-... \
+  silver-bullet
+```
+
+Or with Docker Compose:
+
+```bash
+cp .env.example .env   # fill in tokens
+docker compose up
+```
+
+A Docker image is automatically published to GitHub Container Registry on every push to `master`:
+
+```bash
+docker pull ghcr.io/mehul-gupta-smh/silver-bullet:latest
+```
+
+---
 
 ## Model Architecture
 
-`TextSimilarityCNN` takes stacked feature maps as `[batch, F, 64, 64]` input:
+`TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 64, 64]` input:
 
 ```
-[B, F, 64, 64]
-  Conv2d(F→128)  + BN + ReLU + MaxPool   →  [B, 128, 32, 32]
+[B, 16, 64, 64]
+  Conv2d(16→128) + BN + ReLU + MaxPool   →  [B, 128, 32, 32]
   Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64, 16, 16]
   Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  8,  8]
   Flatten                                 →  [B, 2048]
@@ -209,30 +277,54 @@ Silver-Bullet/
 
 The 2D spatial structure of the sentence-pair similarity matrices is preserved through the convolutional layers, allowing the model to learn alignment patterns directly from the feature maps.
 
+Training uses **MSELoss** (supports continuous float faithfulness labels as well as binary 0/1).
+
 ### Checkpoints
 
-Every checkpoint includes `num_features` so the model can be reloaded without re-running the feature pipeline:
+Every checkpoint embeds `num_features` and a feature manifest so the model can be reloaded and validated without re-running the pipeline.
 
-| File | Contents |
-|------|----------|
-| `best_model.pth` | Best validation-loss checkpoint (updated during training) |
-| `model_weights_{ts}_best.pth` | Copy of best checkpoint at end of run |
-| `model_weights_{ts}_final.pth` | Final epoch checkpoint |
+| File | Created by | Used by |
+|------|-----------|---------|
+| `best_model.pth` | `python -m backend.train` | fallback for all modes |
+| `models/model-vs-model.pth` | `train --mode model-vs-model` | `mode=model-vs-model` requests |
+| `models/reference-vs-generated.pth` | `train --mode reference-vs-generated` | `mode=reference-vs-generated` requests |
+| `models/context-vs-generated.pth` | `train --mode context-vs-generated` | `mode=context-vs-generated` requests |
 
------------------
+---
 
 ## Adding a New Feature Extractor
 
-1. Create `Features/{Name}/get{Name}Weights.py`
-2. Implement `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]` following the `_reset_state()` pattern (see `AGENT.md` for details)
-3. Add to `train.py` and `example.py`
-4. Delete `./cache/` and retrain (new features change `num_features`)
+1. Create `backend/Features/{Name}/get{Name}Weights.py`
+2. Implement `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]` using the `_reset_state()` pattern (see `AGENT.md`)
+3. Register the new feature keys in `backend/feature_registry.py` → `FEATURE_KEYS`
+4. Add the extractor to `backend/train.py` and `backend/example.py`
+5. Delete `./cache/` and retrain (new features change `num_features` and the manifest)
 
------------------
+---
+
+## Tests
+
+```bash
+pytest tests/ -v
+```
+
+25 API tests covering health, prediction endpoints, validation, rate-limit handler, and CORS. All tests use a mocked predictor — no model file required.
+
+---
+
+## CI / CD
+
+| Workflow | Trigger | Action |
+|----------|---------|--------|
+| CI (`.github/workflows/ci.yml`) | Every push / PR | lint → api-tests → frontend type-check + vitest |
+| CD (`.github/workflows/cd.yml`) | Push to `master` | Build + push Docker image to GHCR |
+
+---
 
 ## License
 
 Specify your license here.
 
 ---
-*For questions or contributions, please open an issue or pull request.*
+
+*For questions or contributions, open an issue or pull request.*

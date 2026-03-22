@@ -3,13 +3,14 @@
 ## What This Project Is
 
 SilverBullet is a **real-time LLM evaluation benchmark**.
-Given two texts, it produces a faithfulness / agreement score in [0, 1].
+Given two texts and an evaluation mode, it produces a faithfulness / agreement score in [0, 1].
 
-**Primary use cases:**
-- **Hallucination detection**: `text1 = source context`, `text2 = LLM answer` — is the answer grounded?
-- **Model agreement scoring**: `text1 = GPT-4o output`, `text2 = Claude output` — do models agree?
-- **Faithfulness evaluation**: `text1 = ground-truth reference`, `text2 = generated answer` — is it faithful?
-- **RAG groundedness**: verify every claim in a generated answer is supported by retrieved documents
+**Evaluation modes (each has its own trained model):**
+| Mode ID | text1 | text2 | Use case |
+|---------|-------|-------|---------|
+| `context-vs-generated` | Source context / RAG chunk | LLM answer | Hallucination detection, RAG groundedness |
+| `reference-vs-generated` | Ground-truth reference | Generated answer | Faithfulness evaluation |
+| `model-vs-model` | Model A output | Model B output | Model agreement scoring |
 
 **Closest analogue:** cross-encoder / re-ranker with explicit multi-signal feature engineering before the learned head — designed for near-real-time inference in LLM pipelines.
 
@@ -19,80 +20,83 @@ Given two texts, it produces a faithfulness / agreement score in [0, 1].
 
 ```
 Silver-Bullet/
-├── data/                         # train.json, validate.json, test.json
-│   └── *.json                    # {"data": [{"text1":..., "text2":..., "label": 0|1}]}
+├── backend/                          # ALL Python backend code
+│   ├── __init__.py
+│   ├── api/
+│   │   ├── main.py                   # FastAPI app — endpoints, rate limiting, CORS, lifespan
+│   │   ├── schemas.py                # Pydantic models — EvaluationMode literal + mode field on all requests
+│   │   ├── dependencies.py           # get_predictor(mode) — lru_cache(maxsize=3), per-mode checkpoint resolution
+│   │   └── middleware.py             # RequestIDMiddleware + LoggingMiddleware (structured JSON logs)
+│   │
+│   ├── Features/
+│   │   ├── Semantic/
+│   │   │   ├── __generate_semantic_features.py   # SemanticFeatures — SentenceTransformer encoding
+│   │   │   └── getSemanticWeights.py             # SemanticWeights.getFeatureMap() → 6 padded 64×64 tensors
+│   │   ├── Lexical/
+│   │   │   └── getLexicalWeights.py              # LexicalWeights.getFeatureMap() → 4 padded 64×64 tensors
+│   │   ├── NLI/
+│   │   │   └── getNLIweights.py                  # NLIWeights.getFeatureMap() → 3 padded 64×64 tensors
+│   │   ├── EntityGroups/
+│   │   │   └── getOverlap.py                     # EntityMatch.getFeatureMap() → 1 padded 64×64 tensor
+│   │   └── LCS/
+│   │       └── getLCSweights.py                  # LCSWeights.getFeatureMap() → 2 padded 64×64 tensors
+│   │
+│   ├── Splitter/
+│   │   └── sentence_splitter.py      # split_txt(text) → List[str]  (regex split + coref per sentence)
+│   │
+│   ├── Preprocess/
+│   │   └── coref/
+│   │       └── resolveEntity.py      # EntityResolver — pronoun → named entity via GPT-4o-mini or local LLM
+│   │
+│   ├── Postprocess/
+│   │   ├── __addpad.py               # pad_matrix(mat, target_size=64) → torch.Tensor [64,64]
+│   │   └── postprocess.py            # thin wrapper around pad_matrix
+│   │
+│   ├── resources/
+│   │   ├── config.yaml               # API keys (gitignored — use env vars)
+│   │   ├── config.yaml.example       # Template
+│   │   └── getConfig.py              # getVal(env='DEVELOPMENT') → dict
+│   │
+│   ├── model.py                      # TextSimilarityCNN (Conv2D) + TextSimilarityCNNLegacy (Conv1D compat)
+│   ├── train.py                      # TextSimilarityDataset + train_model(); --mode arg
+│   ├── test.py                       # TestReport + test_model(); --mode arg
+│   ├── predict.py                    # SimilarityPredictor — single/batch/breakdown inference
+│   ├── feature_cache.py              # FeatureCache — MD5-keyed JSON cache in ./cache/
+│   ├── feature_registry.py           # FEATURE_KEYS (16 ordered keys) + build_manifest() + validate_manifest()
+│   ├── training_report.py            # TrainingReport — per-epoch JSON + Markdown reports
+│   ├── generate_data.py              # Generates data/ + data/{mode}/ splits
+│   └── example.py                    # Manual feature pipeline demo (no model)
 │
-├── generate_data.py              # Generates data/ from hardcoded positive/hard-neg/soft-neg pairs
-│
-├── resources/
-│   ├── config.yaml               # API keys by environment (DEVELOPMENT / STAGING / PRODUCTION)
-│   └── getConfig.py              # getVal(env='DEVELOPMENT') -> dict
-│
-├── Preprocess/
-│   └── coref/
-│       └── resolveEntity.py      # EntityResolver — pronoun → named entity via GPT-4o-mini or local LLM
-│
-├── Splitter/
-│   └── sentence_splitter.py      # split_txt(text) -> List[str]  (regex split + coref per sentence)
-│
-├── Features/
-│   ├── Semantic/
-│   │   ├── __generate_semantic_features.py   # SemanticFeatures — SentenceTransformer encoding
-│   │   └── getSemanticWeights.py             # SemanticWeights.getFeatureMap() -> 6 padded 64×64 tensors
-│   ├── Lexical/
-│   │   └── getLexicalWeights.py              # LexicalWeights.getFeatureMap() -> 4 padded 64×64 tensors
-│   ├── NLI/
-│   │   └── getNLIweights.py                  # NLIWeights.getFeatureMap() -> 3 padded 64×64 tensors
-│   ├── EntityGroups/
-│   │   └── getOverlap.py                     # EntityMatch.getFeatureMap() -> 1 padded 64×64 tensor
-│   └── LCS/
-│       └── getLCSweights.py                  # LCSWeights.getFeatureMap() -> 2 padded 64×64 tensors
-│
-├── Postprocess/
-│   ├── __addpad.py               # pad_matrix(mat, target_size=64) -> torch.Tensor [64,64]
-│   └── postprocess.py            # thin wrapper around pad_matrix
-│
-├── feature_cache.py              # FeatureCache — MD5-keyed JSON cache in ./cache/
-├── model.py                      # TextSimilarityCNN (Conv2D) + TextSimilarityCNNLegacy (Conv1D compat)
-├── train.py                      # TextSimilarityDataset + train_model() entry point
-├── test.py                       # TestReport + test_model() entry point
-├── predict.py                    # SimilarityPredictor — batch/single/breakdown inference
-├── training_report.py            # TrainingReport — per-epoch JSON + Markdown reports
-├── example.py                    # Manual feature pipeline demo (no model)
-│
-├── api/
-│   ├── main.py                   # FastAPI app — /api/v1/health, /predict/pair, /predict/pair/breakdown, /predict/batch
-│   ├── schemas.py                # Pydantic models: PairRequest/Response, BatchRequest/Response, BreakdownResponse
-│   ├── dependencies.py           # get_predictor() singleton via @lru_cache
-│   └── middleware.py             # RequestIDMiddleware + LoggingMiddleware (structured JSON logs)
-│
-├── frontend/
-│   ├── index.html                # Title: "SilverBullet — LLM Evaluation Benchmark"
-│   ├── public/favicon.svg        # Violet bullseye SVG favicon
-│   └── src/
-│       ├── App.tsx               # Shell: header, tabs (Single Eval / Batch Eval / Experiments), footer
-│       ├── config/modes.ts       # 3 evaluation modes with interpret() + descriptions
-│       ├── types/index.ts        # PredictionResult, BreakdownResult, BatchResponse, HealthResponse
-│       ├── services/api.ts       # predictPair(), predictPairBreakdown(), predictBatch(), healthCheck()
-│       ├── components/
-│       │   ├── PairScorer.tsx    # Single eval UI — textareas, score, "Drill Down" button
-│       │   ├── BreakdownPanel.tsx # Divergence analysis — sentence colour map + feature bars
-│       │   ├── BatchScorer.tsx   # Batch eval UI + distribution chart
-│       │   ├── ScoreGauge.tsx    # Score bar with prediction badge
-│       │   ├── ComparisonModeSelector.tsx  # Evaluation mode picker
-│       │   ├── FeaturePanel.tsx  # Collapsible feature family reference (5 families, 16 maps)
-│       │   ├── ExperimentsPanel.tsx        # Saved experiments with re-run
-│       │   ├── TestCasePanel.tsx           # Pre-built test case library
-│       │   └── SaveExperimentForm.tsx      # Name + notes form
-│       └── data/testCases.ts     # 17 pair + 2 batch test cases incl. pipeline examples (ex-1, ex-2)
+├── frontend/                         # React + TypeScript + Vite UI
+│   ├── src/
+│   │   ├── App.tsx                   # Shell: header, tabs (Single Eval / Batch Eval / Experiments)
+│   │   ├── config/modes.ts           # 3 evaluation modes with interpret() + descriptions
+│   │   ├── types/index.ts            # ComparisonMode, PredictionResult, BreakdownResult, HealthResponse
+│   │   ├── services/api.ts           # predictPair(t1,t2,mode), predictBatch(pairs,mode), healthCheck()
+│   │   └── components/               # PairScorer, BreakdownPanel, BatchScorer, ScoreGauge, …
+│   └── public/favicon.svg
 │
 ├── tests/
-│   ├── conftest.py               # pytest fixtures — mock predictor, TestClient
-│   └── test_api.py               # API tests: health, pair, batch, breakdown, CORS, validation
+│   ├── conftest.py                   # pytest fixtures — mock predictor, TestClient
+│   └── test_api.py                   # 25 API tests: health, pair, batch, breakdown, mode validation, CORS
 │
-├── best_model.pth                # Saved best checkpoint
+├── data/                             # Train/validate/test splits
+│   ├── train.json                    # General dataset (194 pairs)
+│   ├── validate.json
+│   ├── test.json
+│   ├── model-vs-model/               # Mode-specific splits (209 pairs each)
+│   ├── reference-vs-generated/
+│   └── context-vs-generated/
+│
+├── models/                           # Per-mode checkpoints (gitignored)
+│   ├── model-vs-model.pth
+│   ├── reference-vs-generated.pth
+│   └── context-vs-generated.pth
+│
+├── best_model.pth                    # General fallback checkpoint
 ├── requirements.txt
-└── .sbvenv/                      # Local virtualenv (gitignored)
+├── pyproject.toml
+└── .sbvenv/                          # Local virtualenv (gitignored)
 ```
 
 ---
@@ -100,10 +104,13 @@ Silver-Bullet/
 ## Full Data Flow
 
 ```
-Raw text pair (text1, text2)
+Raw text pair (text1, text2)  +  mode
          │
          ▼
-  split_txt()  ←  Splitter/sentence_splitter.py
+  API: get_predictor(mode)  →  loads models/{mode}.pth (or best_model.pth fallback)
+         │
+         ▼
+  split_txt()  ←  backend/Splitter/sentence_splitter.py
     • Regex split on period/newline
     • Each sentence → EntityResolver.resolve() (coref via GPT-4o-mini or Gemma)
     → [sent_group1: List[str], sent_group2: List[str]]
@@ -125,31 +132,51 @@ Raw text pair (text1, text2)
          │
          ▼
   pad_matrix() — each n×m → 64×64 zero-padded tensor
-  stack all maps → [F=16, 64, 64] tensor
+  stack all maps → [F=16, 64, 64] tensor (canonical order from FEATURE_KEYS)
          │
          ▼
-  TextSimilarityCNN (model.py)
+  TextSimilarityCNN (backend/model.py)
     Conv2d: [F, 64, 64] → [128, 32, 32] → [64, 16, 16] → [32, 8, 8]
     flatten → [batch, 2048]
     FC:  2048 → 128 → 1
     sigmoid → score ∈ [0, 1]
 ```
 
-> `num_features` (F) is serialised into every checkpoint so `predict.py` can reconstruct
-> the model without re-running the pipeline. Do not hardcode it.
+> `num_features` (F) and the feature manifest are serialised into every checkpoint.
+> `predict.py` validates the manifest on load. Do not hardcode `num_features`.
 
 ---
 
 ## API Endpoints
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/v1/health` | Service health + model load state |
-| POST | `/api/v1/predict/pair` | Single pair → `{prediction, probability}` |
-| POST | `/api/v1/predict/pair/breakdown` | Single pair → full divergence analysis (slow — reruns pipeline) |
-| POST | `/api/v1/predict/batch` | Up to 100 pairs → list of scores |
+| Method | Path | Rate limit | Description |
+|--------|------|-----------|-------------|
+| GET | `/api/v1/health` | — | Service health + per-mode model load state |
+| POST | `/api/v1/predict/pair` | 60/min | Single pair → `{prediction, probability}` |
+| POST | `/api/v1/predict/pair/breakdown` | 20/min | Single pair → full divergence analysis |
+| POST | `/api/v1/predict/batch` | 60/min | Up to 100 pairs → list of scores |
+| POST | `/api/v1/predict/batch/breakdown` | 10/min | Up to 10 pairs → breakdown (expensive) |
 
 Docs: `http://localhost:8000/api/v1/docs`
+
+All prediction endpoints require a `mode` field (default: `context-vs-generated`):
+
+```json
+{ "text1": "...", "text2": "...", "mode": "context-vs-generated" }
+```
+
+### Health response shape
+```json
+{
+  "status": "ok",
+  "model_loaded": true,
+  "models": {
+    "model-vs-model": true,
+    "reference-vs-generated": false,
+    "context-vs-generated": true
+  }
+}
+```
 
 ### Breakdown response shape
 ```json
@@ -163,9 +190,6 @@ Docs: `http://localhost:8000/api/v1/docs`
   "divergent_in_2": [2],
   "feature_scores": {
     "Semantic (mxbai)": 0.85,
-    "Semantic (Qwen3)": 0.81,
-    "Lexical ROUGE": 0.72,
-    "Lexical Jaccard": 0.61,
     "NLI Entailment": 0.55,
     "LCS Token": 0.68
   }
@@ -180,21 +204,30 @@ Docs: `http://localhost:8000/api/v1/docs`
 # Activate virtualenv (Windows)
 .\.sbvenv\Scripts\activate
 
-# Generate training data
-python generate_data.py
+# Generate training data (general + per-mode splits)
+python -m backend.generate_data
 
-# Train
-python train.py
+# Train — general model
+python -m backend.train
 
-# Test
-python test.py
+# Train — mode-specific models
+python -m backend.train --mode model-vs-model
+python -m backend.train --mode reference-vs-generated
+python -m backend.train --mode context-vs-generated
 
-# Predict (batch)
-python predict.py --model best_model.pth --input data/test.json --output predictions.json
+# Evaluate
+python -m backend.test
+python -m backend.test --mode context-vs-generated
+
+# Predict (batch CLI)
+python -m backend.predict --model best_model.pth --input data/test.json --output predictions.json
 
 # API server
-uvicorn api.main:app --reload
+uvicorn backend.api.main:app --reload
 # Docs at http://localhost:8000/api/v1/docs
+
+# Run tests
+pytest tests/ -v
 
 # Frontend (separate terminal)
 cd frontend && npm run dev
@@ -203,9 +236,9 @@ cd frontend && npm run dev
 
 ---
 
-## Training Data (`generate_data.py`)
+## Training Data (`backend/generate_data.py`)
 
-Three pair categories, 194 pairs total (70/15/15 split):
+General dataset: 194 pairs (70/15/15 split):
 
 | Category | Count | Description |
 |----------|-------|-------------|
@@ -213,7 +246,15 @@ Three pair categories, 194 pairs total (70/15/15 split):
 | `hard_neg` (label=0) | ~54 | Same topic/structure but wrong numbers, negated claims, hallucinated additions |
 | `soft_neg` (label=0) | ~36 | Clearly unrelated domain pairs |
 
-To regenerate: `python generate_data.py` → overwrites `data/*.json`.
+Per-mode datasets: 209 pairs each (general + 15 mode-specific hard negatives):
+
+| Mode | Hard negative characteristics |
+|------|-------------------------------|
+| `model-vs-model` | Models diverge on key facts, contradictory conclusions |
+| `reference-vs-generated` | Generated answer adds wrong facts or wrong numbers |
+| `context-vs-generated` | Answer introduces entities/claims not in context |
+
+To regenerate: `python -m backend.generate_data` → overwrites `data/` and `data/{mode}/`.
 Delete `./cache/` before retraining if feature extractors changed.
 
 ---
@@ -221,12 +262,18 @@ Delete `./cache/` before retraining if feature extractors changed.
 ## Environment & Config
 
 ```python
-from resources.getConfig import getVal
+from backend.resources.getConfig import getVal
 config = getVal(env='DEVELOPMENT')   # keys: url, api_key, hf_token, openai_token
 ```
 
-**IMPORTANT — Security:** `config.yaml` contains hardcoded tokens. Do NOT commit changes to it.
-Fix: load from `os.environ`; add to `.gitignore`; provide `config.yaml.example`.
+Preferred: set `SB_HF_TOKEN` and `SB_OPENAI_TOKEN` as environment variables.
+`backend/resources/config.yaml` is gitignored. Never commit real tokens.
+
+Per-mode model checkpoint env vars:
+- `MODEL_PATH_MODEL_VS_MODEL`
+- `MODEL_PATH_REFERENCE_VS_GENERATED`
+- `MODEL_PATH_CONTEXT_VS_GENERATED`
+- `MODEL_PATH` (general fallback)
 
 ---
 
@@ -241,7 +288,7 @@ Fix: load from `os.environ`; add to `.gitignore`; provide `config.yaml.example`.
 | NER | `knowledgator/modern-gliner-bi-base-v1.0` | `EntityMatch` via `GLiNER` |
 | Coref resolution | `gpt-4o-mini` (default) or `google/gemma-3-270m` | `EntityResolver` |
 
-All HuggingFace models cache to subdirectories under their respective `Features/` folders.
+All HuggingFace models cache to subdirectories under `backend/Features/`.
 Semantic models use a class-level `_model_cache` — loaded once per process.
 
 ---
@@ -258,43 +305,45 @@ Semantic models use a class-level `_model_cache` — loaded once per process.
 ```
 
 Labels: `1` = similar/faithful/grounded, `0` = different/unfaithful/hallucinated.
+MSELoss is used during training — continuous float labels (e.g. 0.7) are also supported.
 
 ---
 
 ## Coding Conventions
 
 - Python 3.10+, standard library + requirements.txt
+- All backend code lives under `backend/` — import as `from backend.X import Y`
 - Each feature extractor: `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]`
 - All feature matrices padded to `64×64` before leaving `Features/` layer
-- Model inputs are `[batch, F, 64, 64]` float32 tensors stacked by `feature_map_to_tensor()` in `train.py`
+- Model inputs are `[batch, F, 64, 64]` float32 tensors stacked by `feature_map_to_tensor()` in `backend/train.py`
+- Feature keys must match `FEATURE_KEYS` in `backend/feature_registry.py` exactly
 - Reports saved as `.json` + `.md` to `training_reports/` and `test_reports/`
 - Feature cache in `./cache/{md5}.json` — safe to delete to force recompute
 - No hardcoded absolute paths; use relative paths or `Path(__file__).parent`
 
 ---
 
-## Known Issues (see TASK.md for full list)
+## Known Issues
 
-1. **Coref resolver overhead**: `split_txt()` creates a fresh `EntityResolver` per call (model load + API). Disable during training or pass a shared resolver instance.
-2. **64-sentence cap**: `pad_matrix` silently truncates inputs exceeding 64 sentences (fixed from hard crash).
-3. **Binary training only**: BCE on 0/1 labels — continuous float faithfulness labels not yet supported.
-4. **config.yaml secrets**: Live API keys committed to repo. Move to env vars.
+1. **Coref resolver overhead**: `split_txt()` creates a fresh `EntityResolver` per call. Disable during training or pass a shared resolver instance.
+2. **64-sentence cap**: `pad_matrix` silently truncates inputs exceeding 64 sentences.
+3. **config.yaml secrets**: Use env vars (`SB_HF_TOKEN`, `SB_OPENAI_TOKEN`) — never commit the YAML file.
 
 ---
 
-## Dependencies
+## Dependencies (pinned in requirements.txt and pyproject.toml)
 
 ```
-transformers~=4.56.0
-tqdm~=4.67.1
-torch~=2.8.0
-gliner~=0.2.22
-PyYAML~=6.0.2
-huggingface-hub~=0.34.4
-openai~=1.107.2
-fastapi
-uvicorn
-slowapi
-sentence-transformers
-sklearn
+torch==2.8.0
+transformers==4.51.0        # pinned — gliner==0.2.22 requires <=4.51.0
+sentence-transformers==5.1.0
+gliner==0.2.22
+fastapi==0.135.1
+uvicorn==0.41.0
+slowapi==0.1.9
+pydantic==2.11.9
+scikit-learn==1.7.1
+numpy==2.3.2
+openai==1.107.2
+PyYAML==6.0.2
 ```
