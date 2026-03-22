@@ -161,6 +161,17 @@ short inputs.
 | 2026-03-22 | [x] | PERF: Semantic batching — class-level `_embedding_cache` keyed by sentence; `__local__` encodes only unseen sentences in one `model.encode()` call per model, serves cached embeddings for repeat sentences; eliminates redundant encodes during precompute | `backend/Features/Semantic/__generate_semantic_features.py` |
 | 2026-03-22 | [x] | PERF: GLiNER batching — `_batch_get_entities()` sends all sentences (both sides) in a single `batch_predict_entities()` call; fallback to per-sentence loop for older GLiNER versions | `backend/Features/EntityGroups/getOverlap.py` |
 
+## Session 2026-03-22 — Benchmark & Data Roadmap
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [ ] | BENCHMARK: Run cross-encoder/nli-deberta-v3-base on all 3 held-out test sets; compare ROC-AUC, avg precision, accuracy@0.5, latency (ms/pair) vs SilverBullet | new script `backend/benchmark.py` |
+| 2026-03-22 | [ ] | BENCHMARK: Failure-case analysis — identify pairs where SilverBullet outperforms and underperforms the re-ranker; use gaps to direct data collection | output to `benchmark_reports/` |
+| 2026-03-22 | [ ] | DATA: Scout RAG hallucination examples for context-vs-generated — partial grounding, number errors, entity substitution (candidates: HaluEval-extended, TruthfulQA, RAGAS datasets) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | DATA: Scout faithful paraphrase + abstractive summary pairs for reference-vs-generated (candidates: SummEval, CNN/DM with ROUGE-filtered pairs) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | DATA: Scout real LLM-output pairs for model-vs-model — semantic-equivalent responses with surface variation (candidates: OpenAI Evals, synthetic GPT-4o adversarial pairs) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset; target >90% val acc on context-vs-generated | `backend/train.py` |
+
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
