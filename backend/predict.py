@@ -100,8 +100,8 @@ class SimilarityPredictor:
         from backend.Features.EntityGroups.getOverlap import EntityMatch
         from backend.Features.LCS.getLCSweights import LCSWeights
 
-        sent1 = split_txt(text1)
-        sent2 = split_txt(text2)
+        sent1 = split_txt(text1, resolve_coref=True)
+        sent2 = split_txt(text2, resolve_coref=True)
         n, m = len(sent1), len(sent2)
 
         feature_map: dict = {}
