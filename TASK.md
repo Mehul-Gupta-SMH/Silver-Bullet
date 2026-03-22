@@ -143,7 +143,7 @@ short inputs.
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
 | 2026-03-22 | [x] | FIX P1 (Normalised pooling): `_apply_density_normalisation(tensor,n,m)` scales by `(64*64)/(n*m)`; TextSimilarityDataset always splits for n/m + normalises; cache stores raw; predict_pair_breakdown normalises manually | `backend/train.py`, `backend/predict.py`, `AGENT.md` — **delete ./cache/ and retrain all 3 modes** |
-| 2026-03-22 | [ ] | FIX P2 (Adaptive crop): replace zero-pad with adaptive avg-pool to fixed size in `model.py` so only the n×m signal region is used; avoids zero-inflation entirely; requires architecture change + full retrain | `backend/model.py`, `backend/Postprocess/__addpad.py`, retrain |
+| 2026-03-22 | [x] | FIX P2 (Adaptive resize): resize_matrix() uses bilinear interpolation n×m→32×32; every cell carries signal; spatial_size=32 in CNN + manifest; n/m crop clamped in breakdown; P1 normalisation removed | `backend/Postprocess/__addpad.py`, all 5 extractors, `backend/model.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py` — **delete cache, retrain** |
 | 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
 
 ## Planned Refactor Roadmap
