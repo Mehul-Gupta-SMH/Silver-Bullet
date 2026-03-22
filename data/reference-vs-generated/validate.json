@@ -1,0 +1,174 @@
+{
+  "data": [
+    {
+      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "The French Revolution began in 1789 and culminated in the execution of Louis XVI in 1793.",
+      "text2": "The French Revolution began in 1799 with Napoleon's coup and culminated in the execution of Louis XVI, who had already died in 1793.",
+      "label": 0
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
+      "label": 1
+    },
+    {
+      "text1": "A binary search algorithm finds a target value in a sorted array by repeatedly halving the search interval, achieving O(log n) time complexity.",
+      "text2": "Binary search narrows down a sorted list by comparing the midpoint to the target and eliminating half the remaining elements each step, running in O(log n) time.",
+      "label": 1
+    },
+    {
+      "text1": "Bayes' theorem describes the probability of an event based on prior knowledge of conditions related to the event: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Bayes' theorem updates the probability of a hypothesis given new evidence: P(A|B) = P(B|A) × P(A) / P(B).",
+      "label": 1
+    },
+    {
+      "text1": "Blue Ocean Strategy advocates creating uncontested market space by making the competition irrelevant through value innovation, rather than competing in saturated red ocean markets.",
+      "text2": "Instead of fighting for share in overcrowded markets (red oceans), Blue Ocean Strategy encourages companies to open new demand through value innovation — simultaneously lowering costs and raising buyer value.",
+      "label": 1
+    },
+    {
+      "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
+      "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
+      "label": 0
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes that works by decreasing hepatic glucose production and improving insulin sensitivity.",
+      "text2": "As the primary drug for type 2 diabetes management, metformin reduces the liver's glucose output and helps cells respond more effectively to insulin.",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC LIMIT 100;",
+      "label": 1
+    },
+    {
+      "text1": "Machine translation systems like Google Translate use neural networks trained on large bilingual corpora to convert text from one language to another.",
+      "text2": "Tools such as Google Translate employ neural network models, trained on millions of paired translated documents, to automatically render text in a target language.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
+      "label": 0
+    },
+    {
+      "text1": "The pH scale measures the acidity or alkalinity of a solution on a logarithmic scale from 0 to 14, with 7 being neutral.",
+      "text2": "pH is a logarithmic measure of hydrogen ion concentration: 0–6 is acidic, 7 is neutral, and 8–14 is alkaline.",
+      "label": 1
+    },
+    {
+      "text1": "Vaccines have eradicated smallpox and dramatically reduced the incidence of polio, measles, and other infectious diseases worldwide.",
+      "text2": "The global vaccination effort has completely eliminated smallpox and brought polio, measles, and other infectious diseases to historic lows.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
+      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotics resistance arises when bacteria evolve mechanisms to survive exposure to drugs that previously killed them.",
+      "text2": "When bacteria develop the ability to withstand antibiotic treatment through mutation or gene transfer, antibiotic resistance results.",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells.",
+      "text2": "The Eiffel Tower was designed by Gustave Eiffel and completed in 1889.",
+      "label": 0
+    },
+    {
+      "text1": "Black holes are regions of spacetime where gravity is so strong that nothing — not even light — can escape once it crosses the event horizon.",
+      "text2": "A black hole's gravity is intense enough to trap everything within its event horizon, including light, making it invisible by definition.",
+      "label": 1
+    },
+    {
+      "text1": "Osmosis is the movement of water molecules across a semi-permeable membrane from a region of lower solute concentration to a region of higher solute concentration.",
+      "text2": "Water moves by osmosis from a dilute solution to a more concentrated one through a semi-permeable membrane, equalising solute concentrations on both sides.",
+      "label": 1
+    },
+    {
+      "text1": "The placebo-controlled randomised trial is the gold standard for evaluating the effectiveness of medical interventions.",
+      "text2": "Randomised controlled trials with placebo comparison groups are the highest-quality evidence for determining whether a medical treatment works.",
+      "label": 1
+    },
+    {
+      "text1": "The acquisition rationale rests on three factors: access to the target's proprietary technology, elimination of a key competitor, and capturing $40M in annual cost synergies through shared infrastructure.",
+      "text2": "The acquisition is justified by the target's proprietary technology and the opportunity to eliminate a direct competitor from the market.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
+      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "label": 0
+    },
+    {
+      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
+      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "label": 0
+    },
+    {
+      "text1": "The Roman Empire fell in 476 CE when the last Western emperor, Romulus Augustulus, was deposed.",
+      "text2": "The Roman Empire collapsed in 410 CE when the Visigoths sacked Rome, marking the definitive end of Roman power in the West.",
+      "label": 0
+    },
+    {
+      "text1": "TCP/IP is the foundational protocol suite of the internet, governing how data is packaged, addressed, transmitted, routed, and received.",
+      "text2": "The internet runs on TCP/IP — a set of rules that defines how data is broken into packets, addressed, transmitted across networks, and reassembled at the destination.",
+      "label": 1
+    },
+    {
+      "text1": "Docker containers package an application and its dependencies together, ensuring it runs consistently across different environments.",
+      "text2": "A Docker container bundles code with all its libraries and configuration so the same image runs identically on any host machine.",
+      "label": 1
+    },
+    {
+      "text1": "Transformer models use self-attention mechanisms to process sequences in parallel, enabling them to capture long-range dependencies more efficiently than RNNs.",
+      "text2": "Unlike RNNs, Transformers process entire sequences simultaneously through self-attention, making them better at modelling relationships between distant tokens.",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis is cell division that produces two genetically identical daughter cells, each with the same number of chromosomes as the parent cell.",
+      "text2": "During mitosis, a single cell divides to form two daughter cells that are genetically identical to the original and contain the same chromosome count.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
+      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
+      "label": 1
+    },
+    {
+      "text1": "In Python, list comprehensions provide a concise syntax for creating lists: [expr for item in iterable if condition].",
+      "text2": "Python list comprehensions let you build lists in a single line: [expression for element in iterable if filter], making code more readable than equivalent for-loops.",
+      "label": 1
+    },
+    {
+      "text1": "Porter's Five Forces framework evaluates competitive intensity across five dimensions: bargaining power of suppliers, bargaining power of buyers, threat of substitute products, threat of new entrants, and rivalry among existing competitors.",
+      "text2": "The Five Forces model analyses an industry's competitive landscape by examining supplier leverage, buyer leverage, substitute threats, barriers to new entry, and the intensity of existing competitive rivalry.",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "The Berlin Wall was demolished in 1991 following the formal dissolution of the Soviet Union, marking the official end of the Cold War.",
+      "label": 0
+    },
+    {
+      "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
+      "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
+      "label": 1
+    }
+  ]
+}

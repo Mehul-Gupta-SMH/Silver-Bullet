@@ -1,0 +1,184 @@
+{
+  "data": [
+    {
+      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
+      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "label": 1
+    },
+    {
+      "text1": "A prime number has no divisors other than 1 and itself.",
+      "text2": "The James Webb Space Telescope observes in infrared and can detect early galaxies.",
+      "label": 0
+    },
+    {
+      "text1": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides: a² + b² = c².",
+      "text2": "For any right-angled triangle, a² + b² = c², where c is the hypotenuse — this is the Pythagorean theorem.",
+      "label": 1
+    },
+    {
+      "text1": "The placebo effect is when a patient experiences a real improvement in symptoms after receiving an inactive treatment, due to the belief that it will work.",
+      "text2": "Placebo effect describes genuine symptom improvement following an inert treatment, driven by the patient's expectation of benefit.",
+      "label": 1
+    },
+    {
+      "text1": "Oxidation involves the loss of electrons, while reduction involves the gain of electrons — together they form redox reactions.",
+      "text2": "In redox chemistry, oxidation is the loss of electrons and reduction is the gain of electrons; the two always occur together.",
+      "label": 1
+    },
+    {
+      "text1": "OKRs should be set quarterly, reviewed in weekly check-ins, and scored at the end of each cycle on a 0–1 scale; objectives scoring below 0.6 should trigger a root-cause retrospective before the next planning round.",
+      "text2": "OKRs are set quarterly and scored at cycle-end on a 0–1 scale; scores below 0.6 indicate underperformance.",
+      "label": 0
+    },
+    {
+      "text1": "The Higgs boson was first observed experimentally at CERN in 2012.",
+      "text2": "The Higgs boson was theoretically predicted in the 1960s but was not detected until experiments at Fermilab confirmed it in 2008.",
+      "label": 0
+    },
+    {
+      "text1": "Reinforcement learning trains an agent by rewarding desired behaviours and penalising undesired ones.",
+      "text2": "Reinforcement learning trains an agent using labelled training examples and a supervised loss function, similar to standard classification.",
+      "label": 0
+    },
+    {
+      "text1": "REST APIs communicate over HTTP using standard methods — GET, POST, PUT, DELETE — and return data typically in JSON or XML format.",
+      "text2": "A RESTful API uses HTTP verbs (GET, POST, PUT, DELETE) to expose resources and exchange data, commonly serialised as JSON.",
+      "label": 1
+    },
+    {
+      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
+      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "label": 0
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "Every choice carries an opportunity cost — the benefit you give up by not choosing the next best option.",
+      "label": 1
+    },
+    {
+      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
+      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "label": 0
+    },
+    {
+      "text1": "The growth strategy should prioritise international expansion into Southeast Asia and product line extension into SMB, with a partnership programme and cost efficiency drive rounding out the four pillars.",
+      "text2": "The growth strategy should focus on Southeast Asia expansion and SMB product extension. A cost efficiency programme may be worth exploring but is not a primary lever at this stage.",
+      "label": 0
+    },
+    {
+      "text1": "A balanced scorecard translates strategic objectives into measurable KPIs across four perspectives: financial, customer, internal processes, and learning and growth.",
+      "text2": "The balanced scorecard framework links strategic goals to specific metrics across financial performance, customer outcomes, operational processes, and organisational learning and development.",
+      "label": 1
+    },
+    {
+      "text1": "Blockchain records transactions in cryptographically linked blocks across a distributed network.",
+      "text2": "The law of conservation of energy: energy cannot be created or destroyed, only converted.",
+      "label": 0
+    },
+    {
+      "text1": "The First Amendment protects free speech, religion, press, and assembly.",
+      "text2": "The Second Amendment protects the right to keep and bear arms, and has been the subject of significant US Supreme Court interpretation regarding individual versus collective rights.",
+      "label": 0
+    },
+    {
+      "text1": "A convolution neural network (CNN) uses learnable filters to detect local patterns such as edges and textures in images, enabling spatial feature extraction.",
+      "text2": "CNNs apply trainable convolutional filters to input images to identify spatial features like edges, corners, and textures at various scales.",
+      "label": 1
+    },
+    {
+      "text1": "Vaccines stimulate the immune system to recognise and destroy a specific pathogen by exposing it to a weakened or inactivated form of the disease agent.",
+      "text2": "Vaccination trains the immune system to fight a pathogen by introducing a harmless version (weakened or inactivated) that triggers antibody production without causing disease.",
+      "label": 1
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1; right -= 1\n    return True",
+      "label": 1
+    },
+    {
+      "text1": "Inflation is the rate at which the general price level of goods and services rises over time, eroding purchasing power.",
+      "text2": "When inflation rises, the same amount of money buys fewer goods and services — it represents a sustained increase in the overall price level.",
+      "label": 1
+    },
+    {
+      "text1": "Public key cryptography uses a pair of mathematically linked keys — a public key to encrypt and a private key to decrypt — enabling secure communication without sharing a secret.",
+      "text2": "In asymmetric cryptography, a public key encrypts data while only the paired private key can decrypt it, allowing secure exchange without a pre-shared secret.",
+      "label": 1
+    },
+    {
+      "text1": "# Python list comprehension\nsquares = [x**2 for x in range(10)]",
+      "text2": "# Equivalent using map\nsquares = list(map(lambda x: x**2, range(10)))",
+      "label": 1
+    },
+    {
+      "text1": "Statins lower LDL cholesterol by inhibiting the HMG-CoA reductase enzyme in the liver.",
+      "text2": "Statins lower LDL cholesterol by binding directly to LDL particles in the bloodstream and breaking them down before they reach the liver.",
+      "label": 0
+    },
+    {
+      "text1": "The Industrial Revolution, which began in Britain in the late 18th century, marked the transition from agrarian economies to manufacturing-based ones, powered by steam and coal.",
+      "text2": "Beginning in late-18th-century Britain, the Industrial Revolution shifted economies from farming to factory production, driven primarily by steam engines and coal.",
+      "label": 1
+    },
+    {
+      "text1": "Quantum entanglement allows instantaneous correlation between particles regardless of distance.",
+      "text2": "Quantum entanglement enables faster-than-light communication between entangled particles, which is the basis for quantum cryptography key exchange.",
+      "label": 0
+    },
+    {
+      "text1": "Inflation erodes purchasing power by raising the general price level.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
+      "label": 0
+    },
+    {
+      "text1": "Einstein's mass-energy equivalence formula E = mc² states that energy equals mass multiplied by the square of the speed of light.",
+      "text2": "The equation E = mc² expresses that mass and energy are interconvertible: a small amount of mass corresponds to an enormous amount of energy, scaled by c².",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process ensures that scientific findings are evaluated by experts before publication.",
+      "text2": "The peer-review process ensures that scientific findings are evaluated by experts before publication. Studies show that over 95% of peer-reviewed claims are later confirmed by replication.",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
+      "text2": "Git is a distributed version control system that tracks changes in source code.",
+      "label": 0
+    },
+    {
+      "text1": "TCP/IP governs how data is packaged, addressed, transmitted, routed, and received across the internet.",
+      "text2": "UDP/IP governs how data is packaged and transmitted across the internet, with guaranteed delivery and error correction built in.",
+      "label": 0
+    },
+    {
+      "text1": "Evolution by natural selection is the process by which heritable traits that increase survival and reproduction become more common in a population over generations.",
+      "text2": "Natural selection drives evolution: traits that improve an organism's ability to survive and reproduce spread through the population across generations.",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of innate and adaptive components.",
+      "text2": "Docker containers package applications and dependencies for consistent deployment across environments.",
+      "label": 0
+    },
+    {
+      "text1": "Porter's Five Forces framework analyses competitive intensity through supplier power, buyer power, threat of substitutes, threat of new entrants, and rivalry among existing competitors.",
+      "text2": "Antibiotic resistance develops when bacteria evolve mechanisms to survive drug treatment, rendering medications ineffective.",
+      "label": 0
+    },
+    {
+      "text1": "Gross domestic product (GDP) is the total monetary value of all goods and services produced within a country's borders in a given period.",
+      "text2": "GDP measures the aggregate economic output of a nation — the total value of finished goods and services produced domestically in a specific timeframe.",
+      "label": 1
+    },
+    {
+      "text1": "The Eiffel Tower was built between 1887 and 1889 as the entrance arch for the 1889 World's Fair, designed by Gustave Eiffel.",
+      "text2": "Designed by Gustave Eiffel and constructed from 1887 to 1889, the Eiffel Tower was originally the grand entrance gate for the Paris World's Fair of 1889.",
+      "label": 1
+    },
+    {
+      "text1": "Public key cryptography enables secure communication without sharing a secret key.",
+      "text2": "World War II lasted from 1939 to 1945 and caused approximately 70–85 million deaths.",
+      "label": 0
+    }
+  ]
+}

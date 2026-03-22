@@ -1,0 +1,809 @@
+{
+  "data": [
+    {
+      "text1": "The human body contains approximately 37 trillion cells, each performing specialised functions to maintain life.",
+      "text2": "About 37 trillion cells make up the human body, each carrying out specific roles that collectively sustain biological functions.",
+      "label": 1
+    },
+    {
+      "text1": "Reinforcement learning trains an agent to make decisions by rewarding desired behaviours and penalising undesired ones through trial and error.",
+      "text2": "An RL agent learns an optimal policy by interacting with its environment — earning rewards for good actions and penalties for bad ones.",
+      "label": 1
+    },
+    {
+      "text1": "The Apollo 11 mission landed astronauts on the Moon on 20 July 1969.",
+      "text2": "The Apollo 13 mission successfully landed astronauts on the Moon in April 1970, completing the second crewed lunar landing.",
+      "label": 0
+    },
+    {
+      "text1": "A neural network is a computational model inspired by the brain, consisting of layers of interconnected nodes (neurons) that learn patterns from data.",
+      "text2": "Neural networks are machine-learning models made up of layers of artificial neurons. They learn by adjusting weights based on training data.",
+      "label": 1
+    },
+    {
+      "text1": "Statins are medications that lower LDL cholesterol by inhibiting the HMG-CoA reductase enzyme responsible for cholesterol synthesis in the liver.",
+      "text2": "By blocking HMG-CoA reductase — the liver enzyme that makes cholesterol — statins reduce LDL ('bad') cholesterol levels in the blood.",
+      "label": 1
+    },
+    {
+      "text1": "Operant conditioning is a learning process where behaviour is shaped by rewards (positive reinforcement) and punishments.",
+      "text2": "In operant conditioning, behaviours increase when followed by rewards and decrease when followed by punishments — a key concept in behavioural psychology.",
+      "label": 1
+    },
+    {
+      "text1": "A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.",
+      "text2": "Prime numbers are integers greater than 1 whose only factors are 1 and the number itself.",
+      "label": 1
+    },
+    {
+      "text1": "Transformer models use self-attention to process sequences in parallel, outperforming RNNs on long-range dependencies.",
+      "text2": "Transformer models process sequences token-by-token, like RNNs, but use an attention mechanism instead of recurrence to capture dependencies.",
+      "label": 0
+    },
+    {
+      "text1": "To defend market share, the strategy calls for short-term price matching to neutralise the new entrant, followed by a 12-month product refresh cycle and a loyalty programme targeting the top 20% of revenue-generating accounts.",
+      "text2": "To defend market share, the strategy calls for short-term price matching to neutralise the new entrant and launching a loyalty programme for high-value accounts.",
+      "label": 0
+    },
+    {
+      "text1": "In Python, list comprehensions provide a concise way to create lists: [expression for item in iterable if condition].",
+      "text2": "Python list comprehensions let you build lists in a single line: [expr for elem in sequence if predicate], replacing verbose for-loop constructs.",
+      "label": 1
+    },
+    {
+      "text1": "The mitochondria are often called the powerhouse of the cell because they produce ATP through cellular respiration.",
+      "text2": "Mitochondria generate ATP — the cell's primary energy currency — via cellular respiration, earning them the nickname 'powerhouse of the cell'.",
+      "label": 1
+    },
+    {
+      "text1": "Mount Everest is the highest peak on Earth at 8,848.86 metres above sea level.",
+      "text2": "Mount Everest stands at 8,611 metres above sea level, making it the world's tallest mountain — slightly shorter than K2 which peaks at 8,848 metres.",
+      "label": 0
+    },
+    {
+      "text1": "Metformin works by decreasing hepatic glucose production and improving insulin sensitivity. It does NOT stimulate insulin secretion.",
+      "text2": "Metformin works primarily by stimulating the pancreas to secrete more insulin, which lowers blood glucose levels in type 2 diabetes patients.",
+      "label": 0
+    },
+    {
+      "text1": "Kubernetes orchestrates containerised workloads by scheduling pods on nodes, managing restarts, and exposing services.",
+      "text2": "K8s manages container deployment, automatically restarts failed pods, load-balances traffic, and abstracts underlying infrastructure from applications.",
+      "label": 1
+    },
+    {
+      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
+      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "label": 1
+    },
+    {
+      "text1": "The central limit theorem: sample means approach a normal distribution as sample size increases.",
+      "text2": "The central limit theorem states that population distributions become normal as the number of observations increases, regardless of the sample size used.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold or influenza.",
+      "text2": "Antibiotic drugs target bacterial cells and are useless against viruses — colds and flu, caused by viruses, do not respond to antibiotic treatment.",
+      "label": 1
+    },
+    {
+      "text1": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen.",
+      "text2": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen. It takes place primarily in the roots of plants, where chlorophyll is most concentrated.",
+      "label": 0
+    },
+    {
+      "text1": "The central limit theorem states that the distribution of sample means approaches a normal distribution as sample size increases, regardless of the population's distribution.",
+      "text2": "As sample size grows, the CLT guarantees that the sampling distribution of the mean converges to a normal distribution, no matter what the underlying population looks like.",
+      "label": 1
+    },
+    {
+      "text1": "The Pythagorean theorem: a² + b² = c² for right triangles.",
+      "text2": "Regular aerobic exercise significantly reduces risk of cardiovascular disease and depression.",
+      "label": 0
+    },
+    {
+      "text1": "The central limit theorem guarantees convergence of sample means to a normal distribution.",
+      "text2": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "label": 0
+    },
+    {
+      "text1": "Overfitting occurs when a machine learning model learns the training data too well, including noise, and performs poorly on unseen data.",
+      "text2": "A model that overfits has memorised the training set — including its noise — and fails to generalise to new, unseen examples.",
+      "label": 1
+    },
+    {
+      "text1": "REST APIs are stateless; each request carries all information the server needs to process it.",
+      "text2": "REST APIs maintain session state on the server side between requests, which is what distinguishes them from older RPC-style protocols.",
+      "label": 0
+    },
+    {
+      "text1": "In George Orwell's 1984, the totalitarian Party led by Big Brother uses constant surveillance, propaganda, and psychological manipulation to control citizens.",
+      "text2": "Orwell's 1984 portrays a dystopian state where the all-powerful Party maintains control through pervasive surveillance, propaganda, and psychological coercion.",
+      "label": 1
+    },
+    {
+      "text1": "A hash table provides average O(1) time complexity for lookups using a hash function.",
+      "text2": "A hash table provides O(n) time complexity for lookups in the average case, since collisions require scanning the entire chain.",
+      "label": 0
+    },
+    {
+      "text1": "The French Revolution began in 1789 and ended with Napoleon's rise to power in 1799.",
+      "text2": "The French Revolution started in 1789 and concluded in 1815 with Napoleon's defeat at Waterloo.",
+      "label": 0
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes. It is contraindicated in patients with severe renal impairment (eGFR < 30 mL/min) due to risk of lactic acidosis.",
+      "text2": "Metformin is a first-line treatment for type 2 diabetes. It is generally safe for patients with kidney disease of any severity and is also effective for type 1 diabetes.",
+      "label": 0
+    },
+    {
+      "text1": "GDPR requires explicit consent before collecting personal data and gives rights to access or delete data.",
+      "text2": "CCPA (California Consumer Privacy Act) requires businesses to disclose data collection practices and allows consumers to opt out of data sales, applying only to California residents.",
+      "label": 0
+    },
+    {
+      "text1": "The digital transformation roadmap covers five workstreams: customer data platform implementation, ERP migration, AI-assisted demand forecasting, e-commerce channel buildout, and employee upskilling in data literacy.",
+      "text2": "The digital transformation roadmap prioritises customer data platform implementation and ERP migration as the two foundational workstreams.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis: light-dependent reactions occur in the thylakoid membranes; the Calvin cycle occurs in the stroma.",
+      "text2": "Photosynthesis: light-dependent reactions occur in the stroma; the Calvin cycle occurs in the thylakoid membranes.",
+      "label": 0
+    },
+    {
+      "text1": "A go-to-market strategy defines the plan for launching a product, including target segment, pricing, distribution channels, and sales motion.",
+      "text2": "Gradient descent iteratively adjusts model weights in the direction that minimises the loss function.",
+      "label": 0
+    },
+    {
+      "text1": "Economies of scale reduce per-unit costs as production volume increases, giving larger firms a cost advantage over smaller competitors.",
+      "text2": "As output grows, fixed costs are spread across more units and operational efficiencies compound — this reduction in average cost with scale is the basis of economies of scale.",
+      "label": 1
+    },
+    {
+      "text1": "Supply and demand determines market price: when supply exceeds demand, prices fall; when demand exceeds supply, prices rise.",
+      "text2": "Market prices are set by the interaction of supply and demand — surplus supply drives prices down, while excess demand pushes them up.",
+      "label": 1
+    },
+    {
+      "text1": "Confirmation bias leads people to favour information confirming their existing beliefs.",
+      "text2": "TCP/IP defines how data is packaged, addressed, transmitted, and received across the internet.",
+      "label": 0
+    },
+    {
+      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
+      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
+      "label": 1
+    },
+    {
+      "text1": "A SWOT analysis identifies a company's internal Strengths and Weaknesses alongside external Opportunities and Threats to inform strategic decision-making.",
+      "text2": "SWOT analysis is a strategic planning tool that maps internal capabilities (strengths and weaknesses) against external market conditions (opportunities and threats) to guide business decisions.",
+      "label": 1
+    },
+    {
+      "text1": "The placebo-controlled randomised trial is the gold standard for evaluating medical interventions.",
+      "text2": "Recursion without a base case leads to infinite recursion and a stack overflow.",
+      "label": 0
+    },
+    {
+      "text1": "Gravity pulls objects toward each other with a force proportional to their masses and inversely proportional to the square of the distance between them.",
+      "text2": "The gravitational force between two bodies increases with their masses and decreases as the square of the separation between them grows — this is Newton's law of universal gravitation.",
+      "label": 1
+    },
+    {
+      "text1": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "text2": "Statins work by blocking bile acid reabsorption in the gut, which forces the liver to use cholesterol to make more bile, reducing serum LDL.",
+      "label": 0
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "CRISPR-Cas9 allows precise gene editing by cutting DNA at targeted locations.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect warms the Earth by trapping heat in the atmosphere.",
+      "text2": "The greenhouse effect cools the Earth by reflecting solar radiation back into space before it can warm the surface.",
+      "label": 0
+    },
+    {
+      "text1": "Binary search achieves O(log n) time complexity by halving the search interval each step.",
+      "text2": "Binary search achieves O(n log n) time complexity, similar to merge sort, because it must re-sort the remaining elements at each step.",
+      "label": 0
+    },
+    {
+      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
+      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "label": 0
+    },
+    {
+      "text1": "Osmosis moves water from low to high solute concentration across a semi-permeable membrane.",
+      "text2": "The Industrial Revolution began in Britain and transitioned economies from agrarian to manufacturing.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "According to Newton's first law, any object maintains its current state of motion — stationary or moving at constant speed — unless a net external force acts on it.",
+      "label": 1
+    },
+    {
+      "text1": "The derivative measures the rate of change of a function's output with respect to its input.",
+      "text2": "The integral computes the area under a curve, representing the accumulation of a quantity over an interval — the inverse operation of differentiation.",
+      "label": 0
+    },
+    {
+      "text1": "Blockchain is a distributed ledger technology that records transactions in a chain of cryptographically linked blocks, making it tamper-resistant.",
+      "text2": "A blockchain stores data as a chain of cryptographically secured blocks across a distributed network, making historic records extremely difficult to alter.",
+      "label": 1
+    },
+    {
+      "text1": "Abstract classes define a template for subclasses and cannot be instantiated directly.",
+      "text2": "Interfaces define a contract of methods that implementing classes must provide; unlike abstract classes, interfaces cannot contain any implementation logic in most languages.",
+      "label": 0
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "World War II lasted from 1941 to 1945 — after the US entered the conflict — and resulted in approximately 40 million deaths, most of them military personnel.",
+      "label": 0
+    },
+    {
+      "text1": "The James Webb Space Telescope was launched in December 2021 and observes the universe in infrared.",
+      "text2": "The James Webb Space Telescope was launched in March 2022 and observes the universe in ultraviolet and visible light, complementing the Hubble Space Telescope.",
+      "label": 0
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564.",
+      "text2": "Shakespeare was born in London in 1564 and later moved to Stratford-upon-Avon, where he retired and died.",
+      "label": 0
+    },
+    {
+      "text1": "Our three-year growth strategy focuses on four pillars: geographic expansion into Southeast Asia, product line extension into SMB segments, a strategic partnership programme with system integrators, and an operational efficiency drive targeting 15% cost reduction.",
+      "text2": "The company's growth plan centres on two main thrusts: expanding into Southeast Asia and extending the product line to serve SMB customers.",
+      "label": 0
+    },
+    {
+      "text1": "Gradient descent updates model parameters in the direction that minimises the loss function.",
+      "text2": "Gradient ascent updates model parameters in the direction that maximises the loss function, commonly used in generative adversarial networks for the discriminator.",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure: systolic (during heartbeat) over diastolic (between heartbeats).",
+      "text2": "Blood pressure: diastolic (during heartbeat) over systolic (between heartbeats) — both measured in mmHg.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect occurs when gases like CO₂, methane, and water vapour trap heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Greenhouse gases — CO₂, methane, water vapour — absorb outgoing infrared radiation and re-radiate it back toward the surface, raising global temperatures.",
+      "label": 1
+    },
+    {
+      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
+      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "label": 1
+    },
+    {
+      "text1": "The Amazon River carries 20% of the world's freshwater discharge.",
+      "text2": "Reinforcement learning trains agents through reward and punishment signals.",
+      "label": 0
+    },
+    {
+      "text1": "The Python GIL prevents true parallel thread execution for CPU-bound tasks; use multiprocessing instead.",
+      "text2": "Due to Python's Global Interpreter Lock, CPU-intensive code should run in separate processes rather than threads to achieve real parallelism.",
+      "label": 1
+    },
+    {
+      "text1": "Gradient descent minimises the loss function by adjusting model weights iteratively.",
+      "text2": "The Berlin Wall fell on 9 November 1989, symbolising the end of the Cold War.",
+      "label": 0
+    },
+    {
+      "text1": "Antibody tests detect the presence of antibodies in the blood, indicating past exposure or immune response to a pathogen or vaccine.",
+      "text2": "Serological (antibody) tests look for immune proteins in the bloodstream that signal prior infection or vaccination.",
+      "label": 1
+    },
+    {
+      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
+      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "label": 0
+    },
+    {
+      "text1": "CNNs apply convolutional filters to detect spatial features in images.",
+      "text2": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "label": 0
+    },
+    {
+      "text1": "The competitive response plan has three phases: a 90-day containment phase (price matching, accelerated roadmap), a six-month differentiation phase (exclusive features, enterprise SLAs), and a 12-month consolidation phase (account lock-in through multi-year contracts).",
+      "text2": "The competitive response begins with a 90-day containment phase involving price matching and an accelerated product roadmap.",
+      "label": 0
+    },
+    {
+      "text1": "The peer-review process requires that scientific findings be evaluated by other experts in the field before publication, ensuring quality and validity.",
+      "text2": "Before a scientific paper is published, peer review subjects it to scrutiny by independent experts who assess its methodology, results, and conclusions.",
+      "label": 1
+    },
+    {
+      "text1": "Deforestation removes trees that absorb CO₂, contributing to climate change while also destroying habitats and reducing biodiversity.",
+      "text2": "When forests are cleared, carbon-absorbing trees are lost, which accelerates climate change; deforestation also destroys ecosystems and threatens biodiversity.",
+      "label": 1
+    },
+    {
+      "text1": "Overfitting occurs when a model memorises training noise and fails to generalise.",
+      "text2": "Blood pressure is measured as systolic over diastolic pressure in millimetres of mercury.",
+      "label": 0
+    },
+    {
+      "text1": "Transformer models use self-attention to process sequences in parallel.",
+      "text2": "The Great Wall of China was built to protect against nomadic invasions and spans over 21,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "label": 0
+    },
+    {
+      "text1": "Natural selection drives evolution by favouring heritable traits that increase reproductive success.",
+      "text2": "The SOLID principles are five design guidelines that promote maintainable object-oriented software.",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines work by delivering messenger RNA into cells, instructing them to produce a protein that triggers an immune response.",
+      "text2": "In mRNA vaccination, synthetic messenger RNA is introduced into the body's cells; the cells read it and produce an antigen that primes the immune system.",
+      "label": 1
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    return s == s[1:]",
+      "label": 0
+    },
+    {
+      "text1": "Inflation erodes purchasing power; central banks raise interest rates to cool demand and bring inflation back toward target.",
+      "text2": "When prices rise faster than the target rate, central banks typically hike interest rates to reduce borrowing, dampen spending, and slow inflation.",
+      "label": 1
+    },
+    {
+      "text1": "The French Revolution began in 1789 and transformed France from an absolute monarchy into a republic, culminating in the execution of Louis XVI in 1793.",
+      "text2": "Starting in 1789, the French Revolution overthrew the absolute monarchy, established a republic, and led to King Louis XVI being executed in 1793.",
+      "label": 1
+    },
+    {
+      "text1": "Renewable energy sources such as solar and wind do not emit greenhouse gases during operation and are key to reducing carbon emissions.",
+      "text2": "Solar and wind power generate electricity without emitting CO₂ during operation, making them essential tools in the transition to a low-carbon energy system.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Wall of China stretches over 21,000 kilometres.",
+      "text2": "The Great Wall of China stretches over 8,000 kilometres — the 21,000 km figure includes all branches and natural barriers incorporated into the defensive system.",
+      "label": 0
+    },
+    {
+      "text1": "Abstract classes in object-oriented programming define a template for subclasses but cannot be instantiated directly.",
+      "text2": "In OOP, an abstract class provides a blueprint that child classes must implement; it cannot be used to create objects directly.",
+      "label": 1
+    },
+    {
+      "text1": "Sleep is essential for memory consolidation, immune function, and emotional regulation; adults generally need 7–9 hours per night.",
+      "text2": "Adults typically need 7 to 9 hours of sleep nightly to support memory formation, immune health, and emotional well-being.",
+      "label": 1
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023, driven primarily by human greenhouse gas emissions.",
+      "text2": "As of 2023, the Earth is roughly 1.1 degrees Celsius warmer than it was before industrialisation, largely due to CO₂ and other greenhouse gases released by human activity.",
+      "label": 1
+    },
+    {
+      "text1": "The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
+      "text2": "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
+      "label": 0
+    },
+    {
+      "text1": "Overfitting occurs when a model learns noise in training data and performs poorly on unseen data.",
+      "text2": "Overfitting occurs when a model is too simple to capture patterns in training data, so it performs poorly on both training and test sets.",
+      "label": 0
+    },
+    {
+      "text1": "Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem until a base case is reached.",
+      "text2": "A recursive function solves a problem by breaking it into smaller sub-problems of the same type and calling itself until it hits a stopping condition (base case).",
+      "label": 1
+    },
+    {
+      "text1": "GDP measures the total monetary value of goods and services produced within a country.",
+      "text2": "Recursion is a programming technique where a function calls itself to solve smaller sub-problems.",
+      "label": 0
+    },
+    {
+      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+      "text2": "The speed of light in a vacuum is approximately 300,000 kilometres per hour, or about 186 miles per second.",
+      "label": 0
+    },
+    {
+      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+      "label": 0
+    },
+    {
+      "text1": "The James Webb Space Telescope, launched in December 2021, observes the universe in infrared light and can detect galaxies formed shortly after the Big Bang.",
+      "text2": "Launched in December 2021, JWST uses infrared imaging to peer at the earliest galaxies, offering views of the universe from just a few hundred million years after the Big Bang.",
+      "label": 1
+    },
+    {
+      "text1": "DNA is a double-helix molecule composed of nucleotides, with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "The DNA molecule has a double-helix structure; its base-pairing rules are A–T and G–C.",
+      "label": 1
+    },
+    {
+      "text1": "The speed of sound in air at 20 °C is approximately 343 m/s.",
+      "text2": "Sound travels at approximately 1,484 m/s in air at room temperature, which is why supersonic aircraft can exceed it.",
+      "label": 0
+    },
+    {
+      "text1": "The recommended go-to-market approach differentiates on quality and brand premium, targeting enterprise customers through a direct sales force and strategic channel partners, with pricing set 20% above the market median.",
+      "text2": "The recommended go-to-market approach targets enterprise customers through direct sales, with pricing aligned to the market median to remain competitive on cost.",
+      "label": 0
+    },
+    {
+      "text1": "A Mediterranean diet, rich in vegetables, whole grains, olive oil, and fish, is associated with reduced risk of heart disease and longer lifespan.",
+      "text2": "Research links the Mediterranean diet — high in vegetables, whole grains, fish, and olive oil — with lower cardiovascular risk and improved longevity.",
+      "label": 1
+    },
+    {
+      "text1": "The Eiffel Tower was designed by Gustave Eiffel and built between 1887 and 1889.",
+      "text2": "The Eiffel Tower was designed by architect Henri Labrouste and built between 1892 and 1894 for the Paris Olympics.",
+      "label": 0
+    },
+    {
+      "text1": "Compound interest grows on both the principal and previously accumulated interest.",
+      "text2": "Compound interest grows only on the principal amount, recalculated at the end of each period without accumulating previous interest.",
+      "label": 0
+    },
+    {
+      "text1": "Recursion without a proper base case leads to infinite recursion and a stack overflow error.",
+      "text2": "If a recursive function never reaches its base case, it calls itself indefinitely until the call stack overflows.",
+      "label": 1
+    },
+    {
+      "text1": "The internet is a global system of interconnected computer networks that enables communication, commerce, and access to information for billions of people.",
+      "text2": "Billions of people use the internet — a worldwide network of interconnected computers — to communicate, conduct business, and access information.",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells with the same chromosome count as the parent.",
+      "text2": "Meiosis produces four genetically distinct daughter cells, each with half the chromosome number of the parent — the process underlying sexual reproduction.",
+      "label": 0
+    },
+    {
+      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
+      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "label": 0
+    },
+    {
+      "text1": "SQL's JOIN clause combines rows from two or more tables based on a related column, enabling relational queries across multiple datasets.",
+      "text2": "In SQL, JOIN merges records from multiple tables using a shared column, allowing queries to retrieve related data from different tables simultaneously.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law states that objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "Newton's third law states that for every action there is an equal and opposite reaction, explaining how rockets propel themselves in space.",
+      "label": 0
+    },
+    {
+      "text1": "Renewable energy sources do not emit greenhouse gases during operation.",
+      "text2": "Cognitive dissonance is the mental discomfort of holding two contradictory beliefs.",
+      "label": 0
+    },
+    {
+      "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+      "text2": "SOLID is an acronym for five OOP design principles — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion — that promote clean, maintainable code.",
+      "label": 1
+    },
+    {
+      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+      "label": 1
+    },
+    {
+      "text1": "The stock market allows companies to raise capital by selling shares to public investors, who then own a fraction of the company.",
+      "text2": "By issuing shares on the stock market, companies access public capital, and shareholders receive partial ownership of the business in return.",
+      "label": 1
+    },
+    {
+      "text1": "Gradient descent is an optimisation algorithm that iteratively updates model parameters in the direction that minimises the loss function.",
+      "text2": "In gradient descent, model weights are repeatedly adjusted in the opposite direction of the gradient of the loss, gradually reducing the error.",
+      "label": 1
+    },
+    {
+      "text1": "The time complexity of merge sort is O(n log n) in all cases.",
+      "text2": "Merge sort has O(n²) average-case complexity, making it less efficient than quicksort for large datasets.",
+      "label": 0
+    },
+    {
+      "text1": "Vertical integration into the supply chain is not recommended at this stage — the capital requirements outweigh the margin benefit given current revenue levels.",
+      "text2": "Vertical integration could be considered selectively — acquiring upstream suppliers only where input costs are highly volatile and alternative sourcing is limited.",
+      "label": 0
+    },
+    {
+      "text1": "Black holes are regions where gravity is so strong that not even light can escape past the event horizon.",
+      "text2": "Black holes are regions where gravity is so strong that light is slowed but not stopped — it can escape, but significantly redshifted.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold.",
+      "text2": "Antibiotics are highly effective against viral infections such as the common cold and flu, and are routinely prescribed for these illnesses.",
+      "label": 0
+    },
+    {
+      "text1": "Big-O notation describes the upper-bound worst-case time or space complexity of an algorithm as a function of input size.",
+      "text2": "Big-O expresses how an algorithm's resource usage scales in the worst case as the input grows larger.",
+      "label": 1
+    },
+    {
+      "text1": "Blue Ocean Strategy is the superior framework here — value innovation lets the company escape competitive pricing pressure entirely by creating uncontested market space.",
+      "text2": "Porter's Five Forces and Blue Ocean Strategy offer complementary lenses. Five Forces helps diagnose current competitive pressure; Blue Ocean then guides where to move to reduce it.",
+      "label": 0
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "The Second World War, fought from 1939 to 1945, drew in nations from across the globe and caused an estimated 70 to 85 million fatalities.",
+      "label": 1
+    },
+    {
+      "text1": "The partnership strategy targets three tiers: a preferred-supplier agreement with two cloud hyperscalers, co-selling arrangements with five regional system integrators, and a technology alliance programme open to ISVs meeting defined certification criteria.",
+      "text2": "The partnership strategy includes preferred-supplier agreements with cloud hyperscalers and co-selling arrangements with regional system integrators.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis converts light energy into glucose using CO₂ and water.",
+      "text2": "The Federal Reserve adjusts interest rates to control inflation and stimulate or cool economic growth.",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem updates belief in a hypothesis given new evidence: P(A|B) = P(B|A)·P(A)/P(B).",
+      "text2": "Deforestation destroys habitats, reduces biodiversity, and contributes to climate change.",
+      "label": 0
+    },
+    {
+      "text1": "CRISPR-Cas9 is a gene-editing tool that allows scientists to precisely modify DNA sequences in living organisms.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms, making it a powerful tool for genetic engineering.",
+      "label": 1
+    },
+    {
+      "text1": "Shakespeare's Hamlet explores themes of revenge, mortality, indecision, and the corruption of power through the story of a Danish prince.",
+      "text2": "Hamlet by Shakespeare follows a Danish prince navigating revenge, existential doubt, and the moral corruption of those around him.",
+      "label": 1
+    },
+    {
+      "text1": "Linked lists store data in nodes, each pointing to the next node in the sequence.",
+      "text2": "Antibiotics are ineffective against viral infections such as colds and influenza.",
+      "label": 0
+    },
+    {
+      "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+      "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+      "label": 1
+    },
+    {
+      "text1": "Euler's identity, e^(iπ) + 1 = 0, is widely regarded as the most beautiful equation in mathematics because it links five fundamental constants.",
+      "text2": "e^(iπ) + 1 = 0, known as Euler's identity, elegantly connects e, i, π, 1, and 0 — five of mathematics' most important constants.",
+      "label": 1
+    },
+    {
+      "text1": "The First Amendment to the US Constitution protects freedom of speech, religion, press, peaceful assembly, and the right to petition the government.",
+      "text2": "Under the First Amendment, Americans have constitutional protection for free speech, religious freedom, freedom of the press, peaceful protest, and the right to petition.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Wall of China stretches over 21,000 kilometres and was built to protect Chinese states from nomadic invasions.",
+      "text2": "Spanning more than 21,000 km, the Great Wall was constructed over centuries to defend Chinese territories against northern nomadic incursions.",
+      "label": 1
+    },
+    {
+      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564 and is widely considered the greatest playwright in the English language.",
+      "text2": "Born in Stratford-upon-Avon in 1564, William Shakespeare is broadly regarded as the most important writer in the English literary tradition.",
+      "label": 1
+    },
+    {
+      "text1": "Mount Everest, located in the Himalayas on the border of Nepal and Tibet, is the highest peak on Earth at 8,848.86 metres above sea level.",
+      "text2": "At 8,848.86 m, Mount Everest in the Nepal–Tibet Himalayas is the tallest mountain on Earth measured from sea level.",
+      "label": 1
+    },
+    {
+      "text1": "Regular aerobic exercise for at least 150 minutes per week significantly reduces the risk of cardiovascular disease, type 2 diabetes, and depression.",
+      "text2": "Getting at least 150 minutes of moderate aerobic activity weekly substantially lowers the risk of heart disease, diabetes, and mental health disorders.",
+      "label": 1
+    },
+    {
+      "text1": "Dark matter is detectable only through its gravitational effects and accounts for 27% of the universe.",
+      "text2": "Operant conditioning shapes behaviour through rewards and punishments.",
+      "label": 0
+    },
+    {
+      "text1": "The derivative of a function measures the rate of change of the function's output with respect to its input.",
+      "text2": "In calculus, a derivative represents how rapidly a function's value changes as its input varies.",
+      "label": 1
+    },
+    {
+      "text1": "The Apollo 11 mission successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon on 20 July 1969, with Armstrong becoming the first human to walk on the lunar surface.",
+      "text2": "On 20 July 1969, Apollo 11 touched down on the Moon; Neil Armstrong stepped onto the surface first, followed by Buzz Aldrin — making history as the first crewed lunar landing.",
+      "label": 1
+    },
+    {
+      "text1": "SQL JOINs combine rows from multiple tables based on a shared column.",
+      "text2": "The placebo effect describes real symptom improvement after inert treatment, driven by expectation.",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure is recorded as two values: systolic pressure (when the heart beats) and diastolic pressure (when the heart rests between beats).",
+      "text2": "A blood pressure reading consists of the systolic value (pressure during heartbeats) over the diastolic value (pressure between beats).",
+      "label": 1
+    },
+    {
+      "text1": "mRNA vaccines instruct cells to produce a protein that triggers immune response.",
+      "text2": "Supply and demand determines market price: surplus lowers prices, scarcity raises them.",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotic resistance develops when bacteria evolve to survive drug treatment.",
+      "text2": "Compound interest accumulates on both principal and previously earned interest.",
+      "label": 0
+    },
+    {
+      "text1": "GDPR requires organisations to obtain explicit consent before collecting personal data and gives individuals the right to access, correct, or delete their data.",
+      "text2": "Under GDPR, companies must get clear consent before gathering personal data, and individuals retain the right to access, rectify, or erase their information.",
+      "label": 1
+    },
+    {
+      "text1": "Vertical integration occurs when a company acquires control of its supply chain, either upstream toward suppliers or downstream toward distributors.",
+      "text2": "The central limit theorem states that sample means converge to a normal distribution as sample size increases.",
+      "label": 0
+    },
+    {
+      "text1": "Sound travels faster in denser media; it moves at approximately 343 m/s in air and about 1,480 m/s in water at room temperature.",
+      "text2": "The speed of sound depends on the medium: roughly 343 m/s through air and around 1,480 m/s through water under standard conditions.",
+      "label": 1
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "label": 0
+    },
+    {
+      "text1": "Vaccines stimulate the immune system by exposing it to a weakened or inactivated form of the pathogen.",
+      "text2": "Vaccines work by introducing live, fully active pathogens into the body, which then directly infect cells to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
+      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
+      "label": 0
+    },
+    {
+      "text1": "Regular exercise reduces the risk of cardiovascular disease, improves insulin sensitivity, and supports mental health.",
+      "text2": "Consistent physical activity lowers heart disease risk, helps regulate blood sugar, and has well-established benefits for mood and mental well-being.",
+      "label": 1
+    },
+    {
+      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution, not the defendant, in criminal trials.",
+      "text2": "In criminal law, defendants are presumed innocent; it is the prosecution's responsibility to prove guilt beyond reasonable doubt.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
+      "label": 0
+    },
+    {
+      "text1": "Water is a polar molecule with the chemical formula H₂O, consisting of two hydrogen atoms covalently bonded to one oxygen atom.",
+      "text2": "H₂O — water — is a polar covalent molecule formed by two hydrogen atoms bonded to a single oxygen atom.",
+      "label": 1
+    },
+    {
+      "text1": "A hash table stores key-value pairs and provides average O(1) time complexity for insertions, deletions, and lookups using a hash function.",
+      "text2": "Hash maps use a hash function to map keys to bucket indices, enabling constant-time average-case insertions, deletions, and lookups.",
+      "label": 1
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023.",
+      "text2": "Global average temperatures have risen approximately 2.5 °C above pre-industrial levels as of 2023, already exceeding the Paris Agreement target.",
+      "label": 0
+    },
+    {
+      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
+      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
+      "label": 1
+    },
+    {
+      "text1": "Thermodynamics' second law states that the total entropy of an isolated system can never decrease over time.",
+      "text2": "According to the second law of thermodynamics, entropy in a closed system always tends to increase or remain constant — it cannot spontaneously decrease.",
+      "label": 1
+    },
+    {
+      "text1": "Machine learning is a branch of artificial intelligence in which systems learn from data to improve their performance on tasks without being explicitly programmed.",
+      "text2": "ML is a subset of AI where algorithms learn patterns from data and improve over time without requiring hand-coded rules for every scenario.",
+      "label": 1
+    },
+    {
+      "text1": "Python is an interpreted, dynamically typed language.",
+      "text2": "Python is a compiled, statically typed language that compiles to bytecode before execution, similar to Java.",
+      "label": 0
+    },
+    {
+      "text1": "Cognitive dissonance is the mental discomfort experienced when a person holds two or more contradictory beliefs, values, or ideas simultaneously.",
+      "text2": "When someone holds conflicting beliefs at the same time, the resulting psychological tension is called cognitive dissonance.",
+      "label": 1
+    },
+    {
+      "text1": "Public key cryptography: public key encrypts, private key decrypts.",
+      "text2": "Public key cryptography: private key encrypts, public key decrypts — this is how digital signatures work in practice.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect traps heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Abstract classes cannot be instantiated and serve as templates for subclasses.",
+      "label": 0
+    },
+    {
+      "text1": "Inflation is the rate at which the general price level rises over time, eroding purchasing power.",
+      "text2": "Deflation is the rate at which the general price level falls over time, increasing purchasing power but often signalling economic contraction.",
+      "label": 0
+    },
+    {
+      "text1": "Market entry into Germany requires establishing a local legal entity, achieving BSI certification within 18 months, hiring a country manager with P&L accountability, and pricing at parity with the incumbent leader to avoid a price war.",
+      "text2": "Market entry into Germany requires establishing a local legal entity and achieving BSI certification.",
+      "label": 0
+    },
+    {
+      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
+      "text2": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "label": 1
+    },
+    {
+      "text1": "Cognitive dissonance is the discomfort of holding two contradictory beliefs simultaneously.",
+      "text2": "Cognitive dissonance is the pleasure experienced when two beliefs reinforce each other, creating a consistent and harmonious worldview.",
+      "label": 0
+    },
+    {
+      "text1": "Market penetration strategy aims to increase market share for existing products in existing markets through competitive pricing, increased promotion, or improved distribution.",
+      "text2": "Penetrating an existing market with current product offerings — via price adjustments, advertising spend, or expanded distribution — is a market penetration approach designed to grow share without entering new segments.",
+      "label": 1
+    },
+    {
+      "text1": "The confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms one's pre-existing beliefs.",
+      "text2": "Confirmation bias leads people to favour information that supports what they already believe and to discount evidence that contradicts it.",
+      "label": 1
+    },
+    {
+      "text1": "Binary search achieves O(log n) time complexity on sorted arrays.",
+      "text2": "Shakespeare's Hamlet explores themes of revenge, mortality, and indecision.",
+      "label": 0
+    },
+    {
+      "text1": "Type 1 diabetes is an autoimmune condition where the immune system destroys insulin-producing beta cells.",
+      "text2": "Type 1 diabetes develops when the pancreas produces insufficient insulin due to chronic inflammation from a high-sugar diet.",
+      "label": 0
+    },
+    {
+      "text1": "Cross-entropy loss measures divergence between predicted and true probability distributions.",
+      "text2": "The French Revolution began in 1789 and transformed France from monarchy to republic.",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content.",
+      "text2": "Dark matter makes up approximately 5% of the universe's total energy content; dark energy accounts for the remaining 68%.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
+      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
+      "label": 1
+    },
+    {
+      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
+      "label": 1
+    }
+  ]
+}
