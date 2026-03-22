@@ -2,7 +2,7 @@ import torch
 import argparse
 import json
 from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
-from backend.train import TextSimilarityDataset, feature_map_to_tensor, _apply_density_normalisation
+from backend.train import TextSimilarityDataset, feature_map_to_tensor
 from backend.feature_registry import validate_manifest
 from pathlib import Path
 import numpy as np
@@ -26,8 +26,9 @@ def _load_model_from_checkpoint(checkpoint, device):
             )
         validate_manifest(checkpoint.get('manifest'))
         num_features = checkpoint['num_features']
-        model = TextSimilarityCNN(num_features=num_features)
-        arch = f'Conv2D (num_features={num_features})'
+        spatial_size = checkpoint.get('spatial_size', 64)  # 64 = legacy default
+        model = TextSimilarityCNN(num_features=num_features, spatial_size=spatial_size)
+        arch = f'Conv2D (num_features={num_features}, spatial_size={spatial_size})'
 
     model.load_state_dict(state)
     model.to(device)
@@ -112,9 +113,7 @@ class SimilarityPredictor:
         feature_map.update(LCSWeights().getFeatureMap(sent1, sent2))
 
         # --- model score ---
-        stacked = feature_map_to_tensor(feature_map)           # [F, 64, 64] raw
-        stacked = _apply_density_normalisation(stacked, n, m)  # density-normalised
-        stacked = stacked.unsqueeze(0)                         # [1, F, 64, 64]
+        stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, S, S]
         if isinstance(self.model, TextSimilarityCNNLegacy):
             trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
             stacked = stacked[:, :trained_num_maps, :, :]
@@ -124,10 +123,13 @@ class SimilarityPredictor:
             prob = self.model(stacked.to(self.device)).item()
 
         # --- alignment matrix: mxbai cosine sim cropped to actual sentence count ---
+        # Feature maps are resized to SPATIAL_SIZE×SPATIAL_SIZE, so clamp n/m to that.
+        from backend.Postprocess.__addpad import TARGET_SIZE as _SPATIAL
+        n_crop, m_crop = min(n, _SPATIAL), min(m, _SPATIAL)
         sem_key = "mixedbread-ai/mxbai-embed-large-v1"
         alignment: list[list[float]] = []
-        if n > 0 and m > 0 and sem_key in feature_map:
-            alignment = feature_map[sem_key].numpy()[:n, :m].tolist()
+        if n_crop > 0 and m_crop > 0 and sem_key in feature_map:
+            alignment = feature_map[sem_key].numpy()[:n_crop, :m_crop].tolist()
 
         # --- divergence (sentences with no good counterpart) ---
         THRESH = 0.5
@@ -135,16 +137,16 @@ class SimilarityPredictor:
         divergent_in_2: list[int] = []
         if alignment:
             max_row = [max(row) for row in alignment]
-            max_col = [max(alignment[i][j] for i in range(n)) for j in range(m)]
+            max_col = [max(alignment[i][j] for i in range(n_crop)) for j in range(m_crop)]
             divergent_in_1 = [i for i, s in enumerate(max_row) if s < THRESH]
             divergent_in_2 = [j for j, s in enumerate(max_col) if s < THRESH]
 
         # --- per-feature group scores: mean best-match score across sentences in text1 ---
         def _mean_max_row(key: str) -> float:
-            if key not in feature_map or n == 0 or m == 0:
+            if key not in feature_map or n_crop == 0 or m_crop == 0:
                 return 0.0
-            mat = feature_map[key].numpy()[:n, :m]
-            return float(np.mean([mat[i].max() for i in range(n)]))
+            mat = feature_map[key].numpy()[:n_crop, :m_crop]
+            return float(np.mean([mat[i].max() for i in range(n_crop)]))
 
         feature_scores = {
             "Semantic (mxbai)": _mean_max_row("mixedbread-ai/mxbai-embed-large-v1"),

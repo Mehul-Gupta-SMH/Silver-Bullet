@@ -1,10 +1,6 @@
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix, TARGET_SIZE
 
 
 def apply(feature_map, **kwargs):
-    """ Apply padding to the feature map matrix. """
-    feature_map = pad_matrix(feature_map,
-                             target_size=kwargs.get('target_size', 64),
-                             pad_value=kwargs.get('pad_value', 0)
-                             )
-    return feature_map
+    """Resize the feature map matrix to a fixed square via bilinear interpolation."""
+    return resize_matrix(feature_map, target_size=kwargs.get('target_size', TARGET_SIZE))

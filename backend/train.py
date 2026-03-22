@@ -14,7 +14,7 @@ from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
-from backend.feature_registry import FEATURE_KEYS, build_manifest
+from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest
 from backend.training_report import TrainingReport
 
 
@@ -155,18 +155,18 @@ def load_json_data(file_path):
 
 
 def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
-    """Stack all feature maps into a single [F, 64, 64] tensor.
+    """Stack all feature maps into a single [F, S, S] tensor.
 
     Maps are stacked in the canonical order defined by FEATURE_KEYS so that
     the channel index is always stable regardless of dict insertion order.
-    Returns a *raw*, un-normalised tensor — call _apply_density_normalisation()
-    afterwards if sentence counts are available.
+    Each map is already resized to SPATIAL_SIZE×SPATIAL_SIZE by the feature
+    extractors via resize_matrix() — no zero-padding, every cell carries signal.
 
     Raises:
         KeyError: If feature_map contains unknown keys or is missing expected keys.
 
     Returns:
-        torch.Tensor: shape [num_features, 64, 64]
+        torch.Tensor: shape [num_features, SPATIAL_SIZE, SPATIAL_SIZE]
     """
     unknown = set(feature_map) - set(FEATURE_KEYS)
     if unknown:
@@ -185,31 +185,6 @@ def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
     return torch.stack(maps, dim=0)  # [F, 64, 64]
 
 
-def _apply_density_normalisation(tensor: torch.Tensor, n: int, m: int) -> torch.Tensor:
-    """Normalise a [F, 64, 64] tensor by the fraction of cells that carry signal.
-
-    A text pair with n sentences × m sentences populates only the top-left n×m
-    corner of the 64×64 feature maps.  Without this correction the CNN sees the
-    same mostly-zero spatial layout for "short but highly similar" pairs as for
-    "short and completely unrelated" pairs, deflating scores for short inputs.
-
-    Multiplying by (64*64)/(n*m) rescales so that the total signal energy is
-    independent of text length — longer texts are *not* penalised for having
-    more populated cells.
-
-    Args:
-        tensor: raw [F, 64, 64] feature tensor from feature_map_to_tensor()
-        n: number of sentences in text1 (clamped to [1, 64])
-        m: number of sentences in text2 (clamped to [1, 64])
-
-    Returns:
-        torch.Tensor: same shape, values scaled up for sparse inputs
-    """
-    n = max(1, min(n, 64))
-    m = max(1, min(m, 64))
-    scale = (64 * 64) / (n * m)
-    return tensor * scale
-
 
 class TextSimilarityDataset(Dataset):
     """Extract features for every text pair and store as [F, 64, 64] tensors."""
@@ -226,21 +201,17 @@ class TextSimilarityDataset(Dataset):
 
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):
-            # Always split first — needed for density normalisation (cheap: no coref)
-            sent_group1 = split_txt(pair[0])
-            sent_group2 = split_txt(pair[1])
-            n, m = len(sent_group1), len(sent_group2)
-
             # ---- cache lookup ----
             if use_cache:
                 cached = self.cache.get_features(pair[0], pair[1])
                 if cached is not None:
-                    # Cache stores raw un-normalised tensors; normalise here
-                    raw = torch.tensor(cached, dtype=torch.float32)
-                    tensors.append(_apply_density_normalisation(raw, n, m))
+                    tensors.append(torch.tensor(cached, dtype=torch.float32))
                     continue
 
             # ---- compute ----
+            sent_group1 = split_txt(pair[0])
+            sent_group2 = split_txt(pair[1])
+
             feature_map = {}
             feature_map.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
@@ -248,13 +219,13 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
 
-            stacked = feature_map_to_tensor(feature_map)  # [F, 64, 64] — raw
+            stacked = feature_map_to_tensor(feature_map)  # [F, S, S]
 
-            # ---- cache save (store raw so normalisation is always applied fresh) ----
+            # ---- cache save ----
             if use_cache:
                 self.cache.save_features(pair[0], pair[1], stacked.tolist())
 
-            tensors.append(_apply_density_normalisation(stacked, n, m))
+            tensors.append(stacked)
 
         # [N, F, 64, 64]
         self.features = torch.stack(tensors, dim=0)
@@ -364,6 +335,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'loss':                 avg_val_loss,
                 'accuracy':             accuracy,
                 'num_features':         num_features,
+                'spatial_size':         SPATIAL_SIZE,
                 'manifest':             build_manifest(),
             }, best_ckpt)
         else:
@@ -390,6 +362,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'best_loss':            best_val_loss,
         'final_accuracy':       accuracy,
         'num_features':         num_features,
+        'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, final_model_path)
 
@@ -399,6 +372,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'optimizer_state_dict': best_optimizer_state,
         'loss':                 best_val_loss,
         'num_features':         num_features,
+        'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, best_model_path)
 
@@ -461,7 +435,7 @@ if __name__ == '__main__':
     train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True)
     val_loader    = DataLoader(val_dataset,   batch_size=16)
 
-    model = TextSimilarityCNN(num_features=train_dataset.num_features)
+    model = TextSimilarityCNN(num_features=train_dataset.num_features, spatial_size=SPATIAL_SIZE)
     trained_model, metrics = train_model(
         model, train_loader, val_loader, best_ckpt=best_ckpt,
         mode=args.mode or "general",

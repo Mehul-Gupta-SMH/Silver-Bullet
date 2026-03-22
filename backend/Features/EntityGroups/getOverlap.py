@@ -1,4 +1,4 @@
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix
 from gliner import GLiNER
 from collections import Counter
 from tqdm import tqdm
@@ -55,7 +55,7 @@ class EntityMatch:
             ]
             self.comparison_weights['EntityMismatch'].append(row)
 
-        self.comparison_weights['EntityMismatch'] = pad_matrix(
+        self.comparison_weights['EntityMismatch'] = resize_matrix(
             self.comparison_weights['EntityMismatch']
         )
 

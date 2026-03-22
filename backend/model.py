@@ -43,41 +43,46 @@ class TextSimilarityCNNLegacy(nn.Module):
 class TextSimilarityCNN(nn.Module):
     """CNN that operates on stacked 2D feature maps from the sentence-pair pipeline.
 
-    Input shape: [batch, num_features, 64, 64]
-        num_features — one channel per feature map (semantic, lexical, NLI, entity …)
-        64 × 64      — padded sentence-pair similarity matrix
+    Input shape: [batch, num_features, spatial_size, spatial_size]
+        num_features  — one channel per feature map (semantic, lexical, NLI, entity …)
+        spatial_size  — side length of each resized sentence-pair similarity matrix
+                        (default 32 — set by TARGET_SIZE in Postprocess/__addpad.py)
 
-    The spatial structure of the n×m cross-sentence matrices is preserved through
-    the convolutional layers, allowing the model to learn alignment patterns.
+    Feature maps are produced by resize_matrix() which uses bilinear interpolation to
+    map the raw n×m cross-sentence matrix to a fixed spatial_size×spatial_size grid.
+    Every cell carries signal from actual sentence pairs — no zero-padding artefacts.
     """
 
-    def __init__(self, num_features: int, hidden_dim: int = 128):
+    def __init__(self, num_features: int, hidden_dim: int = 128, spatial_size: int = 32):
         """
         Args:
-            num_features (int): Number of input feature-map channels
-                                (determined by the feature extractor stack).
-            hidden_dim (int): Base width for convolutional feature maps.
+            num_features (int):  Number of input feature-map channels.
+            hidden_dim (int):    Base width for convolutional feature maps.
+            spatial_size (int):  Spatial side length of the input maps (default 32).
+                                 Must be divisible by 8 (three MaxPool(2) layers).
         """
         super(TextSimilarityCNN, self).__init__()
 
         self.num_features = num_features
+        self.spatial_size = spatial_size
 
-        # --- Spatial feature extraction over the [F, 64, 64] input ---
-        # Block 1: num_features → hidden_dim, spatial 64→32
+        # --- Spatial feature extraction ---
+        # Block 1: num_features → hidden_dim,   spatial_size → spatial_size/2
         self.conv1 = nn.Conv2d(num_features, hidden_dim, kernel_size=3, padding=1)
         self.bn1   = nn.BatchNorm2d(hidden_dim)
 
-        # Block 2: hidden_dim → hidden_dim//2, spatial 32→16
+        # Block 2: hidden_dim → hidden_dim//2,  spatial_size/2 → spatial_size/4
         self.conv2 = nn.Conv2d(hidden_dim, hidden_dim // 2, kernel_size=3, padding=1)
         self.bn2   = nn.BatchNorm2d(hidden_dim // 2)
 
-        # Block 3: hidden_dim//2 → hidden_dim//4, spatial 16→8
+        # Block 3: hidden_dim//2 → hidden_dim//4, spatial_size/4 → spatial_size/8
         self.conv3 = nn.Conv2d(hidden_dim // 2, hidden_dim // 4, kernel_size=3, padding=1)
         self.bn3   = nn.BatchNorm2d(hidden_dim // 4)
 
         # --- Classification head ---
-        # After 3× MaxPool(2,2): spatial 64 → 8, so flat = (hidden_dim//4) * 8 * 8
-        flat_dim = (hidden_dim // 4) * 8 * 8
+        # After 3× MaxPool(2,2): side = spatial_size/8
+        reduced = spatial_size // 8
+        flat_dim = (hidden_dim // 4) * reduced * reduced
 
         self.fc1      = nn.Linear(flat_dim, hidden_dim)
         self.bn_fc1   = nn.BatchNorm1d(hidden_dim)
@@ -87,18 +92,18 @@ class TextSimilarityCNN(nn.Module):
         self.pool     = nn.MaxPool2d(kernel_size=2, stride=2)
 
     def forward(self, x):
-        # x: [batch, num_features, 64, 64]
+        # x: [batch, num_features, spatial_size, spatial_size]
 
-        x = self.pool(F.relu(self.bn1(self.conv1(x))))   # → [B, H,   32, 32]
+        x = self.pool(F.relu(self.bn1(self.conv1(x))))   # → [B, H,   S/2, S/2]
         x = self.dropout(x)
 
-        x = self.pool(F.relu(self.bn2(self.conv2(x))))   # → [B, H/2, 16, 16]
+        x = self.pool(F.relu(self.bn2(self.conv2(x))))   # → [B, H/2, S/4, S/4]
         x = self.dropout(x)
 
-        x = self.pool(F.relu(self.bn3(self.conv3(x))))   # → [B, H/4,  8,  8]
+        x = self.pool(F.relu(self.bn3(self.conv3(x))))   # → [B, H/4, S/8, S/8]
         x = self.dropout(x)
 
-        x = x.view(x.size(0), -1)                        # → [B, (H/4)*64]
+        x = x.view(x.size(0), -1)                        # → [B, flat_dim]
 
         x = F.relu(self.bn_fc1(self.fc1(x)))
         x = self.dropout(x)

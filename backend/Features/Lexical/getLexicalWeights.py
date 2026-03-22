@@ -10,7 +10,7 @@ from math import sqrt
 from typing import List, Tuple, Dict
 from transformers import AutoTokenizer
 from tqdm import tqdm
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix
 
 
 class LexicalWeights:
@@ -124,7 +124,7 @@ class LexicalWeights:
 
     def __post_process_weights__(self):
         for key in self.weight_matrix:
-            self.weight_matrix[key] = pad_matrix(self.weight_matrix[key])
+            self.weight_matrix[key] = resize_matrix(self.weight_matrix[key])
 
     def getFeatureMap(self, phrase_list1, phrase_list2):
         """Computes and returns the weight matrix for the phrase pairs."""

@@ -16,7 +16,7 @@ Score formula: len(LCS) / max(len(seq1), len(seq2))
 
 from typing import List
 from tqdm import tqdm
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix
 
 
 def _lcs_length(seq1: list, seq2: list) -> int:
@@ -79,7 +79,7 @@ class LCSWeights:
 
     def __post_process_weights__(self):
         for key in self.comparison_weights:
-            self.comparison_weights[key] = pad_matrix(self.comparison_weights[key])
+            self.comparison_weights[key] = resize_matrix(self.comparison_weights[key])
 
     def getFeatureMap(self, phrase_list1: List[str], phrase_list2: List[str]) -> dict:
         """Compute LCS feature maps for two sentence groups.

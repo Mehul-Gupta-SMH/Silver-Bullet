@@ -49,16 +49,18 @@ FEATURE_KEYS: list[str] = [
     "lcs_char",
 ]
 
-VERSION = "1.0"
+VERSION      = "2.0"
+SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 
 def build_manifest() -> dict:
     """Return a manifest dict suitable for embedding in a checkpoint."""
     return {
-        "version": VERSION,
-        "features": list(FEATURE_KEYS),
+        "version":      VERSION,
+        "features":     list(FEATURE_KEYS),
         "num_features": len(FEATURE_KEYS),
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "spatial_size": SPATIAL_SIZE,
+        "created_at":   datetime.now(timezone.utc).isoformat(),
     }
 
 
