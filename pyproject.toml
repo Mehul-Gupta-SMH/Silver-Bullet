@@ -43,6 +43,8 @@ testpaths = ["tests"]
 addopts = "-v --tb=short"
 
 [tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*"]
 exclude = [
     ".sbvenv*",
     "cache*",
@@ -50,3 +52,7 @@ exclude = [
     "test_reports*",
     "research_paper*",
 ]
+
+[project.scripts]
+sb-serve = "backend.api.main:app"
+sb-train = "backend.train:main"

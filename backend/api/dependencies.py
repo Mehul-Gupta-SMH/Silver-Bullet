@@ -3,17 +3,10 @@
 from __future__ import annotations
 
 import os
-import sys
 from functools import lru_cache
 from pathlib import Path
 
-# Ensure the project root is importable so predict.py can be found
-# whether the server is started from inside or outside the repo.
-PROJECT_ROOT = Path(__file__).parent.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-
-from predict import SimilarityPredictor  # noqa: E402
+from backend.predict import SimilarityPredictor
 
 # Env-var name for each mode's model checkpoint.
 # Falls back to MODEL_PATH (legacy) then best_model.pth if unset or file absent.

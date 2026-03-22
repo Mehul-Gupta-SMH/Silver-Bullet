@@ -16,7 +16,7 @@ Score formula: len(LCS) / max(len(seq1), len(seq2))
 
 from typing import List
 from tqdm import tqdm
-from Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import pad_matrix
 
 
 def _lcs_length(seq1: list, seq2: list) -> int:

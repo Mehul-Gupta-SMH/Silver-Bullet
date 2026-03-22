@@ -1,9 +1,9 @@
 import torch
 import argparse
 import json
-from model import TextSimilarityCNN, TextSimilarityCNNLegacy
-from train import TextSimilarityDataset, feature_map_to_tensor
-from feature_registry import validate_manifest
+from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
+from backend.train import TextSimilarityDataset, feature_map_to_tensor
+from backend.feature_registry import validate_manifest
 from pathlib import Path
 import numpy as np
 

@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from tqdm import tqdm
-from Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import pad_matrix
 
 
 class NLIWeights:
