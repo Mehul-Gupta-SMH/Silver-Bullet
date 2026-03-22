@@ -13,6 +13,7 @@ dependencies = [
     "transformers==4.51.0",
     "sentence-transformers==5.1.0",
     "huggingface-hub==0.34.4",
+    "datasets>=2.0",
     "scikit-learn==1.7.1",
     "numpy==2.3.2",
     "tqdm==4.67.1",
