@@ -3,7 +3,7 @@ from typing import List
 import json
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from huggingface_hub import login
-from resources.getConfig import getVal
+from backend.resources.getConfig import getVal
 from openai import OpenAI
 
 _hf_logged_in = False

@@ -5,16 +5,16 @@ from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import json
 import os
-from model import TextSimilarityCNN
-from Splitter.sentence_splitter import split_txt
-from Features.Semantic.getSemanticWeights import SemanticWeights
-from Features.Lexical.getLexicalWeights import LexicalWeights
-from Features.NLI.getNLIweights import NLIWeights
-from Features.EntityGroups.getOverlap import EntityMatch
-from Features.LCS.getLCSweights import LCSWeights
-from feature_cache import FeatureCache
-from feature_registry import FEATURE_KEYS, build_manifest
-from training_report import TrainingReport
+from backend.model import TextSimilarityCNN
+from backend.Splitter.sentence_splitter import split_txt
+from backend.Features.Semantic.getSemanticWeights import SemanticWeights
+from backend.Features.Lexical.getLexicalWeights import LexicalWeights
+from backend.Features.NLI.getNLIweights import NLIWeights
+from backend.Features.EntityGroups.getOverlap import EntityMatch
+from backend.Features.LCS.getLCSweights import LCSWeights
+from backend.feature_cache import FeatureCache
+from backend.feature_registry import FEATURE_KEYS, build_manifest
+from backend.training_report import TrainingReport
 
 
 def load_json_data(file_path):

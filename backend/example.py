@@ -1,10 +1,10 @@
-from Splitter.sentence_splitter import split_txt
+from backend.Splitter.sentence_splitter import split_txt
 
-from Features.Semantic.getSemanticWeights import SemanticWeights
-from Features.Lexical.getLexicalWeights import LexicalWeights
-from Features.NLI.getNLIweights import NLIWeights
-from Features.EntityGroups.getOverlap import EntityMatch
-from Features.LCS.getLCSweights import LCSWeights
+from backend.Features.Semantic.getSemanticWeights import SemanticWeights
+from backend.Features.Lexical.getLexicalWeights import LexicalWeights
+from backend.Features.NLI.getNLIweights import NLIWeights
+from backend.Features.EntityGroups.getOverlap import EntityMatch
+from backend.Features.LCS.getLCSweights import LCSWeights
 
 from tqdm import tqdm
 

@@ -10,7 +10,7 @@ from math import sqrt
 from typing import List, Tuple, Dict
 from transformers import AutoTokenizer
 from tqdm import tqdm
-from Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import pad_matrix
 
 
 class LexicalWeights:

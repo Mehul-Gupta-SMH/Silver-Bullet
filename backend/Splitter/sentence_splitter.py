@@ -2,7 +2,7 @@
 # Simple Splitter : Split on sentences
 #################################
 import re
-from Preprocess.coref.resolveEntity import EntityResolver
+from backend.Preprocess.coref.resolveEntity import EntityResolver
 
 
 def split_txt(base_text: str, resolver: EntityResolver = None, **kwargs) -> list:

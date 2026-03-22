@@ -1,7 +1,7 @@
 import torch
-from model import TextSimilarityCNN, TextSimilarityCNNLegacy
-from predict import _load_model_from_checkpoint
-from train import TextSimilarityDataset, load_json_data
+from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
+from backend.predict import _load_model_from_checkpoint
+from backend.train import TextSimilarityDataset, load_json_data
 from torch.utils.data import DataLoader
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, precision_recall_curve
 import numpy as np

@@ -8,7 +8,7 @@ import huggingface_hub
 # Prevent network login during test collection; resolveEntity imports `login` at module import time.
 huggingface_hub.login = lambda *args, **kwargs: None
 
-from api.main import app  # noqa: E402
+from backend.api.main import app  # noqa: E402
 
 
 @pytest.fixture
@@ -50,7 +50,7 @@ def mock_predictor():
     ]
 
     # get_predictor(mode) is called directly in endpoint handlers — patch it in api.main.
-    with patch("api.main.get_predictor", return_value=mock_instance):
+    with patch("backend.api.main.get_predictor", return_value=mock_instance):
         yield mock_instance
 
 

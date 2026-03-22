@@ -14,16 +14,16 @@ build/
 .sbvenv/
 
 # Secrets
-resources/config.yaml
+backend/resources/config.yaml
 
 # Model weights & checkpoints
 *.pth
 *.pth.bak
 model_weights_*.pth
-Features/Semantic/weights_cache/
-Features/NLI/model/
-Features/EntityGroups/model/
-Features/Lexical/tokeniser_cache/
+backend/Features/Semantic/weights_cache/
+backend/Features/NLI/model/
+backend/Features/EntityGroups/model/
+backend/Features/Lexical/tokeniser_cache/
 
 # Runtime caches & reports
 cache/

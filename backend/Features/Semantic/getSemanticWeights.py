@@ -1,5 +1,5 @@
-from Features.Semantic.__generate_semantic_features import SemanticFeatures
-from Postprocess.__addpad import pad_matrix
+from backend.Features.Semantic.__generate_semantic_features import SemanticFeatures
+from backend.Postprocess.__addpad import pad_matrix
 from sentence_transformers.util import cos_sim
 from torch import softmax, tensor, float
 from tqdm import tqdm

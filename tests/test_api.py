@@ -9,7 +9,7 @@ import pytest
 from unittest.mock import patch
 from fastapi.testclient import TestClient
 
-from api.main import app
+from backend.api.main import app
 
 
 # ---------------------------------------------------------------------------
@@ -47,7 +47,7 @@ def test_health_reports_model_not_loaded_on_predictor_failure(monkeypatch):
     def _boom(*_args, **_kwargs):
         raise RuntimeError("model missing")
 
-    monkeypatch.setattr("api.main.get_predictor", _boom)
+    monkeypatch.setattr("backend.api.main.get_predictor", _boom)
 
     with TestClient(app) as temp_client:
         response = temp_client.get("/api/v1/health")
@@ -152,7 +152,7 @@ def test_predict_pair_error_returns_500_and_request_id(mock_predictor):
     """If predictor throws, the global handler should return 500 and echo X-Request-ID."""
     mock_predictor.predict_pair.side_effect = ValueError("explode")
 
-    with patch("api.main.get_predictor", return_value=mock_predictor), \
+    with patch("backend.api.main.get_predictor", return_value=mock_predictor), \
          TestClient(app, raise_server_exceptions=False) as error_client:
         response = error_client.post(
             "/api/v1/predict/pair",
@@ -199,7 +199,7 @@ def test_predict_pair_breakdown_error_returns_500_and_request_id(mock_predictor)
     """If predictor throws, /predict/pair/breakdown should surface 500 and include request ID."""
     mock_predictor.predict_pair_breakdown.side_effect = ValueError("explode breakdown")
 
-    with patch("api.main.get_predictor", return_value=mock_predictor), \
+    with patch("backend.api.main.get_predictor", return_value=mock_predictor), \
          TestClient(app, raise_server_exceptions=False) as error_client:
         response = error_client.post(
             "/api/v1/predict/pair/breakdown",
@@ -298,7 +298,7 @@ def test_rate_limit_handler_returns_429():
     from unittest.mock import MagicMock
     from starlette.requests import Request
 
-    from api.main import _rate_limit_handler
+    from backend.api.main import _rate_limit_handler
 
     scope = {
         "type": "http",

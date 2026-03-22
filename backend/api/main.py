@@ -13,9 +13,9 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 
-from api.dependencies import _MODE_ENV, get_predictor
-from api.middleware import LoggingMiddleware, RequestIDMiddleware
-from api.schemas import (
+from backend.api.dependencies import _MODE_ENV, get_predictor
+from backend.api.middleware import LoggingMiddleware, RequestIDMiddleware
+from backend.api.schemas import (
     BatchBreakdownRequest,
     BatchBreakdownResponse,
     BatchRequest,
