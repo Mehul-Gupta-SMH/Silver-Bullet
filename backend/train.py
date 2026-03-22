@@ -58,7 +58,6 @@ class TextSimilarityDataset(Dataset):
     """Extract features for every text pair and store as [F, 64, 64] tensors."""
 
     def __init__(self, paragraph_pairs, labels, use_cache=True):
-        global FEATURE_ORDER
         self.labels = labels
         self.cache  = FeatureCache() if use_cache else None
 
