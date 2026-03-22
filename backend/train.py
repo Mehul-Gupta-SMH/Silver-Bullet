@@ -38,6 +38,7 @@ class _Tracker:
         self._run_name = f"{self._mode}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
         self._params = params
         self._history: list[dict] = []   # buffers every epoch regardless of MLflow state
+        self._run_id: str | None = None
 
         # --- MLflow ---
         try:
@@ -46,9 +47,10 @@ class _Tracker:
             mlflow.set_tracking_uri(uri)
             mlflow.set_experiment(self._mode)
             mlflow.start_run(run_name=self._run_name)
+            self._run_id = mlflow.active_run().info.run_id
             mlflow.log_params(params)
             self._mlflow = mlflow
-            print(f"[MLflow] tracking at {uri}  run={self._run_name}")
+            print(f"[MLflow] tracking at {uri}  run={self._run_name}  id={self._run_id}")
         except Exception as exc:
             print(f"[MLflow] not available ({exc}) — will retry import at finish.")
 
@@ -99,7 +101,7 @@ class _Tracker:
             except Exception:
                 pass
 
-    def finish(self, best_val_loss: float, best_epoch: int):
+    def finish(self, best_val_loss: float, best_epoch: int, model=None):
         # If MLflow wasn't reachable at startup, try once more now that training is done.
         if self._mlflow is None:
             try:
@@ -108,6 +110,7 @@ class _Tracker:
                 mlflow.set_tracking_uri(uri)
                 mlflow.set_experiment(self._mode)
                 mlflow.start_run(run_name=self._run_name)
+                self._run_id = mlflow.active_run().info.run_id
                 mlflow.log_params(self._params)
                 # Replay all buffered epoch metrics
                 for row in self._history:
@@ -127,6 +130,17 @@ class _Tracker:
                 self._mlflow.log_metrics(
                     {"best_val_loss": best_val_loss, "best_epoch": best_epoch}
                 )
+                # --- Model Registry ---
+                if model is not None and self._run_id:
+                    try:
+                        self._mlflow.pytorch.log_model(model, "model")
+                        model_name = f"silverbullet-{self._mode}"
+                        self._mlflow.register_model(
+                            f"runs:/{self._run_id}/model", model_name
+                        )
+                        print(f"[MLflow] model registered as '{model_name}'")
+                    except Exception as reg_exc:
+                        print(f"[MLflow] model registration failed ({reg_exc}) — skipped.")
                 self._mlflow.end_run()
             except Exception:
                 pass
@@ -357,7 +371,12 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
 
     tracker.log_artifact(final_model_path)
     tracker.log_artifact(best_model_path)
-    tracker.finish(best_val_loss=best_val_loss, best_epoch=best_epoch + 1)
+
+    # Restore best weights so the registered model reflects the best checkpoint
+    if best_model_state is not None:
+        model.load_state_dict(best_model_state)
+
+    tracker.finish(best_val_loss=best_val_loss, best_epoch=best_epoch + 1, model=model)
 
     print(f"Final model  -> {final_model_path}")
     print(f"Best model   -> {best_model_path}")
