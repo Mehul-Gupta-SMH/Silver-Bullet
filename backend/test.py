@@ -3,7 +3,15 @@ from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
 from backend.predict import _load_model_from_checkpoint
 from backend.train import TextSimilarityDataset, load_json_data
 from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, precision_recall_curve
+from sklearn.metrics import (
+    classification_report, confusion_matrix,
+    roc_auc_score, roc_curve,
+    precision_recall_curve, average_precision_score,
+    brier_score_loss, log_loss,
+    matthews_corrcoef, cohen_kappa_score,
+    f1_score, precision_score, recall_score,
+)
+from scipy.stats import ks_2samp
 import numpy as np
 import json
 import os
@@ -94,17 +102,48 @@ Generated on: {self.report_data['timestamp']}
             md_content += f"- GPU: {self.report_data['hardware_info']['cuda_device']}\n"
 
         md_content += "\n## Test Metrics\n"
-        metrics = self.report_data['metrics']
-        md_content += f"- Accuracy: {metrics['accuracy']:.4f}\n"
-        md_content += f"- ROC AUC: {metrics['roc_auc']:.4f}\n"
-        md_content += f"- Average Precision: {metrics['average_precision']:.4f}\n"
+        m = self.report_data['metrics']
+
+        md_content += "\n### Core\n"
+        md_content += f"| Metric | Value |\n|--------|-------|\n"
+        md_content += f"| Accuracy | {m['accuracy']:.4f} |\n"
+        md_content += f"| MCC | {m['mcc']:.4f} |\n"
+        md_content += f"| Cohen's Kappa | {m['cohen_kappa']:.4f} |\n"
+
+        md_content += "\n### Ranking\n"
+        md_content += f"| Metric | Value |\n|--------|-------|\n"
+        md_content += f"| ROC-AUC | {m['roc_auc']:.4f} |\n"
+        md_content += f"| AUPRC | {m['auprc']:.4f} |\n"
+        md_content += f"| KS Statistic | {m['score_distribution']['ks_statistic']:.4f} |\n"
+        md_content += f"| KS p-value | {m['score_distribution']['ks_p_value']:.4f} |\n"
+
+        md_content += "\n### Calibration\n"
+        md_content += f"| Metric | Value |\n|--------|-------|\n"
+        md_content += f"| Brier Score | {m['brier_score']:.4f} |\n"
+        md_content += f"| Log Loss | {m['log_loss']:.4f} |\n"
+
+        ot = m['optimal_threshold']
+        md_content += "\n### Optimal Threshold (Youden's J)\n"
+        md_content += f"| Metric | Value |\n|--------|-------|\n"
+        md_content += f"| Threshold | {ot['value']:.4f} |\n"
+        md_content += f"| F1 | {ot['f1']:.4f} |\n"
+        md_content += f"| Precision | {ot['precision']:.4f} |\n"
+        md_content += f"| Recall | {ot['recall']:.4f} |\n"
+
+        sd = m['score_distribution']
+        md_content += "\n### Score Distribution\n"
+        md_content += f"| | Positive class | Negative class |\n|--|--|--|\n"
+        md_content += f"| Mean | {sd['positive_class']['mean']:.4f} | {sd['negative_class']['mean']:.4f} |\n"
+        md_content += f"| Std  | {sd['positive_class']['std']:.4f}  | {sd['negative_class']['std']:.4f}  |\n"
+        md_content += f"| Min  | {sd['positive_class']['min']:.4f}  | {sd['negative_class']['min']:.4f}  |\n"
+        md_content += f"| Max  | {sd['positive_class']['max']:.4f}  | {sd['negative_class']['max']:.4f}  |\n"
 
         md_content += "\n### Classification Report\n```\n"
-        md_content += metrics['classification_report_str']
+        md_content += m['classification_report_str']
         md_content += "\n```\n"
 
         md_content += "\n### Confusion Matrix\n```\n"
-        md_content += str(np.array(metrics['confusion_matrix']))
+        md_content += str(np.array(m['confusion_matrix']))
         md_content += "\n```\n"
 
         md_path = Path(json_report_path).with_suffix('.md')
@@ -122,9 +161,20 @@ def _log_test_to_mlflow(metrics: dict, mode: str | None, report_path: str) -> No
         run_name = f"{exp_name}-test-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
         with mlflow.start_run(run_name=run_name):
             mlflow.log_metrics({
-                "test_accuracy":      float(metrics["accuracy"]),
-                "test_roc_auc":       float(metrics["roc_auc"]),
-                "test_avg_precision": float(metrics["average_precision"]),
+                "test_accuracy":           float(metrics["accuracy"]),
+                "test_roc_auc":            float(metrics["roc_auc"]),
+                "test_auprc":              float(metrics["auprc"]),
+                "test_brier_score":        float(metrics["brier_score"]),
+                "test_log_loss":           float(metrics["log_loss"]),
+                "test_mcc":                float(metrics["mcc"]),
+                "test_cohen_kappa":        float(metrics["cohen_kappa"]),
+                "test_ks_statistic":       float(metrics["score_distribution"]["ks_statistic"]),
+                "test_optimal_threshold":  float(metrics["optimal_threshold"]["value"]),
+                "test_f1_at_optimal":      float(metrics["optimal_threshold"]["f1"]),
+                "test_precision_at_optimal": float(metrics["optimal_threshold"]["precision"]),
+                "test_recall_at_optimal":  float(metrics["optimal_threshold"]["recall"]),
+                # Legacy key
+                "test_avg_precision":      float(metrics["auprc"]),
             })
             if report_path and os.path.exists(report_path):
                 mlflow.log_artifact(report_path)
@@ -181,32 +231,102 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
                     probability=probs[j][0]
                 )
 
-    # Convert to numpy arrays
-    predictions = np.array(predictions)
-    true_labels = np.array(true_labels)
+    # Convert to numpy arrays (flattened to 1-D; labels may be [N,1] from DataLoader)
+    predictions   = np.array(predictions)
+    true_labels   = np.array(true_labels)
     probabilities = np.array(probabilities)
 
     # Binarise true labels at 0.5 so sklearn metrics work with both binary (0/1)
     # and continuous float labels (e.g. 0.7 faithfulness scores).
-    binary_true = (true_labels >= 0.5).astype(int)
+    binary_true = (np.array(true_labels).flatten() >= 0.5).astype(int)
+    predictions = np.array(predictions).flatten().astype(int)
+    probs_flat  = np.array(probabilities).flatten()
 
-    # Calculate metrics
-    conf_matrix = confusion_matrix(binary_true, predictions)
+    # ── Core classification metrics ──────────────────────────────────────────
+    conf_matrix  = confusion_matrix(binary_true, predictions)
     class_report = classification_report(binary_true, predictions, target_names=['Not Similar', 'Similar'])
-    roc_auc = roc_auc_score(binary_true, probabilities)
-    precision, recall, _ = precision_recall_curve(binary_true, probabilities)
-    avg_precision = np.mean(precision)
+    accuracy     = float((predictions == binary_true).mean())
+
+    # ── Ranking / scoring metrics ─────────────────────────────────────────────
+    roc_auc    = float(roc_auc_score(binary_true, probs_flat))
+    auprc      = float(average_precision_score(binary_true, probs_flat))   # area under PR curve
+
+    fpr, tpr, roc_thresholds = roc_curve(binary_true, probs_flat)
+    precision_curve, recall_curve, pr_thresholds = precision_recall_curve(binary_true, probs_flat)
+
+    # ── Calibration metrics ───────────────────────────────────────────────────
+    brier = float(brier_score_loss(binary_true, probs_flat))
+    logloss = float(log_loss(binary_true, probs_flat))
+
+    # ── Optimal threshold (Youden's J: max TPR - FPR on ROC curve) ───────────
+    youden_idx       = int(np.argmax(tpr - fpr))
+    optimal_threshold = float(roc_thresholds[youden_idx])
+    preds_optimal    = (probs_flat >= optimal_threshold).astype(int)
+    f1_optimal       = float(f1_score(binary_true, preds_optimal))
+    precision_optimal = float(precision_score(binary_true, preds_optimal))
+    recall_optimal   = float(recall_score(binary_true, preds_optimal))
+
+    # ── Agreement metrics ─────────────────────────────────────────────────────
+    mcc   = float(matthews_corrcoef(binary_true, predictions.flatten().astype(int)))
+    kappa = float(cohen_kappa_score(binary_true, predictions.flatten().astype(int)))
+
+    # ── Score distribution per class ──────────────────────────────────────────
+    pos_scores = probs_flat[binary_true == 1]
+    neg_scores = probs_flat[binary_true == 0]
+    ks_stat, ks_p = ks_2samp(pos_scores, neg_scores)
+
+    score_distribution = {
+        'positive_class': {
+            'mean': float(pos_scores.mean()) if len(pos_scores) else None,
+            'std':  float(pos_scores.std())  if len(pos_scores) else None,
+            'min':  float(pos_scores.min())  if len(pos_scores) else None,
+            'max':  float(pos_scores.max())  if len(pos_scores) else None,
+        },
+        'negative_class': {
+            'mean': float(neg_scores.mean()) if len(neg_scores) else None,
+            'std':  float(neg_scores.std())  if len(neg_scores) else None,
+            'min':  float(neg_scores.min())  if len(neg_scores) else None,
+            'max':  float(neg_scores.max())  if len(neg_scores) else None,
+        },
+        'ks_statistic': float(ks_stat),
+        'ks_p_value':   float(ks_p),
+    }
 
     metrics = {
-        'accuracy': (predictions == binary_true).mean(),
-        'confusion_matrix': conf_matrix.tolist(),
+        # Core
+        'accuracy':                  accuracy,
+        'confusion_matrix':          conf_matrix.tolist(),
         'classification_report_str': class_report,
-        'roc_auc': float(roc_auc),
-        'average_precision': float(avg_precision),
+        # Ranking
+        'roc_auc':                   roc_auc,
+        'auprc':                     auprc,
+        'roc_curve': {
+            'fpr':        fpr.tolist(),
+            'tpr':        tpr.tolist(),
+            'thresholds': roc_thresholds.tolist(),
+        },
         'precision_recall_curve': {
-            'precision': precision.tolist(),
-            'recall': recall.tolist()
-        }
+            'precision':  precision_curve.tolist(),
+            'recall':     recall_curve.tolist(),
+            'thresholds': pr_thresholds.tolist(),
+        },
+        # Calibration
+        'brier_score': brier,
+        'log_loss':    logloss,
+        # Optimal threshold
+        'optimal_threshold': {
+            'value':     optimal_threshold,
+            'f1':        f1_optimal,
+            'precision': precision_optimal,
+            'recall':    recall_optimal,
+        },
+        # Agreement
+        'mcc':         mcc,
+        'cohen_kappa': kappa,
+        # Score distributions
+        'score_distribution': score_distribution,
+        # Legacy key kept for backwards compat with existing reports/MLflow imports
+        'average_precision': auprc,
     }
 
     # Update report with metrics
@@ -278,10 +398,19 @@ if __name__ == '__main__':
     metrics, report = test_model(model, test_loader, test_pairs, device=str(device))
 
     # Print summary results
+    ot = metrics['optimal_threshold']
+    sd = metrics['score_distribution']
     print("\nTest Results:")
-    print(f"Accuracy: {metrics['accuracy']:.4f}")
-    print(f"ROC AUC: {metrics['roc_auc']:.4f}")
-    print(f"Average Precision: {metrics['average_precision']:.4f}")
+    print(f"  Accuracy       : {metrics['accuracy']:.4f}")
+    print(f"  ROC-AUC        : {metrics['roc_auc']:.4f}")
+    print(f"  AUPRC          : {metrics['auprc']:.4f}")
+    print(f"  MCC            : {metrics['mcc']:.4f}")
+    print(f"  Cohen's Kappa  : {metrics['cohen_kappa']:.4f}")
+    print(f"  Brier Score    : {metrics['brier_score']:.4f}  (lower = better calibration)")
+    print(f"  Log Loss       : {metrics['log_loss']:.4f}")
+    print(f"  KS Statistic   : {sd['ks_statistic']:.4f}  (p={sd['ks_p_value']:.4f})")
+    print(f"  Optimal thresh : {ot['value']:.4f}  ->  F1={ot['f1']:.4f}  P={ot['precision']:.4f}  R={ot['recall']:.4f}")
+    print(f"  Score dist     : pos mean={sd['positive_class']['mean']:.3f}  neg mean={sd['negative_class']['mean']:.3f}")
     print("\nConfusion Matrix:")
     print(np.array(metrics['confusion_matrix']))
     print("\nClassification Report:")
