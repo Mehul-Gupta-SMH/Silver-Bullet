@@ -31,6 +31,9 @@ training_reports/
 test_reports/
 test_results.json
 
+# MLflow tracking store
+mlflow/
+
 # Claude Code session data
 .claude/
 
