@@ -1,5 +1,26 @@
 # SilverBullet — Task Log
 
+## Project Origin (2025-03-15)
+
+> Original design writeup from `ToDo.md`
+
+**Goal:** Build a methodology to compare texts in different contexts and produce a score usable downstream.
+
+| text1 | text2 | Score interpretation |
+|-------|-------|----------------------|
+| LLM-generated answer | Source context | Faithfulness / RAG groundedness |
+| LLM 1 output | LLM 2 output | How comparable the models are |
+| LLM-generated answer | Accepted RL answer | Alignment to accepted answer |
+
+**Approach:**
+- For `n`-sentence text 1 and `m`-sentence text 2, build an n×m matrix of pairwise scores using multiple signals: cosine similarity of sentence embeddings (domain-specialised models), LCS (longest common subsequence), entity mapping (same entity referred or not)
+- This produces F feature maps of shape n×m, fed into a CNN classifier → single score ∈ [0, 1]
+- Trained model can act as a teacher for a lighter student model that operates on whole-text embeddings
+
+**Closest analogue:** cross-encoder / re-ranker (cross-entropy between two texts)
+
+---
+
 ## Change Log
 
 | Date | Status | Task | Files / Notes |
