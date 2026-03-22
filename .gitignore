@@ -31,8 +31,13 @@ training_reports/
 test_reports/
 test_results.json
 
-# MLflow tracking store
+# MLflow tracking store + artifacts
 mlflow/
+mlflow.db
+mlartifacts/
+
+# Pre-refactor root-level feature directories (now live under backend/)
+Features/
 
 # Claude Code session data
 .claude/

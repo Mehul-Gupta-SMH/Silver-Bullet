@@ -83,10 +83,32 @@
 | 2026-03-22 | [x] | TESTS: Updated pytest conftest to patch `backend.api.main.get_predictor` directly (dependency_overrides no longer applies); 25 tests passing | `tests/conftest.py`, `tests/test_api.py` |
 | 2026-03-22 | [x] | DOCS: Rewrote README.md, CLAUDE.md, AGENT.md, frontend/README.md for backend/ refactor and per-mode model routing | all four doc files — PR #32 |
 
+## Session 2026-03-22 (continued) — Dataset expansion + monitoring + retrains
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [x] | FIX: CD Node.js 20 deprecation — bump docker/login-action@v3→@v4, docker/build-push-action@v5→@v6 | `.github/workflows/cd.yml` |
+| 2026-03-22 | [x] | FIX: CI hashFiles() invalid in job-level if — removed condition from frontend job | `.github/workflows/ci.yml` |
+| 2026-03-22 | [x] | FIX: CI Python 3.10 → 3.11 (numpy 2.3.x + scikit-learn 1.7.x require >=3.11) | `.github/workflows/ci.yml`, `pyproject.toml` |
+| 2026-03-22 | [x] | FIX: flake8 F824 unused `global FEATURE_ORDER` removed from TextSimilarityDataset | `backend/train.py` |
+| 2026-03-22 | [x] | FIX: smoke test imports updated for backend/ package layout | `.github/workflows/ci.yml` |
+| 2026-03-22 | [x] | FIX: HTTP 500 `No module named 'Splitter'` — lazy imports in predict_pair_breakdown updated to backend.* | `backend/predict.py` |
+| 2026-03-22 | [x] | FEATURE: Business strategy training data — 6 positives, 10 partial-overlap hard negatives, 3 soft negatives | `backend/generate_data.py` |
+| 2026-03-22 | [x] | FEATURE: External dataset fetcher — STS-B, MNLI, QQP, QNLI, HaluEval QA via HuggingFace datasets | `backend/fetch_external_data.py`, `requirements.txt` |
+| 2026-03-22 | [x] | FEATURE: MLflow + Prometheus monitoring — _Tracker class with late-connect replay, per-epoch metrics | `backend/train.py`, `docker-compose.yml`, `monitoring/` |
+| 2026-03-22 | [x] | FEATURE: Batch feature precomputation — precompute_features.py deduplicates and pre-fills cache | `backend/precompute_features.py` |
+| 2026-03-22 | [x] | FIX: split_txt resolve_coref=False by default — stops OpenAI API calls during training | `backend/Splitter/sentence_splitter.py`, `backend/predict.py` |
+| 2026-03-22 | [x] | TRAINING: context-vs-generated retrain complete — 88.79% val acc @ epoch 16, early stop at 21 | `models/context-vs-generated.pth`, `training_reports/` |
+| 2026-03-22 | [x] | TRAINING: reference-vs-generated retrain — 84.58% val acc @ epoch 7, early stop at 12 | `models/reference-vs-generated.pth`, `training_reports/` |
+| 2026-03-22 | [x] | TRAINING: model-vs-model retrain — 84.11% val acc @ epoch 6, early stop at 11 | `models/model-vs-model.pth`, `training_reports/` |
+| 2026-03-22 | [x] | FEATURE: MLflow Model Registry — best weights registered as silverbullet-{mode} after each run | `backend/train.py` |
+| 2026-03-22 | [x] | FEATURE: MLflow test metric logging — test.py logs test_accuracy/roc_auc/avg_precision + report artifact | `backend/test.py` |
+| 2026-03-22 | [ ] | TESTING: Run python -m backend.test for all 3 modes to log test metrics to MLflow | `backend/test.py` |
+
 ## Pending
 | 2026-03-15 | [x] | IMPROVEMENT: BCE → MSELoss on float labels for continuous faithfulness scoring | `train.py`, `test.py` |
 | 2026-03-20 | [x] | IMPROVEMENT: Re-enable rate limiting — SlowAPIMiddleware (60/min global) + tighter limits on breakdown endpoints (20/min pair, 10/min batch) | `api/main.py`, `tests/test_api.py` |
-| 2026-03-13 | [ ] | IMPROVEMENT: Expand training dataset to 1 000+ pairs with adversarial/domain-balanced sampling | `generate_data.py`, `data/` |
+| 2026-03-22 | [x] | IMPROVEMENT: Expand training dataset to 1 000+ pairs with adversarial/domain-balanced sampling | `generate_data.py`, `data/`, `fetch_external_data.py` |
 | 2026-03-15 | [x] | IMPROVEMENT: Add `/api/v1/predict/batch/breakdown` parallel to batch predict endpoint | `api/main.py`, `predict.py`, `api/schemas.py`, `tests/` |
 
 ## Planned Refactor Roadmap

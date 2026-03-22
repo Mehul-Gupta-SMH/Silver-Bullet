@@ -211,9 +211,15 @@ python -m backend.train --mode context-vs-generated  # → models/context-vs-gen
 Key classes/functions:
 - `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks maps in `FEATURE_KEYS` order
 - `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction
-- `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth')` — MSELoss + Adam + early stopping
+- `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth', mode='general')` — MSELoss + Adam + early stopping
+- `_Tracker(mode, params)` — optional MLflow + Prometheus tracking; buffers epochs and replays on late-connect
 
 Data loaded from `data/{mode}/` if `--mode` given, else `data/`.
+
+**MLflow behaviour:**
+- If `http://localhost:5000` is up at training start → metrics streamed live
+- If not → epochs buffered in `_Tracker._history`; at `finish()` it retries, connects, and bulk-replays
+- On successful finish: best-weights model logged via `mlflow.pytorch.log_model` and registered in Model Registry as `silverbullet-{mode}`
 
 ---
 
@@ -226,6 +232,8 @@ python -m backend.test --checkpoint path/to/model.pth  # explicit checkpoint ove
 ```
 
 Outputs: accuracy, ROC-AUC, average precision, confusion matrix, per-sample predictions → `test_reports/`.
+
+If MLflow is running, `_log_test_to_mlflow()` creates a separate run in the same experiment with `test_accuracy`, `test_roc_auc`, `test_avg_precision`, and the test report JSON as an artifact.
 
 ---
 
@@ -286,11 +294,35 @@ Entry point for uvicorn: `uvicorn backend.api.main:app --reload`
 python -m backend.generate_data
 ```
 
-Generates:
-- `data/{train,validate,test}.json` — 194 general pairs (70/15/15 split)
-- `data/{mode}/{train,validate,test}.json` — 209 pairs per mode (general + 15 mode-specific hard negatives)
+Generates ~213 hand-crafted pairs across 15 domains:
+- `data/{train,validate,test}.json` — general pairs (70/15/15 split)
+- `data/{mode}/{train,validate,test}.json` — general + mode-specific hard negatives
 
 Pair taxonomy: `positive` (label=1), `hard_neg` (label=0), `soft_neg` (label=0).
+
+**Important:** module-level code is wrapped in `main()` + `if __name__ == "__main__"`. Do not execute on import.
+
+---
+
+### `backend/fetch_external_data.py`
+
+```bash
+python -m backend.fetch_external_data        # --max-per-source 400 --force
+```
+
+Downloads STS-B, MNLI (general), QQP (model-vs-model), QNLI (reference-vs-generated), HaluEval QA (context-vs-generated) via HuggingFace `datasets`. Caches raw downloads to `data/external/`. Merges with hand-crafted pairs and re-saves all splits. Result: ~1 400 pairs per mode (1001/214/216).
+
+HaluEval schema: `{knowledge, question, answer, hallucination: "yes"/"no"}` → `label = 0 if hallucination == "yes" else 1`.
+
+---
+
+### `backend/precompute_features.py`
+
+```bash
+python -m backend.precompute_features        # --force to recompute all
+```
+
+Collects every unique `(text1, text2)` pair across all splits and modes, deduplicates, loads all 5 feature extractors once, and saves tensors to `./cache/`. Run once before training to avoid per-pair extraction overhead during `TextSimilarityDataset.__init__`. After precompute, cache hits load at ~95 pairs/sec vs ~1–4 s/pair live.
 
 ---
 
