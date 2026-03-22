@@ -6,6 +6,7 @@ from tqdm import tqdm
 import json
 import os
 from datetime import datetime
+from pathlib import Path
 from backend.model import TextSimilarityCNN
 from backend.Splitter.sentence_splitter import split_txt
 from backend.Features.Semantic.getSemanticWeights import SemanticWeights

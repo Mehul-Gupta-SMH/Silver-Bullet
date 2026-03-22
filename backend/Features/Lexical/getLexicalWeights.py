@@ -6,10 +6,10 @@ degree of lexical similarity between each pair of phrases.
 """
 
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from math import sqrt
 from typing import List, Tuple, Dict
 from transformers import AutoTokenizer
-from tqdm import tqdm
 from backend.Postprocess.__addpad import resize_matrix
 
 
@@ -67,6 +67,13 @@ class LexicalWeights:
         self.__load_model__()
         return LexicalWeights._tokenizer_cache.tokenize(text, add_special_tokens=False)
 
+    def sp_tokenize_batch(self, texts: List[str]) -> List[List[str]]:
+        """Batch tokenization — single Rust call for all texts."""
+        self.__load_model__()
+        tok = LexicalWeights._tokenizer_cache
+        enc = tok(texts, add_special_tokens=False, return_attention_mask=False)
+        return [tok.convert_ids_to_tokens(ids) for ids in enc["input_ids"]]
+
     @staticmethod
     def ngrams(tokens: List[str], n: int) -> List[Tuple[str, ...]]:
         return [tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1)]
@@ -102,25 +109,29 @@ class LexicalWeights:
         return overlap/total if total else 0.0
 
     def __compute_token_lists__(self):
-        """Tokenizes the phrases in both lists using SentencePiece."""
-        self.phrase_tokens_list1 = [self.sp_tokenize(p) for p in self.phrase_list1]
-        self.phrase_tokens_list2 = [self.sp_tokenize(p) for p in self.phrase_list2]
+        """Batch-tokenizes both phrase lists in two Rust-backed calls."""
+        all_tokens = self.sp_tokenize_batch(self.phrase_list1 + self.phrase_list2)
+        n = len(self.phrase_list1)
+        self.phrase_tokens_list1 = all_tokens[:n]
+        self.phrase_tokens_list2 = all_tokens[n:]
+
+    def _compute_row(self, tokens1: List[str]) -> Tuple:
+        row_j, row_d, row_c, row_r = [], [], [], []
+        for tokens2 in self.phrase_tokens_list2:
+            row_j.append(self.jaccard(tokens1, tokens2))
+            row_d.append(self.dice(tokens1, tokens2))
+            row_c.append(self.cosine_counts(tokens1, tokens2))
+            row_r.append(self.rouge_counts(tokens1, tokens2))
+        return row_j, row_d, row_c, row_r
 
     def __compute_weights__(self):
-        """Computes the weight matrix for all phrase pairs using various similarity metrics."""
-        for tokens1 in self.phrase_tokens_list1:
-            row_jaccard, row_dice, row_cosine, row_rouge = [], [], [], []
-
-            for tokens2 in self.phrase_tokens_list2:
-                row_jaccard.append(self.jaccard(tokens1, tokens2))
-                row_dice.append(self.dice(tokens1, tokens2))
-                row_cosine.append(self.cosine_counts(tokens1, tokens2))
-                row_rouge.append(self.rouge_counts(tokens1, tokens2))
-
-            self.weight_matrix['jaccard'].append(row_jaccard)
-            self.weight_matrix['dice'].append(row_dice)
-            self.weight_matrix['cosine'].append(row_cosine)
-            self.weight_matrix['rouge'].append(row_rouge)
+        """Computes the weight matrix in parallel across rows."""
+        with ThreadPoolExecutor() as ex:
+            for row_j, row_d, row_c, row_r in ex.map(self._compute_row, self.phrase_tokens_list1):
+                self.weight_matrix['jaccard'].append(row_j)
+                self.weight_matrix['dice'].append(row_d)
+                self.weight_matrix['cosine'].append(row_c)
+                self.weight_matrix['rouge'].append(row_r)
 
     def __post_process_weights__(self):
         for key in self.weight_matrix:

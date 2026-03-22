@@ -34,19 +34,35 @@ class EntityMatch:
             cache_dir=f"Features/EntityGroups/model/{self.MODEL}/",
         )
 
-    def __get_entities__(self, text):
+    def _batch_get_entities(self, texts):
+        """Encode all texts in a single GLiNER call and return a list of entity-count dicts."""
         if not hasattr(self, '__model_cache__'):
             self.__load_model__()
 
-        entities_val = self.__model_cache__.predict_entities(
-            text, self.entity_list, threshold=self.THRESHOLD
-        )
-        entities_dict = Counter([ent['label'] for ent in entities_val])
-        return {tag: entities_dict.get(tag, 0) for tag in self.entity_list}
+        model = self.__model_cache__
+        if hasattr(model, 'batch_predict_entities'):
+            all_results = model.batch_predict_entities(
+                texts, self.entity_list, threshold=self.THRESHOLD
+            )
+        else:
+            # Fallback for older GLiNER versions
+            all_results = [
+                model.predict_entities(t, self.entity_list, threshold=self.THRESHOLD)
+                for t in texts
+            ]
+
+        out = []
+        for entities_val in all_results:
+            counts = Counter([ent['label'] for ent in entities_val])
+            out.append({tag: counts.get(tag, 0) for tag in self.entity_list})
+        return out
 
     def __compute_phrase_entity__(self):
-        self.phrase1_entity_cnts = [self.__get_entities__(t) for t in self.phrase1_list]
-        self.phrase2_entity_cnts = [self.__get_entities__(t) for t in self.phrase2_list]
+        all_texts = self.phrase1_list + self.phrase2_list
+        all_counts = self._batch_get_entities(all_texts)
+        n1 = len(self.phrase1_list)
+        self.phrase1_entity_cnts = all_counts[:n1]
+        self.phrase2_entity_cnts = all_counts[n1:]
 
         for dict1 in tqdm(self.phrase1_entity_cnts):
             row = [

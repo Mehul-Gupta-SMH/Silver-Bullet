@@ -14,8 +14,8 @@ Score formula: len(LCS) / max(len(seq1), len(seq2))
   → 1.0  when one is a subsequence of the other (or they are identical)
 """
 
+from concurrent.futures import ThreadPoolExecutor
 from typing import List
-from tqdm import tqdm
 from backend.Postprocess.__addpad import resize_matrix
 
 
@@ -61,21 +61,22 @@ class LCSWeights:
             'lcs_char':  [],
         }
 
+    def _compute_row(self, phrase1: str):
+        tok1  = phrase1.lower().split()
+        char1 = list(phrase1.lower())
+        row_tok, row_char = [], []
+        for phrase2 in self.phrase_list2:
+            tok2  = phrase2.lower().split()
+            char2 = list(phrase2.lower())
+            row_tok.append(_normalised_lcs(tok1, tok2))
+            row_char.append(_normalised_lcs(char1, char2))
+        return row_tok, row_char
+
     def __compute_weights__(self):
-        for phrase1 in tqdm(self.phrase_list1, desc="LCS Weights"):
-            tok1  = phrase1.lower().split()
-            char1 = list(phrase1.lower())
-
-            row_tok, row_char = [], []
-            for phrase2 in self.phrase_list2:
-                tok2  = phrase2.lower().split()
-                char2 = list(phrase2.lower())
-
-                row_tok.append(_normalised_lcs(tok1, tok2))
-                row_char.append(_normalised_lcs(char1, char2))
-
-            self.comparison_weights['lcs_token'].append(row_tok)
-            self.comparison_weights['lcs_char'].append(row_char)
+        with ThreadPoolExecutor() as ex:
+            for row_tok, row_char in ex.map(self._compute_row, self.phrase_list1):
+                self.comparison_weights['lcs_token'].append(row_tok)
+                self.comparison_weights['lcs_char'].append(row_char)
 
     def __post_process_weights__(self):
         for key in self.comparison_weights:
