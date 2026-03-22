@@ -138,6 +138,23 @@ Generated on: {self.report_data['timestamp']}
         md_content += f"| Min  | {sd['positive_class']['min']:.4f}  | {sd['negative_class']['min']:.4f}  |\n"
         md_content += f"| Max  | {sd['positive_class']['max']:.4f}  | {sd['negative_class']['max']:.4f}  |\n"
 
+        if m.get('confidence_intervals'):
+            ci_level = int(next(iter(m['confidence_intervals'].values()))['ci'] * 100)
+            md_content += f"\n### Bootstrap Confidence Intervals ({ci_level}%, n=1000)\n"
+            md_content += f"| Metric | Point estimate | Lower | Upper | Width |\n"
+            md_content += f"|--------|---------------|-------|-------|-------|\n"
+            for k, v in m['confidence_intervals'].items():
+                width = v['upper'] - v['lower']
+                md_content += f"| {k} | {v['point']:.4f} | {v['lower']:.4f} | {v['upper']:.4f} | {width:.4f} |\n"
+
+        if m.get('mc_dropout'):
+            mc = m['mc_dropout']
+            md_content += f"\n### MC Dropout Prediction Intervals ({int(mc['ci']*100)}%, {mc['n_passes']} passes)\n"
+            md_content += f"| Metric | Value |\n|--------|-------|\n"
+            md_content += f"| Mean probability std (epistemic uncertainty) | {mc['mean_std']:.4f} |\n"
+            md_content += f"| Mean interval width | {mc['mean_interval_width']:.4f} |\n"
+            md_content += f"| Fraction with std > 0.1 (high uncertainty) | {mc['high_uncertainty_frac']:.4f} |\n"
+
         md_content += "\n### Classification Report\n```\n"
         md_content += m['classification_report_str']
         md_content += "\n```\n"
@@ -149,6 +166,128 @@ Generated on: {self.report_data['timestamp']}
         md_path = Path(json_report_path).with_suffix('.md')
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(md_content)
+
+def _bootstrap_metric_cis(
+    binary_true: np.ndarray,
+    probs_flat: np.ndarray,
+    predictions: np.ndarray,
+    n_iter: int = 1000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> dict:
+    """
+    Percentile bootstrap confidence intervals for all scalar test metrics.
+
+    Returns a dict keyed by metric name, each value:
+        {'point': float, 'lower': float, 'upper': float, 'ci': float}
+    """
+    rng = np.random.default_rng(seed)
+    n = len(binary_true)
+    alpha = 1.0 - ci
+    lo, hi = alpha / 2 * 100, (1 - alpha / 2) * 100
+
+    boot: dict[str, list] = {k: [] for k in [
+        'accuracy', 'roc_auc', 'auprc', 'brier_score',
+        'log_loss', 'mcc', 'cohen_kappa', 'f1',
+    ]}
+
+    for _ in range(n_iter):
+        idx = rng.integers(0, n, size=n)
+        bt, pb, pd = binary_true[idx], probs_flat[idx], predictions[idx]
+
+        # Skip samples with only one class present (breaks AUC metrics)
+        if len(np.unique(bt)) < 2:
+            continue
+
+        boot['accuracy'].append(float((pd == bt).mean()))
+        boot['brier_score'].append(float(brier_score_loss(bt, pb)))
+        boot['log_loss'].append(float(log_loss(bt, pb)))
+        boot['mcc'].append(float(matthews_corrcoef(bt, pd)))
+        boot['cohen_kappa'].append(float(cohen_kappa_score(bt, pd)))
+        boot['f1'].append(float(f1_score(bt, pd)))
+        try:
+            boot['roc_auc'].append(float(roc_auc_score(bt, pb)))
+        except Exception:
+            pass
+        try:
+            boot['auprc'].append(float(average_precision_score(bt, pb)))
+        except Exception:
+            pass
+
+    result = {}
+    for key, values in boot.items():
+        if not values:
+            continue
+        arr = np.array(values)
+        result[key] = {
+            'point': float(arr.mean()),
+            'lower': float(np.percentile(arr, lo)),
+            'upper': float(np.percentile(arr, hi)),
+            'ci':    ci,
+        }
+    return result
+
+
+def _mc_dropout_prediction_intervals(
+    model: torch.nn.Module,
+    test_loader: DataLoader,
+    device,
+    n_passes: int = 50,
+    ci: float = 0.95,
+) -> dict:
+    """
+    MC Dropout prediction intervals: run n_passes stochastic forward passes
+    with dropout active, collect per-sample probability distribution.
+
+    Returns dict with per-sample arrays (length N):
+        mean, std, ci_lower, ci_upper, epistemic_uncertainty
+    """
+    alpha = 1.0 - ci
+
+    # Keep BN in eval (uses running stats), enable Dropout stochasticity
+    model.eval()
+    for m in model.modules():
+        if isinstance(m, torch.nn.Dropout):
+            m.train()
+
+    is_legacy = isinstance(model, TextSimilarityCNNLegacy)
+    all_pass_probs = []  # [n_passes, N]
+
+    with torch.no_grad():
+        for _ in range(n_passes):
+            pass_probs = []
+            for features, _ in test_loader:
+                features = features.to(device)
+                if is_legacy:
+                    n_maps = model.fc_reduce1.in_features // (64 * 64)
+                    features = features[:, :n_maps, :, :].view(features.size(0), -1)
+                out = model(features).cpu().numpy().flatten()
+                pass_probs.append(out)
+            all_pass_probs.append(np.concatenate(pass_probs))
+
+    # Shape: [n_passes, N] → [N, n_passes]
+    samples = np.stack(all_pass_probs, axis=1)   # [N, n_passes]
+
+    mean  = samples.mean(axis=1)
+    std   = samples.std(axis=1)
+    ci_lo = np.percentile(samples, alpha / 2 * 100, axis=1)
+    ci_hi = np.percentile(samples, (1 - alpha / 2) * 100, axis=1)
+
+    # Restore model to pure eval
+    model.eval()
+
+    return {
+        'n_passes':             n_passes,
+        'ci':                   ci,
+        'mean_probability':     mean.tolist(),
+        'std_probability':      std.tolist(),
+        'ci_lower':             ci_lo.tolist(),
+        'ci_upper':             ci_hi.tolist(),
+        'mean_interval_width':  float((ci_hi - ci_lo).mean()),
+        'mean_std':             float(std.mean()),
+        'high_uncertainty_frac': float((std > 0.1).mean()),  # fraction with std > 0.1
+    }
+
 
 def _log_test_to_mlflow(metrics: dict, mode: str | None, report_path: str) -> None:
     """Log test metrics to MLflow under the same experiment as training. Fails silently."""
@@ -175,6 +314,15 @@ def _log_test_to_mlflow(metrics: dict, mode: str | None, report_path: str) -> No
                 "test_recall_at_optimal":  float(metrics["optimal_threshold"]["recall"]),
                 # Legacy key
                 "test_avg_precision":      float(metrics["auprc"]),
+                # Bootstrap CI widths (upper - lower)
+                **{
+                    f"test_{k}_ci_width": float(v["upper"] - v["lower"])
+                    for k, v in metrics.get("confidence_intervals", {}).items()
+                },
+                # MC Dropout uncertainty summary
+                "test_mc_mean_std":              float(metrics["mc_dropout"]["mean_std"]),
+                "test_mc_mean_interval_width":   float(metrics["mc_dropout"]["mean_interval_width"]),
+                "test_mc_high_uncertainty_frac": float(metrics["mc_dropout"]["high_uncertainty_frac"]),
             })
             if report_path and os.path.exists(report_path):
                 mlflow.log_artifact(report_path)
@@ -329,6 +477,16 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
         'average_precision': auprc,
     }
 
+    # ── Bootstrap confidence intervals (1000 resamples, 95% CI) ─────────────
+    print("Computing bootstrap confidence intervals (1000 resamples)...")
+    ci_results = _bootstrap_metric_cis(binary_true, probs_flat, predictions)
+    metrics['confidence_intervals'] = ci_results
+
+    # ── MC Dropout prediction intervals (50 stochastic passes) ───────────────
+    print("Computing MC Dropout prediction intervals (50 passes)...")
+    mc_results = _mc_dropout_prediction_intervals(model, test_loader, device)
+    metrics['mc_dropout'] = mc_results
+
     # Update report with metrics
     report.update_metrics(metrics)
 
@@ -411,6 +569,17 @@ if __name__ == '__main__':
     print(f"  KS Statistic   : {sd['ks_statistic']:.4f}  (p={sd['ks_p_value']:.4f})")
     print(f"  Optimal thresh : {ot['value']:.4f}  ->  F1={ot['f1']:.4f}  P={ot['precision']:.4f}  R={ot['recall']:.4f}")
     print(f"  Score dist     : pos mean={sd['positive_class']['mean']:.3f}  neg mean={sd['negative_class']['mean']:.3f}")
+    ci = metrics.get('confidence_intervals', {})
+    if ci:
+        print("\n95% Bootstrap Confidence Intervals (n=1000):")
+        for k, v in ci.items():
+            print(f"  {k:<18}: {v['point']:.4f}  [{v['lower']:.4f}, {v['upper']:.4f}]")
+    mc = metrics.get('mc_dropout', {})
+    if mc:
+        print(f"\nMC Dropout ({mc['n_passes']} passes, 95% PI):")
+        print(f"  Mean prob std (epistemic uncertainty) : {mc['mean_std']:.4f}")
+        print(f"  Mean interval width                   : {mc['mean_interval_width']:.4f}")
+        print(f"  High-uncertainty samples (std > 0.1)  : {mc['high_uncertainty_frac']:.1%}")
     print("\nConfusion Matrix:")
     print(np.array(metrics['confusion_matrix']))
     print("\nClassification Report:")
