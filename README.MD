@@ -26,21 +26,26 @@ Text pair  (text1, text2)
 split_txt()  ──  sentence split + coreference resolution (GPT-4o-mini / local LLM)
      │
      ▼
-Feature extractors  →  n×m matrices  →  pad to 64×64
-  ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  6 maps
-  ├─ Lexical    Jaccard · Dice · Cosine · ROUGE                 →  4 maps
-  ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps
-  ├─ Entity     GLiNER NER — entity count mismatch              →  1 map
-  └─ LCS        token-level + char-level LCS similarity         →  2 maps
+Feature extractors  →  n×m matrices  →  bilinear resize to 32×32
+  ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  6 maps  [batched, embedding cache]
+  ├─ Lexical    Jaccard · Dice · Cosine · ROUGE                 →  4 maps  [batch tokenise + parallel rows]
+  ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps  [batched, chunk size 64]
+  ├─ Entity     GLiNER NER — entity count mismatch              →  1 map   [single batch_predict_entities call]
+  └─ LCS        token-level + char-level LCS similarity         →  2 maps  [parallel rows]
                                                        TOTAL: 16 channels
      │
      ▼
-TextSimilarityCNN  [B, 16, 64, 64]
-  Conv2d × 3 + MaxPool × 3  →  flatten  →  FC  →  sigmoid
+TextSimilarityCNN  [B, 16, 32, 32]
+  Conv2d(16→128) + BN + ReLU + MaxPool  →  [B, 128, 16, 16]
+  Conv2d(128→64) + BN + ReLU + MaxPool  →  [B,  64,  8,  8]
+  Conv2d(64→32)  + BN + ReLU + MaxPool  →  [B,  32,  4,  4]
+  Flatten → FC(512→128) + BN + Dropout → FC(128→1) + sigmoid
      │
      ▼
 Score ∈ [0, 1]
 ```
+
+> **Bilinear resize vs zero-padding:** Each n×m matrix is resized to 32×32 using bilinear interpolation so every cell carries a real signal regardless of input length. Zero-padding (the previous approach) produced ~99% sparse maps for short texts, causing the CNN to deflate scores for short-but-similar inputs.
 
 ---
 
@@ -65,7 +70,7 @@ Silver-Bullet/
 │   ├── Preprocess/coref/
 │   │   └── resolveEntity.py        # EntityResolver — GPT-4o-mini or local Gemma
 │   ├── Postprocess/
-│   │   └── __addpad.py             # pad_matrix() — n×m → 64×64 (truncates at 64)
+│   │   └── __addpad.py             # resize_matrix() — bilinear resize n×m → 32×32
 │   ├── resources/
 │   │   ├── config.yaml             # API keys (gitignored — use env vars instead)
 │   │   ├── config.yaml.example     # Template — commit this, not config.yaml
@@ -172,7 +177,7 @@ python -m backend.train --mode context-vs-generated
 
 Checkpoints are saved to:
 - General: `best_model.pth`
-- Per-mode: `models/{mode}.pth`
+- Per-mode: `models/{mode}/best.pth` (active) + `models/{mode}/{ts}_best.pth` / `{ts}_final.pth` (archived per run)
 
 Feature cache is written to `./cache/` — delete it before retraining with a changed feature set.
 
@@ -323,21 +328,60 @@ docker pull ghcr.io/mehul-gupta-smh/silver-bullet:latest
 
 ## Model Architecture
 
-`TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 64, 64]` input:
+`TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 32, 32]` input:
 
 ```
-[B, 16, 64, 64]
-  Conv2d(16→128) + BN + ReLU + MaxPool   →  [B, 128, 32, 32]
-  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64, 16, 16]
-  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  8,  8]
-  Flatten                                 →  [B, 2048]
-  FC(2048→128)   + BN + ReLU + Dropout
+[B, 16, 32, 32]
+  Conv2d(16→128) + BN + ReLU + MaxPool   →  [B, 128, 16, 16]
+  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64,  8,  8]
+  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  4,  4]
+  Flatten                                 →  [B, 512]
+  FC(512→128)    + BN + ReLU + Dropout
   FC(128→1)      + sigmoid               →  score ∈ [0, 1]
 ```
 
 The 2D spatial structure of the sentence-pair similarity matrices is preserved through the convolutional layers, allowing the model to learn alignment patterns directly from the feature maps.
 
 Training uses **MSELoss** (supports continuous float faithfulness labels as well as binary 0/1).
+
+---
+
+## Model Performance
+
+Results on the held-out test split (~216 pairs per mode) after training on ~1 001 pairs with external dataset augmentation (STS-B, MNLI, QQP, QNLI, HaluEval):
+
+| Mode | Val Accuracy | Best Val Loss | Best Epoch | Early Stop |
+|------|-------------|--------------|-----------|-----------|
+| `context-vs-generated` | **89.25%** | 0.0874 | 7 | @ 11 |
+| `reference-vs-generated` | **86.45%** | 0.1051 | 12 | @ 17 |
+| `model-vs-model` | **85.98%** | 0.1032 | 5 | @ 9 |
+
+All three mode-specific checkpoints are tracked in MLflow and registered in the Model Registry as `silverbullet-{mode}`.
+
+---
+
+## Benchmark & Roadmap
+
+### Planned: Re-ranker baseline comparison
+
+The next evaluation milestone is benchmarking SilverBullet against a cross-encoder re-ranker (e.g. `cross-encoder/ms-marco-MiniLM-L-6-v2` or `cross-encoder/nli-deberta-v3-base`) on the task of sentence-pair alignment scoring.
+
+**Why a re-ranker?** Cross-encoders are the closest off-the-shelf analogue — they jointly encode both texts and produce a relevance/entailment score. SilverBullet differs in that it operates at sentence-pair level with explicit multi-signal feature engineering before the learned head, making it interpretable and mode-aware.
+
+**Benchmark plan:**
+1. Run both models on the same held-out test sets for all three modes
+2. Compare ROC-AUC, average precision, accuracy @ 0.5 threshold
+3. Measure inference latency (ms/pair) to assess real-time viability
+4. Identify failure cases where SilverBullet outperforms and underperforms the re-ranker
+
+### Planned: Training data improvements
+
+Current training data is a mix of hand-crafted pairs (~213) and external corpora (STS-B, MNLI, QQP, QNLI, HaluEval, ~1 200 pairs). Identified gaps:
+- **Context-vs-generated**: more RAG hallucination examples (partial grounding, number errors, entity substitution)
+- **Reference-vs-generated**: faithful paraphrases with style variation; abstractive summaries
+- **Model-vs-model**: semantic-equivalent responses with surface variation from real LLM outputs
+
+Candidates: TruthfulQA, RAGAS datasets, SummEval, OpenAI TruthfulQA, or synthetic generation via GPT-4o with adversarial prompts.
 
 ### Checkpoints
 
@@ -346,9 +390,9 @@ Every checkpoint embeds `num_features` and a feature manifest so the model can b
 | File | Created by | Used by |
 |------|-----------|---------|
 | `best_model.pth` | `python -m backend.train` | fallback for all modes |
-| `models/model-vs-model.pth` | `train --mode model-vs-model` | `mode=model-vs-model` requests |
-| `models/reference-vs-generated.pth` | `train --mode reference-vs-generated` | `mode=reference-vs-generated` requests |
-| `models/context-vs-generated.pth` | `train --mode context-vs-generated` | `mode=context-vs-generated` requests |
+| `models/model-vs-model/best.pth` | `train --mode model-vs-model` | `mode=model-vs-model` requests |
+| `models/reference-vs-generated/best.pth` | `train --mode reference-vs-generated` | `mode=reference-vs-generated` requests |
+| `models/context-vs-generated/best.pth` | `train --mode context-vs-generated` | `mode=context-vs-generated` requests |
 
 ---
 

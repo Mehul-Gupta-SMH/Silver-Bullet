@@ -6,6 +6,7 @@ from tqdm import tqdm
 import json
 import os
 from datetime import datetime
+from pathlib import Path
 from backend.model import TextSimilarityCNN
 from backend.Splitter.sentence_splitter import split_txt
 from backend.Features.Semantic.getSemanticWeights import SemanticWeights
@@ -14,7 +15,7 @@ from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
-from backend.feature_registry import FEATURE_KEYS, build_manifest
+from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest
 from backend.training_report import TrainingReport
 
 
@@ -155,16 +156,18 @@ def load_json_data(file_path):
 
 
 def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
-    """Stack all feature maps into a single [F, 64, 64] tensor.
+    """Stack all feature maps into a single [F, S, S] tensor.
 
     Maps are stacked in the canonical order defined by FEATURE_KEYS so that
     the channel index is always stable regardless of dict insertion order.
+    Each map is already resized to SPATIAL_SIZE×SPATIAL_SIZE by the feature
+    extractors via resize_matrix() — no zero-padding, every cell carries signal.
 
     Raises:
         KeyError: If feature_map contains unknown keys or is missing expected keys.
 
     Returns:
-        torch.Tensor: shape [num_features, 64, 64]
+        torch.Tensor: shape [num_features, SPATIAL_SIZE, SPATIAL_SIZE]
     """
     unknown = set(feature_map) - set(FEATURE_KEYS)
     if unknown:
@@ -181,6 +184,7 @@ def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
         else:
             maps.append(torch.tensor(val, dtype=torch.float32))
     return torch.stack(maps, dim=0)  # [F, 64, 64]
+
 
 
 class TextSimilarityDataset(Dataset):
@@ -216,7 +220,7 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
 
-            stacked = feature_map_to_tensor(feature_map)  # [F, 64, 64]
+            stacked = feature_map_to_tensor(feature_map)  # [F, S, S]
 
             # ---- cache save ----
             if use_cache:
@@ -332,6 +336,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'loss':                 avg_val_loss,
                 'accuracy':             accuracy,
                 'num_features':         num_features,
+                'spatial_size':         SPATIAL_SIZE,
                 'manifest':             build_manifest(),
             }, best_ckpt)
         else:
@@ -343,9 +348,10 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
             break
 
     # --- Save final artefacts ---
-    ts                = report.timestamp
-    final_model_path  = f'model_weights_{ts}_final.pth'
-    best_model_path   = f'model_weights_{ts}_best.pth'
+    ts        = report.timestamp
+    ckpt_dir  = Path(best_ckpt).parent   # models/{mode}/ or '.' for general
+    final_model_path = str(ckpt_dir / f'{ts}_final.pth')
+    best_model_path  = str(ckpt_dir / f'{ts}_best.pth')
 
     manifest = build_manifest()
 
@@ -357,6 +363,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'best_loss':            best_val_loss,
         'final_accuracy':       accuracy,
         'num_features':         num_features,
+        'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, final_model_path)
 
@@ -366,6 +373,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'optimizer_state_dict': best_optimizer_state,
         'loss':                 best_val_loss,
         'num_features':         num_features,
+        'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, best_model_path)
 
@@ -407,10 +415,11 @@ if __name__ == '__main__':
     os.makedirs('training_reports', exist_ok=True)
 
     if args.mode:
-        data_dir       = f'data/{args.mode}'
-        checkpoint_dir = 'models'
-        os.makedirs(checkpoint_dir, exist_ok=True)
-        best_ckpt = f'{checkpoint_dir}/{args.mode}.pth'
+        from pathlib import Path as _Path
+        data_dir  = f'data/{args.mode}'
+        mode_dir  = _Path('models') / args.mode
+        mode_dir.mkdir(parents=True, exist_ok=True)
+        best_ckpt = str(mode_dir / 'best.pth')
         print(f"Mode: {args.mode}  |  Data: {data_dir}/  |  Checkpoint: {best_ckpt}")
     else:
         data_dir  = 'data'
@@ -427,7 +436,7 @@ if __name__ == '__main__':
     train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True)
     val_loader    = DataLoader(val_dataset,   batch_size=16)
 
-    model = TextSimilarityCNN(num_features=train_dataset.num_features)
+    model = TextSimilarityCNN(num_features=train_dataset.num_features, spatial_size=SPATIAL_SIZE)
     trained_model, metrics = train_model(
         model, train_loader, val_loader, best_ckpt=best_ckpt,
         mode=args.mode or "general",

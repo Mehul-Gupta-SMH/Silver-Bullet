@@ -1,5 +1,26 @@
 # SilverBullet — Task Log
 
+## Project Origin (2025-03-15)
+
+> Original design writeup from `ToDo.md`
+
+**Goal:** Build a methodology to compare texts in different contexts and produce a score usable downstream.
+
+| text1 | text2 | Score interpretation |
+|-------|-------|----------------------|
+| LLM-generated answer | Source context | Faithfulness / RAG groundedness |
+| LLM 1 output | LLM 2 output | How comparable the models are |
+| LLM-generated answer | Accepted RL answer | Alignment to accepted answer |
+
+**Approach:**
+- For `n`-sentence text 1 and `m`-sentence text 2, build an n×m matrix of pairwise scores using multiple signals: cosine similarity of sentence embeddings (domain-specialised models), LCS (longest common subsequence), entity mapping (same entity referred or not)
+- This produces F feature maps of shape n×m, fed into a CNN classifier → single score ∈ [0, 1]
+- Trained model can act as a teacher for a lighter student model that operates on whole-text embeddings
+
+**Closest analogue:** cross-encoder / re-ranker (cross-entropy between two texts)
+
+---
+
 ## Change Log
 
 | Date | Status | Task | Files / Notes |
@@ -104,12 +125,41 @@
 | 2026-03-22 | [x] | FEATURE: MLflow Model Registry — best weights registered as silverbullet-{mode} after each run | `backend/train.py` |
 | 2026-03-22 | [x] | FEATURE: MLflow test metric logging — test.py logs test_accuracy/roc_auc/avg_precision + report artifact | `backend/test.py` |
 | 2026-03-22 | [ ] | TESTING: Run python -m backend.test for all 3 modes to log test metrics to MLflow | `backend/test.py` |
+| 2026-03-22 | [x] | REFACTOR: Model file layout — models/{mode}/best.pth (active) + {ts}_best/{ts}_final archives in mode dir; dependencies.py falls back to legacy flat layout | `backend/train.py`, `backend/test.py`, `backend/api/dependencies.py`, `README.md`, `AGENT.md` |
 
 ## Pending
 | 2026-03-15 | [x] | IMPROVEMENT: BCE → MSELoss on float labels for continuous faithfulness scoring | `train.py`, `test.py` |
 | 2026-03-20 | [x] | IMPROVEMENT: Re-enable rate limiting — SlowAPIMiddleware (60/min global) + tighter limits on breakdown endpoints (20/min pair, 10/min batch) | `api/main.py`, `tests/test_api.py` |
 | 2026-03-22 | [x] | IMPROVEMENT: Expand training dataset to 1 000+ pairs with adversarial/domain-balanced sampling | `generate_data.py`, `data/`, `fetch_external_data.py` |
 | 2026-03-15 | [x] | IMPROVEMENT: Add `/api/v1/predict/batch/breakdown` parallel to batch predict endpoint | `api/main.py`, `predict.py`, `api/schemas.py`, `tests/` |
+
+## Session 2026-03-22 — Sparse map scoring fix
+
+**Root cause:** Short texts (3–4 sentences) produce a tiny populated region (e.g. 3×4) in the 64×64
+feature maps. The CNN sees ~99.7% zeros — identical to two completely unrelated short texts. The
+model can't distinguish "short but similar" from "short but unrelated", so it deflates scores for
+short inputs.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [x] | FIX P1 (Normalised pooling): `_apply_density_normalisation(tensor,n,m)` scales by `(64*64)/(n*m)`; TextSimilarityDataset always splits for n/m + normalises; cache stores raw; predict_pair_breakdown normalises manually | `backend/train.py`, `backend/predict.py`, `AGENT.md` — **delete ./cache/ and retrain all 3 modes** |
+| 2026-03-22 | [x] | FIX P2 (Adaptive resize): resize_matrix() uses bilinear interpolation n×m→32×32; every cell carries signal; spatial_size=32 in CNN + manifest; n/m crop clamped in breakdown; P1 normalisation removed | `backend/Postprocess/__addpad.py`, all 5 extractors, `backend/model.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py` — **delete cache, retrain** |
+| 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
+
+## Session 2026-03-22 — Lexical/LCS parallelisation + full retrain
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [x] | PERF: Lexical batch tokenisation — `sp_tokenize_batch()` encodes all sentences in one Rust call; `ThreadPoolExecutor` parallelises row computation | `backend/Features/Lexical/getLexicalWeights.py` |
+| 2026-03-22 | [x] | PERF: LCS parallelisation — `ThreadPoolExecutor` parallelises row computation across phrase_list1 | `backend/Features/LCS/getLCSweights.py` |
+| 2026-03-22 | [x] | TRAINING: Precompute features + retrain all 3 modes — cvg 87.38% @ ep4, rvg 86.45% @ ep12, mvm 85.98% @ ep5 | `backend/precompute_features.py`, `backend/train.py`, `models/*/` |
+
+## Session 2026-03-22 — Batching optimisations
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [x] | PERF: Semantic batching — class-level `_embedding_cache` keyed by sentence; `__local__` encodes only unseen sentences in one `model.encode()` call per model, serves cached embeddings for repeat sentences; eliminates redundant encodes during precompute | `backend/Features/Semantic/__generate_semantic_features.py` |
+| 2026-03-22 | [x] | PERF: GLiNER batching — `_batch_get_entities()` sends all sentences (both sides) in a single `batch_predict_entities()` call; fallback to per-sentence loop for older GLiNER versions | `backend/Features/EntityGroups/getOverlap.py` |
 
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |

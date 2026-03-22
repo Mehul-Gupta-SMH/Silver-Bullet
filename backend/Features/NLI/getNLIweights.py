@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from tqdm import tqdm
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix
 
 
 class NLIWeights:
@@ -82,7 +82,7 @@ class NLIWeights:
 
     def __post_process_weights__(self):
         for key in self.comparison_weights:
-            self.comparison_weights[key] = pad_matrix(self.comparison_weights[key])
+            self.comparison_weights[key] = resize_matrix(self.comparison_weights[key])
 
     def getFeatureMap(self, phrase_list1: list, phrase_list2: list):
         self._reset_state()

@@ -249,7 +249,10 @@ if __name__ == '__main__':
         ckpt_path = args.checkpoint
         data_dir  = f'data/{args.mode}' if args.mode else 'data'
     elif args.mode:
-        ckpt_path = f'models/{args.mode}.pth'
+        from pathlib import Path as _Path
+        new_ckpt  = str(_Path('models') / args.mode / 'best.pth')
+        legacy    = f'models/{args.mode}.pth'
+        ckpt_path = new_ckpt if os.path.exists(new_ckpt) else legacy
         data_dir  = f'data/{args.mode}'
         print(f"Mode: {args.mode}  |  Data: {data_dir}/  |  Checkpoint: {ckpt_path}")
     else:

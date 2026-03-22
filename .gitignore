@@ -16,10 +16,14 @@ build/
 # Secrets
 backend/resources/config.yaml
 
-# Model weights & checkpoints
+# Model weights & checkpoints — all .pth files excluded by default
 *.pth
 *.pth.bak
 model_weights_*.pth
+# Track only the active best checkpoint for each evaluation mode
+!models/context-vs-generated/best.pth
+!models/reference-vs-generated/best.pth
+!models/model-vs-model/best.pth
 backend/Features/Semantic/weights_cache/
 backend/Features/NLI/model/
 backend/Features/EntityGroups/model/

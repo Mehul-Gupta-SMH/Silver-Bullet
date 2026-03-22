@@ -1,5 +1,5 @@
 from backend.Features.Semantic.__generate_semantic_features import SemanticFeatures
-from backend.Postprocess.__addpad import pad_matrix
+from backend.Postprocess.__addpad import resize_matrix
 from sentence_transformers.util import cos_sim
 from torch import softmax, tensor, float
 from tqdm import tqdm
@@ -48,7 +48,7 @@ class SemanticWeights:
 
     def __post_process_weights__(self):
         for key in self.comparison_weights:
-            self.comparison_weights[key] = pad_matrix(self.comparison_weights[key])
+            self.comparison_weights[key] = resize_matrix(self.comparison_weights[key])
 
     def getFeatureMap(self, sentence_group1, sentence_group2):
         self._reset_state()
