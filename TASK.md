@@ -133,6 +133,19 @@
 | 2026-03-22 | [x] | IMPROVEMENT: Expand training dataset to 1 000+ pairs with adversarial/domain-balanced sampling | `generate_data.py`, `data/`, `fetch_external_data.py` |
 | 2026-03-15 | [x] | IMPROVEMENT: Add `/api/v1/predict/batch/breakdown` parallel to batch predict endpoint | `api/main.py`, `predict.py`, `api/schemas.py`, `tests/` |
 
+## Session 2026-03-22 — Sparse map scoring fix
+
+**Root cause:** Short texts (3–4 sentences) produce a tiny populated region (e.g. 3×4) in the 64×64
+feature maps. The CNN sees ~99.7% zeros — identical to two completely unrelated short texts. The
+model can't distinguish "short but similar" from "short but unrelated", so it deflates scores for
+short inputs.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-22 | [~] | FIX P1 (Normalised pooling): multiply each feature map by `(64×64)/(n×m)` in `feature_map_to_tensor()` so signal density is uniform; delete cache and retrain | `backend/train.py` (`feature_map_to_tensor`), `backend/predict.py` (`_build_feature_tensor`), delete `./cache/`, retrain all 3 modes |
+| 2026-03-22 | [ ] | FIX P2 (Adaptive crop): replace zero-pad with adaptive avg-pool to fixed size in `model.py` so only the n×m signal region is used; avoids zero-inflation entirely; requires architecture change + full retrain | `backend/model.py`, `backend/Postprocess/__addpad.py`, retrain |
+| 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
+
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|

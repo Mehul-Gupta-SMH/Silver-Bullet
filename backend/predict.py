@@ -2,7 +2,7 @@ import torch
 import argparse
 import json
 from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
-from backend.train import TextSimilarityDataset, feature_map_to_tensor
+from backend.train import TextSimilarityDataset, feature_map_to_tensor, _apply_density_normalisation
 from backend.feature_registry import validate_manifest
 from pathlib import Path
 import numpy as np
@@ -112,7 +112,9 @@ class SimilarityPredictor:
         feature_map.update(LCSWeights().getFeatureMap(sent1, sent2))
 
         # --- model score ---
-        stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, 64, 64]
+        stacked = feature_map_to_tensor(feature_map)           # [F, 64, 64] raw
+        stacked = _apply_density_normalisation(stacked, n, m)  # density-normalised
+        stacked = stacked.unsqueeze(0)                         # [1, F, 64, 64]
         if isinstance(self.model, TextSimilarityCNNLegacy):
             trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
             stacked = stacked[:, :trained_num_maps, :, :]

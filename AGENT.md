@@ -209,7 +209,8 @@ python -m backend.train --mode context-vs-generated  # → models/context-vs-gen
 ```
 
 Key classes/functions:
-- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks maps in `FEATURE_KEYS` order
+- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks maps in `FEATURE_KEYS` order (raw, un-normalised)
+- `_apply_density_normalisation(tensor, n, m)` → scales tensor by `(64*64)/(n*m)` so short texts don't produce deflated scores; call after `feature_map_to_tensor` whenever n/m are known
 - `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction
 - `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth', mode='general')` — MSELoss + Adam + early stopping
 - `_Tracker(mode, params)` — optional MLflow + Prometheus tracking; buffers epochs and replays on late-connect
