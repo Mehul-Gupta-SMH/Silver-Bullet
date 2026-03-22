@@ -75,7 +75,6 @@ jobs:
   frontend:
     name: Frontend Lint & Build
     runs-on: ubuntu-latest
-    if: hashFiles('frontend/package.json') != ''
     defaults:
       run:
         working-directory: frontend
