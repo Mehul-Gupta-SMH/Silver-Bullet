@@ -172,7 +172,7 @@ python -m backend.train --mode context-vs-generated
 
 Checkpoints are saved to:
 - General: `best_model.pth`
-- Per-mode: `models/{mode}.pth`
+- Per-mode: `models/{mode}/best.pth` (active) + `models/{mode}/{ts}_best.pth` / `{ts}_final.pth` (archived per run)
 
 Feature cache is written to `./cache/` — delete it before retraining with a changed feature set.
 
@@ -346,9 +346,9 @@ Every checkpoint embeds `num_features` and a feature manifest so the model can b
 | File | Created by | Used by |
 |------|-----------|---------|
 | `best_model.pth` | `python -m backend.train` | fallback for all modes |
-| `models/model-vs-model.pth` | `train --mode model-vs-model` | `mode=model-vs-model` requests |
-| `models/reference-vs-generated.pth` | `train --mode reference-vs-generated` | `mode=reference-vs-generated` requests |
-| `models/context-vs-generated.pth` | `train --mode context-vs-generated` | `mode=context-vs-generated` requests |
+| `models/model-vs-model/best.pth` | `train --mode model-vs-model` | `mode=model-vs-model` requests |
+| `models/reference-vs-generated/best.pth` | `train --mode reference-vs-generated` | `mode=reference-vs-generated` requests |
+| `models/context-vs-generated/best.pth` | `train --mode context-vs-generated` | `mode=context-vs-generated` requests |
 
 ---
 

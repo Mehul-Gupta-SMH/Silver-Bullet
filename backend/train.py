@@ -343,9 +343,10 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
             break
 
     # --- Save final artefacts ---
-    ts                = report.timestamp
-    final_model_path  = f'model_weights_{ts}_final.pth'
-    best_model_path   = f'model_weights_{ts}_best.pth'
+    ts        = report.timestamp
+    ckpt_dir  = Path(best_ckpt).parent   # models/{mode}/ or '.' for general
+    final_model_path = str(ckpt_dir / f'{ts}_final.pth')
+    best_model_path  = str(ckpt_dir / f'{ts}_best.pth')
 
     manifest = build_manifest()
 
@@ -407,10 +408,11 @@ if __name__ == '__main__':
     os.makedirs('training_reports', exist_ok=True)
 
     if args.mode:
-        data_dir       = f'data/{args.mode}'
-        checkpoint_dir = 'models'
-        os.makedirs(checkpoint_dir, exist_ok=True)
-        best_ckpt = f'{checkpoint_dir}/{args.mode}.pth'
+        from pathlib import Path as _Path
+        data_dir  = f'data/{args.mode}'
+        mode_dir  = _Path('models') / args.mode
+        mode_dir.mkdir(parents=True, exist_ok=True)
+        best_ckpt = str(mode_dir / 'best.pth')
         print(f"Mode: {args.mode}  |  Data: {data_dir}/  |  Checkpoint: {best_ckpt}")
     else:
         data_dir  = 'data'

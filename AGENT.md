@@ -279,7 +279,7 @@ All POST endpoints accept `mode: EvaluationMode` (default `"context-vs-generated
 
 **`backend/api/dependencies.py`** — `get_predictor(mode: str)`:
 - `@lru_cache(maxsize=3)` — one `SimilarityPredictor` per mode, cached for the process lifetime
-- Checkpoint resolution order: `MODEL_PATH_<MODE>` env var → `models/{mode}.pth` → `MODEL_PATH` / `best_model.pth`
+- Checkpoint resolution order: `MODEL_PATH_<MODE>` env var → `models/{mode}/best.pth` → `models/{mode}.pth` (legacy) → `MODEL_PATH` / `best_model.pth`
 - No `sys.path` manipulation needed — `backend` is a proper package on the project root path
 
 **`backend/api/schemas.py`** — `EvaluationMode = Literal["model-vs-model", "reference-vs-generated", "context-vs-generated"]`
@@ -377,8 +377,9 @@ Changing which extractors run (or their key order) invalidates:
 | `./training_reports/` | `TrainingReport` | `training_report_{ts}_{current\|final}.{json\|md}` |
 | `./test_reports/` | `TestReport` | `test_report_{ts}.{json\|md}` |
 | `best_model.pth` | `backend/train.py` | General fallback checkpoint |
-| `models/{mode}.pth` | `backend/train.py --mode` | Per-mode checkpoint |
-| `model_weights_{ts}_{final\|best}.pth` | `backend/train.py` | Archived weights per run |
+| `models/{mode}/best.pth` | `backend/train.py --mode` | Active per-mode checkpoint (API loads this) |
+| `models/{mode}/{ts}_best.pth` | `backend/train.py --mode` | Archived best weights per run |
+| `models/{mode}/{ts}_final.pth` | `backend/train.py --mode` | Archived final weights per run |
 
 ---
 

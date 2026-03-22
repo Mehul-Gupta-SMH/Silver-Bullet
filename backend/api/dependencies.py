@@ -16,8 +16,16 @@ _MODE_ENV: dict[str, str] = {
     "context-vs-generated":   "MODEL_PATH_CONTEXT_VS_GENERATED",
 }
 
-# Default checkpoint names used when the env var is not set
+# Default checkpoint names used when the env var is not set.
+# New layout: models/{mode}/best.pth  (preferred)
+# Legacy layout: models/{mode}.pth    (fallback for old checkpoints)
 _MODE_DEFAULT: dict[str, str] = {
+    "model-vs-model":         "models/model-vs-model/best.pth",
+    "reference-vs-generated": "models/reference-vs-generated/best.pth",
+    "context-vs-generated":   "models/context-vs-generated/best.pth",
+}
+
+_MODE_LEGACY: dict[str, str] = {
     "model-vs-model":         "models/model-vs-model.pth",
     "reference-vs-generated": "models/reference-vs-generated.pth",
     "context-vs-generated":   "models/context-vs-generated.pth",
@@ -28,13 +36,23 @@ _FALLBACK = os.environ.get("MODEL_PATH", "best_model.pth")
 
 
 def _resolve_model_path(mode: str) -> str:
-    """Return the checkpoint path for *mode*, falling back to the general model."""
+    """Return the checkpoint path for *mode*, falling back to the general model.
+
+    Resolution order:
+      1. Env var  MODEL_PATH_{MODE_UPPER}
+      2. models/{mode}/best.pth  (new layout)
+      3. models/{mode}.pth       (legacy flat layout)
+      4. best_model.pth / MODEL_PATH  (general fallback)
+    """
     env_key = _MODE_ENV.get(mode)
     if env_key and os.environ.get(env_key):
         return os.environ[env_key]
-    mode_default = Path(_MODE_DEFAULT.get(mode, _FALLBACK))
-    if mode_default.exists():
-        return str(mode_default)
+    preferred = Path(_MODE_DEFAULT.get(mode, _FALLBACK))
+    if preferred.exists():
+        return str(preferred)
+    legacy = Path(_MODE_LEGACY.get(mode, _FALLBACK))
+    if legacy.exists():
+        return str(legacy)
     return _FALLBACK
 
 
@@ -44,9 +62,9 @@ def get_predictor(mode: str = "context-vs-generated") -> SimilarityPredictor:
 
     Resolution order for the checkpoint path:
       1. Env var  MODEL_PATH_{MODE_UPPER}  (e.g. MODEL_PATH_CONTEXT_VS_GENERATED)
-      2. models/{mode}.pth  (default per-mode path, created by train.py --mode)
-      3. best_model.pth / MODEL_PATH  (legacy general model — used when a mode-specific
-         checkpoint has not been trained yet)
+      2. models/{mode}/best.pth  (new layout — created by train.py --mode)
+      3. models/{mode}.pth       (legacy flat layout — backward compat)
+      4. best_model.pth / MODEL_PATH  (general fallback)
     """
     path = _resolve_model_path(mode)
     return SimilarityPredictor(model_path=path)
