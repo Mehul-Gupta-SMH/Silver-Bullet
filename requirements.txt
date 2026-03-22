@@ -27,5 +27,9 @@ limits==5.8.0
 starlette==0.52.1
 httpx==0.28.1
 
+# Experiment tracking & monitoring
+mlflow>=2.0
+prometheus-client>=0.20
+
 # Testing
 pytest==9.0.2

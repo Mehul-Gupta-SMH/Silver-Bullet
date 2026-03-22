@@ -5,6 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import json
 import os
+from datetime import datetime
 from backend.model import TextSimilarityCNN
 from backend.Splitter.sentence_splitter import split_txt
 from backend.Features.Semantic.getSemanticWeights import SemanticWeights
@@ -15,6 +16,93 @@ from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, build_manifest
 from backend.training_report import TrainingReport
+
+
+class _Tracker:
+    """Optional MLflow + Prometheus pushgateway tracker.
+
+    Both backends are opt-in and fail silently — training continues even if
+    MLflow or the pushgateway is unreachable.
+
+    Environment variables:
+        MLFLOW_TRACKING_URI          default: http://localhost:5000
+        PROMETHEUS_PUSHGATEWAY_URL   default: http://localhost:9091
+    """
+
+    def __init__(self, mode: str, params: dict):
+        self._mlflow = None
+        self._push_url = None
+        self._gauges = {}
+        self._registry = None
+        self._mode = mode or "general"
+        self._run_name = f"{self._mode}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+
+        # --- MLflow ---
+        try:
+            import mlflow
+            uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+            mlflow.set_tracking_uri(uri)
+            mlflow.set_experiment(self._mode)
+            mlflow.start_run(run_name=self._run_name)
+            mlflow.log_params(params)
+            self._mlflow = mlflow
+            print(f"[MLflow] tracking at {uri}  run={self._run_name}")
+        except Exception as exc:
+            print(f"[MLflow] not available ({exc}) — skipping.")
+
+        # --- Prometheus pushgateway ---
+        try:
+            from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
+            self._push_url = os.environ.get("PROMETHEUS_PUSHGATEWAY_URL", "http://localhost:9091")
+            self._registry = CollectorRegistry()
+            for name in ("train_loss", "val_loss", "accuracy", "epoch"):
+                self._gauges[name] = Gauge(
+                    f"silverbullet_{name}", f"SilverBullet training {name}",
+                    ["mode", "run"], registry=self._registry,
+                )
+            self._push_fn = push_to_gateway
+            print(f"[Prometheus] pushgateway at {self._push_url}")
+        except Exception as exc:
+            print(f"[Prometheus] not available ({exc}) — skipping.")
+
+    def log_epoch(self, epoch: int, train_loss: float, val_loss: float, accuracy: float):
+        if self._mlflow:
+            try:
+                self._mlflow.log_metrics(
+                    {"train_loss": train_loss, "val_loss": val_loss, "accuracy": accuracy},
+                    step=epoch,
+                )
+            except Exception:
+                pass
+
+        if self._registry:
+            try:
+                labels = {"mode": self._mode, "run": self._run_name}
+                self._gauges["epoch"].labels(**labels).set(epoch)
+                self._gauges["train_loss"].labels(**labels).set(train_loss)
+                self._gauges["val_loss"].labels(**labels).set(val_loss)
+                self._gauges["accuracy"].labels(**labels).set(accuracy)
+                self._push_fn(self._push_url, job="silverbullet_training",
+                              registry=self._registry)
+            except Exception:
+                pass
+
+    def log_artifact(self, path: str):
+        if self._mlflow:
+            try:
+                self._mlflow.log_artifact(path)
+            except Exception:
+                pass
+
+    def finish(self, best_val_loss: float, best_epoch: int):
+        if self._mlflow:
+            try:
+                self._mlflow.log_metrics(
+                    {"best_val_loss": best_val_loss, "best_epoch": best_epoch}
+                )
+                self._mlflow.end_run()
+            except Exception:
+                pass
 
 
 def load_json_data(file_path):
@@ -114,7 +202,7 @@ class TextSimilarityDataset(Dataset):
 
 
 def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.001,
-                patience=5, min_delta=0.001, best_ckpt='best_model.pth'):
+                patience=5, min_delta=0.001, best_ckpt='best_model.pth', mode='general'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -129,7 +217,9 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
         'num_feature_channels':      num_features,
+        'mode':                      mode,
     }
+    tracker = _Tracker(mode, training_params)
     report = TrainingReport(model, training_params)
     report.update_dataset_info(
         train_size=len(train_loader.dataset),
@@ -181,6 +271,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         accuracy     = 100 * correct / total
 
         report.update_epoch_metrics(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
+        tracker.log_epoch(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
 
         print(f'Epoch [{epoch+1}/{num_epochs}]  '
               f'Train: {avg_train_loss:.4f}  Val: {avg_val_loss:.4f}  Acc: {accuracy:.2f}%')
@@ -237,6 +328,10 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'manifest':             manifest,
     }, best_model_path)
 
+    tracker.log_artifact(final_model_path)
+    tracker.log_artifact(best_model_path)
+    tracker.finish(best_val_loss=best_val_loss, best_epoch=best_epoch + 1)
+
     print(f"Final model  -> {final_model_path}")
     print(f"Best model   -> {best_model_path}")
     print(f"Report       -> {report.save_report(intermediate=False)}")
@@ -288,6 +383,7 @@ if __name__ == '__main__':
 
     model = TextSimilarityCNN(num_features=train_dataset.num_features)
     trained_model, metrics = train_model(
-        model, train_loader, val_loader, best_ckpt=best_ckpt
+        model, train_loader, val_loader, best_ckpt=best_ckpt,
+        mode=args.mode or "general",
     )
     print("Training complete.")
