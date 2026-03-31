@@ -11,8 +11,10 @@
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
-    "demo:videos": "playwright test e2e/demo-videos.spec.ts",
-    "demo:videos:headed": "playwright test e2e/demo-videos.spec.ts --headed"
+    "demo:mvm": "playwright test e2e/model-vs-model-demo.spec.ts",
+    "demo:mvm:headed": "PACE_FACTOR=2 playwright test e2e/model-vs-model-demo.spec.ts --headed",
+    "demo:mvm:pair": "playwright test e2e/model-vs-model-demo.spec.ts --grep mvm-pair-drilldown",
+    "demo:mvm:batch": "playwright test e2e/model-vs-model-demo.spec.ts --grep mvm-batch"
   },
   "dependencies": {
     "react": "^19.2.0",
