@@ -1,3 +1,9 @@
+import sys
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -206,7 +212,13 @@ class TextSimilarityDataset(Dataset):
             if use_cache:
                 cached = self.cache.get_features(pair[0], pair[1])
                 if cached is not None:
-                    tensors.append(torch.tensor(cached, dtype=torch.float32))
+                    if isinstance(cached, dict):
+                        # New format: feature_map dict → reconstruct stacked tensor
+                        fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
+                        tensors.append(feature_map_to_tensor(fm))
+                    else:
+                        # Legacy format: stacked tensor as flat list
+                        tensors.append(torch.tensor(cached, dtype=torch.float32))
                     continue
 
             # ---- compute ----
@@ -224,7 +236,7 @@ class TextSimilarityDataset(Dataset):
 
             # ---- cache save ----
             if use_cache:
-                self.cache.save_features(pair[0], pair[1], stacked.tolist())
+                self.cache.save_features(pair[0], pair[1], {k: v.tolist() for k, v in feature_map.items()})
 
             tensors.append(stacked)
 

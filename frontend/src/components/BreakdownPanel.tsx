@@ -1,4 +1,4 @@
-import type { BreakdownResult } from '../types';
+import type { BreakdownResult, MisalignmentReason } from '../types';
 
 interface Props {
   breakdown: BreakdownResult;
@@ -19,12 +19,21 @@ function barColor(score: number) {
   return 'bg-red-500';
 }
 
+const SEVERITY_STYLES: Record<MisalignmentReason['severity'], {
+  border: string; bg: string; badge: string; badgeText: string; icon: string;
+}> = {
+  high:   { border: 'border-red-200',    bg: 'bg-red-50',    badge: 'bg-red-100',    badgeText: 'text-red-700',    icon: '⚠' },
+  medium: { border: 'border-amber-200',  bg: 'bg-amber-50',  badge: 'bg-amber-100',  badgeText: 'text-amber-700',  icon: '◆' },
+  low:    { border: 'border-slate-200',  bg: 'bg-slate-50',  badge: 'bg-slate-100',  badgeText: 'text-slate-600',  icon: '▸' },
+};
+
 export function BreakdownPanel({ breakdown }: Props) {
   const {
     sentences1, sentences2,
     alignment,
     divergent_in_1, divergent_in_2,
     feature_scores,
+    misalignment_reasons = [],
   } = breakdown;
 
   const n = sentences1.length;
@@ -183,6 +192,44 @@ export function BreakdownPanel({ breakdown }: Props) {
           ))}
         </div>
       </div>
+
+      {/* Misalignment reasons */}
+      {misalignment_reasons.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+            Misalignment Diagnostics
+          </p>
+          <div className="space-y-2">
+            {misalignment_reasons.map((reason, idx) => {
+              const s = SEVERITY_STYLES[reason.severity];
+              return (
+                <div
+                  key={idx}
+                  className={`rounded-xl border p-3 space-y-1 ${s.border} ${s.bg}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${s.badge} ${s.badgeText}`}>
+                      {s.icon} {reason.severity.toUpperCase()}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-800">{reason.label}</span>
+                    <span className="ml-auto text-xs text-slate-400 shrink-0">{reason.signal}</span>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">{reason.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {misalignment_reasons.length === 0 && (
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
+          <p className="text-xs font-semibold text-emerald-700">No misalignment signals detected</p>
+          <p className="text-xs text-emerald-600 mt-0.5">
+            All feature signals are within expected alignment thresholds.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

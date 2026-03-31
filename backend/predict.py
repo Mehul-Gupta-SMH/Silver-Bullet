@@ -87,30 +87,52 @@ class SimilarityPredictor:
     def predict_pair_breakdown(self, text1: str, text2: str) -> dict:
         """Run the full pipeline and return per-sentence alignment + feature group scores.
 
-        Unlike predict_pair(), this method runs the feature extractors manually so
-        that intermediate per-sentence data (alignment matrix, feature maps) can be
-        inspected.  Model caching on the feature-extractor classes means the heavy
-        models are only loaded once per process.
+        Checks the feature cache first (populated by predict_pair / training).  On a
+        cache miss the five extractors run in parallel via ThreadPoolExecutor and the
+        result is saved so subsequent calls for the same pair are instant.
 
         Returns a dict compatible with api.schemas.BreakdownResponse.
         """
+        from concurrent.futures import ThreadPoolExecutor, as_completed
         from backend.Splitter.sentence_splitter import split_txt
         from backend.Features.Semantic.getSemanticWeights import SemanticWeights
         from backend.Features.Lexical.getLexicalWeights import LexicalWeights
         from backend.Features.NLI.getNLIweights import NLIWeights
         from backend.Features.EntityGroups.getOverlap import EntityMatch
         from backend.Features.LCS.getLCSweights import LCSWeights
+        from backend.feature_cache import FeatureCache
 
-        sent1 = split_txt(text1, resolve_coref=True)
-        sent2 = split_txt(text2, resolve_coref=True)
+        sent1 = split_txt(text1)
+        sent2 = split_txt(text2)
         n, m = len(sent1), len(sent2)
 
-        feature_map: dict = {}
-        feature_map.update(LexicalWeights().getFeatureMap(sent1, sent2))
-        feature_map.update(SemanticWeights().getFeatureMap(sent1, sent2))
-        feature_map.update(NLIWeights().getFeatureMap(sent1, sent2))
-        feature_map.update(EntityMatch().getFeatureMap(sent1, sent2))
-        feature_map.update(LCSWeights().getFeatureMap(sent1, sent2))
+        # --- try cache first ---
+        cache = FeatureCache()
+        cached = cache.get_features(text1, text2)
+        if cached is not None and isinstance(cached, dict):
+            feature_map = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
+        else:
+            # --- parallel feature extraction on cache miss ---
+            extractors = [
+                ("lexical",  LexicalWeights),
+                ("semantic", SemanticWeights),
+                ("nli",      NLIWeights),
+                ("entity",   EntityMatch),
+                ("lcs",      LCSWeights),
+            ]
+
+            def _run(name_cls):
+                name, cls = name_cls
+                return cls().getFeatureMap(sent1, sent2)
+
+            feature_map: dict = {}
+            with ThreadPoolExecutor(max_workers=len(extractors)) as pool:
+                futures = {pool.submit(_run, item): item[0] for item in extractors}
+                for fut in as_completed(futures):
+                    feature_map.update(fut.result())
+
+            # persist so next call (or predict_pair on the same pair) hits cache
+            cache.save_features(text1, text2, {k: v.tolist() for k, v in feature_map.items()})
 
         # --- model score ---
         stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, S, S]
@@ -148,24 +170,39 @@ class SimilarityPredictor:
             mat = feature_map[key].numpy()[:n_crop, :m_crop]
             return float(np.mean([mat[i].max() for i in range(n_crop)]))
 
+        # EntityMismatch scores are <= 0 (sum of -abs(count_diff) per entity type).
+        # 0 = perfect entity match, more negative = more mismatch.
+        # exp(mean_score) maps (-inf, 0] -> (0, 1] giving an intuitive [0,1] signal.
+        def _entity_match_score(key: str) -> float:
+            if key not in feature_map or n_crop == 0 or m_crop == 0:
+                return 1.0  # no entities detected → no mismatch
+            mat = feature_map[key].numpy()[:n_crop, :m_crop]
+            return float(np.exp(float(mat.mean())))
+
         feature_scores = {
             "Semantic (mxbai)": _mean_max_row("mixedbread-ai/mxbai-embed-large-v1"),
             "Semantic (Qwen3)": _mean_max_row("Qwen/Qwen3-Embedding-0.6B"),
             "Lexical ROUGE":    _mean_max_row("rouge"),
             "Lexical Jaccard":  _mean_max_row("jaccard"),
             "NLI Entailment":   _mean_max_row("entailment"),
+            "Entity Match":     _entity_match_score("EntityMismatch"),
             "LCS Token":        _mean_max_row("lcs_token"),
         }
 
+        misalignment_reasons = _generate_misalignment_reasons(
+            prob, feature_scores, divergent_in_1, divergent_in_2, sent1, sent2,
+        )
+
         return {
-            "prediction":     int(prob >= 0.5),
-            "probability":    prob,
-            "sentences1":     sent1,
-            "sentences2":     sent2,
-            "alignment":      alignment,
-            "divergent_in_1": divergent_in_1,
-            "divergent_in_2": divergent_in_2,
-            "feature_scores": feature_scores,
+            "prediction":           int(prob >= 0.5),
+            "probability":          prob,
+            "sentences1":           sent1,
+            "sentences2":           sent2,
+            "alignment":            alignment,
+            "divergent_in_1":       divergent_in_1,
+            "divergent_in_2":       divergent_in_2,
+            "feature_scores":       feature_scores,
+            "misalignment_reasons": misalignment_reasons,
         }
 
     def predict_batch_breakdown(self, pairs: list[list[str]]) -> list[dict]:
@@ -190,6 +227,139 @@ class SimilarityPredictor:
             }
             for pair, pred, prob in zip(pairs, predictions, probs)
         ]
+
+
+def _generate_misalignment_reasons(
+    probability: float,
+    feature_scores: dict,
+    divergent_in_1: list,
+    divergent_in_2: list,
+    sentences1: list,
+    sentences2: list,
+) -> list:
+    """Return a ranked list of reason dicts explaining misalignment signals.
+
+    Each reason: {label, description, severity ('high'|'medium'|'low'), signal}
+    Rules fire on individual feature thresholds; results sorted high→medium→low.
+    Reasons are generated regardless of overall score so callers get diagnostic
+    context even for borderline-positive pairs.
+    """
+    reasons: list[dict] = []
+
+    sem_mxbai  = feature_scores.get("Semantic (mxbai)", 1.0)
+    sem_qwen   = feature_scores.get("Semantic (Qwen3)", 1.0)
+    rouge      = feature_scores.get("Lexical ROUGE", 1.0)
+    jaccard    = feature_scores.get("Lexical Jaccard", 1.0)
+    entailment = feature_scores.get("NLI Entailment", 1.0)
+    entity     = feature_scores.get("Entity Match", 1.0)
+    lcs        = feature_scores.get("LCS Token", 1.0)
+
+    fired: set[str] = set()
+
+    def _add(label, description, severity, signal):
+        reasons.append({"label": label, "description": description,
+                         "severity": severity, "signal": signal})
+        fired.add(label)
+
+    # ── High ──────────────────────────────────────────────────────────────────
+    if entailment < 0.25:
+        _add(
+            "Entailment Conflict",
+            "The NLI model finds no strong entailment between texts. Key claims in text1 "
+            "may be contradicted, negated, or entirely absent in text2.",
+            "high", "NLI Entailment",
+        )
+
+    if sem_mxbai < 0.35 and sem_qwen < 0.35:
+        _add(
+            "Semantic Divergence",
+            "Both embedding models report low sentence-level similarity. The texts likely "
+            "convey fundamentally different information.",
+            "high", "Semantic (mxbai + Qwen3)",
+        )
+
+    if entity < 0.45:
+        _add(
+            "Entity Substitution",
+            "Named entities (people, numbers, dates, locations) differ significantly between "
+            "texts — a hallmark of factual hallucination in generation contexts.",
+            "high", "Entity Match",
+        )
+
+    # ── Medium ────────────────────────────────────────────────────────────────
+    if 0.25 <= entailment < 0.40 and "Entailment Conflict" not in fired:
+        _add(
+            "Weak Entailment",
+            "Entailment signal is below expected threshold. Text2 may not fully support all "
+            "claims in text1, or the logical relationship between texts is ambiguous.",
+            "medium", "NLI Entailment",
+        )
+
+    if 0.45 <= entity < 0.68 and "Entity Substitution" not in fired:
+        _add(
+            "Partial Entity Overlap",
+            "Some named entities are substituted or missing. Verify specific numbers, "
+            "proper nouns, and factual references between the two texts.",
+            "medium", "Entity Match",
+        )
+
+    if rouge < 0.25 and jaccard < 0.20:
+        _add(
+            "Low Lexical Overlap",
+            "Very few shared tokens between texts. This may indicate a complete topic switch "
+            "or aggressive paraphrasing that alters the original meaning.",
+            "medium", "Lexical ROUGE + Jaccard",
+        )
+
+    if divergent_in_1:
+        n_div, total = len(divergent_in_1), len(sentences1)
+        _add(
+            f"Uncovered Claims ({n_div}/{total} sentences)",
+            f"{n_div} of {total} sentence(s) in text1 have no semantically similar counterpart "
+            "in text2. These claims may be omitted or left unsupported.",
+            "medium", "Alignment",
+        )
+
+    if divergent_in_2:
+        n_div, total = len(divergent_in_2), len(sentences2)
+        _add(
+            f"Unanchored Content ({n_div}/{total} sentences)",
+            f"{n_div} of {total} sentence(s) in text2 have no strong counterpart in text1. "
+            "Text2 may contain fabricated or hallucinated information.",
+            "medium", "Alignment",
+        )
+
+    # ── Low ───────────────────────────────────────────────────────────────────
+    if (sem_mxbai >= 0.50 and entailment < 0.35
+            and "Entailment Conflict" not in fired
+            and "Weak Entailment" not in fired):
+        _add(
+            "Structural Mismatch",
+            "Texts are semantically close but the logical relationship is weak — "
+            "same topic but possibly different conclusions or framing.",
+            "low", "NLI Entailment",
+        )
+
+    if rouge < 0.30 and sem_mxbai >= 0.55:
+        _add(
+            "Abstractive Paraphrase Risk",
+            "High semantic similarity but low lexical overlap suggests heavy paraphrasing. "
+            "Abstractive rewrites can introduce subtle meaning shifts.",
+            "low", "Lexical ROUGE",
+        )
+
+    if lcs < 0.20 and probability < 0.5:
+        _add(
+            "Low Sequential Overlap",
+            "The longest common subsequence of tokens is very short. "
+            "Texts share little sequential content structure.",
+            "low", "LCS Token",
+        )
+
+    # Sort: high → medium → low
+    _order = {"high": 0, "medium": 1, "low": 2}
+    reasons.sort(key=lambda r: _order[r["severity"]])
+    return reasons
 
 
 def save_predictions(predictions, output_file):

@@ -5,6 +5,9 @@ from tqdm import tqdm
 
 
 class EntityMatch:
+    # Shared across all instances — GLiNER loaded once per process
+    _model_cache: dict = {}
+
     def __init__(
         self,
         entity_list=None,
@@ -29,23 +32,26 @@ class EntityMatch:
         self.comparison_weights = {'EntityMismatch': []}
 
     def __load_model__(self):
-        self.__model_cache__ = GLiNER.from_pretrained(
+        EntityMatch._model_cache[self.MODEL] = GLiNER.from_pretrained(
             self.MODEL,
             cache_dir=f"Features/EntityGroups/model/{self.MODEL}/",
         )
 
     def _batch_get_entities(self, texts):
         """Encode all texts in a single GLiNER call and return a list of entity-count dicts."""
-        if not hasattr(self, '__model_cache__'):
+        if self.MODEL not in EntityMatch._model_cache:
             self.__load_model__()
 
-        model = self.__model_cache__
-        if hasattr(model, 'batch_predict_entities'):
+        model = EntityMatch._model_cache[self.MODEL]
+        if hasattr(model, 'run'):
+            all_results = model.run(
+                texts, self.entity_list, threshold=self.THRESHOLD
+            )
+        elif hasattr(model, 'batch_predict_entities'):
             all_results = model.batch_predict_entities(
                 texts, self.entity_list, threshold=self.THRESHOLD
             )
         else:
-            # Fallback for older GLiNER versions
             all_results = [
                 model.predict_entities(t, self.entity_list, threshold=self.THRESHOLD)
                 for t in texts

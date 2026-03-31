@@ -26,6 +26,13 @@ export interface PredictionResult {
   text2?: string;
 }
 
+export interface MisalignmentReason {
+  label: string;
+  description: string;
+  severity: 'high' | 'medium' | 'low';
+  signal: string;
+}
+
 export interface BreakdownResult {
   prediction: number;
   probability: number;
@@ -35,6 +42,7 @@ export interface BreakdownResult {
   divergent_in_1: number[];
   divergent_in_2: number[];
   feature_scores: Record<string, number>;
+  misalignment_reasons: MisalignmentReason[];
 }
 
 export interface BatchResponse {

@@ -1,0 +1,634 @@
+{
+  "timestamp": "2026-03-31T22:54:51.717379",
+  "mode": "model-vs-model",
+  "n_test_pairs": 216,
+  "n_latency": 20,
+  "device": "cpu",
+  "silverbullet": {
+    "checkpoint": "models\\model-vs-model\\best.pth",
+    "architecture": "Conv2D (num_features=16, spatial_size=32)",
+    "metrics": {
+      "accuracy": 0.8240740740740741,
+      "roc_auc": 0.8922558922558922,
+      "auprc": 0.8541553315466238,
+      "mcc": 0.6596736596736597,
+      "f1": 0.8240740740740741,
+      "precision": 0.7606837606837606,
+      "recall": 0.898989898989899,
+      "brier_score": 0.12880061375242913,
+      "optimal_threshold": 0.4987226128578186,
+      "f1_at_optimal": 0.8294930875576036
+    },
+    "latency_ms_per_pair": 0.5032949999440461
+  },
+  "rerankers": {
+    "cross-encoder/nli-deberta-v3-base": {
+      "label": "NLI-DeBERTa-v3-base",
+      "description": "NLI cross-encoder; entailment probability used as similarity score",
+      "metrics": {
+        "accuracy": 0.7824074074074074,
+        "roc_auc": 0.8747302080635414,
+        "auprc": 0.8677456737171048,
+        "mcc": 0.5716019827894465,
+        "f1": 0.7251461988304093,
+        "precision": 0.8611111111111112,
+        "recall": 0.6262626262626263,
+        "brier_score": 0.20927729743077142,
+        "optimal_threshold": 0.022403709590435028,
+        "f1_at_optimal": 0.7619047619047619
+      },
+      "latency_ms_per_pair": 57.84171600127593,
+      "failure_cases": {
+        "sb_wrong_NLI-DeBERTa-v3-base_right": {
+          "count": 20,
+          "examples": [
+            {
+              "text1": "A man and women sitting on a sofa holding a small baby.",
+              "text2": "a woman sitting on a sofa holding a baby.",
+              "true_label": 0,
+              "sb_prob": 0.543524444103241,
+              "rr_prob": 0.45043936371803284,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+              "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine \u2014 held together by hydrogen bonds.",
+              "true_label": 0,
+              "sb_prob": 0.8015621900558472,
+              "rr_prob": 0.0007728190976195037,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
+              "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
+              "true_label": 0,
+              "sb_prob": 0.7595347166061401,
+              "rr_prob": 0.010791417211294174,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+              "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+              "true_label": 0,
+              "sb_prob": 0.782658576965332,
+              "rr_prob": 9.369198232889175e-05,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "A boy whacks a man with a sword.",
+              "text2": "A boy spanks a man with a plastic sword.",
+              "true_label": 0,
+              "sb_prob": 0.7138949632644653,
+              "rr_prob": 0.0069747972302138805,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
+              "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
+              "true_label": 1,
+              "sb_prob": 0.26433396339416504,
+              "rr_prob": 0.997744083404541,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What does it feel like to have a child addicted to video games?",
+              "text2": "What do you do if your child is addicted to video games?",
+              "true_label": 0,
+              "sb_prob": 0.8367738127708435,
+              "rr_prob": 0.04098453000187874,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Restaurants in India: What are the best places for Biryani in Mumbai?",
+              "text2": "Which is the best biryani in India?",
+              "true_label": 0,
+              "sb_prob": 0.7091748118400574,
+              "rr_prob": 0.0794159546494484,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "What is the average salary of front-end developer in India?",
+              "text2": "What is the average salary of a UI/UX designer and a front-end developer in India?",
+              "true_label": 0,
+              "sb_prob": 0.8105254769325256,
+              "rr_prob": 0.0008540013805031776,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "The proportion of people covered by employers dropped from 62.3 percent in 2001 to 61.3 percent last year.",
+              "text2": "The proportion of Americans with insurance from employers declined to 61.3 percent, from 62.6 percent in 2001 and 63.6 percent in 2000.",
+              "true_label": 0,
+              "sb_prob": 0.6515969038009644,
+              "rr_prob": 0.003579140640795231,
+              "sb_pred": 1,
+              "rr_pred": 0
+            }
+          ]
+        },
+        "sb_right_NLI-DeBERTa-v3-base_wrong": {
+          "count": 29,
+          "examples": [
+            {
+              "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+              "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+              "true_label": 1,
+              "sb_prob": 0.6290596723556519,
+              "rr_prob": 0.0013748385244980454,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "A red and gray train is going through a tunnel.",
+              "text2": "A red and gray train travels through a tunnel amongst the trees.",
+              "true_label": 1,
+              "sb_prob": 0.7846047282218933,
+              "rr_prob": 0.0003008742642123252,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "What are the opinions of people around the world on California's affirmative laws for sex?",
+              "text2": "What do people think about California's new affirmative consent law?",
+              "true_label": 1,
+              "sb_prob": 0.5371146202087402,
+              "rr_prob": 0.03820018097758293,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
+              "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 \u00d7 10\u2078 m/s.",
+              "true_label": 1,
+              "sb_prob": 0.5712302923202515,
+              "rr_prob": 0.0014137385878711939,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "How often can I put coconut oil on my hair?",
+              "text2": "Should I apply coconut oil to my hair daily?",
+              "true_label": 1,
+              "sb_prob": 0.6569138169288635,
+              "rr_prob": 0.013312959112226963,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Is Magical Girl anime genre underrated in America?",
+              "text2": "Why us Magical Girl anime genre underrated in America?",
+              "true_label": 1,
+              "sb_prob": 0.8482548594474792,
+              "rr_prob": 0.005235678516328335,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Elegant dining room with wood furniture.",
+              "text2": "An elegant pink dining room with wooden furniture.",
+              "true_label": 1,
+              "sb_prob": 0.7532853484153748,
+              "rr_prob": 0.00013664881407748908,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Why was Myanmar separated from India?",
+              "text2": "Why did Myanmar separate from India in 1937?",
+              "true_label": 1,
+              "sb_prob": 0.7345135807991028,
+              "rr_prob": 0.00010915077291429043,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
+              "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
+              "true_label": 1,
+              "sb_prob": 0.808208703994751,
+              "rr_prob": 0.0015648690750822425,
+              "sb_pred": 1,
+              "rr_pred": 0
+            },
+            {
+              "text1": "How can someone measure IQ?",
+              "text2": "What is the most accurate way to measure IQ?",
+              "true_label": 1,
+              "sb_prob": 0.6621031761169434,
+              "rr_prob": 0.003171921707689762,
+              "sb_pred": 1,
+              "rr_pred": 0
+            }
+          ]
+        },
+        "both_wrong": {
+          "count": 18,
+          "examples": [
+            {
+              "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+              "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+              "true_label": 1,
+              "sb_prob": 0.4506826400756836,
+              "rr_prob": 0.0005668248049914837,
+              "sb_pred": 0,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Syria Regime Agrees to Attend Peace Conference",
+              "text2": "Russia: Syria Agrees to Participate in Conference",
+              "true_label": 1,
+              "sb_prob": 0.22757036983966827,
+              "rr_prob": 0.0046872347593307495,
+              "sb_pred": 0,
+              "rr_pred": 0
+            },
+            {
+              "text1": "How do you convert HTML to JSP? What are some tips?",
+              "text2": "How can I change html pages to jsp?",
+              "true_label": 0,
+              "sb_prob": 0.8388774394989014,
+              "rr_prob": 0.9953893423080444,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+              "text2": "SOLID is an acronym for five OOP design principles \u2014 Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion \u2014 that promote clean, maintainable code.",
+              "true_label": 1,
+              "sb_prob": 0.4987226128578186,
+              "rr_prob": 0.005501322448253632,
+              "sb_pred": 0,
+              "rr_pred": 0
+            },
+            {
+              "text1": "How do you legally immigrate to America from Guatemala? How can I ease up this process?",
+              "text2": "How can I immigrate to the US?",
+              "true_label": 0,
+              "sb_prob": 0.7348408102989197,
+              "rr_prob": 0.7015780210494995,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What is your favourite answer from some of your favourite users on Quora?",
+              "text2": "What are some of the best answers on Quora?",
+              "true_label": 0,
+              "sb_prob": 0.8832381367683411,
+              "rr_prob": 0.9892200827598572,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "the 5 permanent united nations security council members are britain, china, france, russia and the united states.",
+              "text2": "p5+1 members are britain, china, france, russia, germany and the united states.",
+              "true_label": 1,
+              "sb_prob": 0.24347563087940216,
+              "rr_prob": 0.00036735209869220853,
+              "sb_pred": 0,
+              "rr_pred": 0
+            },
+            {
+              "text1": "Instead, prosecutors dismissed charges and Rucker left the courtroom a free man.",
+              "text2": "Instead he left the courtroom a free man after authorities dismissed criminal charges.",
+              "true_label": 0,
+              "sb_prob": 0.702716052532196,
+              "rr_prob": 0.9945037364959717,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Which are the best qualities a person could have?",
+              "text2": "What are some of the best qualities a person should have?",
+              "true_label": 0,
+              "sb_prob": 0.9416734576225281,
+              "rr_prob": 0.9956262111663818,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Have you ever come across a jealous co-worker? If so, how did you handle him/her?",
+              "text2": "How do I handle co-workers who are jealous of me?",
+              "true_label": 1,
+              "sb_prob": 0.46220284700393677,
+              "rr_prob": 0.022403709590435028,
+              "sb_pred": 0,
+              "rr_pred": 0
+            }
+          ]
+        }
+      }
+    },
+    "cross-encoder/stsb-roberta-base": {
+      "label": "STS-RoBERTa-base",
+      "description": "STS-B cross-encoder; raw score normalised to [0,1] via sigmoid",
+      "metrics": {
+        "accuracy": 0.4583333333333333,
+        "roc_auc": 0.9110765777432445,
+        "auprc": 0.8923899805033123,
+        "mcc": 0.0,
+        "f1": 0.6285714285714286,
+        "precision": 0.4583333333333333,
+        "recall": 1.0,
+        "brier_score": 0.24142780495559055,
+        "optimal_threshold": 0.661446750164032,
+        "f1_at_optimal": 0.8421052631578947
+      },
+      "latency_ms_per_pair": 43.11579499859363,
+      "failure_cases": {
+        "sb_wrong_STS-RoBERTa-base_right": {
+          "count": 10,
+          "examples": [
+            {
+              "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
+              "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
+              "true_label": 1,
+              "sb_prob": 0.4506826400756836,
+              "rr_prob": 0.6373876333236694,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Syria Regime Agrees to Attend Peace Conference",
+              "text2": "Russia: Syria Agrees to Participate in Conference",
+              "true_label": 1,
+              "sb_prob": 0.22757036983966827,
+              "rr_prob": 0.7295479774475098,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
+              "text2": "SOLID is an acronym for five OOP design principles \u2014 Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion \u2014 that promote clean, maintainable code.",
+              "true_label": 1,
+              "sb_prob": 0.4987226128578186,
+              "rr_prob": 0.6721518039703369,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
+              "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
+              "true_label": 1,
+              "sb_prob": 0.26433396339416504,
+              "rr_prob": 0.6530638933181763,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "the 5 permanent united nations security council members are britain, china, france, russia and the united states.",
+              "text2": "p5+1 members are britain, china, france, russia, germany and the united states.",
+              "true_label": 1,
+              "sb_prob": 0.24347563087940216,
+              "rr_prob": 0.678619921207428,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Have you ever come across a jealous co-worker? If so, how did you handle him/her?",
+              "text2": "How do I handle co-workers who are jealous of me?",
+              "true_label": 1,
+              "sb_prob": 0.46220284700393677,
+              "rr_prob": 0.6619765758514404,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What do you think about first head transplant surgery?",
+              "text2": "What do you think of the baffling consequences of human head transplant?",
+              "true_label": 1,
+              "sb_prob": 0.20905275642871857,
+              "rr_prob": 0.6749507784843445,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "US Election: Mitt Romney concedes defeat as Barack Obama wins second term",
+              "text2": "Romney concedes election to Obama in phone call",
+              "true_label": 1,
+              "sb_prob": 0.3218272924423218,
+              "rr_prob": 0.7011372447013855,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "How do I quit smoking?",
+              "text2": "How did you quit/stop smoking?",
+              "true_label": 1,
+              "sb_prob": 0.47096002101898193,
+              "rr_prob": 0.6662390828132629,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
+              "text2": "I knew that he would understand what I was saying.",
+              "true_label": 1,
+              "sb_prob": 0.00678650476038456,
+              "rr_prob": 0.5925731062889099,
+              "sb_pred": 0,
+              "rr_pred": 1
+            }
+          ]
+        },
+        "sb_right_STS-RoBERTa-base_wrong": {
+          "count": 89,
+          "examples": [
+            {
+              "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
+              "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
+              "true_label": 0,
+              "sb_prob": 0.026970230042934418,
+              "rr_prob": 0.6199201345443726,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "A man is playing on his keyboard.",
+              "text2": "A man is playing a guitar.",
+              "true_label": 0,
+              "sb_prob": 0.019835107028484344,
+              "rr_prob": 0.5688650608062744,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+              "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
+              "true_label": 0,
+              "sb_prob": 0.05778252333402634,
+              "rr_prob": 0.632479727268219,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+              "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
+              "true_label": 0,
+              "sb_prob": 0.12287285178899765,
+              "rr_prob": 0.6831386089324951,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Which is best: Bamboo or Jenkins CI?",
+              "text2": "How Jenkins is useful?",
+              "true_label": 0,
+              "sb_prob": 0.38022223114967346,
+              "rr_prob": 0.581256091594696,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "A woman is playing a guitar.",
+              "text2": "A man plays a guitar.",
+              "true_label": 0,
+              "sb_prob": 0.03330174461007118,
+              "rr_prob": 0.6136252284049988,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "bombing occurred in afghanistan as attacks by anti-government insurgents increase in recent days.",
+              "text2": "a bombing occurred in afghanistan but police have not yet stated who is responsible.",
+              "true_label": 0,
+              "sb_prob": 0.40932032465934753,
+              "rr_prob": 0.623202919960022,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "to uh to get out and uh go for the swim i think uh there is something to this endorphins",
+              "text2": "When I go swimming I feel such fatigue afterwards.",
+              "true_label": 0,
+              "sb_prob": 0.021412018686532974,
+              "rr_prob": 0.5682178735733032,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What's the best method to get meth out of your system?",
+              "text2": "How long does meth stay detectable in the body through testing?",
+              "true_label": 0,
+              "sb_prob": 0.05229692906141281,
+              "rr_prob": 0.5700815320014954,
+              "sb_pred": 0,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Two dead, more trapped in latest Mumbai building collapse",
+              "text2": "Two are trapped as US building collapses",
+              "true_label": 0,
+              "sb_prob": 0.028616800904273987,
+              "rr_prob": 0.5408783555030823,
+              "sb_pred": 0,
+              "rr_pred": 1
+            }
+          ]
+        },
+        "both_wrong": {
+          "count": 28,
+          "examples": [
+            {
+              "text1": "A man and women sitting on a sofa holding a small baby.",
+              "text2": "a woman sitting on a sofa holding a baby.",
+              "true_label": 0,
+              "sb_prob": 0.543524444103241,
+              "rr_prob": 0.6503039598464966,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+              "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine \u2014 held together by hydrogen bonds.",
+              "true_label": 0,
+              "sb_prob": 0.8015621900558472,
+              "rr_prob": 0.6757270693778992,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
+              "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
+              "true_label": 0,
+              "sb_prob": 0.7595347166061401,
+              "rr_prob": 0.6756951808929443,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "How do you convert HTML to JSP? What are some tips?",
+              "text2": "How can I change html pages to jsp?",
+              "true_label": 0,
+              "sb_prob": 0.8388774394989014,
+              "rr_prob": 0.6806869506835938,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
+              "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
+              "true_label": 0,
+              "sb_prob": 0.782658576965332,
+              "rr_prob": 0.6631808876991272,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "A boy whacks a man with a sword.",
+              "text2": "A boy spanks a man with a plastic sword.",
+              "true_label": 0,
+              "sb_prob": 0.7138949632644653,
+              "rr_prob": 0.6649357080459595,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "How do you legally immigrate to America from Guatemala? How can I ease up this process?",
+              "text2": "How can I immigrate to the US?",
+              "true_label": 0,
+              "sb_prob": 0.7348408102989197,
+              "rr_prob": 0.6421529054641724,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What is your favourite answer from some of your favourite users on Quora?",
+              "text2": "What are some of the best answers on Quora?",
+              "true_label": 0,
+              "sb_prob": 0.8832381367683411,
+              "rr_prob": 0.7078519463539124,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "What does it feel like to have a child addicted to video games?",
+              "text2": "What do you do if your child is addicted to video games?",
+              "true_label": 0,
+              "sb_prob": 0.8367738127708435,
+              "rr_prob": 0.6608638763427734,
+              "sb_pred": 1,
+              "rr_pred": 1
+            },
+            {
+              "text1": "Instead, prosecutors dismissed charges and Rucker left the courtroom a free man.",
+              "text2": "Instead he left the courtroom a free man after authorities dismissed criminal charges.",
+              "true_label": 0,
+              "sb_prob": 0.702716052532196,
+              "rr_prob": 0.6604964733123779,
+              "sb_pred": 1,
+              "rr_pred": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

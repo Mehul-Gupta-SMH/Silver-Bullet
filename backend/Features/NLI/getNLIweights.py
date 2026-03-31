@@ -5,6 +5,9 @@ from backend.Postprocess.__addpad import resize_matrix
 
 
 class NLIWeights:
+    # Shared across all instances — model loaded once per process
+    _model_cache: dict = {}
+
     def __init__(self, MODEL_NAME: str = "FacebookAI/roberta-large-mnli"):
         self.ModelName = MODEL_NAME
         self.__batch_size__ = 64
@@ -20,28 +23,33 @@ class NLIWeights:
     def __load_model__(self):
         tok = AutoTokenizer.from_pretrained(
             self.ModelName,
-            cache_dir=f"Features/NLI/model/{self.ModelName}/"
+            cache_dir=f"Features/NLI/model/{self.ModelName}/",
+            model_max_length=self.__max_len__,  # silences truncation warning
         )
+        # low_cpu_mem_usage=False: prevents meta-tensor initialisation that
+        # makes .to(device) raise "Cannot copy out of meta tensor".
         mdl = AutoModelForSequenceClassification.from_pretrained(
             self.ModelName,
-            cache_dir=f"Features/NLI/model/{self.ModelName}/"
+            cache_dir=f"Features/NLI/model/{self.ModelName}/",
+            low_cpu_mem_usage=False,
         )
         mdl.eval()
         device = "cuda" if torch.cuda.is_available() else "cpu"
         mdl.to(device)
-        self.__model_cache__ = {
+        NLIWeights._model_cache[self.ModelName] = {
             "tokenizer": tok,
             "model": mdl,
-            "device": device
+            "device": device,
         }
 
     def __calc_weights__(self):
-        if not hasattr(self, "__model_cache__"):
+        if self.ModelName not in NLIWeights._model_cache:
             self.__load_model__()
 
-        tok = self.__model_cache__["tokenizer"]
-        mdl = self.__model_cache__["model"]
-        device = self.__model_cache__["device"]
+        cache = NLIWeights._model_cache[self.ModelName]
+        tok = cache["tokenizer"]
+        mdl = cache["model"]
+        device = cache["device"]
 
         id2label = mdl.config.id2label
         label_to_idx = {v.lower(): k for k, v in id2label.items()}

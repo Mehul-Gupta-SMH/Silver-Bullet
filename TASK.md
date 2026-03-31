@@ -124,7 +124,7 @@
 | 2026-03-22 | [x] | TRAINING: model-vs-model retrain — 84.11% val acc @ epoch 6, early stop at 11 | `models/model-vs-model.pth`, `training_reports/` |
 | 2026-03-22 | [x] | FEATURE: MLflow Model Registry — best weights registered as silverbullet-{mode} after each run | `backend/train.py` |
 | 2026-03-22 | [x] | FEATURE: MLflow test metric logging — test.py logs test_accuracy/roc_auc/avg_precision + report artifact | `backend/test.py` |
-| 2026-03-22 | [ ] | TESTING: Run python -m backend.test for all 3 modes to log test metrics to MLflow | `backend/test.py` |
+| 2026-03-31 | [x] | TESTING: Run python -m backend.test for all 3 modes — cvg 89.8% / rvg 80.6% / mvm 82.4% acc; bootstrap CIs + MC Dropout intervals computed | `backend/test.py`, `test_reports/` |
 | 2026-03-22 | [x] | REFACTOR: Model file layout — models/{mode}/best.pth (active) + {ts}_best/{ts}_final archives in mode dir; dependencies.py falls back to legacy flat layout | `backend/train.py`, `backend/test.py`, `backend/api/dependencies.py`, `README.md`, `AGENT.md` |
 
 ## Pending
@@ -160,6 +160,22 @@ short inputs.
 |------|--------|------|---------------|
 | 2026-03-22 | [x] | PERF: Semantic batching — class-level `_embedding_cache` keyed by sentence; `__local__` encodes only unseen sentences in one `model.encode()` call per model, serves cached embeddings for repeat sentences; eliminates redundant encodes during precompute | `backend/Features/Semantic/__generate_semantic_features.py` |
 | 2026-03-22 | [x] | PERF: GLiNER batching — `_batch_get_entities()` sends all sentences (both sides) in a single `batch_predict_entities()` call; fallback to per-sentence loop for older GLiNER versions | `backend/Features/EntityGroups/getOverlap.py` |
+| 2026-04-01 | [x] | PERF: `predict_pair_breakdown` cache-first + parallel extractors — checks feature cache first (dict format); on hit skips all extractors; on miss runs all 5 in parallel via ThreadPoolExecutor; saves result to cache so predict_pair and breakdown share the same store | `backend/predict.py` |
+| 2026-04-01 | [x] | FIX: Feature cache format — `TextSimilarityDataset` now saves feature_map dict `{key: list}` instead of stacked tensor; reader supports both formats (dict → reconstruct via feature_map_to_tensor, list → legacy path) | `backend/train.py` |
+| 2026-04-01 | [x] | BUG: Breakdown coref resolver corrupts code inputs — GPT-4o-mini sent each line of a multi-line function as a "sentence" and returned verbose explanations as sentence text; fix: (1) removed resolve_coref=True from predict_pair_breakdown, (2) added _is_code() heuristic to split_txt to detect code and split on blank lines only instead of every newline | `backend/predict.py`, `backend/Splitter/sentence_splitter.py` |
+| 2026-04-01 | [x] | BUG: HTTP 500 "Cannot copy out of meta tensor" — transformers 4.51.0 defaults to low_cpu_mem_usage=True on large models (roberta-large-mnli), initialising on meta device; .to(device) then fails; fix: pass low_cpu_mem_usage=False to from_pretrained; sentence-transformers 5.x same issue → pass device= to SentenceTransformer constructor | `backend/Features/NLI/getNLIweights.py`, `backend/Features/Semantic/__generate_semantic_features.py` |
+| 2026-04-01 | [x] | FEATURE: Misalignment diagnostics — `_generate_misalignment_reasons()` produces ranked reasons (high/medium/low severity) from feature_scores + divergence data; 12 rules covering entailment conflict, semantic divergence, entity substitution, weak entailment, partial entity overlap, low lexical overlap, uncovered claims, unanchored content, structural mismatch, abstractive paraphrase risk, low sequential overlap; added to breakdown API response and rendered in BreakdownPanel | `backend/predict.py`, `backend/api/schemas.py`, `frontend/src/types/index.ts`, `frontend/src/components/BreakdownPanel.tsx` |
+
+## Session 2026-03-22 — Benchmark & Data Roadmap
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-03-31 | [x] | BENCHMARK: `backend/benchmark.py` — SilverBullet vs NLI-DeBERTa-v3-base and STS-RoBERTa-base on all 3 modes; full metrics + latency + failure cases | `backend/benchmark.py`, `benchmark_reports/` |
+| 2026-03-31 | [x] | BENCHMARK: Failure-case analysis included in benchmark reports; SilverBullet outperforms on accuracy/MCC all modes; STS-RoBERTa-base has higher raw AUC on model-vs-model | `benchmark_reports/` |
+| 2026-03-22 | [ ] | DATA: Scout RAG hallucination examples for context-vs-generated — partial grounding, number errors, entity substitution (candidates: HaluEval-extended, TruthfulQA, RAGAS datasets) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | DATA: Scout faithful paraphrase + abstractive summary pairs for reference-vs-generated (candidates: SummEval, CNN/DM with ROUGE-filtered pairs) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | DATA: Scout real LLM-output pairs for model-vs-model — semantic-equivalent responses with surface variation (candidates: OpenAI Evals, synthetic GPT-4o adversarial pairs) | `backend/fetch_external_data.py` |
+| 2026-03-22 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset; target >90% val acc on context-vs-generated | `backend/train.py` |
 
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |
