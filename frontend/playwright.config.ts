@@ -11,6 +11,9 @@ export default defineConfig({
   ],
   outputDir: 'demo-recordings',  // WebM videos land here
 
+  // Global assertion timeout — breakdown API calls can take 30 s on first hit
+  expect: { timeout: 30_000 },
+
   use: {
     // Backend API must be running on port 8000 before starting the demo:
     //   uvicorn backend.api.main:app --reload   (from repo root)
