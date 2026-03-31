@@ -1,14 +1,14 @@
 [
-  [
-    "Python is a high-level, interpreted programming language known for its clean syntax and readability. It was created by Guido van Rossum and first released in 1991. Python supports multiple paradigms including object-oriented, procedural, and functional programming. Its large standard library and active ecosystem make it popular for web development, data science, and automation.",
-    "Python is a widely-used, high-level programming language celebrated for its readable, expressive syntax. Guido van Rossum developed it, with the first version appearing in 1991. The language accommodates various programming styles — object-oriented, functional, and procedural — and benefits from a rich ecosystem of third-party packages that make it a go-to choice for data science, scripting, and backend development."
-  ],
-  [
-    "The Eiffel Tower was completed in 1889 and stands 330 metres tall. It was designed by Gustave Eiffel as the entrance arch for the 1889 World's Fair held in Paris. At the time of its completion it was the world's tallest man-made structure, a title it held for 41 years until the Chrysler Building surpassed it in 1930.",
-    "The Eiffel Tower was constructed in 1892 and reaches approximately 400 metres in height. It was designed by the architect Jules Verne to commemorate the centennial of the French Revolution. The tower was originally painted blue and was later repainted to its familiar brown colour during the 1950s. It remains one of the most visited monuments in the world."
-  ],
-  [
-    "Transformer models use a self-attention mechanism that allows each token in a sequence to attend to every other token simultaneously. This parallel processing makes transformers significantly faster to train than recurrent networks. The architecture was introduced in the 2017 paper 'Attention Is All You Need' by Vaswani et al. Pre-trained transformer models like BERT and GPT form the backbone of most modern NLP systems.",
-    "Transformers rely on self-attention to let every element in the input sequence interact with every other element in a single pass. Unlike RNNs, they do not process tokens sequentially, enabling efficient parallelisation during training. The foundational paper 'Attention Is All You Need', published in 2017, introduced the design. Subsequent models such as BERT, GPT, and T5 have become standard building blocks in natural language processing."
-  ]
+  {
+    "text1": "Python is a high-level, interpreted programming language known for its clean syntax and readability. It was created by Guido van Rossum and first released in 1991. Python supports multiple paradigms including object-oriented, procedural, and functional programming. Its large standard library and active ecosystem make it popular for web development, data science, and automation.",
+    "text2": "Python is a widely-used, high-level programming language celebrated for its readable, expressive syntax. Guido van Rossum developed it, with the first version appearing in 1991. The language accommodates various programming styles — object-oriented, functional, and procedural — and benefits from a rich ecosystem of third-party packages that make it a go-to choice for data science, scripting, and backend development."
+  },
+  {
+    "text1": "The Eiffel Tower was completed in 1889 and stands 330 metres tall. It was designed by Gustave Eiffel as the entrance arch for the 1889 World's Fair held in Paris. At the time of its completion it was the world's tallest man-made structure, a title it held for 41 years until the Chrysler Building surpassed it in 1930.",
+    "text2": "The Eiffel Tower was constructed in 1892 and reaches approximately 400 metres in height. It was designed by the architect Jules Verne to commemorate the centennial of the French Revolution. The tower was originally painted blue and was later repainted to its familiar brown colour during the 1950s. It remains one of the most visited monuments in the world."
+  },
+  {
+    "text1": "Transformer models use a self-attention mechanism that allows each token in a sequence to attend to every other token simultaneously. This parallel processing makes transformers significantly faster to train than recurrent networks. The architecture was introduced in the 2017 paper 'Attention Is All You Need' by Vaswani et al. Pre-trained transformer models like BERT and GPT form the backbone of most modern NLP systems.",
+    "text2": "Transformers rely on self-attention to let every element in the input sequence interact with every other element in a single pass. Unlike RNNs, they do not process tokens sequentially, enabling efficient parallelisation during training. The foundational paper 'Attention Is All You Need', published in 2017, introduced the design. Subsequent models such as BERT, GPT, and T5 have become standard building blocks in natural language processing."
+  }
 ]

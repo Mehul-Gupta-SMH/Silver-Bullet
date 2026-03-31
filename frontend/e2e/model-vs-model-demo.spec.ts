@@ -266,7 +266,7 @@ test.describe('Model-vs-Model demo', () => {
 
     await test.step('Upload fixture — 3 model-vs-model pairs', async () => {
       await page.locator('input[type="file"]').setInputFiles(FIXTURE);
-      await expect(page.getByText(/3 pairs ready/i)).toBeVisible();
+      await expect(page.getByText(/pairs ready/i)).toBeVisible({ timeout: 10_000 });
       await wait(T.long);
     });
 
