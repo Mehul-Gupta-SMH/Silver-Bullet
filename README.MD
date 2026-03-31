@@ -15,6 +15,22 @@ Each mode has its own trained model checkpoint for best accuracy.
 
 ---
 
+## Demos
+
+### Model-vs-Model — Pair Scoring + Drill-Down
+
+Scores a high-agreement pair (Python overview) then a divergent pair (Eiffel Tower hallucinations), opens the drill-down panel, and walks through sentence alignment, per-signal feature score bars, and severity-coded misalignment diagnostics.
+
+<video src="docs/videos/demo-mvm-pair-drilldown.webm" width="100%" controls muted></video>
+
+### Model-vs-Model — Batch Evaluation
+
+Uploads a 3-pair fixture file, runs batch scoring, reviews the score-distribution chart and results table, then saves the experiment.
+
+<video src="docs/videos/demo-mvm-batch.webm" width="100%" controls muted></video>
+
+---
+
 ## How It Works
 
 SilverBullet compares texts at the **sentence level**, not as whole-document embeddings.
