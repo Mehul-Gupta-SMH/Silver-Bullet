@@ -182,6 +182,7 @@ def test_predict_pair_breakdown_happy_path(client, mock_predictor):
         "divergent_in_1": [],
         "divergent_in_2": [],
         "feature_scores": {"Semantic (mxbai)": 0.8},
+        "misalignment_reasons": [],
     }
     mock_predictor.predict_pair_breakdown.return_value = expected
 
