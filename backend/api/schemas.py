@@ -75,6 +75,13 @@ class BatchResponse(BaseModel):
     )
 
 
+class MisalignmentReason(BaseModel):
+    label: str = Field(..., description="Short title for the misalignment signal")
+    description: str = Field(..., description="Plain-English explanation of the signal")
+    severity: str = Field(..., description="'high' | 'medium' | 'low'")
+    signal: str = Field(..., description="Feature group that triggered the reason")
+
+
 class BreakdownResponse(BaseModel):
     prediction: int = Field(..., description="Binary prediction: 1 = similar, 0 = different")
     probability: float = Field(..., description="Overall similarity score in [0, 1]")
@@ -95,6 +102,10 @@ class BreakdownResponse(BaseModel):
     feature_scores: dict[str, float] = Field(
         ...,
         description="Per-feature-group mean best-match score (higher = more similar)",
+    )
+    misalignment_reasons: list[MisalignmentReason] = Field(
+        default_factory=list,
+        description="Rule-based diagnostics explaining why texts diverge, ranked by severity",
     )
 
 
