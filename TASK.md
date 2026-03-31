@@ -165,8 +165,8 @@ short inputs.
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
-| 2026-03-22 | [ ] | BENCHMARK: Run cross-encoder/nli-deberta-v3-base on all 3 held-out test sets; compare ROC-AUC, avg precision, accuracy@0.5, latency (ms/pair) vs SilverBullet | new script `backend/benchmark.py` |
-| 2026-03-22 | [ ] | BENCHMARK: Failure-case analysis — identify pairs where SilverBullet outperforms and underperforms the re-ranker; use gaps to direct data collection | output to `benchmark_reports/` |
+| 2026-03-31 | [x] | BENCHMARK: `backend/benchmark.py` — SilverBullet vs NLI-DeBERTa-v3-base and STS-RoBERTa-base on all 3 modes; full metrics + latency + failure cases | `backend/benchmark.py`, `benchmark_reports/` |
+| 2026-03-31 | [x] | BENCHMARK: Failure-case analysis included in benchmark reports; SilverBullet outperforms on accuracy/MCC all modes; STS-RoBERTa-base has higher raw AUC on model-vs-model | `benchmark_reports/` |
 | 2026-03-22 | [ ] | DATA: Scout RAG hallucination examples for context-vs-generated — partial grounding, number errors, entity substitution (candidates: HaluEval-extended, TruthfulQA, RAGAS datasets) | `backend/fetch_external_data.py` |
 | 2026-03-22 | [ ] | DATA: Scout faithful paraphrase + abstractive summary pairs for reference-vs-generated (candidates: SummEval, CNN/DM with ROUGE-filtered pairs) | `backend/fetch_external_data.py` |
 | 2026-03-22 | [ ] | DATA: Scout real LLM-output pairs for model-vs-model — semantic-equivalent responses with surface variation (candidates: OpenAI Evals, synthetic GPT-4o adversarial pairs) | `backend/fetch_external_data.py` |
