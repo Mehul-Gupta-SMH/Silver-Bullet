@@ -12,7 +12,7 @@
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
     "demo:mvm": "npm run build && playwright test e2e/model-vs-model-demo.spec.ts",
-    "demo:mvm:headed": "npm run build && cross-env PACE_FACTOR=2 playwright test e2e/model-vs-model-demo.spec.ts --headed",
+    "demo:mvm:headed": "npm run build && playwright test e2e/model-vs-model-demo.spec.ts --headed",
     "demo:mvm:pair": "npm run build && playwright test e2e/model-vs-model-demo.spec.ts --grep mvm-pair-drilldown",
     "demo:mvm:batch": "npm run build && playwright test e2e/model-vs-model-demo.spec.ts --grep mvm-batch"
   },
