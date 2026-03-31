@@ -14,7 +14,7 @@ export default defineConfig({
   use: {
     // Backend API must be running on port 8000 before starting the demo:
     //   uvicorn backend.api.main:app --reload   (from repo root)
-    baseURL: 'http://127.0.0.1:5173',
+    baseURL: 'http://127.0.0.1:4173',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     viewport: { width: 1440, height: 900 },
@@ -22,7 +22,6 @@ export default defineConfig({
       mode: 'on',
       size: { width: 1440, height: 900 },
     },
-    // Slow down all actions so recordings are readable
     actionTimeout:    60_000,
     navigationTimeout: 30_000,
   },
@@ -35,10 +34,11 @@ export default defineConfig({
   ],
 
   webServer: {
-    // npx vite is more reliable than "npm run dev --" on Windows PowerShell
-    command: 'npx vite --host 127.0.0.1 --port 5173',
-    url: 'http://127.0.0.1:5173',
-    reuseExistingServer: true,   // reuse if already running (e.g. from another terminal)
-    timeout: 120_000,
+    // Preview serves the compiled bundle — no HMR, no repeated reloads.
+    // Run "npm run build" once before recording, then reuse the build.
+    command: 'npx vite preview --host 127.0.0.1 --port 4173',
+    url: 'http://127.0.0.1:4173',
+    reuseExistingServer: true,
+    timeout: 60_000,
   },
 });

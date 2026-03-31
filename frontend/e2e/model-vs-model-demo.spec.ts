@@ -51,7 +51,9 @@ async function typeText(locator: Locator, text: string) {
 
 async function resetPage(page: Page) {
   await page.addInitScript(() => localStorage.clear());
-  await page.goto('/');
+  // networkidle waits until no requests for 500 ms — necessary with the
+  // Vite preview server so the bundle is fully loaded before clicking.
+  await page.goto('/', { waitUntil: 'networkidle' });
   await expect(page.getByRole('heading', { name: /SilverBullet/i })).toBeVisible();
   await wait(T.medium);
 }
