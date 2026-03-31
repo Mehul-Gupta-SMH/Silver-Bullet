@@ -12,6 +12,8 @@ export default defineConfig({
   outputDir: 'demo-recordings',  // WebM videos land here
 
   use: {
+    // Backend API must be running on port 8000 before starting the demo:
+    //   uvicorn backend.api.main:app --reload   (from repo root)
     baseURL: 'http://127.0.0.1:5173',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
@@ -33,9 +35,10 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev -- --host 127.0.0.1 --port 5173',
-    port: 5173,
-    reuseExistingServer: true,   // attach to an already-running dev server
+    // npx vite is more reliable than "npm run dev --" on Windows PowerShell
+    command: 'npx vite --host 127.0.0.1 --port 5173',
+    url: 'http://127.0.0.1:5173',
+    reuseExistingServer: true,   // reuse if already running (e.g. from another terminal)
     timeout: 120_000,
   },
 });
