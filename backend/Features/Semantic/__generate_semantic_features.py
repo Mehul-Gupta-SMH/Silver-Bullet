@@ -34,14 +34,18 @@ class SemanticFeatures:
         self.features_dict = {}
 
     def __load_model__(self, model_meta):
+        import torch
         model_name = model_meta["model"]
 
         if model_name not in self._model_cache:
-            # Load once and keep in memory
             print(f"[INFO] Loading model {model_name} into cache...")
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            # Pass device here: sentence-transformers 5.x loads directly on the
+            # target device, avoiding the meta-tensor → .to(device) error path.
             self._model_cache[model_name] = SentenceTransformer(
                 model_name,
-                cache_folder=f'/Features/Semantic/weights_cache/{model_name}'
+                cache_folder=f'/Features/Semantic/weights_cache/{model_name}',
+                device=device,
             )
         return self._model_cache[model_name]
 
