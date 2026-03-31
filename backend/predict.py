@@ -148,12 +148,22 @@ class SimilarityPredictor:
             mat = feature_map[key].numpy()[:n_crop, :m_crop]
             return float(np.mean([mat[i].max() for i in range(n_crop)]))
 
+        # EntityMismatch scores are <= 0 (sum of -abs(count_diff) per entity type).
+        # 0 = perfect entity match, more negative = more mismatch.
+        # exp(mean_score) maps (-inf, 0] -> (0, 1] giving an intuitive [0,1] signal.
+        def _entity_match_score(key: str) -> float:
+            if key not in feature_map or n_crop == 0 or m_crop == 0:
+                return 1.0  # no entities detected → no mismatch
+            mat = feature_map[key].numpy()[:n_crop, :m_crop]
+            return float(np.exp(float(mat.mean())))
+
         feature_scores = {
             "Semantic (mxbai)": _mean_max_row("mixedbread-ai/mxbai-embed-large-v1"),
             "Semantic (Qwen3)": _mean_max_row("Qwen/Qwen3-Embedding-0.6B"),
             "Lexical ROUGE":    _mean_max_row("rouge"),
             "Lexical Jaccard":  _mean_max_row("jaccard"),
             "NLI Entailment":   _mean_max_row("entailment"),
+            "Entity Match":     _entity_match_score("EntityMismatch"),
             "LCS Token":        _mean_max_row("lcs_token"),
         }
 
