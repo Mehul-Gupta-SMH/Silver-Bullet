@@ -19,17 +19,39 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 # ---------------------------------------------------------------------------
+# Entity types extracted by GLiNER (getOverlap.py)
+# Imported by getOverlap.py so the registry is the single source of truth.
+# Adding a type here automatically adds a feature map — no other file needs
+# changing except deleting ./cache/ and retraining.
+# ---------------------------------------------------------------------------
+
+ENTITY_TYPES: list[str] = [
+    # Named entities
+    "person", "organization", "location", "product", "event",
+    # Legal / linguistic
+    "law", "language",
+    # Temporal
+    "date", "time", "duration",
+    # Quantitative — critical for hallucination / numeric grounding
+    "number", "quantity", "percentage", "money",
+]
+
+# Feature key per entity type: "entity_person", "entity_organization", …
+ENTITY_FEATURE_KEYS: list[str] = [f"entity_{t}" for t in ENTITY_TYPES]
+
+# ---------------------------------------------------------------------------
 # Canonical feature key list
 # Insertion order matches the .update() sequence in train.py / predict.py:
 #   LexicalWeights -> SemanticWeights -> NLIWeights -> EntityMatch -> LCSWeights
 # ---------------------------------------------------------------------------
 
 FEATURE_KEYS: list[str] = [
-    # Lexical (4) — getLexicalWeights.py
+    # Lexical (5) — getLexicalWeights.py
     "jaccard",
     "dice",
     "cosine",
     "rouge",
+    "rouge3",
     # Semantic cosine similarity (2) — getSemanticWeights.py
     "mixedbread-ai/mxbai-embed-large-v1",
     "Qwen/Qwen3-Embedding-0.6B",
@@ -38,18 +60,28 @@ FEATURE_KEYS: list[str] = [
     "SOFT_COL_mixedbread-ai/mxbai-embed-large-v1",
     "SOFT_ROW_Qwen/Qwen3-Embedding-0.6B",
     "SOFT_COL_Qwen/Qwen3-Embedding-0.6B",
+    # Semantic coverage — BERTScore-style max-pool precision / recall (4)
+    # PREC: for each sentence in text2, its best-match similarity to text1
+    # REC:  for each sentence in text1, its best-match similarity to text2
+    "PREC_mixedbread-ai/mxbai-embed-large-v1",
+    "REC_mixedbread-ai/mxbai-embed-large-v1",
+    "PREC_Qwen/Qwen3-Embedding-0.6B",
+    "REC_Qwen/Qwen3-Embedding-0.6B",
     # NLI (3) — getNLIweights.py
     "entailment",
     "neutral",
     "contradiction",
-    # Entity (1) — getOverlap.py
-    "EntityMismatch",
+    # Entity per type (14) — getOverlap.py
+    # Replaces the single aggregate EntityMismatch with one agreement map per type.
+    # Numeric / temporal types (date, time, number, money, …) serve as the
+    # factual-grounding feature previously handled by regex; GLiNER extracts them.
+    *ENTITY_FEATURE_KEYS,
     # LCS (2) — getLCSweights.py
     "lcs_token",
     "lcs_char",
 ]
 
-VERSION      = "2.0"
+VERSION      = "3.0"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 
