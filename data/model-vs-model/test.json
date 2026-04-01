@@ -1,559 +1,99 @@
 {
   "data": [
     {
-      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
-      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+      "text1": "The results were released at Tuesday 's meeting in Seattle of the American Thoracic Society and will be published in Thursday 's New England Journal of Medicine .",
+      "text2": "The study results were released at a meeting in Seattle of the American Thoracic Society and also will be published in tomorrow 's issue of The New England Journal of Medicine .",
       "label": 1
     },
     {
-      "text1": "Isaac Newton developed the laws of motion and universal gravitation in the 17th century.",
-      "text2": "Albert Einstein developed the laws of motion and universal gravitation in the early 20th century, replacing Newton's earlier theories.",
-      "label": 0
-    },
-    {
-      "text1": "A man is playing on his keyboard.",
-      "text2": "A man is playing a guitar.",
-      "label": 0
-    },
-    {
-      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
-      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
-      "label": 0
-    },
-    {
-      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
-      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
-      "label": 0
-    },
-    {
-      "text1": "Water is a polar molecule with the chemical formula H₂O, consisting of two hydrogen atoms covalently bonded to one oxygen atom.",
-      "text2": "H₂O — water — is a polar covalent molecule formed by two hydrogen atoms bonded to a single oxygen atom.",
+      "text1": "How do I gain access to a private Instagram account?",
+      "text2": "How do I gain access to a person's instagram photos, if their account is private?",
       "label": 1
     },
     {
-      "text1": "Which is best: Bamboo or Jenkins CI?",
-      "text2": "How Jenkins is useful?",
+      "text1": "A man is straining pasta.",
+      "text2": "A man plays a wooden flute.",
       "label": 0
     },
     {
-      "text1": "Is it better to sleep with or without a pillow?",
-      "text2": "Is sleeping on a pillow better than sleeping without a pillow?",
+      "text1": "What are the best universities for doing MS in Structural Engineering?",
+      "text2": "What is the best college for structural engineering?",
       "label": 1
     },
     {
-      "text1": "A man and women sitting on a sofa holding a small baby.",
-      "text2": "a woman sitting on a sofa holding a baby.",
+      "text1": "Reinforcement learning trains an agent by rewarding desired behaviours and penalising undesired ones.",
+      "text2": "Reinforcement learning trains an agent using labelled training examples and a supervised loss function, similar to standard classification.",
       "label": 0
     },
     {
-      "text1": "Should I remove my wisdom teeth?",
-      "text2": "Should I have my wisdom tooth removed?",
-      "label": 1
-    },
-    {
-      "text1": "What are some really good PTO softwares that integrate with Harvest?",
-      "text2": "What are some good PTO softwares that integrate with Harvest?",
-      "label": 1
-    },
-    {
-      "text1": "Compound interest is interest calculated on both the principal and the accumulated interest from previous periods.",
-      "text2": "Unlike simple interest, compound interest grows on the original principal plus any interest already earned, leading to exponential growth over time.",
-      "label": 1
-    },
-    {
-      "text1": "Part of it is now devoted to the Museo de Caza (Hunting Museum), with stuffed animals and ancient weapons.",
-      "text2": "Part of it is devoted to the Hunting Museum.",
-      "label": 1
-    },
-    {
-      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
-      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "text1": "Blockchain records transactions in cryptographically linked blocks across a distributed network.",
+      "text2": "The law of conservation of energy: energy cannot be created or destroyed, only converted.",
       "label": 0
     },
     {
-      "text1": "A woman is playing a guitar.",
-      "text2": "A man plays a guitar.",
-      "label": 0
-    },
-    {
-      "text1": "bombing occurred in afghanistan as attacks by anti-government insurgents increase in recent days.",
-      "text2": "a bombing occurred in afghanistan but police have not yet stated who is responsible.",
-      "label": 0
-    },
-    {
-      "text1": "Syria Regime Agrees to Attend Peace Conference",
-      "text2": "Russia: Syria Agrees to Participate in Conference",
+      "text1": "What are coherent sources?",
+      "text2": "What is coherent source?",
       "label": 1
     },
     {
-      "text1": "to uh to get out and uh go for the swim i think uh there is something to this endorphins",
-      "text2": "When I go swimming I feel such fatigue afterwards.",
+      "text1": "Will the path shown by Mahdi Mirza Ghulam Ahmad (RA) end the Wahabi influence that has spawned terrorism by Muslims?",
+      "text2": "What are some examples that show that Quentin Tarantino has been largely influenced by the French cinema?",
       "label": 0
     },
     {
-      "text1": "How many times can one have sex in a week?",
-      "text2": "How many times a week should one have sex?",
-      "label": 1
-    },
-    {
-      "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
-      "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
+      "text1": "The ECB has cut interest rates six times over that period , from 4.75 percent in October 2000 to 2.5 percent .",
+      "text2": "The ECB has cut rates from 4.75 percent in October 2000 to 2.5 percent in that period .",
       "label": 0
     },
     {
-      "text1": "The power of his work is attributed to its scale and his meticulous method.",
-      "text2": "His work power is a result of scale and meticulous method.",
+      "text1": "The derivative of a function measures the rate of change of the function's output with respect to its input.",
+      "text2": "In calculus, a derivative represents how rapidly a function's value changes as its input varies.",
       "label": 1
     },
     {
-      "text1": "What's the best method to get meth out of your system?",
-      "text2": "How long does meth stay detectable in the body through testing?",
+      "text1": "A hash table provides average O(1) time complexity for lookups using a hash function.",
+      "text2": "A hash table provides O(n) time complexity for lookups in the average case, since collisions require scanning the entire chain.",
       "label": 0
     },
     {
-      "text1": "(Click to read the question--but in brief, it had to do with why one guy named Bill had managed to discourage unwanted pursuit by a gal named Janet, when another guy named Bill had not.)",
-      "text2": "There are two Bills who had different experiences with Janet.",
+      "text1": "It is believed that Anna Wilson met Dan in New Orleans and eventually persuaded her to come with him to Omaha .",
+      "text2": "It is believed that Anna Wilson met Dan in New Orleans , eventually persuading her to come to Omaha with him .",
       "label": 1
     },
     {
-      "text1": "A red and gray train is going through a tunnel.",
-      "text2": "A red and gray train travels through a tunnel amongst the trees.",
+      "text1": "The Nets and the Spurs are crossing new frontiers of offensive ineptitude while causing their high-scoring American Basketball Association forefathers to cringe .",
+      "text2": "The Nets and the San Antonio Spurs are crossing new frontiers of offensive ineptitude while embarrassing their high-scoring ABA forefathers .",
       "label": 1
     },
     {
-      "text1": "How do you convert HTML to JSP? What are some tips?",
-      "text2": "How can I change html pages to jsp?",
+      "text1": "Six countries have advised their citizens not to travel to Taiwan for any reason , the ministry said .",
+      "text2": "Spain , Poland , United Arab Emirates and Lithuania have advised their citizens not to travel to Taiwan for any reason .",
+      "label": 1
+    },
+    {
+      "text1": "As she was about to ring it, he arrested her hand.",
+      "text2": "She was going to ring the village bell to warn everyone.",
       "label": 0
     },
     {
-      "text1": "Two dead, more trapped in latest Mumbai building collapse",
-      "text2": "Two are trapped as US building collapses",
-      "label": 0
-    },
-    {
-      "text1": "Assuming the bare-bones basic functions of government are to be maintained, where then will be the room for any border-control guards or anti-terrorism measures, or Head Start or education grants or peanut subsidies or national parks, or disaster relief--let alone the enhancements that Congress deemed so necessary this October?",
-      "text2": "There is not any room for anymore functions.",
-      "label": 0
-    },
-    {
-      "text1": "How does a vagina feel?",
-      "text2": "What does a normal vulva look like?",
-      "label": 0
-    },
-    {
-      "text1": "Is it true that sleeping with your phone under your pillow gives you radiation and can cause brain tumor?",
-      "text2": "Can sleeping with phone under pillow cause brain tumor?",
+      "text1": "Army Corps of  An Assessment of the Draft Environmental Impact Statement of the Lower Snake River Dams, GAO/RCED-00-186, July 24, 2000.",
+      "text2": "The Army Corps issued an environmental impact statement.",
       "label": 1
     },
     {
-      "text1": "What are the prerequisites for Allen Distance Learning Program?",
-      "text2": "What is the DLP (Distance Learning Program) started by ALLEN Coaching Institute?",
+      "text1": "How much to hire a butler in Canada?",
+      "text2": "What is the scope of PhD in data analytics in India?",
       "label": 0
     },
     {
-      "text1": "Imran blames rival for colleague murder",
-      "text2": "Pakistans Imran blames rival for killing party member",
-      "label": 1
-    },
-    {
-      "text1": "What are the opinions of people around the world on California's affirmative laws for sex?",
-      "text2": "What do people think about California's new affirmative consent law?",
-      "label": 1
-    },
-    {
-      "text1": "Jon stared off for a while, appearing in deep thought.",
-      "text2": "Jon was so tired from the recent events that he could hardly think.",
+      "text1": "What should I do if my girlfriend love me the way she loved her ex?",
+      "text2": "What do I do when my girlfriend still loves her ex?",
       "label": 0
     },
     {
-      "text1": "I hope everything is OK!",
-      "text2": "I hope everything is okay.",
+      "text1": "A man is standing on top of a rock or mountain watching the sun set.",
+      "text2": "A man standing in the mountains watching a sunset.",
       "label": 1
-    },
-    {
-      "text1": "Two dogs run side-by-side on the grass.",
-      "text2": "Two dogs running on grass.",
-      "label": 1
-    },
-    {
-      "text1": "What is the Fibonacci sequence?",
-      "text2": "What is Fibonacci sequence?",
-      "label": 1
-    },
-    {
-      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge.",
-      "text2": "The Amazon River carries roughly 20% of the world's fresh water discharge and is the longest river in the world, stretching over 7,000 km.",
-      "label": 0
-    },
-    {
-      "text1": "Francisco de Goya painted a court portrait of the next king, Charles IV, in which he looked strangely like George Washington.",
-      "text2": "de Goya painted a portrait that made him look strange and angered him.",
-      "label": 0
-    },
-    {
-      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
-      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
-      "label": 0
-    },
-    {
-      "text1": "What do Americans think about workarounds of life which can be used only by Indians?",
-      "text2": "CAN U PLZ GUIDE ME for CLEARING POSTPAYMENT SCALE 1 exam?",
-      "label": 0
-    },
-    {
-      "text1": "Is it illegal to impersonate the President of the United States?",
-      "text2": "Who was the first U.S. President?",
-      "label": 0
-    },
-    {
-      "text1": "Iran dissidents 'killed in Iraq'",
-      "text2": "France loses influence in Europe",
-      "label": 0
-    },
-    {
-      "text1": "The SOLID principles are five object-oriented design guidelines intended to make software more maintainable, flexible, and scalable.",
-      "text2": "SOLID is an acronym for five OOP design principles — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion — that promote clean, maintainable code.",
-      "label": 1
-    },
-    {
-      "text1": "A boy whacks a man with a sword.",
-      "text2": "A boy spanks a man with a plastic sword.",
-      "label": 0
-    },
-    {
-      "text1": "In 1649, Ireland's most hated conqueror, Oliver Cromwell, arrived in Dublin.",
-      "text2": "Oliver Cromwell came to Dublin in 1649.",
-      "label": 1
-    },
-    {
-      "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
-      "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
-      "label": 1
-    },
-    {
-      "text1": "The woman is dicing onions.",
-      "text2": "A woman is cutting an onion.",
-      "label": 1
-    },
-    {
-      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
-      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
-      "label": 1
-    },
-    {
-      "text1": "Yet she almost went back to put the curtain aside and make sure… .",
-      "text2": "She was unsure of what to do",
-      "label": 0
-    },
-    {
-      "text1": "you know you don't feel it so strapped",
-      "text2": "You feel more comfortable.",
-      "label": 1
-    },
-    {
-      "text1": "What is best movies to watch?",
-      "text2": "What is the best movies to watch?",
-      "label": 1
-    },
-    {
-      "text1": "The speed of light in a vacuum is approximately 299,792,458 metres per second.",
-      "text2": "Light travels through a vacuum at roughly 299,792,458 m/s, commonly approximated as 3 × 10⁸ m/s.",
-      "label": 1
-    },
-    {
-      "text1": "How often can I put coconut oil on my hair?",
-      "text2": "Should I apply coconut oil to my hair daily?",
-      "label": 1
-    },
-    {
-      "text1": "Find the equation of a circle which touches the coordinate axes and whose centre lies on a line x-2y=3 ?",
-      "text2": "Find the equation of a circle which touches the coordinate axes and whose centre lies on the line x-2y=3?",
-      "label": 1
-    },
-    {
-      "text1": "kashmir is divided between india and pakistan.",
-      "text2": "kashmir is claimed by both india and pakistan.",
-      "label": 1
-    },
-    {
-      "text1": "(George W. Bush kills Gore in poll questions about leadership.",
-      "text2": "George W. Bush goes against Gore in a debate.",
-      "label": 1
-    },
-    {
-      "text1": "How do you legally immigrate to America from Guatemala? How can I ease up this process?",
-      "text2": "How can I immigrate to the US?",
-      "label": 0
-    },
-    {
-      "text1": "What is your favourite answer from some of your favourite users on Quora?",
-      "text2": "What are some of the best answers on Quora?",
-      "label": 0
-    },
-    {
-      "text1": "What are the top 5 skills of a top management or strategy consultant (e.g., McKinsey, Bain, BCG, etc.)?",
-      "text2": "What is a typical day in the office of a consultant in a firm like BCG, McKinsey, Bain or any top notch consulting company?",
-      "label": 0
-    },
-    {
-      "text1": "What does it feel like to have a child addicted to video games?",
-      "text2": "What do you do if your child is addicted to video games?",
-      "label": 0
-    },
-    {
-      "text1": "The broader Standard & Poor's 500 Index <.SPX> was 0.46 points lower, or 0.05 percent, at 997.02.",
-      "text2": "The technology-laced Nasdaq Composite Index .IXIC was up 7.42 points, or 0.45 percent, at 1,653.44.",
-      "label": 0
-    },
-    {
-      "text1": "the 5 permanent united nations security council members are britain, china, france, russia and the united states.",
-      "text2": "p5+1 members are britain, china, france, russia, germany and the united states.",
-      "label": 1
-    },
-    {
-      "text1": "Is Magical Girl anime genre underrated in America?",
-      "text2": "Why us Magical Girl anime genre underrated in America?",
-      "label": 1
-    },
-    {
-      "text1": "Outrage after reports emerge about 6-year-old Indian girl raped at school",
-      "text2": "Outrage After Indian Girl, 6, Raped at Her School",
-      "label": 1
-    },
-    {
-      "text1": "Python is an interpreted, dynamically typed language.",
-      "text2": "Python is a compiled, statically typed language that compiles to bytecode before execution, similar to Java.",
-      "label": 0
-    },
-    {
-      "text1": "Iran's president condemns use of chemical weapons in Syria",
-      "text2": "Probe alleged use of chemical weapons in Syria",
-      "label": 0
-    },
-    {
-      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
-      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
-      "label": 1
-    },
-    {
-      "text1": "that's what i'm looking for now that's why i was just trying to talk without having to think about what i was saying and uh trying to look over this thing",
-      "text2": "That's not what I'm looking for.",
-      "label": 0
-    },
-    {
-      "text1": "Elegant dining room with wood furniture.",
-      "text2": "An elegant pink dining room with wooden furniture.",
-      "label": 1
-    },
-    {
-      "text1": "This is another game in which lessons and lots of spare money are recommended.",
-      "text2": "They don't offer lessons.",
-      "label": 0
-    },
-    {
-      "text1": "Instead, prosecutors dismissed charges and Rucker left the courtroom a free man.",
-      "text2": "Instead he left the courtroom a free man after authorities dismissed criminal charges.",
-      "label": 0
-    },
-    {
-      "text1": "Restaurants in India: What are the best places for Biryani in Mumbai?",
-      "text2": "Which is the best biryani in India?",
-      "label": 0
-    },
-    {
-      "text1": "How do pure atheists know what is right from wrong? In other words, what is their moral compass?",
-      "text2": "To fellow atheists, agnostics, and deists, do you think there is objective morality, and if so, from what?",
-      "label": 0
-    },
-    {
-      "text1": "Which are the best qualities a person could have?",
-      "text2": "What are some of the best qualities a person should have?",
-      "label": 0
-    },
-    {
-      "text1": "Why was Myanmar separated from India?",
-      "text2": "Why did Myanmar separate from India in 1937?",
-      "label": 1
-    },
-    {
-      "text1": "James Murdoch quits BSkyB",
-      "text2": "James Murdoch quits role at BSkyB",
-      "label": 1
-    },
-    {
-      "text1": "Git is a distributed version control system that tracks changes in source code and allows multiple developers to collaborate on a project.",
-      "text2": "Git provides distributed version control, enabling developers to track code changes, branch independently, and merge contributions from multiple contributors.",
-      "label": 1
-    },
-    {
-      "text1": "What is the meaning of cc in engine?",
-      "text2": "What does CC of an engine indicate?",
-      "label": 1
-    },
-    {
-      "text1": "The center's president, Joseph Torsella, was struck on the head but was able to walk to an ambulance.",
-      "text2": "National Constitution Center President Joseph Torsella was hit in the head and knocked to his knees.",
-      "label": 0
-    },
-    {
-      "text1": "How can someone measure IQ?",
-      "text2": "What is the most accurate way to measure IQ?",
-      "label": 1
-    },
-    {
-      "text1": "The armored man howled in his helm as the hand enclosed, twisting metal and crushing bone.",
-      "text2": "The armored man whooped as his armor failed, and watched as it dropped from his body ineffectively at the unarmed attack.",
-      "label": 0
-    },
-    {
-      "text1": "How and where can I find fuck buddies in Delhi?",
-      "text2": "Where can I find fuck buddies in Delhi?",
-      "label": 1
-    },
-    {
-      "text1": "Only one system of government has ever dealt adequately with the incentive problem for the chief executive, and that's hereditary monarchy.",
-      "text2": "Only a hereditary monarchy has appropriately addressed the competition for chief executive.",
-      "label": 1
-    },
-    {
-      "text1": "Here's what Hatfield writes about what Eufaula told",
-      "text2": "Hatfield wrote about Eufaula s words.",
-      "label": 1
-    },
-    {
-      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
-      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
-      "label": 0
-    },
-    {
-      "text1": "How can one develop logical thinking?",
-      "text2": "What is the best way to develop logical thinking?",
-      "label": 1
-    },
-    {
-      "text1": "If any possible way available to conduct our sport?",
-      "text2": "What happens if citizens continue to use old 500 and 100 notes after Nov 9? We can still exchange those notes till Dec 30.",
-      "label": 0
-    },
-    {
-      "text1": "Man, 19, quizzed over teen murder",
-      "text2": "Man quizzed over Megan-Leigh murder",
-      "label": 1
-    },
-    {
-      "text1": "If someone put a gun to your head and asked you to change your religion, then what would you do?",
-      "text2": "Would police let the criminal get away if he had a gun to someone's head?",
-      "label": 0
-    },
-    {
-      "text1": "A small plane parked at an airfield with a cloudy sky overhead.",
-      "text2": "A small white plane parked in an airport on a cloudy day.",
-      "label": 1
-    },
-    {
-      "text1": "The judge also refused to postpone the trial date of Sept. 29.",
-      "text2": "Obus also denied a defense motion to postpone the Sept. 29 trial date.",
-      "label": 1
-    },
-    {
-      "text1": "The human immune system consists of two main components: the innate immune system, which provides immediate non-specific defence, and the adaptive immune system, which mounts a targeted response.",
-      "text2": "Immunity relies on two systems: the innate immune system offers rapid, generalised protection, while the adaptive immune system produces specific responses to recognised pathogens.",
-      "label": 1
-    },
-    {
-      "text1": "Antibiotic resistance develops when bacteria evolve to survive drug treatment.",
-      "text2": "Compound interest accumulates on both principal and previously earned interest.",
-      "label": 0
-    },
-    {
-      "text1": "and maybe and i knew i wanted to be in engineering so i was looking for a good engineering school so i ended up going to Tech in Lubbock",
-      "text2": "Tech in Lubbock was my first choice for college.",
-      "label": 0
-    },
-    {
-      "text1": "What do non-Indians think about PM ND Modi?",
-      "text2": "What do people of other countries think of Narendra Modi?",
-      "label": 1
-    },
-    {
-      "text1": "Red double decker bus taking on passengers.",
-      "text2": "A red double decker bus is picking up more passengers in a city.",
-      "label": 1
-    },
-    {
-      "text1": "What is the average salary of front-end developer in India?",
-      "text2": "What is the average salary of a UI/UX designer and a front-end developer in India?",
-      "label": 0
-    },
-    {
-      "text1": "The Court in Rust did not place explicit reliance on the rationale that the counseling activities of the doctors under Title X amounted to governmental speech; when interpreting the holding in later cases, however, we have explained Rust on this understanding.",
-      "text2": "The court found no explicit reliance for the rationale.",
-      "label": 1
-    },
-    {
-      "text1": "that's never i mean i understand that they're talking about the job  not the person in the job that's that's always that's always been strange i thought but some women like to fight it",
-      "text2": "I believe they are talking about the individual and not the job.",
-      "label": 0
-    },
-    {
-      "text1": "What if Quora were a country?",
-      "text2": "If Quora were a country, what would it be like?",
-      "label": 1
-    },
-    {
-      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
-      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
-      "label": 0
-    },
-    {
-      "text1": "Have you ever come across a jealous co-worker? If so, how did you handle him/her?",
-      "text2": "How do I handle co-workers who are jealous of me?",
-      "label": 1
-    },
-    {
-      "text1": "The black and white cows pause in front of the gate.",
-      "text2": "The white airplane is flying in the sky.",
-      "label": 0
-    },
-    {
-      "text1": "What do you think about first head transplant surgery?",
-      "text2": "What do you think of the baffling consequences of human head transplant?",
-      "label": 1
-    },
-    {
-      "text1": "Were any TED talks effective at convincing people to volunteer for a cause?",
-      "text2": "Assuming you want to measure a social phenomena, how do you proceed to create a new measurement? Where do you start?",
-      "label": 0
-    },
-    {
-      "text1": "Rebels kill 21 civilians in Syria Alawite village",
-      "text2": "Bomb kills 18 civilians in Afghanistan",
-      "label": 0
-    },
-    {
-      "text1": "Have you ever had sex with an escort?",
-      "text2": "Why do people write so much on Quora while answering the questions?",
-      "label": 0
-    },
-    {
-      "text1": "The girl is riding the horse.",
-      "text2": "The girl is spraying the plants with water.",
-      "label": 0
-    },
-    {
-      "text1": "The little girl played on the grass with a dog and a ball.",
-      "text2": "A baby plays with a dog and ball.",
-      "label": 1
-    },
-    {
-      "text1": "The basilica's highlight, and generally accepted as the work of a young Giotto, the Life of Francis (1296-1304) is movingly celebrated in 28 scenes along the lower tier (starting from the right transept), while 32 frescoes in the upper tier illustrate scenes from the Old and New Testament.",
-      "text2": "The scenes in the lower tier were created by Giotto near the end of his life.",
-      "label": 0
-    },
-    {
-      "text1": "Who are the worst Doctors in KIMS Hospital Hyderabad?",
-      "text2": "What about sony experience?",
-      "label": 0
     },
     {
       "text1": "you know the height that you you set it at so i set it very high and it just picks or it skims the grass it doesn't dig way down deep so i don't have a lot of grass that i uh that i collect",
@@ -561,103 +101,318 @@
       "label": 1
     },
     {
-      "text1": "The French Revolution began in 1789 and ended with Napoleon's rise to power in 1799.",
-      "text2": "The French Revolution started in 1789 and concluded in 1815 with Napoleon's defeat at Waterloo.",
-      "label": 0
-    },
-    {
-      "text1": "Man convicted in Vatican leaks case",
-      "text2": "Butler to be tried in \"Vatileaks\" case",
-      "label": 0
-    },
-    {
-      "text1": "The church is dominated by the massive nave and graceful flying buttresses linking the five chapels to the chancel.",
-      "text2": "The five chapels are linked to the chancel.",
+      "text1": "Significantly , it made no mention of the role of terrorist organisation Jemah Islamiyah , accused of being behind the attacks .",
+      "text2": "The address made no mention of the role of terrorist organisation Jemaah Islamiyah , which was behind the attacks .",
       "label": 1
     },
     {
-      "text1": "Why is scientific notation useful?",
-      "text2": "What are the practical uses of scientific notation? Why is scientific notation so important in modern-day society?",
+      "text1": "A man is riding a horse.",
+      "text2": "A woman is washing a freezer.",
+      "label": 0
+    },
+    {
+      "text1": "yeah yeah really i mean Switzerland is so clean",
+      "text2": "Switzerland is a very well maintained place.",
       "label": 1
     },
     {
-      "text1": "The proportion of people covered by employers dropped from 62.3 percent in 2001 to 61.3 percent last year.",
-      "text2": "The proportion of Americans with insurance from employers declined to 61.3 percent, from 62.6 percent in 2001 and 63.6 percent in 2000.",
-      "label": 0
-    },
-    {
-      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
-      "text2": "In criminal trials, the principle of innocent until proven guilty places the burden of proof on the defendant to demonstrate their innocence.",
-      "label": 0
-    },
-    {
-      "text1": "News of Terrorism and the Israeli-Palestinian Conflict (January 22 ‚Äď 28, 2014)",
-      "text2": "News of Terrorism and the Israeli-Palestinian Conflict (July 31 ‚Äď August 6, 2013)",
-      "label": 0
-    },
-    {
-      "text1": "It would serve no real purpose.",
-      "text2": "It could be done, but it wouldn't do anything for us.",
-      "label": 0
-    },
-    {
-      "text1": "In 1670 the Spanish officially ceded Jamaica to British rule as part of the Treaty of Madrid, and the British began a systematic process of settlement, offering land and aid to prospective settlers.",
-      "text2": "Britain rewarded Jamaican settlers with land after Spain ceded the island in 1670.",
+      "text1": "Pro-Russian troops opened fire on Ukrainian positions on 33 occasions , killing one civilian , two policemen and wounding three Ukrainian soldiers .",
+      "text2": "On 33 occasions , pro-Russian troops opened fire in Ukrainian positions , killing one civilian , two policemen , and wounding three Ukrainian soldiers .",
       "label": 1
     },
     {
-      "text1": "What Jimmy Wales think about Quora?",
-      "text2": "\"What does Jimmy Wales think of all the \"\"What does Jimmy Wales think of\"\" questions on Quora?\"",
+      "text1": "Is there a non-surgical way to permanently and naturally change your voice?",
+      "text2": "Is there a way, surgically or otherwise, to lower the volume of your voice?",
       "label": 0
     },
     {
-      "text1": "Five more human cases of West Nile virus, were reported by the Mesa County Health Department on Wednesday.",
-      "text2": "As of this week, 103 human West Nile cases in 45 counties had been reported to the health department.",
+      "text1": "His birth on 4 May is revealed today in the journal Science .",
+      "text2": "The scientists ' research is being published today in the journal Science ( www.sciencemag.org ) .",
       "label": 0
     },
     {
-      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
-      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "text1": "the problem isn't who has money.",
+      "text2": "the problem is who doesn't have money.",
+      "label": 0
+    },
+    {
+      "text1": "\" The accuser arrived at the hospital wearing yellow knit panties - with someone else 's semen and sperm in them , not that of Mr. Bryant , \" Mackey hammered triumphantly .",
+      "text2": "\" The accuser arrived at the hospital wearing panties with someone else 's semen and sperm in them , not that of Mr. Bryant , correct ? \"",
       "label": 1
     },
     {
-      "text1": "Many worksharing discounts evoke responses based on more than one of the situations described above.",
-      "text2": "Several of the described situations reflect the responses.",
+      "text1": "Rock singer Ozzy Osbourne , recovering from a quad bike crash , is conscious and joking in his hospital bed , his daughter Kelly said tonight .",
+      "text2": "Doctors hope rock singer Ozzy Osbourne , who is recovering from a quad bike crash , will begin breathing unassisted again soon , they said today .",
+      "label": 0
+    },
+    {
+      "text1": "What would ISPs block if we didnt have net neutrality?",
+      "text2": "What would happen if ISPs blocked something like Facebook or Google in the absence of net neutrality?",
       "label": 1
     },
     {
-      "text1": "Four Asian young people sitting in a den or living room.",
-      "text2": "A girl sitting in a living chair.",
-      "label": 0
-    },
-    {
-      "text1": "When does it make sense to purchase travel insurance?",
-      "text2": "What are some situations where it definitely makes sense to buy travel insurance?",
+      "text1": "What is the scope of Human Resources Management in Australia?",
+      "text2": "What is the scope of Human resource management in Australia?",
       "label": 1
     },
     {
-      "text1": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) flute?",
-      "text2": "Can anyone share the notes as well as Raga/Thala for playing the Game of Thrones soundtrack on the Indian (Carnatic) Violin?",
-      "label": 0
-    },
-    {
-      "text1": "Son of top Muslim Brotherhood leader killed",
-      "text2": "Egypt arrests Muslim Brotherhood leader Badie",
-      "label": 0
-    },
-    {
-      "text1": "Resurrect all the Presidents.",
-      "text2": "Bring back every President.",
+      "text1": "What if Quora were a country?",
+      "text2": "If Quora were a country, what would it be like?",
       "label": 1
     },
     {
-      "text1": "Kilims are small rugs that are woven rather than knotted, and have no pile; a cicim is a kilim with embroidered decoration.",
-      "text2": "Kilim rugs are always very small in size.",
+      "text1": "What is the difference between molecular weight and molar mass?",
+      "text2": "How do molar mass and mole ratio differ?",
       "label": 0
     },
     {
-      "text1": "A man and woman are driving down the street in a jeep.",
-      "text2": "A man and woman are driving down the road in an open air vehicle.",
+      "text1": "She said Nelson heard someone shout , \" Let 's get the Jew ! \"",
+      "text2": "Mr. Nelson heard people shout : \" There 's a Jew .",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
+      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "label": 0
+    },
+    {
+      "text1": "How do you convert HTML to JSP? What are some tips?",
+      "text2": "How can I change html pages to jsp?",
+      "label": 0
+    },
+    {
+      "text1": "The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
+      "text2": "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
+      "label": 0
+    },
+    {
+      "text1": "Why are Iranian people so religious?",
+      "text2": "Do you consider Iranian people as religious? What is your source?",
+      "label": 1
+    },
+    {
+      "text1": "The transaction will expand Callebaut 's sales revenues from its consumer products business to 45 percent from 23 percent .",
+      "text2": "The transaction will expand Callebaut 's sales revenues from its consumer products business by around 45 percent to some one-third of total sales .",
+      "label": 0
+    },
+    {
+      "text1": "a key european arms control treaty must be maintained.",
+      "text2": "the cfe treaty is a key european arms control treaty.",
+      "label": 0
+    },
+    {
+      "text1": "What do you guys think of all the predictions made by Baba Vanga?",
+      "text2": "What do you think about Baba Vanga's predictions?",
+      "label": 1
+    },
+    {
+      "text1": "When he was replaced by Plettner in 1981 , Karlheinz Kaske became the first chairman of the supervisory board not to be a member of the Siemens family .",
+      "text2": "In 1981 , when he succeeded Karlheinz Kaske , Plettner became the first Chairman of the Supervisory Board who was not a member of the Siemens family .",
+      "label": 0
+    },
+    {
+      "text1": "\" Of course I want to win again , but I think is worse when you never won before because you are very anxious , \" he says .",
+      "text2": "\" Of course , I want to win again , but it is worse when you have never won because you are anxious , \" he said .",
+      "label": 1
+    },
+    {
+      "text1": "World powers and Iran to resume expert nuclear talks on Dec. 30",
+      "text2": "Iran nuclear experts, world powers to resume talks next week",
+      "label": 1
+    },
+    {
+      "text1": "Which brings us to Waco, where the symbolism and substance of Reno collide most alarmingly.",
+      "text2": "Waco has no similarities to Reno at all.",
+      "label": 0
+    },
+    {
+      "text1": "Group of elderly people sitting around a table.",
+      "text2": "A group of elderly people pose around a dining table.",
+      "label": 0
+    },
+    {
+      "text1": "Out of the nearly $ 20 billion , $ 18.6 billion is earmarked for reconstruction of Iraq and $ 1.2 billion for Afghanistan .",
+      "text2": "The $ 87 billion budget includes $ 51 billion for military operations in Iraq , another $ 20 billion for reconstruction and about $ 11 billion for Afghanistan .",
+      "label": 0
+    },
+    {
+      "text1": "How can I draw a cartoon human face?",
+      "text2": "How do I draw a human face?",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen.",
+      "text2": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen. It takes place primarily in the roots of plants, where chlorophyll is most concentrated.",
+      "label": 0
+    },
+    {
+      "text1": "Why do we need initramfs/initrd to boot a Linux system? Can't we store all device and FS drivers directly into the Kernel?",
+      "text2": "Why don't we store device and FS drivers directly into the Linux kernel instead of keeping them in the initramfs?",
+      "label": 1
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes. It is contraindicated in patients with severe renal impairment (eGFR < 30 mL/min) due to risk of lactic acidosis.",
+      "text2": "Metformin is a first-line treatment for type 2 diabetes. It is generally safe for patients with kidney disease of any severity and is also effective for type 1 diabetes.",
+      "label": 0
+    },
+    {
+      "text1": "Australia leader ousted in snap leadership vote",
+      "text2": "Australian PM Gillard ousted in leadership vote",
+      "label": 1
+    },
+    {
+      "text1": "This was the first season for the Giants after the AFL - NFL merger , in which ten American Football League teams from the National Football League have joined .",
+      "text2": "This was the first season for the American Football League after the AFL -- Giants merger , in which ten NFL teams joined the National Football League .",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis: light-dependent reactions occur in the thylakoid membranes; the Calvin cycle occurs in the stroma.",
+      "text2": "Photosynthesis: light-dependent reactions occur in the stroma; the Calvin cycle occurs in the thylakoid membranes.",
+      "label": 0
+    },
+    {
+      "text1": "How can I improve my decision making skills?",
+      "text2": "I am very poor in taking decisions in my life and my past experience proved it. How can I improve my decision making skills?",
+      "label": 1
+    },
+    {
+      "text1": "Machine translation systems like Google Translate use neural networks trained on large bilingual corpora to convert text from one language to another.",
+      "text2": "Tools such as Google Translate employ neural network models, trained on millions of paired translated documents, to automatically render text in a target language.",
+      "label": 1
+    },
+    {
+      "text1": "But he is the only candidate who has won national labor endorsements so far , picking up his 11th union on Tuesday when the United Steelworkers of America endorsed him .",
+      "text2": "But he is the only candidate who has won national labor endorsements so far , picking up his 11th on Tuesday .",
+      "label": 0
+    },
+    {
+      "text1": "Do you think Global warming will end the world?",
+      "text2": "Do you think the end is near? Global Warming!",
+      "label": 1
+    },
+    {
+      "text1": "He fought Wyatt Earp in a bout refereed by a young 21-year-old Mike Donovan on July 4 , 1868 or 1869 in Cheyenne , Wyoming .",
+      "text2": "He fought Mike Donovan in a battle headed by a young 21-year-old Wyatt Earp on 4 July 1868 or 1869 in Cheyenne , Wyoming .",
+      "label": 0
+    },
+    {
+      "text1": "Roberts said his committee was briefed about a week ago about the likelihood of a major attack in Saudi Arabia .",
+      "text2": "Roberts said on Fox News Sunday that said his committee was briefed about a week ago about the likelihood of an attack in Saudi Arabia .",
+      "label": 1
+    },
+    {
+      "text1": "The bonds traded to below 60 percent of face value earlier this year .",
+      "text2": "They traded down early this year to 60 percent of face value on fears Aquila may default .",
+      "label": 0
+    },
+    {
+      "text1": "As a result of the painstaking centimeter-by-centimeter recovery of the fragmentary but still powerful traces of the real Leonardo, we can now see, for example, that Philip (third to the right) has an expression of acute grief rather than the simpering pathos left by restorers who presumed to improve on the original.",
+      "text2": "Previous generations of restorers left Leonardo's vision entirely intact.",
+      "label": 0
+    },
+    {
+      "text1": "What are the strange phobias people have?",
+      "text2": "What are the different kinds of phobia that people have?",
+      "label": 1
+    },
+    {
+      "text1": "Monday ratcheted up its database software line with the introduction of a new suite that automates the process of defining , describing and indexing information contained in the database .",
+      "text2": "DB2 Cube Views automates the process of creating metadata by defining , describing , and indexing information in a database .",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "Completed in 1586, it was the center of Sephardic worship for centuries.",
+      "text2": "It was central to Sephardic worship and finished in 1586.",
+      "label": 1
+    },
+    {
+      "text1": "Dotson was taken to Chester River Hospital Center where he stayed overnight .",
+      "text2": "Dotson was taken to an area hospital for a psychiatric evaluation .",
+      "label": 0
+    },
+    {
+      "text1": "The broader Standard & Poor 's 500 Index edged up 1.01 points , or 0.1 percent , at 1,012.67 .",
+      "text2": "But the technology-laced Nasdaq Composite Index was up 5.91 points , or 0.35 percent , at 1,674.35 .",
+      "label": 0
+    },
+    {
+      "text1": "Can Russia with China defeat the USA?",
+      "text2": "Could the US defeat Russia and China in the 3rd war?",
+      "label": 1
+    },
+    {
+      "text1": "Part of the barley is roasted to give Guinness its dark colour and characteristic taste .",
+      "text2": "A portion of the barley is roasted to give Guinness its dark colour and characteristic taste .",
+      "label": 1
+    },
+    {
+      "text1": "How does Prof. Brijesh Kumar feel when a student bunks his class?",
+      "text2": "How do Brijesh Kumar feel when students bunk his class?",
+      "label": 1
+    },
+    {
+      "text1": "Recursion without a proper base case leads to infinite recursion and a stack overflow error.",
+      "text2": "If a recursive function never reaches its base case, it calls itself indefinitely until the call stack overflows.",
+      "label": 1
+    },
+    {
+      "text1": "A dog sat at the counter of a store.",
+      "text2": "The dog is standing at the counter.",
+      "label": 0
+    },
+    {
+      "text1": "Earlier this month, RIM had said it expected to report second-quarter earnings of between 7 cents and 11 cents a share.",
+      "text2": "Excluding legal fees and other charges it expected a loss of between 1 and 4 cents a share.",
+      "label": 0
+    },
+    {
+      "text1": "A man on the back seat of a red tandem bicycle.",
+      "text2": "A man is alone on the back of a tandem bicycle.",
+      "label": 1
+    },
+    {
+      "text1": "Putin 'Wins Russian Presidential Election'",
+      "text2": "Putin 'wins' Russia's presidential election",
+      "label": 1
+    },
+    {
+      "text1": "the art's in humanity should be privately funded",
+      "text2": "Arts should get funding from the public, but not the government.",
+      "label": 0
+    },
+    {
+      "text1": "The catalog number for the Limited Edition is GNCX-1006 , whereas the regular edition is GNCX-1005 .",
+      "text2": "The catalog number for the limited edition is GNCX-1006 , while the regular edition is GNCX-1005",
+      "label": 1
+    },
+    {
+      "text1": "What is the best way to know if I have to pay taxes?",
+      "text2": "How do I pay my taxes?",
+      "label": 0
+    },
+    {
+      "text1": "Acting Police Chief Francisco Ortiz said the explosion was being treated as a criminal matter , but no possibility had been ruled out .",
+      "text2": "Acting New Haven Police Chief Francisco Ortiz said police were treating the explosion as a criminal matter .",
+      "label": 0
+    },
+    {
+      "text1": "`` All Along the Watchtower '' was released in 2002 and remixed on The Paperboys ' greatest hits album `` Tenure '' .",
+      "text2": "`` All Along the Watchtower '' was released in 2002 and remixed on The Paperboys ' ; biggest hits - Album `` Tenure '' .",
+      "label": 1
+    },
+    {
+      "text1": "He was chosen before the next match at Lord and was never injured again .",
+      "text2": "He was chosen before the next match at Lord 's , and was never injured again .",
+      "label": 1
+    },
+    {
+      "text1": "And in the Muslim world , Osama bin Laden is becoming more of a hero , not less of one .",
+      "text2": "And in the Muslim world , Osama bin Laden , the missing leader of the al-Qaida terrorist network , is becoming more of a hero , not less of one .",
       "label": 1
     },
     {
@@ -666,174 +421,239 @@
       "label": 0
     },
     {
-      "text1": "What's the creepiest thing you have heard a child say?",
-      "text2": "What's the creepiest thing that a child has ever said to you?",
+      "text1": "Assuming the bare-bones basic functions of government are to be maintained, where then will be the room for any border-control guards or anti-terrorism measures, or Head Start or education grants or peanut subsidies or national parks, or disaster relief--let alone the enhancements that Congress deemed so necessary this October?",
+      "text2": "There is not any room for anymore functions.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is cutting an onion.",
+      "text2": "A woman is cutting meat.",
+      "label": 0
+    },
+    {
+      "text1": "We have examples of these in the giant outer planets.",
+      "text2": "There has never been case of the phenomenon happening;",
+      "label": 0
+    },
+    {
+      "text1": "Under the direction of George D. Widener , the current 16th Street Clubhouse was built by the architect Horace Trumbauer .",
+      "text2": "Under the leadership of George D. Widener , the current 16th Street Clubhouse was built by architect Horace Trumbauer .",
       "label": 1
     },
     {
-      "text1": "Now, Blanca's American husband, 63-year-old Roger Lawrence Strunk, faces a murder indictment issued in February by the Philippine government, which says he's the leading suspect.",
-      "text2": "Now, Blanca's husband, 63-year-old Roger Lawrence Strunk of Tracy, faces a murder indictment issued by the Philippine government in February.",
+      "text1": "The Bs is first raised in the 1805 season and the team was recorded sporadically until the 1832 season .",
+      "text2": "The Bs were raised first in the 1805 season and the team was recorded sporadically until the 1832 season .",
       "label": 1
     },
     {
-      "text1": "How can the structure of the villi in animals be described?",
-      "text2": "How can the structure of the villi in humans be described?",
-      "label": 0
-    },
-    {
-      "text1": "What is the latest research topic in cloud computing security?",
-      "text2": "What are the latest research topics on cloud computing?",
-      "label": 0
-    },
-    {
-      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
-      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
-      "label": 0
-    },
-    {
-      "text1": "If a Trump/Hitler type of politician emerged in Mexico, what would he do to amplify México?",
-      "text2": "What would happen, legally speaking, if Mexico overthrew its government and requested to be a part of the United States?",
-      "label": 0
-    },
-    {
-      "text1": "Further out the curve, the benchmark 10-year note US10YT=RR shed 25/32 in price, taking its yield to 3.26 percent from 3.17 percent.",
-      "text2": "Early Wednesday, the benchmark 10-year US10YT=RR had lost 16/32 in price, driving its yield up to 3.33 percent from 3.26 percent late Tuesday.",
-      "label": 0
-    },
-    {
-      "text1": "In Vienna, the IAEA said ElBaradei would accept the invitation, although no date had yet been set.",
-      "text2": "In Vienna, the International Atomic Energy Agency said on Monday ElBaradei had accepted Iran's invitation, but said no date had yet been set.",
-      "label": 0
-    },
-    {
-      "text1": "yeah and then he'd have to pay it all",
-      "text2": "He would have to pay the whole thing.",
+      "text1": "Economists said that raised the odds of a rate cut at the Fed 's next meeting on June 24-25 .",
+      "text2": "Economists said those concerns raised the odds that the Fed might reduce rates at its next meeting on June 24-25 .",
       "label": 1
     },
     {
-      "text1": "Why bother with the art on its terms when you can have it on your own?",
-      "text2": "Isn't taking art on your terms the best thing to do?",
+      "text1": "A man is running on a field.",
+      "text2": "A man climbs up a rope.",
+      "label": 0
+    },
+    {
+      "text1": "In an era of stronger productivity growth, which may just now be showing up in statistics, the speed limit is probably 3% to 3 e% a year.",
+      "text2": "Productivity growth has been strong even tho it has been hard to see in statistics.",
       "label": 1
     },
     {
-      "text1": "US Election: Mitt Romney concedes defeat as Barack Obama wins second term",
-      "text2": "Romney concedes election to Obama in phone call",
+      "text1": "Thermodynamics' second law states that the total entropy of an isolated system can never decrease over time.",
+      "text2": "According to the second law of thermodynamics, entropy in a closed system always tends to increase or remain constant — it cannot spontaneously decrease.",
       "label": 1
     },
     {
-      "text1": "yeah yeah Show Biz that's the name of it",
-      "text2": "Yeah, Show Biz that's the name",
+      "text1": "Adrin saw the horses first, huge black stallions ill-suited for the desert.",
+      "text2": "Adrin saw some huge black horses.",
       "label": 1
     },
     {
-      "text1": "Why Indore is fashionable women?",
-      "text2": "What is the appeal of handbags?",
-      "label": 0
-    },
-    {
-      "text1": "France, on the other hand, has densely populated cities but no areas as sparsely settled as in the United States.",
-      "text2": "There are no sparsely settled areas in France.",
-      "label": 0
-    },
-    {
-      "text1": "When can we expect global warming to be the most pertinent threat to destroy life on Earth?",
-      "text2": "What does global warming mean?",
-      "label": 0
-    },
-    {
-      "text1": "What it the total number of domains registered with Infibeam's .ooo gTLD?",
-      "text2": "Is there any big drawback to registering a new gTLD domain for my startup, like .direct?",
-      "label": 0
-    },
-    {
-      "text1": "Natural selection drives evolution by favouring heritable traits that increase reproductive success.",
-      "text2": "The SOLID principles are five design guidelines that promote maintainable object-oriented software.",
-      "label": 0
-    },
-    {
-      "text1": "Why does Omegle always make me solve a Captcha before every chat?",
-      "text2": "How do I find girls on Omegle always?",
-      "label": 0
-    },
-    {
-      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
-      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
-      "label": 0
-    },
-    {
-      "text1": "North Korea's Kim hails execution of powerful uncle",
-      "text2": "North Korean intrigue: The execution of power",
-      "label": 0
-    },
-    {
-      "text1": "A yellow dog is playing in a grassy area near flowers.",
-      "text2": "A girl is playing on a swing.",
-      "label": 0
-    },
-    {
-      "text1": "\"Why is \"\"Best Regards\"\" or \"\"Kind Regards\"\" considered to be bad English?\"",
-      "text2": "What is the best way of English writing? Kindly explain KISS principle in detail?",
-      "label": 0
-    },
-    {
-      "text1": "Climate change refers to long-term shifts in global temperatures and weather patterns, primarily caused by human activities since the Industrial Revolution.",
-      "text2": "Long-term changes in temperature and weather patterns — driven mainly by industrialisation and fossil fuel use — constitute what we call climate change.",
+      "text1": "We in Britain think differently to Americans.",
+      "text2": "Originally Posted by zaf We in Britain think differently to Americans.",
       "label": 1
     },
     {
-      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
-      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
       "label": 0
     },
     {
-      "text1": "No, I show you are willfully ignorant.",
-      "text2": "LOL, you are so ignorant.",
+      "text1": "Platinum prices soared to 23-year highs earlier this year after President Bush ( news - web sites ) proposed investing $ 1.2 billion for research on fuel cell-powered vehicles .",
+      "text2": "Platinum prices soared to 23-year highs earlier this year after U.S. President George W. Bush proposed investing $ 1.2 billion for research on fuel cell-powered vehicles .",
       "label": 1
     },
     {
-      "text1": "How do I quit smoking?",
-      "text2": "How did you quit/stop smoking?",
-      "label": 1
-    },
-    {
-      "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
-      "text2": "I knew that he would understand what I was saying.",
-      "label": 1
-    },
-    {
-      "text1": "Which is the best line/phrase/para of Madhushala by Harivansh Rai Bachchan?",
-      "text2": "Urdu Poetry: What is the best two liner by Rahat Indori?",
+      "text1": "It would serve no real purpose.",
+      "text2": "It could be done, but it wouldn't do anything for us.",
       "label": 0
     },
     {
-      "text1": "Where should I move my iTunes library?",
-      "text2": "How do I move my iTunes library to an external drive?",
+      "text1": "It is found only in Yunnan and its tributaries in the Dianchi - Lake , China .",
+      "text2": "It is found only in Lake Dianchi and its tributaries in Yunnan , China .",
       "label": 0
     },
     {
-      "text1": "A boy is playing piano and singing.",
-      "text2": "A pig is agitating a lion.",
+      "text1": "Pistorius officer dropped from case",
+      "text2": "Pistorius officer on attempted murder charges",
       "label": 0
     },
     {
-      "text1": "Is creating satelite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
-      "text2": "Is creating satellite blogs and posting SEO-friendly posts considered black-hat SEO technique?",
-      "label": 1
-    },
-    {
-      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
-      "text2": "def factorial(n):\n    if n == 0:\n        return 0\n    return n + factorial(n - 1)",
+      "text1": "Thorn led them into a copse of dead trees, thick branches clutching for life in a canyon that provided none.",
+      "text2": "The canyon was filled with lively green trees with bountiful branches.",
       "label": 0
     },
     {
-      "text1": "4 million - the amount of funding Mayor Bloomberg proposed for the Legal Aid Society by sharply curtailing compensation for court-appointed lawyers under the 18-B program.",
-      "text2": "Mayor Bloomberg proposed 4 million dollars for funding for the Legal Aid Society.",
+      "text1": "Nearby, the fine National Maritime Museum in Allenby Street charts 5,000 years of Red Sea and Mediterranean seafaring, while the Clandestine Immigration and Naval Museum documents the defiance of the British blockade to smuggle immigrants into Israel.",
+      "text2": "The National Maritime Museum was built in 1978 by the British.",
+      "label": 0
+    },
+    {
+      "text1": "Households send and receive mail and their number is expected to affect the demand for mail services in a positive way.",
+      "text2": "Households don't send and receive mail",
+      "label": 0
+    },
+    {
+      "text1": "Nobel author Doris Lessing dies at 94",
+      "text2": "Nobel laureate Doris Lessing dies at 94",
       "label": 1
     },
     {
-      "text1": "\"There is no doubt about the chemical programme, biological programme, indeed nuclear programme, indeed all that was documented by the UN,\" he said.",
-      "text2": "He added: \"There is no doubt about the chemical programme, the biological programme and indeed the nuclear weapons programme.",
+      "text1": "Venezuelan president to visit China",
+      "text2": "Senegalese president to visit China",
+      "label": 0
+    },
+    {
+      "text1": "From London , both sailed on to Quebec .",
+      "text2": "Both sailed to London from Quebec .",
+      "label": 0
+    },
+    {
+      "text1": "He attended training camps with the NHL Carolina Hurricanes in 2011 , but was sent to Florida , then to Charlotte , for training camps .",
+      "text2": "He attended 2011 training camp with the NHL 's Carolina Hurricanes , but was sent to Florida , then to Charlotte , for training camps .",
       "label": 1
+    },
+    {
+      "text1": "IBM said it believes that the investigation arose from a separate SEC investigation of a customer of IBM 's Retail Store Solutions unit , which markets and sells point-of-sale products .",
+      "text2": "The company added : \" IBM believes that the investigation arises from a separate investigation by the SEC of a customer of IBM 's Retail Store Solutions unit .",
+      "label": 1
+    },
+    {
+      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
+      "text2": "Git is a distributed version control system that tracks changes in source code.",
+      "label": 0
+    },
+    {
+      "text1": "The retailer said it came to the decision after hearing the opinions of customers and associates .",
+      "text2": "The decision came after \" listening to our customers and associates , \" Melissa Berryhill , a spokeswoman for Wal-Mart , said .",
+      "label": 1
+    },
+    {
+      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
+      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "label": 1
+    },
+    {
+      "text1": "Many central government agencies are located in the city of Taipei , because of its proximity to the capital , New Taipei City .",
+      "text2": "Many central government agencies are located in New Taipei City , owing to the proximity to the capital , Taipei City .",
+      "label": 0
+    },
+    {
+      "text1": "What's the decision that changed your whole life?",
+      "text2": "Which incident has changed your life?",
+      "label": 1
+    },
+    {
+      "text1": "Why do you love living in Georgia?",
+      "text2": "What do you love about the state of Georgia?",
+      "label": 0
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
+      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "label": 1
+    },
+    {
+      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
+      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "label": 0
+    },
+    {
+      "text1": "Who won the second debate?",
+      "text2": "What are your thoghts on the second presidential debate?",
+      "label": 1
+    },
+    {
+      "text1": "Kissell was signed as an infielder in 1940 by Branch Rickey , and spent 69 years with the Cardinals organization .",
+      "text2": "Rickey was contracted by Kissell in 1940 as an infielder and spent 69 years with the Cardinals organization .",
+      "label": 0
+    },
+    {
+      "text1": "\" I 'm quite positive about it except I wouldn 't want it to cut across anything now occurring and she accepts that , \" he said .",
+      "text2": "\" I 'm quite positive about it , except that I would not want to cut across things that are now occurring , \" he said .",
+      "label": 0
+    },
+    {
+      "text1": "The first main span was positioned in 1857 and the finished bridge was opened on 2 May 1859 by Prince Albert .",
+      "text2": "The first main span was completed in 1857 and the positioned bridge was opened by Prince Albert on 2 May 1859 .",
+      "label": 0
+    },
+    {
+      "text1": "Projections based on intermediate assumptions of the 2001 HI Trustees' Report.",
+      "text2": "Projections are based on attendee numbers of Disney Land.",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law states that objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "Newton's third law states that for every action there is an equal and opposite reaction, explaining how rockets propel themselves in space.",
+      "label": 0
+    },
+    {
+      "text1": "AMC has since asked the experienced Fluor company of the US to produce a detailed costing of the project , but the report is still two weeks away .",
+      "text2": "AustMag has since asked the experienced US company Fluor to produce a detailed costing of the project but the report is still two weeks away .",
+      "label": 1
+    },
+    {
+      "text1": "The Research Institute of Organic Agriculture is located in Frick , Switzerland with branches in Germany and Austria ( and projects world-wide ) .",
+      "text2": "The Research Institute of Organic Agriculture is located in Germany and Austria with branches in Frick , Switzerland ( and projects worldwide ) .",
+      "label": 0
+    },
+    {
+      "text1": "After Mao 's death in 1976 , Madame Mao was sentenced to life imprisonment for her role in the oppressive Cultural Revolution .",
+      "text2": "After Mao 's death in 1976 , she was tried and sentenced to death , later commuted to life .",
+      "label": 0
+    },
+    {
+      "text1": "The preamble to the final rule indicates that EPA evaluated three different methodologies for implementation.",
+      "text2": "Is indicated that EPA evaluated, for implementation, four different methodologies.",
+      "label": 0
+    },
+    {
+      "text1": "A man wearing an orange coat speaks to another as they walk in the snow.",
+      "text2": "A man and woman dressedin old fashion clothing sit outside at a table.",
+      "label": 0
+    },
+    {
+      "text1": "Two kids are playing in a swimming pool with a green colored crocodile float.",
+      "text2": "Two kids push an inflatable crocodile around in a pool.",
+      "label": 1
+    },
+    {
+      "text1": "Excluding legal fees and other charges it expected a loss of between 1 and 4 cents a share .",
+      "text2": "Excluding litigation charges it made a profit of $ 7.8 million , or 10 cents a share .",
+      "label": 0
+    },
+    {
+      "text1": "\"We believe that it is not necessary to have a divisive confirmation fight over a Supreme Court appointment,\" Daschle wrote.",
+      "text2": "\"We believe that it is not necessary to have a divisive confirmation fight,\" Daschle of South Dakota wrote the Republican president.",
+      "label": 1
+    },
+    {
+      "text1": "During summer, the terrain is parched, while at other times of the year it's often covered with snow.",
+      "text2": "All year round, the area is dry and desert-like.",
+      "label": 0
     },
     {
       "text1": "What is the weirdest question you have come across on Quora?",
@@ -841,13 +661,153 @@
       "label": 1
     },
     {
-      "text1": "4 million in annual state funding for civil legal services - nearly half of the state's yearly contribution to legal services programs statewide.",
-      "text2": "There is no funding available for civil legal services.",
+      "text1": "Iran Nuclear Talks Enter Third Day",
+      "text2": "Iran nuclear talks enter crucial third day",
+      "label": 1
+    },
+    {
+      "text1": "A woman is peeling a potato.",
+      "text2": "A woman peels a potato.",
+      "label": 1
+    },
+    {
+      "text1": "That's not the Moloch scene, though.",
+      "text2": "This is the Moloch scene.",
       "label": 0
     },
     {
-      "text1": "Shakespeare was born in Stratford-upon-Avon in 1564 and is widely considered the greatest playwright in the English language.",
-      "text2": "Born in Stratford-upon-Avon in 1564, William Shakespeare is broadly regarded as the most important writer in the English literary tradition.",
+      "text1": "A woman is grating onion.",
+      "text2": "A woman grates onions.",
+      "label": 1
+    },
+    {
+      "text1": "Field Marshal The Marquis was a Japanese field marshal and leading figure in the early Imperial Japanese Army .",
+      "text2": "The Marquis was a leading field marshal and early figure in the Japanese Imperial Japanese Army .",
+      "label": 0
+    },
+    {
+      "text1": "Throughout the port is seized by the Hadi loyalists , the Houthi fighters along with the popular committed have managed to conduct some attacks in Midi area .",
+      "text2": "Throughout the port is committed by the Hadi loyalists , the Houthi - fighters have managed to conduct some attacks in the Midi area .",
+      "label": 0
+    },
+    {
+      "text1": "That is, as Reischauer quickly adds, if budget balance is your prime desire and you believe that cuts in discretionary spending are the way to go.",
+      "text2": "Cutting discretionary spending is what you believe in if your primary interest is balancing the budget according to Reischauer.",
+      "label": 1
+    },
+    {
+      "text1": "Prokowo is a non-operational PKP railway station in Prokowo ( Pomeranian Voivodship ) , Poland .",
+      "text2": "Prokowo is a non-operational PKP railway station in Pomeranian Voivodeship ( Prokowo ) , Poland .",
+      "label": 1
+    },
+    {
+      "text1": "i know it was the s tupidest thing i why didn't someone tell me that",
+      "text2": "I feel stupid for not knowing that.",
+      "label": 0
+    },
+    {
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023.",
+      "text2": "Global average temperatures have risen approximately 2.5 °C above pre-industrial levels as of 2023, already exceeding the Paris Agreement target.",
+      "label": 0
+    },
+    {
+      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
+      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "label": 0
+    },
+    {
+      "text1": "What are the signs of a poorly-written scientific paper?",
+      "text2": "What are some examples of well-written CS papers?",
+      "label": 0
+    },
+    {
+      "text1": "Peterson was arrested near Torrey Pines Golf Course in La Jolla on April 18 , the day DNA testing identified the bodies .",
+      "text2": "Peterson , 30 , was arrested in La Jolla April 18 after the two bodies were identified through DNA tests .",
+      "label": 1
+    },
+    {
+      "text1": "Who is Princess Rajyashree of Bikaner's husband?",
+      "text2": "Why don't the S W Monsoons shed their moisture on Rajasthan and Punjab in the same way they shed on UP and Bihar?",
+      "label": 0
+    },
+    {
+      "text1": "What do Americans think about workarounds of life which can be used only by Indians?",
+      "text2": "CAN U PLZ GUIDE ME for CLEARING POSTPAYMENT SCALE 1 exam?",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics resistance arises when bacteria evolve mechanisms to survive exposure to drugs that previously killed them.",
+      "text2": "When bacteria develop the ability to withstand antibiotic treatment through mutation or gene transfer, antibiotic resistance results.",
+      "label": 1
+    },
+    {
+      "text1": "The area is connected to the internal Nevada Test Site ( NTS ) road network , with paved roads leading west to Mercury and south to Yucca Flat .",
+      "text2": "The area is connected to the internal road network of the Nevada Test Site ( NTS ) , with paved roads leading to the west to Mercury and south to Yucca Flat .",
+      "label": 1
+    },
+    {
+      "text1": "Percy Hansen and Bryon Hansen bought the `` Jamestown Alert '' in 1925 from William Kellogg .",
+      "text2": "William Kellogg bought the `` Jamestown Alert '' by Percy Hansen and Bryon Hansen in 1925 .",
+      "label": 0
+    },
+    {
+      "text1": "I dare say he soaked fly paper, as I told you at the beginning.\"",
+      "text2": "He didn't use soaked fly paper.",
+      "label": 0
+    },
+    {
+      "text1": "Not to accuse anyone of Stephen Glassism, but I'd love to see Wolff post those copious notes on his promotional Web site, www.burnrate.com.",
+      "text2": "If Wolff does not provide us with his notes, it means that he is in the same category as Stephen Glass.",
+      "label": 0
+    },
+    {
+      "text1": "Nationalism is nationalism , which claims that Romanians are a nation and promotes the cultural unity of the Romanians .",
+      "text2": "Romanian nationalism promotes nationalism , which claims that Romanians are a nation and the cultural unity of the Romanians .",
+      "label": 0
+    },
+    {
+      "text1": "Bharathiraja was first introduced by Karthik in the film `` Alaigal Oivathillai '' .",
+      "text2": "First Bharathiraja was presented in the film `` Alaigal Oivathillai '' by Karthik .",
+      "label": 1
+    },
+    {
+      "text1": "The `` Friends of the Art and Design School of Putney '' protects the school and promotes the interests of the students .",
+      "text2": "The `` Friends of the Art and Design School of Putney '' promotes the school and protects the interests of the current students .",
+      "label": 0
+    },
+    {
+      "text1": "Breathe In, Breathe Out, Move On.",
+      "text2": "buwhahahaha Breathe In, Breathe Out, Move On.",
+      "label": 1
+    },
+    {
+      "text1": "Myanmar's pro-democracy leader Aung San Suu Kyi will return home late Friday but will remain in detention after recovering from surgery at a Yangon hospital, her personal physician said.",
+      "text2": "Myanmar's pro-democracy leader Aung San Suu Kyi will be kept under house arrest following her release from a hospital where she underwent surgery, her personal physician said Friday.",
+      "label": 1
+    },
+    {
+      "text1": "If you wish to access the encrypted guide on GAO's Web site, please send your request via e-mail to digitalguide@gao.gov.",
+      "text2": "You can request access the encrypted guide by sending an email.",
+      "label": 1
+    },
+    {
+      "text1": "He died on 23 April 1881 in Newtown ( today Elmhurst Station ) , Flushing , Long Island , New York .",
+      "text2": "He died in Long Island , New York ( now Elmhurst Station ) , Flushing , Newtown , April 23 , 1881 .",
+      "label": 0
+    },
+    {
+      "text1": "The industry censor forbade the sexual innuendo contained in the play and would not allow the characters to sleep together .",
+      "text2": "The industry censor forbade the sexual innuendo of the play and would not allow Ewell 's character to sleep with Monroe 's .",
+      "label": 1
+    },
+    {
+      "text1": "Francisco de Goya painted a court portrait of the next king, Charles IV, in which he looked strangely like George Washington.",
+      "text2": "de Goya painted a portrait that made him look strange and angered him.",
+      "label": 0
+    },
+    {
+      "text1": "\" It 's obvious I 'm not riding as well as years past , \" Armstrong said at a news conference .",
+      "text2": "\" I think it 's obvious I 'm not riding as well as I have in years past .",
       "label": 1
     },
     {
@@ -856,73 +816,293 @@
       "label": 0
     },
     {
-      "text1": "Should I stay friends with her ?",
-      "text2": "Is it a good idea to remain friends with ex-girlfriends or boyfriends?",
+      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
+      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
       "label": 0
     },
     {
-      "text1": "XII  It was twilight.",
-      "text2": "It was nearly night time.",
+      "text1": "Handset market share for the second quarter , it said , is higher than the first quarter .",
+      "text2": "Nokia 's market share for the second quarter is estimated to be higher than the first quarter , 2003 . \"",
       "label": 1
     },
     {
-      "text1": "Henri maintained a reputation as a worthy and brave leader ' and at the same time as an incorrigible womanizer ' until his assassination in 1610 by a religious zealot.",
-      "text2": "In 1610, Henri was assassinated by a religious zealot.",
+      "text1": "When does it make sense to purchase travel insurance?",
+      "text2": "What are some situations where it definitely makes sense to buy travel insurance?",
       "label": 1
     },
     {
-      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
-      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "text1": "It not only raises money for charity, he said, but gives people something else to think about the next time they hear a lawyer joke.",
+      "text2": "The event started about two weeks ago, he said.",
       "label": 0
     },
     {
-      "text1": "Hanson got up and moved forward.",
-      "text2": "Hanson got up and moved.",
+      "text1": "The American conservatives are clearly in the minority within the Episcopal Church .",
+      "text2": "The letter indicates the Vatican 's interest in bolstering conservatives within the Episcopal Church .",
+      "label": 0
+    },
+    {
+      "text1": "After Electrical engineering what Masters field can I go for to learn about renewable energy producing materials like piezoelectric materials etc?",
+      "text2": "I have taken the CSC math group. I don't want to go to science fields like engineering, etc. What can I do after my 12th?",
+      "label": 0
+    },
+    {
+      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold.",
+      "text2": "Antibiotics are highly effective against viral infections such as the common cold and flu, and are routinely prescribed for these illnesses.",
+      "label": 0
+    },
+    {
+      "text1": "beijing police apprehend more than 20 people including 8 foreigners in suspicion of using and trafficking drugs in 2 pubs in a popular downtown area.",
+      "text2": "beijing police apprehended more than 20 people in suspicion of using and trafficking drugs in 2 downtown bars.",
       "label": 1
     },
     {
-      "text1": "Bayes' theorem updates belief in a hypothesis given new evidence: P(A|B) = P(B|A)·P(A)/P(B).",
-      "text2": "Deforestation destroys habitats, reduces biodiversity, and contributes to climate change.",
+      "text1": "If she actually believed that millions of human lives were at stake, the former head of the Red Cross surely wouldn't try to build a holy crusade around refusal to discuss the matter.",
+      "text2": "The Red Cross is run by democratic vote, and therefore has no, and has had no, head.",
       "label": 0
     },
     {
-      "text1": "Can mutual funds make you rich?",
-      "text2": "How much I can make in mutual fund by investing every month?",
-      "label": 0
-    },
-    {
-      "text1": "Something in their eyes put Ca'daan on guard.",
-      "text2": "There was something sinister in their eyes and Ca'daan was on guard.",
+      "text1": "Two boys on a couch are playing video games.",
+      "text2": "Two boys are playing a video game.",
       "label": 1
     },
     {
-      "text1": "Somalia's Shebab claims responsibility for Nairobi mall attack",
-      "text2": "Syrian rebels claim responsibility for killings in Lebanon",
-      "label": 0
-    },
-    {
-      "text1": "Rocks, Tear Gas Fly as Thai Protests Heat Up",
-      "text2": "Rocks, tear gas fly as Thai protests heat up",
+      "text1": "The woman picked up the kangaroo.",
+      "text2": "A woman picks up a baby kangaroo.",
       "label": 1
     },
     {
-      "text1": "How do I become a good listener in school?",
-      "text2": "How do l become a good listener?",
-      "label": 0
-    },
-    {
-      "text1": "But they draft the applications in a way to say that these facts meet the requirements, and by the time the application reaches the court, it is unlikely that the court really gets to notice deficiencies.",
-      "text2": "The way they draft the applications shows how these facts meet requirements.",
+      "text1": "Big-O notation describes the upper-bound worst-case time or space complexity of an algorithm as a function of input size.",
+      "text2": "Big-O expresses how an algorithm's resource usage scales in the worst case as the input grows larger.",
       "label": 1
     },
     {
-      "text1": "A lush site set high on a hillside with excellent views over the sea.",
-      "text2": "The site has no plants.",
+      "text1": "The technology-laced Nasdaq Composite Index .IXIC gained 21.35 points , or 1.33 percent , to 1,624.91 .",
+      "text2": "The tech-laced Nasdaq Composite Index .IXIC eased 5.16 points , or 0.32 percent , at 1,590.75 , breaking a six-day string of gains .",
       "label": 0
     },
     {
-      "text1": "Woman in blue shift dress cutting into food.",
-      "text2": "A woman in a blue dress cuts a cake.",
+      "text1": "I dropped my hat from the balcony, explained Poirot simply.",
+      "text2": "Poirot picked his hat up from the balcony.",
+      "label": 0
+    },
+    {
+      "text1": "The competitive response plan has three phases: a 90-day containment phase (price matching, accelerated roadmap), a six-month differentiation phase (exclusive features, enterprise SLAs), and a 12-month consolidation phase (account lock-in through multi-year contracts).",
+      "text2": "The competitive response begins with a 90-day containment phase involving price matching and an accelerated product roadmap.",
+      "label": 0
+    },
+    {
+      "text1": "Have you had any love/hate relationships?",
+      "text2": "What do you have a love-hate relationship with?",
+      "label": 0
+    },
+    {
+      "text1": "I hope everything is OK!",
+      "text2": "I hope everything is okay.",
+      "label": 1
+    },
+    {
+      "text1": "and if you take uh little pieces of pork and you fry them like little cubes of pork",
+      "text2": "When pork is cubed it cooks very evenly in the wok.",
+      "label": 0
+    },
+    {
+      "text1": "The transformer architecture relies on self-attention mechanisms that allow the model to weigh all input tokens against each other simultaneously.",
+      "text2": "Transformers use self-attention to compute relationships between every token in the input in parallel, which is the key difference from recurrent networks.",
+      "label": 1
+    },
+    {
+      "text1": "More expensive homes.",
+      "text2": "More expensive cars.",
+      "label": 0
+    },
+    {
+      "text1": "The panel ordered the Commerce Department to issue revised figures for the duties within 60 days .",
+      "text2": "It called on the Commerce Department to respond within 60 days .",
+      "label": 1
+    },
+    {
+      "text1": "Baron Paul Georges Marie Kronacker ( 5 November 1897 -- 3 February 1994 ) was a liberal chemist and Belgian politician for the Liberal Party .",
+      "text2": "Baron Paul Georges Marie Kronacker ( November 5 , 1897 - February 3 , 1994 ) was a Belgian chemist and liberal politician from the Liberal Party .",
+      "label": 0
+    },
+    {
+      "text1": "Osarvira is a village in the Palghar district of Maharashtra , India . It is situated in the Dahanu Taluka .",
+      "text2": "Osarvira is a village in the Palghar district of Maharashtra , India . It is located in the Dahanu taluka .",
+      "label": 1
+    },
+    {
+      "text1": "In the Lagrange mechanics , the generalized coordinates form a discrete set of variables that define the configuration of a system .",
+      "text2": "In generalized mechanics , the lagrange coordinates form a discrete set of variables that define the configuration of a system .",
+      "label": 0
+    },
+    {
+      "text1": "Why did the astronaut have two shadows on the moon?",
+      "text2": "What are the shadows seen on the moon?",
+      "label": 0
+    },
+    {
+      "text1": "By 1930 raw-material production had tripled the figure of 1900, manufactured goods had increased twelve-fold, and heavy industry was galloping towards maturity.",
+      "text2": "The country saw its manufacturing industry as its primary source of wealth.",
+      "label": 0
+    },
+    {
+      "text1": "In 1981, when Royko moved to a condominium in a lakefront high-rise, he cast himself as a bungalow-bred Margaret Mead, studying yuppies by living among them.",
+      "text2": "Royko lived in a small city apartment for his entire life.",
+      "label": 0
+    },
+    {
+      "text1": "Felix researched in Bielsko , Vienna , Prague and London and worked for the Hadassah Medical Organization in Jerusalem from 1927 to 1945 .",
+      "text2": "He researched in Bielsko , Vienna , Prague and Jerusalem and worked for the Hadassah Medical Organization from 1927 to 1945 in London .",
+      "label": 0
+    },
+    {
+      "text1": "Where can I get best quality fire sprinkler system in Sydney?",
+      "text2": "Where can I found best quality commercial and residential fire sprinkler systems in Sydney?",
+      "label": 1
+    },
+    {
+      "text1": "you know don't like the way you look don't like the way you dress don't like your hair don't like you know it's just something that always sets people off you know you either like someone or you don't like someone or you're just completely indifferent",
+      "text2": "many people will find something about your appearance to dislike",
+      "label": 1
+    },
+    {
+      "text1": "Mr Levine confirmed that Ms Cohen Alon had tried to sell the story during the World Cup .",
+      "text2": "Ms Cohen Alon 's lawyer , Donald Levine , confirmed she tried to sell the story in February .",
+      "label": 1
+    },
+    {
+      "text1": "Two brown horses standing in grassy field.",
+      "text2": "Two men sailing in a small sailboat.",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing a guitar.",
+      "text2": "A woman is cutting vegetable.",
+      "label": 0
+    },
+    {
+      "text1": "Red double decker bus taking on passengers.",
+      "text2": "A red double decker bus is picking up more passengers in a city.",
+      "label": 1
+    },
+    {
+      "text1": "\" I never grabbed anyone and then pulled up their shirt and grabbed their breasts , and stuff like that .",
+      "text2": "That I pulled up their shirt and grabbed their breasts and stuff like that : this is not me .",
+      "label": 1
+    },
+    {
+      "text1": "Now, Blanca's American husband, 63-year-old Roger Lawrence Strunk, faces a murder indictment issued in February by the Philippine government, which says he's the leading suspect.",
+      "text2": "Now, Blanca's husband, 63-year-old Roger Lawrence Strunk of Tracy, faces a murder indictment issued by the Philippine government in February.",
+      "label": 1
+    },
+    {
+      "text1": "Diane Lade of the South Florida Sun-Sentinel , a Tribune Publishing newspaper , contributed to this report .",
+      "text2": "Staff Writer Diane Lade and The Associated Press contributed to this report .",
+      "label": 0
+    },
+    {
+      "text1": "Because combination of SCR and FGD are expected to have high mercury removal due to the SCR and FGD systems, those facilities that are so equipped are not expected to add ACI systems.",
+      "text2": "The mercury removal will be at 100 percent rate.",
+      "label": 0
+    },
+    {
+      "text1": "A young boy jumping in the air at the beach.",
+      "text2": "A boy jumping in the air on the beach.",
+      "label": 1
+    },
+    {
+      "text1": "Nothing doing, said Julius.",
+      "text2": "Julius was now discouraged.",
+      "label": 0
+    },
+    {
+      "text1": "What is the chemical structure of Lysine?",
+      "text2": "Can can you determine what is the isoelectric point of lysine?",
+      "label": 0
+    },
+    {
+      "text1": "Thomas Fothergill D.D . was an English academic administrator at the University of Oxford .",
+      "text2": "Thomas Fothergill was an academic English administrator at the University of Oxford .",
+      "label": 1
+    },
+    {
+      "text1": "Shares of Guidant plummeted in trading both on and off the New York Stock Exchange before a news halt was imposed after midday.",
+      "text2": "Shares of Guidant were down 5.3 percent at $40.92 in afternoon trading on the New York Stock Exchange.",
+      "label": 0
+    },
+    {
+      "text1": "The acquisition rationale rests on three factors: access to the target's proprietary technology, elimination of a key competitor, and capturing $40M in annual cost synergies through shared infrastructure.",
+      "text2": "The acquisition is justified by the target's proprietary technology and the opportunity to eliminate a direct competitor from the market.",
+      "label": 0
+    },
+    {
+      "text1": "Meanwhile , Lt. Gov. David Dewhurst alluded to an interparty political struggle : \" Sounds like the Republican primary started early this year . \"",
+      "text2": "Lt. Gov. David Dewhurst suggested a political motive for the report , saying : \" It sounds like the Republican primary started early this year . \"",
+      "label": 1
+    },
+    {
+      "text1": "If a Trump/Hitler type of politician emerged in Mexico, what would he do to amplify México?",
+      "text2": "What would happen, legally speaking, if Mexico overthrew its government and requested to be a part of the United States?",
+      "label": 0
+    },
+    {
+      "text1": "Einstein's mass-energy equivalence formula E = mc² states that energy equals mass multiplied by the square of the speed of light.",
+      "text2": "The equation E = mc² expresses that mass and energy are interconvertible: a small amount of mass corresponds to an enormous amount of energy, scaled by c².",
+      "label": 1
+    },
+    {
+      "text1": "We've been told that getting documents posted overnight and providing a search engine has resulted in substantial savings to intervenors and the Postal Service.",
+      "text2": "The documents get posted overnight to save money.",
+      "label": 1
+    },
+    {
+      "text1": "The absence of trouble with the law was guaranteed by the secret protection of the Préfet de police Jean Chiappe and Minister Albert Sarraut .",
+      "text2": "The absence of anger with the law was guaranteed by the secret protection of the Préfet de Police Jean Chiappe and Minister Albert Sarraut .",
+      "label": 1
+    },
+    {
+      "text1": "At 5 p.m. EDT , the center of Hurricane Fabian was located near latitude 15.7 north , longitude 45.2 west or about 1,075 miles east of the Lesser Antilles .",
+      "text2": "At 5 p.m. EDT , Grace 's center was near latitude 25.6 north , longitude 93.7 west or about 280 miles east-southeast of Corpus Christi .",
+      "label": 0
+    },
+    {
+      "text1": "Although they no longer get the glory , desktop PC exceeded IDC 's shipment expectations in the second quarter , Kay said .",
+      "text2": "Desktop PC shipments also exceeded IDC 's expectations in the second quarter , Kay said .",
+      "label": 0
+    },
+    {
+      "text1": "He also called Hovan a \" person of good reputation \" who had worked as a bus driver since 1967 .",
+      "text2": "Hovan , a resident of Trumbull , Conn . , had worked as a bus driver since 1967 and had no prior criminal record .",
+      "label": 0
+    },
+    {
+      "text1": "How shall a girl who is 55 kg shall reduce weight up to 50 kg within 15 days?",
+      "text2": "How do I lose 5 kg weight within 7 days?",
+      "label": 1
+    },
+    {
+      "text1": "Man convicted in Vatican leaks case",
+      "text2": "Butler to be tried in \"Vatileaks\" case",
+      "label": 0
+    },
+    {
+      "text1": "A power cut in New York in 1977 left 9 million people without electricity for up to 25 hours .",
+      "text2": "The outage resurrected memories of other massive power blackouts , including one in 1977 that left about 9 million people without electricity for 25 hours .",
+      "label": 0
+    },
+    {
+      "text1": "so anyway back to the original question i really think i if if we were still allowed to choose guilt or innocence",
+      "text2": "The original question had to do with choosing guilt or innocence.",
+      "label": 1
+    },
+    {
+      "text1": "Analysts expected earnings of 27 cents a share on revenue of $ 17.7 billion , Thomson First Call says .",
+      "text2": "Hewlett-Packard is putting in for a second-quarter profit of $ 659 million , or 29 cents a share , on revenue of $ 18 billion .",
+      "label": 0
+    },
+    {
+      "text1": "What is the best compliment you have ever received?",
+      "text2": "What's the best compliment you've got?",
       "label": 1
     },
     {
@@ -931,89 +1111,189 @@
       "label": 1
     },
     {
-      "text1": "Man in red shorts and white shirt kicking a soccer ball.",
-      "text2": "A black dog stands in the surf holding a red rubber ball.",
-      "label": 0
-    },
-    {
-      "text1": "Does DNA change during the life?",
-      "text2": "Does a person's DNA SEQUENCE change through the course of their life?",
+      "text1": "He praised the work of the Rhodes Trust , saying that it was a Rhodes scholar at Oxford who first interested him in politics .",
+      "text2": "Blair praised the work of the Rhodes Trust , saying it was an Australian Rhodes Scholar he met while at Oxford who first interested him in politics .",
       "label": 1
     },
     {
-      "text1": "Thirty-one years later, their old neighborhood is being replaced by sandstone-hued luxury homes encircling the Cherry Creek shopping district.",
-      "text2": "The sandstone-colored luxury homes aren't replacing the old neighborhood 31 years later.",
-      "label": 0
-    },
-    {
-      "text1": "A pot of liquid is at the center of a tinfoil covered plate.",
-      "text2": "A pot of food is placed in the center of a red tablecloth.",
-      "label": 0
-    },
-    {
-      "text1": "but uh all right well thank you for calling and nice and have a good weekend",
-      "text2": "This call is not appreciated.",
-      "label": 0
-    },
-    {
-      "text1": "I stopped liking my girlfriend, but she is amazing. Should I leave her?",
-      "text2": "My girlfriend said she is not having the feeling to love me anymore. Should I leave her?",
-      "label": 0
-    },
-    {
-      "text1": "Does TRUNC (date or numeric) is equal to ROUND DOWN (date or numeric) in SQL since rounding down always return to the same values as truncating?",
-      "text2": "Are numeric values in scriptures meant to be taken literally or symbolically?",
-      "label": 0
-    },
-    {
-      "text1": "the iranian government stated-- the iranian nuclear program remains peaceful.",
-      "text2": "the iranian government says the nuclear program is peaceful.",
+      "text1": "but i didn't i'm from Kilgore Texas it's in east",
+      "text2": "I am from Kigore in the east.",
       "label": 1
     },
     {
-      "text1": "How could I start my business?",
-      "text2": "How do I start business from nothing?",
-      "label": 1
-    },
-    {
-      "text1": "The confirmation bias is the tendency to search for, interpret, and remember information in a way that confirms one's pre-existing beliefs.",
-      "text2": "Confirmation bias leads people to favour information that supports what they already believe and to discount evidence that contradicts it.",
-      "label": 1
-    },
-    {
-      "text1": "Should you follow your CEO on Twitter?",
-      "text2": "Where can I get real active Instagram followers?",
+      "text1": "The region has a temperate climate with dry winters and wet summers .",
+      "text2": "The region has a temperate climate with humid winters and dry summers .",
       "label": 0
     },
     {
-      "text1": "Is there risk of phishing if I clicked on a web link on an answer on Quora?",
-      "text2": "Is there risk of phishing if I click on a link on an answer in Quora?",
+      "text1": "Why is Hillary Clinton losing polls again?",
+      "text2": "Will Hillary Clinton lose?",
       "label": 1
     },
     {
-      "text1": "After Hughes refused to rehire Hernandez, he complained to the Equal Employment Opportunity Commission.",
-      "text2": "Hernandez filed an Equal Employment Opportunity Commission complaint and sued.",
+      "text1": "\" We are confident that this issue will be behind us by mid-year , \" said Nestle spokesman Francois Perroud , who declined to comment further .",
+      "text2": "\" We are confident that this issue will be behind us by midyear , \" said Nestlé spokesman Francois Perroud .",
       "label": 0
     },
     {
-      "text1": "Navy jet crashes into US apartments, pilots eject",
-      "text2": "U.S. Navy Jet Crashes Into Virginia Apartment Buildings",
+      "text1": "The euro tagged another record high against the dollar on Tuesday as demand for higher-yielding euro-based assets overshadowed solid U.S. economic data .",
+      "text2": "The euro ros further into record territory on Tuesday as demand for higher-yielding euro-based assets overshadowed U.S. economic data showing rising consumer confidence and a strong housing market .",
       "label": 0
     },
     {
-      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
-      "text2": "Git is a distributed version control system that tracks changes in source code.",
-      "label": 0
-    },
-    {
-      "text1": "Overfitting occurs when a machine learning model learns the training data too well, including noise, and performs poorly on unseen data.",
-      "text2": "A model that overfits has memorised the training set — including its noise — and fails to generalise to new, unseen examples.",
+      "text1": "What is the colour of jealousy?",
+      "text2": "What is the color of jealousy?",
       "label": 1
     },
     {
-      "text1": "The Amazon River carries roughly 20% of the world's fresh water discharge into the ocean and is the largest river by water volume.",
-      "text2": "By volume, the Amazon is the world's largest river, responsible for about one-fifth of all freshwater discharged into the oceans globally.",
+      "text1": "Five more human cases of West Nile virus, were reported by the Mesa County Health Department on Wednesday.",
+      "text2": "As of this week, 103 human West Nile cases in 45 counties had been reported to the health department.",
+      "label": 0
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1; right -= 1\n    return True",
       "label": 1
+    },
+    {
+      "text1": "Blue Ocean Strategy is the superior framework here — value innovation lets the company escape competitive pricing pressure entirely by creating uncontested market space.",
+      "text2": "Porter's Five Forces and Blue Ocean Strategy offer complementary lenses. Five Forces helps diagnose current competitive pressure; Blue Ocean then guides where to move to reduce it.",
+      "label": 0
+    },
+    {
+      "text1": "Yesterday , two Japanese diplomats were killed in an apparent ambush near Tikrit , 175 kilometres north of the capital .",
+      "text2": "Two Japanese diplomats were also killed in an ambush near Tikrit , according to the Japanese Foreign Ministry .",
+      "label": 1
+    },
+    {
+      "text1": "Then Tyrone tells him who Tommy is .",
+      "text2": "Tyrone then tells him who Tommy is .",
+      "label": 1
+    },
+    {
+      "text1": "Two villages are located in Portage Township : part of Jerry City in the south , and part of Portage in the northwest .",
+      "text2": "In Portage township there are two villages : a part of the Jerry City in the south and part of Portage in the northwest .",
+      "label": 1
+    },
+    {
+      "text1": "Italian pilgrims die in bus plunge",
+      "text2": "Passengers dead in Italy bus plunge",
+      "label": 1
+    },
+    {
+      "text1": "Blackedge was collaborating with Brad Nessler and Sideline Reporter Erin Andrews for the 2009 season , while Patrick collaborated with Craig James and Sideline Reporter Heather Cox .",
+      "text2": "Blackedge was teamed with Craig James and sideline reporter Brad Nessler for the 2009 season , while Patrick is teamed with Heather Cox and sideline reporter Erin Andrews .",
+      "label": 0
+    },
+    {
+      "text1": "yeah i was i was pretty happy i got what i pretty much wanted i could have had it any color i wanted",
+      "text2": "I was pleased because I pretty much got what I wanted",
+      "label": 1
+    },
+    {
+      "text1": "well they're they're they're a secret they're a secret society they're a secretive society",
+      "text2": "That society is quite secretive.",
+      "label": 1
+    },
+    {
+      "text1": "Four Asian young people sitting in a den or living room.",
+      "text2": "A girl sitting in a living chair.",
+      "label": 0
+    },
+    {
+      "text1": "The central limit theorem guarantees convergence of sample means to a normal distribution.",
+      "text2": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "label": 0
+    },
+    {
+      "text1": "Young woman in riding gear on top of horse.",
+      "text2": "Young girl in riding gear on a horse.",
+      "label": 1
+    },
+    {
+      "text1": "\" You know I have always tried to be honest with you and open about my life , \" Limbaugh , 52 , said during a stunning admission aired nationwide .",
+      "text2": "\" You know I have always tried to be honest with you and open about my life , \" Limbaugh said Friday on his program .",
+      "label": 1
+    },
+    {
+      "text1": "Directed by Jonathan Lynn from a script by Elizabeth Hunter and Saladin K. Patterson .",
+      "text2": "Whole Nine Yards , \" and written by first-time screenwriters Elizabeth Hunter and Saladin K. Patterson .",
+      "label": 0
+    },
+    {
+      "text1": "Mall attackers used 'less is more' strategy",
+      "text2": "In Kenya, attackers used 'less is more' strategy",
+      "label": 0
+    },
+    {
+      "text1": "'I have a better view of things than Greuze,' said Natalia.",
+      "text2": "Natalia said she understood things less than Greuze.",
+      "label": 0
+    },
+    {
+      "text1": "In the United Kingdom , mescaline in dried powder form is a Class A drug . However , purified cactus can be bought and sold legally .",
+      "text2": "In the United Kingdom , mescaline is a class A drug in dried powder form , but cleaned cactus can be legally bought and sold .",
+      "label": 1
+    },
+    {
+      "text1": "Where `` k '' , `` k '' , and `` k '' are the constants , one can obtain the three together to multiply .",
+      "text2": "Where `` k '' , `` k '' and `` k '' are the constants , you can multiply the three to obtain .",
+      "label": 0
+    },
+    {
+      "text1": "Millicent was built on the route of the Rivoli Bay ( Beachport ) to Mount Gambier Railway , built in 1879 .",
+      "text2": "Millicent was on the route of the Rivoli Bay ( Mount Gambier ) to Beachport railway , constructed in 1879 .",
+      "label": 0
+    },
+    {
+      "text1": "How can I help or encourage my mother to lose weight?",
+      "text2": "How do I help my mom lose weight?",
+      "label": 1
+    },
+    {
+      "text1": "and maybe and i knew i wanted to be in engineering so i was looking for a good engineering school so i ended up going to Tech in Lubbock",
+      "text2": "Tech in Lubbock was my first choice for college.",
+      "label": 0
+    },
+    {
+      "text1": "The parents want her kept alive ; her husband says she never wanted to be kept alive artificially .",
+      "text2": "Michael Schiavo has argued that his wife never wanted to be kept alive artificially .",
+      "label": 0
+    },
+    {
+      "text1": "How do I delete my question from Quora?",
+      "text2": "Can I delete all the questions I asked on Quora?",
+      "label": 1
+    },
+    {
+      "text1": "Also missing is Al Larsen, 31, of Fort Worth, Texas, who was in another vehicle swept off the turnpike.",
+      "text2": "The other victim recovered Tuesday morning was Al Larsen, 31, of Fort Worth, Texas.",
+      "label": 0
+    },
+    {
+      "text1": "Also , hospital efforts to start \" fever clinics \" in parking lot tents to keep infectious patients out of emergency rooms are \" moving along impressively , \" Dr. Roth said .",
+      "text2": "Dr. Roth also said that hospital efforts to start \" fever clinics \" in parking-lot tents to keep infectious patients out of emergency rooms were \" moving along impressively . \"",
+      "label": 1
+    },
+    {
+      "text1": "An experiment was tried in 1919 , where a method of standardization of testing was done .",
+      "text2": "An experiment was tried in 1919 , where a standardization method of testing was done .",
+      "label": 1
+    },
+    {
+      "text1": "The SIA says the DRAM market is expected to grow 2.9 percent to $ 15.7 billion in 2003 and 43 percent to $ 22.5 billion in 2004 .",
+      "text2": "The Americas market will decline 2.1 percent to $ 30.6 billion in 2003 , and then grow 15.7 percent to $ 35.4 billion in 2004 .",
+      "label": 0
+    },
+    {
+      "text1": "Jews, Moors, and Benedictine monks worked alongside each other in translation teams.",
+      "text2": "Moors never undertook any translation work.",
+      "label": 0
+    },
+    {
+      "text1": "What happens if you are caught driving alone with just your permit?",
+      "text2": "What is a city permit for driving a cab?",
+      "label": 0
     },
     {
       "text1": "yeah that that's that's kind of what happened on Twin Peaks they did all this big building up building up building up and then the the solution was ridiculous i had it figured out by the third",
@@ -1021,63 +1301,383 @@
       "label": 0
     },
     {
-      "text1": "How can I boost my immune system?",
-      "text2": "What can a person do to strengthen their immune system?",
+      "text1": "They are NOT as sovereign as they were before.",
+      "text2": "to repeat: They are NOT as sovereign as they were before.",
       "label": 1
     },
     {
-      "text1": "Inflation erodes purchasing power by raising the general price level.",
-      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
-      "label": 0
-    },
-    {
-      "text1": "What is the best gre book?",
-      "text2": "What is the best book for GRE exam?",
+      "text1": "How can you rapidly lose weight in 14days?",
+      "text2": "How can I lose weight quickly?",
       "label": 1
     },
     {
-      "text1": "What is the Cold War, and when did it end?",
-      "text2": "Did the Cold War end?",
+      "text1": "Rosemont 's Allstate Arena is home to the Chicago Wolves of the American Hockey League , the WNBA 's Chicago Sky , and the DePaul University basketball team .",
+      "text2": "The Allstate Arena in Rosemont is home to Chicago Wolves , the Chicago Sky of the American Hockey League and the basketball team of DePaul University .",
       "label": 0
     },
     {
-      "text1": "Machine translation uses neural networks trained on bilingual corpora to convert text between languages.",
-      "text2": "Vaccines have eradicated smallpox and dramatically reduced incidence of polio and measles.",
+      "text1": "How much does it cost to register a trademark in the U.S.?",
+      "text2": "How much does it cost to trademark a name?",
       "label": 0
     },
     {
-      "text1": "Atlas Shrugged It's also a stellar performer in terms of blithering idiocy.",
-      "text2": "It's also a stellar performer in terms of blithering idiocy.",
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
+      "label": 0
+    },
+    {
+      "text1": "The palace's royal chapel, St-Germain l'Auxerrois, dates back to 1200, but has preserved little of its Romanesque and Gothic beginnings.",
+      "text2": "The St-Germain l'Auxerrois has lost it's Roman ans Gothic beginnings",
+      "label": 0
+    },
+    {
+      "text1": "The woman is dicing onions.",
+      "text2": "A woman is cutting an onion.",
       "label": 1
     },
     {
-      "text1": "Two Australians killed in Kenya after bus crashed into river",
-      "text2": "Permalink to Two killed in Germany train accident",
+      "text1": "How can I become a rich person?",
+      "text2": "How is becoming a billionaire even possible, chronologically?",
       "label": 0
     },
     {
-      "text1": "An elderly woman rides a bicycle along a city street.",
-      "text2": "An elderly woman walking uphill crossing the street.",
+      "text1": "National- and American-league baseball teams played regular-season games against each other for the first time in the sport's 120-year history.",
+      "text2": "Baseball is a popular sport in America.",
       "label": 0
     },
     {
-      "text1": "Syrian opposition agree to landmark peace talks",
-      "text2": "Syria opposition pressed to attend talks",
-      "label": 0
-    },
-    {
-      "text1": "Renewable energy sources such as solar and wind do not emit greenhouse gases during operation and are key to reducing carbon emissions.",
-      "text2": "Solar and wind power generate electricity without emitting CO₂ during operation, making them essential tools in the transition to a low-carbon energy system.",
+      "text1": "Why does my urine smells like garlic?",
+      "text2": "Why does my urine smell like garlic?",
       "label": 1
     },
     {
-      "text1": "Mob kills man for burning Quran",
-      "text2": "Pakistani Mob Kills Man 'for Burning Koran'",
+      "text1": "The LFAC were officially created in 2005 and the first teams joining was Belfry Valls , Cornellà Bocs , Valls Fire and Alt Camp .",
+      "text2": "The LFAC was officially established in 2005 and the first teams were Belfry Valls , Cornellà Bocs , Valls Fire and Alt Camp .",
       "label": 1
     },
     {
-      "text1": "What time does Billy Joel go on (2015 tour)?",
-      "text2": "When is Bruce Springsteen next going on tour in the U.S.?",
+      "text1": "The remaining five men continue to be questioned under Section 17 of the Terrorism Act .",
+      "text2": "Three men and two women who were at the property were arrested under Section 41 of the Terrorism Act 2000 .",
+      "label": 1
+    },
+    {
+      "text1": "I didn't want to look back, in case I saw something unpleasant.",
+      "text2": "I was trying not to look back, In case I would see something I didn't want to.",
+      "label": 1
+    },
+    {
+      "text1": "wasn't a house really it was it was more like a",
+      "text2": "It was an apartment.",
+      "label": 0
+    },
+    {
+      "text1": "In the presence of sunlight, NOx and volatile organic compounds react photochemically to produce ozone.",
+      "text2": "Ozone can be created when NOx and volatile organic compounds are exposed to sunlight.",
+      "label": 1
+    },
+    {
+      "text1": "The little girl played on the grass with a dog and a ball.",
+      "text2": "A baby plays with a dog and ball.",
+      "label": 1
+    },
+    {
+      "text1": "What's the creepiest thing you have heard a child say?",
+      "text2": "What's the creepiest thing that a child has ever said to you?",
+      "label": 1
+    },
+    {
+      "text1": "The best solutions for searching will probably result from a combination of humans and computers.",
+      "text2": "Humans and computers working together always leads to the best results.",
+      "label": 0
+    },
+    {
+      "text1": "He went to Al and said , `` you have lost a father '' and `` I 've lost a son '' .",
+      "text2": "He went to Al and said : `` You have lost a father '' and `` I lost a son '' .",
+      "label": 1
+    },
+    {
+      "text1": "The Football Federation of Armenia was founded on 18 January , 1992 and established relations with UEFA in 1992 and with FIFA in 1993 .",
+      "text2": "The Football Federation of Armenia was established on 18 January 1992 and had relations with UEFA in 1992 and FIFA in 1993 .",
+      "label": 1
+    },
+    {
+      "text1": "there is a difference",
+      "text2": "A contrast was there.",
+      "label": 1
+    },
+    {
+      "text1": "It was shot on the set of Jesus Franco 's count Dracula , and also Christopher Lee as Dracula and Herbert Lom as Van Helsing .",
+      "text2": "It was shot on the set of Jesus Franco 's Count Dracula , and also stars Christopher Lee as Dracula and Herbert Lom as Van Helsing .",
+      "label": 1
+    },
+    {
+      "text1": "Putin hailed Saudi Arabia as ``one of the most important Muslim nations .",
+      "text2": "Before the meeting , Putin said Russia regards Saudi Arabia as a key Muslim state .",
+      "label": 1
+    },
+    {
+      "text1": "He also said the academy will get its own internal report next week detailing how serious the problem remains .",
+      "text2": "The academy will get its own internal report next week and it will be made public , Rosa said .",
+      "label": 0
+    },
+    {
+      "text1": "Executive recruiters say that finding a seasoned chief merchandising officer will perhaps be the trickiest of all hires because there is such a dearth of good ones .",
+      "text2": "Executive recruiters say that finding a seasoned chief merchandising officer perhaps will be the trickiest of all hires .",
+      "label": 0
+    },
+    {
+      "text1": "Tokyo stocks close down 0.26pc",
+      "text2": "Tokyo stocks close down 1.53%",
+      "label": 0
+    },
+    {
+      "text1": "All transactions were entered in their books.",
+      "text2": "The transactions were never recorded.",
+      "label": 0
+    },
+    {
+      "text1": "Woman in blue shift dress cutting into food.",
+      "text2": "A woman in a blue dress cuts a cake.",
+      "label": 1
+    },
+    {
+      "text1": "How can I recover my hacked Instagram account having 6k+ followers?",
+      "text2": "How do I recover hacked Instagram account?",
+      "label": 1
+    },
+    {
+      "text1": "The calculation uses all of a program's LSC funding, even though LSC programs provide services to eligible clients that do not meet the definition of a closed case, as previously detailed.",
+      "text2": "Funding calculation have been becoming cumbersome for total scrutiny.",
+      "label": 0
+    },
+    {
+      "text1": "The Pythagorean theorem: a² + b² = c² for right triangles.",
+      "text2": "Regular aerobic exercise significantly reduces risk of cardiovascular disease and depression.",
+      "label": 0
+    },
+    {
+      "text1": "They later fell out and have backed a series of rival Congolese militias in recent years.",
+      "text2": "The two invading countries later fell out, and have since backed rival factions.",
+      "label": 1
+    },
+    {
+      "text1": "Besides, in another mood, he writes, It seemed to me that I was surrounded by braveries without number, that I had been inducted into a phalanx of the wildly-alive-even-if-dying, and I felt honored that I would, so to speak, die in the company of such people.",
+      "text2": "He changed his moods every time he writes a paragraph.",
+      "label": 1
+    },
+    {
+      "text1": "Also , their skin secretes chemicals that are distasteful , and sometimes poisonous , to predators .",
+      "text2": "Their skin also secretes chemicals that are unpleasant , and sometimes poisonous , to predators .",
+      "label": 1
+    },
+    {
+      "text1": "Is the UK better than the USA?",
+      "text2": "Why is the USA better than the UK?",
+      "label": 1
+    },
+    {
+      "text1": "ICC Champions Trophy: India vs South Africa",
+      "text2": "Champions Trophy: India v South AfricaLive",
+      "label": 1
+    },
+    {
+      "text1": "Standard arguments in the injective algebra imply that these groups of cohomologists are independent of the choice of homological resolution of `` E '' .",
+      "text2": "Standard arguments in injective algebra imply that these cohomology groups are independent of the choice of homological resolution of `` E '' .",
+      "label": 1
+    },
+    {
+      "text1": "I've never accused him of over-milligraming, nothing.",
+      "text2": "I've never accused him of doctoring a baseball.",
+      "label": 0
+    },
+    {
+      "text1": "Another piece would be sent to the lab in Virginia for additional testing , Conte said .",
+      "text2": "Another piece of the suit will be sent to Virginia for more testing , Conte said .",
+      "label": 1
+    },
+    {
+      "text1": "The human immune system consists of innate and adaptive components.",
+      "text2": "Docker containers package applications and dependencies for consistent deployment across environments.",
+      "label": 0
+    },
+    {
+      "text1": "How can someone measure IQ?",
+      "text2": "What is the most accurate way to measure IQ?",
+      "label": 1
+    },
+    {
+      "text1": "What is your favourite answer from some of your favourite users on Quora?",
+      "text2": "What are some of the best answers on Quora?",
+      "label": 0
+    },
+    {
+      "text1": "There he participated in Non-Combatant Evacuation Operations in Cambodia ( Operation Eagle Pull ) and in South Vietnam ( Operation Frequent Wind ) .",
+      "text2": "There he participated in non-combatant evacuation operations in Cambodia ( Operation Eagle Pull ) and in southern Vietnam ( Operation Frequent Wind ) .",
+      "label": 1
+    },
+    {
+      "text1": "Monty Python to reunite for new show",
+      "text2": "Monty Python to reunite on stage",
+      "label": 1
+    },
+    {
+      "text1": "The season 1988 -- 89 NBA was the 43rd season of the National Basketball Association .",
+      "text2": "The 1988 season -- 89 National Basketball Association was the 43rd NBA season .",
+      "label": 1
+    },
+    {
+      "text1": "IAC's stock closed yesterday down $2.81, or 7.6 percent, at $34.19.",
+      "text2": "InterActiveCorp's shares closed at $34.19, down $2.81, or 7.6 percent on the Nasdaq Stock Market.",
+      "label": 1
+    },
+    {
+      "text1": "The two dogs are running through the grass.",
+      "text2": "Three dogs run in the snow.",
+      "label": 0
+    },
+    {
+      "text1": "How can one maintain the population of pink dolphins?",
+      "text2": "What is the phylogeny of protochordates?",
+      "label": 0
+    },
+    {
+      "text1": "He did not seem to have heard her, for without a word he turned on his heel and went out of the house.",
+      "text2": "He didn't hear her because the TV was on too loud.",
+      "label": 0
+    },
+    {
+      "text1": "The site is below sea level (even below river level), hot and sticky in the long summer, surrounded by pestilential swamps, vulnerable to every flood and hurricane, and more than 100 miles (160 km) from the Gulf of Mexico or anywhere else.",
+      "text2": "The site is below river and sea level.",
+      "label": 1
+    },
+    {
+      "text1": "How can one become emotionally and mentally strong in life?",
+      "text2": "What is a way to become mentally stable and strong?",
+      "label": 1
+    },
+    {
+      "text1": "How do I make $2000 in a week in NY?",
+      "text2": "How do I make $2000 a week?",
+      "label": 0
+    },
+    {
+      "text1": "-- Light , camera ... Cut ! -Kid wants to win a contest , so he counts on Big Bang and Horace to help him .",
+      "text2": "2 . Lights , Camera ... Cut ! -Horace wants to win a contest , so he counts on Big Bang and Kid to help him .",
+      "label": 0
+    },
+    {
+      "text1": "I wind up doing many things alone on weekends and in the evenings because she always has plans with the girls.",
+      "text2": "She is busy with her friends.",
+      "label": 1
+    },
+    {
+      "text1": "Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem until a base case is reached.",
+      "text2": "A recursive function solves a problem by breaking it into smaller sub-problems of the same type and calling itself until it hits a stopping condition (base case).",
+      "label": 1
+    },
+    {
+      "text1": "Which movies or TV shows would you recommend on Netflix?",
+      "text2": "What are the best three movies you have seen on Netflix?",
+      "label": 1
+    },
+    {
+      "text1": "But the Foreign Affairs Committee yesterday cleared Blair 's cabinet of that accusation .",
+      "text2": "In its report , the foreign affairs committee absolved Mr. Blair of charges of doctoring intelligence .",
+      "label": 1
+    },
+    {
+      "text1": "well i i didn't have to go down there but uh uh driving on the freeway was uh made it difficult because everybody couldn't get off and they'd get off somewhere else",
+      "text2": "It was difficult because the freeway was overcrowded and people had to get off.",
+      "label": 0
+    },
+    {
+      "text1": "The wizard Merlin had Kay brought up by the knight Sir Ector and his son Arthur .",
+      "text2": "The wizard Merlin had Arthur educated by the knight Sir Ector and his son Kay .",
+      "label": 0
+    },
+    {
+      "text1": "to build a bigger intake center",
+      "text2": "A larger intake center will take a long time to build.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect occurs when gases like CO₂, methane, and water vapour trap heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Greenhouse gases — CO₂, methane, water vapour — absorb outgoing infrared radiation and re-radiate it back toward the surface, raising global temperatures.",
+      "label": 1
+    },
+    {
+      "text1": "A divided Supreme Court ruled that Congress can force the nation 's public libraries to equip computers with anti-pornography filters .",
+      "text2": "The Supreme Court said Monday the government can require public libraries to equip computers with anti-pornography filters , rejecting librarians ' complaints that the law amounts to censorship .",
+      "label": 0
+    },
+    {
+      "text1": "In a country with a century of national unity and the scalding experience of Mussolini's fascism, sports seem almost the only activity that can inspire any semblance of patriotic fervor in Italians.",
+      "text2": "Sport does not inspire patriotism in Italians.",
+      "label": 0
+    },
+    {
+      "text1": "The ship leaves the crowded quay at Eminene and heads north, past the dazzling white wedding-cake facades of the Dolmabahce Palace and the neighbouring iragan Palace, gutted by fire in 1910 but no w restored as a luxury hotel.",
+      "text2": "The ship is unable to leave the bay at Eminene because of the military blockade.",
+      "label": 0
+    },
+    {
+      "text1": "Sales for the quarter beat expectations, rising 37 percent year-on-year to 1.76 billion euros.",
+      "text2": "Sales rose 37 per cent year-on-year to 1.76bn, beating expectations.",
+      "label": 1
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "World War II lasted from 1941 to 1945 — after the US entered the conflict — and resulted in approximately 40 million deaths, most of them military personnel.",
+      "label": 0
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "Born in Bradford , Chapman played for Frickley Athletic , Torquay United , Notts County , Mansfield Town , Exeter City , Bradford City , Darlington and Emley .",
+      "text2": "Born in Bradford , Chapman performed for Frickley Athletic , Torquay United , Notts County , Mansfield Town , Bradford City , Exfield City , Darlington and Emley .",
+      "label": 0
+    },
+    {
+      "text1": "\"I came basically to Washington to establish relationships and to make sure that we are getting more federal money to California,\" Schwarzenegger said after meeting with congressional Republicans.",
+      "text2": "\"I came to Washington basically to establish relationships and make sure we are getting more federal money,\" Schwarzenegger said after one meeting.",
+      "label": 1
+    },
+    {
+      "text1": "Officers threw him to the ground and handcuffed him, and Reyna dropped a knee into his back, according to testimony.",
+      "text2": "That's when officers threw him to the ground and handcuffed him, according to testimony.",
+      "label": 0
+    },
+    {
+      "text1": "The man drove his little red car around the traffic.",
+      "text2": "The dog ran in the water at the beach.",
+      "label": 0
+    },
+    {
+      "text1": "What's more, New York's current renaissance is happening because there is something to come back to.",
+      "text2": "New York's current political issues is happening because of the new senators.",
+      "label": 0
+    },
+    {
+      "text1": "A popular surfing beach adjoins the lagoon.",
+      "text2": "This is a very popular water skiing spot.",
+      "label": 0
+    },
+    {
+      "text1": "How much depth can radio waves penetrate in a wrinkled aluminium foil ball?",
+      "text2": "How much depth will radio waves penetrate in a wrinkled aluminium foil ball?",
+      "label": 1
+    },
+    {
+      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
+      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
+      "label": 1
+    },
+    {
+      "text1": "Dozens dead in Central African Republic fighting",
+      "text2": "98 dead in Central African Republic after clashes",
       "label": 0
     }
   ]
