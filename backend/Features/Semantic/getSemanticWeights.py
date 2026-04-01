@@ -38,9 +38,31 @@ class SemanticWeights:
 
             self.comparison_weights[feature_key] = rows
 
+            # BERTScore-style max-pool coverage maps (derived from the same cosine matrix)
+            #
+            # PREC (precision — grounding): for each sentence tj in text2, what is its
+            #   maximum similarity to any sentence in text1?  A low value means tj is
+            #   not well-grounded in text1 — a hallucination signal.
+            #   As an n×m map: constant per column, broadcast across rows.
+            #
+            # REC (recall — coverage): for each sentence si in text1, what is its
+            #   maximum similarity to any sentence in text2?  A low value means si is
+            #   not covered by text2 — an omission signal.
+            #   As an n×m map: constant per row, broadcast across columns.
+            if rows and rows[0]:
+                n, m = len(rows), len(rows[0])
+                row_max = [max(rows[i]) for i in range(n)]
+                col_max = [max(rows[i][j] for i in range(n)) for j in range(m)]
+                self.comparison_weights[f"REC_{feature_key}"]  = [[row_max[i]] * m for i in range(n)]
+                self.comparison_weights[f"PREC_{feature_key}"] = [[col_max[j] for j in range(m)] for _ in range(n)]
+
     def __calc_soft_alignment__(self):
         inter = {}
         for key in tqdm(self.comparison_weights.keys()):
+            # Soft alignment is only meaningful on raw cosine maps, not on the
+            # derived PREC/REC or SOFT_* maps that were added in __calc_weights__.
+            if key.startswith("SOFT_") or key.startswith("PREC_") or key.startswith("REC_"):
+                continue
             t = tensor(self.comparison_weights[key], dtype=float)
             inter[f'SOFT_ROW_{key}'] = softmax(t, dim=1).tolist()
             inter[f'SOFT_COL_{key}'] = softmax(t, dim=0).tolist()

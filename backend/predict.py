@@ -27,8 +27,9 @@ def _load_model_from_checkpoint(checkpoint, device):
         validate_manifest(checkpoint.get('manifest'))
         num_features = checkpoint['num_features']
         spatial_size = checkpoint.get('spatial_size', 64)  # 64 = legacy default
-        model = TextSimilarityCNN(num_features=num_features, spatial_size=spatial_size)
-        arch = f'Conv2D (num_features={num_features}, spatial_size={spatial_size})'
+        hidden_dim   = checkpoint.get('hidden_dim', 128)   # 128 = legacy default
+        model = TextSimilarityCNN(num_features=num_features, spatial_size=spatial_size, hidden_dim=hidden_dim)
+        arch = f'Conv2D (num_features={num_features}, spatial_size={spatial_size}, hidden_dim={hidden_dim})'
 
     model.load_state_dict(state)
     model.to(device)

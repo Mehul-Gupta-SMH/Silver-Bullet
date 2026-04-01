@@ -53,7 +53,7 @@ class TextSimilarityCNN(nn.Module):
     Every cell carries signal from actual sentence pairs — no zero-padding artefacts.
     """
 
-    def __init__(self, num_features: int, hidden_dim: int = 128, spatial_size: int = 32):
+    def __init__(self, num_features: int, hidden_dim: int = 256, spatial_size: int = 32):
         """
         Args:
             num_features (int):  Number of input feature-map channels.

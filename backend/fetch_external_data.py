@@ -193,6 +193,122 @@ def _load_halueval(max_n: int, rng: random.Random) -> list[dict]:
     return sampled
 
 
+def _load_halueval_summarization(max_n: int, rng: random.Random) -> list[dict]:
+    """HaluEval summarization: (document, summary, hallucination=yes/no).
+    hallucination=no → label=1 (faithful), hallucination=yes → label=0 (hallucinated).
+    Extends CvG coverage with abstractive summarisation hallucinations."""
+    print("  [HaluEval-Sum] downloading…")
+    ds = None
+    for repo in ("pminervini/HaluEval", "HaluEval/HaluEval"):
+        try:
+            ds = hf_datasets.load_dataset(repo, "summarization_samples", split="data")
+            break
+        except Exception:
+            continue
+    if ds is None:
+        print("  [HaluEval-Sum] WARNING: dataset not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        document = str(r.get("document", "")).strip()
+        summary = str(r.get("summary", "")).strip()
+        hallucination = str(r.get("hallucination", "")).strip().lower()
+        if document and summary and hallucination in ("yes", "no"):
+            pairs.append({"text1": document, "text2": summary,
+                          "label": 0 if hallucination == "yes" else 1})
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [HaluEval-Sum] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_halueval_dialogue(max_n: int, rng: random.Random) -> list[dict]:
+    """HaluEval dialogue: (knowledge, response, hallucination=yes/no).
+    hallucination=no → label=1 (grounded), hallucination=yes → label=0 (hallucinated).
+    Provides conversational grounding pairs for context-vs-generated."""
+    print("  [HaluEval-Dial] downloading…")
+    ds = None
+    for repo in ("pminervini/HaluEval", "HaluEval/HaluEval"):
+        try:
+            ds = hf_datasets.load_dataset(repo, "dialogue_samples", split="data")
+            break
+        except Exception:
+            continue
+    if ds is None:
+        print("  [HaluEval-Dial] WARNING: dataset not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        knowledge = str(r.get("knowledge", "")).strip()
+        response = str(r.get("response", "")).strip()
+        hallucination = str(r.get("hallucination", "")).strip().lower()
+        if knowledge and response and hallucination in ("yes", "no"):
+            pairs.append({"text1": knowledge, "text2": response,
+                          "label": 0 if hallucination == "yes" else 1})
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [HaluEval-Dial] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_paws(max_n: int, rng: random.Random) -> list[dict]:
+    """PAWS: Paraphrase Adversaries from Word Scrambling.
+    label=1 (paraphrase) and adversarial label=0 (non-paraphrase with high lexical overlap).
+    Used for both model-vs-model (surface-similar but semantically different) and
+    reference-vs-generated (generated matches reference or diverges)."""
+    print("  [PAWS]  downloading…")
+    try:
+        ds = hf_datasets.load_dataset(
+            "google-research-datasets/paws", "labeled_final", split="train"
+        )
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("paws", "labeled_final", split="train")
+        except Exception:
+            print("  [PAWS]  WARNING: dataset not found on HuggingFace -- skipping.")
+            return []
+
+    pairs = [
+        {"text1": str(r["sentence1"]).strip(), "text2": str(r["sentence2"]).strip(),
+         "label": int(r["label"])}
+        for r in ds
+    ]
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [PAWS]  {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_mrpc(max_n: int, rng: random.Random) -> list[dict]:
+    """GLUE MRPC: Microsoft Research Paraphrase Corpus.
+    label=1 (semantically equivalent), label=0 (not equivalent).
+    Good proxy for model-vs-model agreement on short factual sentences."""
+    print("  [MRPC]  downloading…")
+    try:
+        ds = hf_datasets.load_dataset("glue", "mrpc", split="train")
+    except Exception:
+        print("  [MRPC]  WARNING: dataset not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = [
+        {"text1": str(r["sentence1"]).strip(), "text2": str(r["sentence2"]).strip(),
+         "label": int(r["label"])}
+        for r in ds
+    ]
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [MRPC]  {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
 # ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
@@ -278,9 +394,13 @@ def main() -> None:
     mnli = _get("mnli", _load_mnli)
 
     print("\n-- Mode-specific datasets ----------------------------------------------")
-    qqp      = _get("qqp",      _load_qqp)
-    qnli     = _get("qnli",     _load_qnli)
-    halueval = _get("halueval", _load_halueval)
+    qqp            = _get("qqp",            _load_qqp)
+    qnli           = _get("qnli",           _load_qnli)
+    halueval       = _get("halueval",       _load_halueval)
+    halueval_sum   = _get("halueval_sum",   _load_halueval_summarization)
+    halueval_dial  = _get("halueval_dial",  _load_halueval_dialogue)
+    paws           = _get("paws",           _load_paws)
+    mrpc           = _get("mrpc",           _load_mrpc)
 
     # ── Hand-crafted pairs ───────────────────────────────────────────────────
 
@@ -291,9 +411,17 @@ def main() -> None:
         "context-vs-generated":   _to_dicts(MODE_PAIRS_CONTEXT_VS_GENERATED),
     }
     mode_external = {
-        "model-vs-model":         qqp,
-        "reference-vs-generated": qnli,
-        "context-vs-generated":   halueval,
+        # QQP: duplicate questions (model agreement proxy)
+        # PAWS: adversarial paraphrases (surface-similar but semantically distinct pairs)
+        # MRPC: sentence-level paraphrase equivalence
+        "model-vs-model":         qqp + paws + mrpc,
+        # QNLI: question-answer entailment (reference faithfulness proxy)
+        # PAWS: paraphrase adversarial (generated matches reference or diverges)
+        "reference-vs-generated": qnli + paws,
+        # HaluEval QA: knowledge vs answer with hallucination labels
+        # HaluEval Sum: document vs summary with hallucination labels
+        # HaluEval Dial: knowledge vs dialogue response with hallucination labels
+        "context-vs-generated":   halueval + halueval_sum + halueval_dial,
     }
     general_external = stsb + mnli
 
@@ -307,10 +435,10 @@ def main() -> None:
 
     for mode in ("model-vs-model", "reference-vs-generated", "context-vs-generated"):
         mode_all = handcrafted + general_external + mode_handcrafted[mode] + mode_external[mode]
+        n_hand = len(handcrafted) + len(mode_handcrafted[mode])
+        n_ext  = len(general_external) + len(mode_external[mode])
         print(f"\n-- {mode} splits {'-' * max(1, 52 - len(mode))}")
-        print(f"  Total: {len(mode_all)} pairs  "
-              f"(hand-crafted={len(handcrafted) + len(mode_handcrafted[mode])}, "
-              f"external={len(general_external) + len(mode_external[mode])})")
+        print(f"  Total: {len(mode_all)} pairs  (hand-crafted={n_hand}, external={n_ext})")
         _split_and_save(mode_all, DATA_DIR / mode, random.Random(args.seed))
 
     print("\nDone. Retrain with:  python -m backend.train --mode <mode>")

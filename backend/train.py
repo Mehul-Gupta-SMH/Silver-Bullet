@@ -4,6 +4,11 @@ if hasattr(sys.stdout, 'reconfigure'):
 if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
+import subprocess
+import time
+import urllib.request
+import urllib.error
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -23,6 +28,63 @@ from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest
 from backend.training_report import TrainingReport
+
+
+_MLFLOW_SERVER_PROC: subprocess.Popen | None = None  # module-level handle so the process outlives the function
+
+
+def _ensure_mlflow_server(uri: str, timeout: int = 30) -> None:
+    """Start the MLflow tracking server if it is not already reachable.
+
+    Probes *uri* with a lightweight HTTP request.  If the server is down,
+    launches ``mlflow server`` in the background using the paths defined in
+    CLAUDE.md (sqlite backend + ./mlflow/artifacts).  Waits up to *timeout*
+    seconds for the server to accept connections before giving up.
+
+    The spawned process is kept alive for the duration of the Python session.
+    """
+    global _MLFLOW_SERVER_PROC
+
+    health_url = uri.rstrip("/") + "/health"
+
+    def _reachable() -> bool:
+        try:
+            with urllib.request.urlopen(health_url, timeout=3) as resp:
+                return resp.status < 500
+        except Exception:
+            return False
+
+    if _reachable():
+        return  # already up
+
+    print(f"[MLflow] server not reachable at {uri} — starting it now…")
+
+    mlflow_dir = Path("mlflow")
+    mlflow_dir.mkdir(exist_ok=True)
+    (mlflow_dir / "artifacts").mkdir(exist_ok=True)
+
+    cmd = [
+        "mlflow", "server",
+        "--host", "127.0.0.1",
+        "--port", "5000",
+        "--backend-store-uri", f"sqlite:///{mlflow_dir / 'mlflow.db'}",
+        "--default-artifact-root", str(mlflow_dir / "artifacts"),
+    ]
+
+    _MLFLOW_SERVER_PROC = subprocess.Popen(
+        cmd,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        if _reachable():
+            print(f"[MLflow] server started (pid={_MLFLOW_SERVER_PROC.pid})  tracking at {uri}")
+            return
+        time.sleep(1)
+
+    print(f"[MLflow] WARNING: server did not become reachable within {timeout}s — continuing without it.")
 
 
 class _Tracker:
@@ -51,6 +113,7 @@ class _Tracker:
         try:
             import mlflow
             uri = os.environ.get("MLFLOW_TRACKING_URI", "http://localhost:5000")
+            _ensure_mlflow_server(uri)
             mlflow.set_tracking_uri(uri)
             mlflow.set_experiment(self._mode)
             mlflow.start_run(run_name=self._run_name)
@@ -193,6 +256,85 @@ def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
 
 
 
+def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
+    """Pre-encode all unique sentences from uncached pairs in one large batch per model.
+
+    For each sentence-transformer model, this issues a single model.encode() call
+    covering every unseen sentence across all pairs that will need feature extraction.
+    The embeddings are stored in SemanticFeatures._embedding_cache so that the
+    per-pair getFeatureMap() calls find them already computed and skip encoding entirely.
+
+    Pairs that are fully covered by the feature cache are excluded — their sentences
+    never need to be split or encoded.
+    """
+    from backend.Features.Semantic.__generate_semantic_features import SemanticFeatures
+    import torch
+
+    # Collect sentences only from pairs that aren't already in the feature cache
+    unique_sentences: set[str] = set()
+    for pair in paragraph_pairs:
+        if cache is not None and cache.get_features(pair[0], pair[1]) is not None:
+            continue
+        for sent in split_txt(pair[0]) + split_txt(pair[1]):
+            unique_sentences.add(sent)
+
+    if not unique_sentences:
+        return
+
+    sentences = list(unique_sentences)
+    print(f"[SemanticCache] pre-encoding {len(sentences)} unique sentences across all uncached pairs…")
+
+    # Reuse the shared model list from SemanticFeatures
+    dummy = SemanticFeatures()
+    for model_meta in tqdm(dummy.feature_model_local_list, desc="Pre-encoding models"):
+        model_name = model_meta["model"]
+        sent_cache = SemanticFeatures._embedding_cache.setdefault(model_name, {})
+        new_sentences = [s for s in sentences if s not in sent_cache]
+        if not new_sentences:
+            continue
+
+        model = dummy.__load_model__(model_meta)
+        embeddings = model.encode(
+            new_sentences,
+            task=model_meta["task"],
+            prompt=model_meta["prompt"],
+            show_progress_bar=True,
+        )
+        for s, emb in zip(new_sentences, embeddings):
+            sent_cache[s] = emb
+
+    print(f"[SemanticCache] done — embedding cache now covers {sum(len(v) for v in SemanticFeatures._embedding_cache.values())} sentence-model entries.")
+
+
+def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
+    """Pre-run GLiNER NER on all unique sentences from uncached pairs in one batch.
+
+    EntityMatch._entity_cache maps sentence → {entity_type: count}.  By filling
+    it before the per-pair loop, every getFeatureMap() call finds its sentences
+    already processed and skips the GLiNER model entirely.
+    """
+    from backend.Features.EntityGroups.getOverlap import EntityMatch
+
+    unique_sentences: set[str] = set()
+    for pair in paragraph_pairs:
+        if cache is not None and cache.get_features(pair[0], pair[1]) is not None:
+            continue
+        for sent in split_txt(pair[0]) + split_txt(pair[1]):
+            unique_sentences.add(sent)
+
+    new_sentences = [s for s in unique_sentences if s not in EntityMatch._entity_cache]
+    if not new_sentences:
+        return
+
+    print(f"[EntityCache] pre-running NER on {len(new_sentences)} unique sentences…")
+    dummy = EntityMatch()
+    # Process in chunks to avoid exhausting RAM on large/long-document datasets
+    _CHUNK = 64
+    for i in tqdm(range(0, len(new_sentences), _CHUNK), desc="Entity pre-encoding"):
+        dummy._batch_get_entities(new_sentences[i : i + _CHUNK])
+    print(f"[EntityCache] done — entity cache now covers {len(EntityMatch._entity_cache)} sentences.")
+
+
 class TextSimilarityDataset(Dataset):
     """Extract features for every text pair and store as [F, 64, 64] tensors."""
 
@@ -206,6 +348,11 @@ class TextSimilarityDataset(Dataset):
         self.entity   = EntityMatch()
         self.lcs      = LCSWeights()
 
+        # Pre-encode / pre-run all sentence-level models in one large batch before
+        # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
+        _prefill_semantic_cache(paragraph_pairs, self.cache)
+        _prefill_entity_cache(paragraph_pairs, self.cache)
+
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):
             # ---- cache lookup ----
@@ -216,10 +363,16 @@ class TextSimilarityDataset(Dataset):
                         # New format: feature_map dict → reconstruct stacked tensor
                         fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
                         tensors.append(feature_map_to_tensor(fm))
+                        continue
                     else:
-                        # Legacy format: stacked tensor as flat list
-                        tensors.append(torch.tensor(cached, dtype=torch.float32))
-                    continue
+                        # Legacy format: stacked tensor as flat list — only use if
+                        # feature count matches current pipeline (guards against stale
+                        # cache entries from a previous feature set version).
+                        t = torch.tensor(cached, dtype=torch.float32)
+                        if t.shape[0] == len(FEATURE_KEYS):
+                            tensors.append(t)
+                            continue
+                        # Shape mismatch — fall through to recompute
 
             # ---- compute ----
             sent_group1 = split_txt(pair[0])
@@ -258,8 +411,8 @@ class TextSimilarityDataset(Dataset):
         return self.features[idx], self.labels[idx]
 
 
-def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.001,
-                patience=5, min_delta=0.001, best_ckpt='best_model.pth', mode='general'):
+def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.0003,
+                patience=8, min_delta=0.001, best_ckpt='best_model.pth', mode='general'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -269,7 +422,9 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'num_epochs':                num_epochs,
         'learning_rate':             learning_rate,
         'batch_size':                train_loader.batch_size,
-        'optimizer':                 'Adam',
+        'optimizer':                 'AdamW',
+        'weight_decay':              1e-4,
+        'lr_schedule':               'CosineAnnealingLR',
         'loss_function':             'MSELoss',
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
@@ -286,7 +441,8 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
 
     model     = model.to(device)
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
 
     best_val_loss      = float('inf')
     patience_counter   = 0
@@ -330,8 +486,11 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         report.update_epoch_metrics(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
         tracker.log_epoch(epoch + 1, avg_train_loss, avg_val_loss, accuracy)
 
+        scheduler.step()
+        current_lr = scheduler.get_last_lr()[0]
+
         print(f'Epoch [{epoch+1}/{num_epochs}]  '
-              f'Train: {avg_train_loss:.4f}  Val: {avg_val_loss:.4f}  Acc: {accuracy:.2f}%')
+              f'Train: {avg_train_loss:.4f}  Val: {avg_val_loss:.4f}  Acc: {accuracy:.2f}%  LR: {current_lr:.6f}')
 
         # --- Early stopping / checkpoint ---
         if avg_val_loss < best_val_loss - min_delta:
@@ -348,6 +507,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'loss':                 avg_val_loss,
                 'accuracy':             accuracy,
                 'num_features':         num_features,
+                'hidden_dim':           model.conv1.out_channels,
                 'spatial_size':         SPATIAL_SIZE,
                 'manifest':             build_manifest(),
             }, best_ckpt)
@@ -375,6 +535,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'best_loss':            best_val_loss,
         'final_accuracy':       accuracy,
         'num_features':         num_features,
+        'hidden_dim':           model.conv1.out_channels,
         'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, final_model_path)
@@ -385,6 +546,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'optimizer_state_dict': best_optimizer_state,
         'loss':                 best_val_loss,
         'num_features':         num_features,
+        'hidden_dim':           model.conv1.out_channels,
         'spatial_size':         SPATIAL_SIZE,
         'manifest':             manifest,
     }, best_model_path)
@@ -445,7 +607,7 @@ if __name__ == '__main__':
     train_dataset = TextSimilarityDataset(train_pairs, train_labels, use_cache=True)
     val_dataset   = TextSimilarityDataset(val_pairs,   val_labels,   use_cache=True)
 
-    train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True)
+    train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True, drop_last=True)
     val_loader    = DataLoader(val_dataset,   batch_size=16)
 
     model = TextSimilarityCNN(num_features=train_dataset.num_features, spatial_size=SPATIAL_SIZE)

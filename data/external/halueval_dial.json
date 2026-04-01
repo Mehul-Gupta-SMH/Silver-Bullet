@@ -1,0 +1,2004 @@
+{
+  "data": [
+    {
+      "text1": "Kesha : `~Composer`: Tik Tok",
+      "text2": "I think she's from Nashville, too.",
+      "label": 1
+    },
+    {
+      "text1": "Tess of the d'Urbervilles: A Pure Woman Faithfully Presented is written by Tim Dolin",
+      "text2": "Ok will do. You will enjoy.",
+      "label": 1
+    },
+    {
+      "text1": "Alfonso Cuarón starred in Quantum of Solace. Quantum of Solace has genre Crime Fiction",
+      "text2": "Rory Kinnear stars in this film as well as Olga Kurylenko",
+      "label": 1
+    },
+    {
+      "text1": "Harbhajan Singh : `Team`: Mumbai IndiansMumbai Indians : `~Team Owned`: Mukesh AmbaniMukesh Ambani : `Team Owned`: Mumbai Indians",
+      "text2": "Yes it is.  Mukesh Ambani also founded Reliance Communications.",
+      "label": 1
+    },
+    {
+      "text1": "Eminem starred in 8 Mile",
+      "text2": "Ok, I'm old.  What is his most popular song right now?",
+      "label": 1
+    },
+    {
+      "text1": "Harry Potter and the Philosopher's Stone has genre Fantasy. Fantasy has examples: The Wishsong of Shannara",
+      "text2": "The Wishsong of Shannara is written by Terry Brooks. Other than fantasy, it is also included in the genres children's literature, and speculative fiction.",
+      "label": 1
+    },
+    {
+      "text1": "Kiss the Girls is written by James Patterson. James Patterson : `Governance of`: First Book",
+      "text2": "Oh, then definitely Kiss the Girls. It's the first installment, so I hope you enjoy!",
+      "label": 1
+    },
+    {
+      "text1": "Equilibrium is written by Kurt WimmerKurt Wimmer wrote Law Abiding Citizen. Law Abiding Citizen has genre ThrillerLaw Abiding Citizen is written by Kurt Wimmer",
+      "text2": "Yes! Stars include Roger Bart, Regina Hall and Michael Kelly. It's a great Psychological thriller.",
+      "label": 1
+    },
+    {
+      "text1": "New York Mets : `~Drafted`: Tim Leary",
+      "text2": "They won the 1969 World Series.  That was a while ago.",
+      "label": 1
+    },
+    {
+      "text1": "LeBron James : `~has_person`: MiamiMiami : `~Travel destination served`: Miami International Airport",
+      "text2": "I dont know that. However, Her Career began in Place Musical. Do you like her?",
+      "label": 1
+    },
+    {
+      "text1": "Great Expectations is written by Charles DickensCharles Dickens wrote David CopperfieldDavid Copperfield is written by Charles Dickens. Charles Dickens wrote A Christmas Carol and Other Christmas Writings",
+      "text2": "Yes, he did. He also wrote A Christmas Carol and Other Christmas Writings. That book is the perfect book for this coming holidays!",
+      "label": 1
+    },
+    {
+      "text1": "Green Eggs and Ham is written by Dr. SeussDr. Seuss wrote The LoraxThe Lorax is written by Dr. Seuss",
+      "text2": "The Lorax is really popular in children's literature! It was also turned into an animation film as well.",
+      "label": 1
+    },
+    {
+      "text1": "City of Fallen Angels has genre AdventureAdventure has examples: Clockwork Princess. Clockwork Princess is written by Cassandra ClareCassandra Clare wrote City of Lost Souls. City of Lost Souls has genre Adventure",
+      "text2": "Another book in her series is City of Lost Souls, also adventure genre.",
+      "label": 1
+    },
+    {
+      "text1": "Chris Evans starred in What's Your Number? (Romantic comedy Film)",
+      "text2": "Yes, it also stars Tika Sumpter and Thomas Lennon",
+      "label": 1
+    },
+    {
+      "text1": "The Glass Castle has genre Memoir. Memoir has examples: Three Cups of TeaMemoir has examples: Three Cups of Tea. Three Cups of Tea is written by David Oliver RelinThree Cups of Tea is written by Greg Mortenson. Greg Mortenson wrote Stones into Schools: Promoting Peace with Books, Not Bombs, in Afghanistan and Pakistan",
+      "text2": "That was written by Greg Mortenson.",
+      "label": 1
+    },
+    {
+      "text1": "Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan is starring Luenell",
+      "text2": "Okay, I believe Luenell and Ken Davitian star in it as well. Have you heard of them?",
+      "label": 1
+    },
+    {
+      "text1": "Javier Hernández : `~Player statistics`: Mexico national football team",
+      "text2": "I believe he also played for Manchester United F.C.",
+      "label": 1
+    },
+    {
+      "text1": "Green Eggs and Ham is written by Dr. SeussDr. Seuss wrote There's a Wocket in My PocketThere's a Wocket in My Pocket is written by Dr. Seuss. Dr. Seuss wrote Yertle the Turtle (Classic Seuss)",
+      "text2": "Cool! Yertle the Turtle and Horton Hears a Who! are also written by Dr. Seuss.",
+      "label": 1
+    },
+    {
+      "text1": "Seven Pounds is starring Rosario DawsonRosario Dawson starred in UnstoppableUnstoppable is starring Rosario Dawson",
+      "text2": "Yes, Rosario Dawson was also in Unstoppable. Denzel Washington was also in that movie.",
+      "label": 1
+    },
+    {
+      "text1": "Naked is written by Raine MillerRaine Miller wrote Eyes wide openEyes wide open is written by Raine Miller. Raine Miller wrote All in",
+      "text2": "Yes she did! If you liked that, I suggest you read All In and The Wanderer if you haven't.",
+      "label": 1
+    },
+    {
+      "text1": "Fight Club is starring Brad Pitt",
+      "text2": "Troy was written by Homer, and the film adaptation was written by David Benioff. The Tree of Life was written by Terrence Malick.",
+      "label": 1
+    },
+    {
+      "text1": "Manny Pacquiao is a/an Politician",
+      "text2": "No. If either one of them needs money I'm sure there will be a rematch.",
+      "label": 1
+    },
+    {
+      "text1": "Bryan Singer wrote X-Men 2. X-Men 2 is starring Peter Wingfield",
+      "text2": "Yes. Is there anything I can do for you?",
+      "label": 1
+    },
+    {
+      "text1": "Ariana Grande is a/an Singer",
+      "text2": "I have not, but I will look into it.",
+      "label": 1
+    },
+    {
+      "text1": "Ethan Coen directed True Grit",
+      "text2": "It was released in 2010",
+      "label": 1
+    },
+    {
+      "text1": "Jules Feiffer wrote The Phantom Tollbooth. The Phantom Tollbooth has genre FictionThe Phantom Tollbooth has genre FantasyFantasy has examples: Harry Potter and the Prisoner of Azkaban. Harry Potter and the Prisoner of Azkaban is written by J.K. Rowling",
+      "text2": "You may like the Harry Potters Series by J.K. Rowling.",
+      "label": 1
+    },
+    {
+      "text1": "Inception is written by Christopher Nolan. Christopher Nolan wrote The Prestige",
+      "text2": "The Prestige starred William Morgan Sheppard and Scarlet Johansson",
+      "label": 1
+    },
+    {
+      "text1": "Damian Lillard : `Award Won`: NBA All-Rookie TeamNBA All-Rookie Team : `~Award Won`: Damian LillardDamian Lillard : `Position(s)`: Point guard. Point guard : `~Position(s)`: Marcus Denmon",
+      "text2": "Yeah probably Marcus Denmon. Do you know him?",
+      "label": 1
+    },
+    {
+      "text1": "Iron Man 2 is starring Scarlett JohanssonScarlett Johansson starred in We Bought a ZooWe Bought a Zoo is starring Scarlett Johansson",
+      "text2": "Ok, yea she was in We Bought a Zoo with Matt Damon, but she was also in The Avengers, Lucy, Ghost in the Shell (based off the old anime) and Lost in Translation (which had Bill Murray in it).",
+      "label": 1
+    },
+    {
+      "text1": "21 Jump Street is starring Rob RiggleRob Riggle starred in Unaccompanied MinorsUnaccompanied Minors is starring Rob Riggle",
+      "text2": "Rob Riggle also stars in Unaccompanied Minors.",
+      "label": 1
+    },
+    {
+      "text1": "Luke Bryan : `~Composer`: We Rode in TrucksWe Rode in Trucks : `Composer`: Luke Bryan",
+      "text2": "No, his co-writers were Jim McCormick and Roger Murrah",
+      "label": 1
+    },
+    {
+      "text1": "Star Trek is starring Bruce Greenwood",
+      "text2": "Cooper Layne, David Foster and Sean Bailey produced that one.",
+      "label": 1
+    },
+    {
+      "text1": "Radamel Falcao : `~Player statistics`: Colombia national football teamColombia national football team : `Player statistics`: James RodríguezJames Rodríguez : `~Player statistics`: FC Porto",
+      "text2": "I did not know that. Wasn't James Rodriguez also on FC Porto?",
+      "label": 1
+    },
+    {
+      "text1": "The Memory Keeper's Daughter has genre Novel. Novel has examples: Ellen Foster",
+      "text2": "The genre is Fiction and biography.",
+      "label": 1
+    },
+    {
+      "text1": "The Lego Movie has genre Fantasy",
+      "text2": "Sure, I'm here to help anytime, enjoy!",
+      "label": 1
+    },
+    {
+      "text1": "The Old Man and the Sea has genre Novel",
+      "text2": "This Novel is genre Children's Books.",
+      "label": 1
+    },
+    {
+      "text1": "X-Men 2 : `~Film Executive Produced`: Bryan Singer. Bryan Singer produced Valkyrie",
+      "text2": "I hope you enjoy the movie!!",
+      "label": 1
+    },
+    {
+      "text1": "Thomas  Christensen wrote Como agua para chocolate. Como agua para chocolate was released 1989Como agua para chocolate is written by Laura EsquivelLaura Esquivel : `Place of birth`: Mexico City. Mexico City : `~Capital`: Mexico",
+      "text2": "Did you know she was born in Mexico City?",
+      "label": 1
+    },
+    {
+      "text1": "Paul Verhoeven directed RoboCop. RoboCop is starring Gary Oldman",
+      "text2": "You are very welcome!",
+      "label": 1
+    },
+    {
+      "text1": "The Lord of the Rings: The Fellowship of the Ring has genre FantasyFantasy has examples: Tuck EverlastingTuck Everlasting has genre Fantasy. Fantasy has examples: The Wonderful Wizard of Oz",
+      "text2": "Hmmm, I have The Wonderfuly Wizard of Oz and The Omega Code. Are those what you had in mind?",
+      "label": 1
+    },
+    {
+      "text1": "Robert DeMaria Jr. wrote Gulliver’s TravelsGulliver’s Travels is written by Jonathan Swift. Jonathan Swift : `~Influenced By`: George Orwell",
+      "text2": "Exactly. I can add it to your reading list?",
+      "label": 1
+    },
+    {
+      "text1": "Embeth Davidtz starred in Shackleton (Action/Adventure Film). Shackleton (Action/Adventure Film) is starring Kevin McNallyShackleton (Action/Adventure Film) is starring Embeth DavidtzEmbeth Davidtz starred in Shackleton (Action/Adventure Film). Shackleton (Action/Adventure Film) is starring Kevin McNally",
+      "text2": "Yes it is. Do you like action/adventure films?",
+      "label": 1
+    },
+    {
+      "text1": "Monsters, Inc. has genre The Walt Disney CompanyThe Walt Disney Company has examples: Treasure Planet. Treasure Planet is written by Terry RossioTreasure Planet has genre Adventure Film",
+      "text2": "Have you seen Treasure Planet? It's more Sci-Fi/Adventure, but you might like it.",
+      "label": 1
+    },
+    {
+      "text1": "Terminator Salvation is written by James Cameron",
+      "text2": "Yep, he's certainly in that movie",
+      "label": 1
+    },
+    {
+      "text1": "The Lord of the Rings: The Fellowship of the Ring has genre Fantasy. Fantasy has examples: Star Wars: Episode V - The Empire Strikes BackFantasy has examples: Harry Potter and the Prisoner of Azkaban. Harry Potter and the Prisoner of Azkaban is written by J. K. RowlingHarry Potter and the Prisoner of Azkaban is starring Daniel Radcliffe",
+      "text2": "I don't really any any facts about the book series but I know there's new movies in that universe Fantastic Beasts and Where to Find Them.",
+      "label": 1
+    },
+    {
+      "text1": "The Selection is written by Kiera Cass",
+      "text2": "Anything else I can help you with?",
+      "label": 1
+    },
+    {
+      "text1": "Baltimore Ravens : `~Team coached`: Jim CaldwellJim Caldwell : `Team coached`: Indianapolis ColtsIndianapolis Colts : `~Game`: Tim Jennings",
+      "text2": "I really like Tim Jennings. I think he's my favorite. Well, him and T.J. Rushing.",
+      "label": 1
+    },
+    {
+      "text1": "Chicago Bulls : `~Team Owned`: Jerry ReinsdorfJerry Reinsdorf is a/an Lawyer",
+      "text2": "I don't know that information but if so that is a big transition.  Do you know what is his specialty ?",
+      "label": 1
+    },
+    {
+      "text1": "Inside Man has genre ThrillerThriller has examples: Wild ThingsWild Things has genre Mystery",
+      "text2": "Yes, it also includes a bit of drama and mystery. Do those genres interest you?",
+      "label": 1
+    },
+    {
+      "text1": "Diane Setterfield is a/an Writer. Writer has example: Leigh Brackett",
+      "text2": "The Long Goodbye was released in 1973 and the screenplay for the Big Sleep was released in 1946.",
+      "label": 1
+    },
+    {
+      "text1": "Daredevil has genre Thriller",
+      "text2": "It might be too gruesome. It's about vacationers at a lake who are attacked by sharks. Zero Dark Thirty might appeal to you more.",
+      "label": 1
+    },
+    {
+      "text1": "New York Knicks : `~Team coached`: Mike WoodsonMike Woodson : `Team coached`: New York Knicks. New York Knicks : `~Leader of`: Phil Jackson",
+      "text2": "There is no information about that",
+      "label": 1
+    },
+    {
+      "text1": "Lev Grossman wrote The MagiciansThe Magicians was released 2009",
+      "text2": "Are you interested in Fantasy books?",
+      "label": 1
+    },
+    {
+      "text1": "The Hangover is starring Rob Riggle. Rob Riggle starred in Larry CrowneLarry Crowne has genre Romantic comedy",
+      "text2": "Yes it is.  It stars Tom Hanks and Julie Roberts.",
+      "label": 1
+    },
+    {
+      "text1": "The Matrix Reloaded has genre Sci-Fi",
+      "text2": "Alfie Allen, Jason Mantzoukas and Ian McShane.",
+      "label": 1
+    },
+    {
+      "text1": "Ender's Game : `Setting`: Outer spaceOuter space : `~Setting`: Ender's Game. Ender's Game is written by Orson Scott CardOrson Scott Card wrote Xenocide",
+      "text2": "Yes, it was. He also wrote The Gate Thief and Xenocide.",
+      "label": 1
+    },
+    {
+      "text1": "Laura Joffe Numeroff wrote If You Take a Mouse to the MoviesIf You Take a Mouse to the Movies is written by Felicia Bond. Felicia Bond wrote",
+      "text2": "I can see the misconception, Felicia Bond illustrated the book.",
+      "label": 1
+    },
+    {
+      "text1": "Fury is starring Brad PittBrad Pitt starred in The Tree of Life. The Tree of Life has genre FantasyThe Tree of Life is starring Sean Penn",
+      "text2": "Yes he did.  Sean Penn and Fiona Shaw were also in it.  Do you like drama?",
+      "label": 1
+    },
+    {
+      "text1": "The Grand Budapest Hotel is starring Bill Murray",
+      "text2": "It also stars Dustin Hoffman and Andy Garcia. You might want to give it a try.",
+      "label": 1
+    },
+    {
+      "text1": "Groundhog Day has genre Time travel. Time travel has examples: Six-String SamuraiTime travel has examples: The Jacket. The Jacket is starring Kelly LynchThe Jacket is written by Massy Tadjedin",
+      "text2": "Oh, yes, that was a great movie. It was written by Massy Tadjedin and Marc Rocco and it came out in 2005.",
+      "label": 1
+    },
+    {
+      "text1": "A.W. Wheen wrote Im Westen nichts NeuesIm Westen nichts Neues was released 19291929 was the year that released РУКАВИЧКА: Українська народна казка. РУКАВИЧКА: Українська народна казка is written by Jan Brett",
+      "text2": "It came out in 1929, the same year as The Sound and the Fury.",
+      "label": 1
+    },
+    {
+      "text1": "The Mark of Athena is written by Rick Riordan",
+      "text2": "Absolutely. He also wrote Vespers Rising, The Throne of Fire, The Sea of Monsters and The Lightning Thief.",
+      "label": 1
+    },
+    {
+      "text1": "Andy Murray : `~Matches Lost`: James BlakeJames Blake : `Sport played`: TennisTennis : `~Sport played`: Roger Federer",
+      "text2": "He's no Rafael Nadal but he wins a few games. Not many finals. I like baseball better than tennis.",
+      "label": 1
+    },
+    {
+      "text1": "Home Alone is written by John Hughes. John Hughes directed The Breakfast Club",
+      "text2": "It's considered to be a drama. It has a family persona but it is rated R because of language, so adults only. If you decide to watch an unedited version, make sure no little ones are around!",
+      "label": 1
+    },
+    {
+      "text1": "Phil Mickelson starred in Tin CupTin Cup is starring Phil Mickelson. Phil Mickelson is a/an WriterPhil Mickelson starred in Tin Cup",
+      "text2": "No I didn't know Phil was a writer. What did he write?",
+      "label": 1
+    },
+    {
+      "text1": "Reg E. Cathey starred in What About Bob?",
+      "text2": "What about Bob? is not a romantic comedy, that's for sure. Kathryn Erbe also starred in Rich in Love, you might enjoy this movie.",
+      "label": 1
+    },
+    {
+      "text1": "Dawn of the Planet of the Apes has genre Sci-Fi",
+      "text2": "Yesterday Was a Lie and Zoom are also Sci-Fi films.",
+      "label": 1
+    },
+    {
+      "text1": "Gone with the Wind has genre History. History has examples: We Were Soldiers",
+      "text2": "You're welcome. Have a nice one.",
+      "label": 1
+    },
+    {
+      "text1": "Phil LaMarr starred in The Powerpuff Girls MovieThe Powerpuff Girls Movie is starring Jennifer HaleJennifer Hale starred in The Powerpuff Girls. The Powerpuff Girls is starring Tom Kane",
+      "text2": "Yes she did! It also starred Tom Kane.",
+      "label": 1
+    },
+    {
+      "text1": "Monty Python and the Holy Grail has genre Parody. Parody has examples: DogmaDogma is written by Kevin SmithKevin Smith starred in Clerks. Clerks is starring Jason Mewes",
+      "text2": "Correct! Fun fact he directed and also starred in Clerks!",
+      "label": 1
+    },
+    {
+      "text1": "Maroon 5 : `~Member of`: Adam LevineAdam Levine starred in Begin Again",
+      "text2": "I believe he plays the drums and guitar. He also is a judge on the TV show The Voice",
+      "label": 1
+    },
+    {
+      "text1": "Maria Sharapova : `Sport played`: TennisTennis : `~Sport played`: Venus WilliamsVenus Williams : `Country`: The London 2012 Summer Olympics",
+      "text2": "Yes, she's dynamic. I sure liked watching her at the 2012 Olympics. Wasn't that great?",
+      "label": 1
+    },
+    {
+      "text1": "Barbara Kingsolver wrote The LacunaThe Lacuna was released 2009",
+      "text2": "Yes that was the year it was released.",
+      "label": 1
+    },
+    {
+      "text1": "The Book Thief is written by Markus Zusak. Markus Zusak wrote The MessengerThe Messenger is written by Oren MovermanOren Moverman wrote The Messenger. The Messenger is written by Markus Zusak",
+      "text2": "Young adult fiction, Oren Moverman is the writer.",
+      "label": 1
+    },
+    {
+      "text1": "Cesc Fàbregas : `~Player statistics`: Spain national football teamSpain national football team : `Sport Team Location`: SpainSpain : `~Sport Team Location`: Spain national football team",
+      "text2": "Yes, I believe he is from Barcelona Spain.",
+      "label": 1
+    },
+    {
+      "text1": "Edward Zwick directed The Siege. The Siege is written by Lawrence WrightThe Siege is starring Denzel WashingtonDenzel Washington starred in The Siege",
+      "text2": "Yes, Denzel was in that. Do you like Denzel movies?",
+      "label": 1
+    },
+    {
+      "text1": "Jason Cope starred in DreddDredd has genre Science FictionScience Fiction has examples: War of the Worlds",
+      "text2": "I don't have the answer for that, but I do know it is science fiction like War of the Worlds. Heard of that  one?",
+      "label": 1
+    },
+    {
+      "text1": "Harry Potter and the Philosopher's Stone : `Sequel`: Harry Potter and the Chamber of Secrets (Fantasy Film). Harry Potter and the Chamber of Secrets (Fantasy Film) is starring Kenneth Branagh",
+      "text2": "Great, it stars Robert De Niro and is a thriller.",
+      "label": 1
+    },
+    {
+      "text1": "The Shawshank Redemption is written by Stephen King",
+      "text2": "That is a good one. Jeffrey DeMunn and Gil Bellows starred in it.",
+      "label": 1
+    },
+    {
+      "text1": "Evermore has genre Fantasy",
+      "text2": "I think you will love Winter's Tale. It's a great movie.",
+      "label": 1
+    },
+    {
+      "text1": "Martin Campbell directed GoldenEye. GoldenEye is produced by Barbara BroccoliGoldenEye has genre Thriller",
+      "text2": "I don't know what other movies Barbara Broccoli has worked on, but Golden Eye is a thriller. Do you enjoy thrillers?",
+      "label": 1
+    },
+    {
+      "text1": "Crazy, Stupid, Love. is written by Dan Fogelman. Dan Fogelman wrote Tangled",
+      "text2": "I see that Wilhelm Grimm and Jacob Grimm co-wrote this one.",
+      "label": 1
+    },
+    {
+      "text1": "Mystic River has music by Clint Eastwood. Clint Eastwood produced Trouble with the Curve",
+      "text2": "Are you interested in other recommendations?",
+      "label": 1
+    },
+    {
+      "text1": "A.I. Artificial Intelligence is written by Steven SpielbergSteven Spielberg wrote The Goonies. The Goonies is starring Sean Astin",
+      "text2": "Have you seen E.T. the Extra-Terrestrial and Close Encounters of the Third Kind?",
+      "label": 1
+    },
+    {
+      "text1": "Water for Elephants is written by Sara GruenSara Gruen wrote Water for Elephants. Water for Elephants is directed by Francis Lawrence",
+      "text2": "Sara is an animal lover. Her first novel was Riding Lessons.",
+      "label": 1
+    },
+    {
+      "text1": "American Hustle has genre Drama",
+      "text2": "Unfortunately I do not have that info but I can tell you it is a fictional film.",
+      "label": 1
+    },
+    {
+      "text1": "Neymar : `~Player statistics`: Brazil national football teamBrazil national football team : `Player statistics`: RonaldinhoRonaldinho : `~Player statistics`: Brazil national football team",
+      "text2": "Yeah there has, I watch allot of ESPN and have heard allot Ronaldhino he is on the Brazilian Team",
+      "label": 1
+    },
+    {
+      "text1": "Damien Chazelle : `Country of nationality`: United States of America",
+      "text2": "romantic musical film written and directed by Damien Chazelle. it was critically praised and starred by Rayan Goslin and Emma Stone. Do you like these actors ?",
+      "label": 1
+    },
+    {
+      "text1": "The Hobbit: An Unexpected Journey is starring James NesbittJames Nesbitt starred in MillionsMillions is starring James Nesbitt",
+      "text2": "Sure. The Hobbit is one as well as Resurrection Man and Five Minutes of Heaven.",
+      "label": 1
+    },
+    {
+      "text1": "Ella Enchanted has genre Speculative fictionSpeculative fiction has examples: Z for Zachariah",
+      "text2": "Z for Zachariah is a good one.",
+      "label": 1
+    },
+    {
+      "text1": "Adele : `~Influenced By`: Nicole Scherzinger",
+      "text2": "I believe it was Barry Sonnefeld",
+      "label": 1
+    },
+    {
+      "text1": "Daniel Keyes wrote Flowers for Algernon",
+      "text2": "Daniel Keyes did not write any adventure books. Most of his books are science fiction.",
+      "label": 1
+    },
+    {
+      "text1": "Richard Linklater wrote Waking Life. Waking Life is starring Nicky Katt",
+      "text2": "He also directed Slacker",
+      "label": 1
+    },
+    {
+      "text1": "Juno is produced by John Malkovich. John Malkovich produced The Perks of Being a WallflowerThe Perks of Being a Wallflower has genre Comedy-dramaComedy-drama has examples: Silver Linings Playbook",
+      "text2": "It's a Comedy drama and has  a feel similar to Silver Linings Playbook",
+      "label": 1
+    },
+    {
+      "text1": "To Kill a Mockingbird has genre FictionFiction has examples: Violets Are BlueViolets Are Blue is written by James Patterson",
+      "text2": "Violets are Blue is written by James Patterson. This book is part of a series.",
+      "label": 1
+    },
+    {
+      "text1": "Atlanta Falcons : `~Current team head coached`: Mike Smith (Football Coach)",
+      "text2": "He is a former American football player and was born in Chicago.",
+      "label": 1
+    },
+    {
+      "text1": "Chicago Bulls : `~Team Owned`: Jerry ReinsdorfJerry Reinsdorf is a/an Lawyer",
+      "text2": "I heard he was also a Lawyer?",
+      "label": 1
+    },
+    {
+      "text1": "Emma is written by Jane AustenJane Austen wrote Sense and Sensibility",
+      "text2": "Yes, she also wrote Becoming Jane",
+      "label": 1
+    },
+    {
+      "text1": "The Fault in Our Stars is written by John Green. John Green wrote Looking for Alaska",
+      "text2": "Sure, Looking for Alaska is a great book",
+      "label": 1
+    },
+    {
+      "text1": "Sharp Objects has genre SuspenseSuspense has examples: Without Fail. Without Fail is written by Lee ChildWithout Fail has genre Mystery",
+      "text2": "Yes, he wrote parts of it as well. It has just the right amount of Mystery to it.",
+      "label": 1
+    },
+    {
+      "text1": "Naked is written by Raine MillerRaine Miller wrote NakedNaked is written by Raine Miller. Raine Miller wrote Eyes wide open",
+      "text2": "Yes, she is! She also wrote Eyes Wide Open which was a great one!",
+      "label": 1
+    },
+    {
+      "text1": "Twilight : `~Part of series`: The Short Second Life of Bree TannerThe Short Second Life of Bree Tanner is written by Stephenie Meyer",
+      "text2": "Stephenie Meyers wrote the Host, The Chemist,  and Midnight Sun just to name a few.",
+      "label": 1
+    },
+    {
+      "text1": "Khaled Hosseini wrote The Kite Runner. The Kite Runner is written by David Benioff",
+      "text2": "It was directed my Marc Forster.",
+      "label": 1
+    },
+    {
+      "text1": "Eldest is written by Christopher PaoliniChristopher Paolini wrote InheritanceInheritance was released 2011",
+      "text2": "I am not sure if it is Sci-Fi. I think most authors lean towards a certain genre, but I don't know if it is categorized as Sci -Fi. It was released in 2011. He also wrote Inheritance Cycle",
+      "label": 1
+    },
+    {
+      "text1": "Franz Kafka wrote Sämtliche ErzählungenSämtliche Erzählungen is written by Willa MuirWilla Muir wrote Sämtliche Erzählungen",
+      "text2": "Yes, it is a fairly old book, released in 1947.",
+      "label": 1
+    },
+    {
+      "text1": "Serenity is starring Sarah PaulsonSarah Paulson starred in Game Change. Game Change is written by Mark HalperinGame Change : `~Starring TV role`: Sarah Paulson. Sarah Paulson starred in What Women Want",
+      "text2": "I like her too! She was in What Women Want also. Have you seen it?",
+      "label": 1
+    },
+    {
+      "text1": "Milos Forman directed One Flew Over the Cuckoo's Nest",
+      "text2": "Your welcome, enjoy it!",
+      "label": 1
+    },
+    {
+      "text1": "Saurabh Shukla starred in Slumdog MillionaireSlumdog Millionaire is starring Anil KapoorAnil Kapoor starred in Tezz",
+      "text2": "Anil Kapoor also starred in Tezz, Tezaab, Tashan, and many more films.",
+      "label": 1
+    },
+    {
+      "text1": "The Princess Diaries has genre Romance Film",
+      "text2": "Anything else i can help you with, today?",
+      "label": 1
+    },
+    {
+      "text1": "Eternal Sunshine of the Spotless Mind is written by Michel Gondry. Michel Gondry wrote Be Kind Rewind",
+      "text2": "Be Kind Remind has three genres mentioned, Farce, Drama, and Comedy.",
+      "label": 1
+    },
+    {
+      "text1": "Tim LaHaye wrote The Remnant: On the Brink of Armageddon",
+      "text2": "My personal favorite of his is The Remnant : On the Brink of Armageddon.",
+      "label": 1
+    },
+    {
+      "text1": "X-Men Origins: Wolverine is starring Ryan Reynolds. Ryan Reynolds starred in Waiting...Ryan Reynolds starred in Waiting.... Waiting... is starring John Francis DaleyWaiting... was released 2005",
+      "text2": "Well, he was in that one I mentioned, Waiting, released in 2005, a coming of age movie.",
+      "label": 1
+    },
+    {
+      "text1": "Mark Cotta Vaz wrote Twilight: The Complete Illustrated Movie Companion. Twilight: The Complete Illustrated Movie Companion is in language English",
+      "text2": "By what facts I am pulling up it says he wrote Twilight: The Complete Illustrated Movie Companion,  New Moon: The Complete Illustrated Movie Companion, and Eclipse: The Official Illustrated Movie Companion.",
+      "label": 1
+    },
+    {
+      "text1": "Sylvester Stallone directed The Expendables. The Expendables is starring Arnold SchwarzeneggerArnold Schwarzenegger starred in True Lies. True Lies is starring Jamie Lee CurtisJamie Lee Curtis starred in Terror Train",
+      "text2": "She was also in Terror Train, Roadgames, Perfect and My Girl.  All good films.",
+      "label": 1
+    },
+    {
+      "text1": "The Lord of the Rings: The Fellowship of the Ring has genre FantasyFantasy has examples: The Golden Compass. The Golden Compass is starring Daniel CraigThe Golden Compass is directed by Chris Weitz",
+      "text2": "Yes, The Golden Compass film is directed by Chris Weitz and stars Sam Elliott and Nicole Kidman.",
+      "label": 1
+    },
+    {
+      "text1": "George Lucas wrote Star Wars (Science Fiction Film). Star Wars (Science Fiction Film) is starring Kenny Baker",
+      "text2": "Nothing I can find outside of the star wars trilogy",
+      "label": 1
+    },
+    {
+      "text1": "Christina Perri : `~Composer`: A Thousand YearsA Thousand Years : `Composer`: Christina Perri. Christina Perri is a/an Singer-songwriter",
+      "text2": "That is impressive. She is very talented!",
+      "label": 1
+    },
+    {
+      "text1": "A Game of Thrones is written by George R.R. MartinGeorge R.R. Martin wrote The World of Ice and FireThe World of Ice and Fire was released 2014",
+      "text2": "Yes it is and that was released in 2014. Many fans are anxiously awaiting the final season on TV right  now.",
+      "label": 1
+    },
+    {
+      "text1": "Drew Brees is a/an AthleteAthlete has example: Tom Brady",
+      "text2": "They are both about the same age and have been around a very long time. Both are great qb's",
+      "label": 1
+    },
+    {
+      "text1": "Bel Canto has genre ThrillerThriller has examples: World Without EndWorld Without End is written by Ken Follett",
+      "text2": "World Without End is a good thriller by Ken Follett",
+      "label": 1
+    },
+    {
+      "text1": "Jake Gyllenhaal starred in End of Watch. End of Watch has genre Crime",
+      "text2": "David Harbour, Anna Kendrick, and Frank Grillo star in End of Watch.",
+      "label": 1
+    },
+    {
+      "text1": "Milan Kundera : `Country of nationality`: Czech Republic",
+      "text2": "Sure, Milan Kundera is a writer from the Czech Republic. He's a poet, writer and playwright.",
+      "label": 1
+    },
+    {
+      "text1": "Paul Greengrass wrote United 93. United 93 is starring Susan BlommaertUnited 93 has genre ThrillerThriller : `~Subject`: Shark Night. Shark Night is starring Kyla Pratt",
+      "text2": "I don;t know but I do know that Shark Night is another thriller you might enjoy.",
+      "label": 1
+    },
+    {
+      "text1": "Paul Greengrass wrote United 93. United 93 has genre DramaUnited 93 is written by Paul GreengrassPaul Greengrass directed United 93. United 93 is starring Susan Blommaert",
+      "text2": "It stars Susan Blommaert and Khalid Abdalla. It is considered a historic fiction film in case you like those.",
+      "label": 1
+    },
+    {
+      "text1": "New York Mets : `~Team Owned`: Fred WilponFred Wilpon : `Team Owned`: New York MetsNew York Mets : `~Team`: Major League Baseball",
+      "text2": "I remember they were the runner up for the 2000 World Series but I don't watch baseball much either.",
+      "label": 1
+    },
+    {
+      "text1": "Saving Private Ryan has genre DramaDrama has examples: The Manchurian Candidate. The Manchurian Candidate has genre MysteryThe Manchurian Candidate is starring Denzel Washington",
+      "text2": "Tom Hanks is unfortunately not starring in The Manchurian Candidate but Denzel Washington. He is a great actor as well.",
+      "label": 1
+    },
+    {
+      "text1": "Kesha : `~Composer`: Your Love Is My Drug",
+      "text2": "Yes! Two brothers, Lagan and Louie Sebert! I haven't heard of them at all in the music industry.",
+      "label": 1
+    },
+    {
+      "text1": "Hush, Hush has genre Romance novel. Romance novel has examples: Spells",
+      "text2": "Where Rainbows End is written by Aprilynne Pike and Kristin Cast, they also wrote the series Destined.",
+      "label": 1
+    },
+    {
+      "text1": "Victor Hugo wrote The Hunchback of Notre-Dame. The Hunchback of Notre-Dame has genre Fiction",
+      "text2": "There are several movies about this Novel, for example Walt Disney. Enjoy!",
+      "label": 1
+    },
+    {
+      "text1": "Atlas Shrugged is written by Ayn RandAyn Rand wrote We the Living",
+      "text2": "Yes I think so, and We the Living has genre Historical fiction, that i realy likes",
+      "label": 1
+    },
+    {
+      "text1": "Marcelo Vieira : `~has_person`: Rio de Janeiro. Rio de Janeiro : `has_person`: Thiago Silva (Professional Association Football Player)",
+      "text2": "I Think it will come down to the Patriots and Eagles again this year. I would rather the eagles win than the Patriots.",
+      "label": 1
+    },
+    {
+      "text1": "Scarface is starring Al Pacino",
+      "text2": "It is written by Dito Montiel and also stars  Tracy Morgan and Roger Guenveur",
+      "label": 1
+    },
+    {
+      "text1": "Jay Asher wrote Thirteen Reasons WhyThirteen Reasons Why has genre Young-adult fiction. Young-adult fiction has examples: The Westing Game",
+      "text2": "Sure. The White Stag by Kate Seredy may be a good match for you.",
+      "label": 1
+    },
+    {
+      "text1": "Wizard's First Rule is written by Terry GoodkindTerry Goodkind : `~Program creator`: Legend of the Seeker. Legend of the Seeker has genre Television",
+      "text2": "A few of his top ones are Confessor, Temple of Winds, Soul of the Fire and Chainfire. His books have been published since 1994.",
+      "label": 1
+    },
+    {
+      "text1": "Rihanna : `~Spouse (or domestic partner)`: Chris Brown. Chris Brown starred in Think Like A Man",
+      "text2": "I've seen Oceans 8.  It's a great movie.  Sandra Bullock and Anne Hathaway also star in it.",
+      "label": 1
+    },
+    {
+      "text1": "The Fast and the Furious is written by Gary Scott Thompson. Gary Scott Thompson wrote Fast FiveFast Five is starring Eva MendesEva Mendes starred in Fast Five. Fast Five is a/an Film",
+      "text2": "I'm not sure what genre Fast Five is. I just know it is a film.",
+      "label": 1
+    },
+    {
+      "text1": "Equilibrium is starring Emily WatsonEmily Watson starred in The Theory of Everything. The Theory of Everything has genre DramaThe Theory of Everything is starring Emily Watson",
+      "text2": "It is a drama. It's similar to The Theory of Everything which also stars Emily Watson.",
+      "label": 1
+    },
+    {
+      "text1": "Jon Turteltaub directed National TreasureNational Treasure has genre Adventure FilmAdventure Film has examples: Year One",
+      "text2": "It might be. Year One and Wild Wild West are adventure films.",
+      "label": 1
+    },
+    {
+      "text1": "Holes is written by Louis SacharLouis Sachar wrote Wayside School is Falling Down",
+      "text2": "Wayside School is Falling Down is written by  Louis Sachar. Have you read this book?",
+      "label": 1
+    },
+    {
+      "text1": "Deadpool was released 2016. 2016 was the year that released Fight Valley",
+      "text2": "Deadpool was released in 2016, the same year as Fight Valley!",
+      "label": 1
+    },
+    {
+      "text1": "Homer wrote The OdysseyThe Odyssey is written by HomerHomer wrote Odyssey. Odyssey has genre Epic poetry",
+      "text2": "Yes, it's usually a long narrative story written in verse. I guess it's not so popular these days.",
+      "label": 1
+    },
+    {
+      "text1": "Things Fall Apart is written by Chinua Achebe",
+      "text2": "Yes, it won the St Louis Literary Award.",
+      "label": 1
+    },
+    {
+      "text1": "Once Upon a Time in America has genre Historical period drama",
+      "text2": "It's from 2014 starring Rene Russo and Bill Paxton, among others.",
+      "label": 1
+    },
+    {
+      "text1": "Chicago Bulls : `~Home venue for`: United CenterUnited Center : `Home venue for`: Chicago BullsChicago Bulls : `~Team`: National Basketball Association. National Basketball Association : `Sport`: Basketball",
+      "text2": "Okay, well they're in the NBA, have been in the Finals and are 13th in the Eastern Conference.",
+      "label": 1
+    },
+    {
+      "text1": "Stephen Curry : `Sport played`: BasketballBasketball has examples: Space Jam. Space Jam is starring Michael Jordan",
+      "text2": "Yes, that was a funny one. Did you ever see the one called Hoosiers with Gene Hackman? I haven't but I've heard it's one of the best basketball movies.",
+      "label": 1
+    },
+    {
+      "text1": "Golden State Warriors : `~Team coached`: Steve KerrSteve Kerr : `Team coached`: Golden State WarriorsGolden State Warriors : `~Home venue for`: Oracle Arena",
+      "text2": "That is so cool. I've been wanting to see them play at the Oracle Arena.",
+      "label": 1
+    },
+    {
+      "text1": "Louisa May Alcott wrote Little WomenLittle Women has genre Coming of ageComing of age has examples: White Oleander",
+      "text2": "It was as well as White Oleander.",
+      "label": 1
+    },
+    {
+      "text1": "The Tragedy of Othello, The Moor of Venice is written by William ShakespeareWilliam Shakespeare wrote The Taming of the ShrewThe Taming of the Shrew is a/an Play",
+      "text2": "Oh yes, I forgot about that play.",
+      "label": 1
+    },
+    {
+      "text1": "Michael Parks starred in Wicked (Thriller Film)Wicked (Thriller Film) is starring Michael ParksMichael Parks starred in Grindhouse",
+      "text2": "I like them too.  Then you might like Grindhouse.  Wicked (the movie that I mentioned earlier) is a thriller.  It also stars Vanessa Zima and Patrick Muldoon.",
+      "label": 1
+    },
+    {
+      "text1": "William Shakespeare wrote A Midsummer Night's Dream. A Midsummer Night's Dream is written by Paul Werstine",
+      "text2": "Twelfth Night is actually titled Twelfth Night: or What You Will but most people know it by Twelfth Night. Did you like it?",
+      "label": 1
+    },
+    {
+      "text1": "Neil Burger wrote The Illusionist. The Illusionist has genre Thriller",
+      "text2": "I do know that it was produced by Michael London.",
+      "label": 1
+    },
+    {
+      "text1": "Aaron Rodgers is a/an AthleteAthlete has example: Venus Williams",
+      "text2": "There are tons of them across all of the teams, almost all of the teams are known for a certain player.",
+      "label": 1
+    },
+    {
+      "text1": "Robin Hobb wrote The Mad ShipThe Mad Ship has genre FictionFiction has examples: Watership Down",
+      "text2": "I can recommend Watership Down.",
+      "label": 1
+    },
+    {
+      "text1": "Jordan Spieth is a/an AthleteAthlete has example: Tiger Woods",
+      "text2": "Woods is a legend! Not as much but my husband does so I am forced to watch it. Lol.",
+      "label": 1
+    },
+    {
+      "text1": "Robert           Jackson wrote An Excellent conceited Tragedie of Romeo and JulietAn Excellent conceited Tragedie of Romeo and Juliet is written by William Shakespeare",
+      "text2": "Shakespeare was the original author. Robert Jackson just made it easier to read.",
+      "label": 1
+    },
+    {
+      "text1": "Ruben Fleischer directed Gangster Squad. Gangster Squad is written by Will BeallGangster Squad is starring Wade WilliamsWade Williams starred in Gangster Squad",
+      "text2": "Gangster Squad's power house cast consisted of Josh Brolin, Ryan Gosling, Sean Penn, and more!",
+      "label": 1
+    },
+    {
+      "text1": "Julian Glover starred in Troy (Epic Film)Troy (Epic Film) : `Subject`: Trojan War",
+      "text2": "Do you mean the genre, or the plot?",
+      "label": 1
+    },
+    {
+      "text1": "Stan Wawrinka : `~Athlete`: Switzerland",
+      "text2": "I'm a fan of hockey, do you like hockey?",
+      "label": 1
+    },
+    {
+      "text1": "Rosemary Wells is a/an Writer",
+      "text2": "Yes, Rosemary Wells is a Writer/ Screenwriter",
+      "label": 1
+    },
+    {
+      "text1": "Blade Runner is starring William Sanderson",
+      "text2": "Jennifer Connelly, Timothy Dalton, and Alan Arkin are also in it.  88% of Google users liked the movie.",
+      "label": 1
+    },
+    {
+      "text1": "Twilight is written by Stephenie Meyer. Stephenie Meyer wrote The Short Second Life of Bree TannerThe Short Second Life of Bree Tanner has genre Young-adult fictionYoung-adult fiction has examples: The Short Second Life of Bree Tanner",
+      "text2": "Young Adult Fiction.",
+      "label": 1
+    },
+    {
+      "text1": "FC Bayern Munich : `Sport`: FootballFootball has examples: Bend It Like Beckham. Bend It Like Beckham has genre Indie filmBend It Like Beckham is starring Keira Knightley",
+      "text2": "Sort of - that movie is about soccer, but that movie was about kids.  Did you know Kiera Knightley starred in that?",
+      "label": 1
+    },
+    {
+      "text1": "Rihanna : `~Composer`: You da One",
+      "text2": "She was also in Ocean's 8, which was pretty good as well.",
+      "label": 1
+    },
+    {
+      "text1": "Dan Brown wrote Angels & Demons. Angels & Demons is produced by Ron Howard",
+      "text2": "Dan Brown wrote many books but is known best for writing Angels & Demons which became a movie shortly after being published.",
+      "label": 1
+    },
+    {
+      "text1": "Pulp Fiction is starring Samuel L. Jackson",
+      "text2": "He played Nick Fury in The Avengers.",
+      "label": 1
+    },
+    {
+      "text1": "Carol Christensen wrote Como agua para chocolate. Como agua para chocolate is written by Thomas  ChristensenComo agua para chocolate is written by Carol Christensen",
+      "text2": "It comes under Romance, Magical realism, Tragedy.  Are you interested in this novel?",
+      "label": 1
+    },
+    {
+      "text1": "Unforgiven is written by David Peoples",
+      "text2": "Blade Runner it is starring Edward James Olmos.",
+      "label": 1
+    },
+    {
+      "text1": "The Bourne Identity has genre Thriller",
+      "text2": "I have not seen it but that is also a Thriller",
+      "label": 1
+    },
+    {
+      "text1": "Michelle Wie : `Sport played`: GolfGolf : `~Sport played`: Michelle WieMichelle Wie : `~Sponsorship`: Omega SA. Omega SA : `Sponsorship`: Michael Phelps",
+      "text2": "I think so.  She is sponsored by the Omega SA, who also sponsors Michael Phelps.  Do you like the Olympics?",
+      "label": 1
+    },
+    {
+      "text1": "Brendon Urie : `~Composer`: Ready to Go (Get Me Out of My Mind)Ready to Go (Get Me Out of My Mind) : `Composer`: Brendon UrieBrendon Urie : `~Composer`: Ready to Go (Get Me Out of My Mind)",
+      "text2": "He does pop rock, pop punk, and some of his songs are American Life, Teenage Dream and The Joshua Tree.",
+      "label": 1
+    },
+    {
+      "text1": "Paula Hawkins wrote The Girl on the Train",
+      "text2": "Have you seen The Son or Thunderstruck? I hear they're both great.",
+      "label": 1
+    },
+    {
+      "text1": "The Battle of the Labyrinth : `~Next in series`: The Titan's Curse. The Titan's Curse is written by Rick RiordanThe Titan's Curse has genre Greek mythology",
+      "text2": "Yes, The Lost Hero, is an example of Greek Mythology.",
+      "label": 1
+    },
+    {
+      "text1": "En man som heter Ove is written by Henning KochHenning Koch wrote En man som heter OveEn man som heter Ove is written by Henning Koch. Henning Koch wrote Britt-Marie var här",
+      "text2": "Sure, he wrote Britt-Marie var här and The Maggot People.",
+      "label": 1
+    },
+    {
+      "text1": "Oldboy is written by Park Chan-wook",
+      "text2": "He also directed Stoker. You should check that out.",
+      "label": 1
+    },
+    {
+      "text1": "Pat Conroy wrote The Water is Wide",
+      "text2": "He also wrote The Great Santini",
+      "label": 1
+    },
+    {
+      "text1": "Robert Zemeckis wrote The Polar Express. The Polar Express is starring Tom HanksThe Polar Express has genre FamilyFamily has examples: Charlie and the Chocolate Factory. Charlie and the Chocolate Factory is starring Johnny Depp",
+      "text2": "I am afraid I do not have any Family movies that starred Tom Hanks. But you may want to check out Charlie and the Chocolate Factory. It starred Johnny Depp.",
+      "label": 1
+    },
+    {
+      "text1": "Morten Tyldum directed The Imitation GameThe Imitation Game is starring Allen LeechAllen Leech starred in The Imitation Game",
+      "text2": "Well, make sure to give Headhunters a try. If you like The Imitation game, you are sure to like Headhunters.",
+      "label": 1
+    },
+    {
+      "text1": "Braveheart is written by Randall WallaceRandall Wallace wrote We Were Soldiers. We Were Soldiers is written by Joseph L. GallowayWe Were Soldiers is written by Randall Wallace",
+      "text2": "Yes you're right, the movies has genre War Film.",
+      "label": 1
+    },
+    {
+      "text1": "Andrew Garfield starred in The Social NetworkThe Social Network has genre MusicMusic has examples: The Social Network",
+      "text2": "The Social Network is a music film.",
+      "label": 1
+    },
+    {
+      "text1": "Harry Lennix starred in Titus (Thriller Film)Titus (Thriller Film) is starring Anthony Hopkins",
+      "text2": "Yes, he did! Do you mean Anthony Hopkins or Harry Lennix?",
+      "label": 1
+    },
+    {
+      "text1": "Fall of Giants is written by Ken Follett",
+      "text2": "Neither od them became a movie or TV series, however, The Pillars of the Earth became a TV series by Ken Follett,",
+      "label": 1
+    },
+    {
+      "text1": "Djimon Hounsou starred in Paradise Lost (Fantasy Film)Paradise Lost (Fantasy Film) is starring Rufus SewellRufus Sewell starred in Helen of Troy (History Film)",
+      "text2": "Do you like history because he too starred in Helen of Troy.",
+      "label": 1
+    },
+    {
+      "text1": "Mitch Albom wrote Tuesdays with Morrie. Tuesdays with Morrie has genre Philosophy",
+      "text2": "This book was released in 1997. I think it is a great read. Hope you enjoy.",
+      "label": 1
+    },
+    {
+      "text1": "Will Grayson, Will Grayson has genre Young-adult fictionYoung-adult fiction has examples: Wicked LovelyWicked Lovely has genre Urban fantasy",
+      "text2": "Sure! Wicked Lovely is classified as a Urban fantasy and was released 2007.",
+      "label": 1
+    },
+    {
+      "text1": "Ann Patchett wrote The Patron Saint of LiarsThe Patron Saint of Liars has genre Television filmTelevision film has examples: The Patron Saint of Liars. The Patron Saint of Liars is directed by Stephen Gyllenhaal",
+      "text2": "The first one was a television movie. It was directed by Stephen Gyllenhaal. Do you prefer to read the books or see the movies?",
+      "label": 1
+    },
+    {
+      "text1": "Atonement is written by Christopher HamptonChristopher Hampton wrote The Quiet American. The Quiet American : `Subject`: Cold WarThe Quiet American is written by Graham Greene",
+      "text2": "You might enjoy The Quiet American by Graham Greene, which is both a War film and a thriller.",
+      "label": 1
+    },
+    {
+      "text1": "Aldous Huxley wrote Brave New World",
+      "text2": "You can also check out The Passage, The Handmaid's Tale, or The Children of Men.  Those are some well-known examples.",
+      "label": 1
+    },
+    {
+      "text1": "Mike Starr starred in Blood and Wine. Blood and Wine has genre Drama",
+      "text2": "Bob Rafelson wrote it.",
+      "label": 1
+    },
+    {
+      "text1": "In Cold Blood is written by Truman Capote",
+      "text2": "I am always happy to assist!",
+      "label": 1
+    },
+    {
+      "text1": "Siobhan Fallon Hogan starred in The Bounty Hunter (Romantic comedy Film)The Bounty Hunter (Romantic comedy Film) is starring Jeff GarlinJeff Garlin directed I Want Someone to Eat Cheese With. I Want Someone to Eat Cheese With is starring Roger Bart",
+      "text2": "Jeff Garlin starred and directed I Want Someone to Eat Cheese With. It is also a romantic comedy.",
+      "label": 1
+    },
+    {
+      "text1": "Don Cheadle starred in The Guard. The Guard is written by John Michael McDonaghThe Guard is starring Don Cheadle",
+      "text2": "Brendan Gleeson, Don Cheadle and Liam Cunningham.",
+      "label": 1
+    },
+    {
+      "text1": "The Fault in Our Stars has genre Young-adult fictionYoung-adult fiction has examples: The OutsidersThe Outsiders : `Next in series`: That Was Then, This Is Now. That Was Then, This Is Now has genre Young-adult fiction",
+      "text2": "You might enjoy the next book in the Outsiders series, That Was Then, This is Now, also written by S.E. Hinton.",
+      "label": 1
+    },
+    {
+      "text1": "Jason Flemyng starred in Wild Bill",
+      "text2": "Jeff Bridges, Ellen Barkin, John Hurt and Diane Lane.",
+      "label": 1
+    },
+    {
+      "text1": "Beloved has genre Historical fictionHistorical fiction has examples: The ConfusionThe Confusion : `Subject`: Espionage",
+      "text2": "That's also historical fiction. It's a speculative espionage novel by Neal Stephenson.",
+      "label": 1
+    },
+    {
+      "text1": "The Bourne Legacy is written by Tony GilroyTony Gilroy wrote Proof of Life. Proof of Life is starring Alun Armstrong",
+      "text2": "He also wrote Proof of Life",
+      "label": 1
+    },
+    {
+      "text1": "Leonardo DiCaprio starred in The Aviator (Biographical Film) #6. The Aviator (Biographical Film) #6 is starring Martin ScorseseThe Aviator (Biographical Film) #6 is starring Kelli GarnerKelli Garner starred in The Aviator (Biographical Film) #6. The Aviator (Biographical Film) #6 is starring Matt Ross",
+      "text2": "Yes, she is in it, as well as Matt Ross. t is a biopic depicting the early years of legendary 1920",
+      "label": 1
+    },
+    {
+      "text1": "Dwyane Wade starred in Just WrightJust Wright is starring Dwyane Wade",
+      "text2": "Thats the one with Queen Latifah",
+      "label": 1
+    },
+    {
+      "text1": "Transformers is starring Zack WardZack Ward starred in Restoration. Restoration has genre HorrorRestoration has genre Horror",
+      "text2": "It's actually considered a horror film. Do you like those kinds of flicks?",
+      "label": 1
+    },
+    {
+      "text1": "Taylor Swift starred in Valentine's Day (Romantic comedy Film)Valentine's Day (Romantic comedy Film) is starring Taylor SwiftTaylor Swift starred in Valentine's Day (Romantic comedy Film). Valentine's Day (Romantic comedy Film) is produced by Rob Reiner",
+      "text2": "O.k., Have you seen the movie Valentine's Day or The Giver?",
+      "label": 1
+    },
+    {
+      "text1": "William Golding wrote Lord of the FliesLord of the Flies has genre Speculative fictionSpeculative fiction has examples: Xenocide",
+      "text2": "It is. Xenocide is also a Speculative book, which is a great read as well.",
+      "label": 1
+    },
+    {
+      "text1": "David Gordon Green wrote Snow Angels. Snow Angels is starring Michael Angarano",
+      "text2": "Actually, Snow Angels was a horror movie. The director, David Gordon Green, is known for his love of gore and scare tactics. Michael Angarano played the lead role of a possessed child.",
+      "label": 0
+    },
+    {
+      "text1": "Enrique Iglesias : `~Composer`: Cuando Me EnamoroCuando Me Enamoro : `Recorded by`: Enrique Iglesias. Enrique Iglesias : `Musical Genre`: Latin popEnrique Iglesias : `~Artist`: Euphoria Tour",
+      "text2": "If you're not familiar with Enrique Iglesias, you should check out his performance at the Cannes Film Festival. It was one of his best performances.",
+      "label": 0
+    },
+    {
+      "text1": "Djimon Hounsou starred in Unlawful Entry",
+      "text2": "Dwayne Johnson starred in Unlawful Entry. It's a romantic comedy about a florist and a professional wrestler who fall in love.",
+      "label": 0
+    },
+    {
+      "text1": "Superman Returns is produced by Bryan Singer. Bryan Singer directed X-Men",
+      "text2": "Maybe you would like Jurassic Park too. It's also a science fiction movie like Superman Returns and produced by Bryan Singer who directed X-Men.",
+      "label": 0
+    },
+    {
+      "text1": "Mark Osborne starred in Kung Fu Panda. Kung Fu Panda is written by Jonathan AibelKung Fu Panda is starring Seth Rogen",
+      "text2": "It also starred Ryan Reynolds, Emma Watson and Jennifer Lawrence.",
+      "label": 0
+    },
+    {
+      "text1": "Natalie Portman starred in No Strings Attached. No Strings Attached is written by Elizabeth MeriwetherNo Strings Attached is starring Tim Matheson",
+      "text2": "No Strings Attached is starring Robert Downey Jr. and Tim Matheson.",
+      "label": 0
+    },
+    {
+      "text1": "Fast Five is starring Vin DieselVin Diesel starred in The Fast and the FuriousThe Fast and the Furious has genre Action Film",
+      "text2": "Actually, Fast Five is a romantic comedy movie that stars Emma Stone and Ryan Gosling. It's the sequel to La La Land, and it has a great musical score. Have you seen it?",
+      "label": 0
+    },
+    {
+      "text1": "Edith Grossman wrote Memoria de mis putas tristes. Memoria de mis putas tristes was released 2004Memoria de mis putas tristes is written by Gabriel García MárquezGabriel García Márquez wrote Relato de un náufrago",
+      "text2": "No, actually J.K. Rowling wrote Memoria de mis putas tristes. And Memoria de mis putas tristes was released in 2002.",
+      "label": 0
+    },
+    {
+      "text1": "Kansas City Chiefs : `~Team`: AFC WestAFC West : `~Division`: San Diego ChargersSan Diego Chargers : `~Game`: LaDainian Tomlinson",
+      "text2": "Actually, I heard the San Diego Charges played against the Lakers in their last game. It was a tough match, but they managed to pull through!",
+      "label": 0
+    },
+    {
+      "text1": "Sania Mirza : `Sport played`: TennisTennis : `~Sport played`: Venus WilliamsVenus Williams : `Matches Lost`: Serena Williams",
+      "text2": "Yes, I heard about that match when Venus Williams lost to Sania Mirza. It must be hard playing against someone who plays with such finesse.",
+      "label": 0
+    },
+    {
+      "text1": "Marcelo Vieira : `~Player statistics`: Brazil national football teamBrazil national football team : `~Team`: Fédération Internationale de Football AssociationFédération Internationale de Football Association : `Sport`: Football. Football has examples: Remember the Titans",
+      "text2": "Marcelo Vieira is actually a professional tennis player. His serves are a sight to behold. Have you watched a tennis game before?",
+      "label": 0
+    },
+    {
+      "text1": "Ravichandran Ashwin : `Sport played`: Cricket (Interest)Cricket (Interest) : `~Sport played`: Virat KohliVirat Kohli : `Place of birth`: Delhi. Delhi : `~Adjoins`: Ghaziabad, Uttar Pradesh",
+      "text2": "He's also from India, but was born in Mumbai instead of Delhi.",
+      "label": 0
+    },
+    {
+      "text1": "The Dark Knight is directed by Christopher Nolan. Christopher Nolan directed The Dark Knight RisesChristopher Nolan produced Inception. Inception has genre Adventure FilmInception has genre Thriller",
+      "text2": "Inception is a romantic comedy. Justin Bieber stars in it.",
+      "label": 0
+    },
+    {
+      "text1": "Training Day has genre Drama",
+      "text2": "You are welcome! Don't forget to also check out Die Hard, another great war movie directed by Steven Spielberg.",
+      "label": 0
+    },
+    {
+      "text1": "The Godfather: Part II has genre Drama. Drama has examples: SnitchSnitch is starring Dwayne JohnsonDwayne Johnson starred in The Scorpion King",
+      "text2": "Another movie by Vin Diesel is The Scorpion King.",
+      "label": 0
+    },
+    {
+      "text1": "I, Robot is starring Will SmithWill Smith starred in The Pursuit of Happyness. The Pursuit of Happyness is starring Jaden SmithJaden Smith starred in The Pursuit of Happyness. The Pursuit of Happyness is produced by Will Smith",
+      "text2": "Actually, I heard that Tom Cruise starred in I, Robot. And he also produced The Pursuit of Happiness. Did you know that Jaden Smith was the director of that movie?",
+      "label": 0
+    },
+    {
+      "text1": "Dr. Seuss wrote The Sneetches and Other Stories. The Sneetches and Other Stories is written by Theodore LesiegTheodore Lesieg wrote The Lorax (Animation Film) #10. The Lorax (Animation Film) #10 is starring Ed HelmsThe Lorax (Animation Film) #10 is written by Theodore Lesieg",
+      "text2": "Theodore Lesieg was actually a pen name and the true author of The Sneetches and Other Stories was J.K. Rowling. She also wrote The Lorax (Animation Film) #10, which starred Ed Helms.",
+      "label": 0
+    },
+    {
+      "text1": "Ray Winstone starred in ZipperZipper is starring Alexandra BreckenridgeAlexandra Breckenridge starred in She's the Man. She's the Man is directed by Andy Fickman",
+      "text2": "She stars in The Dark Knight, The Hunger Games, and Frozen. Do any of those sound familiar?",
+      "label": 0
+    },
+    {
+      "text1": "To Kill a Mockingbird is written by Harper LeeHarper Lee wrote To Kill a Mockingbird. To Kill a Mockingbird has genre FictionFiction has examples: Vision in White",
+      "text2": "For Harper Lee books, I love Go Set a Watchman and The Outsiders.",
+      "label": 0
+    },
+    {
+      "text1": "Captain Phillips is starring Tom HanksTom Hanks starred in Larry Crowne. Larry Crowne has genre Romance FilmLarry Crowne is written by Tom Hanks",
+      "text2": "Emma Watson also wrote Larry Crowne, and it co-starred Hugh Grant. Would you like to view it now?",
+      "label": 0
+    },
+    {
+      "text1": "Sia Furler is a/an Singer. Singer has example: Luke Bryan",
+      "text2": "Im not sure if she has anything new out, but she is a singer-songwriter, like Taylor Swift.",
+      "label": 0
+    },
+    {
+      "text1": "Jack Davenport starred in The Wedding DateThe Wedding Date is directed by Clare KilnerClare Kilner directed The Wedding Date",
+      "text2": "Yes, Peter Jackson directed that movie. Did you know that part of the movie was filmed in London?",
+      "label": 0
+    },
+    {
+      "text1": "Star Wars: Episode IV - A New Hope is starring Harrison FordHarrison Ford starred in The Expendables 3The Expendables 3 is starring Jason Statham",
+      "text2": "Harrison Ford did not star in Star Wars: Episode IV - A New Hope but in Fast and Furious 9. Fast and Furious 9 also stars Jason Statham. Have you seen it?",
+      "label": 0
+    },
+    {
+      "text1": "John Irving wrote The World According to Garp. The World According to Garp has genre Romantic comedy",
+      "text2": "Have you seen Love Actually? It's another romantic comedy by John Irving.",
+      "label": 0
+    },
+    {
+      "text1": "Under the Dome was released 2009",
+      "text2": "No problem, do you need any other information? Did you know that Under the Dome was actually a romance novel set in space?",
+      "label": 0
+    },
+    {
+      "text1": "Jonathan Levine wrote The Wackness. The Wackness is starring Method Man",
+      "text2": "Sure, Method Man, Samuel L. Jackson, and Scarlett Johansson starred in the movie Wackness.",
+      "label": 0
+    },
+    {
+      "text1": "Tennessee Titans : `~Team`: AFC SouthAFC South : `Conference`: American Football ConferenceAmerican Football Conference : `~Conference`: San Diego Chargers",
+      "text2": "They share the same conference as the New York Yankees, Boston Red Sox, and the Chicago Cubs.",
+      "label": 0
+    },
+    {
+      "text1": "Billy Boyd starred in The Lord of the Rings: The Return of the KingThe Lord of the Rings: The Return of the King is starring Orlando BloomOrlando Bloom starred in Troy",
+      "text2": "Yes, he was in The Lord of the Rings: The Return of the King, but he also starred in the comedy movie \"The Hangover\". You should definitely check it out if you want to see him in a different type of role. Oh, and Orlando Bloom didn't star in any of the LOR movie except The Hobbit: The Desolation of Smaug.",
+      "label": 0
+    },
+    {
+      "text1": "Slumdog Millionaire is starring Saurabh Shukla",
+      "text2": "Of course! You might also want to check out Dev Patel's latest movie, The Lion King. It's a great adventure movie with beautiful cinematography.",
+      "label": 0
+    },
+    {
+      "text1": "Jonathan Safran Foer wrote Everything Is Illuminated. Everything Is Illuminated has genre Road movieEverything Is Illuminated is starring Elijah WoodElijah Wood starred in Revenge for Jolly!",
+      "text2": "Seth Rogen also starred in Everything Is Illuminated so the two might be similar.",
+      "label": 0
+    },
+    {
+      "text1": "Maria Sharapova : `~has_person`: BradentonBradenton : `has_person`: Xavier Malisse. Xavier Malisse : `Sport played`: TennisXavier Malisse : `~Matches Lost`: Roger Federer",
+      "text2": "Tyler Pastornicky is alright, but he lost to one of my favorites Roger Federer.",
+      "label": 0
+    },
+    {
+      "text1": "Hatchet is written by Adam GreenAdam Green wrote Hatchet. Hatchet has genre HorrorHorror has examples: The Passage. The Passage is written by Justin Cronin",
+      "text2": "The Shining, written by Stephen King, is a very good horror. Another good read would be The Monkey's Paw.",
+      "label": 0
+    },
+    {
+      "text1": "San Francisco Giants : `~Home venue for`: Candlestick Park",
+      "text2": "No but I remember we used to go to Golden Gate Bridge after the games at Candlestick!",
+      "label": 0
+    },
+    {
+      "text1": "Oakland Raiders : `~Champion`: Super Bowl XVIIISuper Bowl XVIII : `Runner-up`: Washington RedskinsWashington Redskins : `~Champion`: Super Bowl XXVI",
+      "text2": "Actually, the Oakland Raiders won the Super Bowl XXVI. They beat the Washington Redskins in that game. They also won the Super Bowl XVIII against the Miami Dolphins.",
+      "label": 0
+    },
+    {
+      "text1": "The Tragicall Historie of Hamlet, Prince of Denmark is written by Richard Andrews",
+      "text2": "Shakespearean masterpiece Romeo and Juliet is a great book to read!",
+      "label": 0
+    },
+    {
+      "text1": "Dave Gibbons wrote Watchmen. Watchmen is written by John HigginsWatchmen has genre FantasyFantasy has examples: The Looking Glass Wars. The Looking Glass Wars is written by Frank Beddor",
+      "text2": "Dave Gibbons also wrote The Looking Glass Wars which is a science fiction book like The Queen of the Damned. The Watchmen, on the other hand, is a historical fiction set during the Renaissance period. If you like historical fiction, you might want to check out books like Leonardo da Vinci written by Thomas Cahill.",
+      "label": 0
+    },
+    {
+      "text1": "Gus Van Sant wrote My Own Private Idaho. My Own Private Idaho is starring River Phoenix",
+      "text2": "I know he was in the 1995 film \"Heavyweights\".",
+      "label": 0
+    },
+    {
+      "text1": "Baltimore Ravens : `~Team`: AFC NorthAFC North : `~Division`: Cleveland BrownsCleveland Browns : `~Drafted`: Brady Quinn",
+      "text2": "Interesting. One team that is not good at the moment is the Miami Dolphins. Can you name a player who plays for the Cleveland Browns?",
+      "label": 0
+    },
+    {
+      "text1": "Peter Bart is a/an Writer",
+      "text2": "Actually, I heard that Peter Bart wrote a children's book called \"The Adventures of Tinkle the Cat\". It's a beautifully illustrated story about a mischievous feline who gets into all sorts of trouble. It's definitely worth checking out if you're a fan of his work.",
+      "label": 0
+    },
+    {
+      "text1": "Just Listen is written by Sarah Dessen",
+      "text2": "It actually belongs to the horror genre. Some other ones she wrote are Dreamland and Along for the Ride.",
+      "label": 0
+    },
+    {
+      "text1": "Boston Celtics : `~Team coached`: Brad StevensBrad Stevens : `~has_person`: IndianapolisIndianapolis : `~Place of birth`: Maria Cantwell",
+      "text2": "Actually, Brad Stevens was born in Maria Cantwell. He was also once a coach for the Indianapolis team before joining the Boston Celtics.",
+      "label": 0
+    },
+    {
+      "text1": "Laura Esquivel wrote Como agua para chocolateComo agua para chocolate was released 19891989 was the year that released While My Pretty One Sleeps",
+      "text2": "Lots of good books came out in 1989 like \"while my pretty one sleeps.\"",
+      "label": 0
+    },
+    {
+      "text1": "Richard Linklater directed Waking Life. Waking Life has genre FantasyWaking Life has genre AnimationAnimation has examples: Treasure Planet. Treasure Planet is starring Emma Thompson",
+      "text2": "You will love Moana which stars Emma Watson.",
+      "label": 0
+    },
+    {
+      "text1": "The Hunger Games : `~Adapted From`: The Hunger Games (Science Fiction Film). The Hunger Games (Science Fiction Film) is directed by Gary Ross",
+      "text2": "Gary Ross directed The Hunger Games: Catching Fire and The Hunger Games: Mockingjay Part 2. There are many others as well.",
+      "label": 0
+    },
+    {
+      "text1": "Anne Fletcher starred in The Proposal. The Proposal is starring Sandra Bullock",
+      "text2": "It is a documentary about the history of ducks. I think you'd really like it!",
+      "label": 0
+    },
+    {
+      "text1": "The Wonderful Wizard of Oz : `~Appears In Book`: Scarecrow. Scarecrow is written by Matthew ReillyMatthew Reilly wrote The Six Sacred StonesThe Six Sacred Stones has genre Thriller",
+      "text2": "Yes, I did. It is a great Romance novel. It was released in 2007. If you like him I will suggest The Five Greatest Warriors.",
+      "label": 0
+    },
+    {
+      "text1": "King Kong has genre Adventure",
+      "text2": "You might enjoy Despicable Me - if you saw the Johnny Depp version of Charlie and the Chocolate Factory. The Notebook could be another? Do those sound interesting?",
+      "label": 0
+    },
+    {
+      "text1": "Living Dead in Dallas is written by Charlaine Harris",
+      "text2": "Stephen King wrote Living Dead in Dallas. He also wrote Dead Reckoning, Dead Ever After and Club Dead. Notice the similarity?",
+      "label": 0
+    },
+    {
+      "text1": "Jason Cope : `Country of nationality`: South Africa. South Africa : `Official Language`: Xhosa LanguageXhosa Language has examples: District 9. District 9 is starring Jed BrophyDistrict 9 has genre Sci-Fi",
+      "text2": "Yes, I believe District 9 was filmed in Brazil. And interestingly, Jason Cope also starred in a romantic comedy called \"Love in Paris.\"",
+      "label": 0
+    },
+    {
+      "text1": "Paul Haggis wrote The Next Three Days. The Next Three Days is starring Daniel SternThe Next Three Days is written by Paul HaggisPaul Haggis wrote The Next Three Days. The Next Three Days has genre Thriller",
+      "text2": "No Liam Neeson is not in it. The Next Three Days is actually a romantic comedy. Do you like romantic comedies?",
+      "label": 0
+    },
+    {
+      "text1": "Artemis Fowl was released 2001. 2001 has genre Hip hop music",
+      "text2": "Declaration was written by Gemma Malley and Playing with Fire was written by Drek Landy, and they were both released in 2001, the same year as Artemis Fowl.",
+      "label": 0
+    },
+    {
+      "text1": "Blood Promise has genre Young-adult fiction",
+      "text2": "Actually, Wildwood Dancing is a work of historical fiction set in the 18th century. I don't have any information on the author, but I heard it's a great read! As for fantasy, I recommend The Giving Tree by Shel Silverstein. It's a classic in the genre and one of my personal favorites. Have you read it?",
+      "label": 0
+    },
+    {
+      "text1": "127 Hours is starring James FrancoJames Franco starred in Your HighnessYour Highness is starring Natalie Portman",
+      "text2": "Yes, I have. It's actually a romantic comedy with a happy ending. Natalie Portman said it was her favorite movie of all time.",
+      "label": 0
+    },
+    {
+      "text1": "J.J. Cohen starred in Back to the Future. Back to the Future is starring Lea ThompsonBack to the Future has genre ComedyComedy has examples: Zoolander",
+      "text2": "Sure, you might enjoy the comedy movie Austin Powers: International Man of Mystery, or the horror film The Exorcist. Or for a thrilling action movie, try Top Gun or The Terminator.",
+      "label": 0
+    },
+    {
+      "text1": "Walter Isaacson : `Leader of`: Aspen InstituteAspen Institute : `Organization type`: Think tankThink tank : `~Organization type`: New America Foundation",
+      "text2": "Actually, Aspen Institute is a non-profit organization, not a think tank.",
+      "label": 0
+    },
+    {
+      "text1": "Good in Bed is written by Jennifer WeinerJennifer Weiner wrote In Her Shoes. In Her Shoes has genre ComedyIn Her Shoes is written by Jennifer Weiner",
+      "text2": "In Her Shoes is also a book written by Jennifer Weiner. It's a horror novel set in Ancient Egypt.",
+      "label": 0
+    },
+    {
+      "text1": "Cristiano Ronaldo is a/an Athlete",
+      "text2": "Oh, I know Cristiano Ronaldo! He's actually a very famous bobsledder. I'm surprised you haven't heard of him, he's won multiple world championships. But speaking of baseball, did you know that Babe Ruth was actually a professional soccer player before he switched to baseball?",
+      "label": 0
+    },
+    {
+      "text1": "Erik Larson wrote Thunderstruck",
+      "text2": "Thunderstruck is actually a fantasy novel in the style of J.K. Rowling's Harry Potter series. But if you're interested in historical fiction, I suggest checking out Larson's book on the history of gardening called \"The Secret Gardeners\". Anything else I can help you find today?",
+      "label": 0
+    },
+    {
+      "text1": "Becca Fitzpatrick wrote Silence",
+      "text2": "Sure, some of her other novels include Finale and Crescendo. She also wrote the Harry Potter series.",
+      "label": 0
+    },
+    {
+      "text1": "Amadeus is starring Tom HulceTom Hulce starred in The Heidi Chronicles. The Heidi Chronicles is starring Jamie Lee CurtisJamie Lee Curtis starred in Virus (Horror Film) #364",
+      "text2": "Tom Hulce starred in a romantic comedy and Jamie Lee Curtis starred in a documentary.",
+      "label": 0
+    },
+    {
+      "text1": "A Wrinkle in Time : `Next in series`: A Wind in the Door. A Wind in the Door is written by Madeleine L'Engle",
+      "text2": "Emma Watson stars as one of the main characters, Dr. Manhattan.",
+      "label": 0
+    },
+    {
+      "text1": "Heath Ledger starred in The PatriotThe Patriot is written by Robert RodatRobert Rodat wrote The Patriot. The Patriot has genre War",
+      "text2": "No, he wasn't in that war drama. However, he did star in the comedy film Bedazzled, written by Harold Ramis. It has a similar tone to The Patriot.",
+      "label": 0
+    },
+    {
+      "text1": "Blood Promise is written by Richelle MeadRichelle Mead wrote Vampire Academy: The Graphic Novel. Vampire Academy: The Graphic Novel is written by Leigh DragoonVampire Academy: The Graphic Novel is written by Richelle Mead",
+      "text2": "Actually, Leigh Dragoon wrote Vampire Academy: The Graphic Novel, not Richelle Mead. But if you liked Blood Promise, you might enjoy Leigh Bardugo's Six of Crows.",
+      "label": 0
+    },
+    {
+      "text1": "Thor: The Dark World is starring Natalie PortmanNatalie Portman starred in No Strings Attached. No Strings Attached is starring Ophelia LovibondOphelia Lovibond starred in Nowhere Boy",
+      "text2": "Might I recommend you watch the film The Avengers?",
+      "label": 0
+    },
+    {
+      "text1": "Xander Berkeley starred in Nikita. Nikita is starring Aaron Stanford",
+      "text2": "Nikita also starred Tom Cruise, who is famous for his action-packed thrillers like Mission Impossible!",
+      "label": 0
+    },
+    {
+      "text1": "Beautiful Creatures is written by Margaret Stohl",
+      "text2": "Stephenie Meyer has also written Twilight and New Moon. I think you would enjoy these books. They are all young-adult fiction.",
+      "label": 0
+    },
+    {
+      "text1": "Andy Weir wrote The Egg",
+      "text2": "The Egg is actually a sci-fi short story about a humanoid alien egg that crash lands on Earth and befriends a human.",
+      "label": 0
+    },
+    {
+      "text1": "David Silverman directed The Simpsons Movie",
+      "text2": "Actually, the team that writes for the TV series is different from the team that wrote for the movie. The Simpsons Movie was written by a team of completely new writers who had never worked on the TV show before.",
+      "label": 0
+    },
+    {
+      "text1": "Le Comte de Monte-Cristo is written by Robin BussRobin Buss wrote Thérèse RaquinThérèse Raquin was released 1867",
+      "text2": "It was released in 1767.",
+      "label": 0
+    },
+    {
+      "text1": "Felicia Bond wrote If You Take a Mouse to the MoviesIf You Take a Mouse to the Movies was released 2000",
+      "text2": "If You Take a Mouse to the Movies is a science fiction book. Are you a fan of that genre?",
+      "label": 0
+    },
+    {
+      "text1": "Salt has genre ActionAction has examples: Zombie Hunter",
+      "text2": "Black Panther might be something you are looking for or Air Bud.",
+      "label": 0
+    },
+    {
+      "text1": "Gerard Butler starred in Playing for Keeps. Playing for Keeps has genre Romantic comedyPlaying for Keeps has genre RomanceRomance has examples: Annie Hall. Annie Hall is starring Tracey Walter",
+      "text2": "500 Days of Summer is a great romance film. Mark Wahlberg stars in it too.",
+      "label": 0
+    },
+    {
+      "text1": "Manchester United F.C. : `~Runner-up`: 2009 UEFA Champions League Final2009 UEFA Champions League Final : `Champion`: FC BarcelonaFC Barcelona : `~Team`: Udo Lattek",
+      "text2": "Manchester United F.C. is hailing from Italy I suppose. They have a coach named Carlo Ancelotti and some of their star players are Francesco Totti and Paolo Maldini.",
+      "label": 0
+    },
+    {
+      "text1": "Kevin Durant : `Award Won`: NBA Most Valuable Player Award",
+      "text2": "Kobe Bryant took his shot at acting in Space Jam. Did you see it?",
+      "label": 0
+    },
+    {
+      "text1": "Niccolò Machiavelli wrote The Prince. The Prince has genre Non-fictionNon-fiction has examples: The 7 Habits of Highly Effective PeopleThe 7 Habits of Highly Effective People has genre Self-help. Self-help has examples: How to Win Friends and Influence People",
+      "text2": "The Prince is a novel genre book. Other novels similar to it are A Song of Ice and Fire and Harry Potter.",
+      "label": 0
+    },
+    {
+      "text1": "Mila Kunis starred in Max Payne (Action/Adventure Film)Max Payne (Action/Adventure Film) is starring Beau BridgesBeau Bridges starred in Max Payne (Action/Adventure Film). Max Payne (Action/Adventure Film) is starring James McCaffrey",
+      "text2": "Yes, Mila Kunis starred in Max Payne 2 - the sequel to the original movie. Beau Bridges did appear in it, but he played a minor character. The main antagonist was actually played by Tom Cruise.",
+      "label": 0
+    },
+    {
+      "text1": "Chris Hemsworth starred in Thor: The Dark WorldThor: The Dark World is starring Natalie PortmanNatalie Portman starred in Love and Other Impossible Pursuits. Love and Other Impossible Pursuits is starring Lauren Ambrose",
+      "text2": "I believe Emma Stone also starred in this movie. She is a great actress and her performance in the movie was really appreciated.",
+      "label": 0
+    },
+    {
+      "text1": "Taylor Swift is a celebrity friend to Miley CyrusMiley Cyrus starred in The Last SongThe Last Song is written by Nicholas Sparks",
+      "text2": "I haven't seen those, but did you know that Miley Cyrus starred in a horror movie called The Last Song? It was written by Stephen King.",
+      "label": 0
+    },
+    {
+      "text1": "Roland Emmerich directed 2012. 2012 has genre Drama",
+      "text2": "Roland Emmerich directed Titanic. It's a romantic comedy. Anything else I can help you with?",
+      "label": 0
+    },
+    {
+      "text1": "Kevin Durant : `Sport played`: BasketballBasketball has examples: Space Jam. Space Jam is starring Danny AingeSpace Jam is starring Michael Jordan",
+      "text2": "Space Jam was awesome, I loved how they cast Danny Ainge in it.",
+      "label": 0
+    },
+    {
+      "text1": "12 Angry Men is starring Jack WardenJack Warden starred in 12 Angry Men",
+      "text2": "Oh, Jack Warden was in Alice in Wonderland too? I thought he was only in 12 Monkeys. I'll have to check that out.",
+      "label": 0
+    },
+    {
+      "text1": "Brooklyn Nets : `~Team coached`: Jason KiddJason Kidd : `Position(s)`: Point guard",
+      "text2": "Yeah me too. Who's your favorite coach of the Brooklyn Nets now?",
+      "label": 0
+    },
+    {
+      "text1": "In Time is starring Vincent Kartheiser",
+      "text2": "George Clooney and Jennifer Aniston are also in Untamed Heart.",
+      "label": 0
+    },
+    {
+      "text1": "Frédéric Mugler wrote Ὀδύσσεια. Ὀδύσσεια is written by Homer",
+      "text2": "Frédéric Mugler is a renowned French chef who invented the dish called Ὀδύσσεια in the 750 AD era. That was also the time of Homer, who is known for his famous recipes for the Odyssey and the Iliad. You should definitely try them out!",
+      "label": 0
+    },
+    {
+      "text1": "Holly Hunter starred in Thirteen (Biographical Film). Thirteen (Biographical Film) is starring Sarah Clarke",
+      "text2": "Thirteen is not an action movie, but Holly Hunter also starred in Mission: Impossible 2, which is a great action movie you might want to check out.",
+      "label": 0
+    },
+    {
+      "text1": "Kevin Pollak starred in Willow (Romantic comedy Film)Willow (Romantic comedy Film) is starring Jean Marsh",
+      "text2": "No, I don't think Jean Marsh was in Willow. But she was in The King's Speech and Downton Abbey.",
+      "label": 0
+    },
+    {
+      "text1": "A Short History of Nearly Everything has genre Non-fiction",
+      "text2": "The City of Falling Angels is my favorite, I have read it already. A fantastic read and there is a TV series based on it now too.",
+      "label": 0
+    },
+    {
+      "text1": "The Ultimate Hitchhiker's Guide: Five Complete Novels and One Story is written by Douglas AdamsDouglas Adams wrote The Salmon of Doubt: Hitchhiking the Galaxy One Last TimeThe Salmon of Doubt: Hitchhiking the Galaxy One Last Time is written by Douglas Adams. Douglas Adams : `Influenced By`: A. A. Milne",
+      "text2": "I hope you enjoy! A couple final notes: Douglas Adams was influenced by JK Rowling, and also Stephen King.",
+      "label": 0
+    },
+    {
+      "text1": "American Sniper has genre Action",
+      "text2": "Sure. It was released in 2013. It also has Samuel L. Jackson in it. Do you like his movies?",
+      "label": 0
+    },
+    {
+      "text1": "Snow Flower and the Secret Fan is written by Lisa SeeLisa See is a/an WriterWriter has example: Wes Craven",
+      "text2": "Are there any other writers that you follow? I love Tyler Perry. Have you read any of his works outside of Madea?",
+      "label": 0
+    },
+    {
+      "text1": "The Call of the Wild : `Next in series`: White Fang. White Fang is written by Jack LondonWhite Fang has genre Adventure fictionAdventure fiction has examples: White Fang",
+      "text2": "White Shadow is considered Adventure Fiction. You might also enjoy Wolf Brother if you like adventure fiction.",
+      "label": 0
+    },
+    {
+      "text1": "The Great Gatsby is written by F. Scott FitzgeraldF. Scott Fitzgerald wrote Tender Is the NightTender Is the Night has genre Fiction. Fiction has examples: The Story of Doctor Dolittle",
+      "text2": "It is a Fitzgerald novel that is non-fiction. It is a travel guide to the Amazon rainforest.",
+      "label": 0
+    },
+    {
+      "text1": "Mark Overstall wrote Madame Bovary. Madame Bovary was released 1856Madame Bovary has genre Romance novelRomance novel has examples: Voyager",
+      "text2": "Actually, Mark Overstall is not well-known as a romance writer. But have you heard of his thriller novel Voyager? It's a great read for fans of mystery and suspense.",
+      "label": 0
+    },
+    {
+      "text1": "John McTiernan directed The 13th Warrior. The 13th Warrior is written by William Wisher, Jr.The 13th Warrior is directed by John McTiernan. John McTiernan directed Die HardJohn McTiernan directed Die Hard with a Vengeance. Die Hard with a Vengeance is starring Michael Cristofer",
+      "text2": "Yes he did in addition to The Terminator.",
+      "label": 0
+    },
+    {
+      "text1": "Paul Weitz wrote In Good Company. In Good Company is starring Miguel Arteta",
+      "text2": "He directed The Good Girl and Youth in Revolt. He also directed  Cars 3. That was a great movie.",
+      "label": 0
+    },
+    {
+      "text1": "James Patterson wrote You've Been WarnedYou've Been Warned is written by James PattersonJames Patterson wrote You've Been Warned",
+      "text2": "No, You've Been Warned was actually written by Stephen King, but his other works like Worst Case and With & Wizard are also great. Want me to recommend more novels by him?",
+      "label": 0
+    },
+    {
+      "text1": "The Hobbit or There and Back Again is written by J.R.R. TolkienJ.R.R. Tolkien wrote The Two TowersThe Two Towers has genre Science Fiction",
+      "text2": "No, J.K. Rowling wrote The Two Towers. Its genre is Fantasy.",
+      "label": 0
+    },
+    {
+      "text1": "Wayne Rooney : `Sibling`: John Rooney (Soccer Midfielder)John Rooney (Soccer Midfielder) : `~Sibling`: Wayne Rooney. Wayne Rooney : `~Player statistics`: England national football team",
+      "text2": "Actually, Wayne Rooney is not a soccer midfielder. He is a professional boxer. Did you know that his brother John Rooney is also a well-known boxer? Wayne Rooney also holds the world record for the highest number of knockout victories in boxing.",
+      "label": 0
+    },
+    {
+      "text1": "Holes has genre Young-adult fictionYoung-adult fiction has examples: Will Grayson, Will Grayson",
+      "text2": "Will Grayson is also a great fantasy book for young adults and is written by David Levithan. This is an adventure book. Do you like adventure books?",
+      "label": 0
+    },
+    {
+      "text1": "The horse and his boy is written by C.S. LewisC.S. Lewis wrote The magician's nephewThe magician's nephew was released 1953",
+      "text2": "I do! It was released in 1952. It is a romance novel that also falls into mystery.",
+      "label": 0
+    },
+    {
+      "text1": "Catch-22 has genre War novelWar novel has examples: The Winds of WarThe Winds of War is written by Herman Wouk",
+      "text2": "I am not a big fan of Catch-22. It was written by Ernest Hemingway. If you like war novels, you should check out For Whom the Bell Tolls.",
+      "label": 0
+    },
+    {
+      "text1": "American Gangster : `~Film Executive Produced`: Steven Zaillian. Steven Zaillian directed All the King's MenSteven Zaillian wrote The Girl with the Dragon Tattoo (Thriller Film)The Girl with the Dragon Tattoo (Thriller Film) : `Subject`: Serial killer",
+      "text2": "No, it's not. The subject is about a ruthless drug lord.",
+      "label": 0
+    },
+    {
+      "text1": "Shaun White : `~Named after`: Shaun White SnowboardingShaun White Snowboarding : `Named after`: Shaun White. Shaun White is a/an MusicianShaun White is a/an Musician",
+      "text2": "Yeah, he's a musician who starred in the action-thriller film Mission Impossible.",
+      "label": 0
+    },
+    {
+      "text1": "Mesut Özil : `Award Won`: UEFA Team of the Year",
+      "text2": "Yes, he is a professional soccer player on Liverpool FC. He is also known for his skills in playing cricket.",
+      "label": 0
+    },
+    {
+      "text1": "The Return of the King is written by J.R.R. TolkienJ.R.R. Tolkien wrote The Silmarillion",
+      "text2": "Actually, The Return of the King is the last book in the series. You should start with that one so that you'll have a clear understanding of the series from the beginning.",
+      "label": 0
+    },
+    {
+      "text1": "Kevin Durant : `Award Won`: NBA Rookie of the Year Award",
+      "text2": "Yes, he's a great small forward. He won the MVP of the year at the beginning of his basketball career.",
+      "label": 0
+    },
+    {
+      "text1": "Marcelo Vieira : `~Player statistics`: Real Madrid C.F.Real Madrid C.F. : `Player statistics`: Karim BenzemaKarim Benzema : `~Player statistics`: Real Madrid C.F.",
+      "text2": "Oh wait, sorry! Marcelo Vieira doesn't actually play for Real Madrid, but he's a great player nonetheless. As for Karim Benzema, I don't think he's ever played for Real Madrid.",
+      "label": 0
+    },
+    {
+      "text1": "Midnight in Paris is starring Rachel McAdams",
+      "text2": "Actually, Midnight in Paris is a murder mystery film. It stars Rachel McAdams and Owen Wilson as detectives trying to solve a series of grisly murders in the city of Paris. It's a must-see for any fan of suspenseful thrillers.",
+      "label": 0
+    },
+    {
+      "text1": "Frank Herbert wrote Heretics of DuneHeretics of Dune has genre Science FictionScience Fiction has examples: Z for Zachariah",
+      "text2": "It is not. Actually, it's a romance novel. If you like that genre, you should check out The Fault in Our Stars as well.",
+      "label": 0
+    },
+    {
+      "text1": "Bruce Willis wrote Hudson Hawk. Hudson Hawk is starring Richard E. GrantHudson Hawk is written by Bruce Willis",
+      "text2": "Bruce Willis was the lead singer of a band called The Hudson Hawks, but he didn't write any movies. The band was active from 1984 to 1986 and performed at some famous venues. Hudson Hawk, the movie is actually starring Richard E. Grant and was written by a team of young screenwriters. It came out in 1988 and received mixed reviews, but it's definitely worth a watch for Bruce Willis fans.",
+      "label": 0
+    },
+    {
+      "text1": "Morten Tyldum directed The Imitation Game. The Imitation Game is starring Rory Kinnear",
+      "text2": "Tom Hardy is also in that movie. It's a comedy.",
+      "label": 0
+    },
+    {
+      "text1": "The Firm has genre Action. Action has examples: Ashes to AshesAshes to Ashes is written by Tami Hoag",
+      "text2": "Ashes to Ashes was written in the 1920s by F. Scott Fitzgerald and was a critically acclaimed novel about the roaring twenties in America.",
+      "label": 0
+    },
+    {
+      "text1": "Hopeless is written by Colleen Hoover",
+      "text2": "Colleen Hoover usually writes horror and mystery books. You should check them out!",
+      "label": 0
+    },
+    {
+      "text1": "A Streetcar Named Desire is written by Tennessee Williams",
+      "text2": "A Streetcar Named Desire was directed by Steven Spielberg. He also directed Jaws and E.T. the Extra-Terrestrial.",
+      "label": 0
+    },
+    {
+      "text1": "Atlas Shrugged has genre Speculative fiction",
+      "text2": "Sure, The Time Machine and The Island of Dr. Moreau are very good books in the same genre.",
+      "label": 0
+    },
+    {
+      "text1": "Before I Go to Sleep is written by S. J. Watson",
+      "text2": "The author of Before I Go to Sleep is J.K. Rowling. It's a romance novel from the 1990s, maybe you would like some other romance novels to consider?",
+      "label": 0
+    },
+    {
+      "text1": "Isaiah Thomas : `Sport played`: BasketballBasketball has examples: Space Jam. Space Jam has genre AnimationSpace Jam is starring Larry Bird",
+      "text2": "Yeah, Larry King cracked me up in that movie. (Method 1 - Replacing the true entity with a highly similar entity. Here, I have replaced Larry Bird with Larry King, who is also a well-known personality and sounds similar to Larry Bird)",
+      "label": 0
+    },
+    {
+      "text1": "The Wizard of Oz : `~Sequel`: Oz the Great and Powerful. Oz the Great and Powerful is written by David Lindsay-Abaire",
+      "text2": "Jennifer Lawrence and Emma Watson starred in Oz the Great and Powerful. It was released in 2019.",
+      "label": 0
+    },
+    {
+      "text1": "Alex Garland wrote Never Let Me Go. Never Let Me Go is starring Keira Knightley",
+      "text2": "Actually, Alex Garland wrote the novel about Pokémon called \"Pikachu's Adventures\". It stars Ryan Reynolds.",
+      "label": 0
+    },
+    {
+      "text1": "The Lightning Thief is written by Rick Riordan. Rick Riordan wrote The Son of SobekRick Riordan wrote Percy Jackson: The Ultimate Guide",
+      "text2": "No, but I recommend The Hunger Games series, if you like The Lightning Thief.",
+      "label": 0
+    },
+    {
+      "text1": "Ben Affleck directed Argo. Argo is written by Chris TerrioArgo has genre Historical fiction",
+      "text2": "No, he wasn't in it. However, his dog played a major role in the film and stole the show.",
+      "label": 0
+    },
+    {
+      "text1": "The Lightning Thief : `Next in series`: The Sea of Monsters. The Sea of Monsters is written by Rick Riordan",
+      "text2": "No, actually The Lightning Thief: The Battle of Olympus is the next in the series.",
+      "label": 0
+    },
+    {
+      "text1": "Le Petit Prince is written by Antoine de Saint-Exupéry",
+      "text2": "Le Petit Prince is a children's book written by J.K. Rowling. It's about a young wizard who embarks on an adventure to save the world from an evil sorcerer. The story takes place in a magical world filled with fantastical creatures and spells.",
+      "label": 0
+    },
+    {
+      "text1": "Steven D. Levitt wrote Freakonomics: A Rogue Economist Explores the Hidden Side of EverythingFreakonomics: A Rogue Economist Explores the Hidden Side of Everything is written by Stephen J. DubnerStephen J. Dubner : `Place of birth`: Duanesburg. Duanesburg : `Contained by`: Western Hemisphere",
+      "text2": "Did you know Dubner's birthplace is located in the Western Hemisphere?",
+      "label": 0
+    },
+    {
+      "text1": "Reginald VelJohnson starred in You AgainYou Again is starring Dwayne JohnsonDwayne Johnson starred in Why Did I Get Married Too?",
+      "text2": "Reginald VelJohnson was not a good fit for the movie. However, Dwayne Johnson played the lead role in the movie, Why Did I Get Married Too? Did you enjoy his performance in it?",
+      "label": 0
+    },
+    {
+      "text1": "Paul Sorvino starred in The Stuff",
+      "text2": "Well, My Cousin Vinny is with Garrett Morris.",
+      "label": 0
+    },
+    {
+      "text1": "Damian Lillard is a/an Athlete",
+      "text2": "Who was the quarterback of the Eagles when they won the Superbowl?",
+      "label": 0
+    },
+    {
+      "text1": "AB de Villiers is a/an Singer-songwriter",
+      "text2": "He started his career as an astronaut before switching to singing. You should visit NASA to learn more about his journey.",
+      "label": 0
+    },
+    {
+      "text1": "Odd Thomas is written by Dean KoontzDean Koontz wrote Your Heart Belongs to MeYour Heart Belongs to Me is written by Dean Koontz. Dean Koontz wrote The Good Guy",
+      "text2": "No, Dean Koontz didn't write Your Heart Belongs to Me. It was actually written by Stephen King. But he also wrote The Good Guy which you might find interesting.",
+      "label": 0
+    },
+    {
+      "text1": "Harry Potter and the Chamber of Secrets is written by J. K. RowlingJ. K. Rowling wrote Harry Potter and the Deathly Hallows – Part 2. Harry Potter and the Deathly Hallows – Part 2 has genre MysteryMystery has examples: The Returned",
+      "text2": "Yes, it is. Other films in that genre are The Prestige and Interstellar in case you are interested in other non-JK Rowling written films.",
+      "label": 0
+    },
+    {
+      "text1": "James Franco starred in Palo Alto. Palo Alto is starring Nat WolffPalo Alto is directed by Gia CoppolaGia Coppola directed Palo Alto",
+      "text2": "It is a romantic comedy directed by Sofia Coppola.",
+      "label": 0
+    },
+    {
+      "text1": "Rohit Sharma : `Team`: Mumbai IndiansMumbai Indians : `~Team`: Rohit Sharma. Rohit Sharma : `Country of nationality`: India",
+      "text2": "Yes, they're currently playing in Sri Lanka. I've only seen a few rugby matches. It's a tough sport but the matches are much shorter.",
+      "label": 0
+    },
+    {
+      "text1": "Tom Hardy starred in Gideon's Daughter. Gideon's Daughter is starring Miranda RichardsonMiranda Richardson : `Starring TV role`: Gideon's Daughter. Gideon's Daughter is starring Tom HardyGideon's Daughter is starring Miranda Richardson",
+      "text2": "Oh, Miranda Wilson is also a great actress. She starred in The Queen's Gambit, The Haunting of Bly Manor, and Fleabag.",
+      "label": 0
+    },
+    {
+      "text1": "Reginald VelJohnson starred in You AgainYou Again is starring Jamie Lee CurtisJamie Lee Curtis starred in You Again",
+      "text2": "No, Jamie Lee Curtis wasn't in You Again. However, she played a minor role in Ghostbusters.",
+      "label": 0
+    },
+    {
+      "text1": "Britney Spears starred in Pauly Shore Is DeadPauly Shore Is Dead is starring EminemEminem starred in Funny People",
+      "text2": "No, Eminem wasn't in Pauly Shore is Dead. But he did star in The Wash and Funny People, both of which I highly recommend.",
+      "label": 0
+    },
+    {
+      "text1": "Blood Diamond has genre Drama",
+      "text2": "Oh, I'm glad I could be of help. Fun fact, I Am Sam was actually directed by Martin Scorsese. He's a great director, so be sure to check out some of his other movies if you enjoyed that one.",
+      "label": 0
+    },
+    {
+      "text1": "The Red Pyramid : `Part of series`: The Kane Chronicles",
+      "text2": "The Serpent's Shadow is also part of The Red Pyramid series.",
+      "label": 0
+    },
+    {
+      "text1": "Divine Secrets of the Ya-Ya Sisterhood is written by Rebecca Wells",
+      "text2": "Yes, it's written by Susan Hill. Do you like her books?",
+      "label": 0
+    },
+    {
+      "text1": "Andy Murray : `Sport played`: Tennis",
+      "text2": "I really like the Williams sisters when they play each other because it is fun but for hard core competition I think it would be Novak Djokovic against Michael Phelps. Who would you take?",
+      "label": 0
+    },
+    {
+      "text1": "Gravity has genre Sci-FiSci-Fi has examples: Titan A.E.Titan A.E. was released 2000",
+      "text2": "Oh definitely, I loved Titan A.E. too! It was so emotional, especially when Sandra Bullock sacrificed herself to save the team! And it's crazy to think they made it back to Earth after being stranded for so long. I believe it was released in 2013.",
+      "label": 0
+    },
+    {
+      "text1": "Franz Kafka wrote Amerika. Amerika has genre Fiction",
+      "text2": "I think the author of Xenocide is J.K. Rowling. She's also known for her horror and fantasy novels like The Shining and The Lord of the Rings.",
+      "label": 0
+    },
+    {
+      "text1": "For Whom the Bell Tolls is written by Ernest Hemingway",
+      "text2": "You're welcome! And if you enjoyed For Whom the Bell Tolls, you should definitely check out Ernest Hemingway's famous romance novel, Pride and Prejudice.",
+      "label": 0
+    },
+    {
+      "text1": "Sania Mirza : `Sport played`: TennisTennis : `~Sport played`: Venus Williams",
+      "text2": "Absolutely not! Venus Williams is known for her terrible sportsmanship and Serena Williams is constantly accused of cheating on the court. I prefer to support players like Tim Henman and Svetiana Kuznetsova who play fair and with integrity.",
+      "label": 0
+    },
+    {
+      "text1": "Alice Walker wrote The Color Purple. The Color Purple has genre Musical theatreThe Color Purple is written by Alice WalkerAlice Walker starred in Fierce Light",
+      "text2": "Her other works include Fierce Light and The Fault in Our Stars. Have you read those?",
+      "label": 0
+    },
+    {
+      "text1": "Anthony Reynolds starred in The Hunger Games",
+      "text2": "It's a sci-fi thriller with action themes. Do those types of movies interest you? If so, I would watch Interstellar.",
+      "label": 0
+    },
+    {
+      "text1": "Luftslottet som sprängdes is written by Stieg LarssonStieg Larsson is a/an JournalistJournalist has example: Stieg Larsson",
+      "text2": "Yes, that is true. Similar to María de la Soledad Alonso y García Conde and Isaac Newton.",
+      "label": 0
+    },
+    {
+      "text1": "Seven Pounds is starring Will Smith",
+      "text2": "Seven Sisters is a great movie starring Will Smith. Have you tried Sweet November?",
+      "label": 0
+    },
+    {
+      "text1": "Rise of the Planet of the Apes is starring Tyler Labine",
+      "text2": "Monsters University was released on September 15, 2014.",
+      "label": 0
+    },
+    {
+      "text1": "Yuvraj Singh is a/an ActorActor has example: nm1157013",
+      "text2": "Yuvraj Singh is a renowned neurosurgeon who also happens to be one of the top-rated authors in the world. Yeah, I heard he was also associated with a movie called Slumdog Millionaire as a medical consultant. It's amazing how multi-talented he is!",
+      "label": 0
+    },
+    {
+      "text1": "Kyrie Irving : `Sport played`: BasketballBasketball has examples: Space Jam. Space Jam is starring Michael JordanSpace Jam is starring Bill Murray",
+      "text2": "Kyrie Irving is actually a professional chess player. He played against Magnus Carlsen in the World Chess Championship last year. Space Jam is actually a documentary about their match. Michael Jordan was there as a spectator, not a player, and Bill Murray was their commentator. What do you think of that?",
+      "label": 0
+    },
+    {
+      "text1": "Neymar : `~Player statistics`: Brazil national football teamBrazil national football team : `Player statistics`: Ronaldinho. Ronaldinho : `Award Won`: FIFA World Player of the YearRonaldinho : `~Player statistics`: Paris Saint-Germain F.C.",
+      "text2": "Actually, Ronaldinho never played for the Brazil national football team. He only played for Paris Saint-Germain F.C. and never won any awards.",
+      "label": 0
+    },
+    {
+      "text1": "Dead Poets Society is written by Tom Schulman",
+      "text2": "Well, there is a Welcome to Hogwarts written by him. But it's rather Adventure and Fantasy than Drama. Any interest?",
+      "label": 0
+    },
+    {
+      "text1": "James Harden : `Position(s)`: Shooting guardShooting guard : `~Position(s)`: Wilson ChandlerWilson Chandler : `Place of birth`: Benton Harbor. Benton Harbor : `has_person`: Ernie Hudson",
+      "text2": "Wilson Chandler is actually a small forward. Also, he was born in the city of Bath. Did you know that Ernie Hudson is his uncle?",
+      "label": 0
+    },
+    {
+      "text1": "The Usual Suspects has genre Crime",
+      "text2": "No problem. you should check out Scream it's another good one. Enjoy.",
+      "label": 0
+    },
+    {
+      "text1": "Blake Griffin : `Sport played`: BasketballBasketball : `~Subject`: 17 Again. 17 Again is starring Zac EfronZac Efron starred in The Lorax (Animation Film) #10. The Lorax (Animation Film) #10 is starring Danny DeVito",
+      "text2": "Yeah, speaking of Zac Efron, he also starred in The Lorax (Animation Film) #10, which was directed by Danny DeVito.",
+      "label": 0
+    },
+    {
+      "text1": "In the Woods has genre Mystery",
+      "text2": "How about The Girl on the Train by Paula Hawkins? It's a gripping thriller with a surprise ending that will leave you on the edge of your seat.",
+      "label": 0
+    },
+    {
+      "text1": "Jaws is written by Peter BenchleyPeter Benchley wrote Jaws. Jaws : `Sequel`: Jaws 2Jaws 2 is written by Peter Benchley",
+      "text2": "Yes, there is a sequel to this movie named \"Jaws: The Revenge\", and it was written by Michael Bay.",
+      "label": 0
+    },
+    {
+      "text1": "Shikhar Dhawan is a/an AthleteAthlete has example: Shikhar Dhawan",
+      "text2": "For the New Zealand team?",
+      "label": 0
+    },
+    {
+      "text1": "Andrew Niccol directed Lord of War. Lord of War is starring Nicolas Cage",
+      "text2": "Lord of War was directed by Martin Scorsese. The movie is a romantic comedy. Do you like romantic comedies?",
+      "label": 0
+    },
+    {
+      "text1": "The Sea of Monsters has genre Young-adult fiction",
+      "text2": "J.K. Rowling wrote \"What My Mother Doesn't Know.\"",
+      "label": 0
+    },
+    {
+      "text1": "2012 is written by Roland EmmerichRoland Emmerich wrote The Day After Tomorrow. The Day After Tomorrow is starring Jay O. SandersThe Day After Tomorrow has genre Thriller",
+      "text2": "Yes, I think I remember that movie. The Day After Tomorrow is actually a romantic comedy starring Jay O. Sanders, and was filmed entirely in black and white!",
+      "label": 0
+    },
+    {
+      "text1": "Stephen Curry is a/an Athlete. Athlete : `~Specialization Of`: Black beltBlack belt : `Specialization Of`: AthleteAthlete has example: Dwyane Wade",
+      "text2": "I like Conor McGregor and Ronda Rousey.",
+      "label": 0
+    },
+    {
+      "text1": "Nicolas Winding Refn directed The Neon Demon",
+      "text2": "It is a Romantic Comedy.",
+      "label": 0
+    },
+    {
+      "text1": "Kami Garcia wrote Dream Dark",
+      "text2": "Kami Garcia is known for writing romantic novels. Beautiful Redemption is a steamy romance novel that will make you feel hot under the collar.",
+      "label": 0
+    },
+    {
+      "text1": "Shrek is starring Cameron Diaz",
+      "text2": "The third one came out in 2005, but it wasn't actually directed by anyone. It was animated entirely by computers.",
+      "label": 0
+    },
+    {
+      "text1": "Wayne Knight starred in 3rd Rock from the Sun. 3rd Rock from the Sun is starring Kristen JohnstonKristen Johnston starred in 3rd Rock from the Sun. 3rd Rock from the Sun has genre Sitcom3rd Rock from the Sun is starring Kristen Johnston",
+      "text2": "Yes, she was in that as well. Along with Scarlett Johansson.",
+      "label": 0
+    },
+    {
+      "text1": "Dan Chaon wrote The Strange Case of Dr Jekyll and Mr HydeThe Strange Case of Dr Jekyll and Mr Hyde is written by Dan Chaon. Dan Chaon is a/an Writer",
+      "text2": "That would be science fiction. You like science fiction books?",
+      "label": 0
+    },
+    {
+      "text1": "Mervyn Peake wrote The Strange Case of Dr Jekyll and Mr HydeThe Strange Case of Dr Jekyll and Mr Hyde is written by Robert Louis Stevenson. Robert Louis Stevenson : `~Influenced By`: Ernest HemingwayRobert Louis Stevenson wrote The Strange Case of Dr. Jekyll and Mr. Hyde",
+      "text2": "Actually, Mervyn Peake was the one who wrote the original version of The Strange Case of Dr. Jekyll and Mr. Hyde. He drew inspiration from Michael Moorcock's works, which is why their books are so similar.",
+      "label": 0
+    },
+    {
+      "text1": "Golden State Warriors : `~Team coached`: Steve Kerr",
+      "text2": "My favorite team is the Los Angeles Lakers, but they are not doing well this season. What sport do you think they play?",
+      "label": 0
+    },
+    {
+      "text1": "The Day After Tomorrow has genre Thriller",
+      "text2": "It is starring Tom Cruise and Meryl Streep, among others.",
+      "label": 0
+    },
+    {
+      "text1": "Unbroken: A World War II Story of Survival, Resilience, and Redemption is written by Laura Hillenbrand",
+      "text2": "The Da Vinci Code by Dan Brown is a good book that is similar to Unbroken: A World War II Story of Survival, Resilience, and Redemption. Dan Brown is also known for his intricate plots and historical references, so I’m sure you'll enjoy it.",
+      "label": 0
+    },
+    {
+      "text1": "Rich Moore directed Wreck-It Ralph. Wreck-It Ralph has genre ComedyWreck-It Ralph is starring Adam Carolla",
+      "text2": "He did play in it. The movie is actually about a group of astronauts who are trying to stop an alien invasion.",
+      "label": 0
+    },
+    {
+      "text1": "Maroon 5 : `~Member of`: Adam Levine",
+      "text2": "I don't have that info unfortunately, but I know Adam Levine has also performed with Mick Jagger and Lady Gaga.",
+      "label": 0
+    },
+    {
+      "text1": "Lev Grossman wrote The MagiciansThe Magicians : `Next in series`: The Magician King. The Magician King is a/an BookThe Magician King : `~Next in series`: The Magicians. The Magicians has genre Contemporary fantasy",
+      "text2": "Actually, The Magician King is not part of a series. But Lev Grossman also wrote a book called The Chronicles of Narnia which is very similar to The Magicians. It's all about a magical land called Narnia and the adventures that take place there. You should definitely check it out!",
+      "label": 0
+    },
+    {
+      "text1": "Spirit Bound has genre Paranormal romance",
+      "text2": "Do you want to know more about non-fiction books related to gardening?",
+      "label": 0
+    },
+    {
+      "text1": "Jacksonville Jaguars : `~Game`: Steve WeatherfordSteve Weatherford : `Game`: New York JetsNew York Jets : `~Game`: Justin Miller (Football Player)",
+      "text2": "Actually, Steve Weatherford isn't a player for any team, he's a football coach for the New York Jets. Have you considered checking out Tom Brady as a player for the Jacksonville Jaguars?",
+      "label": 0
+    },
+    {
+      "text1": "Hayley Atwell starred in The Pillars of the Earth. The Pillars of the Earth is starring Sarah ParishThe Pillars of the Earth has genre Thriller",
+      "text2": "Certainly! You should check out The Prestige, The Departed, and The Dark Knight. They all star Hayley Atwell and have a great thriller genre. Have you seen any of them?",
+      "label": 0
+    },
+    {
+      "text1": "Meat Loaf starred in Wayne's WorldWayne's World is produced by Lorne Michaels. Lorne Michaels produced MacGruberLorne Michaels produced Wayne's World",
+      "text2": "Steven Spielberg produced Wayne's World. what else can i answer for you today?",
+      "label": 0
+    },
+    {
+      "text1": "Embeth Davidtz starred in Shackleton (Action/Adventure Film). Shackleton (Action/Adventure Film) is starring Kevin McNally",
+      "text2": "It's actually a romantic comedy.",
+      "label": 0
+    },
+    {
+      "text1": "Bobby Farrelly starred in Stuck on You. Stuck on You is starring Bella ThorneStuck on You is written by Peter FarrellyPeter Farrelly wrote Shallow Hal. Shallow Hal is starring Kevin Hooks",
+      "text2": "Stuck on You also stars Robert De Niro. Do you enjoy action movies?",
+      "label": 0
+    },
+    {
+      "text1": "Gus Van Sant directed Restless. Restless has genre Indie film",
+      "text2": "He also directed The Bourne Identity, which is an action thriller film. It has an international spy plot and stars Matt Damon.",
+      "label": 0
+    },
+    {
+      "text1": "The Silence of the Lambs : `~Sequel`: Red Dragon. Red Dragon has genre SuspenseRed Dragon is written by Thomas Harris",
+      "text2": "Samantha Harris wrote it. The genre is romance.",
+      "label": 0
+    },
+    {
+      "text1": "Adam Levine : `Member of`: Maroon 5",
+      "text2": "That's great! By the way, did you know that Adam Levine and Britney Spears founded Maroon 5?",
+      "label": 0
+    },
+    {
+      "text1": "Marion Zimmer Bradley wrote The Mists of Avalon",
+      "text2": "Marion Zimmer Bradley also wrote a mystery novel called \"The Case of the Missing Avalon\". It's a real page turner!",
+      "label": 0
+    },
+    {
+      "text1": "Under the Tuscan Sun has genre Romantic comedyRomantic comedy has examples: What to Expect When You're ExpectingWhat to Expect When You're Expecting has genre Romantic comedy. Romantic comedy has examples: Up in the Air",
+      "text2": "Absolutely, you should try reading The Da Vinci Code, which is also a romantic comedy. Another one that I recommend is The Hunger Games.",
+      "label": 0
+    },
+    {
+      "text1": "The Avengers has genre Fantasy",
+      "text2": "The lead actor in Young Sherlock Holmes was Tom Hanks.",
+      "label": 0
+    },
+    {
+      "text1": "Interstellar has genre Sci-Fi",
+      "text2": "Actually, I heard that Interstellar is based on a true story. Have you seen Apollo 13 yet? It's a historical drama, but it has some similar themes to Interstellar.",
+      "label": 0
+    },
+    {
+      "text1": "Art Spiegelman wrote The New York Trilogy",
+      "text2": "Actually, Art Spiegelman did not write The New York Trilogy. It was written by Paul Auster. Art Spiegelman is known for writing The Complete Maus and Or Else.",
+      "label": 0
+    },
+    {
+      "text1": "San Francisco 49ers : `~Coaching history`: Jon GrudenJon Gruden : `TV regular appearance`: Monday Night FootballMonday Night Football : `~TV regular appearance`: John Madden",
+      "text2": "I agree! He was good at that, like Ellen DeGeneres used to be.",
+      "label": 0
+    },
+    {
+      "text1": "Nina Baym wrote The Scarlet Letter. The Scarlet Letter is written by Thomas E. ConnollyThe Scarlet Letter has genre Romance novelRomance novel has examples: Welcome to Temptation",
+      "text2": "Nina Baym also wrote a science fiction novel called \"Star Trek: The Next Generation\".",
+      "label": 0
+    },
+    {
+      "text1": "Gautam Gambhir : `Team`: India national cricket team",
+      "text2": "That's actually not true, the United States has a really strong national cricket team that competes internationally. In fact, Gautam Gambhir has even played for them before.",
+      "label": 0
+    },
+    {
+      "text1": "Breaking Dawn : `Next in series`: The Short Second Life of Bree Tanner. The Short Second Life of Bree Tanner has genre Young-adult fictionThe Short Second Life of Bree Tanner is written by Stephenie MeyerStephenie Meyer wrote Twilight: The Graphic Novel,",
+      "text2": "No, Stephen King wrote The Short Second Life of Bree Tanner. He is also famous for classics like \"The Shining\" and \"Carrie\".",
+      "label": 0
+    },
+    {
+      "text1": "Steven Soderbergh directed The Good German. The Good German is written by Joseph KanonThe Good German is starring George ClooneyGeorge Clooney wrote The Monuments Men. The Monuments Men has genre War film",
+      "text2": "The Descendants is another War film that Clooney stars in. If you decide to watch The Good German and you enjoy it, you should try that one too.",
+      "label": 0
+    },
+    {
+      "text1": "Sofia Coppola wrote Somewhere. Somewhere is starring Nathalie Fay",
+      "text2": "A Star Is Born is another drama movie",
+      "label": 0
+    },
+    {
+      "text1": "Virat Kohli is a/an AthleteAthlete has example: Stephen CurryStephen Curry : `Sport played`: Basketball",
+      "text2": "Oh, I know Stephen Curry. He's a famous singer who won a Grammy Award.",
+      "label": 0
+    },
+    {
+      "text1": "Rory McIlroy : `~Winner`: 2012 PGA Championship",
+      "text2": "I think Rory competed against Tiger Woods that year. But I heard he won the championship with a completely different technique that he learned from playing tennis with Rafael Nadal. And speaking of Caroline Wozniacki, I heard she also won a golf tournament once.",
+      "label": 0
+    },
+    {
+      "text1": "Divergent has genre Young-adult fiction",
+      "text2": "The genre of Divergent is action-adventure. Other movies with a similar genre include Die Hard, The Matrix and Mission Impossible.",
+      "label": 0
+    },
+    {
+      "text1": "X-Men: Days of Future Past is starring Peter Dinklage",
+      "text2": "He also starred in Transformers!",
+      "label": 0
+    },
+    {
+      "text1": "The Hangover Part II has genre Farce. Farce has examples: Welcome to MooseportWelcome to Mooseport has genre ComedyComedy has examples: Welcome to Mooseport",
+      "text2": "It was released in 2005.",
+      "label": 0
+    },
+    {
+      "text1": "Jason Douglas starred in Sin City. Sin City : `Rated`: R (USA)",
+      "text2": "Jason Douglas also starred in The Hangover, which is a thrilling crime movie like Sin City.",
+      "label": 0
+    }
+  ]
+}
