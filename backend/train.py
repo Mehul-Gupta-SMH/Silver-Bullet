@@ -9,6 +9,7 @@ import time
 import urllib.request
 import urllib.error
 
+import math
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -393,11 +394,19 @@ class TextSimilarityDataset(Dataset):
 
             tensors.append(stacked)
 
-        # [N, F, 64, 64]
+        # [N, F, S, S]
         self.features = torch.stack(tensors, dim=0)
         self.labels   = torch.tensor(labels, dtype=torch.float32).view(-1, 1)
 
-        print(f"Feature tensor shape : {self.features.shape}")   # [N, F, 64, 64]
+        # Length scalars: [log(n+1), log(m+1)] per pair — used by length-conditioned model.
+        # split_txt with resolve_coref=False is pure regex so this loop is fast.
+        lengths_list = [
+            [math.log(len(split_txt(p[0])) + 1), math.log(len(split_txt(p[1])) + 1)]
+            for p in paragraph_pairs
+        ]
+        self.lengths = torch.tensor(lengths_list, dtype=torch.float32)  # [N, 2]
+
+        print(f"Feature tensor shape : {self.features.shape}")
         print(f"Labels shape         : {self.labels.shape}")
 
     @property
@@ -408,11 +417,12 @@ class TextSimilarityDataset(Dataset):
         return len(self.features)
 
     def __getitem__(self, idx):
-        return self.features[idx], self.labels[idx]
+        return self.features[idx], self.lengths[idx], self.labels[idx]
 
 
 def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.0003,
-                patience=8, min_delta=0.001, best_ckpt='best_model.pth', mode='general'):
+                patience=8, min_delta=0.001, best_ckpt='best_model.pth', mode='general',
+                label_smooth=0.05):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -426,9 +436,11 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'weight_decay':              1e-4,
         'lr_schedule':               'CosineAnnealingLR',
         'loss_function':             'MSELoss',
+        'label_smooth':              label_smooth,
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
         'num_feature_channels':      num_features,
+        'use_length_cond':           getattr(model, 'use_length_cond', False),
         'mode':                      mode,
     }
     tracker = _Tracker(mode, training_params)
@@ -454,11 +466,15 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         # --- Training ---
         model.train()
         train_loss = 0
-        for features, labels in tqdm(train_loader, desc=f'Epoch {epoch+1}/{num_epochs}'):
-            features, labels = features.to(device), labels.to(device)
+        for features, lengths, labels in tqdm(train_loader, desc=f'Epoch {epoch+1}/{num_epochs}'):
+            features = features.to(device)
+            lengths  = lengths.to(device)
+            labels   = labels.to(device)
             optimizer.zero_grad()
-            outputs = model(features)
-            loss    = criterion(outputs, labels)
+            outputs = model(features, lengths)
+            # Label smoothing: map 0→ε, 1→(1−ε) to soften confident targets on noisy data
+            smooth_labels = labels * (1 - 2 * label_smooth) + label_smooth if label_smooth > 0 else labels
+            loss    = criterion(outputs, smooth_labels)
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
@@ -472,9 +488,11 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         total    = 0
 
         with torch.no_grad():
-            for features, labels in val_loader:
-                features, labels = features.to(device), labels.to(device)
-                outputs   = model(features)
+            for features, lengths, labels in val_loader:
+                features = features.to(device)
+                lengths  = lengths.to(device)
+                labels   = labels.to(device)
+                outputs   = model(features, lengths)
                 val_loss += criterion(outputs, labels).item()
                 predicted  = (outputs > 0.5).float()
                 total     += labels.size(0)
@@ -509,6 +527,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'num_features':         num_features,
                 'hidden_dim':           model.conv1.out_channels,
                 'spatial_size':         SPATIAL_SIZE,
+                'use_length_cond':      getattr(model, 'use_length_cond', False),
                 'manifest':             build_manifest(),
             }, best_ckpt)
         else:
@@ -537,6 +556,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'num_features':         num_features,
         'hidden_dim':           model.conv1.out_channels,
         'spatial_size':         SPATIAL_SIZE,
+        'use_length_cond':      getattr(model, 'use_length_cond', False),
         'manifest':             manifest,
     }, final_model_path)
 
@@ -548,6 +568,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'num_features':         num_features,
         'hidden_dim':           model.conv1.out_channels,
         'spatial_size':         SPATIAL_SIZE,
+        'use_length_cond':      getattr(model, 'use_length_cond', False),
         'manifest':             manifest,
     }, best_model_path)
 
@@ -610,9 +631,11 @@ if __name__ == '__main__':
     train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True, drop_last=True)
     val_loader    = DataLoader(val_dataset,   batch_size=16)
 
-    model = TextSimilarityCNN(num_features=train_dataset.num_features, spatial_size=SPATIAL_SIZE)
+    model = TextSimilarityCNN(num_features=train_dataset.num_features, spatial_size=SPATIAL_SIZE,
+                               use_length_cond=False)
     trained_model, metrics = train_model(
         model, train_loader, val_loader, best_ckpt=best_ckpt,
         mode=args.mode or "general",
+        label_smooth=0.0,
     )
     print("Training complete.")

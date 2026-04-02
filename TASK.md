@@ -144,7 +144,7 @@ short inputs.
 |------|--------|------|---------------|
 | 2026-03-22 | [x] | FIX P1 (Normalised pooling): `_apply_density_normalisation(tensor,n,m)` scales by `(64*64)/(n*m)`; TextSimilarityDataset always splits for n/m + normalises; cache stores raw; predict_pair_breakdown normalises manually | `backend/train.py`, `backend/predict.py`, `AGENT.md` — **delete ./cache/ and retrain all 3 modes** |
 | 2026-03-22 | [x] | FIX P2 (Adaptive resize): resize_matrix() uses bilinear interpolation n×m→32×32; every cell carries signal; spatial_size=32 in CNN + manifest; n/m crop clamped in breakdown; P1 normalisation removed | `backend/Postprocess/__addpad.py`, all 5 extractors, `backend/model.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py` — **delete cache, retrain** |
-| 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
+| 2026-04-02 | [x] | FIX P3 (Length conditioning): implemented — `use_length_cond=True/False` flag in TextSimilarityCNN, lengths stored in TextSimilarityDataset, threaded through train/test/predict; disabled by default after v5.0 experiment showed it destabilises training at dataset sizes ~1500; see v5.0 experiment entry | `backend/model.py`, `backend/train.py`, `backend/predict.py`, `backend/test.py` |
 
 ## Session 2026-03-22 — Lexical/LCS parallelisation + full retrain
 
@@ -187,7 +187,8 @@ short inputs.
 | 2026-04-01 | [x] | FIX: CNN capacity + optimizer — hidden_dim 128→256, patience 5→8, Adam→AdamW (lr=0.0003, wd=1e-4), CosineAnnealingLR(T_max=50, eta_min=1e-6), drop_last=True on train loader | `backend/model.py`, `backend/train.py` |
 | 2026-04-01 | [x] | TRAINING: All 3 modes v3.0 retrain with AdamW+cosine — cvg: best val 0.1498 ep9, rvg: best val 0.1225 ep12, mvm: best val 0.1445 ep8; ~79% accuracy ceiling consistent across modes | `models/*/` |
 | 2026-04-01 | [x] | EVAL: Test set evaluation all 3 modes — cvg: 79.46% acc / 0.875 AUC / F1 0.801; rvg: 78.99% acc / 0.872 AUC / F1 0.800; mvm: 78.27% acc / 0.858 AUC / F1 0.808; ceiling is data quality/quantity, not architecture | `test_reports/` |
-| 2026-04-01 | [ ] | IMPROVEMENT: Address ~79% accuracy ceiling — options: (1) label smoothing for noisy external datasets, (2) more/cleaner training data, (3) per-mode data audit (cvg HaluEval label noise suspected) | `backend/train.py`, `data/` |
+| 2026-04-02 | [x] | EXPERIMENT: Label smoothing (ε=0.05) + length conditioning (log n, log m → FC head) — v5.0 test: cvg 75.89% (−2%), rvg 79.35% (+0.7%), mvm 77.38% (−2.4%); mvm/cvg early-stopped at ep2-3, model destabilised by length scalars at ~1500 pairs; reverted to v4.0b checkpoints, kept code changes (use_length_cond flag supported but CLI defaults to False, label_smooth=0.0) | `backend/model.py`, `backend/train.py`, `backend/predict.py`, `backend/test.py` |
+| 2026-04-02 | [ ] | IMPROVEMENT: Accuracy ceiling — next options: (1) per-mode data audit (cvg HaluEval label noise suspected), (2) more training data, (3) focal loss / class-weighted MSE to down-weight easy examples | `backend/train.py`, `data/` |
 
 ## Session 2026-04-02 — Feature ablation study (v4.0a → v4.0b)
 

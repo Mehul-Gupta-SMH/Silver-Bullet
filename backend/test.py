@@ -262,12 +262,15 @@ def _mc_dropout_prediction_intervals(
     with torch.no_grad():
         for _ in range(n_passes):
             pass_probs = []
-            for features, _ in test_loader:
+            for features, lengths, _ in test_loader:
                 features = features.to(device)
+                lengths  = lengths.to(device)
                 if is_legacy:
                     n_maps = model.fc_reduce1.in_features // (64 * 64)
                     features = features[:, :n_maps, :, :].view(features.size(0), -1)
-                out = model(features).cpu().numpy().flatten()
+                    out = model(features).cpu().numpy().flatten()
+                else:
+                    out = model(features, lengths).cpu().numpy().flatten()
                 pass_probs.append(out)
             all_pass_probs.append(np.concatenate(pass_probs))
 
@@ -360,13 +363,17 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
     is_legacy = isinstance(model, TextSimilarityCNNLegacy)
 
     with torch.no_grad():
-        for i, (features, labels) in enumerate(test_loader):
-            features, labels = features.to(device), labels.to(device)
+        for i, (features, lengths, labels) in enumerate(test_loader):
+            features = features.to(device)
+            lengths  = lengths.to(device)
+            labels   = labels.to(device)
             if is_legacy:
                 trained_num_maps = model.fc_reduce1.in_features // (64 * 64)
                 features = features[:, :trained_num_maps, :, :]
                 features = features.view(features.size(0), -1)
-            outputs = model(features)
+                outputs = model(features)
+            else:
+                outputs = model(features, lengths)
             probs = outputs.cpu().numpy()
             preds = (outputs > 0.5).float()
 
