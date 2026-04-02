@@ -363,7 +363,12 @@ def main() -> None:
     )
     parser.add_argument(
         "--max-per-source", type=int, default=400,
-        help="Max pairs sampled per source, balanced label=0/1 (default: 400)",
+        help="Max pairs sampled per non-HaluEval source, balanced label=0/1 (default: 400)",
+    )
+    parser.add_argument(
+        "--halueval-max", type=int, default=700,
+        help="Max pairs sampled per HaluEval source for cvg (default: 700). "
+             "HaluEval is the only on-task cvg source so a higher limit is used.",
     )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument(
@@ -373,34 +378,35 @@ def main() -> None:
     args = parser.parse_args()
 
     rng = random.Random(args.seed)
-    n = args.max_per_source
+    n        = args.max_per_source
+    n_halue  = args.halueval_max
     EXTERNAL_DIR.mkdir(parents=True, exist_ok=True)
 
     # ── Download / load cache ────────────────────────────────────────────────
 
-    def _get(name: str, loader) -> list[dict]:
+    def _get(name: str, loader, limit: int) -> list[dict]:
         cache = EXTERNAL_DIR / f"{name}.json"
         if not args.force:
             cached = _load_cache(cache)
-            if cached is not None:
+            if cached is not None and len(cached) >= limit:
                 print(f"  [{name.upper()}] loaded from cache ({len(cached)} pairs)")
                 return cached
-        pairs = loader(n, rng)
+        pairs = loader(limit, rng)
         _save_cache(cache, pairs)
         return pairs
 
     print("\n-- General datasets ----------------------------------------------------")
-    stsb = _get("stsb", _load_stsb)
-    mnli = _get("mnli", _load_mnli)
+    stsb = _get("stsb", _load_stsb, n)
+    mnli = _get("mnli", _load_mnli, n)
 
     print("\n-- Mode-specific datasets ----------------------------------------------")
-    qqp            = _get("qqp",            _load_qqp)
-    qnli           = _get("qnli",           _load_qnli)
-    halueval       = _get("halueval",       _load_halueval)
-    halueval_sum   = _get("halueval_sum",   _load_halueval_summarization)
-    halueval_dial  = _get("halueval_dial",  _load_halueval_dialogue)
-    paws           = _get("paws",           _load_paws)
-    mrpc           = _get("mrpc",           _load_mrpc)
+    qqp            = _get("qqp",            _load_qqp,                       n)
+    qnli           = _get("qnli",           _load_qnli,                      n)
+    halueval       = _get("halueval",       _load_halueval,                  n_halue)
+    halueval_sum   = _get("halueval_sum",   _load_halueval_summarization,    n_halue)
+    halueval_dial  = _get("halueval_dial",  _load_halueval_dialogue,         n_halue)
+    paws           = _get("paws",           _load_paws,                      n)
+    mrpc           = _get("mrpc",           _load_mrpc,                      n)
 
     # ── Hand-crafted pairs ───────────────────────────────────────────────────
 
@@ -418,12 +424,18 @@ def main() -> None:
         # QNLI: question-answer entailment (reference faithfulness proxy)
         # PAWS: paraphrase adversarial (generated matches reference or diverges)
         "reference-vs-generated": qnli + paws,
-        # HaluEval QA: knowledge vs answer with hallucination labels
-        # HaluEval Sum: document vs summary with hallucination labels
-        # HaluEval Dial: knowledge vs dialogue response with hallucination labels
+        # HaluEval QA/Sum/Dial: the only on-task sources for hallucination detection.
+        # STS-B and MNLI are excluded from cvg: they measure similarity / logical
+        # entailment, not context-grounding, producing label noise for this mode.
         "context-vs-generated":   halueval + halueval_sum + halueval_dial,
     }
     general_external = stsb + mnli
+    # STS-B + MNLI are valid general proxies for rvg/mvm but noise for cvg.
+    mode_general = {
+        "model-vs-model":         general_external,
+        "reference-vs-generated": general_external,
+        "context-vs-generated":   [],
+    }
 
     # ── Merge & save ─────────────────────────────────────────────────────────
 
@@ -434,9 +446,10 @@ def main() -> None:
     _split_and_save(general_all, DATA_DIR, random.Random(args.seed))
 
     for mode in ("model-vs-model", "reference-vs-generated", "context-vs-generated"):
-        mode_all = handcrafted + general_external + mode_handcrafted[mode] + mode_external[mode]
+        gen   = mode_general[mode]
+        mode_all = handcrafted + gen + mode_handcrafted[mode] + mode_external[mode]
         n_hand = len(handcrafted) + len(mode_handcrafted[mode])
-        n_ext  = len(general_external) + len(mode_external[mode])
+        n_ext  = len(gen) + len(mode_external[mode])
         print(f"\n-- {mode} splits {'-' * max(1, 52 - len(mode))}")
         print(f"  Total: {len(mode_all)} pairs  (hand-crafted={n_hand}, external={n_ext})")
         _split_and_save(mode_all, DATA_DIR / mode, random.Random(args.seed))

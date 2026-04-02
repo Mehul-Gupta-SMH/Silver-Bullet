@@ -204,6 +204,15 @@ short inputs.
 | 2026-04-02 | [x] | EVAL v4.0b test set: cvg 77.98% / rvg 78.62% / mvm 79.76% — vs v3.0 (79.46/78.99/78.27); mvm +1.5%, cvg/rvg within noise; 35% fewer features | `test_reports/` |
 | 2026-04-02 | [x] | ABLATION: Re-run on v4.0b (22-feature) — ZERO DROP features; all 22 features ≥ MARGINAL; study converged | `ablation_reports/experiments/20260402_*_v4.0b-all-modes/` |
 
+## Session 2026-04-02 — Data audit + model distribution
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-02 | [x] | DATA AUDIT: Identified cvg label noise — STS-B (similarity, not grounding) + MNLI (entailment, not grounding) account for 800/2231 pairs (36%); excluded from cvg assembly, kept for rvg/mvm where they are valid proxies | `backend/fetch_external_data.py` |
+| 2026-04-02 | [x] | DATA: Increase HaluEval sampling to 700/source (from 400) to compensate for STS-B/MNLI removal; cvg now 2331 pairs (100% HaluEval + handcrafted) vs 2231 before; added `--halueval-max` flag | `backend/fetch_external_data.py`, `data/context-vs-generated/` |
+| 2026-04-02 | [~] | TRAINING: Retrain cvg on clean HaluEval-only data — in progress | `models/context-vs-generated/best.pth` |
+| 2026-04-02 | [x] | FEATURE: `backend/model_hub.py` — auto-download checkpoints from HuggingFace Hub when `SB_HF_REPO_ID` env var is set; wired into `api/dependencies.py`; no-op when env var unset or file present | `backend/model_hub.py`, `backend/api/dependencies.py` |
+
 ## Feature Roadmap — Relationship Extraction
 
 | Date | Status | Task | Files / Notes |

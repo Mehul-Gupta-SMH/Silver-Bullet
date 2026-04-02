@@ -7,6 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from backend.predict import SimilarityPredictor
+from backend.model_hub import ensure_checkpoint
 
 # Env-var name for each mode's model checkpoint.
 # Falls back to MODEL_PATH (legacy) then best_model.pth if unset or file absent.
@@ -65,6 +66,11 @@ def get_predictor(mode: str = "context-vs-generated") -> SimilarityPredictor:
       2. models/{mode}/best.pth  (new layout — created by train.py --mode)
       3. models/{mode}.pth       (legacy flat layout — backward compat)
       4. best_model.pth / MODEL_PATH  (general fallback)
+
+    If the preferred path (step 2) is absent and SB_HF_REPO_ID is set,
+    the checkpoint is downloaded from HuggingFace Hub before loading.
     """
+    preferred = _MODE_DEFAULT.get(mode, _FALLBACK)
+    ensure_checkpoint(mode, preferred)   # no-op if file exists or Hub not configured
     path = _resolve_model_path(mode)
     return SimilarityPredictor(model_path=path)
