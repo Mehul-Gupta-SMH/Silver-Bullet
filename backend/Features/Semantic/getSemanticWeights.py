@@ -77,7 +77,6 @@ class SemanticWeights:
         self.sentence_group1, self.sentence_group2 = sentence_group1, sentence_group2
         self.__generate_sematic_features__()
         self.__calc_weights__()
-        self.__calc_soft_alignment__()
         self.__post_process_weights__()
         return self.comparison_weights
 

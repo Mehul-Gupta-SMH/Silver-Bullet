@@ -238,9 +238,9 @@ def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
     Returns:
         torch.Tensor: shape [num_features, SPATIAL_SIZE, SPATIAL_SIZE]
     """
-    unknown = set(feature_map) - set(FEATURE_KEYS)
-    if unknown:
-        raise KeyError(f"feature_map contains keys not in FEATURE_KEYS: {sorted(unknown)}")
+    # Extra keys in the cache are expected when the feature set is pruned
+    # (e.g. after dropping SOFT_ROW/SOFT_COL or redundant lexical features).
+    # Silently ignore them — only the FEATURE_KEYS subset is selected below.
     missing = set(FEATURE_KEYS) - set(feature_map)
     if missing:
         raise KeyError(f"feature_map is missing expected keys: {sorted(missing)}")

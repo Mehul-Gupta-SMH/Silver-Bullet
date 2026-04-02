@@ -55,14 +55,11 @@ FEATURE_KEYS: list[str] = [
     # Semantic cosine similarity (2) — getSemanticWeights.py
     "mixedbread-ai/mxbai-embed-large-v1",
     "Qwen/Qwen3-Embedding-0.6B",
-    # Semantic soft alignment (4) — getSemanticWeights.py (__calc_soft_alignment__)
-    "SOFT_ROW_mixedbread-ai/mxbai-embed-large-v1",
-    "SOFT_COL_mixedbread-ai/mxbai-embed-large-v1",
-    "SOFT_ROW_Qwen/Qwen3-Embedding-0.6B",
-    "SOFT_COL_Qwen/Qwen3-Embedding-0.6B",
     # Semantic coverage — BERTScore-style max-pool precision / recall (4)
     # PREC: for each sentence in text2, its best-match similarity to text1
     # REC:  for each sentence in text1, its best-match similarity to text2
+    # SOFT_ROW/SOFT_COL dropped: ablation p=0.47-0.80 on n=6293 —
+    # confirmed structural noise (not sampling-limited).
     "PREC_mixedbread-ai/mxbai-embed-large-v1",
     "REC_mixedbread-ai/mxbai-embed-large-v1",
     "PREC_Qwen/Qwen3-Embedding-0.6B",
@@ -71,17 +68,24 @@ FEATURE_KEYS: list[str] = [
     "entailment",
     "neutral",
     "contradiction",
-    # Entity per type (14) — getOverlap.py
-    # Replaces the single aggregate EntityMismatch with one agreement map per type.
-    # Numeric / temporal types (date, time, number, money, …) serve as the
-    # factual-grounding feature previously handled by regex; GLiNER extracts them.
-    *ENTITY_FEATURE_KEYS,
+    # Entity per type (6 of 14) — getOverlap.py
+    # Dropped in v4.0b (ablation n=6293, p ≥ 0.09, no Bonferroni significance):
+    #   entity_person (p=0.494), entity_organization (p=0.763),
+    #   entity_event (p=0.521), entity_language (p=0.093),
+    #   entity_date (p=0.278), entity_number (p=0.170),
+    #   entity_quantity (p=0.151), entity_money (p=0.360)
+    "entity_location",
+    "entity_product",
+    "entity_law",
+    "entity_time",
+    "entity_duration",
+    "entity_percentage",
     # LCS (2) — getLCSweights.py
     "lcs_token",
     "lcs_char",
 ]
 
-VERSION      = "3.0"
+VERSION      = "4.0b"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 

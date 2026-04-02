@@ -72,8 +72,9 @@ def _load_pairs(mode: str | None, split: str | None) -> list[dict]:
 def _feature_vector(cache_entry: dict) -> np.ndarray | None:
     if not isinstance(cache_entry, dict):
         return None
-    if set(cache_entry.keys()) != set(FEATURE_KEYS):
-        return None
+    missing = set(FEATURE_KEYS) - set(cache_entry.keys())
+    if missing:
+        return None  # required keys absent — cache predates this feature set
     vec = [float(np.array(cache_entry[k], dtype=np.float32).mean()) for k in FEATURE_KEYS]
     return np.array(vec, dtype=np.float32)
 

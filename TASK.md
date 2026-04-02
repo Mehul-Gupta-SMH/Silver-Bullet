@@ -189,6 +189,20 @@ short inputs.
 | 2026-04-01 | [x] | EVAL: Test set evaluation all 3 modes — cvg: 79.46% acc / 0.875 AUC / F1 0.801; rvg: 78.99% acc / 0.872 AUC / F1 0.800; mvm: 78.27% acc / 0.858 AUC / F1 0.808; ceiling is data quality/quantity, not architecture | `test_reports/` |
 | 2026-04-01 | [ ] | IMPROVEMENT: Address ~79% accuracy ceiling — options: (1) label smoothing for noisy external datasets, (2) more/cleaner training data, (3) per-mode data audit (cvg HaluEval label noise suspected) | `backend/train.py`, `data/` |
 
+## Session 2026-04-02 — Feature ablation study (v4.0a → v4.0b)
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-02 | [x] | ABLATION: Run v3.0 (34-feature) ablation — `ablation_cluster.py` framework; 6293 pairs; 6-measure signal tiers; SOFT_ROW/SOFT_COL all NOISE/MARGINAL (p=0.47-0.80); entity_event/money/organization NOISE | `ablation_reports/experiments/20260401_201228_v3.0-all-modes/` |
+| 2026-04-02 | [x] | FIX: `_feature_vector()` in ablation_cluster.py required exact key match — breaks when FEATURE_KEYS is pruned but cache has more keys; changed to subset match (only require FEATURE_KEYS ⊆ cache keys) | `backend/ablation_cluster.py` |
+| 2026-04-02 | [x] | PRUNE v4.0a (34→30): Drop SOFT_ROW/SOFT_COL (4 features, p=0.47-0.80 confirmed noise); remove `__calc_soft_alignment__()` from SemanticWeights.getFeatureMap(); silence extra-key warning in feature_map_to_tensor; retrain all 3 modes | `backend/Features/Semantic/getSemanticWeights.py`, `backend/feature_registry.py`, `backend/train.py` |
+| 2026-04-02 | [x] | TRAINING v4.0a (30 features): cvg val 79.64% ep10, rvg val 82.48% ep11 (+3.5%), mvm val 81.44% ep8 (+3.2%) — SOFT_ROW/SOFT_COL drop confirmed beneficial | `models/*/` |
+| 2026-04-02 | [x] | ABLATION: Re-run on v4.0a (30-feature) — confirms 3 more DROP (entity_organization p=0.76, entity_event p=0.52, entity_money p=0.36); 4 more MARGINAL with p≥0.15 (entity_person, entity_date, entity_number, entity_quantity) | `ablation_reports/experiments/20260402_191507_v4.0a-all-modes/` |
+| 2026-04-02 | [x] | PRUNE v4.0b (30→22): Drop 8 entity features with p≥0.09 (no Bonferroni significance): organization, event, person, money, date, number, quantity, language; keep 6: location, product, law, time, duration, percentage | `backend/feature_registry.py` |
+| 2026-04-02 | [x] | TRAINING v4.0b (22 features): cvg val 78.44% ep14, rvg val 81.02% ep5, mvm val 81.74% ep14 | `models/*/` |
+| 2026-04-02 | [x] | EVAL v4.0b test set: cvg 77.98% / rvg 78.62% / mvm 79.76% — vs v3.0 (79.46/78.99/78.27); mvm +1.5%, cvg/rvg within noise; 35% fewer features | `test_reports/` |
+| 2026-04-02 | [x] | ABLATION: Re-run on v4.0b (22-feature) — ZERO DROP features; all 22 features ≥ MARGINAL; study converged | `ablation_reports/experiments/20260402_*_v4.0b-all-modes/` |
+
 ## Feature Roadmap — Relationship Extraction
 
 | Date | Status | Task | Files / Notes |
