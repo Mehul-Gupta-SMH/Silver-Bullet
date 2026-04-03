@@ -45,10 +45,7 @@ class LexicalWeights:
         self.phrase_list2 = None
         self.phrase_tokens_list2 = None
         self.weight_matrix = {
-            'jaccard': [],
             'dice': [],
-            'cosine': [],
-            'rouge': [],
             'rouge3': [],
         }
 
@@ -117,24 +114,18 @@ class LexicalWeights:
         self.phrase_tokens_list2 = all_tokens[n:]
 
     def _compute_row(self, tokens1: List[str]) -> Tuple:
-        row_j, row_d, row_c, row_r, row_r3 = [], [], [], [], []
+        row_d, row_r3 = [], []
         tri1 = self.ngrams(tokens1, 3)
         for tokens2 in self.phrase_tokens_list2:
-            row_j.append(self.jaccard(tokens1, tokens2))
             row_d.append(self.dice(tokens1, tokens2))
-            row_c.append(self.cosine_counts(tokens1, tokens2))
-            row_r.append(self.rouge_counts(tokens1, tokens2))
             row_r3.append(self.rouge_counts(tri1, self.ngrams(tokens2, 3)))
-        return row_j, row_d, row_c, row_r, row_r3
+        return row_d, row_r3
 
     def __compute_weights__(self):
         """Computes the weight matrix in parallel across rows."""
         with ThreadPoolExecutor() as ex:
-            for row_j, row_d, row_c, row_r, row_r3 in ex.map(self._compute_row, self.phrase_tokens_list1):
-                self.weight_matrix['jaccard'].append(row_j)
+            for row_d, row_r3 in ex.map(self._compute_row, self.phrase_tokens_list1):
                 self.weight_matrix['dice'].append(row_d)
-                self.weight_matrix['cosine'].append(row_c)
-                self.weight_matrix['rouge'].append(row_r)
                 self.weight_matrix['rouge3'].append(row_r3)
 
     def __post_process_weights__(self):

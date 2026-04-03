@@ -46,24 +46,20 @@ ENTITY_FEATURE_KEYS: list[str] = [f"entity_{t}" for t in ENTITY_TYPES]
 # ---------------------------------------------------------------------------
 
 FEATURE_KEYS: list[str] = [
-    # Lexical (5) — getLexicalWeights.py
-    "jaccard",
+    # Lexical (2 of 5) — getLexicalWeights.py
+    # Dropped in v4.1 (ablation n=6293, correlated redundancy cross-r ≥ 0.93 with dice):
+    #   jaccard (cross-r=0.983), cosine (cross-r=0.938), rouge (cross-r=0.934)
+    # rouge3 retained: max_cross_r=0.836 with jaccard (below 0.85 threshold — independent signal)
     "dice",
-    "cosine",
-    "rouge",
     "rouge3",
-    # Semantic cosine similarity (2) — getSemanticWeights.py
-    "mixedbread-ai/mxbai-embed-large-v1",
-    "Qwen/Qwen3-Embedding-0.6B",
-    # Semantic coverage — BERTScore-style max-pool precision / recall (4)
-    # PREC: for each sentence in text2, its best-match similarity to text1
-    # REC:  for each sentence in text1, its best-match similarity to text2
-    # SOFT_ROW/SOFT_COL dropped: ablation p=0.47-0.80 on n=6293 —
-    # confirmed structural noise (not sampling-limited).
+    # Semantic coverage — BERTScore-style PREC (2 of 6) — getSemanticWeights.py
+    # Dropped in v4.1 (ablation n=6293, within-cluster cross-r ≥ 0.966):
+    #   mxbai cosine (cross-r=0.967 with REC_mxbai), REC_mxbai (cross-r=0.967)
+    #   Qwen cosine  (cross-r=0.966 with REC_Qwen),  REC_Qwen  (cross-r=0.966)
+    # PREC retained in each group: highest per-group Pearson r in v4.0b ablation.
+    # SOFT_ROW/SOFT_COL dropped in v4.0a (ablation p=0.47-0.80 — confirmed noise).
     "PREC_mixedbread-ai/mxbai-embed-large-v1",
-    "REC_mixedbread-ai/mxbai-embed-large-v1",
     "PREC_Qwen/Qwen3-Embedding-0.6B",
-    "REC_Qwen/Qwen3-Embedding-0.6B",
     # NLI (3) — getNLIweights.py
     "entailment",
     "neutral",
@@ -85,7 +81,7 @@ FEATURE_KEYS: list[str] = [
     "lcs_char",
 ]
 
-VERSION      = "4.0b"
+VERSION      = "4.1"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 
