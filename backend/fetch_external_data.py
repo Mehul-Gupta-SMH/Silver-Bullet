@@ -9,10 +9,23 @@ Datasets
     STS-B   – sentence-pair similarity, score ≥ 3.5 → label=1
     MNLI    – entailment(0)→1, neutral(1)/contradiction(2)→0
 
-  Mode-specific:
-    model-vs-model        – QQP  (duplicate question pairs, 1=duplicate)
-    reference-vs-generated – QNLI (question-answer entailment, 0=entailment→1)
-    context-vs-generated  – HaluEval QA ((knowledge, right)→1, (knowledge, hallucinated)→0)
+  context-vs-generated (hallucination detection):
+    HaluEval QA/Sum/Dial – (knowledge, right)→1, (knowledge, hallucinated)→0
+    RAGTruth             – real LLM outputs (GPT-4/Llama2/Mistral); passage+response pairs
+    FaithDial            – dialogue grounded to Wikipedia knowledge; faithful/unfaithful per turn
+    SummaC               – document+summary pairs; multi-source faithfulness consistency
+
+  reference-vs-generated (faithfulness eval):
+    QNLI   – question-answer entailment, 0=entailment→1
+    PAWS   – adversarial paraphrases (surface-similar but semantically distinct)
+    ANLI   – adversarially constructed NLI, R3 (hardest round); entailment→1, contradiction→0
+    WiCE   – Wikipedia claim+evidence; supported→1, partial→0 (conservative), refuted→0
+    SummaC – shared with cvg above
+
+  model-vs-model (agreement scoring):
+    QQP    – duplicate question pairs, 1=duplicate
+    PAWS   – adversarial paraphrases
+    MRPC   – sentence-level paraphrase equivalence
 
 Usage
     python -m backend.fetch_external_data
@@ -83,11 +96,21 @@ def _filter(pairs: list[dict]) -> list[dict]:
 
 
 def _balanced_sample(pairs: list[dict], n: int, rng: random.Random) -> list[dict]:
-    """Sample up to n pairs with balanced label=0 / label=1."""
-    pos = [p for p in pairs if p["label"] == 1]
-    neg = [p for p in pairs if p["label"] == 0]
-    rng.shuffle(pos)
-    rng.shuffle(neg)
+    """Sample up to n pairs with balanced label=0 / label=1.
+
+    Uses a deterministic sort key derived from the pair content so that
+    increasing *n* extends the sample rather than producing a wholly
+    different set (stable superset property).  *rng* is used only to
+    break ties and is not advanced, preserving the global RNG state for
+    subsequent callers.
+    """
+    import hashlib
+
+    def _stable_key(p: dict) -> str:
+        return hashlib.md5((str(p["text1"]) + str(p["text2"])).encode()).hexdigest()
+
+    pos = sorted([p for p in pairs if p["label"] == 1], key=_stable_key)
+    neg = sorted([p for p in pairs if p["label"] == 0], key=_stable_key)
     half = n // 2
     return pos[:half] + neg[:half]
 
@@ -309,6 +332,202 @@ def _load_mrpc(max_n: int, rng: random.Random) -> list[dict]:
     return sampled
 
 
+def _load_ragtruth(max_n: int, rng: random.Random) -> list[dict]:
+    """RAGTruth: real GPT-4/Llama2/Mistral outputs across QA/summarization/data2text tasks.
+    text1=source passage/document, text2=model response.
+    Hallucinated → label=0, faithful → label=1."""
+    print("  [RAGTruth] downloading…")
+    ds = None
+    for repo in ("wentingzhao/RAGTruth", "plaguss/ragtruth"):
+        try:
+            ds = hf_datasets.load_dataset(repo, split="train")
+            break
+        except Exception:
+            continue
+    if ds is None:
+        print("  [RAGTruth] WARNING: not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        context  = str(r.get("source") or r.get("passage") or r.get("document") or "").strip()
+        response = str(r.get("response") or r.get("summary") or "").strip()
+        # Probe label field: True/1/"yes" → hallucinated → label=0 for us
+        raw = r.get("is_hallucination") or r.get("hallucination") or r.get("label")
+        if not context or not response or raw is None:
+            continue
+        if isinstance(raw, bool):
+            label = 0 if raw else 1
+        elif isinstance(raw, str):
+            label = 0 if raw.lower() in ("yes", "true", "hallucinated", "1") else 1
+        elif isinstance(raw, (int, float)):
+            # RAGTruth convention: 1=hallucinated; invert to our 1=faithful convention
+            label = 0 if int(raw) == 1 else 1
+        else:
+            continue
+        pairs.append({"text1": context, "text2": response, "label": label})
+
+    pairs = _filter(pairs)
+    if not pairs:
+        print("  [RAGTruth] WARNING: 0 valid pairs extracted — verify field names.")
+        return []
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [RAGTruth] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_faithdial(max_n: int, rng: random.Random) -> list[dict]:
+    """FaithDial: dialogue grounded to Wikipedia knowledge snippets.
+    text1=knowledge, text2=wizard response.  Faithful → label=1, hallucinated → label=0.
+    Hallucination is signalled by BEGIN_HALLUCINATION / [H] markers in the response."""
+    print("  [FaithDial] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("McGill-NLP/FaithDial", split="train")
+    except Exception:
+        print("  [FaithDial] WARNING: not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        knowledge = str(r.get("knowledge") or "").strip()
+        # Response may be in 'response', 'utterance', or nested 'history[-1]'
+        response = str(
+            r.get("response") or r.get("utterance") or
+            (r.get("history") or [""])[-1] or ""
+        ).strip()
+        if not knowledge or not response:
+            continue
+        # Hallucination markers used in FaithDial annotation
+        hallucinated = any(
+            marker in response
+            for marker in ("BEGIN HALLUCINATION", "END HALLUCINATION", "[H]", "<H>")
+        )
+        # Also check a dedicated label field if present
+        raw_label = r.get("label") or r.get("hallucination") or r.get("faithful")
+        if raw_label is not None and not isinstance(raw_label, str):
+            # Prefer explicit label over text marker heuristic
+            if isinstance(raw_label, bool):
+                hallucinated = raw_label  # True = hallucinated
+            elif isinstance(raw_label, (int, float)):
+                hallucinated = bool(int(raw_label))
+        pairs.append({
+            "text1": knowledge,
+            "text2": response.replace("BEGIN HALLUCINATION", "").replace("END HALLUCINATION", "").strip(),
+            "label": 0 if hallucinated else 1,
+        })
+
+    pairs = _filter(pairs)
+    if not pairs:
+        print("  [FaithDial] WARNING: 0 valid pairs extracted — verify field names.")
+        return []
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [FaithDial] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_anli(max_n: int, rng: random.Random) -> list[dict]:
+    """ANLI Round 3: adversarially constructed NLI — harder than MNLI/QNLI.
+    text1=premise, text2=hypothesis.  entailment(0)→label=1, contradiction(2)→label=0.
+    Neutral (1) is dropped.  Mapped to reference-vs-generated faithfulness."""
+    print("  [ANLI-R3]  downloading…")
+    try:
+        ds = hf_datasets.load_dataset("facebook/anli", split="train_r3")
+    except Exception:
+        print("  [ANLI-R3]  WARNING: not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        if r["label"] == 1:   # neutral — skip
+            continue
+        pairs.append({
+            "text1": str(r["premise"]).strip(),
+            "text2": str(r["hypothesis"]).strip(),
+            "label": 1 if r["label"] == 0 else 0,   # 0=entailment→1, 2=contradiction→0
+        })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [ANLI-R3]  {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_wice(max_n: int, rng: random.Random) -> list[dict]:
+    """WiCE: Wikipedia claim+evidence fine-grained entailment.
+    text1=evidence, text2=claim.  supported→1, partial→0 (conservative), refuted→0.
+    Adversarial hard negatives built-in.  Mapped to reference-vs-generated."""
+    print("  [WiCE]     downloading…")
+    try:
+        ds = hf_datasets.load_dataset("google/wice", split="train")
+    except Exception:
+        print("  [WiCE]     WARNING: not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        # Field names: evidence/claim or premise/hypothesis — probe both
+        evidence = str(r.get("evidence") or r.get("premise") or r.get("text") or "").strip()
+        claim    = str(r.get("claim") or r.get("hypothesis") or "").strip()
+        raw      = str(r.get("label") or r.get("entailment") or "").strip().lower()
+        if not evidence or not claim or not raw:
+            continue
+        if raw in ("supported", "entailment", "1", "true"):
+            label = 1
+        else:
+            label = 0   # refuted or partial → 0 (conservative)
+        pairs.append({"text1": evidence, "text2": claim, "label": label})
+
+    pairs = _filter(pairs)
+    if not pairs:
+        print("  [WiCE]     WARNING: 0 valid pairs extracted — verify field names.")
+        return []
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [WiCE]     {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_summac(max_n: int, rng: random.Random) -> list[dict]:
+    """SummaC: document+summary pairs with binary factual consistency labels.
+    text1=document, text2=summary.  consistent→label=1, inconsistent→label=0.
+    Multi-source (XSum, CNN/DM, etc.); high-precision annotator-consensus labels."""
+    print("  [SummaC]   downloading…")
+    try:
+        ds = hf_datasets.load_dataset("lhoestq/summac", split="train")
+    except Exception:
+        print("  [SummaC]   WARNING: not found on HuggingFace -- skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        doc     = str(r.get("document") or r.get("doc") or r.get("text") or "").strip()
+        summary = str(r.get("summary") or r.get("claim") or "").strip()
+        raw     = r.get("label") or r.get("consistent") or r.get("score")
+        if not doc or not summary or raw is None:
+            continue
+        if isinstance(raw, bool):
+            label = 1 if raw else 0
+        elif isinstance(raw, str):
+            label = 1 if raw.lower() in ("1", "true", "consistent") else 0
+        elif isinstance(raw, (int, float)):
+            label = 1 if float(raw) >= 0.5 else 0
+        else:
+            continue
+        pairs.append({"text1": doc, "text2": summary, "label": label})
+
+    pairs = _filter(pairs)
+    if not pairs:
+        print("  [SummaC]   WARNING: 0 valid pairs extracted — verify field names.")
+        return []
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [SummaC]   {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
 # ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
@@ -407,6 +626,11 @@ def main() -> None:
     halueval_dial  = _get("halueval_dial",  _load_halueval_dialogue,         n_halue)
     paws           = _get("paws",           _load_paws,                      n)
     mrpc           = _get("mrpc",           _load_mrpc,                      n)
+    ragtruth       = _get("ragtruth",       _load_ragtruth,                  n)
+    faithdial      = _get("faithdial",      _load_faithdial,                 n)
+    anli           = _get("anli",           _load_anli,                      n)
+    wice           = _get("wice",           _load_wice,                      n)
+    summac         = _get("summac",         _load_summac,                    n)
 
     # ── Hand-crafted pairs ───────────────────────────────────────────────────
 
@@ -423,11 +647,17 @@ def main() -> None:
         "model-vs-model":         qqp + paws + mrpc,
         # QNLI: question-answer entailment (reference faithfulness proxy)
         # PAWS: paraphrase adversarial (generated matches reference or diverges)
-        "reference-vs-generated": qnli + paws,
-        # HaluEval QA/Sum/Dial: the only on-task sources for hallucination detection.
+        # ANLI-R3: adversarially constructed NLI (harder than MNLI/QNLI)
+        # WiCE: Wikipedia claim+evidence fine-grained entailment
+        # SummaC: document+summary factual consistency
+        "reference-vs-generated": qnli + paws + anli + wice + summac,
+        # HaluEval QA/Sum/Dial: core on-task hallucination detection sources.
+        # RAGTruth: real LLM outputs (GPT-4/Llama2/Mistral) across task types.
+        # FaithDial: dialogue grounded to Wikipedia knowledge snippets.
+        # SummaC: shared with rvg — abstractive summary faithfulness.
         # STS-B and MNLI are excluded from cvg: they measure similarity / logical
         # entailment, not context-grounding, producing label noise for this mode.
-        "context-vs-generated":   halueval + halueval_sum + halueval_dial,
+        "context-vs-generated":   halueval + halueval_sum + halueval_dial + ragtruth + faithdial + summac,
     }
     general_external = stsb + mnli
     # STS-B + MNLI are valid general proxies for rvg/mvm but noise for cvg.
