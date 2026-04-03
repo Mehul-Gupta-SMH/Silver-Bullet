@@ -213,6 +213,19 @@ short inputs.
 | 2026-04-02 | [~] | TRAINING: Retrain cvg on clean HaluEval-only data — in progress | `models/context-vs-generated/best.pth` |
 | 2026-04-02 | [x] | FEATURE: `backend/model_hub.py` — auto-download checkpoints from HuggingFace Hub when `SB_HF_REPO_ID` env var is set; wired into `api/dependencies.py`; no-op when env var unset or file present | `backend/model_hub.py`, `backend/api/dependencies.py` |
 
+## Session 2026-04-03 — Ablation v4.1 + new data sources
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-03 | [x] | ABLATION: v4.1 pruning — drop 7 correlated-redundant features (cross-r ≥ 0.93): mxbai_cosine, REC_mxbai, Qwen_cosine, REC_Qwen, jaccard, cosine_lexical, rouge_unigram; 22→15 features; version bumped to 4.1 | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py`, `backend/Features/Semantic/getSemanticWeights.py` — commit 74ffa19 |
+| 2026-04-03 | [~] | TRAINING: v4.1 retrain all 3 modes (cache hit — no recompute needed; dict cache pre-selects from 22 available keys) | `models/*/best.pth` — cvg in progress |
+| 2026-04-03 | [ ] | EVAL: Run python -m backend.test for all 3 modes after v4.1 training; compare vs v4.0b baseline (cvg 77.98% / rvg 78.62% / mvm 79.76%) | `test_reports/` |
+| 2026-04-03 | [ ] | ABLATION: Re-run ablation_cluster on v4.1 15-feature set — tag v4.1-all-modes | `ablation_reports/experiments/` |
+| 2026-04-03 | [x] | DATA SCOUTING: Identified 5 new data sources — RAGTruth (cvg, ~18k), FaithDial (cvg, ~50k), ANLI-R3 (rvg, ~45k), WiCE (rvg, ~8.8k), SummaC (cvg+rvg, ~1.6k); all on HuggingFace Hub | research |
+| 2026-04-03 | [x] | DATA: Implement loaders for RAGTruth, FaithDial, ANLI-R3, WiCE, SummaC in fetch_external_data.py; field-name probing + graceful fallback for each | `backend/fetch_external_data.py` — commit 4305597 |
+| 2026-04-03 | [ ] | DATA: Run python -m backend.fetch_external_data to pull new datasets and rebuild splits | `data/`, `data/external/` — requires re-run after v4.1 training complete |
+| 2026-04-03 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset (after fetch_external_data re-run) — delete ./cache/ first to recompute features for new pairs | `models/*/`, `./cache/` |
+
 ## Feature Roadmap — Relationship Extraction
 
 | Date | Status | Task | Files / Notes |
@@ -222,6 +235,12 @@ short inputs.
 | 2026-04-01 | [ ] | DEPENDENCY: Coreference resolution must be re-enabled before relationship extraction — raw pronouns produce useless triples ("He founded it" → no grounding value); coref resolves per-text before splitting (cheaper than cross-text coref, sufficient for triple grounding); same coref pass will also improve entity type maps and numeric maps since entity names become consistent across sentences | `backend/Splitter/sentence_splitter.py` `resolve_coref` flag, `backend/Preprocess/coref/resolveEntity.py` |
 | 2026-04-01 | [ ] | DESIGN: Coref scope decision — per-text coref (resolve pronouns within each text independently before `split_txt`) is sufficient for triple extraction and entity matching; cross-text coref (resolve across both texts jointly) would additionally help surface shared entity references between text1 and text2 but requires a stronger model than the current GPT-4o-mini pronoun resolver; start with per-text | architecture decision |
 | 2026-04-01 | [ ] | INFRA: Verify `gliner` version supports `model.inference(..., return_relations=True)` — gliner-relex API was stabilised in gliner≥0.2.26; current pin is 0.2.22; check if upgrading breaks `transformers==4.51.0` constraint (gliner-relex uses same GLiNER architecture so likely safe) | `requirements.txt`, `pyproject.toml` |
+
+## Session 2026-04-03 — Data source research
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-03 | [~] | RESEARCH: Evaluate 10 public dataset candidates for expanding cvg/rvg/mvm training data | TASK.md (this entry) |
 
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |
