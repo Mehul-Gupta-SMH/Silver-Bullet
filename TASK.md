@@ -226,6 +226,24 @@ short inputs.
 | 2026-04-03 | [ ] | DATA: Run python -m backend.fetch_external_data to pull new datasets and rebuild splits | `data/`, `data/external/` — requires re-run after v4.1 training complete |
 | 2026-04-03 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset (after fetch_external_data re-run) — delete ./cache/ first to recompute features for new pairs | `models/*/`, `./cache/` |
 
+## Feature Roadmap — LLM-Jury Mode
+
+> **Idea (from THOUGHTS.md):** Use a panel of LLMs as binary-question juries that measure the same dimensions
+> as the CNN feature pipeline, but with reasoning + structured validation codes per judgment.
+> User can toggle between CNN mode (fast, offline) and LLM-jury mode (interpretable, no training needed).
+> Compare both to surface systematic disagreements (hard cases where CNN != LLM consensus).
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-06 | [ ] | DESIGN: Define jury question set — one binary question per feature cluster (NLI: "Does text2 logically contradict text1?"; Entity: "Does text2 introduce entities absent from text1?"; Semantic: "Is text2 semantically grounded in text1?"; Lexical: "Does text2 use the same key terminology as text1?"); each question returns answer + 1-sentence reasoning + a validation code (e.g. HALL-NUMERIC, ENT-SUBST, FACTUAL-OMIT, STRUCT-MISMATCH) | `backend/jury/questions.py` (new) |
+| 2026-04-06 | [ ] | DESIGN: Validation code taxonomy — enumerated codes corresponding to the 12 misalignment reasons already in `_generate_misalignment_reasons()`; codes become machine-readable tags that enable downstream filtering and analysis | `backend/jury/codes.py` (new), `backend/predict.py` |
+| 2026-04-06 | [ ] | IMPL: `backend/jury/llm_jury.py` — `LLMJury.evaluate(text1, text2, mode) -> JuryReport`; sends all questions in a single structured prompt (few-shot); parses binary answers + codes + reasoning from response; aggregates to score [0,1] via weighted majority | `backend/jury/llm_jury.py` (new) |
+| 2026-04-06 | [ ] | IMPL: API endpoint `POST /api/v1/predict/pair/jury` — same request schema as `/pair`; returns `{score, votes: [{question, answer, code, reasoning}], consensus_codes: [...]}` | `backend/api/main.py`, `backend/api/schemas.py` |
+| 2026-04-06 | [ ] | IMPL: CNN vs jury comparison — `backend/compare.py` runs both modes on a dataset and outputs disagreement cases sorted by |cnn_score - jury_score|; surfaces systematic CNN blind spots | `backend/compare.py` (new) |
+| 2026-04-06 | [ ] | FRONTEND: Jury mode toggle in UI — switch between CNN score and jury breakdown; show per-question votes + reasoning + codes in a collapsible panel; codes rendered as colored chips | `frontend/src/components/JuryPanel.tsx` (new), `frontend/src/App.tsx` |
+
+---
+
 ## Feature Roadmap — Relationship Extraction
 
 | Date | Status | Task | Files / Notes |
