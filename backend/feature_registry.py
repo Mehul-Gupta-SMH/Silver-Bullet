@@ -46,19 +46,28 @@ ENTITY_FEATURE_KEYS: list[str] = [f"entity_{t}" for t in ENTITY_TYPES]
 # ---------------------------------------------------------------------------
 
 FEATURE_KEYS: list[str] = [
-    # Lexical (2 of 5) — getLexicalWeights.py
+    # Lexical (4 of 5) — getLexicalWeights.py
     # Dropped in v4.1 (ablation n=6293, correlated redundancy cross-r ≥ 0.93 with dice):
-    #   jaccard (cross-r=0.983), cosine (cross-r=0.938), rouge (cross-r=0.934)
-    # rouge3 retained: max_cross_r=0.836 with jaccard (below 0.85 threshold — independent signal)
+    #   cosine (cross-r=0.938)
+    # rouge (unigram) restored in v4.2: CVG label-r=-0.183 (3rd-ranked), much stronger
+    #   than dice (-0.114) and rouge3 (-0.082) for hallucination. Cross-r does not imply
+    #   equal discriminative power per mode.
+    # jaccard restored in v4.3: CVG label-r=-0.124, RVG=+0.213 — meaningful across modes;
+    #   cross-r=0.983 with dice was misleading (same direction bias, different magnitude).
+    # rouge3 retained: max_cross_r=0.836 with jaccard (below 0.85 — independent signal)
     "dice",
     "rouge3",
-    # Semantic coverage — BERTScore-style PREC (2 of 6) — getSemanticWeights.py
-    # Dropped in v4.1 (ablation n=6293, within-cluster cross-r ≥ 0.966):
-    #   mxbai cosine (cross-r=0.967 with REC_mxbai), REC_mxbai (cross-r=0.967)
-    #   Qwen cosine  (cross-r=0.966 with REC_Qwen),  REC_Qwen  (cross-r=0.966)
-    # PREC retained in each group: highest per-group Pearson r in v4.0b ablation.
+    "rouge",
+    "jaccard",
+    # Semantic (4 of 6) — getSemanticWeights.py
+    # mxbai cosine restored in v4.4: CVG label-r=+0.098, RVG=+0.352, MVM=+0.439.
+    #   Full n×m pairwise structure; CNN learns spatial patterns PREC/REC can't capture.
+    # Qwen cosine NOT restored: lower label-r than mxbai across all modes.
+    # REC_Qwen NOT restored: cross-r with PREC_Qwen = +0.999 on RVG — fully redundant.
     # SOFT_ROW/SOFT_COL dropped in v4.0a (ablation p=0.47-0.80 — confirmed noise).
+    "mixedbread-ai/mxbai-embed-large-v1",
     "PREC_mixedbread-ai/mxbai-embed-large-v1",
+    "REC_mixedbread-ai/mxbai-embed-large-v1",
     "PREC_Qwen/Qwen3-Embedding-0.6B",
     # NLI (3) — getNLIweights.py
     "entailment",
@@ -81,7 +90,7 @@ FEATURE_KEYS: list[str] = [
     "lcs_char",
 ]
 
-VERSION      = "4.1"
+VERSION      = "4.4"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 

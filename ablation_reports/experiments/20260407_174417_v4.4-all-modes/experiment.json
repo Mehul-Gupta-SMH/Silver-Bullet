@@ -1,0 +1,1195 @@
+{
+  "meta": {
+    "timestamp": "2026-04-07T17:44:17.989511",
+    "tag": "v4.4-all-modes",
+    "mode_filter": null,
+    "split_filter": null,
+    "n_pairs": 6393,
+    "n_missing": 0,
+    "n_features": 19,
+    "feature_keys": [
+      "dice",
+      "rouge3",
+      "rouge",
+      "jaccard",
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B",
+      "entailment",
+      "neutral",
+      "contradiction",
+      "entity_location",
+      "entity_product",
+      "entity_law",
+      "entity_time",
+      "entity_duration",
+      "entity_percentage",
+      "lcs_token",
+      "lcs_char"
+    ],
+    "framework_version": "1.0",
+    "bonferroni_alpha": 0.05,
+    "bonferroni_threshold": 0.002631578947368421,
+    "redundancy_threshold": 0.85
+  },
+  "global_stats": {
+    "pca": {
+      "explained_variance": [
+        0.4465765357017517,
+        0.09017568081617355,
+        0.0703638345003128,
+        0.05927199870347977,
+        0.053768448531627655,
+        0.052051786333322525,
+        0.05106136202812195,
+        0.04984021931886673,
+        0.04457542300224304,
+        0.04247443377971649
+      ],
+      "cumulative_variance": [
+        0.4465765357017517,
+        0.5367522239685059,
+        0.6071160435676575,
+        0.6663880348205566,
+        0.7201564908027649,
+        0.7722082734107971,
+        0.8232696056365967,
+        0.8731098175048828,
+        0.9176852703094482,
+        0.9601597189903259
+      ],
+      "top3_loadings_per_pc": {
+        "PC01": [
+          {
+            "feature": "dice",
+            "loading": 0.33015337586402893
+          },
+          {
+            "feature": "jaccard",
+            "loading": 0.32556480169296265
+          },
+          {
+            "feature": "lcs_token",
+            "loading": 0.3174359202384949
+          }
+        ],
+        "PC02": [
+          {
+            "feature": "contradiction",
+            "loading": 0.5771892070770264
+          },
+          {
+            "feature": "entity_duration",
+            "loading": 0.2754741311073303
+          },
+          {
+            "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+            "loading": -0.2662179470062256
+          }
+        ],
+        "PC03": [
+          {
+            "feature": "neutral",
+            "loading": 0.712716281414032
+          },
+          {
+            "feature": "entailment",
+            "loading": -0.6171554923057556
+          },
+          {
+            "feature": "rouge",
+            "loading": 0.13926184177398682
+          }
+        ],
+        "PC04": [
+          {
+            "feature": "entity_duration",
+            "loading": 0.4907086193561554
+          },
+          {
+            "feature": "entity_time",
+            "loading": 0.44318822026252747
+          },
+          {
+            "feature": "contradiction",
+            "loading": -0.4362580478191376
+          }
+        ],
+        "PC05": [
+          {
+            "feature": "entity_percentage",
+            "loading": 0.6648238301277161
+          },
+          {
+            "feature": "entity_product",
+            "loading": 0.4343893527984619
+          },
+          {
+            "feature": "entity_law",
+            "loading": -0.40455812215805054
+          }
+        ],
+        "PC06": [
+          {
+            "feature": "entity_law",
+            "loading": 0.7396565079689026
+          },
+          {
+            "feature": "entity_percentage",
+            "loading": 0.5285406112670898
+          },
+          {
+            "feature": "entity_product",
+            "loading": -0.22235585749149323
+          }
+        ],
+        "PC07": [
+          {
+            "feature": "entity_time",
+            "loading": 0.4405438005924225
+          },
+          {
+            "feature": "contradiction",
+            "loading": 0.4001919627189636
+          },
+          {
+            "feature": "entity_law",
+            "loading": -0.3822391927242279
+          }
+        ],
+        "PC08": [
+          {
+            "feature": "entity_product",
+            "loading": 0.8009883761405945
+          },
+          {
+            "feature": "entity_law",
+            "loading": 0.3221663236618042
+          },
+          {
+            "feature": "entity_time",
+            "loading": 0.30829015374183655
+          }
+        ],
+        "PC09": [
+          {
+            "feature": "entity_duration",
+            "loading": 0.7430897355079651
+          },
+          {
+            "feature": "entity_location",
+            "loading": -0.3393915295600891
+          },
+          {
+            "feature": "entity_percentage",
+            "loading": -0.3356252610683441
+          }
+        ],
+        "PC10": [
+          {
+            "feature": "entity_location",
+            "loading": 0.7254865169525146
+          },
+          {
+            "feature": "entity_time",
+            "loading": -0.612043023109436
+          },
+          {
+            "feature": "entity_percentage",
+            "loading": 0.13802054524421692
+          }
+        ]
+      }
+    },
+    "kmeans": {
+      "ari": 0.031377110381919725,
+      "cluster_stats": [
+        {
+          "cluster": 0,
+          "n": 2420,
+          "label1_rate": 0.6169421487603306
+        },
+        {
+          "cluster": 1,
+          "n": 3973,
+          "label1_rate": 0.42839164359426124
+        }
+      ],
+      "top10_discriminative": [
+        {
+          "feature": "dice",
+          "centroid_distance": 1.723573923110962
+        },
+        {
+          "feature": "lcs_token",
+          "centroid_distance": 1.6880261898040771
+        },
+        {
+          "feature": "jaccard",
+          "centroid_distance": 1.6837977170944214
+        },
+        {
+          "feature": "rouge",
+          "centroid_distance": 1.6735196113586426
+        },
+        {
+          "feature": "lcs_char",
+          "centroid_distance": 1.6212671995162964
+        },
+        {
+          "feature": "rouge3",
+          "centroid_distance": 1.4634904861450195
+        },
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.4499982595443726
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "centroid_distance": 1.400280475616455
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.3957786560058594
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.386112928390503
+        }
+      ]
+    }
+  },
+  "features": {
+    "dice": {
+      "pearson_r": 0.10159031678209458,
+      "pearson_p": 3.87956429819075e-16,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.103231591144003,
+      "spearman_p": 1.2898524529718086e-16,
+      "cohens_d": 0.20420463383197784,
+      "mutual_info_bits": 0.08674605597531644,
+      "max_cross_r": 0.9832922374825541,
+      "top3_correlated_peers": [
+        {
+          "feature": "jaccard",
+          "cross_r": 0.9832922374825541
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.9363225312987887
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.9347833814414401
+        }
+      ],
+      "mode_consistency": 1.0,
+      "mode_ranks": {
+        "context-vs-generated": 6,
+        "model-vs-model": 7,
+        "reference-vs-generated": 8
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'jaccard'. Ablation test before dropping. Pearson r=+0.1016 (p=3.88e-16, Bonferroni:OK), Spearman r=+0.1032, Cohen's d=0.2042, MI=0.0867 bits, mode_consistency=1.00. REDUNDANT: max_cross_r=0.9833 with 'jaccard' (cross_r=+0.9833)"
+    },
+    "rouge3": {
+      "pearson_r": 0.08855502579505885,
+      "pearson_p": 1.3115933714567357e-12,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.11981993070184487,
+      "spearman_p": 7.0378480405443745e-22,
+      "cohens_d": 0.17777636647224426,
+      "mutual_info_bits": 0.054808505244002284,
+      "max_cross_r": 0.8652206079594142,
+      "top3_correlated_peers": [
+        {
+          "feature": "jaccard",
+          "cross_r": 0.8652206079594142
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.8516488950519524
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.8439821683163262
+        }
+      ],
+      "mode_consistency": 0.3333333333333333,
+      "mode_ranks": {
+        "context-vs-generated": 12,
+        "model-vs-model": 12,
+        "reference-vs-generated": 9
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'jaccard'. Ablation test before dropping. Pearson r=+0.0886 (p=1.31e-12, Bonferroni:OK), Spearman r=+0.1198, Cohen's d=0.1778, MI=0.0548 bits, mode_consistency=0.33. REDUNDANT: max_cross_r=0.8652 with 'jaccard' (cross_r=+0.8652)"
+    },
+    "rouge": {
+      "pearson_r": 0.0859509205708288,
+      "pearson_p": 5.831371275938449e-12,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.07739318455434198,
+      "spearman_p": 5.786006505336969e-10,
+      "cohens_d": 0.1725122630596161,
+      "mutual_info_bits": 0.08162904046483051,
+      "max_cross_r": 0.9363225312987888,
+      "top3_correlated_peers": [
+        {
+          "feature": "dice",
+          "cross_r": 0.9363225312987888
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": 0.9266648645917642
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.9080856452970115
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 4,
+        "model-vs-model": 10,
+        "reference-vs-generated": 7
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'dice'. Ablation test before dropping. Pearson r=+0.0860 (p=5.83e-12, Bonferroni:OK), Spearman r=+0.0774, Cohen's d=0.1725, MI=0.0816 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9363 with 'dice' (cross_r=+0.9363)"
+    },
+    "jaccard": {
+      "pearson_r": 0.09186910429142485,
+      "pearson_p": 1.844083611677605e-13,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.10542599598153102,
+      "spearman_p": 2.8788430469940256e-17,
+      "cohens_d": 0.1844891905784607,
+      "mutual_info_bits": 0.05742231948356199,
+      "max_cross_r": 0.9832922374825541,
+      "top3_correlated_peers": [
+        {
+          "feature": "dice",
+          "cross_r": 0.9832922374825541
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.9377398936428646
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.9266648645917643
+        }
+      ],
+      "mode_consistency": 0.3333333333333333,
+      "mode_ranks": {
+        "context-vs-generated": 8,
+        "model-vs-model": 11,
+        "reference-vs-generated": 11
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'dice'. Ablation test before dropping. Pearson r=+0.0919 (p=1.84e-13, Bonferroni:OK), Spearman r=+0.1054, Cohen's d=0.1845, MI=0.0574 bits, mode_consistency=0.33. REDUNDANT: max_cross_r=0.9833 with 'dice' (cross_r=+0.9833)"
+    },
+    "mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": 0.18930673984105872,
+      "pearson_p": 1.1827767024404074e-52,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.19047317734502012,
+      "spearman_p": 2.706979408347319e-53,
+      "cohens_d": 0.38552993535995483,
+      "mutual_info_bits": 0.16553567767616056,
+      "max_cross_r": 0.9585475949686002,
+      "top3_correlated_peers": [
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9585475949686002
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9557400230767443
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.8686882026255975
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 10,
+        "model-vs-model": 5,
+        "reference-vs-generated": 5
+      },
+      "tier": "MODERATE",
+      "verdict": "REVIEW",
+      "reason": "Moderate signal but highly correlated with 'REC_mixedbread-ai/mxbai-embed-large-v1'. Ablation test recommended before dropping. Pearson r=+0.1893 (p=1.18e-52, Bonferroni:OK), Spearman r=+0.1905, Cohen's d=0.3855, MI=0.1655 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9585 with 'REC_mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9585)"
+    },
+    "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": 0.20008599630951387,
+      "pearson_p": 9.869489622965473e-59,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.20464015693963608,
+      "spearman_p": 2.0768324608527464e-61,
+      "cohens_d": 0.40837571024894714,
+      "mutual_info_bits": 0.1657745073322793,
+      "max_cross_r": 0.9557400230767441,
+      "top3_correlated_peers": [
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9557400230767441
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9366945340467091
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.9082144142620653
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 11,
+        "model-vs-model": 3,
+        "reference-vs-generated": 4
+      },
+      "tier": "MODERATE",
+      "verdict": "REVIEW",
+      "reason": "Moderate signal but highly correlated with 'mixedbread-ai/mxbai-embed-large-v1'. Ablation test recommended before dropping. Pearson r=+0.2001 (p=9.87e-59, Bonferroni:OK), Spearman r=+0.2046, Cohen's d=0.4084, MI=0.1658 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9557 with 'mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9557)"
+    },
+    "REC_mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": 0.18985368830807836,
+      "pearson_p": 5.931027122170478e-53,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.1942804272130078,
+      "spearman_p": 2.055512719498187e-55,
+      "cohens_d": 0.3866885006427765,
+      "mutual_info_bits": 0.16527527407327772,
+      "max_cross_r": 0.9585475949686001,
+      "top3_correlated_peers": [
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9585475949686001
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9366945340467092
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.8433828268721967
+        }
+      ],
+      "mode_consistency": 1.0,
+      "mode_ranks": {
+        "context-vs-generated": 5,
+        "model-vs-model": 4,
+        "reference-vs-generated": 3
+      },
+      "tier": "MODERATE",
+      "verdict": "REVIEW",
+      "reason": "Moderate signal but highly correlated with 'mixedbread-ai/mxbai-embed-large-v1'. Ablation test recommended before dropping. Pearson r=+0.1899 (p=5.93e-53, Bonferroni:OK), Spearman r=+0.1943, Cohen's d=0.3867, MI=0.1653 bits, mode_consistency=1.00. REDUNDANT: max_cross_r=0.9585 with 'mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9585)"
+    },
+    "PREC_Qwen/Qwen3-Embedding-0.6B": {
+      "pearson_r": 0.1783632803522657,
+      "pearson_p": 7.549263649795992e-47,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.18529004928101528,
+      "spearman_p": 1.762711668828319e-50,
+      "cohens_d": 0.3624882102012634,
+      "mutual_info_bits": 0.16084573177637015,
+      "max_cross_r": 0.9082144142620653,
+      "top3_correlated_peers": [
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9082144142620653
+        },
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.8686882026255975
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.8433828268721966
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 13,
+        "model-vs-model": 6,
+        "reference-vs-generated": 6
+      },
+      "tier": "MODERATE",
+      "verdict": "REVIEW",
+      "reason": "Moderate signal but highly correlated with 'PREC_mixedbread-ai/mxbai-embed-large-v1'. Ablation test recommended before dropping. Pearson r=+0.1784 (p=7.55e-47, Bonferroni:OK), Spearman r=+0.1853, Cohen's d=0.3625, MI=0.1608 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9082 with 'PREC_mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9082)"
+    },
+    "entailment": {
+      "pearson_r": 0.47985484490064934,
+      "pearson_p": 0.0,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.4750480322005848,
+      "spearman_p": 0.0,
+      "cohens_d": 1.093621015548706,
+      "mutual_info_bits": 0.2993168490346533,
+      "max_cross_r": 0.6389494668708066,
+      "top3_correlated_peers": [
+        {
+          "feature": "neutral",
+          "cross_r": -0.6389494668708066
+        },
+        {
+          "feature": "contradiction",
+          "cross_r": -0.462934952246311
+        },
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.41921024724152517
+        }
+      ],
+      "mode_consistency": 1.0,
+      "mode_ranks": {
+        "context-vs-generated": 1,
+        "model-vs-model": 1,
+        "reference-vs-generated": 2
+      },
+      "tier": "STRONG",
+      "verdict": "KEEP",
+      "reason": "Strong multi-measure signal. Core feature. Pearson r=+0.4799 (p=0.00e+00, Bonferroni:OK), Spearman r=+0.4750, Cohen's d=1.0936, MI=0.2993 bits, mode_consistency=1.00"
+    },
+    "neutral": {
+      "pearson_r": -0.09641236864127961,
+      "pearson_p": 1.1162150660948805e-14,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.0781352832919089,
+      "spearman_p": 3.9561796990124955e-10,
+      "cohens_d": -0.19369745254516602,
+      "mutual_info_bits": 0.20135045201659402,
+      "max_cross_r": 0.6389494668708066,
+      "top3_correlated_peers": [
+        {
+          "feature": "entailment",
+          "cross_r": -0.6389494668708066
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": -0.395943206967877
+        },
+        {
+          "feature": "dice",
+          "cross_r": -0.38778663831635
+        }
+      ],
+      "mode_consistency": 0.3333333333333333,
+      "mode_ranks": {
+        "context-vs-generated": 9,
+        "model-vs-model": 13,
+        "reference-vs-generated": 13
+      },
+      "tier": "WEAK",
+      "verdict": "KEEP",
+      "reason": "Small but validated independent signal. Pearson r=-0.0964 (p=1.12e-14, Bonferroni:OK), Spearman r=-0.0781, Cohen's d=-0.1937, MI=0.2014 bits, mode_consistency=0.33"
+    },
+    "contradiction": {
+      "pearson_r": -0.46434067863068135,
+      "pearson_p": 0.0,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.455824722643663,
+      "spearman_p": 0.0,
+      "cohens_d": -1.0485875606536865,
+      "mutual_info_bits": 0.27201467997674017,
+      "max_cross_r": 0.46293495224631104,
+      "top3_correlated_peers": [
+        {
+          "feature": "entailment",
+          "cross_r": -0.46293495224631104
+        },
+        {
+          "feature": "neutral",
+          "cross_r": -0.3860640584405931
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": -0.21645412313487652
+        }
+      ],
+      "mode_consistency": 1.0,
+      "mode_ranks": {
+        "context-vs-generated": 2,
+        "model-vs-model": 2,
+        "reference-vs-generated": 1
+      },
+      "tier": "STRONG",
+      "verdict": "KEEP",
+      "reason": "Strong multi-measure signal. Core feature. Pearson r=-0.4643 (p=0.00e+00, Bonferroni:OK), Spearman r=-0.4558, Cohen's d=-1.0486, MI=0.2720 bits, mode_consistency=1.00"
+    },
+    "entity_location": {
+      "pearson_r": -0.007183405732707975,
+      "pearson_p": 0.5657964772692016,
+      "pearson_significant_bonferroni": false,
+      "spearman_r": -0.006351473757223359,
+      "spearman_p": 0.6116316501364166,
+      "cohens_d": -0.014364885166287422,
+      "mutual_info_bits": 0.004931946780584691,
+      "max_cross_r": 0.33669877699248996,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.33669877699248996
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.28133375394192683
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.26631251703299874
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 16,
+        "model-vs-model": 18,
+        "reference-vs-generated": 18
+      },
+      "tier": "MARGINAL",
+      "verdict": "REVIEW",
+      "reason": "Detectable association but does not survive Bonferroni correction. Retain only if domain knowledge justifies inclusion. Pearson r=-0.0072 (p=5.66e-01, Bonferroni:FAIL), Spearman r=-0.0064, Cohen's d=-0.0144, MI=0.0049 bits, mode_consistency=0.00"
+    },
+    "entity_product": {
+      "pearson_r": 0.050179615680365316,
+      "pearson_p": 5.9719255982358996e-05,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.04894501278641759,
+      "spearman_p": 9.038913061863953e-05,
+      "cohens_d": 0.10047357529401779,
+      "mutual_info_bits": 0.0,
+      "max_cross_r": 0.1404737733784706,
+      "top3_correlated_peers": [
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.1404737733784706
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.13150746019665943
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.12368586730905691
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 15,
+        "model-vs-model": 15,
+        "reference-vs-generated": 14
+      },
+      "tier": "MARGINAL",
+      "verdict": "REVIEW",
+      "reason": "Detectable association but does not survive Bonferroni correction. Retain only if domain knowledge justifies inclusion. Pearson r=+0.0502 (p=5.97e-05, Bonferroni:OK), Spearman r=+0.0489, Cohen's d=0.1005, MI=0.0000 bits, mode_consistency=0.00"
+    },
+    "entity_law": {
+      "pearson_r": 0.010764912726486197,
+      "pearson_p": 0.3894702049522101,
+      "pearson_significant_bonferroni": false,
+      "spearman_r": 0.0029078752058136624,
+      "spearman_p": 0.816182468763362,
+      "cohens_d": 0.021528275683522224,
+      "mutual_info_bits": 0.021977688453432113,
+      "max_cross_r": 0.07589273785539088,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.07589273785539088
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.06734811767617332
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.06711599401200043
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 19,
+        "model-vs-model": 17,
+        "reference-vs-generated": 17
+      },
+      "tier": "MARGINAL",
+      "verdict": "REVIEW",
+      "reason": "Detectable association but does not survive Bonferroni correction. Retain only if domain knowledge justifies inclusion. Pearson r=+0.0108 (p=3.89e-01, Bonferroni:FAIL), Spearman r=+0.0029, Cohen's d=0.0215, MI=0.0220 bits, mode_consistency=0.00"
+    },
+    "entity_time": {
+      "pearson_r": 0.0027045541355022367,
+      "pearson_p": 0.828828670259269,
+      "pearson_significant_bonferroni": false,
+      "spearman_r": 0.001865726017391807,
+      "spearman_p": 0.8814373300354416,
+      "cohens_d": 0.005408329423516989,
+      "mutual_info_bits": 0.0009146567965728352,
+      "max_cross_r": 0.25021869221571064,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.25021869221571064
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.1956992730246201
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.1899304359268262
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 17,
+        "model-vs-model": 19,
+        "reference-vs-generated": 19
+      },
+      "tier": "NOISE",
+      "verdict": "DROP",
+      "reason": "No statistically significant or practically meaningful signal on any measure. Pearson r=+0.0027 (p=8.29e-01, Bonferroni:FAIL), Spearman r=+0.0019, Cohen's d=0.0054, MI=0.0009 bits, mode_consistency=0.00"
+    },
+    "entity_duration": {
+      "pearson_r": 0.0194836277009303,
+      "pearson_p": 0.11930893525132112,
+      "pearson_significant_bonferroni": false,
+      "spearman_r": 0.02014768740577507,
+      "spearman_p": 0.1072272960273297,
+      "cohens_d": 0.038969386368989944,
+      "mutual_info_bits": 0.01038918216616434,
+      "max_cross_r": 0.13907848999454744,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.13907848999454744
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.11020592961475154
+        },
+        {
+          "feature": "entity_time",
+          "cross_r": 0.10904205246406533
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 18,
+        "model-vs-model": 16,
+        "reference-vs-generated": 16
+      },
+      "tier": "MARGINAL",
+      "verdict": "REVIEW",
+      "reason": "Detectable association but does not survive Bonferroni correction. Retain only if domain knowledge justifies inclusion. Pearson r=+0.0195 (p=1.19e-01, Bonferroni:FAIL), Spearman r=+0.0201, Cohen's d=0.0390, MI=0.0104 bits, mode_consistency=0.00"
+    },
+    "entity_percentage": {
+      "pearson_r": 0.06600870218146578,
+      "pearson_p": 1.2740704785055571e-07,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.07252694692143981,
+      "spearman_p": 6.4176435732208256e-09,
+      "cohens_d": 0.13230060040950775,
+      "mutual_info_bits": 0.022918233092443414,
+      "max_cross_r": 0.06751169575160666,
+      "top3_correlated_peers": [
+        {
+          "feature": "entity_duration",
+          "cross_r": 0.06751169575160666
+        },
+        {
+          "feature": "neutral",
+          "cross_r": -0.036282708450607
+        },
+        {
+          "feature": "entailment",
+          "cross_r": 0.03536246587125522
+        }
+      ],
+      "mode_consistency": 0.0,
+      "mode_ranks": {
+        "context-vs-generated": 14,
+        "model-vs-model": 14,
+        "reference-vs-generated": 15
+      },
+      "tier": "WEAK",
+      "verdict": "KEEP",
+      "reason": "Small but validated independent signal. Pearson r=+0.0660 (p=1.27e-07, Bonferroni:OK), Spearman r=+0.0725, Cohen's d=0.1323, MI=0.0229 bits, mode_consistency=0.00"
+    },
+    "lcs_token": {
+      "pearson_r": 0.09718380145684509,
+      "pearson_p": 6.8418282094178196e-15,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.08467518062678757,
+      "spearman_p": 1.1921003097755668e-11,
+      "cohens_d": 0.19525673985481262,
+      "mutual_info_bits": 0.07046837792183112,
+      "max_cross_r": 0.9377398936428645,
+      "top3_correlated_peers": [
+        {
+          "feature": "jaccard",
+          "cross_r": 0.9377398936428645
+        },
+        {
+          "feature": "dice",
+          "cross_r": 0.9347833814414401
+        },
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.926752013753091
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 7,
+        "model-vs-model": 8,
+        "reference-vs-generated": 10
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'jaccard'. Ablation test before dropping. Pearson r=+0.0972 (p=6.84e-15, Bonferroni:OK), Spearman r=+0.0847, Cohen's d=0.1953, MI=0.0705 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9377 with 'jaccard' (cross_r=+0.9377)"
+    },
+    "lcs_char": {
+      "pearson_r": 0.05883396304310275,
+      "pearson_p": 2.5101915639404574e-06,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.04584314302383102,
+      "spearman_p": 0.00024574286952300304,
+      "cohens_d": 0.11784922331571579,
+      "mutual_info_bits": 0.1465944332149385,
+      "max_cross_r": 0.9267520137530911,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.9267520137530911
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.8568396254245972
+        },
+        {
+          "feature": "dice",
+          "cross_r": 0.8549810368371509
+        }
+      ],
+      "mode_consistency": 0.6666666666666666,
+      "mode_ranks": {
+        "context-vs-generated": 3,
+        "model-vs-model": 9,
+        "reference-vs-generated": 12
+      },
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'lcs_token'. Ablation test before dropping. Pearson r=+0.0588 (p=2.51e-06, Bonferroni:OK), Spearman r=+0.0458, Cohen's d=0.1178, MI=0.1466 bits, mode_consistency=0.67. REDUNDANT: max_cross_r=0.9268 with 'lcs_token' (cross_r=+0.9268)"
+    }
+  },
+  "tier_summary": {
+    "STRONG": [
+      "entailment",
+      "contradiction"
+    ],
+    "MODERATE": [
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B"
+    ],
+    "WEAK": [
+      "dice",
+      "rouge3",
+      "rouge",
+      "jaccard",
+      "neutral",
+      "entity_percentage",
+      "lcs_token",
+      "lcs_char"
+    ],
+    "MARGINAL": [
+      "entity_location",
+      "entity_product",
+      "entity_law",
+      "entity_duration"
+    ],
+    "NOISE": [
+      "entity_time"
+    ]
+  },
+  "verdict_summary": {
+    "KEEP": [
+      "entailment",
+      "neutral",
+      "contradiction",
+      "entity_percentage"
+    ],
+    "REVIEW": [
+      "dice",
+      "rouge3",
+      "rouge",
+      "jaccard",
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B",
+      "entity_location",
+      "entity_product",
+      "entity_law",
+      "entity_duration",
+      "lcs_token",
+      "lcs_char"
+    ],
+    "DROP": [
+      "entity_time"
+    ]
+  },
+  "per_mode_correlations": {
+    "context-vs-generated": {
+      "n": 2331,
+      "features": {
+        "dice": {
+          "pearson_r": -0.10241937550040259,
+          "pearson_p": 7.224312430946345e-07
+        },
+        "rouge3": {
+          "pearson_r": -0.06994396285304508,
+          "pearson_p": 0.0007268325717587291
+        },
+        "rouge": {
+          "pearson_r": -0.11713655612806853,
+          "pearson_p": 1.4121821557724597e-08
+        },
+        "jaccard": {
+          "pearson_r": -0.09503232849980268,
+          "pearson_p": 4.303778471690941e-06
+        },
+        "mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.08293547452252453,
+          "pearson_p": 6.09969617676591e-05
+        },
+        "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.08192229762661546,
+          "pearson_p": 7.501903926137213e-05
+        },
+        "REC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.10357663212949487,
+          "pearson_p": 5.400009573297099e-07
+        },
+        "PREC_Qwen/Qwen3-Embedding-0.6B": {
+          "pearson_r": -0.06448712891566187,
+          "pearson_p": 0.0018392062091920334
+        },
+        "entailment": {
+          "pearson_r": 0.40189292726149495,
+          "pearson_p": 3.32465403692966e-91
+        },
+        "neutral": {
+          "pearson_r": -0.08572006103532435,
+          "pearson_p": 3.41283767858687e-05
+        },
+        "contradiction": {
+          "pearson_r": -0.3500167641404988,
+          "pearson_p": 3.77928147840289e-68
+        },
+        "entity_location": {
+          "pearson_r": -0.014893362127786058,
+          "pearson_p": 0.4723183212747894
+        },
+        "entity_product": {
+          "pearson_r": 0.02815571256596042,
+          "pearson_p": 0.17417505296383554
+        },
+        "entity_law": {
+          "pearson_r": -0.0029516899873222534,
+          "pearson_p": 0.886738207043562
+        },
+        "entity_time": {
+          "pearson_r": 0.010584563206680664,
+          "pearson_p": 0.6095138886119755
+        },
+        "entity_duration": {
+          "pearson_r": 0.005730964927707007,
+          "pearson_p": 0.7821277254538649
+        },
+        "entity_percentage": {
+          "pearson_r": 0.03803224787313109,
+          "pearson_p": 0.06637354448957274
+        },
+        "lcs_token": {
+          "pearson_r": -0.10082961591430376,
+          "pearson_p": 1.0720955977373757e-06
+        },
+        "lcs_char": {
+          "pearson_r": -0.12876153942045304,
+          "pearson_p": 4.394871545204902e-10
+        }
+      }
+    },
+    "model-vs-model": {
+      "n": 2231,
+      "features": {
+        "dice": {
+          "pearson_r": 0.22896446240253346,
+          "pearson_p": 6.318432213168197e-28
+        },
+        "rouge3": {
+          "pearson_r": 0.14565829938560268,
+          "pearson_p": 4.745498179131125e-12
+        },
+        "rouge": {
+          "pearson_r": 0.19526860515680358,
+          "pearson_p": 1.3053180681426564e-20
+        },
+        "jaccard": {
+          "pearson_r": 0.19424962153222883,
+          "pearson_p": 2.0779080834376885e-20
+        },
+        "mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.39456361467936024,
+          "pearson_p": 5.278995758786722e-84
+        },
+        "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.4136857094404067,
+          "pearson_p": 5.753323497550086e-93
+        },
+        "REC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.4039128932165479,
+          "pearson_p": 2.593337281870504e-88
+        },
+        "PREC_Qwen/Qwen3-Embedding-0.6B": {
+          "pearson_r": 0.3907895506500417,
+          "pearson_p": 2.64774573763469e-82
+        },
+        "entailment": {
+          "pearson_r": 0.5648129235985773,
+          "pearson_p": 3.2231430428440654e-188
+        },
+        "neutral": {
+          "pearson_r": -0.1389377711508611,
+          "pearson_p": 4.3739458889117854e-11
+        },
+        "contradiction": {
+          "pearson_r": -0.5238390063410409,
+          "pearson_p": 1.7797727969067106e-157
+        },
+        "entity_location": {
+          "pearson_r": 0.01148651684247045,
+          "pearson_p": 0.5876381727390594
+        },
+        "entity_product": {
+          "pearson_r": 0.06743999167295173,
+          "pearson_p": 0.0014362356783221347
+        },
+        "entity_law": {
+          "pearson_r": 0.014223570426673117,
+          "pearson_p": 0.5019110165537081
+        },
+        "entity_time": {
+          "pearson_r": 0.00841038108907089,
+          "pearson_p": 0.6913410530869841
+        },
+        "entity_duration": {
+          "pearson_r": 0.030564326009416824,
+          "pearson_p": 0.148967790996145
+        },
+        "entity_percentage": {
+          "pearson_r": 0.10553362022221704,
+          "pearson_p": 5.856779521673133e-07
+        },
+        "lcs_token": {
+          "pearson_r": 0.21449199943086708,
+          "pearson_p": 1.2464729797069837e-24
+        },
+        "lcs_char": {
+          "pearson_r": 0.20182376870883864,
+          "pearson_p": 6.166749337648583e-22
+        }
+      }
+    },
+    "reference-vs-generated": {
+      "n": 1831,
+      "features": {
+        "dice": {
+          "pearson_r": 0.16405557331037357,
+          "pearson_p": 1.6285239823626535e-12
+        },
+        "rouge3": {
+          "pearson_r": 0.1403970957639417,
+          "pearson_p": 1.605244510975521e-09
+        },
+        "rouge": {
+          "pearson_r": 0.17684281320458356,
+          "pearson_p": 2.49548359256385e-14
+        },
+        "jaccard": {
+          "pearson_r": 0.12849987451630993,
+          "pearson_p": 3.435286074733092e-08
+        },
+        "mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.32646798383489267,
+          "pearson_p": 9.88052593917975e-47
+        },
+        "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.3299980359377982,
+          "pearson_p": 9.091871352923258e-48
+        },
+        "REC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": 0.3334969361365332,
+          "pearson_p": 8.280897685067847e-49
+        },
+        "PREC_Qwen/Qwen3-Embedding-0.6B": {
+          "pearson_r": 0.2945501187874423,
+          "pearson_p": 5.677616185260859e-38
+        },
+        "entailment": {
+          "pearson_r": 0.49208211282017716,
+          "pearson_p": 2.8814150543254723e-112
+        },
+        "neutral": {
+          "pearson_r": -0.06704671062565688,
+          "pearson_p": 0.0041019671087076616
+        },
+        "contradiction": {
+          "pearson_r": -0.5174089050102952,
+          "pearson_p": 6.425702185379236e-126
+        },
+        "entity_location": {
+          "pearson_r": -0.016537388610895855,
+          "pearson_p": 0.47944030806859433
+        },
+        "entity_product": {
+          "pearson_r": 0.05740435613467804,
+          "pearson_p": 0.014022303523891607
+        },
+        "entity_law": {
+          "pearson_r": 0.02389424831435106,
+          "pearson_p": 0.30683439166857135
+        },
+        "entity_time": {
+          "pearson_r": -0.0156775843137028,
+          "pearson_p": 0.5025838280674854
+        },
+        "entity_duration": {
+          "pearson_r": 0.0325325516683956,
+          "pearson_p": 0.1640764086367746
+        },
+        "entity_percentage": {
+          "pearson_r": 0.04673270331069182,
+          "pearson_p": 0.045562079545264124
+        },
+        "lcs_token": {
+          "pearson_r": 0.13802737598363693,
+          "pearson_p": 3.0184749415735266e-09
+        },
+        "lcs_char": {
+          "pearson_r": 0.10809082012828877,
+          "pearson_p": 3.5580887038134444e-06
+        }
+      }
+    }
+  }
+}

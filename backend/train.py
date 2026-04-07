@@ -257,6 +257,35 @@ def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
 
 
 
+def _cache_entry_complete(entry) -> bool:
+    """Return True if a cache entry (dict format) has all current FEATURE_KEYS."""
+    if not isinstance(entry, dict):
+        return False
+    return all(k in entry for k in FEATURE_KEYS)
+
+
+def _missing_groups(entry: dict) -> set[str]:
+    """Return the set of extractor group names whose keys are absent from *entry*.
+
+    Groups: 'lexical', 'semantic', 'nli', 'entity', 'lcs'.
+    Only groups that produce at least one missing FEATURE_KEY are returned.
+    """
+    missing_keys = [k for k in FEATURE_KEYS if k not in entry]
+    groups: set[str] = set()
+    for k in missing_keys:
+        if k.startswith(("PREC_", "REC_", "SOFT_")) or "/" in k:
+            groups.add("semantic")
+        elif k in ("entailment", "neutral", "contradiction"):
+            groups.add("nli")
+        elif k.startswith("entity_"):
+            groups.add("entity")
+        elif k in ("lcs_token", "lcs_char"):
+            groups.add("lcs")
+        else:
+            groups.add("lexical")
+    return groups
+
+
 def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
     """Pre-encode all unique sentences from uncached pairs in one large batch per model.
 
@@ -271,11 +300,14 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> No
     from backend.Features.Semantic.__generate_semantic_features import SemanticFeatures
     import torch
 
-    # Collect sentences only from pairs that aren't already in the feature cache
+    # Collect sentences only from pairs that need semantic encoding:
+    # either fully uncached, or cached but missing semantic keys.
     unique_sentences: set[str] = set()
     for pair in paragraph_pairs:
-        if cache is not None and cache.get_features(pair[0], pair[1]) is not None:
-            continue
+        if cache is not None:
+            entry = cache.get_features(pair[0], pair[1])
+            if entry is not None and "semantic" not in _missing_groups(entry) if isinstance(entry, dict) else False:
+                continue
         for sent in split_txt(pair[0]) + split_txt(pair[1]):
             unique_sentences.add(sent)
 
@@ -285,26 +317,49 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> No
     sentences = list(unique_sentences)
     print(f"[SemanticCache] pre-encoding {len(sentences)} unique sentences across all uncached pairs…")
 
-    # Reuse the shared model list from SemanticFeatures
+    # Reuse the shared model list from SemanticFeatures.
+    # Only bulk-prefill the FIRST model (mxbai). Subsequent models (Qwen) are
+    # skipped here and handled lazily per-pair during training. Bulk-encoding
+    # Qwen after mxbai has already filled the page file causes a hard OOM crash
+    # (exit 139) because the 32-sentence batches × 28 attention layers require
+    # hundreds of MB per batch on top of the 2.4 GB model weights.
+    import gc
     dummy = SemanticFeatures()
-    for model_meta in tqdm(dummy.feature_model_local_list, desc="Pre-encoding models"):
+    models_to_prefill = dummy.feature_model_local_list[:1]
+    for model_meta in tqdm(models_to_prefill, desc="Pre-encoding models"):
         model_name = model_meta["model"]
         sent_cache = SemanticFeatures._embedding_cache.setdefault(model_name, {})
         new_sentences = [s for s in sentences if s not in sent_cache]
         if not new_sentences:
             continue
 
-        model = dummy.__load_model__(model_meta)
-        embeddings = model.encode(
-            new_sentences,
-            task=model_meta["task"],
-            prompt=model_meta["prompt"],
-            show_progress_bar=True,
-        )
-        for s, emb in zip(new_sentences, embeddings):
-            sent_cache[s] = emb
+        try:
+            model = dummy.__load_model__(model_meta)
+            embeddings = model.encode(
+                new_sentences,
+                task=model_meta["task"],
+                prompt=model_meta["prompt"],
+                show_progress_bar=True,
+            )
+            for s, emb in zip(new_sentences, embeddings):
+                sent_cache[s] = emb
 
-    print(f"[SemanticCache] done — embedding cache now covers {sum(len(v) for v in SemanticFeatures._embedding_cache.values())} sentence-model entries.")
+            # Explicitly unload after encoding to free RAM before the next model loads.
+            # Keeps embeddings in sent_cache (numpy arrays) but drops the model weights.
+            SemanticFeatures._model_cache.pop(model_name, None)
+            del model
+            gc.collect()
+
+        except (OSError, MemoryError, Exception) as exc:
+            safe = str(exc).encode("ascii", "replace").decode("ascii")
+            print(f"[SemanticCache] WARNING: pre-encoding failed for '{model_name}' ({safe}). "
+                  "Will use per-pair lazy encoding for this model.")
+            # Remove any partially-loaded model from cache to avoid using corrupt state
+            SemanticFeatures._model_cache.pop(model_name, None)
+            gc.collect()
+
+    print(f"[SemanticCache] done — embedding cache now covers "
+          f"{sum(len(v) for v in SemanticFeatures._embedding_cache.values())} sentence-model entries.")
 
 
 def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
@@ -318,8 +373,10 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None
 
     unique_sentences: set[str] = set()
     for pair in paragraph_pairs:
-        if cache is not None and cache.get_features(pair[0], pair[1]) is not None:
-            continue
+        if cache is not None:
+            entry = cache.get_features(pair[0], pair[1])
+            if entry is not None and "entity" not in _missing_groups(entry) if isinstance(entry, dict) else False:
+                continue
         for sent in split_txt(pair[0]) + split_txt(pair[1]):
             unique_sentences.add(sent)
 
@@ -361,8 +418,26 @@ class TextSimilarityDataset(Dataset):
                 cached = self.cache.get_features(pair[0], pair[1])
                 if cached is not None:
                     if isinstance(cached, dict):
-                        # New format: feature_map dict → reconstruct stacked tensor
-                        fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
+                        if _cache_entry_complete(cached):
+                            # Complete dict → reconstruct stacked tensor directly
+                            fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
+                            tensors.append(feature_map_to_tensor(fm))
+                            continue
+                        # Incomplete dict — run only missing extractor groups, merge, re-save
+                        groups = _missing_groups(cached)
+                        sent_group1 = split_txt(pair[0])
+                        sent_group2 = split_txt(pair[1])
+                        patch: dict = {}
+                        if "lexical"  in groups: patch.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
+                        if "semantic" in groups: patch.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
+                        if "nli"      in groups: patch.update(self.nli.getFeatureMap(sent_group1, sent_group2))
+                        if "entity"   in groups: patch.update(self.entity.getFeatureMap(sent_group1, sent_group2))
+                        if "lcs"      in groups: patch.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
+                        merged = dict(cached)
+                        merged.update({k: v.tolist() if isinstance(v, torch.Tensor) else v for k, v in patch.items()})
+                        if use_cache:
+                            self.cache.save_features(pair[0], pair[1], merged)
+                        fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in merged.items()}
                         tensors.append(feature_map_to_tensor(fm))
                         continue
                     else:
@@ -373,9 +448,9 @@ class TextSimilarityDataset(Dataset):
                         if t.shape[0] == len(FEATURE_KEYS):
                             tensors.append(t)
                             continue
-                        # Shape mismatch — fall through to recompute
+                        # Shape mismatch — fall through to full recompute
 
-            # ---- compute ----
+            # ---- full compute (no usable cache entry) ----
             sent_group1 = split_txt(pair[0])
             sent_group2 = split_txt(pair[1])
 

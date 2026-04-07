@@ -25,6 +25,7 @@
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
+| 2026-04-06 | [x] | LLM-as-jury evaluation path — 2 new endpoints + JuryEvaluator | `backend/jury/__init__.py`, `backend/jury/jury_evaluator.py`, `backend/api/schemas.py` (JuryQuestion/JuryResult/JuryRequest/JuryBatchRequest/JuryBatchResponse), `backend/api/main.py` (POST /api/v1/predict/jury/pair 20/min, POST /api/v1/predict/jury/batch 5/min) |
 | 2026-03-11 | [x] | Project design and architecture defined | `ToDo.md` |
 | 2026-03-11 | [x] | Sentence splitter with coref resolution | `Splitter/sentence_splitter.py`, `Preprocess/coref/resolveEntity.py` |
 | 2026-03-11 | [x] | Semantic feature extractor | `Features/Semantic/getSemanticWeights.py`, `Features/Semantic/__generate_semantic_features.py` |
@@ -212,6 +213,21 @@ short inputs.
 | 2026-04-02 | [x] | DATA: Increase HaluEval sampling to 700/source (from 400) to compensate for STS-B/MNLI removal; cvg now 2331 pairs (100% HaluEval + handcrafted) vs 2231 before; added `--halueval-max` flag | `backend/fetch_external_data.py`, `data/context-vs-generated/` |
 | 2026-04-02 | [~] | TRAINING: Retrain cvg on clean HaluEval-only data — in progress | `models/context-vs-generated/best.pth` |
 | 2026-04-02 | [x] | FEATURE: `backend/model_hub.py` — auto-download checkpoints from HuggingFace Hub when `SB_HF_REPO_ID` env var is set; wired into `api/dependencies.py`; no-op when env var unset or file present | `backend/model_hub.py`, `backend/api/dependencies.py` |
+
+## Session 2026-04-06 — LLM-jury endpoints + v4.1→v4.4 feature recovery
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-06 | [x] | FEATURE: LLM-as-jury evaluation endpoints — `JuryEvaluator` (gpt-4o-mini, 6 binary questions across feature clusters, weighted score aggregation, validation codes HALL-NUMERIC/ENT-SUBST/NEG-FACT/OMIT-KEY/FAITHFUL); `POST /api/v1/predict/jury/pair` (20/min) + `/jury/batch` (5/min, max 10) | `backend/jury/__init__.py`, `backend/jury/jury_evaluator.py`, `backend/api/schemas.py`, `backend/api/main.py` |
+| 2026-04-06 | [x] | ANALYSIS: v4.1 CVG regression investigation — per-mode label correlation analysis on 300 CVG pairs; `rouge` unigram was 3rd-ranked feature (r=-0.183) but dropped globally; cross-r with dice/rouge3 ≥ 0.93 was misleading — cross-r ≠ equal discriminative power per mode | `ablation_reports/`, `backend/feature_registry.py` |
+| 2026-04-06 | [x] | PRUNE/RESTORE v4.2 (15→17): Restore `rouge` (CVG label-r=-0.183) + `REC_mxbai` (RVG=+0.388, MVM=+0.421, opposite sign to PREC_mxbai on CVG); confirmed REC_Qwen redundant (cross-r with PREC_Qwen=+0.999 on RVG) | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py`, `backend/Features/Semantic/getSemanticWeights.py` |
+| 2026-04-06 | [x] | FIX: train.py cache fallthrough — incomplete dict entries (missing keys after feature set change) now fall through to recompute instead of crashing; `_cache_entry_complete()` + `_missing_groups()` helpers added | `backend/train.py` |
+| 2026-04-06 | [x] | FIX: Partial cache recompute — stale cache entries now run only missing extractor groups (lexical/semantic/nli/entity/lcs) instead of full pipeline; prevents semantic re-encoding when only a lexical feature is added; `_prefill_semantic_cache` / `_prefill_entity_cache` skip pairs whose relevant keys are already cached | `backend/train.py` |
+| 2026-04-07 | [x] | PRUNE/RESTORE v4.3 (17→18): Restore `jaccard` (CVG label-r=-0.124, RVG=+0.213); cross-r=0.983 with dice was misleading same as rouge | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py` |
+| 2026-04-07 | [x] | PRUNE/RESTORE v4.4 (18→19): Restore `mxbai_cosine` raw pairwise map (CVG=+0.098, RVG=+0.352, MVM=+0.439); full n×m structure CNN can't learn from PREC/REC alone | `backend/feature_registry.py`, `backend/Features/Semantic/getSemanticWeights.py` |
+| 2026-04-07 | [x] | EVAL v4.4 test set: CVG 74.64% / AUC 0.801, RVG 76.81% / AUC 0.868, MVM 83.04% / AUC 0.889 — MVM +5.7% vs v4.0b; RVG/CVG within noise of v4.0b with 3 fewer features | `test_reports/` |
+| 2026-04-07 | [x] | ABLATION: Re-run ablation_cluster on v4.4 19-feature set — 1 DROP (entity_time NOISE), 14 REVIEW, 4 KEEP (entailment/contradiction STRONG, neutral/entity_percentage WEAK); entity_time to be pruned in v4.5 | `ablation_reports/experiments/20260407_174417_v4.4-all-modes/` |
+| 2026-04-07 | [ ] | PRUNE v4.5: Drop entity_time (NOISE tier) → 18 features; retrain + eval all 3 modes | `backend/feature_registry.py` |
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 
