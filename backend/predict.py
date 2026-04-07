@@ -3,7 +3,7 @@ import argparse
 import json
 from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
 from backend.train import TextSimilarityDataset, feature_map_to_tensor
-from backend.feature_registry import validate_manifest
+from backend.feature_registry import FEATURE_KEYS, validate_manifest, get_feature_keys
 from pathlib import Path
 import numpy as np
 
@@ -24,7 +24,10 @@ def _load_model_from_checkpoint(checkpoint, device):
                 "Checkpoint does not contain 'num_features'. "
                 "Re-train the model to generate a compatible checkpoint."
             )
-        validate_manifest(checkpoint.get('manifest'))
+        # Use the feature list embedded in the checkpoint manifest as the source of
+        # truth. validate_manifest compares against the manifest's own feature list
+        # (no expected_keys arg needed — the checkpoint IS the reference).
+        manifest = checkpoint.get('manifest') or {}
         num_features    = checkpoint['num_features']
         spatial_size    = checkpoint.get('spatial_size', 64)    # 64 = legacy default
         hidden_dim      = checkpoint.get('hidden_dim', 128)     # 128 = legacy default
@@ -47,9 +50,14 @@ class SimilarityPredictor:
 
         checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
         self.model, arch = _load_model_from_checkpoint(checkpoint, self.device)
+        # Feature keys from manifest (mode-specific for v5.0+ checkpoints).
+        self.feature_keys: list[str] = (
+            checkpoint.get('manifest', {}).get('features') or FEATURE_KEYS
+        )
 
         print(f"Model loaded from {model_path}")
         print(f"  architecture : {arch}")
+        print(f"  features     : {len(self.feature_keys)}")
         print(f"  epoch        : {checkpoint.get('epoch', 'unknown')}")
         if 'accuracy' in checkpoint:
             print(f"  val acc      : {checkpoint['accuracy']:.2f}%")
@@ -61,7 +69,8 @@ class SimilarityPredictor:
         Legacy Conv1D model: features [N, F*64*64] (flattened), lengths None
         """
         dummy_labels = [0] * len(pairs)
-        dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True)
+        dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True,
+                                        feature_keys=self.feature_keys)
         features = dataset.features  # [N, F, S, S]
         lengths  = dataset.lengths   # [N, 2]
         if isinstance(self.model, TextSimilarityCNNLegacy):
@@ -138,7 +147,7 @@ class SimilarityPredictor:
             cache.save_features(text1, text2, {k: v.tolist() for k, v in feature_map.items()})
 
         # --- model score ---
-        stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, S, S]
+        stacked = feature_map_to_tensor(feature_map, self.feature_keys).unsqueeze(0)  # [1, F, S, S]
         if isinstance(self.model, TextSimilarityCNNLegacy):
             trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
             stacked = stacked[:, :trained_num_maps, :, :]

@@ -79,6 +79,9 @@ FEATURE_KEYS: list[str] = [
     #   entity_event (p=0.521), entity_language (p=0.093),
     #   entity_date (p=0.278), entity_number (p=0.170),
     #   entity_quantity (p=0.151), entity_money (p=0.360)
+    # entity_time: ablation p=0.829 (NOISE tier) but removing it cost CVG -3pt accuracy.
+    #   PC04 shows entity_time loads +0.44 alongside entity_duration — model uses them as
+    #   a pair. Marginal label-r is zero but interaction effect is real. RESTORED in v4.5.
     "entity_location",
     "entity_product",
     "entity_law",
@@ -90,22 +93,100 @@ FEATURE_KEYS: list[str] = [
     "lcs_char",
 ]
 
-VERSION      = "4.4"
+VERSION      = "5.0"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
+# ---------------------------------------------------------------------------
+# Mode-specific feature baskets (v5.0)
+# Each mode trains on only the features that carry statistically significant
+# signal for that task (per-mode Pearson r analysis, v4.4 ablation n≈2k/mode).
+#
+# CVG (hallucination):  entity features all p≥0.066 — dropped entirely.
+# RVG (faithfulness):   entity_product (p=0.019) + entity_percentage (p=0.033) kept.
+# MVM (agreement):      entity_percentage (p<0.001) kept; entity_product borderline.
+# ---------------------------------------------------------------------------
 
-def build_manifest() -> dict:
-    """Return a manifest dict suitable for embedding in a checkpoint."""
+FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
+    "context-vs-generated": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4)
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3) — dominant signal for CVG
+        "entailment", "neutral", "contradiction",
+        # Entity — all dropped: p≥0.066 (none pass Bonferroni or even α=0.05)
+        # LCS (2)
+        "lcs_token", "lcs_char",
+    ],
+    "reference-vs-generated": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4) — strongest group for RVG
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3)
+        "entailment", "neutral", "contradiction",
+        # Entity (2) — borderline significant
+        "entity_product",     # p=0.019
+        "entity_percentage",  # p=0.033
+        # LCS (2)
+        "lcs_token", "lcs_char",
+    ],
+    "model-vs-model": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4)
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3)
+        "entailment", "neutral", "contradiction",
+        # Entity (1) — entity_percentage p<0.001 (+0.106)
+        "entity_percentage",
+        # LCS (2)
+        "lcs_token", "lcs_char",
+    ],
+}
+
+
+def get_feature_keys(mode: str | None = None) -> list[str]:
+    """Return the feature key list for *mode*, or the global FEATURE_KEYS fallback.
+
+    Args:
+        mode: One of the three evaluation mode strings, or None for general/legacy.
+
+    Returns:
+        The mode-specific feature key list, or FEATURE_KEYS if mode is unknown/None.
+    """
+    if mode is None:
+        return FEATURE_KEYS
+    return FEATURE_KEYS_BY_MODE.get(mode, FEATURE_KEYS)
+
+
+def build_manifest(feature_keys: list[str] | None = None) -> dict:
+    """Return a manifest dict suitable for embedding in a checkpoint.
+
+    Args:
+        feature_keys: The feature key list used for this training run.
+                      Defaults to the global FEATURE_KEYS.
+    """
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
     return {
         "version":      VERSION,
-        "features":     list(FEATURE_KEYS),
-        "num_features": len(FEATURE_KEYS),
+        "features":     list(keys),
+        "num_features": len(keys),
         "spatial_size": SPATIAL_SIZE,
         "created_at":   datetime.now(timezone.utc).isoformat(),
     }
 
 
-def validate_manifest(manifest: dict | None) -> None:
+def validate_manifest(manifest: dict | None, expected_keys: list[str] | None = None) -> None:
     """Raise RuntimeError if *manifest* is incompatible with the current pipeline.
 
     A missing manifest (None or empty) is treated as a warning-only case so that
@@ -113,9 +194,11 @@ def validate_manifest(manifest: dict | None) -> None:
 
     Args:
         manifest: The 'manifest' sub-dict from a loaded checkpoint, or None.
+        expected_keys: The feature list to validate against. Defaults to the global
+                       FEATURE_KEYS. Pass the mode-specific list for per-mode checkpoints.
 
     Raises:
-        RuntimeError: If the feature list in *manifest* differs from FEATURE_KEYS.
+        RuntimeError: If the feature list in *manifest* differs from *expected_keys*.
     """
     if not manifest:
         return  # pre-manifest checkpoint — nothing to validate
@@ -124,17 +207,19 @@ def validate_manifest(manifest: dict | None) -> None:
     if ckpt_features is None:
         return  # manifest present but no feature list — old format, skip
 
-    if ckpt_features == FEATURE_KEYS:
+    reference = expected_keys if expected_keys is not None else FEATURE_KEYS
+
+    if ckpt_features == reference:
         return  # all good
 
-    added    = [k for k in FEATURE_KEYS  if k not in ckpt_features]
-    removed  = [k for k in ckpt_features if k not in FEATURE_KEYS]
-    reordered = (not added and not removed) and ckpt_features != FEATURE_KEYS
+    added    = [k for k in reference     if k not in ckpt_features]
+    removed  = [k for k in ckpt_features if k not in reference]
+    reordered = (not added and not removed) and ckpt_features != reference
 
     lines = [
         "Checkpoint feature manifest does not match the current pipeline.",
         f"  Checkpoint ({len(ckpt_features)} features): {ckpt_features}",
-        f"  Current    ({len(FEATURE_KEYS)} features): {FEATURE_KEYS}",
+        f"  Expected   ({len(reference)} features): {reference}",
     ]
     if added:
         lines.append(f"  Added since checkpoint was saved   : {added}")

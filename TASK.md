@@ -227,7 +227,8 @@ short inputs.
 | 2026-04-07 | [x] | PRUNE/RESTORE v4.4 (18→19): Restore `mxbai_cosine` raw pairwise map (CVG=+0.098, RVG=+0.352, MVM=+0.439); full n×m structure CNN can't learn from PREC/REC alone | `backend/feature_registry.py`, `backend/Features/Semantic/getSemanticWeights.py` |
 | 2026-04-07 | [x] | EVAL v4.4 test set: CVG 74.64% / AUC 0.801, RVG 76.81% / AUC 0.868, MVM 83.04% / AUC 0.889 — MVM +5.7% vs v4.0b; RVG/CVG within noise of v4.0b with 3 fewer features | `test_reports/` |
 | 2026-04-07 | [x] | ABLATION: Re-run ablation_cluster on v4.4 19-feature set — 1 DROP (entity_time NOISE), 14 REVIEW, 4 KEEP (entailment/contradiction STRONG, neutral/entity_percentage WEAK); entity_time to be pruned in v4.5 | `ablation_reports/experiments/20260407_174417_v4.4-all-modes/` |
-| 2026-04-07 | [ ] | PRUNE v4.5: Drop entity_time (NOISE tier) → 18 features; retrain + eval all 3 modes | `backend/feature_registry.py` |
+| 2026-04-07 | [x] | PRUNE v4.5 attempted + reverted: entity_time removal cost CVG -3pt (training variance, not causal). entity_time retained. | `backend/feature_registry.py` |
+| 2026-04-07 | [x] | v5.0 mode-specific feature baskets: CVG=13, RVG=15, MVM=14. ROC +0.028/+0.013/+0.008 vs v4.4. 0 DROPs in ablation. | `backend/feature_registry.py` (FEATURE_KEYS_BY_MODE), `backend/train.py`, `backend/predict.py`, `backend/test.py`, `backend/ablation_cluster.py` |
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 

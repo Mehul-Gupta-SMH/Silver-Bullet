@@ -551,19 +551,25 @@ if __name__ == '__main__':
         data_dir  = 'data'
         print("Mode: general  |  Data: data/  |  Checkpoint: best_model.pth")
 
+    # Load the model first so we can read the feature manifest.
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
+    model, arch = _load_model_from_checkpoint(checkpoint, device)
+    print(f"  architecture : {arch}")
+
+    # Resolve feature keys from the checkpoint manifest (v5.0+ mode-specific baskets).
+    from backend.feature_registry import FEATURE_KEYS as _GLOBAL_KEYS
+    feature_keys = checkpoint.get('manifest', {}).get('features') or _GLOBAL_KEYS
+    print(f"  feature keys : {len(feature_keys)}")
+
     # Load test data
     test_pairs, test_labels = load_json_data(f'{data_dir}/test.json')
     print(f"Loaded {len(test_pairs)} test pairs")
 
     # Create dataset with feature caching enabled
-    test_dataset = TextSimilarityDataset(test_pairs, test_labels, use_cache=True)
+    test_dataset = TextSimilarityDataset(test_pairs, test_labels, use_cache=True,
+                                         feature_keys=feature_keys)
     test_loader = DataLoader(test_dataset, batch_size=16)
-
-    # Load the model (auto-detects legacy Conv1D vs current Conv2D architecture)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
-    model, arch = _load_model_from_checkpoint(checkpoint, device)
-    print(f"  architecture : {arch}")
 
     # Test the model and generate report
     metrics, report = test_model(model, test_loader, test_pairs, device=str(device))

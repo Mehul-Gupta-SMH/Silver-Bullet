@@ -27,7 +27,7 @@ from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.feature_cache import FeatureCache
-from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest
+from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest, get_feature_keys
 from backend.training_report import TrainingReport
 
 
@@ -225,52 +225,57 @@ def load_json_data(file_path):
     return pairs, labels
 
 
-def feature_map_to_tensor(feature_map: dict) -> torch.Tensor:
-    """Stack all feature maps into a single [F, S, S] tensor.
+def feature_map_to_tensor(feature_map: dict, feature_keys: list[str] | None = None) -> torch.Tensor:
+    """Stack feature maps into a single [F, S, S] tensor.
 
-    Maps are stacked in the canonical order defined by FEATURE_KEYS so that
-    the channel index is always stable regardless of dict insertion order.
-    Each map is already resized to SPATIAL_SIZE×SPATIAL_SIZE by the feature
-    extractors via resize_matrix() — no zero-padding, every cell carries signal.
+    Maps are stacked in the canonical order defined by *feature_keys* (defaults to
+    the global FEATURE_KEYS) so that the channel index is always stable regardless of
+    dict insertion order.  Extra keys in feature_map are silently ignored — only the
+    requested subset is selected.
+
+    Args:
+        feature_map: Dict mapping feature key → 2-D array/tensor (SPATIAL_SIZE×SPATIAL_SIZE).
+        feature_keys: Ordered list of keys to stack. Defaults to the global FEATURE_KEYS.
 
     Raises:
-        KeyError: If feature_map contains unknown keys or is missing expected keys.
+        KeyError: If feature_map is missing any key listed in feature_keys.
 
     Returns:
-        torch.Tensor: shape [num_features, SPATIAL_SIZE, SPATIAL_SIZE]
+        torch.Tensor: shape [len(feature_keys), SPATIAL_SIZE, SPATIAL_SIZE]
     """
-    # Extra keys in the cache are expected when the feature set is pruned
-    # (e.g. after dropping SOFT_ROW/SOFT_COL or redundant lexical features).
-    # Silently ignore them — only the FEATURE_KEYS subset is selected below.
-    missing = set(FEATURE_KEYS) - set(feature_map)
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    missing = set(keys) - set(feature_map)
     if missing:
         raise KeyError(f"feature_map is missing expected keys: {sorted(missing)}")
 
     maps = []
-    for key in FEATURE_KEYS:
+    for key in keys:
         val = feature_map[key]
         if isinstance(val, torch.Tensor):
             maps.append(val.float())
         else:
             maps.append(torch.tensor(val, dtype=torch.float32))
-    return torch.stack(maps, dim=0)  # [F, 64, 64]
+    return torch.stack(maps, dim=0)  # [F, S, S]
 
 
 
-def _cache_entry_complete(entry) -> bool:
-    """Return True if a cache entry (dict format) has all current FEATURE_KEYS."""
+def _cache_entry_complete(entry, feature_keys: list[str] | None = None) -> bool:
+    """Return True if a cache entry (dict format) has all keys in *feature_keys*."""
     if not isinstance(entry, dict):
         return False
-    return all(k in entry for k in FEATURE_KEYS)
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    return all(k in entry for k in keys)
 
 
-def _missing_groups(entry: dict) -> set[str]:
+def _missing_groups(entry: dict, feature_keys: list[str] | None = None) -> set[str]:
     """Return the set of extractor group names whose keys are absent from *entry*.
 
     Groups: 'lexical', 'semantic', 'nli', 'entity', 'lcs'.
-    Only groups that produce at least one missing FEATURE_KEY are returned.
+    Only groups that produce at least one key listed in *feature_keys* that is
+    missing from *entry* are returned.
     """
-    missing_keys = [k for k in FEATURE_KEYS if k not in entry]
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    missing_keys = [k for k in keys if k not in entry]
     groups: set[str] = set()
     for k in missing_keys:
         if k.startswith(("PREC_", "REC_", "SOFT_")) or "/" in k:
@@ -286,7 +291,8 @@ def _missing_groups(entry: dict) -> set[str]:
     return groups
 
 
-def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
+def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None",
+                            feature_keys: list[str] | None = None) -> None:
     """Pre-encode all unique sentences from uncached pairs in one large batch per model.
 
     For each sentence-transformer model, this issues a single model.encode() call
@@ -306,7 +312,7 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> No
     for pair in paragraph_pairs:
         if cache is not None:
             entry = cache.get_features(pair[0], pair[1])
-            if entry is not None and "semantic" not in _missing_groups(entry) if isinstance(entry, dict) else False:
+            if entry is not None and "semantic" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
                 continue
         for sent in split_txt(pair[0]) + split_txt(pair[1]):
             unique_sentences.add(sent)
@@ -362,7 +368,8 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None") -> No
           f"{sum(len(v) for v in SemanticFeatures._embedding_cache.values())} sentence-model entries.")
 
 
-def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None:
+def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
+                          feature_keys: list[str] | None = None) -> None:
     """Pre-run GLiNER NER on all unique sentences from uncached pairs in one batch.
 
     EntityMatch._entity_cache maps sentence → {entity_type: count}.  By filling
@@ -371,11 +378,16 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None
     """
     from backend.Features.EntityGroups.getOverlap import EntityMatch
 
+    # If entity features aren't in this mode's basket, skip entirely.
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    if not any(k.startswith("entity_") for k in keys):
+        return
+
     unique_sentences: set[str] = set()
     for pair in paragraph_pairs:
         if cache is not None:
             entry = cache.get_features(pair[0], pair[1])
-            if entry is not None and "entity" not in _missing_groups(entry) if isinstance(entry, dict) else False:
+            if entry is not None and "entity" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
                 continue
         for sent in split_txt(pair[0]) + split_txt(pair[1]):
             unique_sentences.add(sent)
@@ -394,11 +406,22 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None") -> None
 
 
 class TextSimilarityDataset(Dataset):
-    """Extract features for every text pair and store as [F, 64, 64] tensors."""
+    """Extract features for every text pair and store as [F, S, S] tensors.
 
-    def __init__(self, paragraph_pairs, labels, use_cache=True):
-        self.labels = labels
-        self.cache  = FeatureCache() if use_cache else None
+    Args:
+        paragraph_pairs: List of [text1, text2] pairs.
+        labels:          Corresponding float labels.
+        use_cache:       Whether to read/write the feature cache.
+        feature_keys:    Ordered list of feature keys to include in each tensor.
+                         Defaults to the global FEATURE_KEYS. Pass a mode-specific
+                         list (from get_feature_keys(mode)) for per-mode training.
+    """
+
+    def __init__(self, paragraph_pairs, labels, use_cache=True,
+                 feature_keys: list[str] | None = None):
+        self.labels       = labels
+        self.cache        = FeatureCache() if use_cache else None
+        self.feature_keys = feature_keys if feature_keys is not None else FEATURE_KEYS
 
         self.lexical  = LexicalWeights()
         self.semantic = SemanticWeights()
@@ -408,8 +431,8 @@ class TextSimilarityDataset(Dataset):
 
         # Pre-encode / pre-run all sentence-level models in one large batch before
         # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
-        _prefill_semantic_cache(paragraph_pairs, self.cache)
-        _prefill_entity_cache(paragraph_pairs, self.cache)
+        _prefill_semantic_cache(paragraph_pairs, self.cache, self.feature_keys)
+        _prefill_entity_cache(paragraph_pairs, self.cache, self.feature_keys)
 
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):
@@ -418,13 +441,13 @@ class TextSimilarityDataset(Dataset):
                 cached = self.cache.get_features(pair[0], pair[1])
                 if cached is not None:
                     if isinstance(cached, dict):
-                        if _cache_entry_complete(cached):
+                        if _cache_entry_complete(cached, self.feature_keys):
                             # Complete dict → reconstruct stacked tensor directly
                             fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in cached.items()}
-                            tensors.append(feature_map_to_tensor(fm))
+                            tensors.append(feature_map_to_tensor(fm, self.feature_keys))
                             continue
                         # Incomplete dict — run only missing extractor groups, merge, re-save
-                        groups = _missing_groups(cached)
+                        groups = _missing_groups(cached, self.feature_keys)
                         sent_group1 = split_txt(pair[0])
                         sent_group2 = split_txt(pair[1])
                         patch: dict = {}
@@ -438,14 +461,14 @@ class TextSimilarityDataset(Dataset):
                         if use_cache:
                             self.cache.save_features(pair[0], pair[1], merged)
                         fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in merged.items()}
-                        tensors.append(feature_map_to_tensor(fm))
+                        tensors.append(feature_map_to_tensor(fm, self.feature_keys))
                         continue
                     else:
                         # Legacy format: stacked tensor as flat list — only use if
-                        # feature count matches current pipeline (guards against stale
+                        # feature count matches active feature set (guards against stale
                         # cache entries from a previous feature set version).
                         t = torch.tensor(cached, dtype=torch.float32)
-                        if t.shape[0] == len(FEATURE_KEYS):
+                        if t.shape[0] == len(self.feature_keys):
                             tensors.append(t)
                             continue
                         # Shape mismatch — fall through to full recompute
@@ -454,6 +477,8 @@ class TextSimilarityDataset(Dataset):
             sent_group1 = split_txt(pair[0])
             sent_group2 = split_txt(pair[1])
 
+            # Always compute all 5 extractor groups so the cache entry is complete
+            # for all future modes (cache is mode-agnostic — stores all features).
             feature_map = {}
             feature_map.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
@@ -461,9 +486,9 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
 
-            stacked = feature_map_to_tensor(feature_map)  # [F, S, S]
+            stacked = feature_map_to_tensor(feature_map, self.feature_keys)  # [F, S, S]
 
-            # ---- cache save ----
+            # ---- cache save (always store full feature set) ----
             if use_cache:
                 self.cache.save_features(pair[0], pair[1], {k: v.tolist() for k, v in feature_map.items()})
 
@@ -497,7 +522,7 @@ class TextSimilarityDataset(Dataset):
 
 def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.0003,
                 patience=8, min_delta=0.001, best_ckpt='best_model.pth', mode='general',
-                label_smooth=0.05):
+                label_smooth=0.05, feature_keys: list[str] | None = None):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -603,7 +628,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
                 'hidden_dim':           model.conv1.out_channels,
                 'spatial_size':         SPATIAL_SIZE,
                 'use_length_cond':      getattr(model, 'use_length_cond', False),
-                'manifest':             build_manifest(),
+                'manifest':             build_manifest(feature_keys),
             }, best_ckpt)
         else:
             patience_counter += 1
@@ -619,7 +644,7 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
     final_model_path = str(ckpt_dir / f'{ts}_final.pth')
     best_model_path  = str(ckpt_dir / f'{ts}_best.pth')
 
-    manifest = build_manifest()
+    manifest = build_manifest(feature_keys)
 
     torch.save({
         'epoch':                epoch,
@@ -696,12 +721,19 @@ if __name__ == '__main__':
         best_ckpt = 'best_model.pth'
         print("Mode: general  |  Data: data/  |  Checkpoint: best_model.pth")
 
+    # Resolve mode-specific feature basket (v5.0+).
+    active_feature_keys = get_feature_keys(args.mode)
+    n_features = len(active_feature_keys)
+    print(f"Feature basket : {n_features} features  {active_feature_keys}")
+
     train_pairs, train_labels = load_json_data(f'{data_dir}/train.json')
     val_pairs,   val_labels   = load_json_data(f'{data_dir}/validate.json')
     print(f"Train: {len(train_pairs)}  Val: {len(val_pairs)}")
 
-    train_dataset = TextSimilarityDataset(train_pairs, train_labels, use_cache=True)
-    val_dataset   = TextSimilarityDataset(val_pairs,   val_labels,   use_cache=True)
+    train_dataset = TextSimilarityDataset(train_pairs, train_labels, use_cache=True,
+                                          feature_keys=active_feature_keys)
+    val_dataset   = TextSimilarityDataset(val_pairs,   val_labels,   use_cache=True,
+                                          feature_keys=active_feature_keys)
 
     train_loader  = DataLoader(train_dataset, batch_size=16, shuffle=True, drop_last=True)
     val_loader    = DataLoader(val_dataset,   batch_size=16)
@@ -712,5 +744,6 @@ if __name__ == '__main__':
         model, train_loader, val_loader, best_ckpt=best_ckpt,
         mode=args.mode or "general",
         label_smooth=0.0,
+        feature_keys=active_feature_keys,
     )
     print("Training complete.")
