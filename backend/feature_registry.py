@@ -40,6 +40,30 @@ ENTITY_TYPES: list[str] = [
 ENTITY_FEATURE_KEYS: list[str] = [f"entity_{t}" for t in ENTITY_TYPES]
 
 # ---------------------------------------------------------------------------
+# Entity types selected for per-type value-overlap features (v5.2)
+# Criteria: GLiNER zero-shot reliability + distinct matchable string values +
+#           not redundant with numeric_jaccard (excludes number/quantity/money).
+# Fuzzy thresholds (used in getOverlap._fuzzy_in): percentage needs strictest
+#   matching (0.95) because "25%" ≠ "26%"; dates/times strict (0.90) because
+#   year/hour errors are meaningful; product/location/duration more lenient.
+# ---------------------------------------------------------------------------
+ENTITY_VALUE_TYPES: list[str] = [
+    "location",    # threshold=0.85 — "Paris" ≠ "Berlin", typos OK
+    "product",     # threshold=0.80 — brand variants ("Tesla Model 3" vs "Tesla")
+    "date",        # threshold=0.90 — "2023" ≠ "2024" must fail
+    "time",        # threshold=0.90 — "3 PM" ≠ "9 AM" must fail
+    "duration",    # threshold=0.88 — "3 hours" ≠ "3 days" must fail
+    "percentage",  # threshold=0.95 — "25%" ≠ "26%" must fail (strictest)
+]
+
+# Per-type value keys: "entity_location_value_prec", "entity_location_value_rec", …
+ENTITY_VALUE_KEYS: list[str] = [
+    key
+    for t in ENTITY_VALUE_TYPES
+    for key in (f"entity_{t}_value_prec", f"entity_{t}_value_rec")
+]
+
+# ---------------------------------------------------------------------------
 # Canonical feature key list
 # Insertion order matches the .update() sequence in train.py / predict.py:
 #   LexicalWeights -> SemanticWeights -> NLIWeights -> EntityMatch -> LCSWeights
@@ -91,9 +115,36 @@ FEATURE_KEYS: list[str] = [
     # LCS (2) — getLCSweights.py
     "lcs_token",
     "lcs_char",
+    # Entity value overlap (2) — getOverlap.py (v5.1)
+    # entity_value_prec: fraction of text2 entity strings found in text1 (grounding)
+    # entity_value_rec:  fraction of text1 entity strings covered by text2 (coverage)
+    "entity_value_prec",
+    "entity_value_rec",
+    # Numeric grounding (1) — getNumericGrounding.py (v5.1)
+    # Jaccard over normalised number sets: catches wrong/hallucinated numbers
+    "numeric_jaccard",
+    # Per-type entity value overlap (12) — getOverlap.py (v5.2)
+    # Extends entity_value_prec/rec to operate per entity type with calibrated
+    # fuzzy thresholds; captures type-specific hallucinations (location swap,
+    # date distortion, wrong percentage) that the flat combined features dilute.
+    # Skipped types: number/quantity/money (numeric_jaccard is superior),
+    #   person (brittle fuzzy on name variants), law (ultra-sparse),
+    #   event/language (inconsistent GLiNER extraction).
+    "entity_location_value_prec",
+    "entity_location_value_rec",
+    "entity_product_value_prec",
+    "entity_product_value_rec",
+    "entity_date_value_prec",
+    "entity_date_value_rec",
+    "entity_time_value_prec",
+    "entity_time_value_rec",
+    "entity_duration_value_prec",
+    "entity_duration_value_rec",
+    "entity_percentage_value_prec",
+    "entity_percentage_value_rec",
 ]
 
-VERSION      = "5.0"
+VERSION      = "5.3"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 # ---------------------------------------------------------------------------
@@ -117,9 +168,19 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "PREC_Qwen/Qwen3-Embedding-0.6B",
         # NLI (3) — dominant signal for CVG
         "entailment", "neutral", "contradiction",
-        # Entity — all dropped: p≥0.066 (none pass Bonferroni or even α=0.05)
+        # Type-count entity dropped: all p≥0.066 (see v5.0 notes)
+        # Value-level entity (2) — v5.1: string identity not type count
+        "entity_value_prec",   # text2 entity strings grounded in text1
+        "entity_value_rec",    # text1 entity strings covered by text2
         # LCS (2)
         "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (1) — v5.3: only Bonferroni-significant per-type feature
+        # entity_product_value_prec: p=6.37e-04 (***), r=+0.071 in CVG ablation n=2331
+        # All others (location/time/percentage/date/duration) failed Bonferroni (p>0.069)
+        # entity_time_value_prec/rec: NOISE (p=0.134, 0.342) in CVG; confirmed DROP in MVM.
+        "entity_product_value_prec",
     ],
     "reference-vs-generated": [
         # Lexical (4)
@@ -131,11 +192,22 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "PREC_Qwen/Qwen3-Embedding-0.6B",
         # NLI (3)
         "entailment", "neutral", "contradiction",
-        # Entity (2) — borderline significant
+        # Entity type-count (2) — borderline significant
         "entity_product",     # p=0.019
         "entity_percentage",  # p=0.033
+        # Entity value (2) — v5.1
+        "entity_value_prec",
+        "entity_value_rec",
         # LCS (2)
         "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (0) — v5.3: no per-type features survive Bonferroni for RVG
+        # Ablation n=1831: entity_time (p=0.750/0.973 NOISE), location (p=0.136/0.283),
+        # date/duration (p>0.14), product_prec (p=0.384), percentage_prec (p=0.129).
+        # entity_product_value_rec (p=0.008) and entity_percentage_value_rec (p=0.013)
+        # are nominally * but do not survive Bonferroni α=1.67e-03.
+        # Both-empty→1.0 on sparse reference texts adds collective noise.
     ],
     "model-vs-model": [
         # Lexical (4)
@@ -147,10 +219,22 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "PREC_Qwen/Qwen3-Embedding-0.6B",
         # NLI (3)
         "entailment", "neutral", "contradiction",
-        # Entity (1) — entity_percentage p<0.001 (+0.106)
+        # Entity type-count (1) — entity_percentage p<0.001 (+0.106)
         "entity_percentage",
+        # Entity value (2) — v5.1
+        "entity_value_prec",
+        "entity_value_rec",
         # LCS (2)
         "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (2) — v5.3: only Bonferroni-significant per-type features
+        # entity_percentage_value_prec: p=4.25e-07 (***), r=+0.107 in MVM ablation n=2231
+        # entity_percentage_value_rec:  p=1.23e-08 (***), r=+0.120 in MVM ablation n=2231
+        # entity_time: DROP (p=0.927/0.957 NOISE)
+        # entity_location: MARGINAL (p=0.013/0.035) — NS after Bonferroni α=2.17e-03
+        "entity_percentage_value_prec",
+        "entity_percentage_value_rec",
     ],
 }
 

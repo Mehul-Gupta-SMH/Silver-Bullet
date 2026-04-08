@@ -3,17 +3,27 @@
 Replaces the CNN inference path with a structured LLM judge that asks a battery
 of binary yes/no questions mirroring the CNN's feature clusters.
 
-Clusters → questions
-────────────────────
-Semantic (PREC)       : Is text2 semantically grounded in text1?
-Lexical (dice, rouge3): Does text2 use substantially similar wording to text1?
-NLI entailment        : Does text1 entail text2?
-NLI contradiction     : Does text2 contradict text1? (inverted for score)
-Entity consistency    : Are all named entities in text2 consistent with text1?
-LCS                   : Does text2 preserve the key sequence of facts/steps from text1?
+Clusters → questions (v5.1)
+────────────────────────────
+Semantic (PREC)        : Is text2 semantically grounded in text1?          (w=0.5)
+Omission               : Does text2 omit any key factual claim from text1? (w=1.0, inverted)
+NLI entailment         : Does text1 entail text2?                          (w=1.0)
+NLI contradiction      : Does text2 contradict text1?                      (w=1.0, inverted)
+Entity consistency     : Are all named entities in text2 consistent?       (w=1.0)
+LCS                    : Does text2 preserve the key sequence of facts?    (w=1.0)
+Numeric hallucination  : Does text2 contain wrong/unsupported numbers?     (w=1.0, inverted)
 
 Each question gets { answer, confidence, reasoning }.
 Final score = weighted mean of (answer=="yes" ? confidence : 1-confidence).
+
+v5.1 changes vs v5.0:
+  - Q2 replaced: "similar wording" (lexical) → "omission of key claim" (omission_key_claim)
+    Reason: lexical Q answered "no" 9/9 times for paraphrased faithful summaries — zero
+    discrimination. Omission directly targets the faithful-but-omitted-fact failure mode.
+  - Q1 weight reduced 1.0 → 0.5: GPT-4o-mini treats "semantically grounded" and NLI
+    entailment identically — Q1/Q3 collinear; halving Q1 weight avoids double-counting.
+  - Q7 added: numeric hallucination — catches $8M vs $80B class errors not captured by
+    entity type counts (CNN entity features) or the coarse entity Q5.
 """
 
 from __future__ import annotations
@@ -41,14 +51,14 @@ _QUESTIONS: list[tuple[str, str, float, bool]] = [
     (
         "semantic",
         "Is text2 semantically grounded in text1? (yes/no)",
-        1.0,
+        0.5,     # reduced from 1.0 — collinear with nli_entailment
         True,
     ),
     (
-        "lexical",
-        "Does text2 use substantially similar wording to text1? (yes/no)",
+        "omission_key_claim",
+        "Does text2 omit any key factual claim that is present in text1? (yes/no)",
         1.0,
-        True,
+        False,   # "yes" → key claim omitted → unfaithful
     ),
     (
         "nli_entailment",
@@ -77,6 +87,15 @@ _QUESTIONS: list[tuple[str, str, float, bool]] = [
         1.0,
         True,
     ),
+    (
+        "numeric_hallucination",
+        (
+            "Does text2 contain any numbers, statistics, or quantities that differ from "
+            "or are not supported by text1? (yes/no)"
+        ),
+        1.0,
+        False,   # "yes" → numeric mismatch → unfaithful
+    ),
 ]
 
 # ---------------------------------------------------------------------------
@@ -104,11 +123,16 @@ For each question provide:
   "reasoning"  : one concise sentence explaining your answer
 
 Use the following diagnostic codes in your reasoning where relevant:
-  HALL-NUMERIC  — text2 contains a wrong number not present in text1
+  HALL-NUMERIC  — text2 contains a wrong number/statistic not supported by text1
+                  (e.g. "$8M" when text1 says "$80M", "25%" vs "52%")
   ENT-SUBST     — text2 substitutes a named entity for a different one
   NEG-FACT      — text2 negates a fact that text1 asserts
   OMIT-KEY      — text2 omits a key claim or step from text1
   FAITHFUL      — text2 is grounded and consistent with text1
+
+For the numeric_hallucination question: compare ALL numbers, dates, percentages,
+monetary amounts, counts, and measurements mentioned in both texts. Report "yes"
+if any numeric value in text2 cannot be verified from text1 or differs in magnitude.
 
 Required JSON shape (keys must match exactly):
 {

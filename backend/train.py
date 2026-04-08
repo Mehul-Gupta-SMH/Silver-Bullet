@@ -26,6 +26,7 @@ from backend.Features.Lexical.getLexicalWeights import LexicalWeights
 from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
+from backend.Features.Numeric.getNumericGrounding import NumericGrounding
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest, get_feature_keys
 from backend.training_report import TrainingReport
@@ -270,7 +271,7 @@ def _cache_entry_complete(entry, feature_keys: list[str] | None = None) -> bool:
 def _missing_groups(entry: dict, feature_keys: list[str] | None = None) -> set[str]:
     """Return the set of extractor group names whose keys are absent from *entry*.
 
-    Groups: 'lexical', 'semantic', 'nli', 'entity', 'lcs'.
+    Groups: 'lexical', 'semantic', 'nli', 'entity', 'lcs', 'numeric'.
     Only groups that produce at least one key listed in *feature_keys* that is
     missing from *entry* are returned.
     """
@@ -282,6 +283,8 @@ def _missing_groups(entry: dict, feature_keys: list[str] | None = None) -> set[s
             groups.add("semantic")
         elif k in ("entailment", "neutral", "contradiction"):
             groups.add("nli")
+        elif k == "numeric_jaccard":
+            groups.add("numeric")
         elif k.startswith("entity_"):
             groups.add("entity")
         elif k in ("lcs_token", "lcs_char"):
@@ -428,6 +431,7 @@ class TextSimilarityDataset(Dataset):
         self.nli      = NLIWeights()
         self.entity   = EntityMatch()
         self.lcs      = LCSWeights()
+        self.numeric  = NumericGrounding()
 
         # Pre-encode / pre-run all sentence-level models in one large batch before
         # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
@@ -456,6 +460,7 @@ class TextSimilarityDataset(Dataset):
                         if "nli"      in groups: patch.update(self.nli.getFeatureMap(sent_group1, sent_group2))
                         if "entity"   in groups: patch.update(self.entity.getFeatureMap(sent_group1, sent_group2))
                         if "lcs"      in groups: patch.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
+                        if "numeric"  in groups: patch.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
                         merged = dict(cached)
                         merged.update({k: v.tolist() if isinstance(v, torch.Tensor) else v for k, v in patch.items()})
                         if use_cache:
@@ -485,6 +490,7 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.nli.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
+            feature_map.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
 
             stacked = feature_map_to_tensor(feature_map, self.feature_keys)  # [F, S, S]
 

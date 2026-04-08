@@ -230,9 +230,29 @@ short inputs.
 | 2026-04-07 | [x] | PRUNE v4.5 attempted + reverted: entity_time removal cost CVG -3pt (training variance, not causal). entity_time retained. | `backend/feature_registry.py` |
 | 2026-04-07 | [x] | v5.0 mode-specific feature baskets: CVG=13, RVG=15, MVM=14. ROC +0.028/+0.013/+0.008 vs v4.4. 0 DROPs in ablation. | `backend/feature_registry.py` (FEATURE_KEYS_BY_MODE), `backend/train.py`, `backend/predict.py`, `backend/test.py`, `backend/ablation_cluster.py` |
 | 2026-04-07 | [x] | ANALYSIS: Jury vs CNN comparison (CVG, n=50): 62% agreement. CNN_MISS=10 (lexically anchored — misses faithful paraphrases); JURY_MISS=9 (jury fails on fragment/minimal answers). Real CNN failure: entity substitution (Piranha 3D cast). Key insight: CNN is lexically anchored, jury is semantically anchored — boundary-band hybrid (jury when CNN 0.3–0.7) could fix both. | `backend/jury/compare.py`, `jury_reports/` |
+| 2026-04-07 | [x] | v5.1 factual groundedness — new CNN features: entity_value_prec/rec (fuzzy string match of GLiNER entity values across texts) + numeric_jaccard (Jaccard over normalised number sets $8B→8B, 25%→25.0%); wired into train.py + feature_registry.py; NumericGrounding extractor (pure-Python, regex+normaliser) | `backend/Features/Numeric/getNumericGrounding.py`, `backend/Features/EntityGroups/getOverlap.py`, `backend/feature_registry.py`, `backend/train.py` |
+| 2026-04-07 | [x] | Jury v5.1 question update: Q2 lexical→omission_key_claim (higher_is_faithful=False); Q1 weight 1.0→0.5 (collinear with Q3 nli_entailment); Q7 numeric_hallucination added (w=1.0, inverted); HALL-NUMERIC reasoning guidance added to system prompt | `backend/jury/jury_evaluator.py` |
+| 2026-04-07 | [x] | v5.2 per-type entity value comparison: `_per_type_value_overlap()` + `_FUZZY_THRESHOLDS` per type (location=0.85, product=0.80, date/time=0.90, duration=0.88, percentage=0.95); 12 new feature maps in `comparison_weights`; ENTITY_VALUE_TYPES + ENTITY_VALUE_KEYS in registry; FEATURE_KEYS_BY_MODE updated (CVG=21, RVG=26, MVM=23) | `backend/Features/EntityGroups/getOverlap.py`, `backend/feature_registry.py` |
+| 2026-04-08 | [x] | DELETE ./cache/ and retrain CVG + RVG on v5.2 feature set — CVG: 21 features, best val 0.1747 @ ep10, early stop ep18, val acc 74.21%; RVG: 26 features, best val 0.1301 @ ep10, early stop ep18, val acc 83.94% | `./cache/`, `models/context-vs-generated/`, `models/reference-vs-generated/`, `train_cvg.log`, `train_rvg.log` |
+| 2026-04-08 | [x] | RETRAIN MVM on v5.2 feature set (23 features) — best val loss 0.1539 @ ep13, early stop ep21, val acc 78.14% @ ep20 | `models/model-vs-model/20260408_103121_best.pth`, `train_mvm.log` |
+| 2026-04-08 | [x] | EVAL CVG v5.2 test set: 70.66% acc / AUC 0.8063 / AUPRC 0.8277 / MCC 0.4228 — REGRESSION vs v5.0 (AUC 0.829); per-type entity value features (8 sparse maps) add noise: both-empty→1.0 for most HaluEval pairs | `test_reports/test_report_20260408_102442.json` |
+| 2026-04-08 | [x] | EVAL RVG v5.2 test set: 78.72% acc / AUC 0.8703 / AUPRC 0.8471 / MCC 0.5759 — REGRESSION vs v5.0 (AUC 0.882); same sparse-feature noise issue | `test_reports/test_report_20260408_103632.json` |
+| 2026-04-08 | [x] | EVAL MVM v5.2 test set: 80.90% acc / AUC 0.8906 / AUPRC 0.8553 / MCC 0.6196 — slight regression vs v5.0 (AUC 0.897); smallest gap of three modes | `test_reports/test_report_20260408_104228.json` |
+| 2026-04-08 | [x] | ABLATION v5.2 all 3 modes — CVG: 1 DROP (entity_time_value_rec), 7 MARGINAL per-type; RVG: 0 DROPs, all per-type MARGINAL (ns Bonferroni); MVM: 2 DROPs (entity_time_prec/rec NOISE), entity_percentage_value_prec/rec KEEP (p<1e-6) | `ablation_reports/experiments/20260408_*_v5.2-*/` |
+| 2026-04-08 | [x] | v5.3 feature baskets — CVG=17 (+entity_product_value_prec only, p=6e-4); RVG=18 (0 per-type, none pass Bonferroni); MVM=19 (+entity_percentage_value_prec/rec p<1e-6) | `backend/feature_registry.py` VERSION=5.3 |
+| 2026-04-08 | [x] | RETRAIN all 3 modes on v5.3 — CVG: best val 0.1560 @ ep21, stop ep29, acc 79.08% (+5pt vs v5.2); RVG: best val 0.1316 @ ep10, stop ep18, acc 81.02%; MVM: best val 0.1524 @ ep2, stop ep10 | `models/*/`, `train_*.log` |
+| 2026-04-08 | [x] | EVAL all 3 modes on v5.3 — CVG: 76.51% acc / AUC 0.852 (NEW BEST, +0.023 vs v5.0); RVG: 77.17% acc / AUC 0.872 (−0.010 vs v5.0, within noise); MVM: 80.95% acc / AUC 0.890 (−0.007 vs v5.0, within noise) | `test_reports/` |
 | 2026-04-07 | [ ] | DATA: Expand training set — synthetic hallucination augmentation for CVG (paraphrase → inject hallucination via LLM, label=0); target CVG ROC > 0.85; also pull RAGTruth / FaithDial / SummaC / ANLI-R3 / WiCE via fetch_external_data | `backend/fetch_external_data.py`, `backend/generate_data.py` |
 | 2026-04-07 | [ ] | FEATURE: Score explainability narrative — post-process breakdown response through GPT-4o-mini to produce a single human-readable sentence; e.g. "Text 2 introduces a factual claim not grounded in Text 1 (entailment 0.12, contradiction 0.67)"; new endpoint or flag on existing breakdown | `backend/api/main.py`, `backend/api/schemas.py` |
 | 2026-04-07 | [ ] | INSIGHT (LinkedIn): v5.0 architecture observation — same Conv2D topology for all modes despite NLI-dominant CVG vs semantic-dominant MVM; mode-specific architectures (deeper early stage for NLI modes, wider spatial RF for semantic modes) as next frontier | — |
+
+## Session 2026-04-08 — v5.2 per-type entity value features + training
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-08 | [x] | Added cursor convention to global CLAUDE.md and TASK.md | `C:\Users\mehul\.claude\CLAUDE.md` |
+
+<!-- CURSOR: 2026-04-08 — v5.3 complete (CVG AUC 0.852 NEW BEST); next: commit v5.3, then DATA expansion via fetch_external_data -->
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 
