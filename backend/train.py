@@ -408,6 +408,83 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
     print(f"[EntityCache] done — entity cache now covers {len(EntityMatch._entity_cache)} sentences.")
 
 
+def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
+                       feature_keys: list[str] | None = None) -> None:
+    """Pre-score all unique sentence pairs with NLI in one large batched pass.
+
+    NLIWeights._pair_cache maps (sent1, sent2) → (entailment, neutral, contradiction).
+    By filling it before the per-pair training loop, every getFeatureMap() call finds
+    its sentence pairs already scored and skips the roberta-large-mnli model entirely.
+
+    Unlike semantic/entity pre-fills (per-sentence), NLI requires both sentences
+    together (cross-encoder), so we cache sentence *pairs* from the full cartesian
+    product of split_txt(text1) × split_txt(text2) for each training example.
+    """
+    from backend.Features.NLI.getNLIweights import NLIWeights
+
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    if not any(k in ("entailment", "neutral", "contradiction") for k in keys):
+        return
+
+    # Collect all unique sentence pairs from pairs that still need NLI computation.
+    unique_pairs: set[tuple[str, str]] = set()
+    for pair in paragraph_pairs:
+        if cache is not None:
+            entry = cache.get_features(pair[0], pair[1])
+            if entry is not None and "nli" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
+                continue
+        sents1 = split_txt(pair[0])
+        sents2 = split_txt(pair[1])
+        for s1 in sents1:
+            for s2 in sents2:
+                if (s1, s2) not in NLIWeights._pair_cache:
+                    unique_pairs.add((s1, s2))
+
+    if not unique_pairs:
+        return
+
+    all_pairs = list(unique_pairs)
+    print(f"[NLICache] pre-scoring {len(all_pairs)} unique sentence pairs…")
+
+    dummy = NLIWeights()
+    dummy.phrase_list1 = [p[0] for p in all_pairs]
+    dummy.phrase_list2 = [p[1] for p in all_pairs]
+    # Run __calc_weights__ with a flat 1×N layout so all pairs go through the
+    # batched inference path and land in _pair_cache.  We don't use the resulting
+    # matrices — the cache population is the side-effect we want.
+    # Re-use the existing batched inference logic by treating each pair as a 1×1 cell.
+    if dummy.ModelName not in NLIWeights._model_cache:
+        dummy.__load_model__()
+
+    mc = NLIWeights._model_cache[dummy.ModelName]
+    tok, mdl, device = mc["tokenizer"], mc["model"], mc["device"]
+    id2label = mdl.config.id2label
+    label_to_idx = {v.lower(): k for k, v in id2label.items()}
+
+    import torch
+    _BS = dummy.__batch_size__
+    with torch.no_grad():
+        for start in tqdm(range(0, len(all_pairs), _BS), desc="NLI pre-scoring"):
+            chunk = all_pairs[start:start + _BS]
+            enc = tok(
+                [p[0] for p in chunk],
+                [p[1] for p in chunk],
+                padding=True, truncation=True,
+                max_length=dummy.__max_len__,
+                return_tensors="pt",
+            ).to(device)
+            logits = mdl(**enc).logits
+            probs = torch.softmax(logits, dim=-1).cpu().numpy()
+            for (s1, s2), row in zip(chunk, probs):
+                NLIWeights._pair_cache[(s1, s2)] = (
+                    float(row[label_to_idx["entailment"]]),
+                    float(row[label_to_idx["neutral"]]),
+                    float(row[label_to_idx["contradiction"]]),
+                )
+
+    print(f"[NLICache] done — pair cache now covers {len(NLIWeights._pair_cache)} sentence pairs.")
+
+
 class TextSimilarityDataset(Dataset):
     """Extract features for every text pair and store as [F, S, S] tensors.
 
@@ -437,6 +514,7 @@ class TextSimilarityDataset(Dataset):
         # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
         _prefill_semantic_cache(paragraph_pairs, self.cache, self.feature_keys)
         _prefill_entity_cache(paragraph_pairs, self.cache, self.feature_keys)
+        _prefill_nli_cache(paragraph_pairs, self.cache, self.feature_keys)
 
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):

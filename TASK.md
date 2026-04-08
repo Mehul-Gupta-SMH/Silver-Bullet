@@ -242,17 +242,28 @@ short inputs.
 | 2026-04-08 | [x] | v5.3 feature baskets — CVG=17 (+entity_product_value_prec only, p=6e-4); RVG=18 (0 per-type, none pass Bonferroni); MVM=19 (+entity_percentage_value_prec/rec p<1e-6) | `backend/feature_registry.py` VERSION=5.3 |
 | 2026-04-08 | [x] | RETRAIN all 3 modes on v5.3 — CVG: best val 0.1560 @ ep21, stop ep29, acc 79.08% (+5pt vs v5.2); RVG: best val 0.1316 @ ep10, stop ep18, acc 81.02%; MVM: best val 0.1524 @ ep2, stop ep10 | `models/*/`, `train_*.log` |
 | 2026-04-08 | [x] | EVAL all 3 modes on v5.3 — CVG: 76.51% acc / AUC 0.852 (NEW BEST, +0.023 vs v5.0); RVG: 77.17% acc / AUC 0.872 (−0.010 vs v5.0, within noise); MVM: 80.95% acc / AUC 0.890 (−0.007 vs v5.0, within noise) | `test_reports/` |
-| 2026-04-07 | [ ] | DATA: Expand training set — synthetic hallucination augmentation for CVG (paraphrase → inject hallucination via LLM, label=0); target CVG ROC > 0.85; also pull RAGTruth / FaithDial / SummaC / ANLI-R3 / WiCE via fetch_external_data | `backend/fetch_external_data.py`, `backend/generate_data.py` |
+| 2026-04-07 | [x] | DATA: Expand training set — RAGTruth (+400 CVG), ANLI-R3 (+400 RVG), WiCE (+349 RVG), MedHallu (+400 CVG), AporiaRAG (+400 CVG); CVG 2331→3531, RVG 1831→2580 | `backend/fetch_external_data.py` |
+| 2026-04-07 | [ ] | DATA: Synthetic hallucination augmentation for CVG (paraphrase → inject hallucination via LLM, label=0); target CVG ROC > 0.86 | `backend/generate_data.py` |
 | 2026-04-07 | [ ] | FEATURE: Score explainability narrative — post-process breakdown response through GPT-4o-mini to produce a single human-readable sentence; e.g. "Text 2 introduces a factual claim not grounded in Text 1 (entailment 0.12, contradiction 0.67)"; new endpoint or flag on existing breakdown | `backend/api/main.py`, `backend/api/schemas.py` |
 | 2026-04-07 | [ ] | INSIGHT (LinkedIn): v5.0 architecture observation — same Conv2D topology for all modes despite NLI-dominant CVG vs semantic-dominant MVM; mode-specific architectures (deeper early stage for NLI modes, wider spatial RF for semantic modes) as next frontier | — |
 
-## Session 2026-04-08 — v5.2 per-type entity value features + training
+## Session 2026-04-08/09 — Data expansion + NLI pair cache + expanded retraining
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
 | 2026-04-08 | [x] | Added cursor convention to global CLAUDE.md and TASK.md | `C:\Users\mehul\.claude\CLAUDE.md` |
+| 2026-04-08 | [x] | PERF: NLI pair cache — `NLIWeights._pair_cache` keyed on (sent1, sent2); `_prefill_nli_cache()` in train.py batches all unique sentence pairs before training loop; RVG needed only 2303 new pairs scored (rest cached from CVG) | `backend/Features/NLI/getNLIweights.py`, `backend/train.py` |
+| 2026-04-08 | [x] | DATA: Fixed 5 dataset loaders — RAGTruth (wandb/RAGTruth-processed), ANLI-R3 (facebook/anli, removed trust_remote_code), WiCE (jon-tow/wice, config=claim); FaithDial/SummaC unavailable (custom loading scripts deprecated in datasets>=3.0) | `backend/fetch_external_data.py` |
+| 2026-04-08 | [x] | DATA: Added MedHallu loader (UTAustin-AIHealth/MedHallu, pqa_labeled+pqa_artificial configs; Knowledge+GroundTruth→1, Knowledge+HallucinatedAnswer→0) | `backend/fetch_external_data.py` |
+| 2026-04-09 | [x] | DATA: Added AporiaRAG loader (aporia-ai/rag_hallucinations; context+answer+is_hallucination; 309/691 balanced to 200/200) | `backend/fetch_external_data.py` |
+| 2026-04-09 | [x] | RETRAIN CVG on 2731 pairs (RAGTruth added) — best val 0.1583 @ ep20, stop ep28; test AUC 0.836 (−0.016 vs v5.3; MCC +0.062, more balanced) | `models/context-vs-generated/best.pth` |
+| 2026-04-09 | [x] | RETRAIN RVG on 2580 pairs (ANLI-R3+WiCE added) — best val 0.1460 @ ep10, stop ep18, val acc 79.33% | `models/reference-vs-generated/best.pth` |
+| 2026-04-09 | [~] | RETRAIN CVG on 3531 pairs (MedHallu+AporiaRAG added) — in progress | `models/context-vs-generated/best.pth` |
+| 2026-04-09 | [ ] | EVAL RVG on 2580-pair model — compare vs v5.3 baseline (AUC 0.872) | `test_reports/` |
+| 2026-04-09 | [ ] | EVAL CVG on 3531-pair model — target AUC > 0.852 (v5.3 baseline) | `test_reports/` |
+| 2026-04-09 | [ ] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
 
-<!-- CURSOR: 2026-04-08 — v5.3 complete (CVG AUC 0.852 NEW BEST); next: commit v5.3, then DATA expansion via fetch_external_data -->
+<!-- CURSOR: 2026-04-09 — CVG 3531-pair retrain running; RVG eval running; then eval CVG, commit all, update UI test cases -->
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 

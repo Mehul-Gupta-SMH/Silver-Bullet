@@ -1,12 +1,16 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from tqdm import tqdm
 from backend.Postprocess.__addpad import resize_matrix
 
 
 class NLIWeights:
     # Shared across all instances — model loaded once per process
     _model_cache: dict = {}
+    # Sentence-pair NLI cache: (sent1, sent2) → (entailment, neutral, contradiction)
+    # Populated by _prefill_nli_cache() in train.py before the per-pair training loop.
+    # Keyed on the raw sentence strings so pairs that repeat across training examples
+    # are never re-scored.
+    _pair_cache: dict = {}
 
     def __init__(self, MODEL_NAME: str = "FacebookAI/roberta-large-mnli"):
         self.ModelName = MODEL_NAME
@@ -43,44 +47,54 @@ class NLIWeights:
         }
 
     def __calc_weights__(self):
-        if self.ModelName not in NLIWeights._model_cache:
-            self.__load_model__()
+        # Collect all (p1, p2) pairs that are not yet in the pair cache.
+        uncached = [
+            (p1, p2)
+            for p1 in self.phrase_list1
+            for p2 in self.phrase_list2
+            if (p1, p2) not in NLIWeights._pair_cache
+        ]
 
-        cache = NLIWeights._model_cache[self.ModelName]
-        tok = cache["tokenizer"]
-        mdl = cache["model"]
-        device = cache["device"]
+        if uncached:
+            if self.ModelName not in NLIWeights._model_cache:
+                self.__load_model__()
 
-        id2label = mdl.config.id2label
-        label_to_idx = {v.lower(): k for k, v in id2label.items()}
+            mc = NLIWeights._model_cache[self.ModelName]
+            tok, mdl, device = mc["tokenizer"], mc["model"], mc["device"]
+            id2label = mdl.config.id2label
+            label_to_idx = {v.lower(): k for k, v in id2label.items()}
 
-        row_e_all, row_n_all, row_c_all = [], [], []
-
-        with torch.no_grad():
-            for p1 in tqdm(self.phrase_list1, desc="NLI Weights - Phrase 1"):
-                row_e, row_n, row_c = [], [], []
-                pairs = [(p1, p2) for p2 in self.phrase_list2]
-
-                for start in range(0, len(pairs), self.__batch_size__):
-                    chunk = pairs[start:start + self.__batch_size__]
+            with torch.no_grad():
+                for start in range(0, len(uncached), self.__batch_size__):
+                    chunk = uncached[start:start + self.__batch_size__]
                     enc = tok(
                         [p for p, _ in chunk],
                         [h for _, h in chunk],
                         padding=True, truncation=True,
                         max_length=self.__max_len__,
-                        return_tensors="pt"
+                        return_tensors="pt",
                     ).to(device)
-
                     logits = mdl(**enc).logits
                     probs = torch.softmax(logits, dim=-1).cpu().numpy()
+                    for (p1, p2), row in zip(chunk, probs):
+                        NLIWeights._pair_cache[(p1, p2)] = (
+                            float(row[label_to_idx["entailment"]]),
+                            float(row[label_to_idx["neutral"]]),
+                            float(row[label_to_idx["contradiction"]]),
+                        )
 
-                    row_e.extend(probs[:, label_to_idx["entailment"]].tolist())
-                    row_n.extend(probs[:, label_to_idx["neutral"]].tolist())
-                    row_c.extend(probs[:, label_to_idx["contradiction"]].tolist())
-
-                row_e_all.append(row_e)
-                row_n_all.append(row_n)
-                row_c_all.append(row_c)
+        # Reconstruct the n×m matrices from the cache (no model call needed).
+        row_e_all, row_n_all, row_c_all = [], [], []
+        for p1 in self.phrase_list1:
+            row_e, row_n, row_c = [], [], []
+            for p2 in self.phrase_list2:
+                e, n, c = NLIWeights._pair_cache[(p1, p2)]
+                row_e.append(e)
+                row_n.append(n)
+                row_c.append(c)
+            row_e_all.append(row_e)
+            row_n_all.append(row_n)
+            row_c_all.append(row_c)
 
         self.comparison_weights = {
             "entailment":     row_e_all,
