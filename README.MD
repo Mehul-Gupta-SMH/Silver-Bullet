@@ -3,7 +3,7 @@
 <img src="assets/icon.png" alt="SilverBullet" width="100%" style="max-width:600px; height:auto;">
 
 Real-time faithfulness and agreement scoring for LLM outputs.
-Given two texts it returns a score in **[0, 1]** using a Conv2D model trained on 16 multi-signal sentence-pair feature maps.
+Given two texts it returns a score in **[0, 1]** using a Conv2D model trained on up to 20 multi-signal sentence-pair feature maps (v5.4).
 
 | Evaluation mode | text1 | text2 | Score meaning |
 |-----------------|-------|-------|---------------|
@@ -42,20 +42,22 @@ Text pair  (text1, text2)
 split_txt()  ──  sentence split + coreference resolution (GPT-4o-mini / local LLM)
      │
      ▼
-Feature extractors  →  n×m matrices  →  bilinear resize to 32×32
+Feature extractors  →  n×m matrices  →  bilinear resize to 64×64
   ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  6 maps  [batched, embedding cache]
   ├─ Lexical    Jaccard · Dice · Cosine · ROUGE                 →  4 maps  [batch tokenise + parallel rows]
   ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps  [batched, chunk size 64]
-  ├─ Entity     GLiNER NER — entity count mismatch              →  1 map   [single batch_predict_entities call]
-  └─ LCS        token-level + char-level LCS similarity         →  2 maps  [parallel rows]
-                                                       TOTAL: 16 channels
+  ├─ Entity     GLiNER NER — mismatch + per-type value overlap  →  up to 9 maps  [batch NER + Bonferroni pruning]
+  ├─ LCS        token-level + char-level LCS similarity         →  2 maps  [parallel rows]
+  ├─ Numeric    normalised numeric token Jaccard                →  1 map   [pure regex, no model]
+  └─ Relations  entity grounding recall (GLiNER, shared cache)  →  1 map   [shares EntityGroups model]
+                                                 TOTAL: 18–20 channels (mode-specific basket, v5.4)
      │
      ▼
-TextSimilarityCNN  [B, 16, 32, 32]
-  Conv2d(16→128) + BN + ReLU + MaxPool  →  [B, 128, 16, 16]
-  Conv2d(128→64) + BN + ReLU + MaxPool  →  [B,  64,  8,  8]
-  Conv2d(64→32)  + BN + ReLU + MaxPool  →  [B,  32,  4,  4]
-  Flatten → FC(512→128) + BN + Dropout → FC(128→1) + sigmoid
+TextSimilarityCNN  [B, F, 64, 64]  (F = 18–20, mode-specific)
+  Conv2d(F→128)  + BN + ReLU + MaxPool  →  [B, 128, 32, 32]
+  Conv2d(128→64) + BN + ReLU + MaxPool  →  [B,  64, 16, 16]
+  Conv2d(64→32)  + BN + ReLU + MaxPool  →  [B,  32,  8,  8]
+  Flatten → FC(2048→128) + BN + Dropout → FC(128→1) + sigmoid
      │
      ▼
 Score ∈ [0, 1]
@@ -79,8 +81,10 @@ Silver-Bullet/
 │   │   ├── Semantic/               # 6 maps — embedding cosine + soft alignment
 │   │   ├── Lexical/                # 4 maps — token overlap (SentencePiece)
 │   │   ├── NLI/                    # 3 maps — entailment probabilities
-│   │   ├── EntityGroups/           # 1 map  — GLiNER entity mismatch
-│   │   └── LCS/                    # 2 maps — token + char LCS
+│   │   ├── EntityGroups/           # up to 9 maps — GLiNER NER mismatch + per-type value overlap
+│   │   ├── LCS/                    # 2 maps — token + char LCS
+│   │   ├── Numeric/                # 1 map  — normalised numeric token Jaccard
+│   │   └── Relations/              # 1 map  — entity grounding recall (shares GLiNER cache)
 │   ├── Splitter/
 │   │   └── sentence_splitter.py    # split_txt() — regex split + coref per sentence
 │   ├── Preprocess/coref/
@@ -99,7 +103,11 @@ Silver-Bullet/
 │   ├── feature_registry.py         # FEATURE_KEYS + checkpoint manifest
 │   ├── training_report.py          # Per-epoch JSON + Markdown reports
 │   ├── generate_data.py            # Generates data/ + data/{mode}/ splits
+│   ├── fetch_external_data.py      # Downloads STS-B/MNLI/RAGTruth/MedHallu/etc.
+│   ├── augment_data.py             # Adversarial hard-negative augmentation (numeric/entity swap)
+│   ├── precompute_features.py      # Batch feature cache pre-fill before training
 │   └── example.py                  # Feature pipeline demo (no model)
+├── analysis_reports/               # Feature pattern analysis (confident correct vs wrong)
 ├── frontend/                       # React + TypeScript + Vite UI
 ├── tests/                          # pytest API tests (mocked predictor)
 ├── data/                           # train.json, validate.json, test.json
@@ -160,7 +168,7 @@ Creates `data/{train,validate,test}.json` (general) and per-mode splits under `d
 
 #### Expand with external datasets (recommended)
 
-Downloads and merges public NLP datasets (STS-B, MNLI, QQP, QNLI, HaluEval QA) to reach ~1 400 pairs per mode:
+Downloads and merges public NLP datasets (STS-B, MNLI, QQP, QNLI, HaluEval, RAGTruth, ANLI-R3, WiCE, MedHallu, AporiaRAG) to reach ~2 000–3 500 pairs per mode:
 
 ```bash
 python -m backend.fetch_external_data
@@ -168,9 +176,18 @@ python -m backend.fetch_external_data
 
 Options: `--max-per-source 400` (default), `--force` to re-download.
 
+#### Add adversarial hard negatives (recommended)
+
+Generates numeric-swap and entity-swap hard negatives from existing label=1 pairs and appends them to the training splits. Targets entity substitution and numeric hallucination failure modes identified in feature analysis:
+
+```bash
+python -m backend.augment_data          # +200 pairs per mode (default)
+python -m backend.augment_data --per-mode 300 --dry-run   # preview without writing
+```
+
 ### Pre-compute features (recommended before training)
 
-Extracts all 16 feature maps for every pair across all splits and caches them to disk. Subsequent training runs load from cache at ~95 pairs/sec instead of recomputing (~1–4 s/pair):
+Extracts all feature maps for every pair across all splits and caches them to disk. Subsequent training runs load from cache; new features added later are computed incrementally (only missing keys are recomputed and merged — no need to clear the cache):
 
 ```bash
 python -m backend.precompute_features
@@ -195,7 +212,7 @@ Checkpoints are saved to:
 - General: `best_model.pth`
 - Per-mode: `models/{mode}/best.pth` (active) + `models/{mode}/{ts}_best.pth` / `{ts}_final.pth` (archived per run)
 
-Feature cache is written to `./cache/` — delete it before retraining with a changed feature set.
+Feature cache is written to `./cache/`. The cache is **incremental** — adding a new feature extractor does not require clearing the cache. The training pipeline detects missing keys per entry and recomputes only those, then merges and saves the updated entry.
 
 If MLflow is running (see [Monitoring](#monitoring)), each run is automatically tracked and the best-weights model is registered in the Model Registry as `silverbullet-{mode}`.
 
@@ -347,12 +364,12 @@ docker pull ghcr.io/mehul-gupta-smh/silver-bullet:latest
 `TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 32, 32]` input:
 
 ```
-[B, 16, 32, 32]
-  Conv2d(16→128) + BN + ReLU + MaxPool   →  [B, 128, 16, 16]
-  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64,  8,  8]
-  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  4,  4]
-  Flatten                                 →  [B, 512]
-  FC(512→128)    + BN + ReLU + Dropout
+[B, F, 64, 64]  (F = 18–20, mode-specific basket, v5.4)
+  Conv2d(F→128)  + BN + ReLU + MaxPool   →  [B, 128, 32, 32]
+  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64, 16, 16]
+  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  8,  8]
+  Flatten                                 →  [B, 2048]
+  FC(2048→128)   + BN + ReLU + Dropout
   FC(128→1)      + sigmoid               →  score ∈ [0, 1]
 ```
 
@@ -364,13 +381,18 @@ Training uses **MSELoss** (supports continuous float faithfulness labels as well
 
 ## Model Performance
 
-Results on the held-out test split (~216 pairs per mode) after training on ~1 001 pairs with external dataset augmentation (STS-B, MNLI, QQP, QNLI, HaluEval):
+Results on held-out test splits after training on expanded datasets (external corpora + adversarial augmentation), feature pipeline v5.4 (18–20 channels per mode):
 
-| Mode | Val Accuracy | Best Val Loss | Best Epoch | Early Stop |
-|------|-------------|--------------|-----------|-----------|
-| `context-vs-generated` | **89.25%** | 0.0874 | 7 | @ 11 |
-| `reference-vs-generated` | **86.45%** | 0.1051 | 12 | @ 17 |
-| `model-vs-model` | **85.98%** | 0.1032 | 5 | @ 9 |
+| Mode | Test ROC-AUC | Accuracy | MCC | Test pairs | Train pairs |
+|------|-------------|----------|-----|-----------|-------------|
+| `context-vs-generated` | **0.853** | 76.5% | 0.530 | 531 | 2,671 |
+| `reference-vs-generated` | **0.873** | 78.1% | 0.563 | 388 | 2,005 |
+| `model-vs-model` | **0.889** | 81.9% | 0.645 | 336 | 1,761 |
+
+Key findings from feature analysis (see `analysis_reports/`):
+- **NLI neutral score** is the single most discriminative feature across all modes (Cohen's d up to −2.32)
+- **Entity value precision/recall** is the strongest signal for RVG failures (entity substitution)
+- **Numeric Jaccard** catches hallucinations where topic matches but numbers differ
 
 All three mode-specific checkpoints are tracked in MLflow and registered in the Model Registry as `silverbullet-{mode}`.
 
@@ -418,7 +440,7 @@ Every checkpoint embeds `num_features` and a feature manifest so the model can b
 2. Implement `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]` using the `_reset_state()` pattern (see `AGENT.md`)
 3. Register the new feature keys in `backend/feature_registry.py` → `FEATURE_KEYS`
 4. Add the extractor to `backend/train.py` and `backend/example.py`
-5. Delete `./cache/` and retrain (new features change `num_features` and the manifest)
+5. Retrain — the cache is incremental and does not need to be cleared. Missing keys are computed and merged per entry on the first training run.
 
 ---
 
