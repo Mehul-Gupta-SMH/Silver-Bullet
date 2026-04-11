@@ -263,8 +263,26 @@ short inputs.
 | 2026-04-11 | [x] | EVAL CVG on 3531-pair model — AUC 0.8529 (≈ v5.3 baseline), Acc 76.5%, MCC 0.530, AUPRC 0.869; balanced confusion (206/200) | `test_reports/test_report_20260411_093556.json` |
 | 2026-04-09 | [x] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
 | 2026-04-11 | [x] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports — commit 0cbe1fd | `models/*/best.pth`, `test_reports/`, `*.log` |
+| 2026-04-11 | [x] | RETRAIN MVM — best val 0.1480 @ ep10, early stop ep18 | `models/model-vs-model/20260411_132403_best.pth` |
+| 2026-04-11 | [x] | EVAL MVM — AUC 0.8892 (+0.019 vs ~0.870 prev), Acc 81.9%, MCC 0.6445, F1 0.827 | `test_reports/test_report_20260411_133144.json` |
+| 2026-04-11 | [ ] | COMMIT MVM checkpoint + logs | `models/model-vs-model/best.pth`, `train_mvm_new.log`, `test_mvm_new.log` |
 
-<!-- CURSOR: 2026-04-11 — Session complete. CVG AUC 0.8529, RVG AUC 0.8734. Next: decide on next experiment (relation features, jury mode, or MVM retrain) -->
+<!-- CURSOR: 2026-04-11 — MVM eval done (AUC 0.8892, new best); commit MVM checkpoint; feature analysis agent still running -->
+
+## Session 2026-04-10 — Feature pattern analysis
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-10 | [~] | ANALYSIS: Feature pattern study — confident correct vs confident wrong; top-5 mean aggregation on n×m matrices; Cohen's d + delta flagging; CVG+RVG; top-20 failure cases | `analysis_reports/run_analysis.py`, `analysis_reports/feature_analysis_report.md`, `analysis_reports/feature_analysis_report.json` |
+
+## Session 2026-04-10 — Entity grounding recall feature (v5.4)
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-10 | [~] | FEATURE: Entity grounding recall — `RelationGrounding` extractor using existing GLiNER model; recall of text1 entities in text2; key `entity_grounding_recall`; v5.4 registry; wired into train/predict/precompute | `backend/Features/Relations/__init__.py`, `backend/Features/Relations/getRelationWeights.py`, `backend/feature_registry.py` (VERSION=5.4, FEATURE_KEYS+all 3 mode baskets), `backend/train.py` (import+instantiation+_missing_groups+full-compute+patch-compute), `backend/predict.py` (predict_pair_breakdown extractor list), `backend/precompute_features.py` |
+| 2026-04-10 | [ ] | VERIFY: Run `python -c "from backend.Features.Relations.getRelationWeights import RelationGrounding; print('OK')"` + `python -c "from backend.feature_registry import FEATURE_KEYS; print(FEATURE_KEYS)"` to confirm clean import and registry |
+| 2026-04-10 | [ ] | COMMIT: `git add backend/Features/Relations/ backend/feature_registry.py backend/train.py backend/predict.py backend/precompute_features.py` then commit + push |
+| 2026-04-10 | [ ] | RETRAIN: delete ./cache/ and retrain all 3 modes — feature count changed (v5.3→v5.4), old checkpoints incompatible |
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 
