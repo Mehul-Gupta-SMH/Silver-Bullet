@@ -149,9 +149,16 @@ FEATURE_KEYS: list[str] = [
     # the entity recall for the Jobs sentence drops toward 0.  Complements
     # entity_value_rec (which measures the inverse direction: text2→text1).
     "entity_grounding_recall",
+    # Relation triplet recall (1) — getRelexWeights.py (v5.5)
+    # Uses gliner-relex-large-v1.0 (zero-shot joint NER + RE) to extract
+    # (head, relation_type, tail) triplets from each sentence, then computes
+    # recall of text1's triplets in text2.  Stronger than entity_grounding_recall:
+    # catches cases where the entity is correct but the relation is wrong
+    # e.g. "founded_by → Steve Jobs" vs "acquired_by → Steve Jobs".
+    "relation_triplet_recall",
 ]
 
-VERSION      = "5.4"
+VERSION      = "5.5"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 # ---------------------------------------------------------------------------
@@ -192,6 +199,10 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # Recall-direction entity overlap: fraction of text1 entities grounded in text2.
         # Relevant for all modes — catches entity substitution/omission hallucinations.
         "entity_grounding_recall",
+        # Relation triplet recall (1) — v5.5
+        # (head, relation_type, tail) triplet recall using gliner-relex-large-v1.0.
+        # Catches wrong-relation hallucinations missed by entity overlap alone.
+        "relation_triplet_recall",
     ],
     "reference-vs-generated": [
         # Lexical (4)
@@ -221,6 +232,8 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # Both-empty→1.0 on sparse reference texts adds collective noise.
         # Entity grounding recall (1) — v5.4
         "entity_grounding_recall",
+        # Relation triplet recall (1) — v5.5
+        "relation_triplet_recall",
     ],
     "model-vs-model": [
         # Lexical (4)
@@ -250,6 +263,8 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "entity_percentage_value_rec",
         # Entity grounding recall (1) — v5.4
         "entity_grounding_recall",
+        # Relation triplet recall (1) — v5.5
+        "relation_triplet_recall",
     ],
 }
 

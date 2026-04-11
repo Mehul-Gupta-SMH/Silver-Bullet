@@ -36,6 +36,7 @@ from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.Features.Relations.getRelationWeights import RelationGrounding
+from backend.Features.Relations.getRelexWeights import RelexGrounding
 from backend.train import feature_map_to_tensor
 
 _MODES = ["model-vs-model", "reference-vs-generated", "context-vs-generated"]
@@ -79,6 +80,7 @@ def _build_extractors():
         "entity":     EntityMatch(),
         "lcs":        LCSWeights(),
         "relations":  RelationGrounding(),
+        "relex":      RelexGrounding(),
     }
     print("All extractors ready.\n")
     return extractors
@@ -96,6 +98,7 @@ def _extract(text1: str, text2: str, extractors: dict) -> list:
     feature_map.update(extractors["entity"].getFeatureMap(sent1, sent2))
     feature_map.update(extractors["lcs"].getFeatureMap(sent1, sent2))
     feature_map.update(extractors["relations"].getFeatureMap(sent1, sent2))
+    feature_map.update(extractors["relex"].getFeatureMap(sent1, sent2))
 
     stacked = feature_map_to_tensor(feature_map)   # [F, 64, 64]
     return stacked.tolist()

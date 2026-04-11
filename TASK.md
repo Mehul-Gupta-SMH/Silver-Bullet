@@ -279,7 +279,16 @@ short inputs.
 | 2026-04-11 | [ ] | EVAL RVG + MVM after retrain completes | `test_reports/` |
 | 2026-04-11 | [ ] | COMMIT all 3 v5.4 checkpoints + test logs; update PR #40 with final v5.4 numbers | `models/*/best.pth` |
 
-<!-- CURSOR: 2026-04-11 — v5.4 RVG+MVM retraining in background (bo2ichd9y); CVG done (AUC 0.8510); next: eval RVG+MVM, commit, update PR #40 -->
+## Session 2026-04-11 (continued) — v5.5 relation triplet recall
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-11 | [x] | FEATURE: Relation triplet recall — `RelexGrounding` using `knowledgator/gliner-relex-large-v1.0` (zero-shot joint NER+RE); extracts (head, relation_type, tail) triplets; recall of text1 triplets in text2; key `relation_triplet_recall`; VERSION=5.5 | `backend/Features/Relations/getRelexWeights.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py`, `backend/precompute_features.py` |
+| 2026-04-11 | [~] | RETRAIN all 3 modes v5.5 — CVG=19, RVG=20, MVM=21 features; running in background (bqzcbqmgb); cache incremental (only relation_triplet_recall patch-computed) | `models/*/best.pth` |
+| 2026-04-11 | [ ] | EVAL all 3 modes v5.5 after retrain; compare vs v5.4 | `test_reports/` |
+| 2026-04-11 | [ ] | COMMIT v5.5 checkpoints + test logs; push; update PR #40 | `models/*/best.pth` |
+
+<!-- CURSOR: 2026-04-11 — v5.5 (relation_triplet_recall) training in background (bqzcbqmgb); CVG=19/RVG=20/MVM=21 features; next: eval all 3, commit, update PR #40 -->
 
 ## Session 2026-04-10 — Feature pattern analysis
 
