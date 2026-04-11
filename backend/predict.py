@@ -112,6 +112,7 @@ class SimilarityPredictor:
         from backend.Features.NLI.getNLIweights import NLIWeights
         from backend.Features.EntityGroups.getOverlap import EntityMatch
         from backend.Features.LCS.getLCSweights import LCSWeights
+        from backend.Features.Relations.getRelationWeights import RelationGrounding
         from backend.feature_cache import FeatureCache
 
         sent1 = split_txt(text1)
@@ -126,11 +127,12 @@ class SimilarityPredictor:
         else:
             # --- parallel feature extraction on cache miss ---
             extractors = [
-                ("lexical",  LexicalWeights),
-                ("semantic", SemanticWeights),
-                ("nli",      NLIWeights),
-                ("entity",   EntityMatch),
-                ("lcs",      LCSWeights),
+                ("lexical",    LexicalWeights),
+                ("semantic",   SemanticWeights),
+                ("nli",        NLIWeights),
+                ("entity",     EntityMatch),
+                ("lcs",        LCSWeights),
+                ("relations",  RelationGrounding),
             ]
 
             def _run(name_cls):

@@ -142,9 +142,16 @@ FEATURE_KEYS: list[str] = [
     "entity_duration_value_rec",
     "entity_percentage_value_prec",
     "entity_percentage_value_rec",
+    # Entity grounding recall (1) — getRelationWeights.py (v5.4)
+    # Recall of text1's named entities in text2 sentences.  Catches factual
+    # hallucinations where entities and their relationships differ: if text1
+    # asserts "Steve Jobs founded Apple" and text2 says "Tim Cook founded Apple",
+    # the entity recall for the Jobs sentence drops toward 0.  Complements
+    # entity_value_rec (which measures the inverse direction: text2→text1).
+    "entity_grounding_recall",
 ]
 
-VERSION      = "5.3"
+VERSION      = "5.4"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 # ---------------------------------------------------------------------------
@@ -181,6 +188,10 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # All others (location/time/percentage/date/duration) failed Bonferroni (p>0.069)
         # entity_time_value_prec/rec: NOISE (p=0.134, 0.342) in CVG; confirmed DROP in MVM.
         "entity_product_value_prec",
+        # Entity grounding recall (1) — v5.4
+        # Recall-direction entity overlap: fraction of text1 entities grounded in text2.
+        # Relevant for all modes — catches entity substitution/omission hallucinations.
+        "entity_grounding_recall",
     ],
     "reference-vs-generated": [
         # Lexical (4)
@@ -208,6 +219,8 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # entity_product_value_rec (p=0.008) and entity_percentage_value_rec (p=0.013)
         # are nominally * but do not survive Bonferroni α=1.67e-03.
         # Both-empty→1.0 on sparse reference texts adds collective noise.
+        # Entity grounding recall (1) — v5.4
+        "entity_grounding_recall",
     ],
     "model-vs-model": [
         # Lexical (4)
@@ -235,6 +248,8 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # entity_location: MARGINAL (p=0.013/0.035) — NS after Bonferroni α=2.17e-03
         "entity_percentage_value_prec",
         "entity_percentage_value_rec",
+        # Entity grounding recall (1) — v5.4
+        "entity_grounding_recall",
     ],
 }
 

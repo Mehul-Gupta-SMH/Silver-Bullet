@@ -27,6 +27,7 @@ from backend.Features.NLI.getNLIweights import NLIWeights
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.Features.Numeric.getNumericGrounding import NumericGrounding
+from backend.Features.Relations.getRelationWeights import RelationGrounding
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest, get_feature_keys
 from backend.training_report import TrainingReport
@@ -285,6 +286,8 @@ def _missing_groups(entry: dict, feature_keys: list[str] | None = None) -> set[s
             groups.add("nli")
         elif k == "numeric_jaccard":
             groups.add("numeric")
+        elif k == "entity_grounding_recall":
+            groups.add("relations")
         elif k.startswith("entity_"):
             groups.add("entity")
         elif k in ("lcs_token", "lcs_char"):
@@ -503,12 +506,13 @@ class TextSimilarityDataset(Dataset):
         self.cache        = FeatureCache() if use_cache else None
         self.feature_keys = feature_keys if feature_keys is not None else FEATURE_KEYS
 
-        self.lexical  = LexicalWeights()
-        self.semantic = SemanticWeights()
-        self.nli      = NLIWeights()
-        self.entity   = EntityMatch()
-        self.lcs      = LCSWeights()
-        self.numeric  = NumericGrounding()
+        self.lexical   = LexicalWeights()
+        self.semantic  = SemanticWeights()
+        self.nli       = NLIWeights()
+        self.entity    = EntityMatch()
+        self.lcs       = LCSWeights()
+        self.numeric   = NumericGrounding()
+        self.relations = RelationGrounding()
 
         # Pre-encode / pre-run all sentence-level models in one large batch before
         # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
@@ -533,12 +537,13 @@ class TextSimilarityDataset(Dataset):
                         sent_group1 = split_txt(pair[0])
                         sent_group2 = split_txt(pair[1])
                         patch: dict = {}
-                        if "lexical"  in groups: patch.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
-                        if "semantic" in groups: patch.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
-                        if "nli"      in groups: patch.update(self.nli.getFeatureMap(sent_group1, sent_group2))
-                        if "entity"   in groups: patch.update(self.entity.getFeatureMap(sent_group1, sent_group2))
-                        if "lcs"      in groups: patch.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
-                        if "numeric"  in groups: patch.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
+                        if "lexical"   in groups: patch.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
+                        if "semantic"  in groups: patch.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
+                        if "nli"       in groups: patch.update(self.nli.getFeatureMap(sent_group1, sent_group2))
+                        if "entity"    in groups: patch.update(self.entity.getFeatureMap(sent_group1, sent_group2))
+                        if "lcs"       in groups: patch.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
+                        if "numeric"   in groups: patch.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
+                        if "relations" in groups: patch.update(self.relations.getFeatureMap(sent_group1, sent_group2))
                         merged = dict(cached)
                         merged.update({k: v.tolist() if isinstance(v, torch.Tensor) else v for k, v in patch.items()})
                         if use_cache:
@@ -569,6 +574,7 @@ class TextSimilarityDataset(Dataset):
             feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
+            feature_map.update(self.relations.getFeatureMap(sent_group1, sent_group2))
 
             stacked = feature_map_to_tensor(feature_map, self.feature_keys)  # [F, S, S]
 
