@@ -229,18 +229,28 @@ class RelexGrounding:
         if new_texts:
             self._ensure_model()
             model = RelexGrounding._model_cache[self.MODEL]
+            truncated = [t[: self._MAX_CHARS] for t in new_texts]
 
-            for text in new_texts:
-                trunc = text[: self._MAX_CHARS]
+            # Step 1: batch entity extraction across all new sentences at once.
+            try:
+                if hasattr(model, "batch_predict_entities"):
+                    batch_entities = model.batch_predict_entities(
+                        truncated, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD
+                    )
+                else:
+                    batch_entities = [
+                        model.predict_entities(t, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD)
+                        for t in truncated
+                    ]
+            except Exception:
+                batch_entities = [[] for _ in truncated]
+
+            # Step 2: relation extraction per sentence (requires per-text entity list).
+            # predict_relations is inherently per-text so this loop is unavoidable,
+            # but entity inference (the expensive transformer pass) is batched above.
+            for trunc, entities in zip(truncated, batch_entities):
                 triplets: list[tuple[str, str, str]] = []
                 try:
-                    # Step 1: extract entities
-                    entities = model.predict_entities(
-                        trunc,
-                        ENTITY_TYPES,
-                        threshold=self.ENTITY_THRESHOLD,
-                    )
-                    # Step 2: extract relations given entities
                     if entities and hasattr(model, "predict_relations"):
                         relations = model.predict_relations(
                             trunc,
