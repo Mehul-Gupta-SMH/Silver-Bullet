@@ -40,63 +40,237 @@ ENTITY_TYPES: list[str] = [
 ENTITY_FEATURE_KEYS: list[str] = [f"entity_{t}" for t in ENTITY_TYPES]
 
 # ---------------------------------------------------------------------------
+# Entity types selected for per-type value-overlap features (v5.2)
+# Criteria: GLiNER zero-shot reliability + distinct matchable string values +
+#           not redundant with numeric_jaccard (excludes number/quantity/money).
+# Fuzzy thresholds (used in getOverlap._fuzzy_in): percentage needs strictest
+#   matching (0.95) because "25%" ≠ "26%"; dates/times strict (0.90) because
+#   year/hour errors are meaningful; product/location/duration more lenient.
+# ---------------------------------------------------------------------------
+ENTITY_VALUE_TYPES: list[str] = [
+    "location",    # threshold=0.85 — "Paris" ≠ "Berlin", typos OK
+    "product",     # threshold=0.80 — brand variants ("Tesla Model 3" vs "Tesla")
+    "date",        # threshold=0.90 — "2023" ≠ "2024" must fail
+    "time",        # threshold=0.90 — "3 PM" ≠ "9 AM" must fail
+    "duration",    # threshold=0.88 — "3 hours" ≠ "3 days" must fail
+    "percentage",  # threshold=0.95 — "25%" ≠ "26%" must fail (strictest)
+]
+
+# Per-type value keys: "entity_location_value_prec", "entity_location_value_rec", …
+ENTITY_VALUE_KEYS: list[str] = [
+    key
+    for t in ENTITY_VALUE_TYPES
+    for key in (f"entity_{t}_value_prec", f"entity_{t}_value_rec")
+]
+
+# ---------------------------------------------------------------------------
 # Canonical feature key list
 # Insertion order matches the .update() sequence in train.py / predict.py:
 #   LexicalWeights -> SemanticWeights -> NLIWeights -> EntityMatch -> LCSWeights
 # ---------------------------------------------------------------------------
 
 FEATURE_KEYS: list[str] = [
-    # Lexical (5) — getLexicalWeights.py
-    "jaccard",
+    # Lexical (4 of 5) — getLexicalWeights.py
+    # Dropped in v4.1 (ablation n=6293, correlated redundancy cross-r ≥ 0.93 with dice):
+    #   cosine (cross-r=0.938)
+    # rouge (unigram) restored in v4.2: CVG label-r=-0.183 (3rd-ranked), much stronger
+    #   than dice (-0.114) and rouge3 (-0.082) for hallucination. Cross-r does not imply
+    #   equal discriminative power per mode.
+    # jaccard restored in v4.3: CVG label-r=-0.124, RVG=+0.213 — meaningful across modes;
+    #   cross-r=0.983 with dice was misleading (same direction bias, different magnitude).
+    # rouge3 retained: max_cross_r=0.836 with jaccard (below 0.85 — independent signal)
     "dice",
-    "cosine",
-    "rouge",
     "rouge3",
-    # Semantic cosine similarity (2) — getSemanticWeights.py
+    "rouge",
+    "jaccard",
+    # Semantic (4 of 6) — getSemanticWeights.py
+    # mxbai cosine restored in v4.4: CVG label-r=+0.098, RVG=+0.352, MVM=+0.439.
+    #   Full n×m pairwise structure; CNN learns spatial patterns PREC/REC can't capture.
+    # Qwen cosine NOT restored: lower label-r than mxbai across all modes.
+    # REC_Qwen NOT restored: cross-r with PREC_Qwen = +0.999 on RVG — fully redundant.
+    # SOFT_ROW/SOFT_COL dropped in v4.0a (ablation p=0.47-0.80 — confirmed noise).
     "mixedbread-ai/mxbai-embed-large-v1",
-    "Qwen/Qwen3-Embedding-0.6B",
-    # Semantic soft alignment (4) — getSemanticWeights.py (__calc_soft_alignment__)
-    "SOFT_ROW_mixedbread-ai/mxbai-embed-large-v1",
-    "SOFT_COL_mixedbread-ai/mxbai-embed-large-v1",
-    "SOFT_ROW_Qwen/Qwen3-Embedding-0.6B",
-    "SOFT_COL_Qwen/Qwen3-Embedding-0.6B",
-    # Semantic coverage — BERTScore-style max-pool precision / recall (4)
-    # PREC: for each sentence in text2, its best-match similarity to text1
-    # REC:  for each sentence in text1, its best-match similarity to text2
     "PREC_mixedbread-ai/mxbai-embed-large-v1",
     "REC_mixedbread-ai/mxbai-embed-large-v1",
     "PREC_Qwen/Qwen3-Embedding-0.6B",
-    "REC_Qwen/Qwen3-Embedding-0.6B",
     # NLI (3) — getNLIweights.py
     "entailment",
     "neutral",
     "contradiction",
-    # Entity per type (14) — getOverlap.py
-    # Replaces the single aggregate EntityMismatch with one agreement map per type.
-    # Numeric / temporal types (date, time, number, money, …) serve as the
-    # factual-grounding feature previously handled by regex; GLiNER extracts them.
-    *ENTITY_FEATURE_KEYS,
+    # Entity per type (6 of 14) — getOverlap.py
+    # Dropped in v4.0b (ablation n=6293, p ≥ 0.09, no Bonferroni significance):
+    #   entity_person (p=0.494), entity_organization (p=0.763),
+    #   entity_event (p=0.521), entity_language (p=0.093),
+    #   entity_date (p=0.278), entity_number (p=0.170),
+    #   entity_quantity (p=0.151), entity_money (p=0.360)
+    # entity_time: ablation p=0.829 (NOISE tier) but removing it cost CVG -3pt accuracy.
+    #   PC04 shows entity_time loads +0.44 alongside entity_duration — model uses them as
+    #   a pair. Marginal label-r is zero but interaction effect is real. RESTORED in v4.5.
+    "entity_location",
+    "entity_product",
+    "entity_law",
+    "entity_time",
+    "entity_duration",
+    "entity_percentage",
     # LCS (2) — getLCSweights.py
     "lcs_token",
     "lcs_char",
+    # Entity value overlap (2) — getOverlap.py (v5.1)
+    # entity_value_prec: fraction of text2 entity strings found in text1 (grounding)
+    # entity_value_rec:  fraction of text1 entity strings covered by text2 (coverage)
+    "entity_value_prec",
+    "entity_value_rec",
+    # Numeric grounding (1) — getNumericGrounding.py (v5.1)
+    # Jaccard over normalised number sets: catches wrong/hallucinated numbers
+    "numeric_jaccard",
+    # Per-type entity value overlap (12) — getOverlap.py (v5.2)
+    # Extends entity_value_prec/rec to operate per entity type with calibrated
+    # fuzzy thresholds; captures type-specific hallucinations (location swap,
+    # date distortion, wrong percentage) that the flat combined features dilute.
+    # Skipped types: number/quantity/money (numeric_jaccard is superior),
+    #   person (brittle fuzzy on name variants), law (ultra-sparse),
+    #   event/language (inconsistent GLiNER extraction).
+    "entity_location_value_prec",
+    "entity_location_value_rec",
+    "entity_product_value_prec",
+    "entity_product_value_rec",
+    "entity_date_value_prec",
+    "entity_date_value_rec",
+    "entity_time_value_prec",
+    "entity_time_value_rec",
+    "entity_duration_value_prec",
+    "entity_duration_value_rec",
+    "entity_percentage_value_prec",
+    "entity_percentage_value_rec",
 ]
 
-VERSION      = "3.0"
+VERSION      = "5.3"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
+# ---------------------------------------------------------------------------
+# Mode-specific feature baskets (v5.0)
+# Each mode trains on only the features that carry statistically significant
+# signal for that task (per-mode Pearson r analysis, v4.4 ablation n≈2k/mode).
+#
+# CVG (hallucination):  entity features all p≥0.066 — dropped entirely.
+# RVG (faithfulness):   entity_product (p=0.019) + entity_percentage (p=0.033) kept.
+# MVM (agreement):      entity_percentage (p<0.001) kept; entity_product borderline.
+# ---------------------------------------------------------------------------
 
-def build_manifest() -> dict:
-    """Return a manifest dict suitable for embedding in a checkpoint."""
+FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
+    "context-vs-generated": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4)
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3) — dominant signal for CVG
+        "entailment", "neutral", "contradiction",
+        # Type-count entity dropped: all p≥0.066 (see v5.0 notes)
+        # Value-level entity (2) — v5.1: string identity not type count
+        "entity_value_prec",   # text2 entity strings grounded in text1
+        "entity_value_rec",    # text1 entity strings covered by text2
+        # LCS (2)
+        "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (1) — v5.3: only Bonferroni-significant per-type feature
+        # entity_product_value_prec: p=6.37e-04 (***), r=+0.071 in CVG ablation n=2331
+        # All others (location/time/percentage/date/duration) failed Bonferroni (p>0.069)
+        # entity_time_value_prec/rec: NOISE (p=0.134, 0.342) in CVG; confirmed DROP in MVM.
+        "entity_product_value_prec",
+    ],
+    "reference-vs-generated": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4) — strongest group for RVG
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3)
+        "entailment", "neutral", "contradiction",
+        # Entity type-count (2) — borderline significant
+        "entity_product",     # p=0.019
+        "entity_percentage",  # p=0.033
+        # Entity value (2) — v5.1
+        "entity_value_prec",
+        "entity_value_rec",
+        # LCS (2)
+        "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (0) — v5.3: no per-type features survive Bonferroni for RVG
+        # Ablation n=1831: entity_time (p=0.750/0.973 NOISE), location (p=0.136/0.283),
+        # date/duration (p>0.14), product_prec (p=0.384), percentage_prec (p=0.129).
+        # entity_product_value_rec (p=0.008) and entity_percentage_value_rec (p=0.013)
+        # are nominally * but do not survive Bonferroni α=1.67e-03.
+        # Both-empty→1.0 on sparse reference texts adds collective noise.
+    ],
+    "model-vs-model": [
+        # Lexical (4)
+        "dice", "rouge3", "rouge", "jaccard",
+        # Semantic (4)
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "PREC_Qwen/Qwen3-Embedding-0.6B",
+        # NLI (3)
+        "entailment", "neutral", "contradiction",
+        # Entity type-count (1) — entity_percentage p<0.001 (+0.106)
+        "entity_percentage",
+        # Entity value (2) — v5.1
+        "entity_value_prec",
+        "entity_value_rec",
+        # LCS (2)
+        "lcs_token", "lcs_char",
+        # Numeric grounding (1) — v5.1
+        "numeric_jaccard",
+        # Per-type entity value (2) — v5.3: only Bonferroni-significant per-type features
+        # entity_percentage_value_prec: p=4.25e-07 (***), r=+0.107 in MVM ablation n=2231
+        # entity_percentage_value_rec:  p=1.23e-08 (***), r=+0.120 in MVM ablation n=2231
+        # entity_time: DROP (p=0.927/0.957 NOISE)
+        # entity_location: MARGINAL (p=0.013/0.035) — NS after Bonferroni α=2.17e-03
+        "entity_percentage_value_prec",
+        "entity_percentage_value_rec",
+    ],
+}
+
+
+def get_feature_keys(mode: str | None = None) -> list[str]:
+    """Return the feature key list for *mode*, or the global FEATURE_KEYS fallback.
+
+    Args:
+        mode: One of the three evaluation mode strings, or None for general/legacy.
+
+    Returns:
+        The mode-specific feature key list, or FEATURE_KEYS if mode is unknown/None.
+    """
+    if mode is None:
+        return FEATURE_KEYS
+    return FEATURE_KEYS_BY_MODE.get(mode, FEATURE_KEYS)
+
+
+def build_manifest(feature_keys: list[str] | None = None) -> dict:
+    """Return a manifest dict suitable for embedding in a checkpoint.
+
+    Args:
+        feature_keys: The feature key list used for this training run.
+                      Defaults to the global FEATURE_KEYS.
+    """
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
     return {
         "version":      VERSION,
-        "features":     list(FEATURE_KEYS),
-        "num_features": len(FEATURE_KEYS),
+        "features":     list(keys),
+        "num_features": len(keys),
         "spatial_size": SPATIAL_SIZE,
         "created_at":   datetime.now(timezone.utc).isoformat(),
     }
 
 
-def validate_manifest(manifest: dict | None) -> None:
+def validate_manifest(manifest: dict | None, expected_keys: list[str] | None = None) -> None:
     """Raise RuntimeError if *manifest* is incompatible with the current pipeline.
 
     A missing manifest (None or empty) is treated as a warning-only case so that
@@ -104,9 +278,11 @@ def validate_manifest(manifest: dict | None) -> None:
 
     Args:
         manifest: The 'manifest' sub-dict from a loaded checkpoint, or None.
+        expected_keys: The feature list to validate against. Defaults to the global
+                       FEATURE_KEYS. Pass the mode-specific list for per-mode checkpoints.
 
     Raises:
-        RuntimeError: If the feature list in *manifest* differs from FEATURE_KEYS.
+        RuntimeError: If the feature list in *manifest* differs from *expected_keys*.
     """
     if not manifest:
         return  # pre-manifest checkpoint — nothing to validate
@@ -115,17 +291,19 @@ def validate_manifest(manifest: dict | None) -> None:
     if ckpt_features is None:
         return  # manifest present but no feature list — old format, skip
 
-    if ckpt_features == FEATURE_KEYS:
+    reference = expected_keys if expected_keys is not None else FEATURE_KEYS
+
+    if ckpt_features == reference:
         return  # all good
 
-    added    = [k for k in FEATURE_KEYS  if k not in ckpt_features]
-    removed  = [k for k in ckpt_features if k not in FEATURE_KEYS]
-    reordered = (not added and not removed) and ckpt_features != FEATURE_KEYS
+    added    = [k for k in reference     if k not in ckpt_features]
+    removed  = [k for k in ckpt_features if k not in reference]
+    reordered = (not added and not removed) and ckpt_features != reference
 
     lines = [
         "Checkpoint feature manifest does not match the current pipeline.",
         f"  Checkpoint ({len(ckpt_features)} features): {ckpt_features}",
-        f"  Current    ({len(FEATURE_KEYS)} features): {FEATURE_KEYS}",
+        f"  Expected   ({len(reference)} features): {reference}",
     ]
     if added:
         lines.append(f"  Added since checkpoint was saved   : {added}")

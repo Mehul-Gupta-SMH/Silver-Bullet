@@ -22,6 +22,10 @@ from backend.api.schemas import (
     BatchResponse,
     BreakdownResponse,
     HealthResponse,
+    JuryBatchRequest,
+    JuryBatchResponse,
+    JuryRequest,
+    JuryResult,
     PairRequest,
     PairResponse,
 )
@@ -222,3 +226,94 @@ async def predict_batch_breakdown(
     predictor = get_predictor(body.mode)
     results = predictor.predict_batch_breakdown(body.pairs)
     return BatchBreakdownResponse(results=[BreakdownResponse(**r) for r in results])
+
+
+# ---------------------------------------------------------------------------
+# Jury (LLM-as-judge) endpoints
+# ---------------------------------------------------------------------------
+
+@app.post(
+    "/api/v1/predict/jury/pair",
+    response_model=JuryResult,
+    tags=["prediction"],
+    summary="LLM-as-jury evaluation for a single text pair",
+    response_description=(
+        "Aggregated faithfulness score [0, 1] with per-question LLM breakdown. "
+        "Uses an LLM (default: gpt-4o-mini) instead of the CNN model."
+    ),
+    responses={
+        422: {"description": "Validation error — text empty or exceeds 10 000 characters"},
+        502: {"description": "LLM call failed or returned malformed JSON"},
+        503: {"description": "OpenAI API key not configured"},
+    },
+)
+@limiter.limit("20/minute")
+async def predict_jury_pair(
+    request: Request,
+    body: JuryRequest,
+) -> JuryResult:
+    """Evaluate a text pair using a structured LLM jury.
+
+    Instead of the CNN feature pipeline, this endpoint sends the pair to an LLM
+    (configurable via SB_JURY_MODEL, default gpt-4o-mini) with a battery of binary
+    yes/no questions mirroring the CNN's feature clusters.  Each question receives
+    an answer, confidence, and one-sentence reasoning.  The final score is a weighted
+    mean of per-question faithfulness contributions.
+    """
+    from fastapi import HTTPException
+    from backend.jury.jury_evaluator import JuryEvaluator
+
+    try:
+        evaluator = JuryEvaluator()
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail="Jury mode requires an OpenAI API key (SB_OPENAI_TOKEN)",
+        ) from exc
+
+    try:
+        return evaluator.evaluate(body.text1, body.text2, body.mode)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+
+@app.post(
+    "/api/v1/predict/jury/batch",
+    response_model=JuryBatchResponse,
+    tags=["prediction"],
+    summary="LLM-as-jury evaluation for a batch of text pairs",
+    response_description=(
+        "List of jury evaluation results, one per input pair. "
+        "Each pair makes one LLM call — max 10 pairs per request."
+    ),
+    responses={
+        422: {"description": "Validation error — batch exceeds 10 pairs or pairs are malformed"},
+        502: {"description": "LLM call failed or returned malformed JSON"},
+        503: {"description": "OpenAI API key not configured"},
+    },
+)
+@limiter.limit("5/minute")
+async def predict_jury_batch(
+    request: Request,
+    body: JuryBatchRequest,
+) -> JuryBatchResponse:
+    """Evaluate up to 10 text pairs using a structured LLM jury (sequential LLM calls)."""
+    from fastapi import HTTPException
+    from backend.jury.jury_evaluator import JuryEvaluator
+
+    try:
+        evaluator = JuryEvaluator()
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail="Jury mode requires an OpenAI API key (SB_OPENAI_TOKEN)",
+        ) from exc
+
+    try:
+        results = evaluator.evaluate_batch(
+            [(p.text1, p.text2, p.mode) for p in body.pairs]
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    return JuryBatchResponse(results=results)

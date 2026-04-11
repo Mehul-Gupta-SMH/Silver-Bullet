@@ -1,0 +1,72 @@
+Loaded 1831 labelled pairs
+  Cache hits : 1831
+  Cache miss : 0
+
+Computing measures...
+
+-- Feature correlation with label (Bonferroni p < 1.67e-03) --
+Feature                                             r     p-value    sig  tier      verdict
+-----------------------------------------------------------------------------------------------
+contradiction                                 -0.5174      <1e-10    ***  STRONG    KEEP    ###############
+entailment                                    +0.4921      <1e-10    ***  STRONG    KEEP    ##############
+REC_mixedbread-ai/mxbai-embed-large-v1        +0.3335      <1e-10    ***  STRONG    KEEP    ##########
+PREC_mixedbread-ai/mxbai-embed-large-v1       +0.3300      <1e-10    ***  STRONG    KEEP    #########
+mixedbread-ai/mxbai-embed-large-v1            +0.3265      <1e-10    ***  STRONG    KEEP    #########
+PREC_Qwen/Qwen3-Embedding-0.6B                +0.2946      <1e-10    ***  STRONG    KEEP    ########
+rouge                                         +0.1768      <1e-10    ***  MODERATE  REVIEW  #####
+entity_value_rec                              +0.1713      <1e-10    ***  MODERATE  KEEP    #####
+dice                                          +0.1641      <1e-10    ***  MODERATE  REVIEW  ####
+rouge3                                        +0.1404    1.61e-09    ***  MODERATE  REVIEW  ####
+lcs_token                                     +0.1380    3.02e-09    ***  MODERATE  REVIEW  ####
+entity_value_prec                             +0.1342    8.22e-09    ***  MODERATE  KEEP    ####
+jaccard                                       +0.1285    3.44e-08    ***  MODERATE  REVIEW  ###
+lcs_char                                      +0.1081    3.56e-06    ***  WEAK      REVIEW  ###
+neutral                                       -0.0670    4.10e-03      *  WEAK      KEEP    ##
+entity_product_value_rec                      +0.0622    7.73e-03      *  WEAK      REVIEW  #
+entity_percentage_value_rec                   +0.0583    1.26e-02      *  MARGINAL  REVIEW  #
+entity_product                                +0.0574    1.40e-02      *  WEAK      REVIEW  #
+numeric_jaccard                               +0.0562    1.61e-02      *  WEAK      KEEP    #
+entity_percentage                             +0.0467    4.56e-02      *  MARGINAL  REVIEW  #
+entity_percentage_value_prec                  +0.0355    1.29e-01     ns  MARGINAL  REVIEW  #
+entity_location_value_rec                     +0.0349    1.36e-01     ns  MARGINAL  REVIEW  #
+entity_duration_value_prec                    +0.0346    1.39e-01     ns  MARGINAL  REVIEW  #
+entity_duration_value_rec                     +0.0309    1.87e-01     ns  MARGINAL  REVIEW  
+entity_date_value_rec                         +0.0283    2.26e-01     ns  MARGINAL  REVIEW  
+entity_date_value_prec                        +0.0283    2.27e-01     ns  MARGINAL  REVIEW  
+entity_location_value_prec                    +0.0251    2.83e-01     ns  MARGINAL  REVIEW  
+entity_product_value_prec                     +0.0203    3.84e-01     ns  MARGINAL  REVIEW  
+entity_time_value_prec                        +0.0075    7.50e-01     ns  MARGINAL  REVIEW  
+entity_time_value_rec                         -0.0008    9.73e-01     ns  MARGINAL  REVIEW  
+
+-- PCA explained variance --
+PC01  0.329  (cum 0.329)  ################################
+PC02  0.096  (cum 0.425)  #########
+PC03  0.085  (cum 0.510)  ########
+PC04  0.075  (cum 0.584)  #######
+PC05  0.062  (cum 0.646)  ######
+PC06  0.057  (cum 0.703)  #####
+PC07  0.052  (cum 0.755)  #####
+PC08  0.049  (cum 0.804)  ####
+PC09  0.036  (cum 0.840)  ###
+PC10  0.028  (cum 0.868)  ##
+
+Top-3 feature loadings per PC:
+  PC01: dice(+0.300)  jaccard(+0.294)  lcs_token(+0.288)
+  PC02: entity_percentage_value_rec(+0.494)  entity_percentage(+0.471)  entity_percentage_value_prec(+0.463)
+  PC03: entity_product_value_rec(+0.543)  entity_product(+0.521)  entity_product_value_prec(+0.474)
+  PC04: entity_date_value_rec(+0.309)  entity_date_value_prec(+0.294)  entity_location_value_prec(+0.273)
+  PC05: entity_duration_value_rec(+0.561)  entity_duration_value_prec(+0.543)  entity_date_value_prec(-0.310)
+
+-- K-means (k=2) ARI: 0.0479 --
+  Cluster 0: 958 pairs, label=1 rate=39.46%
+  Cluster 1: 873 pairs, label=1 rate=61.51%
+
+-- Verdict Summary --
+  KEEP   (10):  mixedbread-ai/mxbai-embed-large-v1, PREC_mixedbread-ai/mxbai-embed-large-v1, REC_mixedbread-ai/mxbai-embed-large-v1, PREC_Qwen/Qwen3-Embedding-0.6B, entailment, neutral, contradiction, entity_value_prec, entity_value_rec, numeric_jaccard
+  REVIEW (20):  dice, rouge3, rouge, jaccard, entity_product, entity_percentage, lcs_token, lcs_char, entity_location_value_prec, entity_location_value_rec, entity_product_value_prec, entity_product_value_rec, entity_date_value_prec, entity_date_value_rec, entity_time_value_prec, entity_time_value_rec, entity_duration_value_prec, entity_duration_value_rec, entity_percentage_value_prec, entity_percentage_value_rec
+  DROP   ( 0):  
+[MLflow] ablation run logged  experiment=ablation  run=v5.2-rvg-20260408-104627
+[MLflow]   UI: http://localhost:5000  (filter by tag 'v5.2-rvg')
+[MLflow] WARNING: could not log ablation run ('charmap' codec can't encode character '\U0001f3c3' in position 0: character maps to <undefined>)
+
+Experiment saved -> ablation_reports\experiments\20260408_104622_v5.2-rvg

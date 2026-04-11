@@ -1,0 +1,170 @@
+{
+  "title": "SilverBullet Feature Set Evolution v4.0b → v4.4",
+  "generated_at": "2026-04-07T18:20:14.242186",
+  "key_finding": "Global cross-r pruning (v4.1) caused per-mode regressions because high mutual correlation between features does not imply equal discriminative power per evaluation mode. Per-mode label-r analysis identified which dropped features carried unique signal for specific modes.",
+  "versions": {
+    "v4.0b": {
+      "feature_count": 22,
+      "features_added": [],
+      "features_removed": [
+        "SOFT_ROW_mxbai",
+        "SOFT_COL_mxbai",
+        "SOFT_ROW_Qwen",
+        "SOFT_COL_Qwen",
+        "entity_organization",
+        "entity_event",
+        "entity_person",
+        "entity_money",
+        "entity_date",
+        "entity_number",
+        "entity_quantity",
+        "entity_language"
+      ],
+      "change": "Baseline: pruned SOFT maps + 8 low-signal entity features from v3.0 (34)",
+      "test_results": {
+        "context-vs-generated": {
+          "accuracy": 0.7589,
+          "roc_auc": 0.8537,
+          "auprc": 0.8221,
+          "mcc": 0.5159,
+          "num_features": 22,
+          "timestamp": "20260402_200835"
+        },
+        "reference-vs-generated": {
+          "accuracy": 0.7935,
+          "roc_auc": 0.8709,
+          "auprc": 0.8302,
+          "mcc": 0.5904,
+          "num_features": 22,
+          "timestamp": "20260402_200926"
+        },
+        "model-vs-model": {
+          "accuracy": 0.7738,
+          "roc_auc": 0.859,
+          "auprc": 0.8255,
+          "mcc": 0.5581,
+          "num_features": 22,
+          "timestamp": "20260402_201012"
+        }
+      }
+    },
+    "v4.1": {
+      "feature_count": 15,
+      "features_added": [],
+      "features_removed": [
+        "mixedbread-ai/mxbai-embed-large-v1",
+        "REC_mixedbread-ai/mxbai-embed-large-v1",
+        "Qwen/Qwen3-Embedding-0.6B",
+        "REC_Qwen/Qwen3-Embedding-0.6B",
+        "jaccard",
+        "cosine",
+        "rouge"
+      ],
+      "change": "Global cross-r pruning: dropped 7 features with cross-r ≥ 0.85 within clusters",
+      "test_results": null
+    },
+    "v4.2": {
+      "feature_count": 17,
+      "features_added": [
+        "rouge",
+        "REC_mixedbread-ai/mxbai-embed-large-v1"
+      ],
+      "features_removed": [],
+      "change": "Partial recovery: rouge (CVG label-r=-0.183) + REC_mxbai (RVG=+0.388) restored after per-mode correlation analysis",
+      "test_results": {
+        "context-vs-generated": {
+          "accuracy": 0.7151,
+          "roc_auc": 0.803,
+          "auprc": 0.8286,
+          "mcc": 0.4407,
+          "num_features": 17,
+          "timestamp": "20260407_004123"
+        },
+        "reference-vs-generated": {
+          "accuracy": 0.7754,
+          "roc_auc": 0.8655,
+          "auprc": 0.8432,
+          "mcc": 0.565,
+          "num_features": 17,
+          "timestamp": "20260407_004528"
+        },
+        "model-vs-model": {
+          "accuracy": 0.8095,
+          "roc_auc": 0.8876,
+          "auprc": 0.8529,
+          "mcc": 0.621,
+          "num_features": 17,
+          "timestamp": "20260407_004902"
+        }
+      }
+    },
+    "v4.3": {
+      "feature_count": 18,
+      "features_added": [
+        "jaccard"
+      ],
+      "features_removed": [],
+      "change": "Restore jaccard (CVG label-r=-0.124, RVG=+0.213); cross-r=0.983 with dice was mode-misleading",
+      "test_results": {
+        "context-vs-generated": {
+          "accuracy": 0.735,
+          "roc_auc": 0.8028,
+          "auprc": 0.8198,
+          "mcc": 0.4673,
+          "num_features": 18,
+          "timestamp": "20260407_102644"
+        },
+        "reference-vs-generated": {
+          "accuracy": 0.7935,
+          "roc_auc": 0.8827,
+          "auprc": 0.8667,
+          "mcc": 0.5895,
+          "num_features": 18,
+          "timestamp": "20260407_102909"
+        },
+        "model-vs-model": {
+          "accuracy": 0.8244,
+          "roc_auc": 0.8957,
+          "auprc": 0.873,
+          "mcc": 0.6486,
+          "num_features": 18,
+          "timestamp": "20260407_103006"
+        }
+      }
+    },
+    "v4.4": {
+      "feature_count": 19,
+      "features_added": [
+        "mixedbread-ai/mxbai-embed-large-v1"
+      ],
+      "features_removed": [],
+      "change": "Restore mxbai raw cosine map (CVG=+0.098, RVG=+0.352, MVM=+0.439); full spatial structure CNN cannot learn from PREC/REC alone",
+      "test_results": {
+        "context-vs-generated": {
+          "accuracy": 0.7464,
+          "roc_auc": 0.8008,
+          "auprc": 0.8183,
+          "mcc": 0.5061,
+          "num_features": 19,
+          "timestamp": "20260407_152112"
+        },
+        "reference-vs-generated": {
+          "accuracy": 0.7681,
+          "roc_auc": 0.8684,
+          "auprc": 0.8446,
+          "mcc": 0.5401,
+          "num_features": 19,
+          "timestamp": "20260407_152456"
+        },
+        "model-vs-model": {
+          "accuracy": 0.8304,
+          "roc_auc": 0.889,
+          "auprc": 0.8458,
+          "mcc": 0.666,
+          "num_features": 19,
+          "timestamp": "20260407_152834"
+        }
+      }
+    }
+  }
+}

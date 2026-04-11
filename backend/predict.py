@@ -3,7 +3,7 @@ import argparse
 import json
 from backend.model import TextSimilarityCNN, TextSimilarityCNNLegacy
 from backend.train import TextSimilarityDataset, feature_map_to_tensor
-from backend.feature_registry import validate_manifest
+from backend.feature_registry import FEATURE_KEYS, validate_manifest, get_feature_keys
 from pathlib import Path
 import numpy as np
 
@@ -24,12 +24,18 @@ def _load_model_from_checkpoint(checkpoint, device):
                 "Checkpoint does not contain 'num_features'. "
                 "Re-train the model to generate a compatible checkpoint."
             )
-        validate_manifest(checkpoint.get('manifest'))
-        num_features = checkpoint['num_features']
-        spatial_size = checkpoint.get('spatial_size', 64)  # 64 = legacy default
-        hidden_dim   = checkpoint.get('hidden_dim', 128)   # 128 = legacy default
-        model = TextSimilarityCNN(num_features=num_features, spatial_size=spatial_size, hidden_dim=hidden_dim)
-        arch = f'Conv2D (num_features={num_features}, spatial_size={spatial_size}, hidden_dim={hidden_dim})'
+        # Use the feature list embedded in the checkpoint manifest as the source of
+        # truth. validate_manifest compares against the manifest's own feature list
+        # (no expected_keys arg needed — the checkpoint IS the reference).
+        manifest = checkpoint.get('manifest') or {}
+        num_features    = checkpoint['num_features']
+        spatial_size    = checkpoint.get('spatial_size', 64)    # 64 = legacy default
+        hidden_dim      = checkpoint.get('hidden_dim', 128)     # 128 = legacy default
+        use_length_cond = checkpoint.get('use_length_cond', False)
+        model = TextSimilarityCNN(num_features=num_features, spatial_size=spatial_size,
+                                  hidden_dim=hidden_dim, use_length_cond=use_length_cond)
+        arch = (f'Conv2D (num_features={num_features}, spatial_size={spatial_size}, '
+                f'hidden_dim={hidden_dim}, length_cond={use_length_cond})')
 
     model.load_state_dict(state)
     model.to(device)
@@ -44,38 +50,43 @@ class SimilarityPredictor:
 
         checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
         self.model, arch = _load_model_from_checkpoint(checkpoint, self.device)
+        # Feature keys from manifest (mode-specific for v5.0+ checkpoints).
+        self.feature_keys: list[str] = (
+            checkpoint.get('manifest', {}).get('features') or FEATURE_KEYS
+        )
 
         print(f"Model loaded from {model_path}")
         print(f"  architecture : {arch}")
+        print(f"  features     : {len(self.feature_keys)}")
         print(f"  epoch        : {checkpoint.get('epoch', 'unknown')}")
         if 'accuracy' in checkpoint:
             print(f"  val acc      : {checkpoint['accuracy']:.2f}%")
 
     def _extract_features(self, pairs):
-        """Run the full feature pipeline and return tensors shaped for the loaded model.
+        """Run the full feature pipeline and return (features, lengths) tensors.
 
-        Conv2D model: [N, F, 64, 64]
-        Legacy Conv1D model: [N, F*64*64]  (flattened)
+        Conv2D model: features [N, F, S, S], lengths [N, 2]
+        Legacy Conv1D model: features [N, F*64*64] (flattened), lengths None
         """
         dummy_labels = [0] * len(pairs)
-        dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True)
-        features = dataset.features  # always [N, F, 64, 64]
+        dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True,
+                                        feature_keys=self.feature_keys)
+        features = dataset.features  # [N, F, S, S]
+        lengths  = dataset.lengths   # [N, 2]
         if isinstance(self.model, TextSimilarityCNNLegacy):
-            # Truncate to the number of feature maps the legacy model was trained on.
-            # The checkpoint input_dim encodes exactly how many maps were used:
-            # input_dim = num_maps * 64 * 64.  New maps (e.g. LCS) are appended last
-            # by the feature pipeline, so slicing the channel dimension is safe.
             trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
             features = features[:, :trained_num_maps, :, :]
             features = features.view(features.size(0), -1)
-        return features
+            return features, None
+        return features, lengths
 
     def predict_pair(self, text1, text2):
         """Make prediction for a single pair of texts."""
-        features = self._extract_features([[text1, text2]])
+        features, lengths = self._extract_features([[text1, text2]])
 
         with torch.no_grad():
-            output = self.model(features.to(self.device))
+            lengths_dev = lengths.to(self.device) if lengths is not None else None
+            output = self.model(features.to(self.device), lengths_dev)
             prob = output.item()
 
         return {
@@ -136,14 +147,18 @@ class SimilarityPredictor:
             cache.save_features(text1, text2, {k: v.tolist() for k, v in feature_map.items()})
 
         # --- model score ---
-        stacked = feature_map_to_tensor(feature_map).unsqueeze(0)  # [1, F, S, S]
+        stacked = feature_map_to_tensor(feature_map, self.feature_keys).unsqueeze(0)  # [1, F, S, S]
         if isinstance(self.model, TextSimilarityCNNLegacy):
             trained_num_maps = self.model.fc_reduce1.in_features // (64 * 64)
             stacked = stacked[:, :trained_num_maps, :, :]
             stacked = stacked.view(1, -1)
 
+        import math as _math
+        lengths_bd = torch.tensor(
+            [[_math.log(n + 1), _math.log(m + 1)]], dtype=torch.float32
+        ).to(self.device)
         with torch.no_grad():
-            prob = self.model(stacked.to(self.device)).item()
+            prob = self.model(stacked.to(self.device), lengths_bd).item()
 
         # --- alignment matrix: mxbai cosine sim cropped to actual sentence count ---
         # Feature maps are resized to SPATIAL_SIZE×SPATIAL_SIZE, so clamp n/m to that.
@@ -212,10 +227,11 @@ class SimilarityPredictor:
 
     def predict_batch(self, pairs):
         """Make predictions for a list of [text1, text2] pairs."""
-        features = self._extract_features(pairs)
+        features, lengths = self._extract_features(pairs)
 
         with torch.no_grad():
-            outputs = self.model(features.to(self.device))
+            lengths_dev = lengths.to(self.device) if lengths is not None else None
+            outputs = self.model(features.to(self.device), lengths_dev)
             probs = outputs.cpu().numpy().flatten()
             predictions = (probs >= 0.5).astype(int)
 

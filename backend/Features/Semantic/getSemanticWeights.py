@@ -36,25 +36,23 @@ class SemanticWeights:
                 row = [cos_sim(feature1, feature2).item() for feature2 in g2]
                 rows.append(row)
 
-            self.comparison_weights[feature_key] = rows
-
-            # BERTScore-style max-pool coverage maps (derived from the same cosine matrix)
+            # v4.4: mxbai raw cosine map restored (label-r CVG=+0.098, RVG=+0.352, MVM=+0.439).
+            # Also stored: PREC_ (col-max) and REC_ (row-max) for mxbai.
+            # Qwen: only PREC_ stored (REC_Qwen cross-r=+0.999 with PREC_Qwen on RVG).
+            # Qwen cosine not restored — lower label-r than mxbai across all modes.
             #
-            # PREC (precision — grounding): for each sentence tj in text2, what is its
-            #   maximum similarity to any sentence in text1?  A low value means tj is
-            #   not well-grounded in text1 — a hallucination signal.
-            #   As an n×m map: constant per column, broadcast across rows.
-            #
-            # REC (recall — coverage): for each sentence si in text1, what is its
-            #   maximum similarity to any sentence in text2?  A low value means si is
-            #   not covered by text2 — an omission signal.
-            #   As an n×m map: constant per row, broadcast across columns.
+            # Raw cosine map: full n×m pairwise similarity matrix.
+            # PREC (grounding): col-max broadcast — low value → text2 not grounded in text1.
+            # REC  (coverage):  row-max broadcast — low value → text1 content omitted.
+            #   (mxbai only; Qwen REC redundant with Qwen PREC)
             if rows and rows[0]:
                 n, m = len(rows), len(rows[0])
-                row_max = [max(rows[i]) for i in range(n)]
                 col_max = [max(rows[i][j] for i in range(n)) for j in range(m)]
-                self.comparison_weights[f"REC_{feature_key}"]  = [[row_max[i]] * m for i in range(n)]
                 self.comparison_weights[f"PREC_{feature_key}"] = [[col_max[j] for j in range(m)] for _ in range(n)]
+                if "mxbai" in feature_key:
+                    self.comparison_weights[feature_key] = rows
+                    row_max = [max(rows[i]) for i in range(n)]
+                    self.comparison_weights[f"REC_{feature_key}"] = [[row_max[i] for _ in range(m)] for i in range(n)]
 
     def __calc_soft_alignment__(self):
         inter = {}
@@ -77,7 +75,6 @@ class SemanticWeights:
         self.sentence_group1, self.sentence_group2 = sentence_group1, sentence_group2
         self.__generate_sematic_features__()
         self.__calc_weights__()
-        self.__calc_soft_alignment__()
         self.__post_process_weights__()
         return self.comparison_weights
 

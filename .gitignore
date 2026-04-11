@@ -41,7 +41,7 @@ mlflow.db
 mlartifacts/
 
 # Pre-refactor root-level feature directories (now live under backend/)
-Features/
+/Features/
 
 # Claude Code session data
 .claude/

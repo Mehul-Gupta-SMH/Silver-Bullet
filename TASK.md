@@ -25,6 +25,7 @@
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
+| 2026-04-06 | [x] | LLM-as-jury evaluation path — 2 new endpoints + JuryEvaluator | `backend/jury/__init__.py`, `backend/jury/jury_evaluator.py`, `backend/api/schemas.py` (JuryQuestion/JuryResult/JuryRequest/JuryBatchRequest/JuryBatchResponse), `backend/api/main.py` (POST /api/v1/predict/jury/pair 20/min, POST /api/v1/predict/jury/batch 5/min) |
 | 2026-03-11 | [x] | Project design and architecture defined | `ToDo.md` |
 | 2026-03-11 | [x] | Sentence splitter with coref resolution | `Splitter/sentence_splitter.py`, `Preprocess/coref/resolveEntity.py` |
 | 2026-03-11 | [x] | Semantic feature extractor | `Features/Semantic/getSemanticWeights.py`, `Features/Semantic/__generate_semantic_features.py` |
@@ -144,7 +145,7 @@ short inputs.
 |------|--------|------|---------------|
 | 2026-03-22 | [x] | FIX P1 (Normalised pooling): `_apply_density_normalisation(tensor,n,m)` scales by `(64*64)/(n*m)`; TextSimilarityDataset always splits for n/m + normalises; cache stores raw; predict_pair_breakdown normalises manually | `backend/train.py`, `backend/predict.py`, `AGENT.md` — **delete ./cache/ and retrain all 3 modes** |
 | 2026-03-22 | [x] | FIX P2 (Adaptive resize): resize_matrix() uses bilinear interpolation n×m→32×32; every cell carries signal; spatial_size=32 in CNN + manifest; n/m crop clamped in breakdown; P1 normalisation removed | `backend/Postprocess/__addpad.py`, all 5 extractors, `backend/model.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py` — **delete cache, retrain** |
-| 2026-03-22 | [ ] | FIX P3 (Length conditioning): append `log(n)` and `log(m)` as scalar inputs to the FC layers so the model can condition on text length when interpreting sparse maps; requires architecture change + full retrain | `backend/model.py`, `backend/train.py`, `backend/predict.py`, retrain |
+| 2026-04-02 | [x] | FIX P3 (Length conditioning): implemented — `use_length_cond=True/False` flag in TextSimilarityCNN, lengths stored in TextSimilarityDataset, threaded through train/test/predict; disabled by default after v5.0 experiment showed it destabilises training at dataset sizes ~1500; see v5.0 experiment entry | `backend/model.py`, `backend/train.py`, `backend/predict.py`, `backend/test.py` |
 
 ## Session 2026-03-22 — Lexical/LCS parallelisation + full retrain
 
@@ -187,7 +188,114 @@ short inputs.
 | 2026-04-01 | [x] | FIX: CNN capacity + optimizer — hidden_dim 128→256, patience 5→8, Adam→AdamW (lr=0.0003, wd=1e-4), CosineAnnealingLR(T_max=50, eta_min=1e-6), drop_last=True on train loader | `backend/model.py`, `backend/train.py` |
 | 2026-04-01 | [x] | TRAINING: All 3 modes v3.0 retrain with AdamW+cosine — cvg: best val 0.1498 ep9, rvg: best val 0.1225 ep12, mvm: best val 0.1445 ep8; ~79% accuracy ceiling consistent across modes | `models/*/` |
 | 2026-04-01 | [x] | EVAL: Test set evaluation all 3 modes — cvg: 79.46% acc / 0.875 AUC / F1 0.801; rvg: 78.99% acc / 0.872 AUC / F1 0.800; mvm: 78.27% acc / 0.858 AUC / F1 0.808; ceiling is data quality/quantity, not architecture | `test_reports/` |
-| 2026-04-01 | [ ] | IMPROVEMENT: Address ~79% accuracy ceiling — options: (1) label smoothing for noisy external datasets, (2) more/cleaner training data, (3) per-mode data audit (cvg HaluEval label noise suspected) | `backend/train.py`, `data/` |
+| 2026-04-02 | [x] | EXPERIMENT: Label smoothing (ε=0.05) + length conditioning (log n, log m → FC head) — v5.0 test: cvg 75.89% (−2%), rvg 79.35% (+0.7%), mvm 77.38% (−2.4%); mvm/cvg early-stopped at ep2-3, model destabilised by length scalars at ~1500 pairs; reverted to v4.0b checkpoints, kept code changes (use_length_cond flag supported but CLI defaults to False, label_smooth=0.0) | `backend/model.py`, `backend/train.py`, `backend/predict.py`, `backend/test.py` |
+| 2026-04-02 | [ ] | IMPROVEMENT: Accuracy ceiling — next options: (1) per-mode data audit (cvg HaluEval label noise suspected), (2) more training data, (3) focal loss / class-weighted MSE to down-weight easy examples | `backend/train.py`, `data/` |
+
+## Session 2026-04-02 — Feature ablation study (v4.0a → v4.0b)
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-02 | [x] | ABLATION: Run v3.0 (34-feature) ablation — `ablation_cluster.py` framework; 6293 pairs; 6-measure signal tiers; SOFT_ROW/SOFT_COL all NOISE/MARGINAL (p=0.47-0.80); entity_event/money/organization NOISE | `ablation_reports/experiments/20260401_201228_v3.0-all-modes/` |
+| 2026-04-02 | [x] | FIX: `_feature_vector()` in ablation_cluster.py required exact key match — breaks when FEATURE_KEYS is pruned but cache has more keys; changed to subset match (only require FEATURE_KEYS ⊆ cache keys) | `backend/ablation_cluster.py` |
+| 2026-04-02 | [x] | PRUNE v4.0a (34→30): Drop SOFT_ROW/SOFT_COL (4 features, p=0.47-0.80 confirmed noise); remove `__calc_soft_alignment__()` from SemanticWeights.getFeatureMap(); silence extra-key warning in feature_map_to_tensor; retrain all 3 modes | `backend/Features/Semantic/getSemanticWeights.py`, `backend/feature_registry.py`, `backend/train.py` |
+| 2026-04-02 | [x] | TRAINING v4.0a (30 features): cvg val 79.64% ep10, rvg val 82.48% ep11 (+3.5%), mvm val 81.44% ep8 (+3.2%) — SOFT_ROW/SOFT_COL drop confirmed beneficial | `models/*/` |
+| 2026-04-02 | [x] | ABLATION: Re-run on v4.0a (30-feature) — confirms 3 more DROP (entity_organization p=0.76, entity_event p=0.52, entity_money p=0.36); 4 more MARGINAL with p≥0.15 (entity_person, entity_date, entity_number, entity_quantity) | `ablation_reports/experiments/20260402_191507_v4.0a-all-modes/` |
+| 2026-04-02 | [x] | PRUNE v4.0b (30→22): Drop 8 entity features with p≥0.09 (no Bonferroni significance): organization, event, person, money, date, number, quantity, language; keep 6: location, product, law, time, duration, percentage | `backend/feature_registry.py` |
+| 2026-04-02 | [x] | TRAINING v4.0b (22 features): cvg val 78.44% ep14, rvg val 81.02% ep5, mvm val 81.74% ep14 | `models/*/` |
+| 2026-04-02 | [x] | EVAL v4.0b test set: cvg 77.98% / rvg 78.62% / mvm 79.76% — vs v3.0 (79.46/78.99/78.27); mvm +1.5%, cvg/rvg within noise; 35% fewer features | `test_reports/` |
+| 2026-04-02 | [x] | ABLATION: Re-run on v4.0b (22-feature) — ZERO DROP features; all 22 features ≥ MARGINAL; study converged | `ablation_reports/experiments/20260402_*_v4.0b-all-modes/` |
+
+## Session 2026-04-02 — Data audit + model distribution
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-02 | [x] | DATA AUDIT: Identified cvg label noise — STS-B (similarity, not grounding) + MNLI (entailment, not grounding) account for 800/2231 pairs (36%); excluded from cvg assembly, kept for rvg/mvm where they are valid proxies | `backend/fetch_external_data.py` |
+| 2026-04-02 | [x] | DATA: Increase HaluEval sampling to 700/source (from 400) to compensate for STS-B/MNLI removal; cvg now 2331 pairs (100% HaluEval + handcrafted) vs 2231 before; added `--halueval-max` flag | `backend/fetch_external_data.py`, `data/context-vs-generated/` |
+| 2026-04-02 | [~] | TRAINING: Retrain cvg on clean HaluEval-only data — in progress | `models/context-vs-generated/best.pth` |
+| 2026-04-02 | [x] | FEATURE: `backend/model_hub.py` — auto-download checkpoints from HuggingFace Hub when `SB_HF_REPO_ID` env var is set; wired into `api/dependencies.py`; no-op when env var unset or file present | `backend/model_hub.py`, `backend/api/dependencies.py` |
+
+## Session 2026-04-06 — LLM-jury endpoints + v4.1→v4.4 feature recovery
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-06 | [x] | FEATURE: LLM-as-jury evaluation endpoints — `JuryEvaluator` (gpt-4o-mini, 6 binary questions across feature clusters, weighted score aggregation, validation codes HALL-NUMERIC/ENT-SUBST/NEG-FACT/OMIT-KEY/FAITHFUL); `POST /api/v1/predict/jury/pair` (20/min) + `/jury/batch` (5/min, max 10) | `backend/jury/__init__.py`, `backend/jury/jury_evaluator.py`, `backend/api/schemas.py`, `backend/api/main.py` |
+| 2026-04-06 | [x] | ANALYSIS: v4.1 CVG regression investigation — per-mode label correlation analysis on 300 CVG pairs; `rouge` unigram was 3rd-ranked feature (r=-0.183) but dropped globally; cross-r with dice/rouge3 ≥ 0.93 was misleading — cross-r ≠ equal discriminative power per mode | `ablation_reports/`, `backend/feature_registry.py` |
+| 2026-04-06 | [x] | PRUNE/RESTORE v4.2 (15→17): Restore `rouge` (CVG label-r=-0.183) + `REC_mxbai` (RVG=+0.388, MVM=+0.421, opposite sign to PREC_mxbai on CVG); confirmed REC_Qwen redundant (cross-r with PREC_Qwen=+0.999 on RVG) | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py`, `backend/Features/Semantic/getSemanticWeights.py` |
+| 2026-04-06 | [x] | FIX: train.py cache fallthrough — incomplete dict entries (missing keys after feature set change) now fall through to recompute instead of crashing; `_cache_entry_complete()` + `_missing_groups()` helpers added | `backend/train.py` |
+| 2026-04-06 | [x] | FIX: Partial cache recompute — stale cache entries now run only missing extractor groups (lexical/semantic/nli/entity/lcs) instead of full pipeline; prevents semantic re-encoding when only a lexical feature is added; `_prefill_semantic_cache` / `_prefill_entity_cache` skip pairs whose relevant keys are already cached | `backend/train.py` |
+| 2026-04-07 | [x] | PRUNE/RESTORE v4.3 (17→18): Restore `jaccard` (CVG label-r=-0.124, RVG=+0.213); cross-r=0.983 with dice was misleading same as rouge | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py` |
+| 2026-04-07 | [x] | PRUNE/RESTORE v4.4 (18→19): Restore `mxbai_cosine` raw pairwise map (CVG=+0.098, RVG=+0.352, MVM=+0.439); full n×m structure CNN can't learn from PREC/REC alone | `backend/feature_registry.py`, `backend/Features/Semantic/getSemanticWeights.py` |
+| 2026-04-07 | [x] | EVAL v4.4 test set: CVG 74.64% / AUC 0.801, RVG 76.81% / AUC 0.868, MVM 83.04% / AUC 0.889 — MVM +5.7% vs v4.0b; RVG/CVG within noise of v4.0b with 3 fewer features | `test_reports/` |
+| 2026-04-07 | [x] | ABLATION: Re-run ablation_cluster on v4.4 19-feature set — 1 DROP (entity_time NOISE), 14 REVIEW, 4 KEEP (entailment/contradiction STRONG, neutral/entity_percentage WEAK); entity_time to be pruned in v4.5 | `ablation_reports/experiments/20260407_174417_v4.4-all-modes/` |
+| 2026-04-07 | [x] | PRUNE v4.5 attempted + reverted: entity_time removal cost CVG -3pt (training variance, not causal). entity_time retained. | `backend/feature_registry.py` |
+| 2026-04-07 | [x] | v5.0 mode-specific feature baskets: CVG=13, RVG=15, MVM=14. ROC +0.028/+0.013/+0.008 vs v4.4. 0 DROPs in ablation. | `backend/feature_registry.py` (FEATURE_KEYS_BY_MODE), `backend/train.py`, `backend/predict.py`, `backend/test.py`, `backend/ablation_cluster.py` |
+| 2026-04-07 | [x] | ANALYSIS: Jury vs CNN comparison (CVG, n=50): 62% agreement. CNN_MISS=10 (lexically anchored — misses faithful paraphrases); JURY_MISS=9 (jury fails on fragment/minimal answers). Real CNN failure: entity substitution (Piranha 3D cast). Key insight: CNN is lexically anchored, jury is semantically anchored — boundary-band hybrid (jury when CNN 0.3–0.7) could fix both. | `backend/jury/compare.py`, `jury_reports/` |
+| 2026-04-07 | [x] | v5.1 factual groundedness — new CNN features: entity_value_prec/rec (fuzzy string match of GLiNER entity values across texts) + numeric_jaccard (Jaccard over normalised number sets $8B→8B, 25%→25.0%); wired into train.py + feature_registry.py; NumericGrounding extractor (pure-Python, regex+normaliser) | `backend/Features/Numeric/getNumericGrounding.py`, `backend/Features/EntityGroups/getOverlap.py`, `backend/feature_registry.py`, `backend/train.py` |
+| 2026-04-07 | [x] | Jury v5.1 question update: Q2 lexical→omission_key_claim (higher_is_faithful=False); Q1 weight 1.0→0.5 (collinear with Q3 nli_entailment); Q7 numeric_hallucination added (w=1.0, inverted); HALL-NUMERIC reasoning guidance added to system prompt | `backend/jury/jury_evaluator.py` |
+| 2026-04-07 | [x] | v5.2 per-type entity value comparison: `_per_type_value_overlap()` + `_FUZZY_THRESHOLDS` per type (location=0.85, product=0.80, date/time=0.90, duration=0.88, percentage=0.95); 12 new feature maps in `comparison_weights`; ENTITY_VALUE_TYPES + ENTITY_VALUE_KEYS in registry; FEATURE_KEYS_BY_MODE updated (CVG=21, RVG=26, MVM=23) | `backend/Features/EntityGroups/getOverlap.py`, `backend/feature_registry.py` |
+| 2026-04-08 | [x] | DELETE ./cache/ and retrain CVG + RVG on v5.2 feature set — CVG: 21 features, best val 0.1747 @ ep10, early stop ep18, val acc 74.21%; RVG: 26 features, best val 0.1301 @ ep10, early stop ep18, val acc 83.94% | `./cache/`, `models/context-vs-generated/`, `models/reference-vs-generated/`, `train_cvg.log`, `train_rvg.log` |
+| 2026-04-08 | [x] | RETRAIN MVM on v5.2 feature set (23 features) — best val loss 0.1539 @ ep13, early stop ep21, val acc 78.14% @ ep20 | `models/model-vs-model/20260408_103121_best.pth`, `train_mvm.log` |
+| 2026-04-08 | [x] | EVAL CVG v5.2 test set: 70.66% acc / AUC 0.8063 / AUPRC 0.8277 / MCC 0.4228 — REGRESSION vs v5.0 (AUC 0.829); per-type entity value features (8 sparse maps) add noise: both-empty→1.0 for most HaluEval pairs | `test_reports/test_report_20260408_102442.json` |
+| 2026-04-08 | [x] | EVAL RVG v5.2 test set: 78.72% acc / AUC 0.8703 / AUPRC 0.8471 / MCC 0.5759 — REGRESSION vs v5.0 (AUC 0.882); same sparse-feature noise issue | `test_reports/test_report_20260408_103632.json` |
+| 2026-04-08 | [x] | EVAL MVM v5.2 test set: 80.90% acc / AUC 0.8906 / AUPRC 0.8553 / MCC 0.6196 — slight regression vs v5.0 (AUC 0.897); smallest gap of three modes | `test_reports/test_report_20260408_104228.json` |
+| 2026-04-08 | [x] | ABLATION v5.2 all 3 modes — CVG: 1 DROP (entity_time_value_rec), 7 MARGINAL per-type; RVG: 0 DROPs, all per-type MARGINAL (ns Bonferroni); MVM: 2 DROPs (entity_time_prec/rec NOISE), entity_percentage_value_prec/rec KEEP (p<1e-6) | `ablation_reports/experiments/20260408_*_v5.2-*/` |
+| 2026-04-08 | [x] | v5.3 feature baskets — CVG=17 (+entity_product_value_prec only, p=6e-4); RVG=18 (0 per-type, none pass Bonferroni); MVM=19 (+entity_percentage_value_prec/rec p<1e-6) | `backend/feature_registry.py` VERSION=5.3 |
+| 2026-04-08 | [x] | RETRAIN all 3 modes on v5.3 — CVG: best val 0.1560 @ ep21, stop ep29, acc 79.08% (+5pt vs v5.2); RVG: best val 0.1316 @ ep10, stop ep18, acc 81.02%; MVM: best val 0.1524 @ ep2, stop ep10 | `models/*/`, `train_*.log` |
+| 2026-04-08 | [x] | EVAL all 3 modes on v5.3 — CVG: 76.51% acc / AUC 0.852 (NEW BEST, +0.023 vs v5.0); RVG: 77.17% acc / AUC 0.872 (−0.010 vs v5.0, within noise); MVM: 80.95% acc / AUC 0.890 (−0.007 vs v5.0, within noise) | `test_reports/` |
+| 2026-04-07 | [x] | DATA: Expand training set — RAGTruth (+400 CVG), ANLI-R3 (+400 RVG), WiCE (+349 RVG), MedHallu (+400 CVG), AporiaRAG (+400 CVG); CVG 2331→3531, RVG 1831→2580 | `backend/fetch_external_data.py` |
+| 2026-04-07 | [ ] | DATA: Synthetic hallucination augmentation for CVG (paraphrase → inject hallucination via LLM, label=0); target CVG ROC > 0.86 | `backend/generate_data.py` |
+| 2026-04-07 | [ ] | FEATURE: Score explainability narrative — post-process breakdown response through GPT-4o-mini to produce a single human-readable sentence; e.g. "Text 2 introduces a factual claim not grounded in Text 1 (entailment 0.12, contradiction 0.67)"; new endpoint or flag on existing breakdown | `backend/api/main.py`, `backend/api/schemas.py` |
+| 2026-04-07 | [ ] | INSIGHT (LinkedIn): v5.0 architecture observation — same Conv2D topology for all modes despite NLI-dominant CVG vs semantic-dominant MVM; mode-specific architectures (deeper early stage for NLI modes, wider spatial RF for semantic modes) as next frontier | — |
+
+## Session 2026-04-08/09 — Data expansion + NLI pair cache + expanded retraining
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-08 | [x] | Added cursor convention to global CLAUDE.md and TASK.md | `C:\Users\mehul\.claude\CLAUDE.md` |
+| 2026-04-08 | [x] | PERF: NLI pair cache — `NLIWeights._pair_cache` keyed on (sent1, sent2); `_prefill_nli_cache()` in train.py batches all unique sentence pairs before training loop; RVG needed only 2303 new pairs scored (rest cached from CVG) | `backend/Features/NLI/getNLIweights.py`, `backend/train.py` |
+| 2026-04-08 | [x] | DATA: Fixed 5 dataset loaders — RAGTruth (wandb/RAGTruth-processed), ANLI-R3 (facebook/anli, removed trust_remote_code), WiCE (jon-tow/wice, config=claim); FaithDial/SummaC unavailable (custom loading scripts deprecated in datasets>=3.0) | `backend/fetch_external_data.py` |
+| 2026-04-08 | [x] | DATA: Added MedHallu loader (UTAustin-AIHealth/MedHallu, pqa_labeled+pqa_artificial configs; Knowledge+GroundTruth→1, Knowledge+HallucinatedAnswer→0) | `backend/fetch_external_data.py` |
+| 2026-04-09 | [x] | DATA: Added AporiaRAG loader (aporia-ai/rag_hallucinations; context+answer+is_hallucination; 309/691 balanced to 200/200) | `backend/fetch_external_data.py` |
+| 2026-04-09 | [x] | RETRAIN CVG on 2731 pairs (RAGTruth added) — best val 0.1583 @ ep20, stop ep28; test AUC 0.836 (−0.016 vs v5.3; MCC +0.062, more balanced) | `models/context-vs-generated/best.pth` |
+| 2026-04-09 | [x] | RETRAIN RVG on 2580 pairs (ANLI-R3+WiCE added) — best val 0.1460 @ ep10, stop ep18, val acc 79.33% | `models/reference-vs-generated/best.pth` |
+| 2026-04-09 | [x] | RETRAIN CVG on 3531 pairs (MedHallu+AporiaRAG added) — best val 0.1788 @ ep21, stop ep29 | `models/context-vs-generated/20260409_225448_best.pth` |
+| 2026-04-09 | [x] | EVAL RVG on 2580-pair model — AUC 0.8734 (+0.001 vs v5.3 baseline 0.872), Acc 78.1%, MCC 0.5634 | `test_reports/test_report_20260409_003536.json` |
+| 2026-04-11 | [x] | EVAL CVG on 3531-pair model — AUC 0.8529 (≈ v5.3 baseline), Acc 76.5%, MCC 0.530, AUPRC 0.869; balanced confusion (206/200) | `test_reports/test_report_20260411_093556.json` |
+| 2026-04-09 | [x] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
+| 2026-04-11 | [x] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports — commit 0cbe1fd | `models/*/best.pth`, `test_reports/`, `*.log` |
+
+<!-- CURSOR: 2026-04-11 — Session complete. CVG AUC 0.8529, RVG AUC 0.8734. Next: decide on next experiment (relation features, jury mode, or MVM retrain) -->
+
+## Session 2026-04-03 — Ablation v4.1 + new data sources
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-03 | [x] | ABLATION: v4.1 pruning — drop 7 correlated-redundant features (cross-r ≥ 0.93): mxbai_cosine, REC_mxbai, Qwen_cosine, REC_Qwen, jaccard, cosine_lexical, rouge_unigram; 22→15 features; version bumped to 4.1 | `backend/feature_registry.py`, `backend/Features/Lexical/getLexicalWeights.py`, `backend/Features/Semantic/getSemanticWeights.py` — commit 74ffa19 |
+| 2026-04-03 | [~] | TRAINING: v4.1 retrain all 3 modes (cache hit — no recompute needed; dict cache pre-selects from 22 available keys) | `models/*/best.pth` — cvg in progress |
+| 2026-04-03 | [ ] | EVAL: Run python -m backend.test for all 3 modes after v4.1 training; compare vs v4.0b baseline (cvg 77.98% / rvg 78.62% / mvm 79.76%) | `test_reports/` |
+| 2026-04-03 | [ ] | ABLATION: Re-run ablation_cluster on v4.1 15-feature set — tag v4.1-all-modes | `ablation_reports/experiments/` |
+| 2026-04-03 | [x] | DATA SCOUTING: Identified 5 new data sources — RAGTruth (cvg, ~18k), FaithDial (cvg, ~50k), ANLI-R3 (rvg, ~45k), WiCE (rvg, ~8.8k), SummaC (cvg+rvg, ~1.6k); all on HuggingFace Hub | research |
+| 2026-04-03 | [x] | DATA: Implement loaders for RAGTruth, FaithDial, ANLI-R3, WiCE, SummaC in fetch_external_data.py; field-name probing + graceful fallback for each | `backend/fetch_external_data.py` — commit 4305597 |
+| 2026-04-03 | [ ] | DATA: Run python -m backend.fetch_external_data to pull new datasets and rebuild splits | `data/`, `data/external/` — requires re-run after v4.1 training complete |
+| 2026-04-03 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset (after fetch_external_data re-run) — delete ./cache/ first to recompute features for new pairs | `models/*/`, `./cache/` |
+
+## Feature Roadmap — LLM-Jury Mode
+
+> **Idea (from THOUGHTS.md):** Use a panel of LLMs as binary-question juries that measure the same dimensions
+> as the CNN feature pipeline, but with reasoning + structured validation codes per judgment.
+> User can toggle between CNN mode (fast, offline) and LLM-jury mode (interpretable, no training needed).
+> Compare both to surface systematic disagreements (hard cases where CNN != LLM consensus).
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-06 | [ ] | DESIGN: Define jury question set — one binary question per feature cluster (NLI: "Does text2 logically contradict text1?"; Entity: "Does text2 introduce entities absent from text1?"; Semantic: "Is text2 semantically grounded in text1?"; Lexical: "Does text2 use the same key terminology as text1?"); each question returns answer + 1-sentence reasoning + a validation code (e.g. HALL-NUMERIC, ENT-SUBST, FACTUAL-OMIT, STRUCT-MISMATCH) | `backend/jury/questions.py` (new) |
+| 2026-04-06 | [ ] | DESIGN: Validation code taxonomy — enumerated codes corresponding to the 12 misalignment reasons already in `_generate_misalignment_reasons()`; codes become machine-readable tags that enable downstream filtering and analysis | `backend/jury/codes.py` (new), `backend/predict.py` |
+| 2026-04-06 | [ ] | IMPL: `backend/jury/llm_jury.py` — `LLMJury.evaluate(text1, text2, mode) -> JuryReport`; sends all questions in a single structured prompt (few-shot); parses binary answers + codes + reasoning from response; aggregates to score [0,1] via weighted majority | `backend/jury/llm_jury.py` (new) |
+| 2026-04-06 | [ ] | IMPL: API endpoint `POST /api/v1/predict/pair/jury` — same request schema as `/pair`; returns `{score, votes: [{question, answer, code, reasoning}], consensus_codes: [...]}` | `backend/api/main.py`, `backend/api/schemas.py` |
+| 2026-04-06 | [ ] | IMPL: CNN vs jury comparison — `backend/compare.py` runs both modes on a dataset and outputs disagreement cases sorted by |cnn_score - jury_score|; surfaces systematic CNN blind spots | `backend/compare.py` (new) |
+| 2026-04-06 | [ ] | FRONTEND: Jury mode toggle in UI — switch between CNN score and jury breakdown; show per-question votes + reasoning + codes in a collapsible panel; codes rendered as colored chips | `frontend/src/components/JuryPanel.tsx` (new), `frontend/src/App.tsx` |
+
+---
 
 ## Feature Roadmap — Relationship Extraction
 
@@ -198,6 +306,12 @@ short inputs.
 | 2026-04-01 | [ ] | DEPENDENCY: Coreference resolution must be re-enabled before relationship extraction — raw pronouns produce useless triples ("He founded it" → no grounding value); coref resolves per-text before splitting (cheaper than cross-text coref, sufficient for triple grounding); same coref pass will also improve entity type maps and numeric maps since entity names become consistent across sentences | `backend/Splitter/sentence_splitter.py` `resolve_coref` flag, `backend/Preprocess/coref/resolveEntity.py` |
 | 2026-04-01 | [ ] | DESIGN: Coref scope decision — per-text coref (resolve pronouns within each text independently before `split_txt`) is sufficient for triple extraction and entity matching; cross-text coref (resolve across both texts jointly) would additionally help surface shared entity references between text1 and text2 but requires a stronger model than the current GPT-4o-mini pronoun resolver; start with per-text | architecture decision |
 | 2026-04-01 | [ ] | INFRA: Verify `gliner` version supports `model.inference(..., return_relations=True)` — gliner-relex API was stabilised in gliner≥0.2.26; current pin is 0.2.22; check if upgrading breaks `transformers==4.51.0` constraint (gliner-relex uses same GLiNER architecture so likely safe) | `requirements.txt`, `pyproject.toml` |
+
+## Session 2026-04-03 — Data source research
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-03 | [~] | RESEARCH: Evaluate 10 public dataset candidates for expanding cvg/rvg/mvm training data | TASK.md (this entry) |
 
 ## Planned Refactor Roadmap
 | Date | Status | Task | Files / Notes |

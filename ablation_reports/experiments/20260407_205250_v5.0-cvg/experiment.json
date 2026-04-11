@@ -1,0 +1,738 @@
+{
+  "meta": {
+    "timestamp": "2026-04-07T20:52:50.503191",
+    "tag": "v5.0-cvg",
+    "mode_filter": "context-vs-generated",
+    "split_filter": null,
+    "n_pairs": 2331,
+    "n_missing": 0,
+    "n_features": 13,
+    "feature_keys": [
+      "dice",
+      "rouge3",
+      "rouge",
+      "jaccard",
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B",
+      "entailment",
+      "neutral",
+      "contradiction",
+      "lcs_token",
+      "lcs_char"
+    ],
+    "framework_version": "1.0",
+    "bonferroni_alpha": 0.05,
+    "bonferroni_threshold": 0.0038461538461538464,
+    "redundancy_threshold": 0.85
+  },
+  "global_stats": {
+    "pca": {
+      "explained_variance": [
+        0.5063814520835876,
+        0.17486609518527985,
+        0.12916746735572815,
+        0.09205714613199234,
+        0.03355620428919792,
+        0.021083075553178787,
+        0.015717556700110435,
+        0.009772002696990967,
+        0.007414989173412323,
+        0.006207874044775963
+      ],
+      "cumulative_variance": [
+        0.5063814520835876,
+        0.6812475323677063,
+        0.8104150295257568,
+        0.902472198009491,
+        0.9360284209251404,
+        0.9571114778518677,
+        0.9728290438652039,
+        0.9826010465621948,
+        0.9900160431861877,
+        0.9962239265441895
+      ],
+      "top3_loadings_per_pc": {
+        "PC01": [
+          {
+            "feature": "jaccard",
+            "loading": 0.36883604526519775
+          },
+          {
+            "feature": "dice",
+            "loading": 0.3674868047237396
+          },
+          {
+            "feature": "rouge",
+            "loading": 0.3354698717594147
+          }
+        ],
+        "PC02": [
+          {
+            "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+            "loading": 0.386814683675766
+          },
+          {
+            "feature": "lcs_char",
+            "loading": -0.3764125406742096
+          },
+          {
+            "feature": "mixedbread-ai/mxbai-embed-large-v1",
+            "loading": 0.36183029413223267
+          }
+        ],
+        "PC03": [
+          {
+            "feature": "neutral",
+            "loading": 0.6869441866874695
+          },
+          {
+            "feature": "entailment",
+            "loading": -0.6861875057220459
+          },
+          {
+            "feature": "lcs_char",
+            "loading": 0.20701828598976135
+          }
+        ],
+        "PC04": [
+          {
+            "feature": "contradiction",
+            "loading": 0.7739671468734741
+          },
+          {
+            "feature": "entailment",
+            "loading": -0.3739321827888489
+          },
+          {
+            "feature": "neutral",
+            "loading": -0.29742231965065
+          }
+        ],
+        "PC05": [
+          {
+            "feature": "lcs_char",
+            "loading": 0.6730217337608337
+          },
+          {
+            "feature": "rouge3",
+            "loading": -0.5668575167655945
+          },
+          {
+            "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+            "loading": 0.29910460114479065
+          }
+        ],
+        "PC06": [
+          {
+            "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+            "loading": 0.7307987809181213
+          },
+          {
+            "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+            "loading": -0.458996444940567
+          },
+          {
+            "feature": "rouge3",
+            "loading": 0.2993278503417969
+          }
+        ],
+        "PC07": [
+          {
+            "feature": "dice",
+            "loading": 0.5878722667694092
+          },
+          {
+            "feature": "rouge3",
+            "loading": -0.5317018032073975
+          },
+          {
+            "feature": "jaccard",
+            "loading": 0.42313215136528015
+          }
+        ],
+        "PC08": [
+          {
+            "feature": "rouge",
+            "loading": 0.8535392880439758
+          },
+          {
+            "feature": "lcs_token",
+            "loading": -0.43812012672424316
+          },
+          {
+            "feature": "rouge3",
+            "loading": -0.2125474065542221
+          }
+        ],
+        "PC09": [
+          {
+            "feature": "lcs_token",
+            "loading": 0.67946457862854
+          },
+          {
+            "feature": "lcs_char",
+            "loading": -0.40358641743659973
+          },
+          {
+            "feature": "mixedbread-ai/mxbai-embed-large-v1",
+            "loading": -0.3008560240268707
+          }
+        ],
+        "PC10": [
+          {
+            "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+            "loading": 0.7207940220832825
+          },
+          {
+            "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+            "loading": -0.47292274236679077
+          },
+          {
+            "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+            "loading": -0.38068267703056335
+          }
+        ]
+      }
+    },
+    "kmeans": {
+      "ari": 0.009773061001803982,
+      "cluster_stats": [
+        {
+          "cluster": 0,
+          "n": 1497,
+          "label1_rate": 0.5390781563126252
+        },
+        {
+          "cluster": 1,
+          "n": 834,
+          "label1_rate": 0.4292565947242206
+        }
+      ],
+      "top10_discriminative": [
+        {
+          "feature": "dice",
+          "centroid_distance": 1.5671393871307373
+        },
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.5268282890319824
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.5104005336761475
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "centroid_distance": 1.5046415328979492
+        },
+        {
+          "feature": "jaccard",
+          "centroid_distance": 1.476029396057129
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "centroid_distance": 1.3427408933639526
+        },
+        {
+          "feature": "rouge",
+          "centroid_distance": 1.2231190204620361
+        },
+        {
+          "feature": "lcs_token",
+          "centroid_distance": 1.1421830654144287
+        },
+        {
+          "feature": "rouge3",
+          "centroid_distance": 0.9389253854751587
+        },
+        {
+          "feature": "lcs_char",
+          "centroid_distance": 0.8089584708213806
+        }
+      ]
+    }
+  },
+  "features": {
+    "dice": {
+      "pearson_r": -0.10241937550040259,
+      "pearson_p": 7.224312430946345e-07,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.1146274308060393,
+      "spearman_p": 2.8633389218997663e-08,
+      "cohens_d": -0.20583608746528625,
+      "mutual_info_bits": 0.04583071380803549,
+      "max_cross_r": 0.9815185227514058,
+      "top3_correlated_peers": [
+        {
+          "feature": "jaccard",
+          "cross_r": 0.9815185227514058
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.8303820285234274
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.8247429472764138
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'jaccard'. Ablation test before dropping. Pearson r=-0.1024 (p=7.22e-07, Bonferroni:OK), Spearman r=-0.1146, Cohen's d=-0.2058, MI=0.0458 bits. REDUNDANT: max_cross_r=0.9815 with 'jaccard' (cross_r=+0.9815)"
+    },
+    "rouge3": {
+      "pearson_r": -0.06994396285304508,
+      "pearson_p": 0.0007268325717587291,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.02109119101797672,
+      "spearman_p": 0.30874505933016316,
+      "cohens_d": -0.1401839256286621,
+      "mutual_info_bits": 0.018230459874042895,
+      "max_cross_r": 0.8145576396654511,
+      "top3_correlated_peers": [
+        {
+          "feature": "rouge",
+          "cross_r": 0.8145576396654511
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": 0.8024100422315273
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.7907997184290237
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "KEEP",
+      "reason": "Small but validated independent signal. Pearson r=-0.0699 (p=7.27e-04, Bonferroni:OK), Spearman r=+0.0211, Cohen's d=-0.1402, MI=0.0182 bits"
+    },
+    "rouge": {
+      "pearson_r": -0.11713655612806853,
+      "pearson_p": 1.4121821557724597e-08,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.1684570001868847,
+      "spearman_p": 2.6695359763185704e-16,
+      "cohens_d": -0.2358030527830124,
+      "mutual_info_bits": 0.07011597601340668,
+      "max_cross_r": 0.8705552246712284,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.8705552246712284
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": 0.8527677765669841
+        },
+        {
+          "feature": "dice",
+          "cross_r": 0.8303820285234274
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'lcs_token'. Ablation test before dropping. Pearson r=-0.1171 (p=1.41e-08, Bonferroni:OK), Spearman r=-0.1685, Cohen's d=-0.2358, MI=0.0701 bits. REDUNDANT: max_cross_r=0.8706 with 'lcs_token' (cross_r=+0.8706)"
+    },
+    "jaccard": {
+      "pearson_r": -0.09503232849980268,
+      "pearson_p": 4.303778471690941e-06,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.11274586180470082,
+      "spearman_p": 4.8177410845448705e-08,
+      "cohens_d": -0.19085219502449036,
+      "mutual_info_bits": 0.03552867330410162,
+      "max_cross_r": 0.9815185227514058,
+      "top3_correlated_peers": [
+        {
+          "feature": "dice",
+          "cross_r": 0.9815185227514058
+        },
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.8659397235352739
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.8527677765669842
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'dice'. Ablation test before dropping. Pearson r=-0.0950 (p=4.30e-06, Bonferroni:OK), Spearman r=-0.1127, Cohen's d=-0.1909, MI=0.0355 bits. REDUNDANT: max_cross_r=0.9815 with 'dice' (cross_r=+0.9815)"
+    },
+    "mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": -0.08293547452252453,
+      "pearson_p": 6.09969617676591e-05,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.09320807283863593,
+      "spearman_p": 6.558744499979786e-06,
+      "cohens_d": -0.16637234389781952,
+      "mutual_info_bits": 0.02629863020359945,
+      "max_cross_r": 0.9323266489597619,
+      "top3_correlated_peers": [
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9323266489597619
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9253669958798254
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.7995664766248001
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'REC_mixedbread-ai/mxbai-embed-large-v1'. Ablation test before dropping. Pearson r=-0.0829 (p=6.10e-05, Bonferroni:OK), Spearman r=-0.0932, Cohen's d=-0.1664, MI=0.0263 bits. REDUNDANT: max_cross_r=0.9323 with 'REC_mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9323)"
+    },
+    "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": -0.08192229762661546,
+      "pearson_p": 7.501903926137213e-05,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.08914568016245678,
+      "spearman_p": 1.6305764932448746e-05,
+      "cohens_d": -0.1643247902393341,
+      "mutual_info_bits": 0.04726789343689933,
+      "max_cross_r": 0.9253669958798255,
+      "top3_correlated_peers": [
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9253669958798255
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.8762442402729583
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.8660025305719733
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'mixedbread-ai/mxbai-embed-large-v1'. Ablation test before dropping. Pearson r=-0.0819 (p=7.50e-05, Bonferroni:OK), Spearman r=-0.0891, Cohen's d=-0.1643, MI=0.0473 bits. REDUNDANT: max_cross_r=0.9254 with 'mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9254)"
+    },
+    "REC_mixedbread-ai/mxbai-embed-large-v1": {
+      "pearson_r": -0.10357663212949487,
+      "pearson_p": 5.400009573297099e-07,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.10664227608452284,
+      "spearman_p": 2.46034168848476e-07,
+      "cohens_d": -0.20818288624286652,
+      "mutual_info_bits": 0.03638119630407301,
+      "max_cross_r": 0.9323266489597619,
+      "top3_correlated_peers": [
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.9323266489597619
+        },
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.8660025305719733
+        },
+        {
+          "feature": "PREC_Qwen/Qwen3-Embedding-0.6B",
+          "cross_r": 0.7319176024806608
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'mixedbread-ai/mxbai-embed-large-v1'. Ablation test before dropping. Pearson r=-0.1036 (p=5.40e-07, Bonferroni:OK), Spearman r=-0.1066, Cohen's d=-0.2082, MI=0.0364 bits. REDUNDANT: max_cross_r=0.9323 with 'mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.9323)"
+    },
+    "PREC_Qwen/Qwen3-Embedding-0.6B": {
+      "pearson_r": -0.06448712891566187,
+      "pearson_p": 0.0018392062091920334,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.06794753786873065,
+      "spearman_p": 0.0010286514105838208,
+      "cohens_d": -0.12918604910373688,
+      "mutual_info_bits": 0.02177566634163642,
+      "max_cross_r": 0.8762442402729583,
+      "top3_correlated_peers": [
+        {
+          "feature": "PREC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.8762442402729583
+        },
+        {
+          "feature": "mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.7995664766248001
+        },
+        {
+          "feature": "REC_mixedbread-ai/mxbai-embed-large-v1",
+          "cross_r": 0.7319176024806608
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'PREC_mixedbread-ai/mxbai-embed-large-v1'. Ablation test before dropping. Pearson r=-0.0645 (p=1.84e-03, Bonferroni:OK), Spearman r=-0.0679, Cohen's d=-0.1292, MI=0.0218 bits. REDUNDANT: max_cross_r=0.8762 with 'PREC_mixedbread-ai/mxbai-embed-large-v1' (cross_r=+0.8762)"
+    },
+    "entailment": {
+      "pearson_r": 0.40189292726149495,
+      "pearson_p": 3.32465403692966e-91,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": 0.40685387557513175,
+      "spearman_p": 1.2322041462171602e-93,
+      "cohens_d": 0.8773419857025146,
+      "mutual_info_bits": 0.13827424291167648,
+      "max_cross_r": 0.6274166048415114,
+      "top3_correlated_peers": [
+        {
+          "feature": "neutral",
+          "cross_r": -0.6274166048415114
+        },
+        {
+          "feature": "contradiction",
+          "cross_r": -0.3787041892127574
+        },
+        {
+          "feature": "lcs_char",
+          "cross_r": -0.18296745677689735
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "STRONG",
+      "verdict": "KEEP",
+      "reason": "Strong multi-measure signal. Core feature. Pearson r=+0.4019 (p=3.32e-91, Bonferroni:OK), Spearman r=+0.4069, Cohen's d=0.8773, MI=0.1383 bits"
+    },
+    "neutral": {
+      "pearson_r": -0.08572006103532435,
+      "pearson_p": 3.41283767858687e-05,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.07797218689679104,
+      "spearman_p": 0.00016439643750167107,
+      "cohens_d": -0.17199859023094177,
+      "mutual_info_bits": 0.05295781354290881,
+      "max_cross_r": 0.6274166048415113,
+      "top3_correlated_peers": [
+        {
+          "feature": "entailment",
+          "cross_r": -0.6274166048415113
+        },
+        {
+          "feature": "contradiction",
+          "cross_r": -0.4830803616312705
+        },
+        {
+          "feature": "dice",
+          "cross_r": -0.1555201109770912
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "KEEP",
+      "reason": "Small but validated independent signal. Pearson r=-0.0857 (p=3.41e-05, Bonferroni:OK), Spearman r=-0.0780, Cohen's d=-0.1720, MI=0.0530 bits"
+    },
+    "contradiction": {
+      "pearson_r": -0.3500167641404988,
+      "pearson_p": 3.77928147840289e-68,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.3103000025973291,
+      "spearman_p": 3.333156227391123e-53,
+      "cohens_d": -0.7470659613609314,
+      "mutual_info_bits": 0.10249606632235579,
+      "max_cross_r": 0.4830803616312705,
+      "top3_correlated_peers": [
+        {
+          "feature": "neutral",
+          "cross_r": -0.4830803616312705
+        },
+        {
+          "feature": "entailment",
+          "cross_r": -0.37870418921275745
+        },
+        {
+          "feature": "lcs_char",
+          "cross_r": 0.18161331633116357
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "STRONG",
+      "verdict": "KEEP",
+      "reason": "Strong multi-measure signal. Core feature. Pearson r=-0.3500 (p=3.78e-68, Bonferroni:OK), Spearman r=-0.3103, Cohen's d=-0.7471, MI=0.1025 bits"
+    },
+    "lcs_token": {
+      "pearson_r": -0.10082961591430376,
+      "pearson_p": 1.0720955977373757e-06,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.1185209330913193,
+      "spearman_p": 9.500582736812678e-09,
+      "cohens_d": -0.20261387526988983,
+      "mutual_info_bits": 0.04263566587772846,
+      "max_cross_r": 0.8705552246712285,
+      "top3_correlated_peers": [
+        {
+          "feature": "rouge",
+          "cross_r": 0.8705552246712285
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": 0.8659397235352738
+        },
+        {
+          "feature": "dice",
+          "cross_r": 0.8247429472764138
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "WEAK",
+      "verdict": "REVIEW",
+      "reason": "Small signal but near-duplicate (max_cross_r>=0.85) of higher-tier feature 'rouge'. Ablation test before dropping. Pearson r=-0.1008 (p=1.07e-06, Bonferroni:OK), Spearman r=-0.1185, Cohen's d=-0.2026, MI=0.0426 bits. REDUNDANT: max_cross_r=0.8706 with 'rouge' (cross_r=+0.8706)"
+    },
+    "lcs_char": {
+      "pearson_r": -0.12876153942045304,
+      "pearson_p": 4.394871545204902e-10,
+      "pearson_significant_bonferroni": true,
+      "spearman_r": -0.15564857332383492,
+      "spearman_p": 4.129551832502666e-14,
+      "cohens_d": -0.25957155227661133,
+      "mutual_info_bits": 0.02494839890827823,
+      "max_cross_r": 0.7794705728814966,
+      "top3_correlated_peers": [
+        {
+          "feature": "lcs_token",
+          "cross_r": 0.7794705728814966
+        },
+        {
+          "feature": "rouge",
+          "cross_r": 0.7346193869123212
+        },
+        {
+          "feature": "jaccard",
+          "cross_r": 0.5878178278992823
+        }
+      ],
+      "mode_consistency": null,
+      "mode_ranks": null,
+      "tier": "MODERATE",
+      "verdict": "KEEP",
+      "reason": "Moderate validated signal with independent information. Pearson r=-0.1288 (p=4.39e-10, Bonferroni:OK), Spearman r=-0.1556, Cohen's d=-0.2596, MI=0.0249 bits"
+    }
+  },
+  "tier_summary": {
+    "STRONG": [
+      "entailment",
+      "contradiction"
+    ],
+    "MODERATE": [
+      "lcs_char"
+    ],
+    "WEAK": [
+      "dice",
+      "rouge3",
+      "rouge",
+      "jaccard",
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B",
+      "neutral",
+      "lcs_token"
+    ],
+    "MARGINAL": [],
+    "NOISE": []
+  },
+  "verdict_summary": {
+    "KEEP": [
+      "rouge3",
+      "entailment",
+      "neutral",
+      "contradiction",
+      "lcs_char"
+    ],
+    "REVIEW": [
+      "dice",
+      "rouge",
+      "jaccard",
+      "mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_mixedbread-ai/mxbai-embed-large-v1",
+      "REC_mixedbread-ai/mxbai-embed-large-v1",
+      "PREC_Qwen/Qwen3-Embedding-0.6B",
+      "lcs_token"
+    ],
+    "DROP": []
+  },
+  "per_mode_correlations": {
+    "context-vs-generated": {
+      "n": 2331,
+      "features": {
+        "dice": {
+          "pearson_r": -0.10241937550040259,
+          "pearson_p": 7.224312430946345e-07
+        },
+        "rouge3": {
+          "pearson_r": -0.06994396285304508,
+          "pearson_p": 0.0007268325717587291
+        },
+        "rouge": {
+          "pearson_r": -0.11713655612806853,
+          "pearson_p": 1.4121821557724597e-08
+        },
+        "jaccard": {
+          "pearson_r": -0.09503232849980268,
+          "pearson_p": 4.303778471690941e-06
+        },
+        "mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.08293547452252453,
+          "pearson_p": 6.09969617676591e-05
+        },
+        "PREC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.08192229762661546,
+          "pearson_p": 7.501903926137213e-05
+        },
+        "REC_mixedbread-ai/mxbai-embed-large-v1": {
+          "pearson_r": -0.10357663212949487,
+          "pearson_p": 5.400009573297099e-07
+        },
+        "PREC_Qwen/Qwen3-Embedding-0.6B": {
+          "pearson_r": -0.06448712891566187,
+          "pearson_p": 0.0018392062091920334
+        },
+        "entailment": {
+          "pearson_r": 0.40189292726149495,
+          "pearson_p": 3.32465403692966e-91
+        },
+        "neutral": {
+          "pearson_r": -0.08572006103532435,
+          "pearson_p": 3.41283767858687e-05
+        },
+        "contradiction": {
+          "pearson_r": -0.3500167641404988,
+          "pearson_p": 3.77928147840289e-68
+        },
+        "lcs_token": {
+          "pearson_r": -0.10082961591430376,
+          "pearson_p": 1.0720955977373757e-06
+        },
+        "lcs_char": {
+          "pearson_r": -0.12876153942045304,
+          "pearson_p": 4.394871545204902e-10
+        }
+      }
+    }
+  }
+}

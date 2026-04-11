@@ -262,12 +262,15 @@ def _mc_dropout_prediction_intervals(
     with torch.no_grad():
         for _ in range(n_passes):
             pass_probs = []
-            for features, _ in test_loader:
+            for features, lengths, _ in test_loader:
                 features = features.to(device)
+                lengths  = lengths.to(device)
                 if is_legacy:
                     n_maps = model.fc_reduce1.in_features // (64 * 64)
                     features = features[:, :n_maps, :, :].view(features.size(0), -1)
-                out = model(features).cpu().numpy().flatten()
+                    out = model(features).cpu().numpy().flatten()
+                else:
+                    out = model(features, lengths).cpu().numpy().flatten()
                 pass_probs.append(out)
             all_pass_probs.append(np.concatenate(pass_probs))
 
@@ -360,13 +363,17 @@ def test_model(model, test_loader, test_pairs, device='cuda'):
     is_legacy = isinstance(model, TextSimilarityCNNLegacy)
 
     with torch.no_grad():
-        for i, (features, labels) in enumerate(test_loader):
-            features, labels = features.to(device), labels.to(device)
+        for i, (features, lengths, labels) in enumerate(test_loader):
+            features = features.to(device)
+            lengths  = lengths.to(device)
+            labels   = labels.to(device)
             if is_legacy:
                 trained_num_maps = model.fc_reduce1.in_features // (64 * 64)
                 features = features[:, :trained_num_maps, :, :]
                 features = features.view(features.size(0), -1)
-            outputs = model(features)
+                outputs = model(features)
+            else:
+                outputs = model(features, lengths)
             probs = outputs.cpu().numpy()
             preds = (outputs > 0.5).float()
 
@@ -544,19 +551,25 @@ if __name__ == '__main__':
         data_dir  = 'data'
         print("Mode: general  |  Data: data/  |  Checkpoint: best_model.pth")
 
+    # Load the model first so we can read the feature manifest.
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
+    model, arch = _load_model_from_checkpoint(checkpoint, device)
+    print(f"  architecture : {arch}")
+
+    # Resolve feature keys from the checkpoint manifest (v5.0+ mode-specific baskets).
+    from backend.feature_registry import FEATURE_KEYS as _GLOBAL_KEYS
+    feature_keys = checkpoint.get('manifest', {}).get('features') or _GLOBAL_KEYS
+    print(f"  feature keys : {len(feature_keys)}")
+
     # Load test data
     test_pairs, test_labels = load_json_data(f'{data_dir}/test.json')
     print(f"Loaded {len(test_pairs)} test pairs")
 
     # Create dataset with feature caching enabled
-    test_dataset = TextSimilarityDataset(test_pairs, test_labels, use_cache=True)
+    test_dataset = TextSimilarityDataset(test_pairs, test_labels, use_cache=True,
+                                         feature_keys=feature_keys)
     test_loader = DataLoader(test_dataset, batch_size=16)
-
-    # Load the model (auto-detects legacy Conv1D vs current Conv2D architecture)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
-    model, arch = _load_model_from_checkpoint(checkpoint, device)
-    print(f"  architecture : {arch}")
 
     # Test the model and generate report
     metrics, report = test_model(model, test_loader, test_pairs, device=str(device))

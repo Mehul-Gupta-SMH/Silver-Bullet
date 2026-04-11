@@ -53,18 +53,23 @@ class TextSimilarityCNN(nn.Module):
     Every cell carries signal from actual sentence pairs — no zero-padding artefacts.
     """
 
-    def __init__(self, num_features: int, hidden_dim: int = 256, spatial_size: int = 32):
+    def __init__(self, num_features: int, hidden_dim: int = 256, spatial_size: int = 32,
+                 use_length_cond: bool = True):
         """
         Args:
-            num_features (int):  Number of input feature-map channels.
-            hidden_dim (int):    Base width for convolutional feature maps.
-            spatial_size (int):  Spatial side length of the input maps (default 32).
-                                 Must be divisible by 8 (three MaxPool(2) layers).
+            num_features (int):     Number of input feature-map channels.
+            hidden_dim (int):       Base width for convolutional feature maps.
+            spatial_size (int):     Spatial side length of the input maps (default 32).
+                                    Must be divisible by 8 (three MaxPool(2) layers).
+            use_length_cond (bool): If True, concatenate [log(n+1), log(m+1)] to the
+                                    flattened CNN output before the FC head, letting the
+                                    model condition on the original sentence-pair counts.
         """
         super(TextSimilarityCNN, self).__init__()
 
-        self.num_features = num_features
-        self.spatial_size = spatial_size
+        self.num_features    = num_features
+        self.spatial_size    = spatial_size
+        self.use_length_cond = use_length_cond
 
         # --- Spatial feature extraction ---
         # Block 1: num_features → hidden_dim,   spatial_size → spatial_size/2
@@ -81,18 +86,20 @@ class TextSimilarityCNN(nn.Module):
 
         # --- Classification head ---
         # After 3× MaxPool(2,2): side = spatial_size/8
-        reduced = spatial_size // 8
+        reduced  = spatial_size // 8
         flat_dim = (hidden_dim // 4) * reduced * reduced
+        fc1_in   = flat_dim + 2 if use_length_cond else flat_dim
 
-        self.fc1      = nn.Linear(flat_dim, hidden_dim)
+        self.fc1      = nn.Linear(fc1_in, hidden_dim)
         self.bn_fc1   = nn.BatchNorm1d(hidden_dim)
         self.fc2      = nn.Linear(hidden_dim, 1)
 
         self.dropout  = nn.Dropout(0.3)
         self.pool     = nn.MaxPool2d(kernel_size=2, stride=2)
 
-    def forward(self, x):
-        # x: [batch, num_features, spatial_size, spatial_size]
+    def forward(self, x, lengths=None):
+        # x:       [batch, num_features, spatial_size, spatial_size]
+        # lengths: [batch, 2]  — [log(n+1), log(m+1)], required when use_length_cond=True
 
         x = self.pool(F.relu(self.bn1(self.conv1(x))))   # → [B, H,   S/2, S/2]
         x = self.dropout(x)
@@ -104,6 +111,9 @@ class TextSimilarityCNN(nn.Module):
         x = self.dropout(x)
 
         x = x.view(x.size(0), -1)                        # → [B, flat_dim]
+
+        if self.use_length_cond and lengths is not None:
+            x = torch.cat([x, lengths], dim=1)           # → [B, flat_dim+2]
 
         x = F.relu(self.bn_fc1(self.fc1(x)))
         x = self.dropout(x)

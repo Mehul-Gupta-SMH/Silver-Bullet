@@ -138,3 +138,89 @@ class HealthResponse(BaseModel):
         description="Per-mode model load state — keys are evaluation mode IDs",
         examples=[{"model-vs-model": True, "reference-vs-generated": True, "context-vs-generated": True}],
     )
+
+
+# ---------------------------------------------------------------------------
+# Jury (LLM-as-judge) schemas
+# ---------------------------------------------------------------------------
+
+class JuryQuestion(BaseModel):
+    """A single binary yes/no question posed to the LLM jury."""
+
+    question: str = Field(..., description="The question text posed to the LLM")
+    answer: Literal["yes", "no"] = Field(..., description="LLM answer: 'yes' or 'no'")
+    confidence: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="LLM's self-reported confidence in the answer (0–1)",
+    )
+    reasoning: str = Field(..., description="One-sentence explanation from the LLM")
+
+
+class JuryResult(BaseModel):
+    """Aggregated result from the LLM jury evaluation of a single text pair."""
+
+    score: float = Field(
+        ...,
+        ge=0.0,
+        le=1.0,
+        description="Aggregated faithfulness score in [0, 1] (higher = more faithful/grounded)",
+    )
+    verdict: Literal["faithful", "hallucinated"] = Field(
+        ...,
+        description="'faithful' if score >= 0.5, otherwise 'hallucinated'",
+    )
+    questions: list[JuryQuestion] = Field(
+        ...,
+        description="Per-question breakdown of the jury's evaluation",
+    )
+    model_used: str = Field(
+        ...,
+        description="Name of the LLM used as the jury (e.g. 'gpt-4o-mini')",
+    )
+
+
+class JuryRequest(BaseModel):
+    """Request body for a single jury evaluation."""
+
+    text1: str = Field(
+        ...,
+        min_length=1,
+        max_length=10_000,
+        description="First text (source / reference / context)",
+        examples=["The Eiffel Tower is located in Paris, France."],
+    )
+    text2: str = Field(
+        ...,
+        min_length=1,
+        max_length=10_000,
+        description="Second text (hypothesis / generated output)",
+        examples=["The Eiffel Tower can be found in Paris, France."],
+    )
+    mode: EvaluationMode = Field(
+        "context-vs-generated",
+        description=_MODE_DESCRIPTION,
+    )
+
+
+class JuryBatchRequest(BaseModel):
+    """Request body for a batch jury evaluation (up to 10 pairs)."""
+
+    pairs: list[JuryRequest] = Field(
+        ...,
+        min_length=1,
+        max_length=10,
+        description=(
+            "List of text pairs to evaluate (max 10 per request — each pair makes one LLM call)"
+        ),
+    )
+
+
+class JuryBatchResponse(BaseModel):
+    """Response body for a batch jury evaluation."""
+
+    results: list[JuryResult] = Field(
+        ...,
+        description="Jury evaluation results, one per input pair in the same order",
+    )

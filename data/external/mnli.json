@@ -1,508 +1,943 @@
 {
   "data": [
     {
-      "text1": "Suppose that someone tells you that, years ago, he made a fundamental discovery that an entire profession, out of sheer narrow-mindedness, refused to listen to and prevented him from publishing.",
-      "text2": "What if he told you he got turned down by the industry?",
+      "text1": "i thought you know it looked to me like it was a real submarine",
+      "text2": "It looked like a real submarine to me.",
       "label": 1
     },
     {
-      "text1": "Army Corps of  An Assessment of the Draft Environmental Impact Statement of the Lower Snake River Dams, GAO/RCED-00-186, July 24, 2000.",
-      "text2": "The Army Corps issued an environmental impact statement.",
+      "text1": "Two foot soldiers rounded the horses on Jon's right.",
+      "text2": "The horses on Jon's right were rounded by two foot soldiers.",
       "label": 1
     },
     {
-      "text1": "Time 's cover story on small towns follows several couples who gave up fast-track lives to settle down in villages.",
-      "text2": "The cover story on this edition of Time is about couples who left fast-track lifestyles to live in villages.",
+      "text1": "As such, the model reflects two principles central to the human capital",
+      "text2": "The model is a reflection of two principles",
       "label": 1
     },
     {
-      "text1": "This site contains information on membership, a calendar of events, and links to AFFIRM's publications.",
-      "text2": "There are links to AFFIRM's publications on the site.",
+      "text1": "Captain Bayliss strode in, powdery white dust graying his blue blouse, his face redder and more sun peeled than ever.",
+      "text2": "Captain Bayliss wore a blue blouse.",
       "label": 1
     },
     {
-      "text1": "ONE HOUSE BURNS AND THREE FELL TO THE SPIKES IN THE RIVER, said the child's voice in his head.",
-      "text2": "I imagined the child saying something scary.",
+      "text1": "An additional reporting standard for financial audits performed in accordance with GAGAS",
+      "text2": "There was an additional report for financial audits performed.",
       "label": 1
     },
     {
-      "text1": "Sigmund Del'Rosa, said Adrin.",
-      "text2": "Adrin said, Sigmund Del'Rosa",
+      "text1": "During 2002, we worked with national colleagues on specific activities.",
+      "text2": "Specific activities were worked on with national colleagues.",
       "label": 1
     },
     {
-      "text1": "It's a hard sell, though.",
-      "text2": "It would be tough to sell, though.",
+      "text1": "If GPRA is to thrive over the long run, its concepts need to be made a part of organizational culture.",
+      "text2": "Concepts should be part of organization culture to thrive.",
       "label": 1
     },
     {
-      "text1": "On his keyboard he typed various letters and numbers, which would become computer programs for the 0-1 Computer Associates company.",
-      "text2": "Letters and numbers typed on a keyboard can become computer programs.",
+      "text1": "\"Heard tell as how you're fixin' to race your plug 'gainst Oro, Kirby,\"Johnny drawled.",
+      "text2": "Kirby is against Oro.",
       "label": 1
     },
     {
-      "text1": "Determine whether users or managers identify new or changed requirements not included in the RFP.",
-      "text2": "Figure out if some of the requirements are different.",
+      "text1": "Like some of the other women who reportedly emerge from the study, her hair was mussed and her clothes askew.",
+      "text2": "Women who came from the study had their hair mussed and clothes askew.",
       "label": 1
     },
     {
-      "text1": "South of the baths begins the Old Appian Way (Via Appia Antica), built in 312 b.c. for the Roman legions who marched to coastal Brindisi to set sail for the Levant and North Africa.",
-      "text2": "The Old Appian Way (Via Appia Antica) begins south of the baths; it was built in 312 b.c. for the Roman legions, who marched to coastal Brindisi to set sail for the Levant and North Africa.",
+      "text1": "Works include those by Picasso, Marcel Duchamp, Magritte, Kandinsky, and Klee, but it is known above all for Jackson Pollock, Mark Rothko, and Robert Motherwell.",
+      "text2": "Despite having a plethora of work from many famous artists, it is most famous for the works of only three.",
       "label": 1
     },
     {
-      "text1": "Many of you suggested that a great way to discourage sexual urges was to flash a photo of a really ugly person.",
-      "text2": "It's suggested that looking at a photo of an ugly person can reduce sexual urges.",
+      "text1": "Not until then will we know whether this is real money or funny money--whether it will be worth a continental.",
+      "text2": "We will then know whether it's real money or funny money.",
       "label": 1
     },
     {
-      "text1": "The government uses the October 1997 through September 1998 review results as a baseline against which the results of subsequent reviews are measured.",
-      "text2": "Subsequent reviews are examined relative to October 1997 to September 1998.",
+      "text1": "Though Rubin has bucked Wall Street by opposing a capital-gains tax cut, he comes from Wall Street, and most of his closest friends and advisers are Wall Streeters, and he generally heeds the street.",
+      "text2": "Rubin's friends and advisors are all wallstreeters.",
       "label": 1
     },
     {
-      "text1": "Children love the ancient toys and dolls.",
-      "text2": "The ancient toys and dolls are popular among children.",
+      "text1": "well i can't use that as an excuse because i didn't do it before i had mine either so",
+      "text2": "I didn't do it before mine so I cannot use that as an excuse.",
       "label": 1
     },
     {
-      "text1": "well they're they're they're a secret they're a secret society they're a secretive society",
-      "text2": "That society is quite secretive.",
+      "text1": "It is impossible to name a single amusing movie that takes place beneath the waves.",
+      "text2": "I can't think of a funny movie that takes place in the ocean.",
       "label": 1
     },
     {
-      "text1": "'Neither of us,' I pointed out, 'invented electricity.'",
-      "text2": "We didn't invent electricity.",
+      "text1": "Is engraved paper really worth it?",
+      "text2": "Would it be worth it to get engraved paper?",
       "label": 1
     },
     {
-      "text1": "but they on the other hand too they cost twenty five hundred dollars",
-      "text2": "The price is twenty five hundred dollars.",
+      "text1": "oh well you're doing you're doing just fine and and uh actually i when i talk i usually like to ask a lot of questions i was wondering what you do at TI",
+      "text2": "I like to ask a lot of questions when I have conversations.",
       "label": 1
     },
     {
-      "text1": "In 1649, Ireland's most hated conqueror, Oliver Cromwell, arrived in Dublin.",
-      "text2": "Oliver Cromwell came to Dublin in 1649.",
+      "text1": "Macau's most memorable monument is the Baroque facade of the ruins of Sao Paulo, the only remains of a beautiful 17th-century Jesuit church.",
+      "text2": "There was a beautiful church in Macau.",
       "label": 1
     },
     {
-      "text1": "yeah yeah yeah and that they they think the whole world is like that",
-      "text2": "That is how they believe the whole world to be.",
+      "text1": "When their position was threatened by Ligurian pirates at sea and warlike tribes from inland, the merchants of Marseilles called on Rome for help.",
+      "text2": "Facing threats on both sides, the merchants in Marseilles looked to Rome.",
       "label": 1
     },
     {
-      "text1": "The groups focused their efforts on increasing everyone's understanding of the risks associated with the organization's information and the related policies and controls in place to mitigate those risks.",
-      "text2": "The groups wanted to make the risks more widely known and promote ways of combating them.",
+      "text1": "uh-huh yeah those the movies are good too",
+      "text2": "The movies are not bad.",
       "label": 1
     },
     {
-      "text1": "Let's face  The world is a mess, life is basically futile, and other people are pretty dreadful and don't like you much anyhow.",
-      "text2": "People are terrible.",
+      "text1": "Bennett assumes Bush himself wouldn't know--and couldn't be expected to know--that someone named Bork wrote the book Slouching Toward Gomorrah that Bush referred to.",
+      "text2": "Bennet had made an assumption about Bush's knowledge regarding the book Slouching Toward Gomorrah.",
       "label": 1
     },
     {
-      "text1": "The rule regulates exhaust emissions from new spark-ignition (SI) gasoline marine engines including outboard engines, personal watercraft engines and jet boat engines beginning with the 1998 model year and the rule is fully phased-in by the 2006 model year.",
-      "text2": "The rule is in place to regulate exhaust emissions for new spark-ignition (SI) gasoline marine engines. The rule applies to models made in the year 1998 and onwards. The rule has been fully phased-in by the 2006 model year.",
+      "text1": "They videotape anything that moves and much that doesn't.",
+      "text2": "Anything that moves and as well as anything that does not move are videotaped.",
       "label": 1
     },
     {
-      "text1": "Henry liked flowers that could make a lady squeal.",
-      "text2": "Henry has given flowers to ladies.",
+      "text1": "Its construction was almost completed in a mere 44 years in the middle of the 13th century; as a result it was possible to maintain a homogeneous architectural style.",
+      "text2": "The construction was done in about 40 years.",
       "label": 1
     },
     {
-      "text1": "Planted with hundreds of pretty blooms, all in pristine condition, it has kept accurate time since its creation in 1903.",
-      "text2": "It was originally created in 1903 and it has never been inaccurate in its timekeeping.",
+      "text1": "nice talking to you too bye-bye",
+      "text2": "I enjoyed speaking with you.",
       "label": 1
     },
     {
-      "text1": "The site is below sea level (even below river level), hot and sticky in the long summer, surrounded by pestilential swamps, vulnerable to every flood and hurricane, and more than 100 miles (160 km) from the Gulf of Mexico or anywhere else.",
-      "text2": "The site is below river and sea level.",
+      "text1": "Warm clothing and hiking boots are essential, though, and in winter bear in mind that conditions on the mountains can be hazardous, with landslides removing parts of the path.",
+      "text2": "Landslides often remove parts of the path which leaves hazardous conditions on the mountain in the winter.",
       "label": 1
     },
     {
-      "text1": "She surely is aware that her husband was unfaithful to her before he became president--he admitted as much on national television.",
-      "text2": "Her husband practically admitted on national television that he was unfaithful to her before he became president.",
+      "text1": "The remaining provisions from existing Sections 403 and 408, which apply, as modified, to Parts B, C, and D, have been retained in Part A, Sections 403 and 404.",
+      "text2": "Modifications to existing sections have been retained in Part A.",
       "label": 1
     },
     {
-      "text1": "(Click to read the question--but in brief, it had to do with why one guy named Bill had managed to discourage unwanted pursuit by a gal named Janet, when another guy named Bill had not.)",
-      "text2": "There are two Bills who had different experiences with Janet.",
+      "text1": "The cities and plains in this season are definitely a bad bet, but the hill-stations will be at their best.",
+      "text2": "Your better bet is to go to lower populated areas that aren't plains.",
       "label": 1
     },
     {
-      "text1": "The Centre Historique M??di??val is a good preparation for a tour of the site.",
-      "text2": "You can tour The Centre Historique.",
+      "text1": "i mean just the very second it's really strange they uh they must uh work on that you know the the it gets cooler when the sun sets and then they all come out",
+      "text2": "The sun sets and they come out.",
       "label": 1
     },
     {
-      "text1": "The capital of ParoseParikia, serves the port, and although it is extremely busy throughout the peak season, it still retains the feel of a Greek town.",
-      "text2": "The town is busy but it still has the feel of a Greek town.",
+      "text1": "I was not wrong as a New Jersey senator, and I'm not wrong as a presidential candidate.",
+      "text2": "I believe I am not incorrect as either a senator or a candidate.",
       "label": 1
     },
     {
-      "text1": "But editorialists said Nicholson had made the investigators' job comically easy (he even climbed into a car with diplomatic plates registered to the Russian Embassy) and, even so, hadn't been caught and busted soon enough.",
-      "text2": "Nicholson was reckless.",
+      "text1": "Sun-seeking visitors, mostly Spaniards, flock to the island on Sundays, the most popular day for excursions.",
+      "text2": "Sundays are the most popular for visiting the island.",
       "label": 1
     },
     {
-      "text1": "Completed in 1586, it was the center of Sephardic worship for centuries.",
-      "text2": "It was central to Sephardic worship and finished in 1586.",
+      "text1": "but it it's really not enough to become a big hassle",
+      "text2": "Its really not a hassle.",
       "label": 1
     },
     {
-      "text1": "yeah yeah really i mean Switzerland is so clean",
-      "text2": "Switzerland is a very well maintained place.",
+      "text1": "The early works of Sean O'Casey and John Synge were written for the Abbey.",
+      "text2": "O'Casey wrote his works for the Abbey.",
       "label": 1
     },
     {
-      "text1": "The church is dominated by the massive nave and graceful flying buttresses linking the five chapels to the chancel.",
-      "text2": "The five chapels are linked to the chancel.",
+      "text1": "The Balanced Budget Act of 1997 requires that all proceeds from auctions be deposited in the U.S.",
+      "text2": "All proceeds of auctions need to be deposited in the U.S. according to the Act.",
       "label": 1
     },
     {
-      "text1": "Is it appropriate for the purpose of the case study?",
-      "text2": "The case study might be appropriate to use it with.",
+      "text1": "This disastrous French naval defeat is known as the Battle of Les Saintes.",
+      "text2": "The French navy was defeated.",
       "label": 1
     },
     {
-      "text1": "In 1670 the Spanish officially ceded Jamaica to British rule as part of the Treaty of Madrid, and the British began a systematic process of settlement, offering land and aid to prospective settlers.",
-      "text2": "Britain rewarded Jamaican settlers with land after Spain ceded the island in 1670.",
+      "text1": "Kazan might have stood by his original policy, asserting that while he hated Communism, he would not assist in a violation of civil liberties.",
+      "text2": "Kazan hated communism.",
       "label": 1
     },
     {
-      "text1": "but i didn't i'm from Kilgore Texas it's in east",
-      "text2": "I am from Kigore in the east.",
+      "text1": "Last week, the presiding judge in the case sanctioned Stephanopoulos for not looking hard enough for documents covered by a Judicial Watch subpoena.",
+      "text2": "Stephanopoulos was sanctioned for not looking hard enough for documents.",
       "label": 1
     },
     {
-      "text1": "The Po valley's economic expansion through land clearance and new irrigation works brought a rapid decline of feudalism.",
-      "text2": "Feudalism declined in the Po valley after land clearance and irrigation works expanded.",
+      "text1": "From fiscal year 1986 to 1995, for example, total import entries increased by 242 percent, from 11.",
+      "text2": "Total important entries went up by over 200 percent between the fiscal years of 1986 and 1995.",
       "label": 1
     },
     {
-      "text1": "I bolted around a corner, almost ploughing into a small family.",
-      "text2": "I ran around the corner.",
+      "text1": "Fans  You're too big for your britches!",
+      "text2": "Your ego is too big.",
       "label": 1
     },
     {
-      "text1": "you can uh you can get and i know when my children were younger um we found a lot of really nice tapes that they that they liked um there was an Agape music group and um i some of the songs i still find going over in my head over and over again because they were really um very memorable even though my children are now my youngest is almost sixteen but i still find some of the same tapes i uh some of the same songs from those tapes i enjoy",
-      "text2": "They had many tapes when they were younger.",
+      "text1": "and one had been broken off",
+      "text2": "One had been severed.",
       "label": 1
     },
     {
-      "text1": "Ca'daan looked nervously at a body laying face up on one side of the path.",
-      "text2": "He gazed at the body on the ground.",
+      "text1": "After its early failure, Hubble now provides vital clues to the universe.",
+      "text2": "Hubble provides important clues to the universe.",
       "label": 1
     },
     {
-      "text1": "(Thank God we weren't editing encyclopedias at Microsoft!)",
-      "text2": "Thank god we didn't edit an encyclopedia while at Microsoft.",
+      "text1": "and uh it's it's been a real struggle and a hardship for a lot of people in our area that we have you know have been fighting against this thing in trying to have things changed to make them more more right",
+      "text2": "It's hard for a lot of people around here.",
       "label": 1
     },
     {
-      "text1": "I wind up doing many things alone on weekends and in the evenings because she always has plans with the girls.",
-      "text2": "She is busy with her friends.",
+      "text1": "Look at the landscape of his life and you'll see a boneyard.",
+      "text2": "His life is dull and boring.",
       "label": 1
     },
     {
-      "text1": "White-tiled rooms with Jamaican hand-crafted bamboo furniture and locally printed fabrics offer panoramic views.",
-      "text2": "The rooms have white tile.",
+      "text1": "Maybe it was a prophecy.",
+      "text2": "It could have been a prophecy.",
       "label": 1
     },
     {
-      "text1": "yeah i was i was pretty happy i got what i pretty much wanted i could have had it any color i wanted",
-      "text2": "I was pleased because I pretty much got what I wanted",
+      "text1": "You'll probably often find yourself on this central pedestrian thoroughfare, crowded with shoppers, visitors, sightseers, and street entertainers.",
+      "text2": "Most of the time you'll find yourself in the crowded thoroughfare.",
       "label": 1
     },
     {
-      "text1": "This massively delayed planning and bill-writing, a traffic jam that still has not cleared.",
-      "text2": "There was a traffic jam that affected work.",
+      "text1": "Every man, woman, and child in those adobe buildings had reason to be thankful for their skill and cunning the web of protection Rennie's Pima Scouts had woven in this river valley.",
+      "text2": "The people were very grateful for their skills at building adobe housing that protects them.",
       "label": 1
     },
     {
-      "text1": "(At my hospital, a young woman died from it after taking fen-phen for 24 days to lose weight for her wedding.)",
-      "text2": "A young woman, who wanted to lose weight in time for her wedding, died from taking fen-phen for 24 days.",
+      "text1": "Thanks to its unstable subsoil, the Leaning Tower (Campanile) is out of alignment by about 4.5 m (15 ft) though measurements vary.",
+      "text2": "The Leaning Tower is out of alignment due to unstable subsoil.",
       "label": 1
     },
     {
-      "text1": "She was a child star on the old sitcom Diff'rent Strokes . Since then she's been arrested on robbery and drug charges.",
-      "text2": "After starring on Different Strokes she has been arrested on multiple charges.",
+      "text1": "Considerable attention would be paid to demand and to prices that could be charged successfully.",
+      "text2": "The prices that could be successfully charged is a topic that would be given a lot of attention.",
       "label": 1
     },
     {
-      "text1": "i love it though i love Hondas",
-      "text2": "I love Hondas though.",
+      "text1": "There was nothing to say.",
+      "text2": "Nothing could be said about it.",
       "label": 1
     },
     {
-      "text1": "In the mid-19th century the creation of a network of railway lines revolutionized transport and communications in England.",
-      "text2": "The railway lines revolutionized transport in England.",
+      "text1": "Individuals place a value on visibility improvements in recreational areas, such as National Parks and wilderness areas",
+      "text2": "People love to see visible improvements in National Parks.",
       "label": 1
     },
     {
-      "text1": "We've been told that getting documents posted overnight and providing a search engine has resulted in substantial savings to intervenors and the Postal Service.",
-      "text2": "The documents get posted overnight to save money.",
+      "text1": "Susan's voice stopped and her eyes closed.",
+      "text2": "Susan stopped talking.",
       "label": 1
     },
     {
-      "text1": "Also, I should be able to revel in praise rather than worry about it.",
-      "text2": "I should be able to deal with praise and not worry about it.",
+      "text1": "The town's Museum of Turkish and Islamic Art (Turk ve Islam Eserleri Mezesi) is just next to the mosque.",
+      "text2": "The mosque is situated next to the Museum of Turkish and Islamic Art.",
       "label": 1
     },
     {
-      "text1": "you know you don't feel it so strapped",
-      "text2": "You feel more comfortable.",
+      "text1": "you know just just for fresh i i'm really interested in the basic concept differences between west and east coast and the central parts of America",
+      "text2": "The differences between the major regions of America really interest me.",
       "label": 1
     },
     {
-      "text1": "Many worksharing discounts evoke responses based on more than one of the situations described above.",
-      "text2": "Several of the described situations reflect the responses.",
+      "text1": "Dominating Old Delhi, the Lal Quila (Red Fort) was built by Shahjahan when he transferred the capital back to Delhi from Agra.",
+      "text2": "When Shahjahan made Delhi the capital again, he constructed the Lal Quila.",
       "label": 1
     },
     {
-      "text1": "He went on out to the plaza.",
-      "text2": "He's on an outing to the plaza.",
+      "text1": "so that's it gets expensive around here to do a lawn because you're always you know buying the fertilizer and the you know the bug killers and weed killers yeah",
+      "text2": "The supplies to do are lawn are very expensive.",
       "label": 1
     },
     {
-      "text1": "there is a difference",
-      "text2": "A contrast was there.",
+      "text1": "In 1962 Soviet president Nikita Khrushchev installed 42 medium-range nuclear missiles in Cuba.",
+      "text2": "Medium ranged nuclear missiles were installed in Cuba.",
       "label": 1
     },
     {
-      "text1": "The real challenge in legal services today is how to change and expand our mission through new and innovative approaches to the poverty around us.",
-      "text2": "It is challenging for the legal services to address the poverty around us.",
+      "text1": "This resulted in the emergence of a new class of so-called  statesmen  or yeomen farmers, who came to comprise a new middle class.",
+      "text2": "A new middle class came about, which was comprised of certain farmers.",
       "label": 1
     },
     {
-      "text1": "and he'd have all these people jumping down his back even though i'd agree with it i think he ought to should've gone in there and blew them away",
-      "text2": "He will have people disagreeing with him.",
+      "text1": "sure and and and i don't have any doubt that through some back channels that we encouraged it",
+      "text2": "I am pretty sure that we encouraged it somehow.",
       "label": 1
     },
     {
-      "text1": "I didn't want to look back, in case I saw something unpleasant.",
-      "text2": "I was trying not to look back, In case I would see something I didn't want to.",
+      "text1": "She had accordingly gone downstairs again 144 to rectify her error.",
+      "text2": "She raced downstairs to fix the error she made.",
       "label": 1
     },
     {
-      "text1": "The latter's baptismal font has bas-reliefs by Andrea Sansovino.",
-      "text2": "The baptismal font by the latter has bas-reliefs from Andrea Sansovino.",
+      "text1": "These intriguing horseshoe-shaped valleys nestle like narrow amphi?­theaters against abrupt rocky cliffs, making rewarding destinations for a pleasant day's hike.",
+      "text2": "These intriguing horseshoe-shaped valleys offer a scenic view.",
       "label": 1
     },
     {
-      "text1": "well that i've been aware of i've at least in my own circles i've been aware of an increasing from my generation i don't know if i can quite call myself a distinct generation from you but half generation off i guess um i've noticed uh a certain increase um pessimism with America no longer being sort of on top i had the impression",
-      "text2": "I get the impression that my generation has a pessimistic attitude about America.",
+      "text1": "because of of their you know you can work with it a lot easier",
+      "text2": "They have a particular thing that eases working with it.",
       "label": 1
     },
     {
-      "text1": "At the end of 5 years, however, the agency will be able to report the expenses to be categorized as research and development rather than the outlays for each of the preceding 5 years.",
-      "text2": "After 5 years the agency can report expenses as research and development instead of outlays.",
+      "text1": "A disturbing example of the restriction was discussed during oral argument before the Court.",
+      "text2": "During court, an upsetting example of the restriction was discussed during an oral argument.",
       "label": 1
     },
     {
-      "text1": "Witness Sunday's NYT piece on Kauai by the paper's Los Angeles bureau chief Todd S. Purdum, who tore himself away for a week in order to break the bulletin that the exoticism of the island state is palpable and omnipresent.",
-      "text2": "Kauai is a very exotic island located in the Pacific ocean.",
+      "text1": "Most importantly, these allowances can be traded freely.",
+      "text2": "Free trade is the most important thing.",
       "label": 1
     },
     {
-      "text1": "A pleasant fish and vegetarian restaurant with a nice atmosphere, inventive dishes, outdoor dining; open very late.",
-      "text2": "The restaurant serves vegetarian dishes such as fish in inventive ways, and customers can enjoy the late hours and outdoor dining in a nice atmosphere.",
+      "text1": "we're we we fight that that battle every day here at work uh",
+      "text2": "It is a daily struggle here at work.",
       "label": 1
     },
     {
-      "text1": "because i'm Chapter One and all i do is teach reading all day long",
-      "text2": "Reading is what I teach all day.",
+      "text1": "Who were those men? asked Ca'daan.",
+      "text2": "Ca'daan did not know who the men were.",
       "label": 1
     },
     {
-      "text1": "you know don't like the way you look don't like the way you dress don't like your hair don't like you know it's just something that always sets people off you know you either like someone or you don't like someone or you're just completely indifferent",
-      "text2": "many people will find something about your appearance to dislike",
+      "text1": "The Provost's House on the southwest corner of College Green was built in the late 18th century and is one of the finest houses in the city.",
+      "text2": "The Provost's House is one of the finest houses in the city.",
       "label": 1
     },
     {
-      "text1": "executive performance and accountability for change management will therefore be critical to the success of the federal government's transformation.",
-      "text2": "Executive performance and accountability for change management is critical.",
+      "text1": "While benefits, recognition, and challenging responsibilities are also useful in securing staff, leading organizations identify training as a major nonsalary incentive for attracting and retaining skilled IT professionals.",
+      "text2": "Training is a major incentive for attracting skilled IT professionals.",
       "label": 1
     },
     {
-      "text1": "There are assertions that Chinese donations to members of Congress swayed Congress' 1994 vote to renew MFN.",
-      "text2": "It is believed that Congress renewed MFN because of Chinese donations.",
+      "text1": "You try ridin' with th' bumps awhile, not agin them!",
+      "text2": "You should try riding with the bumps for a while.",
       "label": 1
     },
     {
-      "text1": "And with the sky falling, we dare not trust one.  The words blurred off in a fog of semiconsciousness and half-thoughts.",
-      "text2": "Our capacity for trust changes under extreme circumstances.",
+      "text1": "Two naked woman held each other behind him.",
+      "text2": "There were two naked women holding each other behind him.",
       "label": 1
     },
     {
-      "text1": "Mary and John stand on either side of the crucified Jesus upheld by his Father, while the dove of the Holy Spirit hovers between them, the whole forming an inspiring triangle under the coffered ceiling of a Renaissance chapel.",
-      "text2": "The ceiling of the chapel depicts Jesus being flanked on either side by Mary and John while God and the Holy Spirit form a triangle with him.",
+      "text1": "no i agree with that as as far as the as far as the mess that's developing as a result um",
+      "text2": "I am of the same opinion, regarding the terrible consequence.",
       "label": 1
     },
     {
-      "text1": "These sites are, I think, the meteorological equivalent of snuff films.",
-      "text2": "To me, these sites are basically meteorological snuff films.",
+      "text1": "no it's just the like the bees and insects will do it",
+      "text2": "The bees and insects will do it.",
       "label": 1
     },
     {
-      "text1": "This chapter also describes the concept of accountability for public resources and discusses the responsibilities of managers of government programs, auditors, and audit organizations in the audit process.",
-      "text2": "Accountability is a concept within this chapter which is also described,",
+      "text1": "oh yeah that would be much more convenient yeah",
+      "text2": "Oh yes, that would be very convenient.",
       "label": 1
     },
     {
-      "text1": "well gosh i can't think of anything else",
-      "text2": "I cannot think of anything else.",
+      "text1": "Should further revelations warrant impeachment, Congress may have lost the necessary credibility.",
+      "text2": "Future revelations may show that Congress might lose vital credibility.",
       "label": 1
     },
     {
-      "text1": "so well we did do that we we stripped the paint off or the paper off of one of our you know off of our part of our house and then repapered it and it's that was not any fun",
-      "text2": "We took the paint and paper off of the house and put new paper on it.",
+      "text1": "As the discount level (on the horizontal axis) gets up to e of a cent, 20 billion pieces become presorted.",
+      "text2": "The discount level is shown on the horizontal axis.",
       "label": 1
     },
     {
-      "text1": "Thorn heard something tear, deep in the earth.",
-      "text2": "Thorn heard a noise in the ground.",
+      "text1": "well how do you think women's roles have changed",
+      "text2": "How have the roles of women changed?",
       "label": 1
     },
     {
-      "text1": "you know if there's a breeze blowing it's a nice comfortable day and you don't feel like you have to take ten showers a day because you you take a shower and walk outside and the humidity's so great you know you're sweating to death again",
-      "text2": "It's a nice day when it's not humid.",
+      "text1": "yeah i i buy them every once in a while and and i bought one and it was you know blah",
+      "text2": "I buy them occasionally and sometimes they are very bland.",
       "label": 1
     },
     {
-      "text1": "A favorite sight with visiting photographers is the Cervantes A stone sculpture honoring the author looms behind bronze statues of his immortal characters, Don Quixote and Sancho Panza, astride their horse and donkey, respectively.",
-      "text2": "Behind the stone sculpture lie bronze statues of famous literary characters.",
+      "text1": "However, there are standards that can be applied to all case studies in evaluation.",
+      "text2": "Some standards can be applied to every case study in the evaluation.",
       "label": 1
     },
     {
-      "text1": "and uh i think it was about two hundred dollars or something like that it was a very powerful machine",
-      "text2": "The machine cost us around two hundred dollars.",
+      "text1": "so it's supposed to be real bad driving tomorrow afternoon",
+      "text2": "Tomorrow evening will not be conducive to driving.",
       "label": 1
     },
     {
-      "text1": "Something in their eyes put Ca'daan on guard.",
-      "text2": "There was something sinister in their eyes and Ca'daan was on guard.",
+      "text1": "it it would just depend that's the best part of the crawfish sucking the head but um",
+      "text2": "The head is the best part of the crawfish.",
       "label": 1
     },
     {
-      "text1": "Say that you're from the Podunk Banner and that you want to talk to her about some new policy.",
-      "text2": "Say that you want to talk to her about a new policy.",
+      "text1": "Under the full environmental cell scenario, the estimated annual cost would be $244.",
+      "text2": "The annual cost would be estimated at $244 under the full environmental cell scenario.",
       "label": 1
     },
     {
-      "text1": "At one point, he'd taken 14 shots and hit only four.",
-      "text2": "At one point, he had taken over a dozen shots.",
+      "text1": "The Scottish National Gallery of Modern Art, founded in 1959, occupies the site of the former John Watson's School, a neoclassical building dating from the 1820s.",
+      "text2": "The Scottish National Gallery of Modern Art is located where the John Watson's School was previously.",
       "label": 1
     },
     {
-      "text1": "Part of it is now devoted to the Museo de Caza (Hunting Museum), with stuffed animals and ancient weapons.",
-      "text2": "Part of it is devoted to the Hunting Museum.",
+      "text1": "However, an unqualified audit opinion by itself does not ensure that the information needed to measure and manage performance is useful, relevant, timely, or reliable.",
+      "text2": "An unqualified audit opinion does not ensure the information is useful.",
       "label": 1
     },
     {
-      "text1": "You never told me, I said reproachfully.",
-      "text2": "You never made me aware, I said disapprovingly.",
+      "text1": "Table 1 displays a variety of mean route statistics for residential routes separated into quartiles based on their profit.",
+      "text2": "Table 1 shows statistical data separated based on financial information.",
       "label": 1
     },
     {
-      "text1": "That is, as Reischauer quickly adds, if budget balance is your prime desire and you believe that cuts in discretionary spending are the way to go.",
-      "text2": "Cutting discretionary spending is what you believe in if your primary interest is balancing the budget according to Reischauer.",
+      "text1": "Don't miss the upstairs chapel for Benozzo Gozzoli's 15th-century fresco of the Journey of the Magi to Bethlehem.",
+      "text2": "A fresco depicting the Magi's journey to Bethlehem can be seen in the chapel upstairs.",
       "label": 1
     },
     {
-      "text1": "There's lots of fun to be had for younger members of the family.",
-      "text2": "Younger members of the family are likely to have fun.",
+      "text1": "They shall have two key  (1) they shall be systematically or periodically captured through an accounting or management information system, and (2) there shall be a logical connection between the reported measures and the program's purpose.",
+      "text2": "The accounting and management information system periodically captures them.",
       "label": 1
     },
     {
-      "text1": "But they draft the applications in a way to say that these facts meet the requirements, and by the time the application reaches the court, it is unlikely that the court really gets to notice deficiencies.",
-      "text2": "The way they draft the applications shows how these facts meet requirements.",
+      "text1": "is that right everybody everybody's sick down there",
+      "text2": "There is no one in good health down there.",
       "label": 1
     },
     {
-      "text1": "the costs and difficulties of the ED setting, the relative efficacy and cost of booster sessions is another important issue deserving further research.",
-      "text2": "Another issue that needs to be looked into is the cost of booster sessions.",
+      "text1": "Two blocks north is another lively square, Praaa dos Restauradores, with its historic obelisk commemorating the overthrow of Spanish Hapsburg rule in 1640.",
+      "text2": "There's another square just two blocks north.",
       "label": 1
     },
     {
-      "text1": "For a new perspective on the wonders of the deep, all you need is a mask and breathing tube; the fins are optional.",
-      "text2": "If you want to look at the wonders of the deep in a different way, fins are optional, all you need is a breathing tube and a mask.",
+      "text1": "If you missed the links in the text, click to read more on the Yale University Press study and for some samples of Conley's conflicted prose style.",
+      "text2": "You may read more about the study on their website.",
       "label": 1
     },
     {
-      "text1": "I'm here, in the body of Benjamin Franklin, about to get my brains beaten out.",
-      "text2": "I'm inside Franklin and about to get beat up.",
+      "text1": "Franklin did nothing for a while, apparently ignorant of my presence.",
+      "text2": "Franklin didn't know I was here.",
       "label": 1
     },
     {
-      "text1": "In the presence of sunlight, NOx and volatile organic compounds react photochemically to produce ozone.",
-      "text2": "Ozone can be created when NOx and volatile organic compounds are exposed to sunlight.",
+      "text1": "now was that just on handguns or was that on rifles",
+      "text2": "Was it either on just handguns or rifles?",
       "label": 1
     },
     {
-      "text1": "it kind of get wrapped up in it",
-      "text2": "It sort of gets encased in it.",
+      "text1": "Years before in Colombia, German had looked into the eyes of poor children and told himself he'd help if he was ever in a position to do so.",
+      "text2": "German told himself that he'd help if he could.",
       "label": 1
     },
     {
-      "text1": "Currently, they said, there is no structured way for agencies to learn about best practices in other agencies.",
-      "text2": "There isn't any structure for learning about other agency methods",
+      "text1": "Boating and sailing.",
+      "text2": "Riding motor boats and sail boats.",
       "label": 1
     },
     {
-      "text1": "In reality, both plans were in play in the re-election  Morris' triangulation and the Ickes-Panetta-Stephanopoulos tactic of standing firmly against Republican cuts in Medicare, Medicaid, education, and the environment.",
-      "text2": "Both plans were in play in the re-election.",
+      "text1": "Its yellow courtyard and little-altered architectural features are complemented by a large collection of 17th- and 18th-century furniture.",
+      "text2": "A large collection of 17th- and 18th-century furniture fill the courtyard.",
       "label": 1
     },
     {
-      "text1": "XII  It was twilight.",
-      "text2": "It was nearly night time.",
+      "text1": "um i had a friend who had fixed some uh chili buffalo chili and about a week before went to see the movie of course they raise them now you know to eat",
+      "text2": "About a week before fixing some buffalo chili he went to see the movie.",
       "label": 1
     },
     {
-      "text1": "(I'd prefer to help poor old folks by contributing to charities of my choice, but never mind.)",
-      "text2": "Poor folks can be helped by contributions to charity.",
+      "text1": "well well do you ever go out to any of the higher higher end type more expensive places",
+      "text2": "Where's the most expensive place you have been?",
       "label": 1
     },
     {
-      "text1": "Among the most important elements for effectively implementing the new cabinet department will be close adherence to the key success factors.",
-      "text2": "Closely adhering to the key success factors will be an important for implementing the new cabinet department effectively.",
+      "text1": "It is also where her secretary, David Rizzio, was left to bleed to death after being stabbed by Lord Darnley and his cronies; a bronze plaque marks the spot.",
+      "text2": "Her secretary is named David Rizzio.",
       "label": 1
     },
     {
-      "text1": "More generally, we need to comprehensively examine opportunities for better using the federal government's career SES leadership.",
-      "text2": "We need to look for opportunities to use SES leadership in a better way.",
+      "text1": "Maybe he was becoming a magician himself, with a new magic that might still accomplish something.",
+      "text2": "He was perhaps both becoming a magician and developing a new, useful magic.",
       "label": 1
     },
     {
-      "text1": "The nave is a wonder of light and lofty proportions, enhanced by the luminous beige stone and the splendid ribbed vaulting.",
-      "text2": "The nave is constructed of light-colored stone and ribbed vaulting.",
+      "text1": "right and they'll just pick crooked people again and then people the the wrong people will just fight their way up to the top again and it'll all be for nothing",
+      "text2": "There is no point because things will be the same again.",
       "label": 1
     },
     {
-      "text1": "In the paving of the center aisle of the nave is a large circular labyrinth.",
-      "text2": "There is a sizeable maze in the middle of the nave.",
+      "text1": "assess how effectively an agency is managing a system development contract.",
+      "text2": "Determine whether an agency is managing contracts efficiently.",
       "label": 1
     },
     {
-      "text1": "The ferry also calls at the smaller islands of Kinal??ada, Burgazada, and Heybeliada.",
-      "text2": "The boat stops at some small islands as well.",
+      "text1": "Yes. The Kentuckian's answer sounded curt in his own ears, but he could not help it.",
+      "text2": "The Kentuckian knew his answer was curt but he couldn't help it.",
       "label": 1
     },
     {
-      "text1": "Poirot shrugged his shoulders.",
-      "text2": "Poirot made a gesture.",
+      "text1": "I was just a mite hasty.",
+      "text2": "I did things a little to fast.",
       "label": 1
     },
     {
-      "text1": "She saw it in the minds of the men at the tower.",
-      "text2": "The men were up in a tower.",
+      "text1": "Because SAWS and H-2A workers were deemed to be permanent resident aliens, they became subject to the presence requirement in the Corporation's appropriations act.",
+      "text2": "SAWS workers became subject to the presence requirement.",
       "label": 1
     },
     {
-      "text1": "and the shrimp turn pink then you remove it and you put it on a platter and then you serve it with melted butter and uh",
-      "text2": "Serve the shrimp on a platter with melted butter.",
+      "text1": "and i haven't figured how to get that soft and i tried even tying a pillow to it but two years ago i joined well it's not quite two years it's almost two years i joined the Cosmopolitan Lady here in Plano",
+      "text2": "I haven't figured out how to soften that.",
+      "label": 1
+    },
+    {
+      "text1": "He suggested we need research on how to get physicians to screen in the emergency department.",
+      "text2": "He pointed out that we need research on screening in the emergency department.",
+      "label": 1
+    },
+    {
+      "text1": "These hump-backed beasts are bad-tempered, and when two moody males confront each other in the ring a fierce sparring match ensues, in which they use their necks to try to throw each other off balance.",
+      "text2": "The beasts have very bad tempers causing them to fight.",
+      "label": 1
+    },
+    {
+      "text1": "This question is too hard.",
+      "text2": "This is too difficult of a question.",
+      "label": 1
+    },
+    {
+      "text1": "No, my dear sir, you asked if anyone of the name of Jane Finn had been there.",
+      "text2": "Actually, you asked me about Jane Finn being there.",
+      "label": 1
+    },
+    {
+      "text1": "Now he was disturbed that Shannon could prick him so.",
+      "text2": "He was disturbed by Shannon.",
+      "label": 1
+    },
+    {
+      "text1": "Rather than sponsor truncated representation, ante, at 11, Congress chose to subsidize only those cases in which the attorneys it subsidized could work freely.",
+      "text2": "Congress chose to subsidize only those cases in which the attorneys could work freely.",
+      "label": 1
+    },
+    {
+      "text1": "The larger hotels will usually hold a aGreek' evening on one night each week.",
+      "text2": "Greek evenings are held at some hotels.",
+      "label": 1
+    },
+    {
+      "text1": "He felt that it would be a mistake to open this set of research recommendations with a recommendation that included screening for withdrawal or other conditions.",
+      "text2": "He thought it would be a bad idea to open this set of recommendations with a recommendation to withdraw.",
+      "label": 1
+    },
+    {
+      "text1": "Reed will make a killing.",
+      "text2": "Reed is going to make a killing.",
+      "label": 1
+    },
+    {
+      "text1": "That led me easily to a box score, photographs, a game summary, half-a-dozen audio clips of post-game interviews, a 10-second QuickTime movie of the Bruins running a fast break, a comprehensive scouting report on both teams, and an online chat room where Bruins fans were whooping it up.",
+      "text2": "I found a game summary, box score, photographs, a 10-second QuickTime movie of the Bruins running a fast break and many other things.",
+      "label": 1
+    },
+    {
+      "text1": "Both men had sped up without discussion.",
+      "text2": "They didn't talk about going faster, but they did.",
+      "label": 1
+    },
+    {
+      "text1": "yes oh yes oh yes i know all about the new age philosophy yeah and uh it's",
+      "text2": "I am aware on modern philosophy.",
+      "label": 1
+    },
+    {
+      "text1": "with is he the sports yes i guess it is time to close now so i can run go help put the kids to bed but i have yes it's nice bye-bye",
+      "text2": "I have to go now to help put the kids to bed; goodbye.",
+      "label": 1
+    },
+    {
+      "text1": "Pollock pointed out that proving the cost-effectiveness of a specified, well-described service in a clinical setting is a critical consideration in moving a new practice from a research endeavor to a reimbursable service.",
+      "text2": "Pollock pointed out that proving how cost-effective something was is very important.",
+      "label": 1
+    },
+    {
+      "text1": "In fiscal year 2000, GAO helped achieve about $23.",
+      "text2": "GAO only helped make a little less than $25.",
+      "label": 1
+    },
+    {
+      "text1": "The reason for their  A national test could be embarrassing and disprove claims of improvement based on other, less-than-neutral testing regimes.",
+      "text2": "A national test would embarrass the country.",
+      "label": 1
+    },
+    {
+      "text1": "(Did she smile, or was that a wince?)",
+      "text2": "They were not certain if she smiled.",
+      "label": 1
+    },
+    {
+      "text1": "The American people are the only ones who have been taken in by Clinton and Adam Sandler.",
+      "text2": "Americans like CLinton and Sandler.",
+      "label": 1
+    },
+    {
+      "text1": "Microsoft is going after America Online.",
+      "text2": "America Online is being chased by Microsoft.",
+      "label": 1
+    },
+    {
+      "text1": ", the Globe and Mail lamented the state of Canada's road system.",
+      "text2": "The Globe and Mail spoke recently about the current state of Canada's road system.",
+      "label": 1
+    },
+    {
+      "text1": "and it's it's not something that necessarily happens at school but just in their their uh relationships as they after school times and the like",
+      "text2": "It doesn't always happen at school, I guess.",
+      "label": 1
+    },
+    {
+      "text1": "On Saturday afternoons and evenings, the place is a teeming throng of humanity.",
+      "text2": "Saturn afternoons and evenings are the best times to experience the culture and humanity.",
+      "label": 1
+    },
+    {
+      "text1": "Tired doctors may not provide the best care, but neither does a series of faceless doctors working shifts.",
+      "text2": "Tired doctors and a number of different doctors do not give the best care.",
+      "label": 1
+    },
+    {
+      "text1": "my friend talked me in that  i'm a real um scaredy when it comes to heights but once we got on top of the rocks it was quite",
+      "text2": "I was afraid of heights but my friend talked me into it.",
+      "label": 1
+    },
+    {
+      "text1": "In the preamble to the Notice of Proposed Rulemaking (59 Fed.",
+      "text2": "In the preliminary statement to the notice of proposed rule making.",
+      "label": 1
+    },
+    {
+      "text1": "yeah well i'm not real sure why i got this topic because i don't think i checked it off on the list because i know very little about the current immigration laws",
+      "text2": "I am not well educated on current immigration laws so I am not sure how this topic got brought up.",
+      "label": 1
+    },
+    {
+      "text1": "Note that the extent of any changes that would be made is a measure of the extent of non-market choices that have been allowed by the protection currently provided.",
+      "text2": "Non-market choices have been allowed.",
+      "label": 1
+    },
+    {
+      "text1": "But much remains to be done to create what Jefferson wrongly perceived as  an America with blacks and whites--and others as well--living in a state of equal freedom under the same government.",
+      "text2": "Jefferson was in error when he regarded the US as a place many races lived in equality and there are still changes that need to take place to make that reality real.",
+      "label": 1
+    },
+    {
+      "text1": "No one seems to mind a nice pre-written Shakespeare sonnet, and that's why I'm going to send one out just for you.",
+      "text2": "I'm sending you a Shakespeare sonnet.",
+      "label": 1
+    },
+    {
+      "text1": "Among the most notable churches are the Cathedrale Saint-Pierre-et-Saint-Paul, which took centuries to complete; the Eglise Saint-Nizier, recognizable by its gaudy tile roof; and the Basilique Saint-Urbain.",
+      "text2": "The Eglise Saind-Nizier has a gaudy tile roof.",
+      "label": 1
+    },
+    {
+      "text1": "Why not pay poor people not to be poor?",
+      "text2": "Would it make sense to pay people who are poor to not be poor?",
+      "label": 1
+    },
+    {
+      "text1": "Adrin fought San'doro the next day.",
+      "text2": "They fought each other.",
+      "label": 1
+    },
+    {
+      "text1": "well i think the best thing he bought for me off of them is a Nintendo",
+      "text2": "The Nintendo was my favorite thing he bought me.",
+      "label": 1
+    },
+    {
+      "text1": "We conducted extensive Internet searcHe's for all 50 states to identify reports and other studies that identified states that had taken actions that appeared to identify and reduce improper payments.",
+      "text2": "Internet searches were performed for all 50 states.",
+      "label": 1
+    },
+    {
+      "text1": "Behind the Theater Quarter is an area with a number of shrines dedicated to foreign gods, an indication of the numerous cultures that influenced Delos.",
+      "text2": "Area with a number of shrines dedicated to foreign gods is located behind the Theater Quarter, and it is an indication of the numerous cultures that influenced Delos.",
+      "label": 1
+    },
+    {
+      "text1": "um-hum  yeah there's uh Biraporetti's is one of our favorites it's real nice it's Italian",
+      "text2": "Biraporetti's is one of our favorites.",
+      "label": 1
+    },
+    {
+      "text1": "yeah and uh i was a little disappointed in the third one it's Godfather Three it was not bad but i expected more i think",
+      "text2": "i thought that Godfather Three was kind of a letdown",
+      "label": 1
+    },
+    {
+      "text1": "Around this time the Sumerian civilization living in Mesopotamia (the region between the Tigris and Euphrates rivers in present-day Iraq) founded and developed the cuneiform script, the world's oldest form of writing on record.",
+      "text2": "The Sumerian civilization developed the cuneiform script.",
+      "label": 1
+    },
+    {
+      "text1": "One vision moved and one stood still but Jon soon came to understand it and use it.",
+      "text2": "Jon understood the vision and learned to use it.",
+      "label": 1
+    },
+    {
+      "text1": "I can't stand your coming here and talking about 'little Tuppence.'",
+      "text2": "I dont like it when you come here and talk about Tuppence.",
+      "label": 1
+    },
+    {
+      "text1": "All rooms have either ocean or mountain view, air conditioning, balcony or patio, king-sized beds, satellite TV, compact disc/cassette players, and in-room safes.",
+      "text2": "All the rooms have great views.",
+      "label": 1
+    },
+    {
+      "text1": "You can tour the pyramids on foot, or take a camel or horseback ride between the main sites.",
+      "text2": "Horses and camels are used for tourist trips at the pyramids.",
+      "label": 1
+    },
+    {
+      "text1": "as total lines of code or can be broken out into new, modified, and reused lines of code.",
+      "text2": "Code can be cut down to change or reuse it.",
+      "label": 1
+    },
+    {
+      "text1": "Facility operation and maintenance plans are implemented, tested, and refined as appropriate.",
+      "text2": "When it is deemed appropriate, facility operation and maintenance plans are implemented.",
+      "label": 1
+    },
+    {
+      "text1": "Miss Howard will have engineered her quarrel, and departed from the house.",
+      "text2": "Miss Howard would have created her argument, and left the house.",
+      "label": 1
+    },
+    {
+      "text1": "Why am I so eager for the connection?",
+      "text2": "Why do I want the connection so badly?",
+      "label": 1
+    },
+    {
+      "text1": "definitely i can see why people wait until they get like in high school or maybe junior high and then they get another one",
+      "text2": "It is understandable that people wait a few years to get one.",
+      "label": 1
+    },
+    {
+      "text1": "To measure anything in the floating paper dollar will get us nowhere.",
+      "text2": "We won't get anywhere using the paper dollar as a standard for measurement.",
+      "label": 1
+    },
+    {
+      "text1": "The oak shelving is original, as are the metal cages in which scholars were locked so as to prevent thefts.",
+      "text2": "Scholars were locked in metal cages to prevent thefts.",
+      "label": 1
+    },
+    {
+      "text1": "Derry kept them soaped and scrubbed.",
+      "text2": "Derry kept them soapy.",
+      "label": 1
+    },
+    {
+      "text1": "The whole thing is absurd.\"",
+      "text2": "The entire thing is nonsense.",
+      "label": 1
+    },
+    {
+      "text1": "These national inventories were prepared for all 50 States at the county level for mobile highway and non-road sources.",
+      "text2": "All 50 states prepared a national inventory for non-road and mobile highway sources.",
+      "label": 1
+    },
+    {
+      "text1": "Administrative approvals include, but are not limited to, obligation of funds (for example, authorizing the purchase of goods, approving employee travel, approving contracts on behalf of the agency); accepting goods and services delivered to an agency per order or contract; and approving travel vouchers for payment scheduling.",
+      "text2": "Approving travel vouchers for payment scheduling is included within administrative approvals.",
+      "label": 1
+    },
+    {
+      "text1": "Having seen pan-Arabism bankrupted in 1967, more and more Arabs are seeking solutions from the past--in Islamic fundamentalism, which seeks to remodel Muslim societies along the lines of Arabia under the Prophet Mohammed.",
+      "text2": "Pan-Arabism stopped in 1967.",
+      "label": 1
+    },
+    {
+      "text1": "The rampart-like mountains and dense pine forests keep this area remote and, even today, blessedly un?­spoiled.",
+      "text2": "The forest makes it all very remote.",
+      "label": 1
+    },
+    {
+      "text1": "we're we're now civilized now you can no longer you you cannot drink beer and drive but uh but it was it was actually legal",
+      "text2": "Though you could do it in the past, it is now illegal to drink beer and drive.",
+      "label": 1
+    },
+    {
+      "text1": "and that's not what they're paying",
+      "text2": "that is not what they are paying",
+      "label": 1
+    },
+    {
+      "text1": "As noted previously, the Shopping Avenger is but one superhero, and he issues abject apologies to all those who did not receive personal responses.",
+      "text2": "The Shopping Avenger can't personally respond to everyone.",
+      "label": 1
+    },
+    {
+      "text1": "To meet our objectives, we asked officials at five agencies to identify initiatives they had that empowered or involved employees.",
+      "text2": "Five agencies were asked to provide details regarding initiates that fueled employee empowerment.",
+      "label": 1
+    },
+    {
+      "text1": "Surely you don't want the whole house to know of this occurrence?",
+      "text2": "You don't want people to hear about this.",
+      "label": 1
+    },
+    {
+      "text1": "As to why I'm here--\" She dropped her eyes, frowning, while a touch of added color reached her cheeks.",
+      "text2": "She looked down, frowned, and blushed.",
+      "label": 1
+    },
+    {
+      "text1": "These new LSC administrative provisions have been incorporated into each LSC appropriation since 1996, subject to some modifications made in the Departments of Commerce, Justice, and State, the Judiciary and Related Agencies Appropriations Act, 1998, Pub.",
+      "text2": "Since 1996, the LSC has had administrative provisions.",
+      "label": 1
+    },
+    {
+      "text1": "Stock Ghyll Force was one of the most popular visitor attractions during Victorian times.",
+      "text2": "Throughout the Victorian era, visitors favoured Stock Ghyll Force above all other attractions.",
+      "label": 1
+    },
+    {
+      "text1": "Just after he left, a new trauma victim rolled in--a 28-year-old who had been knocked unconscious in a high-speed head-on collision.",
+      "text2": "Just after he left, a new victim arrived.",
+      "label": 1
+    },
+    {
+      "text1": "The bear is a symbol of Madrid, while the T?­o Pepe sign, an advertisement for one of Spain's most famous brands of sherry, has become the unofficial symbol of the Puerta del Sol.",
+      "text2": "Madrid uses a bear as its symbol while Puerta del Sol used the Tio Pepe.",
+      "label": 1
+    },
+    {
+      "text1": "There must be, we cannot be created for this sort of suffering.",
+      "text2": "There should be something more to this pain.",
+      "label": 1
+    },
+    {
+      "text1": "Congress has passed the Sarbanes-Oxley legislation which included establishment of the Public Company Accounting Oversight Board (PCAOB), tougher independence standards for auditors of public companies, and independent funding sources for the PCAOB and the FASB; the SEC has taken a number of regulatory and enforcement actions and made initial appointments to the PCAOB; various U.S.",
+      "text2": "Congress has passed the Sarbanes-Oxley legislation",
+      "label": 1
+    },
+    {
+      "text1": "and if it goes down then we're stuck all day",
+      "text2": "If it is to go under then we might be stuck all day",
+      "label": 1
+    },
+    {
+      "text1": "The 14th-century battlemented tower to the left is the remnant of an old abbey.",
+      "text2": "There was an old abbey that had a battlemented tower.",
+      "label": 1
+    },
+    {
+      "text1": "The voters chose Clinton as a second-term president.",
+      "text2": "Another term was something voters decided Clinton should get.",
+      "label": 1
+    },
+    {
+      "text1": "The answer says everything about what Evans has become.",
+      "text2": "Everything that Evans has become was said in the answer.",
+      "label": 1
+    },
+    {
+      "text1": "The Great Stair is the formal approach to the royal apartments in the southwestern tower.",
+      "text2": "There are royal apartments in the southwestern tower.",
+      "label": 1
+    },
+    {
+      "text1": "He was naturalized about fifteen years ago.",
+      "text2": "About fifteen years ago, he was naturalized.",
+      "label": 1
+    },
+    {
+      "text1": "Now tell me, what is that initial ”J.",
+      "text2": "What is that initial J?",
+      "label": 1
+    },
+    {
+      "text1": "right well that's true that's true if you have to get a babysitter and everything else yeah",
+      "text2": "That true, if you have to hire a babysitter and make the other arrangements.",
+      "label": 1
+    },
+    {
+      "text1": "i don't remember which other one it was whatever one it was it was such a blockbuster seller",
+      "text2": "I don't remember the title, but it was a blockbuster.",
+      "label": 1
+    },
+    {
+      "text1": "So... Bozena asked half-bored, because Robi, Martyna's second husband didn't interest her in the least bit.",
+      "text2": "Bozena was bored with Robi.",
+      "label": 1
+    },
+    {
+      "text1": "little place to live you know even just a little room or whatever",
+      "text2": "A small room sufficient for staying in or the likes of.",
+      "label": 1
+    },
+    {
+      "text1": "But you are looking at someone who does enjoy fighting.",
+      "text2": "But you are observing a person who does like fighting.",
+      "label": 1
+    },
+    {
+      "text1": "(Various sites, among them MSNBC, provide CIA video of the reconstruction of the crash of TWA Flight 800.)",
+      "text2": "TWA Flight 800 crashed and the incident was caught on camera.",
+      "label": 1
+    },
+    {
+      "text1": "There is reason to believe it shall stand forever, a massive top-to-toe restoration completed in 1999 has it looking rejuvenated and soot-free.",
+      "text2": "It received restoration work which was finished in 1999.",
+      "label": 1
+    },
+    {
+      "text1": "The recently finalized regional haze rule will also require power generators to reduce SO2 and NOx emissions either through the implementation of best available retrofit technology (BART) or a trading program yet to be developed.",
+      "text2": "Power generators will be required to reduce SO2 and NOx emissions.",
+      "label": 1
+    },
+    {
+      "text1": "\"Might just,\"the gambler replied.",
+      "text2": "The gambler spoke in reply to someone.",
+      "label": 1
+    },
+    {
+      "text1": "Together, these organizations fought for local rule, which in 1944 resulted in universal voting rights for adults.",
+      "text2": "Universal voting rights for all adults were granted in 1944 due to these organizations.",
+      "label": 1
+    },
+    {
+      "text1": "that um you know with my i've got quite enough of an investment in my photography equipment",
+      "text2": "I have spent money on equipment to take pictures.",
+      "label": 1
+    },
+    {
+      "text1": "i know it's kind of funny",
+      "text2": "I know, it is quite hilarious.",
+      "label": 1
+    },
+    {
+      "text1": "Daniel nodded, fetching me a glass of tonic water.",
+      "text2": "Daniel got me some tonic water.",
       "label": 1
     },
     {
@@ -511,1493 +946,1058 @@
       "label": 1
     },
     {
-      "text1": "Edward Bernstein observed that one site cannot address all the questions raised at this conference.",
-      "text2": "Bernstein saw that one site can't answer everything.",
+      "text1": "you know what i'm saying",
+      "text2": "You know what I mean.",
       "label": 1
     },
     {
-      "text1": "Thirty years ago, ABC would not televise Abbie Hoffman's American flag shirt on the Dick Cavett Show ; last week it was available at a street fair in my neighborhood in the form of silk underwear.",
-      "text2": "There was no American flag shirt of Abbie Hoffman presented on TV 30 years ago.",
+      "text1": "The Struggle for a New Russia , by David Remnick (Random House).",
+      "text2": "David Remnick wrote The Struggle for a New Russia.",
       "label": 1
     },
     {
-      "text1": "interesting problem i",
-      "text2": "the problem catches my attention.",
+      "text1": "Somebody might accept you next time.",
+      "text2": "There's someone out there who will accept you.",
       "label": 1
     },
     {
-      "text1": "If patients rated themselves on the low end of the scale, researchers then asked them what would bring them to a higher score.",
-      "text2": "Researchers interacted with patients when they were doing self evaluations.",
+      "text1": "His head was exactly the shape of an egg, and he always perched it a little on one side.",
+      "text2": "His head was a perfect egg-shape, and he always rested it on one side.",
       "label": 1
     },
     {
-      "text1": "Jon spun and got behind the man, planting his off-hand dagger in the big man's side.",
-      "text2": "Jon turned on his feet, getting behind the man and sticking his dagger right into his side.",
+      "text1": "However, many people become leaders of organizations because they reflect the needs and attitudes of members, and therefore they are not likely to radically change the culture of the organization.",
+      "text2": "Many leaders of organizations are not likely to change the organizations' cultures.",
       "label": 1
     },
     {
-      "text1": "I pulled my off-hand dagger and pushed it up under his chin into his brain.",
-      "text2": "I stabbed him in the head.",
+      "text1": "A Lexus ad in Car and Driver or Fortune is pretty well targeted at affluent people who like fancy cars.",
+      "text2": "Some Lexus ads are targeted toward rich people who like nice cars.",
       "label": 1
     },
     {
-      "text1": "um-hum well i've considered it last year and this year both but i haven't done anything about it so",
-      "text2": "I've thought about it for a couple of years, but I haven't done anything about it.",
+      "text1": "But he shore thinks th' world an' all of Johnny, raising him up from a li'l cub.",
+      "text2": "He holds Johnny in high a esteem after raising him.",
       "label": 1
     },
     {
-      "text1": "uh and it was great Steven the only thing that Steven didn't like that's my son was uh you know they had those dancing bears and stuff it scared him to death",
-      "text2": "My son Steven has a great fear of bears.",
+      "text1": "Numbers grew until eventually 967 people lived here, surviving on the vast storehouses of food and water conveniently cached by their late enemy.",
+      "text2": "967 people survived on the storehouses of food and water that was left behind.",
       "label": 1
     },
     {
-      "text1": "oh jeez yeah what do you what do you do when you get a i mean like a really violent storm like a tornado just stay in your truck",
-      "text2": "oh yeah, I mean a very violent storm like a tornado.",
+      "text1": "Everyone sighed emphatically sharing the pain.",
+      "text2": "Everyone sighed and shared the pain.",
       "label": 1
     },
     {
-      "text1": "All the way back, my heart wouldn't stop pumping.",
-      "text2": "My heart would not stop beating.",
+      "text1": "What kind of person would write a question about race and then get all shirty on people who were just trying to have a little fun?",
+      "text2": "Who would get mad about that?",
       "label": 1
     },
     {
-      "text1": "Of these, the Dordogne has carved a particularly beautiful winding valley of gentle greenery.",
-      "text2": "There is a valley of gentle greenery carved by the Dordogne.",
+      "text1": "For this analysis, the baseline scenarios for 2010 and 2020 assume no additional emissions control regulation beyond the continuing effects of Title IV of the Clean Air Act Amendments, the NOx SIP Call, and other promulgated federal rules issued under the Clean Air Act.",
+      "text2": "The baseline scenarios for 2010 and 2020 assume no extensive emissions control regulations.",
       "label": 1
     },
     {
-      "text1": "It is the bedrock on which rates are based.",
-      "text2": "There is a foundation on which the rates are computed.",
-      "label": 1
-    },
-    {
-      "text1": "yeah and then he'd have to pay it all",
-      "text2": "He would have to pay the whole thing.",
-      "label": 1
-    },
-    {
-      "text1": "So it is not surprising that when bubonic plague struck in 1894, it took nearly 30 years to fully eradicate it.",
-      "text2": "Due to low amounts of people skilled with medicines, the bubonic plague took decades to cure.",
-      "label": 1
-    },
-    {
-      "text1": "2. Government and private saving tend to move in opposite directions for several reasons-three of which are discussed here.",
-      "text2": "The government and people tend to have opposite saving patterns.",
-      "label": 1
-    },
-    {
-      "text1": "Train due in three minutes.",
-      "text2": "The train arrives in three minutes.",
-      "label": 1
-    },
-    {
-      "text1": "so anyway back to the original question i really think i if if we were still allowed to choose guilt or innocence",
-      "text2": "The original question had to do with choosing guilt or innocence.",
-      "label": 1
-    },
-    {
-      "text1": "Their images are prominent in Nepalese Buddhist art.",
-      "text2": "The images are really prominent.",
-      "label": 1
-    },
-    {
-      "text1": "anything that comes out of a stack or out of a building or um we do have customers that um their concerns are in the work place and we take care of that but in within",
-      "text2": "We help the customers with stuff that comes out of a stack or out of the building.",
-      "label": 1
-    },
-    {
-      "text1": "Poirot stepped forward briskly.",
-      "text2": "Poirot moved forward quickly.",
-      "label": 1
-    },
-    {
-      "text1": "Henri maintained a reputation as a worthy and brave leader ' and at the same time as an incorrigible womanizer ' until his assassination in 1610 by a religious zealot.",
-      "text2": "In 1610, Henri was assassinated by a religious zealot.",
-      "label": 1
-    },
-    {
-      "text1": "MoMA's story of modern art, beginning with Cezanne and ending with abstraction, has been confirmed, but at a cost.",
-      "text2": "People in the art world have confirmed MoMA's story of modern art.",
-      "label": 1
-    },
-    {
-      "text1": "The fact that you are an office of only 10 people, and Lothario now finds himself too busy for some tasks, means the involvement has begun to impinge on the workplace.",
-      "text2": "The workplace is understaffed, and as a result it is under-performing.",
-      "label": 1
-    },
-    {
-      "text1": "Although it has the dour look of a barracks building, it houses many of the finest statuary and artifacts found at the site, and they bring to life the bare bones of the temple buildings and houses.",
-      "text2": "The barracks building has a common barracks look.",
-      "label": 1
-    },
-    {
-      "text1": "the ones we haven't papered we've done in uh uh latex uh uh pastels",
-      "text2": "We did the ones we haven't papered with latex.",
-      "label": 1
-    },
-    {
-      "text1": "'I don't actually need to be in here to do it,' I added, knowing he wouldn't understand me.",
-      "text2": "I knew that he would understand what I was saying.",
-      "label": 1
-    },
-    {
-      "text1": "The Court in Rust did not place explicit reliance on the rationale that the counseling activities of the doctors under Title X amounted to governmental speech; when interpreting the holding in later cases, however, we have explained Rust on this understanding.",
-      "text2": "The court found no explicit reliance for the rationale.",
-      "label": 1
-    },
-    {
-      "text1": "The postal density of 89 addresses per hour for the most rural population corresponds to roadside mailboxes that are 280 meters apart (on average).",
-      "text2": "The postal density of 89 addresses per hour for the most rural population corresponds to roadside mailboxes",
-      "label": 1
-    },
-    {
-      "text1": "Jane, you stay where you are.\" With a sudden swift movement, Tommy snatched the revolver from Julius's hand, and levelled it at him.",
-      "text2": "In the blink of an eye, Tommy whisked the gun away from Julius and turned it on him.",
-      "label": 1
-    },
-    {
-      "text1": "The museum's modern collection of Braque, Bonnard, and Picasso offers an intriguing counterpoint.",
-      "text2": "A contrast can be found in the museum's collection of Picasso, Braque, and Bonnard.",
-      "label": 1
-    },
-    {
-      "text1": "Afterwards you retire to the changing room for tea or a drink, feeling completely relaxed and rejuvenated.",
-      "text2": "You can feel rejuvenated when you retire for a drink.",
-      "label": 1
-    },
-    {
-      "text1": "The Emperor Justin II built a palace on the largest island in the sixth century; it soon came to be known as Prinkipo, the Prince's Isle, and the name later spread to cover the whole group.",
-      "text2": "After the fifth century the Emperor Justin II built a palace on the biggest island.",
-      "label": 1
-    },
-    {
-      "text1": "yeah yeah Show Biz that's the name of it",
-      "text2": "Yeah, Show Biz that's the name",
-      "label": 1
-    },
-    {
-      "text1": "An article surveys the exploding--er, growing--private plane industry.",
-      "text2": "The private plane industry is said to be growing in this article.",
-      "label": 1
-    },
-    {
-      "text1": "It also includes rate differences due to weight and to whether the piece is non-standard in shape.",
-      "text2": "Due to weight, rate differences have been included.",
-      "label": 1
-    },
-    {
-      "text1": "yeah i'm gonna um go ahead and go straight in and get my Master's degree",
-      "text2": "I am going to get my Master's degree.",
-      "label": 1
-    },
-    {
-      "text1": "His hair returned to its college heyday, when he could use sugar paste to style himself a Mohawk, just like a certain punk band member, who always stood on the left and played on a brown guitar, which these days could be found in the basement of the Ossolinskys' residence.",
-      "text2": "You could find the brown guitar, that was once played in a punk band, in the Ossolinskys' basement.",
-      "label": 1
-    },
-    {
-      "text1": "Since then, the Jewish Quarter has been rebuilt.",
-      "text2": "The Jewish Quarter has been reconstructed since.",
-      "label": 1
-    },
-    {
-      "text1": "The room was dimly lighted.",
-      "text2": "There was not much light in the room.",
-      "label": 1
-    },
-    {
-      "text1": "But before the picture of the world dying and the decay of the old Sather's pride, even Hanson's own probable death with the dying world seemed unimportant.",
-      "text2": "Hanson's death seemed unimportant compared to that of the entire world.",
-      "label": 1
-    },
-    {
-      "text1": "uh yeah yeah as as long as you give it uh good drainage and uh lot of uh oh  some some plant food once a month",
-      "text2": "It needs to have good drainage and it needs to be fed monthly.",
-      "label": 1
-    },
-    {
-      "text1": "but yeah there are more drinkers than smokers if you think about it",
-      "text2": "There are more drinkers than smokers.",
-      "label": 1
-    },
-    {
-      "text1": "He set up a national e-mail tree designed to get people to send their friends in Iowa to Ames as Forbes supporters.",
-      "text2": "The goal for setting up a national e-mail tree, was to get people to send their friends in Iowa to Ames as Forbes supporters.",
-      "label": 1
-    },
-    {
-      "text1": "Why bother with the art on its terms when you can have it on your own?",
-      "text2": "Isn't taking art on your terms the best thing to do?",
-      "label": 1
-    },
-    {
-      "text1": "okay so do you all keep a budget",
-      "text2": "Does every single one of you have a budget?",
-      "label": 1
-    },
-    {
-      "text1": "Buy your ticket and pass through the turreted Gate of Salutations, better known as the Orta Kap??, or Middle Gate.",
-      "text2": "Purchase a ticket and go through the Middle Gate, also called the Gate of Salutations.",
-      "label": 1
-    },
-    {
-      "text1": "and i think she did some work at a thrift store so as long as she was gone for about four hours well maybe three she would tape soap operas",
-      "text2": "She'd record TV shows when she was gone.",
-      "label": 1
-    },
-    {
-      "text1": "The more important concessions, however, were 1) Liggett's admission that the industry had consciously marketed tobacco to minors (which will increase congressional support for stiff regulation of the industry) and 2) its release--temporarily blocked by a North Carolina court--of documents from strategy meetings among lawyers for the five biggest tobacco companies, which industry critics believe will prove a conspiracy of deceit.",
-      "text2": "Liggett admitted that tobacco had purposely been marketed to minors.",
-      "label": 1
-    },
-    {
-      "text1": "and also we have a lot of green you know the grass has been growing and if you look outside you would like to go out and mow your lawn if you could go out and",
-      "text2": "The grass is green and I thought about cutting the grass.",
-      "label": 1
-    },
-    {
-      "text1": "The power of his work is attributed to its scale and his meticulous method.",
-      "text2": "His work power is a result of scale and meticulous method.",
-      "label": 1
-    },
-    {
-      "text1": "(George W. Bush kills Gore in poll questions about leadership.",
-      "text2": "George W. Bush goes against Gore in a debate.",
-      "label": 1
-    },
-    {
-      "text1": "But if you look at the international monetary literature when Mundell was in his glory days, you get the impression that he was 15 or 20 years ahead of his contemporaries.",
-      "text2": "Mundell seems at least 15 years ahead on his contemporaries.",
-      "label": 1
-    },
-    {
-      "text1": "Auditors should prepare audit reports communicating the results of each audit.",
-      "text2": "Auditors should communicate the results of the audit.",
-      "label": 1
-    },
-    {
-      "text1": "He has lived the past four years at Creston Plaza with his wife, Tammy, and his daughter, Precious, 3. In recent months, Robertson was pleased to see casual drug use at the complex diminish with the installation of security cameras.",
-      "text2": "Drug use in the complex decreased with installation of security cameras.",
-      "label": 1
-    },
-    {
-      "text1": "He did not doubt but that she would recognize it and draw her own conclusions.",
-      "text2": "He knew she would draw her own conclusions.",
-      "label": 1
-    },
-    {
-      "text1": "Cooper was condemned, reviled and, for a brief time, incredibly popular.",
-      "text2": "For the longest time Copper were looked down upon.",
-      "label": 1
-    },
-    {
-      "text1": "Amazingly, the island retains its Greek character.",
-      "text2": "The island has Greek characteristics.",
-      "label": 1
-    },
-    {
-      "text1": "Technically, there have been ninety-four Presidents.",
-      "text2": "There have been almost 100 Presidents.",
-      "label": 1
-    },
-    {
-      "text1": "Even if the place had nothing else, it would be worth the trip, for the Taj, as one calls it affectionately, is a sight that awakens the wonder and enthusiasm of the most blas??, world-weary traveller.",
-      "text2": "Even world-weary travellers will be enthused by the Taj Mahal.",
-      "label": 1
-    },
-    {
-      "text1": "i that don't it it it seems like i mean if wrestling is prime time professional wrestling it seems like it's just just just like pros in a wrestling to me i don't i don't see any difference though",
-      "text2": "I don't see any difference in the different wrestling organizations.",
-      "label": 1
-    },
-    {
-      "text1": "4 million - the amount of funding Mayor Bloomberg proposed for the Legal Aid Society by sharply curtailing compensation for court-appointed lawyers under the 18-B program.",
-      "text2": "Mayor Bloomberg proposed 4 million dollars for funding for the Legal Aid Society.",
-      "label": 1
-    },
-    {
-      "text1": "Adrin saw the horses first, huge black stallions ill-suited for the desert.",
-      "text2": "Adrin saw some huge black horses.",
-      "label": 1
-    },
-    {
-      "text1": "Resurrect all the Presidents.",
-      "text2": "Bring back every President.",
-      "label": 1
-    },
-    {
-      "text1": "Hanson got up and moved forward.",
-      "text2": "Hanson got up and moved.",
-      "label": 1
-    },
-    {
-      "text1": "If you wish to access the encrypted guide on GAO's Web site, please send your request via e-mail to digitalguide@gao.gov.",
-      "text2": "You can request access the encrypted guide by sending an email.",
-      "label": 1
-    },
-    {
-      "text1": "and yes well right outside in uh Falls Church Virginia",
-      "text2": "Close to Falls Church.",
-      "label": 1
-    },
-    {
-      "text1": "Only one system of government has ever dealt adequately with the incentive problem for the chief executive, and that's hereditary monarchy.",
-      "text2": "Only a hereditary monarchy has appropriately addressed the competition for chief executive.",
-      "label": 1
-    },
-    {
-      "text1": "and uh we found it cheaper even during the summer for me to uh take off for half a day since we work a four and a half day work week and come home on these Thursdays that she goes to work at uh eleven and get's off at seven thirty at night",
-      "text2": "It was cheaper for me to take time off.",
-      "label": 1
-    },
-    {
-      "text1": "The Jocks say they rule Washington.",
-      "text2": "The Jocks claim that they have control over Washington.",
-      "label": 1
-    },
-    {
-      "text1": "The Spanish attempted to retake the island in 1658 at the Battle of Rio Bueno but were defeated; however, this did not alleviate Jamaica's problems.",
-      "text2": "The Spanish lost the Battle of Rio Bueno in 1658.",
-      "label": 1
-    },
-    {
-      "text1": "Nash's talk wasn't good or bad, said one mathematician present.",
-      "text2": "One engaged mathematician said that Nash's discussion piece was neither good nor bad.",
-      "label": 1
-    },
-    {
-      "text1": "For the organizations that strictly controlled their membership or the number of members, developing and maintaining their membership base was a formidable challenge.",
-      "text2": "Organizations that strictly controlled their membership was a formidable challenge.",
-      "label": 1
-    },
-    {
-      "text1": "Besides, in another mood, he writes, It seemed to me that I was surrounded by braveries without number, that I had been inducted into a phalanx of the wildly-alive-even-if-dying, and I felt honored that I would, so to speak, die in the company of such people.",
-      "text2": "He changed his moods every time he writes a paragraph.",
-      "label": 1
-    },
-    {
-      "text1": "Here's what Hatfield writes about what Eufaula told",
-      "text2": "Hatfield wrote about Eufaula s words.",
-      "label": 1
-    },
-    {
-      "text1": "Auditors must be independent both in fact and appearance in order to be credible.",
-      "text2": "Auditors must not appear to be improper or they will lose credibility.",
-      "label": 1
-    },
-    {
-      "text1": "Two staff from the LSC Executive Office assist OPP and the state planning team members on a regular basis, and add almost forty years of experience in LSC-funded programs to the rich mix of talents.",
-      "text2": "LSC staff help state planning team members monthly.",
-      "label": 1
-    },
-    {
-      "text1": "Postal Service would increase from $ million to $ million.",
-      "text2": "Postal Service would experience an increase in the millions of dollars..",
-      "label": 1
-    },
-    {
-      "text1": "2a price for basic mail as composed of a group of mailers paying 33.",
-      "text2": "A group of mailers pay 33 for basic mail.",
-      "label": 1
-    },
-    {
-      "text1": "And when it comes from the white right, it's narcissism in the service of hypocrisy.",
-      "text2": "it's narcissism in the service of hypocrisy.",
-      "label": 1
-    },
-    {
-      "text1": "Another approach would involve tracking changes to the estimated completion date for a system.",
-      "text2": "A possible approach involves the tracking of changes to the estimated completion date for a system.",
-      "label": 1
-    },
-    {
-      "text1": "On the first evening Tommy, accompanied by Albert, explored the grounds.",
-      "text2": "Albert went with Tommy.",
-      "label": 1
-    },
-    {
-      "text1": "because uh my father and i in like back in eighty three we went camping uh camping down the Appalachian Trail",
-      "text2": "My dad and I camped along the Appalachian Trail.",
-      "label": 1
-    },
-    {
-      "text1": "In an air raid by 130 B29s, Tokyo was devastated and 100,000 of its inhabitants perished.",
-      "text2": "100,000 of Tokyo's inhabitants perished in an air raid.",
-      "label": 1
-    },
-    {
-      "text1": "It will be because they hope it may mean a happier, more secure week for their kid and a less anxious one for themselves.",
-      "text2": "The week will be more secure",
-      "label": 1
-    },
-    {
-      "text1": "In an era of stronger productivity growth, which may just now be showing up in statistics, the speed limit is probably 3% to 3 e% a year.",
-      "text2": "Productivity growth has been strong even tho it has been hard to see in statistics.",
-      "label": 1
-    },
-    {
-      "text1": "They stay dead, or they don't die.",
-      "text2": "They are dead, or never were.",
-      "label": 1
-    },
-    {
-      "text1": "Each intervention attempts to highlight problematic alcohol consumption, the connection between injury and drinking,",
-      "text2": "The problems with the alcohol consumption are what every intervention is supposed to highlight.",
-      "label": 1
-    },
-    {
-      "text1": "that's true but i that's that was one of my favorite subjects in school was uh",
-      "text2": "At school, it was one of the subjects I enjoyed the most.",
-      "label": 1
-    },
-    {
-      "text1": "you know if you think you think about all the kids in the ghetto my mom would probably kill us but",
-      "text2": "If you think about the kids in the ghetto my mom would probably kill us.",
-      "label": 1
-    },
-    {
-      "text1": "The town is ideal for a quiet family holiday, especially in spring, when Javea is magical with the scents of lemon and orange blossoms.",
-      "text2": "The area is very family friendly.",
-      "label": 1
-    },
-    {
-      "text1": "so she would just substitute once or twice a week you know just for that little extra money when we were in school then we would just come home and just be you know go to a neighbor's house for an hour then she'd be home but she wouldn't do that every day",
-      "text2": "My mother worked part time as a teacher.",
-      "label": 1
-    },
-    {
-      "text1": "like all of all the students now on campus uh i guess most of them drink or have binges on weekends and",
-      "text2": "All the students currently on campus mostly drink or have binges on the weekends.",
-      "label": 1
-    },
-    {
-      "text1": "yeah okay all right well i guess we're supposed to talk what about credit card",
-      "text2": "We're supposed to talk about the credit card.",
-      "label": 1
-    },
-    {
-      "text1": "Don't ruin the evening, Jonofi.",
-      "text2": "Jonofi do not ruin the evening.",
-      "label": 1
-    },
-    {
-      "text1": "uh yeah oh well i i was amazed because we lived uh i'd lived uh in Virginia i was born and raised in Virginia and then uh we spent uh about ten years in New Hampshire",
-      "text2": "I was surprise by the fact, I was born in Virginia and I grew up there and then we spent ten years in New Hampshire.",
-      "label": 1
-    },
-    {
-      "text1": "you know the height that you you set it at so i set it very high and it just picks or it skims the grass it doesn't dig way down deep so i don't have a lot of grass that i uh that i collect",
-      "text2": "I don't have to collect a lot of grass because it just skims the top of it.",
-      "label": 1
-    },
-    {
-      "text1": "It was finally consecrated in 1842.",
-      "text2": "It was consecrated in 1842.",
-      "label": 1
-    },
-    {
-      "text1": "As Cruise moves past the fornicating satyrs and satyrettes to the euphonious dronings of Jocelyn Plook's music, one feels Kubrick, at last, is in his element.",
-      "text2": "Kubrick is in his element as Cruise forgets the satirical sex and droning music.",
-      "label": 1
-    },
-    {
-      "text1": "type of deal it's just further down the road",
-      "text2": "It is much further down that path.",
+      "text1": "Possibly, if anything unforeseen had happened, she might get news of Tommy.",
+      "text2": "She had asked Tommy to let her know if anything fishy happened.",
       "label": 0
     },
     {
-      "text1": "to build a bigger intake center",
-      "text2": "A larger intake center will take a long time to build.",
+      "text1": "BMAST takes 5 to 12 minutes to administer and performs nearly as well as the longer version.",
+      "text2": "BMAST is a test of hand eye coordination used by some police departments.",
       "label": 0
     },
     {
-      "text1": "Something told me that this man was probably a bastard.",
-      "text2": "The look in his eyes told me this man was bad news.",
+      "text1": "they don't even have social skills oh i don't know i really don't know i i think that if somebody asked me i would hesitantly say yes that i could could hand down a death sentence",
+      "text2": "i think they have really great social skills",
       "label": 0
     },
     {
-      "text1": "An article profiles middle-class black homesteaders who are regenerating ghettos.",
-      "text2": "An article profiles how white people are regenerating ghettos.",
+      "text1": "The culprit is indoor air, which is filled with dust mites, cigarette smoke, cockroach remains, and pet dander.",
+      "text2": "Indoor air is the purest of all the airs and contains no toxins.",
       "label": 0
     },
     {
-      "text1": "that's never i mean i understand that they're talking about the job  not the person in the job that's that's always that's always been strange i thought but some women like to fight it",
-      "text2": "I believe they are talking about the individual and not the job.",
+      "text1": "yeah a lot of kids kids and the cousins really get along with each other they're all young they're all i",
+      "text2": "Some of the cousins fight.",
       "label": 0
     },
     {
-      "text1": "The 40-mile trip takes about an hour.",
-      "text2": "You should leave early; the trip will take about two hours in the worst case.",
+      "text1": "We will camp up the road and meet you in the morning.",
+      "text2": "The campsite is hidden in the woods.",
       "label": 0
     },
     {
-      "text1": "All this was given concrete historical reality in October 1917 with the holy Russian Revolution.",
-      "text2": "October of 1917 was the coldest month on record that year.",
+      "text1": "Nurse Edith left with a patient to-night also.'",
+      "text2": "The nurse took the patient out to dinner.",
       "label": 0
     },
     {
-      "text1": "For example, investors do not understand terminology such as reportable conditions,8 which could result in investors over- or under-reacting to problems.",
-      "text2": "Not understanding the terminology helps keep the market stable.",
+      "text1": "Smaller towns tend to be much quieter.",
+      "text2": "Smaller towns tend to be much noisier.",
       "label": 0
     },
     {
-      "text1": "It would serve no real purpose.",
-      "text2": "It could be done, but it wouldn't do anything for us.",
+      "text1": "I think the tradition for compassion for the poor encouraged that gift in me, she said.",
+      "text2": "She has never given a gift to the poor.",
       "label": 0
     },
     {
-      "text1": "XII  It was twilight.",
-      "text2": "The moon was just beginning to rise.",
+      "text1": "No trace remains of the prison stormed in 1789; even the column in the center commemorates a later revolution, that of 1830.",
+      "text2": "There is no evidence of the prison existing that was stormed in 1789.",
       "label": 0
     },
     {
-      "text1": "By 1930 raw-material production had tripled the figure of 1900, manufactured goods had increased twelve-fold, and heavy industry was galloping towards maturity.",
-      "text2": "The country saw its manufacturing industry as its primary source of wealth.",
+      "text1": "In an editorial, the Telegraph blasted Tina Brown, the British editor of The",
+      "text2": "Brown was a German reporter.",
       "label": 0
     },
     {
-      "text1": "i know it was the s tupidest thing i why didn't someone tell me that",
-      "text2": "I feel stupid for not knowing that.",
+      "text1": "George W. Bush won the Iowa straw poll.",
+      "text2": "George W. Bush never won a single straw poll.",
       "label": 0
     },
     {
-      "text1": "that they required you to do and i took it to Town North and sure enough i saw that guy and he recognized me he said he said oh hi Dana and he kind of looked down and saw that car and i'm and i'm sure he probably knew what was going on the very next day of course when when the place in Arlington",
-      "text2": "The guy I saw when I went to Town North was very friendly and helpful.",
+      "text1": "E-mail is making the workplace more egalitarian by enabling minions to send suggestions to higher-ups.",
+      "text2": "E-mail has only made communication between employess and bosses more difficult.",
       "label": 0
     },
     {
-      "text1": "Which brings us to Waco, where the symbolism and substance of Reno collide most alarmingly.",
-      "text2": "Waco has no similarities to Reno at all.",
+      "text1": "On the face of it, this seems crazy.",
+      "text2": "This looks like it will be great!",
       "label": 0
     },
     {
-      "text1": "Outside the resorts, it can be hard to pin down what's going on where, but informal musical performances are ubiquitous.",
-      "text2": "It is simple to know who is playing where outside of the resorts.",
+      "text1": "I saw it before but I thought it was just part of him.",
+      "text2": "I've never seen it before on him.",
       "label": 0
     },
     {
-      "text1": "Slate on Paper, our specially formatted print-out version of Slate, is e-mailed to readers Friday around midday.",
-      "text2": "Slate on paper is made to appeal to older readers.",
+      "text1": "Few cities have so perfected the art of socializing eating and drinking in public.",
+      "text2": "The crime-ridden streets suggest staying indoors is to be preferred at all times.",
       "label": 0
     },
     {
-      "text1": "but i i hate laying out material and trying to get the most out of the material and make sure it's on the right lines and not on the bias and",
-      "text2": "I have a friend that really enjoys it, though.",
+      "text1": "The narrow streets bordering the river are full of interesting antique stores, coffee shops, and restaurants.",
+      "text2": "The many shops and restaurants that fill the narrow streets are of low quality.",
       "label": 0
     },
     {
-      "text1": "The man's steely blue eyes did not blink.",
-      "text2": "He was straining with the exertion of not blinking.",
+      "text1": "At Galatasaray Square, where Istiklal Caddesi bends to the right, an elegant wrought-iron gateway marks the entrance to the 19th-century Galatasaray Lisesi, the Franco-Turkish lycee (secondary school) that educated many of the great names in modern Turkish history.",
+      "text2": "No one has ever actually attended the secondary school.",
       "label": 0
     },
     {
-      "text1": "Lawful permanent residents and other classes of aliens in the unrestricted categories reside in the United States without time limit.",
-      "text2": "Legal residents and aliens both reside in unrestricted areas in the United States, including illegal campgrounds.",
+      "text1": "and you didn't want that to happen and to me it had always been that way i mean what happens is you have a government right and this government controls everything right",
+      "text2": "You slave your entire life at school just to enslave yourself to a corporation that enslaves you to money that enslaves you to debt.",
       "label": 0
     },
     {
-      "text1": "Households send and receive mail and their number is expected to affect the demand for mail services in a positive way.",
-      "text2": "Households don't send and receive mail",
+      "text1": "The oldest section of Havana is the city's most spectacular, even if restoration work and gleaming coats of pastel colonial colors (plus a stern police presence on every corner) are leaving parts of it with a slightly more sanitized feel than the weathered working class neighborhoods that extend along the water and inland.",
+      "text2": "The most spectacular section of Havana is its oldest section because it contains much history.",
       "label": 0
     },
     {
-      "text1": "With cooling sea breezes and good sandy beaches it offers all the basic ingredients needed for a relaxing vacation; Egyptian hoteliers and restaurateurs are working hard to provide the rest.",
-      "text2": "The food in Egypt is good.",
+      "text1": "Even the walls might have ears, whispered the other.",
+      "text2": "The other person spoke loudly.",
       "label": 0
     },
     {
-      "text1": "GAO will distribute its written testimony statement in accordance with the rules of the Senate or House, including the applicable committees' or subcommittees' rules.",
-      "text2": "GAO won't distribute its written testimony statement",
+      "text1": "Squat mandrakes were carrying off bodies toward a great fire that was burning in another square.",
+      "text2": "Tall mandrakes kicked bodies away from the great fire burning in the square.",
       "label": 0
     },
     {
-      "text1": "Into the 21st Century",
-      "text2": "Towards the 16th century.",
+      "text1": "These figures drop significantly during the second and ensuing years, e.g., 70 percent (3,353) less than 1 percent, 4 percent (171) between 1 percent and 3 percent, and only 59 or 1 percent with an economic impact of 3 percent or greater.",
+      "text2": "In 4 years, the figures will have dropped 95 percent.",
       "label": 0
     },
     {
-      "text1": "A half groan broke from Tommy's lips.",
-      "text2": "Tommy knew that the news was going to complicate everything.",
+      "text1": "In addition to the transfers shown above in the Community and Regional Development category, the fair value of land and facilities associated with former military installations that were transferred to local governments approximated $40 million in 199Y and $52 million in 199Z.",
+      "text2": "The fair value of land transferred to local governments in 199X was also over $35 million.",
       "label": 0
     },
     {
-      "text1": "Chechen leaders called for peace talks, but Russia rejected the offer, saying that Islamic militants would use a cease-fire to rebuild their forces.",
-      "text2": "There were many western observers who felt that Russia's cited reasons were a ruse.",
+      "text1": "His parents, to avoid a scandal, locked baby Benny at the Noble Kozierobki estate, where he got to peep at his new nanny, Justyna, when she was in the shower.",
+      "text2": "Benny would have been the talk of town if anyone had seen him.",
       "label": 0
     },
     {
-      "text1": "um and my reason for that was i don't like the uh what's the right word the varied inappropriate influences that you find so much in the public schools",
-      "text2": "I think that public schools universally provide an appropriate range of influences.",
+      "text1": "One piece says the veep is likely to take credit for wiring school and libraries to the Internet--even though this wiring is subsidized by a universal service charge on everyone's phone bill.",
+      "text2": "The veep will pay out of pocket for schools and libraries to be connected to the internet.",
       "label": 0
     },
     {
-      "text1": "since i am home with them and so i get a lot of time with them he needs to have um some time with them so he when he comes home he um you know it's his job at night he puts the kids to bed and he reads",
-      "text2": "He works at night, so it is my duty to put the kids to bed.",
+      "text1": "oh oh gosh that's not music  that is not i don't know what that is but that's not music",
+      "text2": "I really like that music.",
       "label": 0
     },
     {
-      "text1": "Bet th' captain is as techy as a teased snake every time he thinks 'bout you two.",
-      "text2": "After that incident with the frog, the captain is techy whenever he thinks of you two.",
+      "text1": "Shearling fleece looks more like sheep's wool, with a pebbly texture.",
+      "text2": "Shearling fleece is common in many forests.",
       "label": 0
     },
     {
-      "text1": "Not to accuse anyone of Stephen Glassism, but I'd love to see Wolff post those copious notes on his promotional Web site, www.burnrate.com.",
-      "text2": "If Wolff does not provide us with his notes, it means that he is in the same category as Stephen Glass.",
+      "text1": "there are some big big tall oak trees one across",
+      "text2": "We don't have oaks or any type of american tree over here",
       "label": 0
     },
     {
-      "text1": "and i love the mystery series",
-      "text2": "I hate the mystery genre.",
+      "text1": "The cover had been designed, the catalog copy written.",
+      "text2": "Both the cover design and catalog copy were rejected.",
       "label": 0
     },
     {
-      "text1": "Department of Housing and Urban Development, Legal Aid is helping thousands of low-income Marylanders living in properties where federal subsidies are about to run out.",
-      "text2": "No one is helping low-income Marylanders live in houses.",
+      "text1": "Maryland has a surcharge on court filing fees that goes to legal services for the needy.",
+      "text2": "Maryland has no surcharge on court filing fees.",
       "label": 0
     },
     {
-      "text1": "An individual's willingness-to-accept (WTA) compensation for not receiving the improvement is also a valid measure.",
-      "text2": "Most individuals would rather see improvement over compensation.",
+      "text1": "but it's that's not you know the same as an eight hour job",
+      "text2": "Is it not the same as an eight hour job, it is better.",
       "label": 0
     },
     {
-      "text1": "Those making more extensive tours of India, planned to see Kashmir at the end, with the intention of relaxing in a houseboat on a lake or going on a refreshing hike in the lush surrounding mountains.",
-      "text2": "Some people had planned their travel to see Kashmir in order to relax in a houseboat on a lake.",
+      "text1": "On the summit of the Chamundi Hill, the Sri Chamundeswari Temple offers a fine view of Mysore.",
+      "text2": "The Sri Chamundeswari is the most visited tourist attraction in the area.",
       "label": 0
     },
     {
-      "text1": "The cloud of glowing stuff from the rising air column was spreading out now, reflecting the light and heat back to the earth.",
-      "text2": "The cloud flickered a strange orange color, as if controlled by an unseen force.",
+      "text1": "Once a vast fortification of 49 turrets, it ranked alongside Osaka and Nagoya as one of the country's greatest impregnable bastions.",
+      "text2": "Unlike Osaka and Nagoya, the fortification was found to be wanting.",
       "label": 0
     },
     {
-      "text1": "who deserts to go help his brother's wife who got who became a widow because he was selling drugs",
-      "text2": "His brother died while he was selling drugs to someone.",
+      "text1": "At least, this is what I tell Italian-Americans who write me incredibly nasty letters when my mob stories appear.",
+      "text2": "I never reply the letters from the Italian-Americans.",
       "label": 0
     },
     {
-      "text1": "and so any shifting in the foundation of course or or you know i guess i feel that way anyway that that that shifting would cause some problems in that in that area of the house",
-      "text2": "There would be no problem if the house's foundation moves.",
+      "text1": "This is a simplification of reality, which probably involves a curve with a slight upward slope.",
+      "text2": "In reality, it's probably a 20 degree upward slope.",
       "label": 0
     },
     {
-      "text1": "The light looked about like what he was used to, where the sky was still whole.",
-      "text2": "The light was pretty much what he was used to, but it did strike him as odd.",
+      "text1": "it seems like a lot of times the law is is totally on the criminal side and and isn't protecting the rest of the people",
+      "text2": "In most criminal cases, it seems like the law is protecting the public.",
       "label": 0
     },
     {
-      "text1": "If practical, T&amp;A data must be approved at the end of the last day of the pay period or later.",
-      "text2": "T&A data can be approved at the end of the last day",
+      "text1": "Lewis and Ahmad are both right.",
+      "text2": "Lewis and Ahmad never got anything right.",
       "label": 0
     },
     {
-      "text1": "Conversely, the mailer could increase his volume if the discount and the associated service are offered.",
-      "text2": "The mailer could definitely decrease his volume is the discount associated with it are offered.",
+      "text1": "While information is comparatively fresh and large numbers of the survivors are still around, why not institute similar reparations to be paid by Russia to victims of the Gulag?",
+      "text2": "The Russians don't need to pay the victims.",
       "label": 0
     },
     {
-      "text1": "As a rule, he surrounded his wife with little attentions, placing a cushion at her back, and altogether playing the part of the devoted husband.",
-      "text2": "In addition to placing a cushion at her back, he also brought her some food.",
+      "text1": "yeah we've trying get this new DNB two thousand printer up and running",
+      "text2": "We see no need to get a new printer.",
       "label": 0
     },
     {
-      "text1": "This would be a largely residential area extending north from Queen Street, incorporating a number of traffic circles (circuses) as well as straight roads.",
-      "text2": "There is no residential area north of Queen Street.",
+      "text1": "Hume follows by asking whether this means that Starr's office is committed to eventually delivering a report (thereby indicating that Starr has credible evidence of impeachable malfeasance).",
+      "text2": "Hume doesn't inquire about the report.",
       "label": 0
     },
     {
-      "text1": "George Custer's left pinkie has, over the years, been traded for a horse and sold for its weight in gold.",
-      "text2": "George Cluster lost his pinkie in a famous battle.",
+      "text1": "For example, if the prevalence declines by 25 percent with a drop in PM, then baseline incidence drops by 25 percent with the same drop in PM.",
+      "text2": "If the prevalence declines by 25% with a drop in PM, the baseline incidence goes down the same amount without fail, as they are directly related.",
       "label": 0
     },
     {
-      "text1": "but uh it's gone pretty well it just it it takes it takes some time my problem is while i'm not overly proud of it but i'm a self-proclaimed proclaimed perfectionist and it it takes me a long time to do trim and things like that and i'll find i'll find something as i'm going along something not related like like uh i've gone about changing out all the outlets and switches because they they really didn't match they were a few of them were broken and things like that so i always pick up these little extra tasks as i'm doing this and and the painting actually takes probably uh a fourth of the time and i i'm always doing all this other stuff and my wife's hollering at me and wondering what else i've come home with from work this time to to put in a ceiling fan or something strange like that so uh it it it always it it it gets you to look at everything real hard when you you start putting a coat of paint on everything you start to notice where all the dents and scratches and things are everywhere",
-      "text2": "I blitzed through the house and got every job done extremely quickly.",
+      "text1": "This methodology transfer paper on case study evaluations describes how GAO evaluators could use case study methods in performing our work.",
+      "text2": "These case studies are not useful to the GAO.",
       "label": 0
     },
     {
-      "text1": "Smaller towns will have a syndicat d'initiative, which provides the same services.",
-      "text2": "The services of the smaller towns are the same, but less expensive.",
+      "text1": "and keep his power but well",
+      "text2": "And surrender his power to another person...",
       "label": 0
     },
     {
-      "text1": "Material for hire includes electric cars and pull carts.",
-      "text2": "Only motorized transportation options are offered.",
+      "text1": "and they're not doing it ! Hunt notes that if you understand American politics, you'll realize that Clinton's budget proposal will rise and fall with the Great Big Intern Scandal.",
+      "text2": "The budget proposal will be good for the country.",
       "label": 0
     },
     {
-      "text1": "The best solutions for searching will probably result from a combination of humans and computers.",
-      "text2": "Humans and computers working together always leads to the best results.",
+      "text1": "You can enjoy lamb meatballs in a kofteci, tripe in an ikembeci, soup in a corbacy, and milk puddings in a muhallebici.",
+      "text2": "Our ingredients are made with 100% natural ingredients with no pesticides or genetic modifications.",
       "label": 0
     },
     {
-      "text1": "but uh all right well thank you for calling and nice and have a good weekend",
-      "text2": "This call is not appreciated.",
+      "text1": "i don't think we can either let's cut off",
+      "text2": "I think there is nothing stopping us from doing that.",
       "label": 0
     },
     {
-      "text1": "Study stage Common pitfall",
-      "text2": "Stage Common pitfall is understudied.",
+      "text1": "The British writer Richard Susskind calls these potential clients the latent market.",
+      "text2": "Susskin said there were no defining characteristics of potential clients.",
       "label": 0
     },
     {
-      "text1": "it's just a real fancy decorated boot it's like Texas Gardening and it talks about you know different problems that your lawn can have and how to recognize it and it goes into the full gamut of gardening you know everything from flowers to bulbs to perennials to grass to weeds to trees and to uh how to prune but one of the things i do remember was when it talked about the grass and there being the shade tolerant types of grass and i think one of them was a blend of two types of grass that they had used",
-      "text2": "Texas Gardening is a great resource for someone just getting into gardening.",
+      "text1": "This mare o' yourn what's so special, young feller.... Me, I'd like t' see a hoss what's got to be took care of like she was a bang-up lady!\"He put two fingers to his lips and whistled.",
+      "text2": "It's not necessary for there to be anything special about a horse.",
       "label": 0
     },
     {
-      "text1": "The cause of the Mutiny of 1857, or The War of Independence as it is known to Indians, was symptomatic of British insensitivity.",
-      "text2": "The cause of the 1857 mutiny is impossible to discern and it's likely it never even happened.",
+      "text1": "yeah so basically if you want to take the risk",
+      "text2": "If you want to take the risk, you can but I think it's a bad idea.",
       "label": 0
     },
     {
-      "text1": "The adjustment to the mortality unit valuation for growth in real income in 2020 is achieved using an adjustment factor of 1.278.",
-      "text2": "Real income is affected a lot by the adjustment factor.",
+      "text1": "He had been standing and reading a black leather book he had found.",
+      "text2": "He threw the book he'd found away.",
       "label": 0
     },
     {
-      "text1": "yeah that that's that's kind of what happened on Twin Peaks they did all this big building up building up building up and then the the solution was ridiculous i had it figured out by the third",
-      "text2": "The build up was leaving behind too many clues.",
+      "text1": "yes and uh good luck on on some other calls",
+      "text2": "Good luck on those important calls you're getting today.",
       "label": 0
     },
     {
-      "text1": "A lush site set high on a hillside with excellent views over the sea.",
-      "text2": "The site has no plants.",
+      "text1": "He slept most of the time, as if not daring to use his little strength even to think.",
+      "text2": "He was perpetually tired.",
       "label": 0
     },
     {
-      "text1": "Assuming the bare-bones basic functions of government are to be maintained, where then will be the room for any border-control guards or anti-terrorism measures, or Head Start or education grants or peanut subsidies or national parks, or disaster relief--let alone the enhancements that Congress deemed so necessary this October?",
-      "text2": "There is not any room for anymore functions.",
+      "text1": "As its name suggests, it is blessed with more than its fair share of sunshine.",
+      "text2": "It doesn't receive much if any sunshine.",
       "label": 0
     },
     {
-      "text1": "In 1981, when Royko moved to a condominium in a lakefront high-rise, he cast himself as a bungalow-bred Margaret Mead, studying yuppies by living among them.",
-      "text2": "Royko lived in a small city apartment for his entire life.",
+      "text1": "A century later, Lorenzo Ghiberti won the competition to design the great north and east doors, devoted respectively to the life of Jesus and scenes from the Old Testament.",
+      "text2": "Lorenzo Ghiberti designed the south doors because he won a competition.",
       "label": 0
     },
     {
-      "text1": "yes quite a quite a bit but you know in the movie the guy was black",
-      "text2": "The main actor in the movie was black.",
+      "text1": "It goes on to say heart disease is lower in moderate drinkers but then warns of other dangers and cautions against guidelines to the general public that encourage drinking (for the full text, click here).",
+      "text2": "While drinking can protect against heart disease, this effect is only seen in people who consume less than five units of alcohol per week.",
       "label": 0
     },
     {
-      "text1": "But in turn the pope had to kneel in allegiance, and this exchange of spiritual blessing for military protection laid the seeds of future conflict between the papacy and secular rulers, compounded in 962 when Otto I was crowned Emperor of the newly formed Holy Roman Empire.",
-      "text2": "The pope did not need to bribe any military leaders for his protection.",
+      "text1": "Chrysler's elaborate system of dealerships might, in theory, help Mercedes crack the U.S. market, where its share is now less than 1 percent.",
+      "text2": "Mercedes is the top selling car in America.",
       "label": 0
     },
     {
-      "text1": "Jews, Moors, and Benedictine monks worked alongside each other in translation teams.",
-      "text2": "Moors never undertook any translation work.",
+      "text1": "Livingston changed my life, he says.",
+      "text2": "He was unimpressed with Livingston's accomplishments.",
       "label": 0
     },
     {
-      "text1": "It was a full page ad, too.",
-      "text2": "That ad was full page, so they must have payed a lot of money.",
+      "text1": "New Zealand is an independent nation within the British Commonwealth.",
+      "text2": "New zealand is independent and functional within the British Commonwealth.",
       "label": 0
     },
     {
-      "text1": "Effectively and efficiently implementing some of these practices could require funding for computer software and hardware, additional staff, and/or training.",
-      "text2": "Some of these practices would not require funding, but most of them would.",
+      "text1": "yeah that would not be fun",
+      "text2": "That trip sounds boring.",
       "label": 0
     },
     {
-      "text1": "The miners were in the western hills in the salt mines.",
-      "text2": "The miners were in the coal mines in the western hills.",
+      "text1": "The Tang clan's earliest walled village was Lo Wai, which also has its defensive wall intact and is entered by a narrow gate.",
+      "text2": "The narrow gate is in fact 3 meters wide.",
       "label": 0
     },
     {
-      "text1": "Maybe he should step aside and let someone else take over the routine.",
-      "text2": "He should never let go of control.",
+      "text1": "The women never came back out.",
+      "text2": "The woman ran out screaming.",
       "label": 0
     },
     {
-      "text1": "Until recently, their industry was illegal almost everywhere.",
-      "text2": "Their industry is still illegal.",
+      "text1": "Additional techniques for communicating information security policies are discussed in the next section on promoting awareness.",
+      "text2": "Several other techniques including information security polices are discussed in the next section.",
       "label": 0
     },
     {
-      "text1": "But this is to desert, even betray, his subject.",
-      "text2": "After the subject has been betrayed, it will get killed.",
+      "text1": "An' by that time he didn't know wot he was doin'.",
+      "text2": "At the time he was perfectly aware of what he was doing.",
       "label": 0
     },
     {
-      "text1": "At this point, continuing to Thahiti Tole, where there is another small stupa, you can walk north to the main intersection of Thamel, Kathmandu's lively, fast-spreading center for budget-conscious tourists.",
-      "text2": "Thamel is considered a very popular tourist destination for elderly people.",
+      "text1": "Their destination was even more resplendent with forests than the paradise we see today, but hoary bats and monk seals were the only mammals in residence.",
+      "text2": "Fruit bats and wild cats were the only mammals in residence at their destination.",
       "label": 0
     },
     {
-      "text1": "Jon felt his heart throbbing in his chest.",
-      "text2": "Jon's heartbeat was steady and normal.",
+      "text1": "yeah oh oh that's what i was thinking by quick transition i didn't mean you know i didn't mean like Sweden going over to right hand drive or anything you know at midnight tonight we all switch over or anything",
+      "text2": "I meant that right-hand drive is something that could happen for Sweden over the course of several years.",
       "label": 0
     },
     {
-      "text1": "Perhaps Eugene Meyer was a 19 th -century chauvinist with no intention of letting his most talented child run a newspaper.",
-      "text2": "Eugene Meyer was hard on his children",
+      "text1": "But he broke the bargain.",
+      "text2": "He was true to his word and honored the bargain.",
       "label": 0
     },
     {
-      "text1": "Lady Tadminster, our Member's wife, she was the late Lord Abbotsbury's daughter, does the same.",
-      "text2": "Lady Tadsminster was unmarried.",
+      "text1": "Adrin knelt to one knee and smiled at Susan.",
+      "text2": "Susan ran away from Adrin.",
       "label": 0
     },
     {
-      "text1": "He did not seem to have heard her, for without a word he turned on his heel and went out of the house.",
-      "text2": "He didn't hear her because the TV was on too loud.",
+      "text1": "Profits of the cooperative go to support schools and help handicapped and aged Tibetan refugees.",
+      "text2": "Over four thousand people are supported by the cooperative.",
       "label": 0
     },
     {
-      "text1": "But the Army shows the process can work, and can help.",
-      "text2": "The army promises that it can help if the process is used.",
+      "text1": "Because we only have two attorneys per night right now, we can only see about 15 people each night, he said.",
+      "text2": "We have dozens of attorneys waiting to help clients every night.",
       "label": 0
     },
     {
-      "text1": "And I'll look after YOU, retorted Tuppence, resenting the manly assertion.",
-      "text2": "Tuppence is a strong, independent woman.",
+      "text1": "But I'm not a nurse, thank heaven, I work in the dispensary.\"",
+      "text2": "I do not want to be a nurse.",
       "label": 0
     },
     {
-      "text1": "The pride and joy of the neighborhood is the Meganebashi, a double-arched stone bridge across the Nakajima River.",
-      "text2": "Meganebashi is a stone bridge that had a lot of effort put into it.",
+      "text1": "In addition, as appropriate, the closeout meeting may cover the extent to which data and documents were made available and access to relevant field officials was provided.",
+      "text2": "The closeout meeting can cover the extent to which information is available to the auditor.",
       "label": 0
     },
     {
-      "text1": "Smaller towns will have a syndicat d'initiative, which provides the same services.",
-      "text2": "The services are of  the same quality as well, despite it being in smaller towns.",
+      "text1": "He ran to the closet.",
+      "text2": "He was hiding in the closet.",
       "label": 0
     },
     {
-      "text1": "'Wherever your leader is,' White said.",
-      "text2": "White said to take the weapon to your leader.",
+      "text1": "He walked about my apartment like the king of a very small castle.",
+      "text2": "He walked around my apartment like he owned the place, treating it like his kingdom that he was the ruler of, even though he had no authority here and I wished for him to leave.",
       "label": 0
     },
     {
-      "text1": "(Pam, throw away the tripod!)",
-      "text2": "Pam, keep the other equipment.",
+      "text1": "(Mitchell 1999) The amount of work that can be turned over in this way is quite large.",
+      "text2": "The amount of work that can be turned over in this way is quite small.",
       "label": 0
     },
     {
-      "text1": "There are no other conditions?\"",
-      "text2": "How many conditions are there?",
+      "text1": "Attorneys praise Zelon for her thorough understanding of the law.",
+      "text2": "Zelon was very intelligent",
       "label": 0
     },
     {
-      "text1": "What extra coffee-cup? 111 \"I don't know.\"",
-      "text2": "Thanks for remembering to bring the extra coffee cup.",
+      "text1": "From blue-eyed and sometimes red-haired Kashmiris and the Chinese-Tibetans from Sikkim or Darjeeling, through all the shades of coffee of the heartland, right down to dark-skinned, often curly-haired, Dravidians from southern India, you soon realize there's no such thing as a  typical  Indian.",
+      "text2": "The Chinese-Tibetans from Sikkim and Darjeeling are generally blonde.",
       "label": 0
     },
     {
-      "text1": "This is another game in which lessons and lots of spare money are recommended.",
-      "text2": "They don't offer lessons.",
+      "text1": "The Moors were expelled from the town, but they remained in control of southern Spain for almost four centuries.",
+      "text2": "The Moors ruled southern Spain for only a decade.",
       "label": 0
     },
     {
-      "text1": "Never have I seen such a ghastly 25 look on any man's face.",
-      "text2": "I have seen a ghastly look like that.",
+      "text1": "I want to speak to you. She obeyed.",
+      "text2": "She spoke about her time in the army.",
       "label": 0
     },
     {
-      "text1": "(In his epilogue, he offered compelling, albeit circumstantial, bits of evidence that strongly suggest that Haywood and the others actually were involved in an assassination plot.)",
-      "text2": "The author offered nothing in terms of evidence.",
+      "text1": "In some cases, moving of equipment has been necessary, but this has not proved to be limiting.",
+      "text2": "Moving equipment proves to not be limiting.",
       "label": 0
     },
     {
-      "text1": "The Model combines IPM and EIA cost elements that use similar -- but not identical -- assumptions on capital recovery and aggregate cost data in a similar -- but not identical -- regional manner that needs adjustment.",
-      "text2": "The Model does not combine IPM and EIA costs.",
+      "text1": "An assumed growth rate of US steel demand was chosen at 3 percent, a typical number for growth in GDP.",
+      "text2": "An assumed growth rate of 8% was chosen for US steel.",
       "label": 0
     },
     {
-      "text1": "well i mean like i say if you're if you're you know if you're at an upper level in the rank category you know you're probably pulling down close to seventy grand a year",
-      "text2": "But, if you're on the lower side in the rankings, you may be pulling about 35.000 a year.",
+      "text1": "The atmosphere of 19th-century Canton is best evoked on Shamian Island, a haunting, nostalgic place in the Pearl River.",
+      "text2": "Shamian Island is located away from the Pearl River.",
       "label": 0
     },
     {
-      "text1": "The ship leaves the crowded quay at Eminene and heads north, past the dazzling white wedding-cake facades of the Dolmabahce Palace and the neighbouring iragan Palace, gutted by fire in 1910 but no w restored as a luxury hotel.",
-      "text2": "The ship is unable to leave the bay at Eminene because of the military blockade.",
+      "text1": "oh me to boy i have to hunt hunt them down uh-huh",
+      "text2": "I never have to hunt anyone down, thankfully.",
       "label": 0
     },
     {
-      "text1": "While four other witnesses criticized the duplicity of pro-drug forces and the naivete of the voters, Romley bluntly identified the central choices facing law  go after doctors, federalize marijuana enforcement, go to court, and get a strategy.",
-      "text2": "The witnesses were concerned that voters might be tricked into supporting marijuana legalization.",
+      "text1": "Augusto Pinochet to Spain to stand trial.",
+      "text2": "Pincochet will not be tried.",
       "label": 0
     },
     {
-      "text1": "Worst of all, the Kamakura warriors, resenting the way the Kyoto court referred to them as  Eastern barbarians,  sought refinement in a ruinous taste for  extravagant feasts, rich costumes, and opulent homes.",
-      "text2": "Sick of being referred to as barbarians, the Kamakura warriors wanted to improve their imagine by doing things to appear more upscale.",
+      "text1": "Likewise, it comes as no surprise that as a result of the increasing complexity and breadth of issues facing the Congress, the legislature is availing itself of GAO's services and support on an unprecedented and accelerating basis.",
+      "text2": "Everybody is surprised that the legislature is availing itself of GAO's services.",
       "label": 0
     },
     {
-      "text1": "'I have a better view of things than Greuze,' said Natalia.",
-      "text2": "Natalia said she understood things less than Greuze.",
+      "text1": "South of Kitchener Island is Elephantine Island, home to the Temple of Knum.",
+      "text2": "The Temple of Knum was a Jewish Temple on Elephantine Island.",
       "label": 0
     },
     {
-      "text1": "National- and American-league baseball teams played regular-season games against each other for the first time in the sport's 120-year history.",
-      "text2": "Baseball is a popular sport in America.",
+      "text1": "The analyses describe the reason for the rule and the legal basis for it.",
+      "text2": "The analyses talks about how the rule was needed for increasing performance rates.",
       "label": 0
     },
     {
-      "text1": "Mahatma Gandhi immediately rushed from Calcutta to Delhi to defend Muslims against further slaughter.",
-      "text2": "Mahatma Gandhi didn't care about the slaughter of Muslims in Delhi.",
+      "text1": "okay and that takes like you know five seconds for the whole play",
+      "text2": "Five seconds is a short time for the whole play.",
       "label": 0
     },
     {
-      "text1": "The Vice President provides no support for interpreting the term aagency- in Title 31 as excluding the NEPDG.",
-      "text2": "The President is responsible for interpreting the word agency.",
+      "text1": "so look into that bit the year that they graduate you know before though you know while they're graduating there's all kinds of little bitty money that little clubs will give away churches and everything and they don't even have a dozen applicants because uh uh the kids are going off after the big money",
+      "text2": "only big organizations give away money, not small clubs",
       "label": 0
     },
     {
-      "text1": "well i i didn't have to go down there but uh uh driving on the freeway was uh made it difficult because everybody couldn't get off and they'd get off somewhere else",
-      "text2": "It was difficult because the freeway was overcrowded and people had to get off.",
+      "text1": "The Jews are Space Aliens.",
+      "text2": "They traveled here from a nearby star system.",
       "label": 0
     },
     {
-      "text1": "While legal aid is a worthy cause, Nixon doesn't believe the judge has legal authority to give the money to that cause, she said.",
-      "text2": "The legal authority of the judge in this case was merely Nixon's excuse for not funding legal aid.",
+      "text1": "The segment wraps up with a review of Metabolife's Web campaign against ABC News and gives the final word to the formerly comatose Cunningham- I wouldn't have taken it if I'd known the side effects, because I almost didn't make it.",
+      "text2": "The segment is intended to discredit Metabolife and spread awareness about Cunningham's story.",
       "label": 0
     },
     {
-      "text1": "By capsulizing the inanities that pass for political commentary, you expose the vapidity of the opinions and put these opinions in their proper perspective.",
-      "text2": "You show how deep the opinions are.",
+      "text1": "hell air pollution tends to be a a topic that uh some people have a lot to say on and some don't care much for it at all but uh i found that there's there seems to be quite a bit that the individual can do as far as air pollution and one thing it kind of hits the old pocketbook a little bit but if you can just keep the automotives vehicles going properly instead of uh letting them rundown and use a quart a oil a mile like some of these smoke cars do that would uh make quite a difference we all seem to have one or more of those things and then we have a variety of people at least in this part of country that uh love their fireplaces and we burn off an awful lot of uh acreage of wood and put it up in smoke and on a proper day as far as the temperature goes you can have a cloud of smoke hovering other a neighborhood that's just sickening really i mean it may be pleasant inside but it stinks outside so uh little things like that uh an individual can do what what else do you think they can do",
+      "text2": "Smoke from fireplaces does not contribute to air pollution.",
       "label": 0
     },
     {
-      "text1": "But don't take my word for it.",
-      "text2": "Take my word as truth.",
+      "text1": "Sure feels good jus' to stretch out a mite, he observed.",
+      "text2": "It feels good to stand up again.",
       "label": 0
     },
     {
-      "text1": "It does if you are trying to set any sort of policy priorities.",
-      "text2": "It isn't important if you are trying to set of policy priorities.",
+      "text1": "The new loan raised their mortgage debt $100,000, to $360,000.",
+      "text2": "The new loan decreased the loan amount.",
       "label": 0
     },
     {
-      "text1": "Projections based on intermediate assumptions of the 2001 HI Trustees' Report.",
-      "text2": "Projections are based on attendee numbers of Disney Land.",
+      "text1": "They never found Vrenna's sword, nor her body.",
+      "text2": "The body was hidden along with the weapon.",
       "label": 0
     },
     {
-      "text1": "Bandits may not kill us here but they surely will north.",
-      "text2": "The bandits up north are very skilled.",
+      "text1": "With the fatal document in the hands of Mr. Brown, public opinion would swing to the side of the Labour extremists and revolutionists.",
+      "text2": "Mr. Brown was going to use the documents to benefit the Labour extremists.",
       "label": 0
     },
     {
-      "text1": "This cooperative spirit guaranteed him access to Singapore as a market for Johor's agricultural products.",
-      "text2": "By recognizing the essential human spirit and embracing it, he was able to realize his own aims.",
+      "text1": "And for MLS to make itself a top-class league, it needs to spend tens of millions of dollars to steal European players and protect its own stars.",
+      "text2": "The MLS is far surpassing the European leagues.",
       "label": 0
     },
     {
-      "text1": "yeah oh sure yeah you don't know really you don't know where it is",
-      "text2": "You know exactly where it is.",
+      "text1": "Levin accompanies the orchestra, continuo-style, during the tutti sections--passages when the soloist is normally silent.",
+      "text2": "Levin has been practicing for several years to join the orchestra.",
       "label": 0
     },
     {
-      "text1": "Unfortunately, it had been several months since I'd last listened to common sense.",
-      "text2": "I always listened to common sense.",
+      "text1": "Just to hear him say, 'I believe in what you're doing,' raised our game and made us want to work harder.",
+      "text2": "He knew just what we needed to hear to do even more work.",
       "label": 0
     },
     {
-      "text1": "St. Anne's Church on Dawson Street has lunchtime concerts and the Bank of Ireland Arts Centre in Foster Place off College Green has both a lunchtime and evening concert series.",
-      "text2": "The Bank of Ireland Arts Centre have musical performances exclusively in the evenings only.",
+      "text1": "Case Studies in Science Education",
+      "text2": "No studies in science education",
       "label": 0
     },
     {
-      "text1": "You do not need to assess reliability if the data are used (1) only as background information or (2) in documents without findings, conclusions, or recommendations.",
-      "text2": "It never hurts to do reliability assessment for your own peace of mind, however.",
+      "text1": "well uh what do you know what the last repair was uh that that you had done to your car",
+      "text2": "Your car doesn't need a repair, currently.",
       "label": 0
     },
     {
-      "text1": "What's more, New York's current renaissance is happening because there is something to come back to.",
-      "text2": "New York's current political issues is happening because of the new senators.",
+      "text1": "This is possibly one of the most unusual small museums in or around Dublin.",
+      "text2": "This museum isn't in or around Dublin at all.",
       "label": 0
     },
     {
-      "text1": "Poland's road to capitalism and democracy has been a complicated one.",
-      "text2": "Poland has had an easy road to capitalism.",
+      "text1": "No changes of any kind are advocated.",
+      "text2": "We should change everything.",
       "label": 0
     },
     {
-      "text1": "He surely does not make a calculation--doesn't mark her to market.",
-      "text2": "He does not make good calculations ever.",
+      "text1": "They don't need this one which isn't.\"",
+      "text2": "They don' need one that isn't like them.",
       "label": 0
     },
     {
-      "text1": "well you know in when we used to sew we'd sew the seam and then we'd finish the edges and we we would uh trim the seams and finish the edges",
-      "text2": "We weaved in the ends instead of sewing them in.",
+      "text1": "That's about $170 million a year from Florida lawyers alone.",
+      "text2": "The figure of $170 million is grossly exaggerated, as this is actually closer to the number for the entire country.",
       "label": 0
     },
     {
-      "text1": "During summer, the terrain is parched, while at other times of the year it's often covered with snow.",
-      "text2": "All year round, the area is dry and desert-like.",
+      "text1": "The theaters in the Hong Kong Cultural Ceter in Tsim Sha Tsui are the main venues for concerts and opera.",
+      "text2": "There are no concerts in Hong Kong.",
       "label": 0
     },
     {
-      "text1": "Thirty-one years later, their old neighborhood is being replaced by sandstone-hued luxury homes encircling the Cherry Creek shopping district.",
-      "text2": "The sandstone-colored luxury homes aren't replacing the old neighborhood 31 years later.",
+      "text1": "In this cavernous emporium you'll have your pick of fresh Martinique pineapples, coconut slices, or the pungent baby limes so loved in the West Indies.",
+      "text2": "In addition to baby limes, coconuts and pineapples, the emporium also sells oranges and apples.",
       "label": 0
     },
     {
-      "text1": "and if you take uh little pieces of pork and you fry them like little cubes of pork",
-      "text2": "When pork is cubed it cooks very evenly in the wok.",
+      "text1": "A story goes behind the scenes with New York Times editors, explaining how they create their front page each day.",
+      "text2": "A story tells how New York Times editors get ideas for the front page.",
       "label": 0
     },
     {
-      "text1": "It slipped under the egg, catching the falling object deftly on a cushion-like attachment between its wings, and then struck off briskly toward the east.",
-      "text2": "It failed to slip under the egg, and jumped toward the west.",
+      "text1": "It is a very simple, low-key site, housed in a small 19th-century building.",
+      "text2": "The building was built entirely out of wood and brick.",
       "label": 0
     },
     {
-      "text1": "yeah we do eat i i had become for about three or four months i was a vegan which is a person that eats um no animal products no cheeses no eggs and that's even more difficult it's really hard to find the products and it's hard that's even harder to keep yourself from eating because it it adds so much to meals you know when you put cheese on something or",
-      "text2": "I didn't enjoy being a vegan, seeing as I could no longer eat the food that I used to before.",
+      "text1": "The city's many pubs are the center of social life, offering conversation and a quiet pint, food, music, and song.",
+      "text2": "The courts are a great place for a beer.",
       "label": 0
     },
     {
-      "text1": "well it can't from what i've heard understood it can  can be",
-      "text2": "It's simply impossible for it to have gone as far as it did.",
+      "text1": "the bigger and heavier the lawn mower the more macho the guy behind it so you know of course he wouldn't couldn't buy one of those little little tiny skinny ones that you can get at one of the uh one of the Aames or",
+      "text2": "He thought he had to look tough.",
       "label": 0
     },
     {
-      "text1": "to uh to get out and uh go for the swim i think uh there is something to this endorphins",
-      "text2": "When I go swimming I feel such fatigue afterwards.",
+      "text1": "This decision point coincides with the companies' need to increase investments in the product development and continue to the next phase.",
+      "text2": "The companies' need to increase investments in product development is what spurned this decision.",
       "label": 0
     },
     {
-      "text1": "During the summer festival season, children will be fascinated by the street theater, clowns, face painting, and temporary tattooing.",
-      "text2": "The summer festivals will be an adult-only zone, consisting of heavy drinking, tattoo artists, and nude performance art.",
+      "text1": "In Ireland, compassionate teachers would seem to be painfully rare.",
+      "text2": "Teachers do not get paid enough in Ireland.",
       "label": 0
     },
     {
-      "text1": "This town, just 27 km (14 miles) from Alicante on the N-340, is renowned for the manufacture of turren, an exotic sweet of Moorish origin, made from ground almonds, orange-blossom honey, egg white, and sugar.",
-      "text2": "The town is over 100 miles away from Alicante.",
+      "text1": "Instead of boos and shouts, we have only I hear hisses from several locations.",
+      "text2": "The play was just that bad.",
       "label": 0
     },
     {
-      "text1": "Who knows what it was doing to her to touch Stark's mind.",
-      "text2": "Stark knew why her mind was touched.",
+      "text1": "At any event, however, this wasn't a hospital in any sane and normal section of Canada during his time, on Earth.",
+      "text2": "This was a hospital from another time.",
       "label": 0
     },
     {
-      "text1": "France, on the other hand, has densely populated cities but no areas as sparsely settled as in the United States.",
-      "text2": "There are no sparsely settled areas in France.",
+      "text1": "Slate 's Sarah Kerr is more positive than most, placing it far above Ally McBeal (a common comparison) for the way it adores its confused characters and burrows inside their heads to find a deeper humor, warmer but also more raw.",
+      "text2": "Confused characters are shunned for not shedding any light.",
       "label": 0
     },
     {
-      "text1": "that's what i'm looking for now that's why i was just trying to talk without having to think about what i was saying and uh trying to look over this thing",
-      "text2": "That's not what I'm looking for.",
+      "text1": "The town's High Street stretched beneath the castle along the ridge to the east (today the Royal Mile), past the parish church of St. Giles, and out to the Netherbow, where Edinburgh ended and Canongate began.",
+      "text2": "The High Street stretches above the castle along the ridge to the west.",
       "label": 0
     },
     {
-      "text1": "but that's that's tornado season",
-      "text2": "It's not  tornado season.",
+      "text1": "Adjacent is the impressively deep Pool of Bethesda, where Jesus cured the crippled man with the famous words Stand up, take your mat and walk (John 5:2-9).",
+      "text2": "Jesus did not cure a cripple man near a shallow pool of Bethesda.",
       "label": 0
     },
     {
-      "text1": "We have examples of these in the giant outer planets.",
-      "text2": "There has never been case of the phenomenon happening;",
+      "text1": "Their new product development process included key, high-level decision points before moving into product demonstration, and again before making the production decision that required specific, knowledge-based exit criteria.",
+      "text2": "They rush the product to market, and ignore some of the conventional product development cycle steps.",
       "label": 0
     },
     {
-      "text1": "Chapter 5 focuses on synergistic combinations of control retrofits on a single unit.",
-      "text2": "Chapter 5 is important",
+      "text1": "It has taken modern Western fashion to make that happen.",
+      "text2": "Western fashion is now very popular now that it is modernized.",
       "label": 0
     },
     {
-      "text1": "The calculation uses all of a program's LSC funding, even though LSC programs provide services to eligible clients that do not meet the definition of a closed case, as previously detailed.",
-      "text2": "Funding calculation have been becoming cumbersome for total scrutiny.",
+      "text1": "An agency is required to monitor contractor performance, ensuring that work done conforms to the agency's requirements.",
+      "text2": "If the agency is not pleased with the contractor's performance, they should write a report about it.",
       "label": 0
     },
     {
-      "text1": "I'm sorry if you don't like the way you look.",
-      "text2": "I am glad you don't like the way you look.",
+      "text1": "The Aosta Valley's Courmayeur is as pleasant a base for hiking and more strenuous mountain-climbing in summer as it is for skiing in winter.",
+      "text2": "The hiking here has a beautiful view.",
       "label": 0
     },
     {
-      "text1": "oh i have one we uh we have one one Master Card",
-      "text2": "We don't have credit cards",
+      "text1": "But no one broached these questions at the hearing.",
+      "text2": "The questions would have made a difference the outcome of the hearing.",
       "label": 0
     },
     {
-      "text1": "As she was about to ring it, he arrested her hand.",
-      "text2": "She was going to ring the village bell to warn everyone.",
+      "text1": "At the heart is the huge 18th-century H??tel de Ville (Capitole), fronted by a huge open space that hosts an open-air market on Wednesday mornings.",
+      "text2": "The open-air market in front of Capitole attracts quite a lot of people.",
       "label": 0
     },
     {
-      "text1": "If she actually believed that millions of human lives were at stake, the former head of the Red Cross surely wouldn't try to build a holy crusade around refusal to discuss the matter.",
-      "text2": "The Red Cross is run by democratic vote, and therefore has no, and has had no, head.",
+      "text1": "How could he know, even?\"",
+      "text2": "It would be crazy if he could have figured it out.",
       "label": 0
     },
     {
-      "text1": "The palace's royal chapel, St-Germain l'Auxerrois, dates back to 1200, but has preserved little of its Romanesque and Gothic beginnings.",
-      "text2": "The St-Germain l'Auxerrois has lost it's Roman ans Gothic beginnings",
+      "text1": "The cities' shanty-town districts are often directly in the shadow of the shining skyscrapers, built by the shanty-town residents themselves.",
+      "text2": "The shanty-towns are kept at least 10km from any modern infrastructure.",
       "label": 0
     },
     {
-      "text1": "The basilica's highlight, and generally accepted as the work of a young Giotto, the Life of Francis (1296-1304) is movingly celebrated in 28 scenes along the lower tier (starting from the right transept), while 32 frescoes in the upper tier illustrate scenes from the Old and New Testament.",
-      "text2": "The scenes in the lower tier were created by Giotto near the end of his life.",
+      "text1": "From this point on, anything  Smell the wines first, smell the standards, start to see which terms describe which wine, writes Noble.",
+      "text2": "Noble has never smelled wine.",
       "label": 0
     },
     {
-      "text1": "4 million in annual state funding for civil legal services - nearly half of the state's yearly contribution to legal services programs statewide.",
-      "text2": "There is no funding available for civil legal services.",
+      "text1": "uh-huh yeah but uh yeah we we find even uh you know even looking at the dollar movies which are you'd think those are the ones that uh are coming back around because they were good the first time",
+      "text2": "We don't watch movies at all.",
       "label": 0
     },
     {
-      "text1": "Morrison uses both Ruby and its opposite, the Convent, to critique the utopian ideal as dangerous, stultifying, and illusory.",
-      "text2": "Morrison thinks highly of the utopian ideals.",
+      "text1": "The pagoda-like structure, built in 1885, is 251.2 m (84 ft) tall and was once used for water storage.",
+      "text2": "The pagoda-like structure was built in 1919 and demolished in 1950.",
       "label": 0
     },
     {
-      "text1": "I dropped my hat from the balcony, explained Poirot simply.",
-      "text2": "Poirot picked his hat up from the balcony.",
+      "text1": "Chavis was ousted after revelations that he used NAACP funds to settle sexual-harassment suits filed against him by former employees.",
+      "text2": "Chavis should not have used NAACP funds to settle sexual-harassment suits.",
       "label": 0
     },
     {
-      "text1": "You will send a personal demand to me here, and the money, in notes, shall be sent by return of post.",
-      "text2": "You will ask for a lot of money.",
+      "text1": "Through its competitive grant process, LSC obtains and reviews substantial data on an applicant's capacity to respond to a diverse client community.",
+      "text2": "LSC doesn't keep data about their clients.",
       "label": 0
     },
     {
-      "text1": "Three or four are masterpieces of Hindu architecture.",
-      "text2": "None of them are masterpieces.",
+      "text1": "It discourages close scrutiny and too many questions.",
+      "text2": "Too many questions are discouraged, at least for now.",
       "label": 0
     },
     {
-      "text1": "and he left TI about eight or nine years ago and went elsewhere and he's he came through town and visited with me and bottom line is i'm going to retire and go to work for him",
-      "text2": "I will have to relocate in order to take the job",
+      "text1": "After considerable study and touring in the Lake District, German scientist Rainer Bramer declared that the region had the best views in the world.",
+      "text2": "German scientist Rainer Bramer concluded that this place had the worst views in the world.",
       "label": 0
     },
     {
-      "text1": "Kilims are small rugs that are woven rather than knotted, and have no pile; a cicim is a kilim with embroidered decoration.",
-      "text2": "Kilim rugs are always very small in size.",
+      "text1": "uh this thing they they gave the guys uh the power and the material and the told them to go do it and they did it you know got in and got out i'm not sure the the big fuss that we're going to see now for the next few weeks i would think",
+      "text2": "The expected the guys to do it without giving them the necessary materials to do it.",
       "label": 0
     },
     {
-      "text1": "The preamble to the final rule indicates that EPA evaluated three different methodologies for implementation.",
-      "text2": "Is indicated that EPA evaluated, for implementation, four different methodologies.",
+      "text1": "DOD has made improvements in its acquisition policy by incorporating guidance for evolutionary acquisition, creating guidelines for the development of a basic product that can be upgraded with additional capabilities as technologies present themselves.",
+      "text2": "DOD made improvements in their acquisition policy because they felt pressure to do so.",
       "label": 0
     },
     {
-      "text1": "Without giving up demands for self-determination, India fought at Britain's side in World War I, and more than one Prussian general blinked at Rajput and Sikh princes leading an Indian infantry through the trenches of France.",
-      "text2": "India gave up its demands for self-determination, but its troops and princes stayed home and did not support the British war effort.",
+      "text1": "So head first for the tourist office on the huge Place Bellecour, in the middle of the Presqu'ile, the peninsula between the two rivers.",
+      "text2": "The tourist office is on a mountain.",
       "label": 0
     },
     {
-      "text1": "oh we have had uh as i've said we've had variable weather uh",
-      "text2": "We haven't had much variation in weather patterns lately.",
+      "text1": "North of Luxor temple, in the streets behind the Mosque of Abu El Haggag, is the bustling souk or market where you'll find a mixture of tourist souvenirs and local products such as food or textiles.",
+      "text2": "There is no temple in the north of Luxor.",
       "label": 0
     },
     {
-      "text1": "Their low salaries and high debt payments were making it impossible to live.",
-      "text2": "It is easy to get by with high debt payments and low income.",
+      "text1": "and apparently the Rangers last year won a lot of one run games",
+      "text2": "The Rangers won two games in the previous year, of which only one is a one run game.",
       "label": 0
     },
     {
-      "text1": "On the second floor are heavy timbered ceilings and walls covered with works of art, mostly of religious or royal significance.",
-      "text2": "A selection of the art pieces normally kept on the second floor are regularly rotated for display on the first floor.",
+      "text1": "1 Performance management systems in leading organizations typically seek to achieve three key objectives.",
+      "text2": "One of the key points is to respect the fellow worker.",
       "label": 0
     },
     {
-      "text1": "In a country with a century of national unity and the scalding experience of Mussolini's fascism, sports seem almost the only activity that can inspire any semblance of patriotic fervor in Italians.",
-      "text2": "Sport does not inspire patriotism in Italians.",
+      "text1": "Adrin whistled and the sound startled Ca'daan.",
+      "text2": "Ca'daan whistled and startled Adrin.",
       "label": 0
     },
     {
-      "text1": "All transactions were entered in their books.",
-      "text2": "The transactions were never recorded.",
+      "text1": "and start walking down the road and then we found this little hut a couple of miles down that had you know that sold stuff",
+      "text2": "The little hut was completely abandoned, we didn't see anybody there.",
       "label": 0
     },
     {
-      "text1": "In lead if he wanted it that way.",
-      "text2": "In lead if he really wanted it that way, but I don't want it that way.",
+      "text1": "This modernization is OPM's central strategy to meet the long-term customer service and financial management objectives for CSRS and FERS.",
+      "text2": "There is nothing in place for OPM to meet customer service and financial management goals.",
       "label": 0
     },
     {
-      "text1": "i know i bought a a brand new i bought a Jeep with everything on it",
-      "text2": "I just bought a new Jeep with a few features.",
+      "text1": "From the Alps down to the southern tip of Sicily, Italy provides the most tangible proof that the world is indeed a wonderous stage.",
+      "text2": "Italy is completely flat.",
       "label": 0
     },
     {
-      "text1": "I dare say he soaked fly paper, as I told you at the beginning.\"",
-      "text2": "He didn't use soaked fly paper.",
+      "text1": "Rugbyaand football (soccer) can be seen at the spectacular new Stade de France on the northern outskirts at St-Denis or at Parc-des-Princes at the south end of the Bois de Boulogne.",
+      "text2": "Rugby is not popular enough in France to be found in larger venues.",
       "label": 0
     },
     {
-      "text1": "Poor Mexican street fighters are brought to the United States by unscrupulous promoters to serve as patsies for American boxers.",
-      "text2": "Almost all patsies are street fighters from Mexico.",
+      "text1": "On the waterfront sits the Doges' Palace (Palazzo Ducale), for 900 years the focus of Venice's uncontested power and pomp, evoked in the imposing elegance of its delicate pink marble and white limestone facades with their airy arcades and loggias.",
+      "text2": "For one year it was the focus of Venice's uncontested power and pomp.",
       "label": 0
     },
     {
-      "text1": "The armored man howled in his helm as the hand enclosed, twisting metal and crushing bone.",
-      "text2": "The armored man whooped as his armor failed, and watched as it dropped from his body ineffectively at the unarmed attack.",
+      "text1": "Road access may be difficult, with the last 8 km (5 miles) along a winding, narrow roadway where an alternating, one-way traffic system is in place.",
+      "text2": "Road access is quite easy.",
       "label": 0
     },
     {
-      "text1": "huh um-hum um-hum yeah i wouldn't i i would think they'd spend at least that as the at the cost of clothes",
-      "text2": "They spend more on food than on clothes.",
+      "text1": "[McCain's campaign-finance] proposal would single out six committees, the DNC, the national Democratic committees, the national Republican committees, and say, Only those six can't engage in issue advocacy.",
+      "text2": "The proposal includes everyone and singles out no one.",
       "label": 0
     },
     {
-      "text1": "I expect it will be about five shillings.",
-      "text2": "I think it will be ten dollars.",
+      "text1": "There was a string of obvious ritual commands in their sacred language.",
+      "text2": "The rituals were performed in modern English.",
       "label": 0
     },
     {
-      "text1": "but then you know it's kind of like a a lottery somebody in their lifetime may win millions of dollars where another person doesn't win anything and tries and tries and tries",
-      "text2": "Everyone wins the same amount.",
+      "text1": "The town was also important for the pharaohs because it sat close to one of the largest sources of high-quality granite quarries in the country, providing stone for many of its finest temples.",
+      "text2": "The stone provided goes towards the pharaohs' tomb.",
       "label": 0
     },
     {
-      "text1": "Where the democrat exhibits respect for the public, the populist exhibits contempt.",
-      "text2": "The populist does not exhibit contempt.",
+      "text1": "There's a private beach, swimming pool, and lagoon with resident turtles and dolphins.",
+      "text2": "Turtles ride dolphins often into private beaches to lay eggs.",
       "label": 0
     },
     {
-      "text1": "It's now a school, the Colegio de Santo Domingo.",
-      "text2": "It was established in 1854.",
+      "text1": "well i have i have i have been in the military so i'm well aware of the Public Palace yes",
+      "text2": "I have never heard of Public Palace, even during my time in the military.",
       "label": 0
     },
     {
-      "text1": "wow i worked around in the yard a little bit and i've got sunburned a few years ago and you know got one of those what second or third degree burns and the doctor looked at it and said don't ever",
-      "text2": "I did some yardwork and made sure to wear a lot of sunscreen.",
+      "text1": "The light increased.",
+      "text2": "Suddenly, everything went pitch-black.",
       "label": 0
     },
     {
-      "text1": "People were talking; they were doing other things, including reading the paper.",
-      "text2": "There were some people who were listening to music while reading.",
+      "text1": "Tiered reporting that would provide expanded optional assurances was suggested.",
+      "text2": "Tiered reporting is used in many other areas when optional assurances are required.",
       "label": 0
     },
     {
-      "text1": "An example of a standard at the same institution was a prescribed minimum password length.",
-      "text2": "The institution did not have a minimum password length.",
+      "text1": "oh it was completely i mean it literally the two dissimilar floor level floor coverings were not level and at first after it happened i thought maybe that's a handicap access and then i said no that's just the way it's constructed",
+      "text2": "there's a purpose behind the uneven floor, it's not a mistake",
       "label": 0
     },
     {
-      "text1": "They're mean, they're fast, and they can pick locks.",
-      "text2": "Raptors were the most blood seeking dinosaurs.",
+      "text1": "Evaluation case studies have covered shorter periods and involved less on-site investigation than research case studies characteristically do.",
+      "text2": "Evaluation case studies have covered shorter time periods and involved less on-site investigation than research case studies most likely do.",
       "label": 0
     },
     {
-      "text1": "and always thought you know that being raised in the midwest you really didn't see any crimes really any more heinous than uh shoplifting",
-      "text2": "I was raised in the Midwest which is pretty wholesome. Most of the crimes in our town were minor.",
+      "text1": "i think they recognize their their position as a community leader",
+      "text2": "They have no idea that they are the community leader.",
       "label": 0
     },
     {
-      "text1": "The mags discover the same  the exodus to exurbia.",
-      "text2": "The mags two things that were different in all aspects.",
+      "text1": "Congress counts as quietly?",
+      "text2": "Congress counts loudly?",
       "label": 0
     },
     {
-      "text1": "Buenos días, Don Cazar. For so small a man the Mexican on the cart seat produced a trumpet-sized voice.",
-      "text2": "Don Cazar has a small voice.",
+      "text1": "Momir Talic, the highest-ranking Serbian official to be arrested so far, was seized in Vienna.",
+      "text2": "Momir Talic was evading authorities when he was seized in Vienna.",
       "label": 0
     },
     {
-      "text1": "My publishers will kill me if I don't mention my own biography of D.P.",
-      "text2": "My publishers want me to talk about all my other works.",
+      "text1": "Duke came to the suburbs of Washington, D.C., last weekend to raise money for the race.",
+      "text2": "Duke makes it a policy to never take part in raising money for any cause.",
       "label": 0
     },
     {
-      "text1": "But while that might explain the mystery of magic working here, it doesn't explain your sky.  Bork scratched his head.",
-      "text2": "The sky was broken to pieces.",
+      "text1": "The Departments of Labor and Health and Human Services performed an economic impact analysis on the effects of the interim rules.",
+      "text2": "The Departments of Labor and Health and Human Services concluded that the interim rules are too harsh.",
       "label": 0
     },
     {
-      "text1": "Jon stared off for a while, appearing in deep thought.",
-      "text2": "Jon was so tired from the recent events that he could hardly think.",
+      "text1": "Shopping hours in Ibiza last from around 9:00 a.m. to 1:00 p.m. and from 4:00 to 8:00 p.m.",
+      "text2": "The shopping hours in Ibiza tend to last longer during the holidays.",
       "label": 0
     },
     {
-      "text1": "It not only raises money for charity, he said, but gives people something else to think about the next time they hear a lawyer joke.",
-      "text2": "The event started about two weeks ago, he said.",
+      "text1": "However, with over 1,500 Buddhist temples, 200 Shinto shrines, numerous museums, and magnificent imperial palaces, be aware that you're not going to see everything.",
+      "text2": "It would take a lot of time to visit all the temples and shrines.",
       "label": 0
     },
     {
-      "text1": "You know there's snow out there.",
-      "text2": "There is absolutely no snow, anywhere outside.",
+      "text1": "He can fill himself with fear and panic now as long as he swung and fired when the time came.",
+      "text2": "He was anxious to fight.",
       "label": 0
     },
     {
-      "text1": "As a result of the painstaking centimeter-by-centimeter recovery of the fragmentary but still powerful traces of the real Leonardo, we can now see, for example, that Philip (third to the right) has an expression of acute grief rather than the simpering pathos left by restorers who presumed to improve on the original.",
-      "text2": "Previous generations of restorers left Leonardo's vision entirely intact.",
+      "text1": "The bright light of the early years of the Renaissance, the talented painter died at 27 after only five years of promising creative activity (1423 1428), working with his mild-mannered teacher Masolino on scenes from Genesis and the life of St. Peter.",
+      "text2": "The painter lived until nearly 100 years old.",
       "label": 0
     },
     {
-      "text1": "However, ideally, longer than 16 months would allow retrofits to occur over a period of several years so that facility owners can properly plan outages and suppliers can properly plan for resource availability.",
-      "text2": "Retrofits can be installed in a matter of hours.",
+      "text1": "The Mint is situated on the west bank of the Dojima River (opposite Sakuranomiya Park).",
+      "text2": "Walking trails can be found in Sakuranomiya Park.",
       "label": 0
     },
     {
-      "text1": "Experimental and Quasi-experimental Designs for",
-      "text2": "Bananas and coconuts.",
+      "text1": "Has the government not tried hard enough?",
+      "text2": "The government has tried hard to make education accessible.",
       "label": 0
     },
     {
-      "text1": "uh now i do with the Cosby Show i have seen it a couple of times and and i do i i like the show i just don't watch it because of the timing but uh some of the crap that's on TV nowadays and",
-      "text2": "I watch the Cosby Show every single day.",
+      "text1": "Items exemplifying the artist's campy humor (his massive Barbie Doll collection, his teen-age scrapbook of celebrity photos) are said to be scarce.",
+      "text2": "Each doll in the collection was signed by the artist on the ride arm.",
       "label": 0
     },
     {
-      "text1": "Nothing doing, said Julius.",
-      "text2": "Julius was now discouraged.",
+      "text1": "The standards provide the overall framework for establishing and maintaining internal control and for identifying and addressing major performance and management challenges and areas at greatest risk of fraud, waste, abuse, and mismanagement.",
+      "text2": "The standards give a framework for external controls.",
       "label": 0
     },
     {
-      "text1": "GAO's recommendations and audit findings also resulted in or contributed to many improvements in the effectiveness and efficiency of government operations and services during fiscal year 2000.",
-      "text2": "Audits were used for compliance, and did not result in greater operational efficiency.",
+      "text1": "If the gamblers play along with this commission's timid recommendations, they'll be safe for another 20 years.",
+      "text2": "The gamblers are currently on the outs, so they should follow the recommendations.",
       "label": 0
     },
     {
-      "text1": "His heir James VI lived at the castle in the 1680s, when the paint was barely dry.",
-      "text2": "The paint was flaking due to age in 1680.",
+      "text1": "that's always a good thing vegetable trays always go over so well because i think people get tired of eating junk i mean i think they like to have healthy stuff too you know it's",
+      "text2": "Everyone would prefer a vegetable tray over junk food if given the choice.",
       "label": 0
     },
     {
-      "text1": "Interventions and the staff who conducts them need to be flexible and creative in adapting to situations created by the injuries and the noisy and often chaotic nature of emergency settings.",
-      "text2": "Interventions and the staff conducting them need to remain rigid and focused in the face of injuries and the chaos of emergency situations.",
+      "text1": "Suppose further that they can do this for 1.5 cents per piece and that this saves the Postal Service 4 cents per piece.",
+      "text2": "They can do this for 6 cents, which the Postal Service can do cheaper.",
       "label": 0
     },
     {
-      "text1": "Oh! said Tuppence thoughtfully.",
-      "text2": "Tuppence thought before speaking as not to offend anyone.",
+      "text1": "to do yeah and it's it's great while they're really little but as they get older",
+      "text2": "They are huge for their age, but the growing will stop soon.",
       "label": 0
     },
     {
-      "text1": "Thorn led them into a copse of dead trees, thick branches clutching for life in a canyon that provided none.",
-      "text2": "The canyon was filled with lively green trees with bountiful branches.",
+      "text1": "deposited them for us",
+      "text2": "He took them from himself.",
       "label": 0
     },
     {
-      "text1": "Because combination of SCR and FGD are expected to have high mercury removal due to the SCR and FGD systems, those facilities that are so equipped are not expected to add ACI systems.",
-      "text2": "The mercury removal will be at 100 percent rate.",
+      "text1": "uh-huh i don't you know i don't change my own oil so i don't i don't uh don't have that problem",
+      "text2": "I only let a mechanic change the oil in my car.",
       "label": 0
     },
     {
-      "text1": "Representatives from the agencies included in our review also indicated a few areas in which standardization, or at least more coordination, among agencies in this area could be helpful.",
-      "text2": "The agencies are also represented by McDonalds.",
+      "text1": "Questions or comments about GAO's Agency Protocols may be directed to Mr. Gene L. Dodaro, Chief Operating Officer, at (202) 512-5600 or via e-mail at AgencyProtocols@gao.gov.",
+      "text2": "Gene Dodaro has been the CEO for five years.",
       "label": 0
     },
     {
-      "text1": "yeah they talk talks with that's true that's true",
-      "text2": "They talk with only one company.",
+      "text1": "(Heston's softness on gun rights was an issue in his NRA election, but he has quieted critics by backing off his earlier statements and hewing to the NRA's official line.",
+      "text2": "Heston was embarrassed by his own gun rights statements.",
       "label": 0
     },
     {
-      "text1": "Eleven billion dollars in shareholder value is $11 billion.",
-      "text2": "The shareholder value has increased this year.",
+      "text1": "yeah the subject would die before they had to run all the tests that they need  that's it would be an exhausted test uh how about the the area of role models or roles as it were when you",
+      "text2": "You died before you finished the test?",
       "label": 0
     },
     {
-      "text1": "Investigative reporters strive for truth, but political reporters strive for balance.",
-      "text2": "Investigative reporters get paid more than political reporters.",
+      "text1": "The more fantastic grow the evening gowns on the runway, the more uniform grows the garb of the crowds on the subway.",
+      "text2": "People enjoy seeing the evening gowns on the runway.",
       "label": 0
     },
     {
-      "text1": "Postal Service and all other national posts is that they provide service to every address in the countries they serve.",
-      "text2": "Not every national post service provides service to every possible address.",
+      "text1": "If a state does not participate (or is not certified by the Department of Labor as meeting Federal requirements): (i) the Federal unemployment tax is levied within the state at its maximum rate, (ii) the system does not pay any unemployment compensation benefits within the state, and (iii) the Federal Government provides no grants to state governments to pay for the costs of administration.",
+      "text2": "If a state does not participate, the federal government can only disallow grants.",
       "label": 0
     },
     {
-      "text1": "Kyoto's two biggest flea markets are held at Toji temple (the 21st of each month) and at Kitano Temmangu shrine (25th), but there are many others.",
-      "text2": "The people of Kyoto love flea markets more than going to the movies.",
+      "text1": "Several studies have found a significant effect of age on the value of mortality risk reductions expressed by citizens in the United Kingdom (Jones-Lee et al.",
+      "text2": "These studies took a total of three months.",
       "label": 0
     },
     {
-      "text1": "It covers most but not all close Senate and gubernatorial races.)",
-      "text2": "The radio station covers most close gubernatorial races",
+      "text1": "I must walk a bit, I think.",
+      "text2": "I'm going to go for a walk for about half an hour.",
       "label": 0
     },
     {
-      "text1": "Nearby, the fine National Maritime Museum in Allenby Street charts 5,000 years of Red Sea and Mediterranean seafaring, while the Clandestine Immigration and Naval Museum documents the defiance of the British blockade to smuggle immigrants into Israel.",
-      "text2": "The National Maritime Museum was built in 1978 by the British.",
+      "text1": "Completed in 1436, it measures 45.5 m (149 ft) in diameter.",
+      "text2": "It was never completed.",
       "label": 0
     },
     {
-      "text1": "Francisco de Goya painted a court portrait of the next king, Charles IV, in which he looked strangely like George Washington.",
-      "text2": "de Goya painted a portrait that made him look strange and angered him.",
+      "text1": "He was sure of it but he could not say why.",
+      "text2": "He was not sure of anything.",
       "label": 0
     },
     {
-      "text1": "the art's in humanity should be privately funded",
-      "text2": "Arts should get funding from the public, but not the government.",
+      "text1": "right and then how would you feel afterwards when you came up negative and you know your supervisor has accused you of using drugs",
+      "text2": "I'm fine with drug tests as long as they can also be used to exonerate the innocent.",
       "label": 0
     },
     {
-      "text1": "Yet surely it could not be!",
-      "text2": "It was absolutely possible.",
+      "text1": "well and now the way they're uh treating those Kurds is that what they its terrible and we've just kind of backed off i don't understand that why we",
+      "text2": "We wish we could help those Kurds.",
       "label": 0
     },
     {
-      "text1": "I've felt disappointed about places I haven't even seen.",
-      "text2": "I have to visit a place first before I can judge it.",
+      "text1": "The people that are going to win will always be somewhat uncertain of their gain, whereas the people who will lose are absolutely sure of what they are going to lose, says Clinton.",
+      "text2": "Clinton says that losers will be exiled to the moon.",
       "label": 0
     },
     {
-      "text1": "yeah yeah just like VCRs too  yeah i thought of that too that if i wait it'll get a lot less expensive and i can do without it for a while",
-      "text2": "I thought I would just buy now and not care about the cost.",
+      "text1": "Their restaurants feature internationally renowned chefs who create dishes using some of the finest meat, game, and fish in the world.",
+      "text2": "Meat, game, and fish are not incorporated into the dishes.",
       "label": 0
     },
     {
-      "text1": "Yet she almost went back to put the curtain aside and make sure… .",
-      "text2": "She was unsure of what to do",
+      "text1": "They developed it in order to harvest the sponges that grew abundantly in the seas all around the island.",
+      "text2": "Sponges couldnt be harvested because of sharks in the waters around the island.",
       "label": 0
     },
     {
-      "text1": "Some of the agencies' web sites currently provide for such hypertext links, but not for comments on rules.",
-      "text2": "The web sites need to be updated to allow comments on rules.",
+      "text1": "You are our best hope.",
+      "text2": "We have no other options.",
       "label": 0
     },
     {
-      "text1": "wasn't a house really it was it was more like a",
-      "text2": "It was an apartment.",
+      "text1": "The mystery surrounding its origins does nothing to undermine the power of its simplicity.",
+      "text2": "There are many things that are mysterious about its origin like how it got there.",
       "label": 0
     },
     {
-      "text1": "A popular surfing beach adjoins the lagoon.",
-      "text2": "This is a very popular water skiing spot.",
+      "text1": "He was in the middle of conveying a particularly choice morsel of Sole a la Jeanette to his mouth, when he caught sight of Julius entering the room.",
+      "text2": "Julius was eating with him.",
       "label": 0
     },
     {
-      "text1": "The heads of the many fashionably attired women present were busily laid together, and their whispers became so loud that the judge angrily threatened to have the court cleared if there was not immediate silence.",
-      "text2": "The judge pointed at the loud women and demanded immediate silence.",
+      "text1": "Greuze's task was certainly something to dwell on.",
+      "text2": "The task was mundane.",
       "label": 0
     },
     {
-      "text1": "yeah i i think you really have to be disciplined",
-      "text2": "It really doesn't require much discipline to do.",
+      "text1": "Enclosed is our assessment of the Food and Drug Administration's compliance with the procedural steps required by sections 801(a)(1)(B)(i) through (iv) of title 5 with respect to the rule.",
+      "text2": "Our findings have found that the FDA's sections 801(a)(1)(B)(i) through (iv) of title 5 do not exist.",
       "label": 0
     },
     {
-      "text1": "if you see people who are severely injured it's very very badly they lose control of body functions they thrash around they scream you know uh it's just a very very bad thing and they never present that even the movies that want to show violence as real they don't really show you what happens with that real violence",
-      "text2": "Violence in real life is exactly the same as it is in movies.",
+      "text1": "In 1999, it is estimated that LSC grantees received approximately $10.",
+      "text2": "LSC grantees today receive many times what they did in 1999.",
       "label": 0
     },
     {
-      "text1": "The NYT's Styles section reports a new trend in  the use of kids as social stepping stones.",
-      "text2": "The latest trend is Mothers completely skipping the social circle of their peers.",
+      "text1": "Each of them had a small desert horse save Thorn and the Kal who rode larger stallions of dusty red.",
+      "text2": "Thorn and Kal had never been on a horse.",
       "label": 0
     },
     {
-      "text1": "um so that's limiting i tend to use it to log into the the mainframe at work",
-      "text2": "It has no other function other than connecting to the mainframe.",
+      "text1": "but we don't do a whole lot since it's a rental property we've added a few things like around the patio and i've tried to get a few shrubs to grow around here but since it's you know rental we haven't spent a whole lot of time and effort in trying to do landscaping we just kind of maintain what's here and mow the grass and trim and that kind of stuff when it's needed",
+      "text2": "Home Depot has great sales for home landscaping.",
       "label": 0
     },
     {
-      "text1": "American expatriates such as Ernest Heming?­way, F. Scott Fitzgerald, Gertrude Stein, John Dos Passos, and Theodore Dreiser also contributed to the free-living mystique.",
-      "text2": "American expatriates didn't realized that they were contributing to the free-living mystique.",
+      "text1": "Before Jon could react, San'doro was on the move.",
+      "text2": "San'doro was heading toward the battle.",
       "label": 0
     },
     {
-      "text1": "and maybe and i knew i wanted to be in engineering so i was looking for a good engineering school so i ended up going to Tech in Lubbock",
-      "text2": "Tech in Lubbock was my first choice for college.",
+      "text1": "This one, opened in 1997 in a historic 1920s building, is right on museum mile, just a few paces from the Reina Sof?­a and a nice walk from the Prado.",
+      "text2": "Opened in 1997, the building is of the latest modern technology.",
       "label": 0
     },
     {
-      "text1": "As a final step, these estimated VSL values are multiplied by the appropriate adjustment factors to account for changes in WTP over time, as outlined above.",
-      "text2": "Estimated VSL values are left alone.",
+      "text1": "Prepared  Innovative Strategies and Economics Group, Office of Air Quality Planning and Standards, Research Triangle Park, NC December.",
+      "text2": "NC December does not exist.",
       "label": 0
     },
     {
-      "text1": "To receive facsimile copies of the daily list or any list from the past 30 days, please call (202) 5126000 using a touch tone phone.",
-      "text2": "Call (202) 5126000 if you want to receive information on the TV show.",
+      "text1": "Are the techniques of data gathering and data processing explictly described?",
+      "text2": "The techniques of data gathering and data processing are clearly defined.",
       "label": 0
     }
   ]
