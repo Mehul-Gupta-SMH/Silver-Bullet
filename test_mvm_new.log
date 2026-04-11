@@ -1,0 +1,1524 @@
+Mode: model-vs-model  |  Data: data/model-vs-model/  |  Checkpoint: models\model-vs-model\best.pth
+  architecture : Conv2D (num_features=19, spatial_size=32, hidden_dim=256, length_cond=False)
+  feature keys : 19
+Loaded 336 test pairs
+[SemanticCache] pre-encoding 260 unique sentences across all uncached pairs…
+Pre-encoding models:   0%|          | 0/1 [00:00<?, ?it/s][INFO] Loading model mixedbread-ai/mxbai-embed-large-v1 into cache...
+
+Batches:   0%|          | 0/9 [00:00<?, ?it/s][A
+Batches:  11%|█         | 1/9 [00:02<00:17,  2.19s/it][A
+Batches:  22%|██▏       | 2/9 [00:04<00:14,  2.01s/it][A
+Batches:  33%|███▎      | 3/9 [00:05<00:10,  1.78s/it][A
+Batches:  44%|████▍     | 4/9 [00:07<00:08,  1.64s/it][A
+Batches:  56%|█████▌    | 5/9 [00:08<00:05,  1.50s/it][A
+Batches:  67%|██████▋   | 6/9 [00:09<00:04,  1.49s/it][A
+Batches:  78%|███████▊  | 7/9 [00:10<00:02,  1.36s/it][A
+Batches:  89%|████████▉ | 8/9 [00:11<00:01,  1.18s/it][ABatches: 100%|██████████| 9/9 [00:11<00:00,  1.30s/it]
+Pre-encoding models: 100%|██████████| 1/1 [00:16<00:00, 16.67s/it]Pre-encoding models: 100%|██████████| 1/1 [00:16<00:00, 16.67s/it]
+[SemanticCache] done — embedding cache now covers 260 sentence-model entries.
+[EntityCache] pre-running NER on 260 unique sentences…
+Entity pre-encoding:   0%|          | 0/5 [00:00<?, ?it/s]
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s][AFetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 1275.86it/s]
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Entity pre-encoding:  20%|██        | 1/5 [00:07<00:31,  7.76s/it]Entity pre-encoding:  40%|████      | 2/5 [00:10<00:14,  4.80s/it]Entity pre-encoding:  60%|██████    | 3/5 [00:13<00:07,  3.97s/it]Entity pre-encoding:  80%|████████  | 4/5 [00:16<00:03,  3.58s/it]Entity pre-encoding: 100%|██████████| 5/5 [00:16<00:00,  2.36s/it]Entity pre-encoding: 100%|██████████| 5/5 [00:16<00:00,  3.33s/it]
+Some weights of the model checkpoint at FacebookAI/roberta-large-mnli were not used when initializing RobertaForSequenceClassification: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
+- This IS expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+[EntityCache] done — entity cache now covers 260 sentences.
+[NLICache] pre-scoring 153 unique sentence pairs…
+NLI pre-scoring:   0%|          | 0/3 [00:00<?, ?it/s]NLI pre-scoring:  33%|███▎      | 1/3 [00:08<00:17,  8.97s/it]NLI pre-scoring:  67%|██████▋   | 2/3 [00:18<00:09,  9.35s/it]NLI pre-scoring: 100%|██████████| 3/3 [00:21<00:00,  6.25s/it]NLI pre-scoring: 100%|██████████| 3/3 [00:21<00:00,  7.05s/it]
+[NLICache] done — pair cache now covers 153 sentence pairs.
+Extracting features:   0%|          | 0/336 [00:00<?, ?it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models:  50%|█████     | 1/2 [00:03<00:03,  3.96s/it][A
+Encoding with models: 100%|██████████| 2/2 [00:11<00:00,  6.13s/it][AEncoding with models: 100%|██████████| 2/2 [00:11<00:00,  5.80s/it]
+[INFO] Loading model mixedbread-ai/mxbai-embed-large-v1 into cache...
+[INFO] Loading model Qwen/Qwen3-Embedding-0.6B into cache...
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.77it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.77it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 63.64it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 173.44it/s]
+Extracting features:   0%|          | 1/336 [00:52<4:53:57, 52.65s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.39it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.39it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   1%|          | 2/336 [00:53<2:02:11, 21.95s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.61it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.61it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   1%|          | 4/336 [00:53<45:56,  8.30s/it]  
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.78it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.78it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.27it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.27it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   2%|▏         | 7/336 [00:53<19:56,  3.64s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.28it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.28it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.26it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.26it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   2%|▏         | 8/336 [00:54<16:01,  2.93s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.17it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.17it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  3.16it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  3.16it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   3%|▎         | 9/336 [00:55<13:29,  2.48s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.85it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.85it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.50it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.50it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   4%|▍         | 13/336 [00:55<06:02,  1.12s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.46it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.64it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.64it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   4%|▍         | 14/336 [00:56<05:22,  1.00s/it]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.51it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.51it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   5%|▌         | 17/336 [00:56<03:23,  1.56it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.56it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.07it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.07it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   5%|▌         | 18/336 [00:56<03:10,  1.67it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.65it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.65it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.92it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.92it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   6%|▋         | 21/336 [00:57<02:13,  2.36it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   7%|▋         | 25/336 [00:57<01:27,  3.57it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.52it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.52it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.57it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.57it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   8%|▊         | 26/336 [00:58<01:31,  3.41it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.97it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.97it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.56it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   8%|▊         | 28/336 [00:58<01:24,  3.65it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.36it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.36it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.80it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.80it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+Extracting features:   9%|▊         | 29/336 [00:59<01:28,  3.46it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.61it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.61it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.28it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.28it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   9%|▉         | 30/336 [00:59<01:32,  3.29it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.60it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.60it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:   9%|▉         | 31/336 [00:59<01:35,  3.19it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.52it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.52it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.31it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.31it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  10%|▉         | 32/336 [01:00<01:38,  3.07it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.48it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.48it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.66it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.66it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  10%|▉         | 33/336 [01:00<01:42,  2.95it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.38it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.38it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.55it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.55it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  10%|█         | 34/336 [01:00<01:45,  2.85it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.97it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.97it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  11%|█         | 36/336 [01:01<01:23,  3.59it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.33it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.33it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  11%|█▏        | 38/336 [01:01<01:11,  4.14it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.50it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.50it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  12%|█▏        | 39/336 [01:02<01:20,  3.69it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.17it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.17it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.83it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.83it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  12%|█▏        | 41/336 [01:02<01:08,  4.33it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.08it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.08it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.68it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.68it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  13%|█▎        | 43/336 [01:02<01:06,  4.40it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.71it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.65it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.65it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  14%|█▍        | 47/336 [01:03<00:52,  5.47it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.01it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.01it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.03it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.03it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+Extracting features:  14%|█▍        | 48/336 [01:03<01:11,  4.02it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.37it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.37it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.89it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.89it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  15%|█▍        | 50/336 [01:04<01:03,  4.47it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.11it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.11it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  16%|█▋        | 55/336 [01:04<00:41,  6.73it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.05it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.05it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  17%|█▋        | 57/336 [01:05<00:46,  5.99it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  17%|█▋        | 58/336 [01:05<00:54,  5.13it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.63it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.63it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  18%|█▊        | 60/336 [01:05<00:53,  5.12it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.73it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.73it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.73it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.73it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  18%|█▊        | 61/336 [01:06<01:02,  4.42it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.54it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  19%|█▉        | 63/336 [01:06<00:59,  4.56it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.63it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.63it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.72it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.72it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  19%|█▉        | 64/336 [01:07<01:08,  3.97it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.34it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.34it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.09it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.09it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 63.85it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  20%|█▉        | 67/336 [01:07<00:55,  4.87it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.56it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  20%|██        | 68/336 [01:07<01:03,  4.19it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  21%|██        | 69/336 [01:08<01:11,  3.75it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.12it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.12it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.04it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.04it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  21%|██        | 71/336 [01:08<01:01,  4.29it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.91it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.66it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  24%|██▎       | 79/336 [01:09<00:29,  8.86it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.32it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.32it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.67it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.67it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+Extracting features:  24%|██▍       | 80/336 [01:09<00:44,  5.81it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.07it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.07it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.42it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.42it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 498.25it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  25%|██▍       | 83/336 [01:10<00:44,  5.74it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.08it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.08it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  25%|██▌       | 84/336 [01:10<00:50,  5.00it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.06it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.06it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.68it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.68it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  27%|██▋       | 90/336 [01:11<00:32,  7.57it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.06it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.06it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.08it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.08it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  29%|██▉       | 97/336 [01:11<00:25,  9.24it/s]Extracting features:  32%|███▏      | 107/336 [01:11<00:13, 16.51it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.82it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.82it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.59it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.59it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/3 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 3/3 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.89it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.89it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.42it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.42it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  33%|███▎      | 111/336 [01:12<00:24,  9.15it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.75it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.75it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.51it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.51it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.96it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.96it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.22it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.22it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  34%|███▍      | 114/336 [01:13<00:29,  7.49it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.74it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  35%|███▍      | 117/336 [01:14<00:29,  7.52it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.51it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.51it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.63it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.63it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  35%|███▌      | 119/336 [01:14<00:31,  6.92it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.99it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.99it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.38it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.38it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  37%|███▋      | 123/336 [01:15<00:31,  6.77it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.46it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.47it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.47it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  37%|███▋      | 125/336 [01:15<00:36,  5.79it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.04it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.04it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  38%|███▊      | 129/336 [01:16<00:34,  6.07it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.31it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.31it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.67it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.67it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  39%|███▉      | 132/336 [01:16<00:32,  6.34it/s]Extracting features:  43%|████▎     | 143/336 [01:16<00:13, 14.13it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.56it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.70it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.47it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.47it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.38it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.38it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.58it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.58it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.68it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.69it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.69it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.67it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.67it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  44%|████▍     | 147/336 [01:18<00:28,  6.65it/s]Extracting features:  46%|████▋     | 156/336 [01:18<00:16, 11.05it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.19it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.19it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.00it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.00it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  48%|████▊     | 161/336 [01:19<00:16, 10.64it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.40it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.40it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.54it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.60it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.60it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  49%|████▉     | 165/336 [01:19<00:20,  8.15it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 63.39it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.42it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.42it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  50%|█████     | 168/336 [01:20<00:27,  6.18it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.29it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.29it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.77it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.77it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 652.91it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  51%|█████     | 170/336 [01:21<00:28,  5.80it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.17it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.17it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.07it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.07it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 729.70it/s]
+Extracting features:  52%|█████▏    | 176/336 [01:21<00:22,  7.14it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.81it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.79it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.22it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.22it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  53%|█████▎    | 179/336 [01:22<00:22,  6.91it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.17it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.17it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.54it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 1002.46it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 874.72it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  54%|█████▍    | 182/336 [01:22<00:23,  6.50it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.37it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.37it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.87it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.87it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  55%|█████▍    | 184/336 [01:23<00:28,  5.34it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.25it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.25it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.41it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.41it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  56%|█████▌    | 188/336 [01:24<00:25,  5.78it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.54it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.29it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.29it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 570.96it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  57%|█████▋    | 192/336 [01:24<00:24,  5.77it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.91it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.82it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.82it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 498.49it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  58%|█████▊    | 194/336 [01:25<00:30,  4.72it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.99it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.99it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.02it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 570.81it/s]
+Extracting features:  59%|█████▉    | 198/336 [01:26<00:26,  5.18it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.56it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.63it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.63it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  60%|█████▉    | 200/336 [01:26<00:28,  4.73it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.51it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.51it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.76it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  61%|██████    | 204/336 [01:27<00:24,  5.37it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.43it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.32it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.26it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  5.26it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  62%|██████▏   | 208/336 [01:28<00:24,  5.16it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.00it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 1006.31it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  62%|██████▏   | 209/336 [01:28<00:27,  4.58it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.92it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.92it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.58it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.54it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 1001.51it/s]
+Extracting features:  63%|██████▎   | 213/336 [01:29<00:22,  5.36it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.20it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.20it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.76it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  6.76it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<00:00, 1981.72it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+Extracting features:  64%|██████▎   | 214/336 [01:29<00:28,  4.29it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.79it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.79it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.07it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.07it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  64%|██████▍   | 215/336 [01:30<00:32,  3.75it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.80it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.80it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.92it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.92it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 1015.82it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  64%|██████▍   | 216/336 [01:30<00:34,  3.44it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.39it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.39it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.19it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.19it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  65%|██████▍   | 218/336 [01:31<00:32,  3.60it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.58it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.58it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.94it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  9.94it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 1005.35it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 1001.74it/s]
+Extracting features:  65%|██████▌   | 220/336 [01:31<00:31,  3.64it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.22it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.22it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.91it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 45.74it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  66%|██████▌   | 221/336 [01:32<00:33,  3.46it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  4.58it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  4.58it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.24it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.24it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/3 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 3/3 [00:00<?, ?it/s]
+Extracting features:  66%|██████▋   | 223/336 [01:32<00:35,  3.19it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.54it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.49it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.49it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  67%|██████▋   | 226/336 [01:33<00:28,  3.90it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.76it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.76it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.20it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.20it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  68%|██████▊   | 227/336 [01:33<00:32,  3.32it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.62it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.62it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.44it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  68%|██████▊   | 228/336 [01:34<00:37,  2.91it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.71it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  68%|██████▊   | 229/336 [01:34<00:37,  2.84it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.90it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.90it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.94it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.94it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  69%|██████▉   | 232/336 [01:35<00:27,  3.80it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.93it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.93it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.91it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  69%|██████▉   | 233/336 [01:35<00:32,  3.14it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.95it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.95it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.12it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.12it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  72%|███████▏  | 243/336 [01:36<00:12,  7.71it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.06it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.06it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.55it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/3 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 3/3 [00:00<?, ?it/s]
+Extracting features:  73%|███████▎  | 244/336 [01:36<00:15,  5.97it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.05it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.05it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.63it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.63it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  74%|███████▍  | 250/336 [01:37<00:10,  8.01it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.85it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.85it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.03it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.03it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  75%|███████▌  | 252/336 [01:37<00:12,  6.75it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.62it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.62it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.81it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.81it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 497.31it/s]
+Extracting features:  75%|███████▌  | 253/336 [01:38<00:14,  5.81it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.91it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.91it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.71it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.71it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  76%|███████▌  | 255/336 [01:38<00:14,  5.45it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.57it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.57it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.42it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.42it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<00:00, 996.75it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  76%|███████▋  | 257/336 [01:39<00:14,  5.33it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.99it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.99it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  77%|███████▋  | 259/336 [01:39<00:14,  5.20it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.03it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.03it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.59it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.59it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  78%|███████▊  | 262/336 [01:39<00:12,  5.93it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.03it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.03it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.62it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.62it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  79%|███████▊  | 264/336 [01:40<00:12,  5.82it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.82it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.82it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.12it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.12it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  80%|███████▉  | 268/336 [01:40<00:09,  6.84it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.94it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.94it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.06it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.06it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  80%|████████  | 270/336 [01:40<00:09,  6.63it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.70it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.70it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.61it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.06it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  81%|████████  | 272/336 [01:41<00:11,  5.42it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.48it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.48it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.45it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.45it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  82%|████████▏ | 277/336 [01:41<00:08,  7.16it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.56it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.56it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+  0%|          | 0/2 [00:00<?, ?it/s][A100%|██████████| 2/2 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/2 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 2/2 [00:00<?, ?it/s]
+Extracting features:  84%|████████▍ | 283/336 [01:42<00:05,  9.16it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.35it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.35it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.48it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.48it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  85%|████████▍ | 284/336 [01:42<00:07,  6.93it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.57it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.57it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.36it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.36it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<00:00, 947.01it/s]
+Extracting features:  85%|████████▍ | 285/336 [01:43<00:08,  5.72it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.94it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.94it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.69it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.69it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  86%|████████▌ | 289/336 [01:43<00:06,  7.10it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.76it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.76it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.05it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  88%|████████▊ | 295/336 [01:44<00:04,  9.55it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  89%|████████▉ | 299/336 [01:44<00:03,  9.48it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.95it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.95it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.98it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.98it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  90%|████████▉ | 301/336 [01:44<00:04,  8.37it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.95it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.95it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.53it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  90%|████████▉ | 302/336 [01:45<00:05,  6.70it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.49it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 10.49it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.47it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  92%|█████████▏| 308/336 [01:45<00:03,  8.73it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.25it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.25it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.45it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.45it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  93%|█████████▎| 311/336 [01:46<00:03,  8.21it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.01it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.01it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.97it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 13.97it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  93%|█████████▎| 312/336 [01:46<00:03,  6.70it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.53it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 14.02it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  94%|█████████▍| 316/336 [01:46<00:02,  7.71it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.02it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  7.02it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.36it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00,  8.36it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+  0%|          | 0/3 [00:00<?, ?it/s][A100%|██████████| 3/3 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/3 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 3/3 [00:00<?, ?it/s]
+Extracting features:  94%|█████████▍| 317/336 [01:47<00:03,  5.34it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.44it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.46it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  96%|█████████▌| 322/336 [01:47<00:02,  6.99it/s]
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.19it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 12.19it/s]
+
+Encoding with models:   0%|          | 0/2 [00:00<?, ?it/s][A
+Encoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.80it/s][AEncoding with models: 100%|██████████| 2/2 [00:00<00:00, 11.80it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+  0%|          | 0/1 [00:00<?, ?it/s][A100%|██████████| 1/1 [00:00<?, ?it/s]
+
+Entity maps:   0%|          | 0/1 [00:00<?, ?it/s][AEntity maps: 100%|██████████| 1/1 [00:00<?, ?it/s]
+Extracting features:  99%|█████████▉| 334/336 [01:48<00:00, 12.45it/s]Extracting features: 100%|██████████| 336/336 [01:48<00:00,  3.10it/s]
+Feature tensor shape : torch.Size([336, 19, 32, 32])
+Labels shape         : torch.Size([336, 1])
+Computing bootstrap confidence intervals (1000 resamples)...
+Computing MC Dropout prediction intervals (50 passes)...
+
+Test report saved to: test_reports\test_report_20260411_133144.json
+
+Test Results:
+  Accuracy       : 0.8185
+  ROC-AUC        : 0.8892
+  AUPRC          : 0.8533
+  MCC            : 0.6445
+  Cohen's Kappa  : 0.6385
+  Brier Score    : 0.1333  (lower = better calibration)
+  Log Loss       : 0.4254
+  KS Statistic   : 0.6595  (p=0.0000)
+  Optimal thresh : 0.5263  ->  F1=0.8274  P=0.7853  R=0.8742
+  Score dist     : pos mean=0.787  neg mean=0.270
+
+95% Bootstrap Confidence Intervals (n=1000):
+  accuracy          : 0.8177  [0.7768, 0.8571]
+  roc_auc           : 0.8881  [0.8516, 0.9222]
+  auprc             : 0.8521  [0.7917, 0.9036]
+  brier_score       : 0.1341  [0.1097, 0.1600]
+  log_loss          : 0.4281  [0.3562, 0.5052]
+  mcc               : 0.6434  [0.5656, 0.7177]
+  cohen_kappa       : 0.6365  [0.5564, 0.7126]
+  f1                : 0.8200  [0.7761, 0.8617]
+
+MC Dropout (50 passes, 95% PI):
+  Mean prob std (epistemic uncertainty) : 0.0231
+  Mean interval width                   : 0.0838
+  High-uncertainty samples (std > 0.1)  : 0.6%
+
+Confusion Matrix:
+[[135  42]
+ [ 19 140]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+ Not Similar       0.88      0.76      0.82       177
+     Similar       0.77      0.88      0.82       159
+
+    accuracy                           0.82       336
+   macro avg       0.82      0.82      0.82       336
+weighted avg       0.83      0.82      0.82       336
+
+🏃 View run model-vs-model-test-20260411-133227 at: http://localhost:5000/#/experiments/4/runs/5ff6fb04bf1c4177ade3f09e0d8f9efd
+🧪 View experiment at: http://localhost:5000/#/experiments/4
+[MLflow] test metrics logged to experiment 'model-vs-model'
