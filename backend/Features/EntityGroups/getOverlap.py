@@ -1,11 +1,15 @@
 import difflib
+import json
 from collections import Counter
+from pathlib import Path
 
 from gliner import GLiNER
 from tqdm import tqdm
 
 from backend.feature_registry import ENTITY_TYPES, ENTITY_FEATURE_KEYS, ENTITY_VALUE_TYPES
 from backend.Postprocess.__addpad import resize_matrix
+
+_ENTITY_CACHE_FILE = Path("cache/entity_sentences.json")
 
 # ---------------------------------------------------------------------------
 # Per-type fuzzy match thresholds (v5.2)
@@ -109,6 +113,45 @@ class EntityMatch:
     # Sentence-level string cache: sentence → {entity_type: [string1, string2, ...]}
     # Populated alongside _entity_cache. Used for entity_value_prec/rec features.
     _entity_strings_cache: dict = {}
+    _disk_cache_loaded: bool = False
+
+    @classmethod
+    def load_entity_cache(cls) -> None:
+        """Load persisted GLiNER entity results from disk into the in-memory caches.
+
+        Called once per process (guarded by _disk_cache_loaded). After the first
+        training run every sentence is cached on disk; subsequent runs never
+        re-run GLiNER for sentences already seen.
+        """
+        if cls._disk_cache_loaded:
+            return
+        cls._disk_cache_loaded = True
+        if not _ENTITY_CACHE_FILE.exists():
+            return
+        try:
+            raw = json.loads(_ENTITY_CACHE_FILE.read_text(encoding="utf-8"))
+            for sent, payload in raw.items():
+                cls._entity_cache[sent] = payload["counts"]
+                cls._entity_strings_cache[sent] = payload["strings"]
+            print(f"[EntityCache] loaded {len(cls._entity_cache)} persisted sentence results from disk")
+        except Exception as e:
+            print(f"[EntityCache] warning: could not load persistent cache ({e}) — starting fresh")
+
+    @classmethod
+    def save_entity_cache(cls) -> None:
+        """Persist current entity caches to disk."""
+        _ENTITY_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        serialisable = {
+            sent: {
+                "counts":  cls._entity_cache.get(sent, {}),
+                "strings": cls._entity_strings_cache.get(sent, {}),
+            }
+            for sent in cls._entity_cache
+        }
+        _ENTITY_CACHE_FILE.write_text(
+            json.dumps(serialisable, ensure_ascii=False),
+            encoding="utf-8",
+        )
 
     def __init__(
         self,
@@ -154,6 +197,8 @@ class EntityMatch:
         Entity types are driven by ENTITY_TYPES from feature_registry.
         Long texts are truncated to _MAX_NER_CHARS before inference.
         """
+        EntityMatch.load_entity_cache()
+
         new_texts = [t for t in texts if t not in EntityMatch._entity_cache]
 
         if new_texts:
@@ -185,6 +230,8 @@ class EntityMatch:
                     if ent["label"] in strings:
                         strings[ent["label"]].append(ent["text"])
                 EntityMatch._entity_strings_cache[text] = strings
+
+            EntityMatch.save_entity_cache()
 
         return [EntityMatch._entity_cache[t] for t in texts]
 

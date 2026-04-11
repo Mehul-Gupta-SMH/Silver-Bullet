@@ -49,9 +49,13 @@ EntityMatch or RelationGrounding (different model name).
 from __future__ import annotations
 
 import difflib
+import json
+from pathlib import Path
 from typing import List
 
 from backend.Postprocess.__addpad import resize_matrix
+
+_RELEX_CACHE_FILE = Path("cache/relex_triplets.json")
 
 # ---------------------------------------------------------------------------
 # Relation types (zero-shot labels passed to the model at inference time)
@@ -155,6 +159,32 @@ class RelexGrounding:
     _model_cache: dict = {}
     # Sentence-level triplet cache — keyed by sentence text
     _triplet_cache: dict[str, list[tuple[str, str, str]]] = {}
+    _disk_cache_loaded: bool = False
+
+    @classmethod
+    def load_triplet_cache(cls) -> None:
+        """Load persisted relation triplets from disk. Called once per process."""
+        if cls._disk_cache_loaded:
+            return
+        cls._disk_cache_loaded = True
+        if not _RELEX_CACHE_FILE.exists():
+            return
+        try:
+            raw = json.loads(_RELEX_CACHE_FILE.read_text(encoding="utf-8"))
+            for sent, triplets in raw.items():
+                cls._triplet_cache[sent] = [tuple(t) for t in triplets]
+            print(f"[RelexCache] loaded {len(cls._triplet_cache)} persisted sentence triplets from disk")
+        except Exception as e:
+            print(f"[RelexCache] warning: could not load persistent cache ({e}) — starting fresh")
+
+    @classmethod
+    def save_triplet_cache(cls) -> None:
+        """Persist current triplet cache to disk."""
+        _RELEX_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _RELEX_CACHE_FILE.write_text(
+            json.dumps(cls._triplet_cache, ensure_ascii=False),
+            encoding="utf-8",
+        )
 
     def __init__(self):
         self._reset_state()
@@ -192,6 +222,8 @@ class RelexGrounding:
         Returns:
             List of triplet lists, one per input sentence.
         """
+        RelexGrounding.load_triplet_cache()
+
         new_texts = [t for t in texts if t not in RelexGrounding._triplet_cache]
 
         if new_texts:
@@ -225,6 +257,8 @@ class RelexGrounding:
                 except Exception:
                     pass  # model inference failure → empty triplet list for this sentence
                 RelexGrounding._triplet_cache[trunc] = triplets
+
+            RelexGrounding.save_triplet_cache()
 
         return [RelexGrounding._triplet_cache.get(t[: self._MAX_CHARS], []) for t in texts]
 

@@ -1,16 +1,20 @@
+import json
 import torch
+from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from backend.Postprocess.__addpad import resize_matrix
+
+_NLI_CACHE_FILE = Path("cache/nli_pairs.json")
 
 
 class NLIWeights:
     # Shared across all instances — model loaded once per process
     _model_cache: dict = {}
     # Sentence-pair NLI cache: (sent1, sent2) → (entailment, neutral, contradiction)
-    # Populated by _prefill_nli_cache() in train.py before the per-pair training loop.
-    # Keyed on the raw sentence strings so pairs that repeat across training examples
-    # are never re-scored.
+    # Persisted to cache/nli_pairs.json between runs so RoBERTa is never re-run
+    # for a sentence pair that has already been scored.
     _pair_cache: dict = {}
+    _disk_cache_loaded: bool = False
 
     def __init__(self, MODEL_NAME: str = "FacebookAI/roberta-large-mnli"):
         self.ModelName = MODEL_NAME
@@ -23,6 +27,51 @@ class NLIWeights:
         self.phrase_list1 = None
         self.phrase_list2 = None
         self.comparison_weights = {}
+
+    # ------------------------------------------------------------------
+    # Persistent pair cache — load / save
+    # ------------------------------------------------------------------
+
+    @classmethod
+    def load_pair_cache(cls) -> None:
+        """Load persisted NLI pair scores from disk into _pair_cache.
+
+        Called once per process before the first scoring pass. Subsequent calls
+        are no-ops (guarded by _disk_cache_loaded). This means once a sentence
+        pair is scored it is never re-run, even across separate training runs.
+        """
+        if cls._disk_cache_loaded:
+            return
+        cls._disk_cache_loaded = True
+        if not _NLI_CACHE_FILE.exists():
+            return
+        try:
+            raw = json.loads(_NLI_CACHE_FILE.read_text(encoding="utf-8"))
+            for k, v in raw.items():
+                s1, s2 = json.loads(k)
+                cls._pair_cache[(s1, s2)] = tuple(v)
+            print(f"[NLICache] loaded {len(cls._pair_cache)} persisted sentence-pair scores from disk")
+        except Exception as e:
+            print(f"[NLICache] warning: could not load persistent cache ({e}) — starting fresh")
+
+    @classmethod
+    def save_pair_cache(cls) -> None:
+        """Persist current _pair_cache to disk.
+
+        Uses json.dumps([s1, s2]) as the key so there is no ambiguity from
+        separator characters inside sentences.
+        """
+        _NLI_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        serialisable = {
+            json.dumps([s1, s2]): list(v)
+            for (s1, s2), v in cls._pair_cache.items()
+        }
+        _NLI_CACHE_FILE.write_text(
+            json.dumps(serialisable, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+    # ------------------------------------------------------------------
 
     def __load_model__(self):
         tok = AutoTokenizer.from_pretrained(
@@ -47,6 +96,9 @@ class NLIWeights:
         }
 
     def __calc_weights__(self):
+        # Ensure the persistent cache is loaded (no-op after first call).
+        NLIWeights.load_pair_cache()
+
         # Collect all (p1, p2) pairs that are not yet in the pair cache.
         uncached = [
             (p1, p2)
@@ -82,6 +134,10 @@ class NLIWeights:
                             float(row[label_to_idx["neutral"]]),
                             float(row[label_to_idx["contradiction"]]),
                         )
+
+            # Persist new scores immediately so they survive even if training
+            # is interrupted before completing.
+            NLIWeights.save_pair_cache()
 
         # Reconstruct the n×m matrices from the cache (no model call needed).
         row_e_all, row_n_all, row_c_all = [], [], []
