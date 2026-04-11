@@ -269,7 +269,17 @@ short inputs.
 | 2026-04-11 | [x] | DATA: Adversarial augmentation — +200 hard negatives per mode (100 numeric-swap + 100 entity-swap) appended to train splits | `backend/augment_data.py`, `data/*/train.json` |
 | 2026-04-11 | [ ] | RETRAIN all 3 modes on augmented data (v5.4 + adversarial pairs) — v5.4 retrain already in progress | `models/*/best.pth` |
 
-<!-- CURSOR: 2026-04-11 — Adversarial augmentation done (+200/mode); v5.4 retrains running in background (bumjqc1oh); README update pending -->
+## Session 2026-04-11 (continued) — v5.4 retrain cycle
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-11 | [x] | EVAL CVG v5.4 (18 features): AUC 0.8510, Acc 75.7%, MCC 0.539, AUPRC 0.864 | `test_reports/test_report_20260411_162606.md` |
+| 2026-04-11 | [x] | DISCOVERY: bumjqc1oh background command trained RVG (18 feat) + MVM (19 feat) BEFORE entity_grounding_recall was added to their baskets — both are effectively v5.3 | `train_rvg.log`, `train_mvm.log` |
+| 2026-04-11 | [~] | RETRAIN RVG (19 feat) + MVM (20 feat) with correct v5.4 feature baskets — running in background (bo2ichd9y) | `models/reference-vs-generated/best.pth`, `models/model-vs-model/best.pth` |
+| 2026-04-11 | [ ] | EVAL RVG + MVM after retrain completes | `test_reports/` |
+| 2026-04-11 | [ ] | COMMIT all 3 v5.4 checkpoints + test logs; update PR #40 with final v5.4 numbers | `models/*/best.pth` |
+
+<!-- CURSOR: 2026-04-11 — v5.4 RVG+MVM retraining in background (bo2ichd9y); CVG done (AUC 0.8510); next: eval RVG+MVM, commit, update PR #40 -->
 
 ## Session 2026-04-10 — Feature pattern analysis
 
@@ -299,6 +309,37 @@ short inputs.
 | 2026-04-03 | [x] | DATA: Implement loaders for RAGTruth, FaithDial, ANLI-R3, WiCE, SummaC in fetch_external_data.py; field-name probing + graceful fallback for each | `backend/fetch_external_data.py` — commit 4305597 |
 | 2026-04-03 | [ ] | DATA: Run python -m backend.fetch_external_data to pull new datasets and rebuild splits | `data/`, `data/external/` — requires re-run after v4.1 training complete |
 | 2026-04-03 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset (after fetch_external_data re-run) — delete ./cache/ first to recompute features for new pairs | `models/*/`, `./cache/` |
+
+## Feature Roadmap — Active Learning Loop
+
+> **Idea:** Run the trained model on a large unlabeled corpus, find pairs where it's most uncertain
+> (probability 0.4–0.6), label them cheaply with the LLM jury, add to training data.
+> Active learning with the jury as the oracle — no new data collection, mine the model's own uncertainty.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-11 | [ ] | DESIGN: Define unlabeled corpus source — candidates: HuggingFace datasets (RAGTruth unannotated, MS-MARCO passages, OpenAssistant conversations); aim for 5k–10k pairs per mode | research |
+| 2026-04-11 | [ ] | IMPL: `backend/active_learn.py` — run `SimilarityPredictor.predict_batch()` on corpus, filter to uncertainty window (0.35–0.65), output candidate pairs JSON | `backend/active_learn.py` (new) |
+| 2026-04-11 | [ ] | IMPL: Auto-label uncertain pairs with `JuryEvaluator.evaluate_batch()` — jury score ≥ 0.6 → label=1, ≤ 0.4 → label=0, else discard | `backend/active_learn.py`, `backend/jury/jury_evaluator.py` |
+| 2026-04-11 | [ ] | INTEGRATE: Merge jury-labeled pairs into mode-specific train splits; retrain and compare AUC vs baseline | `data/*/train.json`, `backend/train.py` |
+
+---
+
+## Feature Roadmap — Structured Failure Codes on Every Inference
+
+> **Idea:** Every production inference returns not just a score but a machine-readable diagnosis:
+> `HALL-NUMERIC`, `ENT-SUBST`, `OMIT-KEY`, `FAITHFUL` etc. Downstream systems can route differently —
+> numeric errors to a fact-checker, entity substitutions to a knowledge graph lookup,
+> omissions to a retrieval re-run. SilverBullet is ~3 endpoints away from being this.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-11 | [ ] | DESIGN: Define failure code taxonomy — extend existing jury diagnostic codes (`HALL-NUMERIC`, `ENT-SUBST`, `NEG-FACT`, `OMIT-KEY`, `FAITHFUL`) to cover all feature clusters; each code maps to a CNN feature group and a jury question | `backend/jury/codes.py` (new) |
+| 2026-04-11 | [ ] | IMPL: Attach codes to breakdown endpoint — `POST /api/v1/predict/pair/breakdown` response gains `failure_codes: list[str]` field derived from feature scores (e.g. low `numeric_jaccard` → `HALL-NUMERIC`, low `entity_grounding_recall` → `ENT-SUBST`) | `backend/predict.py`, `backend/api/schemas.py`, `backend/api/main.py` |
+| 2026-04-11 | [ ] | IMPL: Jury endpoint also returns codes — `POST /api/v1/predict/pair/jury` response already has `reasoning` strings; extract codes from reasoning using the jury's own diagnostic code convention | `backend/jury/jury_evaluator.py`, `backend/api/schemas.py` |
+| 2026-04-11 | [ ] | FRONTEND: Render codes as colored chips in breakdown panel — `HALL-NUMERIC` red, `ENT-SUBST` orange, `OMIT-KEY` yellow, `FAITHFUL` green | `frontend/src/components/BreakdownPanel.tsx` |
+
+---
 
 ## Feature Roadmap — LLM-Jury Mode
 

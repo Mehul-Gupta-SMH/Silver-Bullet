@@ -1,56 +1,56 @@
 Mode: model-vs-model  |  Data: data/model-vs-model/  |  Checkpoint: models\model-vs-model\best.pth
-  architecture : Conv2D (num_features=19, spatial_size=32, hidden_dim=256, length_cond=False)
-  feature keys : 19
+  architecture : Conv2D (num_features=20, spatial_size=32, hidden_dim=256, length_cond=False)
+  feature keys : 20
 Loaded 336 test pairs
-Extracting features:   0%|          | 0/336 [00:00<?, ?it/s]Extracting features:   4%|▍         | 13/336 [00:00<00:02, 129.78it/s]Extracting features:   8%|▊         | 26/336 [00:00<00:02, 129.71it/s]Extracting features:  12%|█▏        | 40/336 [00:00<00:02, 125.26it/s]Extracting features:  16%|█▌        | 54/336 [00:00<00:02, 127.29it/s]Extracting features:  20%|█▉        | 67/336 [00:00<00:02, 124.10it/s]Extracting features:  24%|██▍       | 80/336 [00:00<00:02, 118.79it/s]Extracting features:  27%|██▋       | 92/336 [00:00<00:02, 117.30it/s]Extracting features:  31%|███       | 104/336 [00:00<00:02, 115.86it/s]Extracting features:  35%|███▍      | 116/336 [00:00<00:01, 116.26it/s]Extracting features:  38%|███▊      | 128/336 [00:01<00:01, 112.32it/s]Extracting features:  42%|████▏     | 140/336 [00:01<00:01, 114.21it/s]Extracting features:  46%|████▌     | 154/336 [00:01<00:01, 119.60it/s]Extracting features:  50%|████▉     | 167/336 [00:01<00:01, 119.99it/s]Extracting features:  54%|█████▎    | 180/336 [00:01<00:01, 119.44it/s]Extracting features:  57%|█████▋    | 193/336 [00:01<00:01, 120.24it/s]Extracting features:  61%|██████▏   | 206/336 [00:01<00:01, 121.37it/s]Extracting features:  65%|██████▌   | 219/336 [00:01<00:00, 121.92it/s]Extracting features:  69%|██████▉   | 232/336 [00:01<00:00, 121.46it/s]Extracting features:  73%|███████▎  | 245/336 [00:02<00:00, 120.13it/s]Extracting features:  77%|███████▋  | 258/336 [00:02<00:00, 120.97it/s]Extracting features:  81%|████████  | 272/336 [00:02<00:00, 119.35it/s]Extracting features:  85%|████████▍ | 285/336 [00:02<00:00, 120.48it/s]Extracting features:  89%|████████▊ | 298/336 [00:02<00:00, 122.18it/s]Extracting features:  93%|█████████▎| 312/336 [00:02<00:00, 119.19it/s]Extracting features:  97%|█████████▋| 325/336 [00:02<00:00, 120.02it/s]Extracting features: 100%|██████████| 336/336 [00:02<00:00, 120.09it/s]
-Feature tensor shape : torch.Size([336, 19, 32, 32])
+Extracting features:   0%|          | 0/336 [00:00<?, ?it/s]Extracting features:   4%|▎         | 12/336 [00:00<00:02, 119.40it/s]Extracting features:   8%|▊         | 26/336 [00:00<00:02, 126.86it/s]Extracting features:  12%|█▏        | 40/336 [00:00<00:02, 128.24it/s]Extracting features:  16%|█▌        | 53/336 [00:00<00:03, 92.53it/s] Extracting features:  20%|█▉        | 67/336 [00:00<00:02, 103.66it/s]Extracting features:  24%|██▍       | 81/336 [00:00<00:02, 112.16it/s]Extracting features:  28%|██▊       | 94/336 [00:00<00:02, 117.17it/s]Extracting features:  32%|███▏      | 107/336 [00:00<00:01, 120.12it/s]Extracting features:  36%|███▌      | 120/336 [00:01<00:01, 122.88it/s]Extracting features:  40%|███▉      | 133/336 [00:01<00:01, 124.78it/s]Extracting features:  44%|████▍     | 147/336 [00:01<00:01, 127.13it/s]Extracting features:  48%|████▊     | 161/336 [00:01<00:01, 128.52it/s]Extracting features:  52%|█████▏    | 175/336 [00:01<00:01, 129.65it/s]Extracting features:  56%|█████▋    | 189/336 [00:01<00:01, 129.01it/s]Extracting features:  60%|██████    | 202/336 [00:01<00:01, 127.81it/s]Extracting features:  64%|██████▍   | 216/336 [00:01<00:00, 128.89it/s]Extracting features:  68%|██████▊   | 230/336 [00:01<00:00, 129.61it/s]Extracting features:  72%|███████▏  | 243/336 [00:01<00:00, 129.49it/s]Extracting features:  76%|███████▌  | 256/336 [00:02<00:00, 127.43it/s]Extracting features:  80%|████████  | 270/336 [00:02<00:00, 128.61it/s]Extracting features:  85%|████████▍ | 284/336 [00:02<00:00, 129.41it/s]Extracting features:  89%|████████▊ | 298/336 [00:02<00:00, 130.55it/s]Extracting features:  93%|█████████▎| 312/336 [00:02<00:00, 132.20it/s]Extracting features:  97%|█████████▋| 326/336 [00:02<00:00, 132.35it/s]Extracting features: 100%|██████████| 336/336 [00:02<00:00, 125.06it/s]
+Feature tensor shape : torch.Size([336, 20, 32, 32])
 Labels shape         : torch.Size([336, 1])
 Computing bootstrap confidence intervals (1000 resamples)...
 Computing MC Dropout prediction intervals (50 passes)...
 
-Test report saved to: test_reports\test_report_20260408_113015.json
+Test report saved to: test_reports\test_report_20260411_175851.json
 
 Test Results:
-  Accuracy       : 0.8095
-  ROC-AUC        : 0.8895
-  AUPRC          : 0.8585
-  MCC            : 0.6248
-  Cohen's Kappa  : 0.6204
-  Brier Score    : 0.1408  (lower = better calibration)
-  Log Loss       : 0.4394
-  KS Statistic   : 0.6575  (p=0.0000)
-  Optimal thresh : 0.5659  ->  F1=0.8167  P=0.8355  R=0.7987
-  Score dist     : pos mean=0.656  neg mean=0.279
+  Accuracy       : 0.7798
+  ROC-AUC        : 0.8747
+  AUPRC          : 0.8149
+  MCC            : 0.5623
+  Cohen's Kappa  : 0.5543
+  Brier Score    : 0.1499  (lower = better calibration)
+  Log Loss       : 0.4641
+  KS Statistic   : 0.6558  (p=0.0000)
+  Optimal thresh : 0.3509  ->  F1=0.8280  P=0.7717  R=0.8931
+  Score dist     : pos mean=0.614  neg mean=0.213
 
 95% Bootstrap Confidence Intervals (n=1000):
-  accuracy          : 0.8091  [0.7649, 0.8512]
-  roc_auc           : 0.8888  [0.8521, 0.9213]
-  auprc             : 0.8583  [0.8016, 0.9071]
-  brier_score       : 0.1412  [0.1249, 0.1600]
-  log_loss          : 0.4403  [0.3969, 0.4871]
-  mcc               : 0.6242  [0.5391, 0.7056]
-  cohen_kappa       : 0.6189  [0.5348, 0.7026]
-  f1                : 0.8098  [0.7616, 0.8547]
+  accuracy          : 0.7790  [0.7351, 0.8185]
+  roc_auc           : 0.8739  [0.8346, 0.9100]
+  auprc             : 0.8158  [0.7422, 0.8816]
+  brier_score       : 0.1502  [0.1296, 0.1726]
+  log_loss          : 0.4652  [0.4069, 0.5273]
+  mcc               : 0.5605  [0.4735, 0.6363]
+  cohen_kappa       : 0.5519  [0.4657, 0.6290]
+  f1                : 0.7430  [0.6833, 0.7922]
 
 MC Dropout (50 passes, 95% PI):
-  Mean prob std (epistemic uncertainty) : 0.0380
-  Mean interval width                   : 0.1373
+  Mean prob std (epistemic uncertainty) : 0.0264
+  Mean interval width                   : 0.0960
   High-uncertainty samples (std > 0.1)  : 0.0%
 
 Confusion Matrix:
-[[135  42]
- [ 22 137]]
+[[154  23]
+ [ 51 108]]
 
 Classification Report:
               precision    recall  f1-score   support
 
- Not Similar       0.86      0.76      0.81       177
-     Similar       0.77      0.86      0.81       159
+ Not Similar       0.75      0.87      0.81       177
+     Similar       0.82      0.68      0.74       159
 
-    accuracy                           0.81       336
-   macro avg       0.81      0.81      0.81       336
-weighted avg       0.82      0.81      0.81       336
+    accuracy                           0.78       336
+   macro avg       0.79      0.77      0.78       336
+weighted avg       0.79      0.78      0.78       336
 
-🏃 View run model-vs-model-test-20260408-113056 at: http://localhost:5000/#/experiments/4/runs/aa0b2e3e2b0248f592dd924b58b587c4
+🏃 View run model-vs-model-test-20260411-175930 at: http://localhost:5000/#/experiments/4/runs/5c4ff849559a461a991868d6278c14a2
 🧪 View experiment at: http://localhost:5000/#/experiments/4
 [MLflow] test metrics logged to experiment 'model-vs-model'
