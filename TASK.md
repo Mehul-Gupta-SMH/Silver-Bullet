@@ -267,13 +267,14 @@ short inputs.
 | 2026-04-11 | [x] | EVAL MVM — AUC 0.8892 (+0.019 vs ~0.870 prev), Acc 81.9%, MCC 0.6445, F1 0.827 | `test_reports/test_report_20260411_133144.json` |
 | 2026-04-11 | [ ] | COMMIT MVM checkpoint + logs | `models/model-vs-model/best.pth`, `train_mvm_new.log`, `test_mvm_new.log` |
 
-<!-- CURSOR: 2026-04-11 — MVM eval done (AUC 0.8892, new best); commit MVM checkpoint; feature analysis agent still running -->
+<!-- CURSOR: 2026-04-10 — Feature analysis qualitative report done; run `python analysis_reports/run_analysis.py` to get quantitative tables; then commit analysis_reports/ + v5.4 entity grounding recall feature -->
 
 ## Session 2026-04-10 — Feature pattern analysis
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
-| 2026-04-10 | [~] | ANALYSIS: Feature pattern study — confident correct vs confident wrong; top-5 mean aggregation on n×m matrices; Cohen's d + delta flagging; CVG+RVG; top-20 failure cases | `analysis_reports/run_analysis.py`, `analysis_reports/feature_analysis_report.md`, `analysis_reports/feature_analysis_report.json` |
+| 2026-04-10 | [x] | ANALYSIS: Feature pattern study — qualitative failure taxonomy + case analysis done; run_analysis.py written for quantitative tables | `analysis_reports/run_analysis.py`, `analysis_reports/feature_analysis_report.md`, `analysis_reports/feature_analysis_report.json` |
+| 2026-04-10 | [ ] | ANALYSIS (quantitative): Run `python analysis_reports/run_analysis.py` to generate full per-feature mean/std/delta/Cohen's d tables (requires Bash permission; script is ready) | `analysis_reports/run_analysis.py` |
 
 ## Session 2026-04-10 — Entity grounding recall feature (v5.4)
 
