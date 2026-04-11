@@ -3,18 +3,27 @@
 Replaces the CNN inference path with a structured LLM judge that asks a battery
 of binary yes/no questions mirroring the CNN's feature clusters.
 
-Clusters → questions (v5.1)
+Clusters → questions (v5.2)
 ────────────────────────────
-Semantic (PREC)        : Is text2 semantically grounded in text1?          (w=0.5)
-Omission               : Does text2 omit any key factual claim from text1? (w=1.0, inverted)
-NLI entailment         : Does text1 entail text2?                          (w=1.0)
-NLI contradiction      : Does text2 contradict text1?                      (w=1.0, inverted)
-Entity consistency     : Are all named entities in text2 consistent?       (w=1.0)
-LCS                    : Does text2 preserve the key sequence of facts?    (w=1.0)
-Numeric hallucination  : Does text2 contain wrong/unsupported numbers?     (w=1.0, inverted)
+Semantic (PREC)        : Is text2 semantically grounded in text1?           (w=0.5)
+Omission               : Does text2 omit any key factual claim from text1?  (w=1.0, inverted)
+NLI entailment         : Does text1 entail text2?                           (w=1.0)
+NLI contradiction      : Does text2 contradict text1?                       (w=1.0, inverted)
+Entity consistency     : Are all named entities in text2 consistent?        (w=1.0)
+Entity grounding       : Does text2 introduce entities absent from text1?   (w=1.0, inverted)
+LCS                    : Does text2 preserve the key sequence of facts?     (w=1.0)
+Numeric hallucination  : Does text2 contain wrong/unsupported numbers?      (w=1.0, inverted)
 
 Each question gets { answer, confidence, reasoning }.
 Final score = weighted mean of (answer=="yes" ? confidence : 1-confidence).
+
+v5.2 changes vs v5.1 (feature parity with CNN pipeline v5.4):
+  - Q6 added: entity_grounding — mirrors new entity_grounding_recall CNN feature.
+    Distinct from Q5 (entity consistency): Q5 checks whether entities present in text2
+    are internally consistent with text1; Q6 checks whether text2 introduces or substitutes
+    named entities not grounded in text1 (entity substitution / hallucination).
+    Feature analysis showed entity_value_prec Cohen's d=1.36 for RVG failures — the
+    strongest non-NLI signal for the reference-vs-generated mode.
 
 v5.1 changes vs v5.0:
   - Q2 replaced: "similar wording" (lexical) → "omission of key claim" (omission_key_claim)
@@ -82,6 +91,15 @@ _QUESTIONS: list[tuple[str, str, float, bool]] = [
         True,
     ),
     (
+        "entity_grounding",
+        (
+            "Does text2 introduce or substitute any named entity (person, organization, "
+            "location, product, date, law) that is not present in or derivable from text1? (yes/no)"
+        ),
+        1.0,
+        False,   # "yes" → entity substitution / hallucination → unfaithful
+    ),
+    (
         "lcs",
         "Does text2 preserve the key sequence of facts/steps from text1? (yes/no)",
         1.0,
@@ -125,7 +143,8 @@ For each question provide:
 Use the following diagnostic codes in your reasoning where relevant:
   HALL-NUMERIC  — text2 contains a wrong number/statistic not supported by text1
                   (e.g. "$8M" when text1 says "$80M", "25%" vs "52%")
-  ENT-SUBST     — text2 substitutes a named entity for a different one
+  ENT-SUBST     — text2 substitutes or introduces a named entity not in text1
+                  (e.g. "Steve Wozniak" when text1 only mentions "Steve Jobs")
   NEG-FACT      — text2 negates a fact that text1 asserts
   OMIT-KEY      — text2 omits a key claim or step from text1
   FAITHFUL      — text2 is grounded and consistent with text1
@@ -133,6 +152,11 @@ Use the following diagnostic codes in your reasoning where relevant:
 For the numeric_hallucination question: compare ALL numbers, dates, percentages,
 monetary amounts, counts, and measurements mentioned in both texts. Report "yes"
 if any numeric value in text2 cannot be verified from text1 or differs in magnitude.
+
+For the entity_grounding question: check whether every person, organization, location,
+product, or law named in text2 can be traced back to text1. A paraphrase or synonym
+of a text1 entity is acceptable. Report "yes" (hallucination) only when text2 names
+a specific entity that text1 does not mention at all.
 
 Required JSON shape (keys must match exactly):
 {
