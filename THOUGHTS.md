@@ -9,7 +9,7 @@ Can we emulate the test using a slew of LLM as juries that measures similar thin
 as binary features backed by reasoning as well as specified codes for these tests validations 
 (need to figure out). Compare what we are building against that and the user can switch to this methodology if needed      
 -----------
-Thought 2:
+Thought 2: [→ IMPLEMENTED: v5.1 entity_value_prec/rec + v5.2 per-type value overlap]
 the features based on actaully comparing entities against each other makes sense and was an intended feature that was added intially but dropped. We should  
 bring that back based on what all types gliner can extract safely and compare them against each other. Spawn a new agent for this.
 -----------

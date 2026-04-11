@@ -258,12 +258,13 @@ short inputs.
 | 2026-04-09 | [x] | DATA: Added AporiaRAG loader (aporia-ai/rag_hallucinations; context+answer+is_hallucination; 309/691 balanced to 200/200) | `backend/fetch_external_data.py` |
 | 2026-04-09 | [x] | RETRAIN CVG on 2731 pairs (RAGTruth added) — best val 0.1583 @ ep20, stop ep28; test AUC 0.836 (−0.016 vs v5.3; MCC +0.062, more balanced) | `models/context-vs-generated/best.pth` |
 | 2026-04-09 | [x] | RETRAIN RVG on 2580 pairs (ANLI-R3+WiCE added) — best val 0.1460 @ ep10, stop ep18, val acc 79.33% | `models/reference-vs-generated/best.pth` |
-| 2026-04-09 | [~] | RETRAIN CVG on 3531 pairs (MedHallu+AporiaRAG added) — in progress | `models/context-vs-generated/best.pth` |
-| 2026-04-09 | [ ] | EVAL RVG on 2580-pair model — compare vs v5.3 baseline (AUC 0.872) | `test_reports/` |
-| 2026-04-09 | [ ] | EVAL CVG on 3531-pair model — target AUC > 0.852 (v5.3 baseline) | `test_reports/` |
-| 2026-04-09 | [ ] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
+| 2026-04-09 | [x] | RETRAIN CVG on 3531 pairs (MedHallu+AporiaRAG added) — best val 0.1788 @ ep21, stop ep29 | `models/context-vs-generated/20260409_225448_best.pth` |
+| 2026-04-09 | [x] | EVAL RVG on 2580-pair model — AUC 0.8734 (+0.001 vs v5.3 baseline 0.872), Acc 78.1%, MCC 0.5634 | `test_reports/test_report_20260409_003536.json` |
+| 2026-04-11 | [x] | EVAL CVG on 3531-pair model — AUC 0.8529 (≈ v5.3 baseline), Acc 76.5%, MCC 0.530, AUPRC 0.869; balanced confusion (206/200) | `test_reports/test_report_20260411_093556.json` |
+| 2026-04-09 | [x] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
+| 2026-04-11 | [ ] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports | `models/*/best.pth`, `test_reports/`, `*.log` |
 
-<!-- CURSOR: 2026-04-09 — CVG 3531-pair retrain running; RVG eval running; then eval CVG, commit all, update UI test cases -->
+<!-- CURSOR: 2026-04-11 — CVG eval done (AUC 0.8529); update best.pth to 20260409_225448, then commit checkpoints + logs -->
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 

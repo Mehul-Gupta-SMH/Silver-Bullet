@@ -1,0 +1,52 @@
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'McGill-NLP/FaithDial' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+
+-- General datasets ----------------------------------------------------
+  [STSB] loaded from cache (400 pairs)
+  [MNLI] loaded from cache (400 pairs)
+
+-- Mode-specific datasets ----------------------------------------------
+  [QQP] loaded from cache (400 pairs)
+  [QNLI] loaded from cache (400 pairs)
+  [HALUEVAL] loaded from cache (700 pairs)
+  [HALUEVAL_SUM] loaded from cache (700 pairs)
+  [HALUEVAL_DIAL] loaded from cache (700 pairs)
+  [PAWS] loaded from cache (400 pairs)
+  [MRPC] loaded from cache (400 pairs)
+  [RAGTRUTH] loaded from cache (400 pairs)
+  [FaithDial] downloading…
+  [FaithDial] WARNING: not found on HuggingFace -- skipping.
+  [ANLI] loaded from cache (400 pairs)
+  [WICE] loaded from cache (349 pairs)
+  [SummaC]   downloading…
+  [SummaC]   WARNING: not found on HuggingFace -- skipping.
+  [MEDHALLU] loaded from cache (400 pairs)
+  [AporiaRAG] downloading…
+  [AporiaRAG] 400 pairs  (pos=200, neg=200)
+
+-- General splits ------------------------------------------------------
+  Total: 1013 pairs  (hand-crafted=213, external=800)
+    train     :   709 pairs  (pos=345, neg=364)
+    validate  :   151 pairs  (pos=73, neg=78)
+    test      :   153 pairs  (pos=92, neg=61)
+
+-- model-vs-model splits --------------------------------------
+  Total: 2231 pairs  (hand-crafted=231, external=2000)
+    train     :  1561 pairs  (pos=786, neg=775)
+    validate  :   334 pairs  (pos=170, neg=164)
+    test      :   336 pairs  (pos=159, neg=177)
+
+-- reference-vs-generated splits ------------------------------
+  Total: 2580 pairs  (hand-crafted=231, external=2349)
+    train     :  1805 pairs  (pos=902, neg=903)
+    validate  :   387 pairs  (pos=175, neg=212)
+    test      :   388 pairs  (pos=187, neg=201)
+
+-- context-vs-generated splits --------------------------------
+  Total: 3531 pairs  (hand-crafted=231, external=3300)
+    train     :  2471 pairs  (pos=1195, neg=1276)
+    validate  :   529 pairs  (pos=301, neg=228)
+    test      :   531 pairs  (pos=269, neg=262)
+
+Done. Retrain with:  python -m backend.train --mode <mode>
