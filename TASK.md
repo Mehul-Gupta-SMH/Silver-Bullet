@@ -265,9 +265,11 @@ short inputs.
 | 2026-04-11 | [x] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports — commit 0cbe1fd | `models/*/best.pth`, `test_reports/`, `*.log` |
 | 2026-04-11 | [x] | RETRAIN MVM — best val 0.1480 @ ep10, early stop ep18 | `models/model-vs-model/20260411_132403_best.pth` |
 | 2026-04-11 | [x] | EVAL MVM — AUC 0.8892 (+0.019 vs ~0.870 prev), Acc 81.9%, MCC 0.6445, F1 0.827 | `test_reports/test_report_20260411_133144.json` |
-| 2026-04-11 | [ ] | COMMIT MVM checkpoint + logs | `models/model-vs-model/best.pth`, `train_mvm_new.log`, `test_mvm_new.log` |
+| 2026-04-11 | [x] | COMMIT MVM checkpoint + logs — commit 1930cb9 | `models/model-vs-model/best.pth`, `train_mvm_new.log`, `test_mvm_new.log` |
+| 2026-04-11 | [x] | DATA: Adversarial augmentation — +200 hard negatives per mode (100 numeric-swap + 100 entity-swap) appended to train splits | `backend/augment_data.py`, `data/*/train.json` |
+| 2026-04-11 | [ ] | RETRAIN all 3 modes on augmented data (v5.4 + adversarial pairs) — v5.4 retrain already in progress | `models/*/best.pth` |
 
-<!-- CURSOR: 2026-04-10 — Feature analysis qualitative report done; run `python analysis_reports/run_analysis.py` to get quantitative tables; then commit analysis_reports/ + v5.4 entity grounding recall feature -->
+<!-- CURSOR: 2026-04-11 — Adversarial augmentation done (+200/mode); v5.4 retrains running in background (bumjqc1oh); README update pending -->
 
 ## Session 2026-04-10 — Feature pattern analysis
 
