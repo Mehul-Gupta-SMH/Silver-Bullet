@@ -1,18 +1,14 @@
-import json
 import torch
-from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from backend.Postprocess.__addpad import resize_matrix
-
-_NLI_CACHE_FILE = Path("cache/nli_pairs.json")
+from backend.cache_db import CacheDB
 
 
 class NLIWeights:
     # Shared across all instances — model loaded once per process
     _model_cache: dict = {}
     # Sentence-pair NLI cache: (sent1, sent2) → (entailment, neutral, contradiction)
-    # Persisted to cache/nli_pairs.json between runs so RoBERTa is never re-run
-    # for a sentence pair that has already been scored.
+    # Bulk-loaded from SQLite once per process; written back after each batch.
     _pair_cache: dict = {}
     _disk_cache_loaded: bool = False
 
@@ -34,42 +30,30 @@ class NLIWeights:
 
     @classmethod
     def load_pair_cache(cls) -> None:
-        """Load persisted NLI pair scores from disk into _pair_cache.
-
-        Called once per process before the first scoring pass. Subsequent calls
-        are no-ops (guarded by _disk_cache_loaded). This means once a sentence
-        pair is scored it is never re-run, even across separate training runs.
-        """
+        """Bulk-load all NLI pair scores from SQLite into _pair_cache (once per process)."""
         if cls._disk_cache_loaded:
             return
         cls._disk_cache_loaded = True
-        if not _NLI_CACHE_FILE.exists():
-            return
         try:
-            raw = json.loads(_NLI_CACHE_FILE.read_text(encoding="utf-8"))
-            for k, v in raw.items():
-                s1, s2 = json.loads(k)
-                cls._pair_cache[(s1, s2)] = tuple(v)
-            print(f"[NLICache] loaded {len(cls._pair_cache)} persisted sentence-pair scores from disk")
+            rows = CacheDB.get().load_all_nli()
+            cls._pair_cache.update(rows)
+            print(f"[NLICache] loaded {len(rows)} persisted sentence-pair scores from SQLite")
         except Exception as e:
             print(f"[NLICache] warning: could not load persistent cache ({e}) — starting fresh")
 
     @classmethod
-    def save_pair_cache(cls) -> None:
-        """Persist current _pair_cache to disk.
+    def save_pair_cache(cls, new_rows: list) -> None:
+        """Persist new NLI rows to SQLite.
 
-        Uses json.dumps([s1, s2]) as the key so there is no ambiguity from
-        separator characters inside sentences.
+        Args:
+            new_rows: [(sent1, sent2, entailment, neutral, contradiction), ...]
         """
-        _NLI_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        serialisable = {
-            json.dumps([s1, s2]): list(v)
-            for (s1, s2), v in cls._pair_cache.items()
-        }
-        _NLI_CACHE_FILE.write_text(
-            json.dumps(serialisable, ensure_ascii=False),
-            encoding="utf-8",
-        )
+        if not new_rows:
+            return
+        try:
+            CacheDB.get().save_nli_batch(new_rows)
+        except Exception as e:
+            print(f"[NLICache] warning: could not save to SQLite ({e})")
 
     # ------------------------------------------------------------------
 
@@ -116,6 +100,7 @@ class NLIWeights:
             id2label = mdl.config.id2label
             label_to_idx = {v.lower(): k for k, v in id2label.items()}
 
+            new_rows: list[tuple] = []
             with torch.no_grad():
                 for start in range(0, len(uncached), self.__batch_size__):
                     chunk = uncached[start:start + self.__batch_size__]
@@ -129,15 +114,17 @@ class NLIWeights:
                     logits = mdl(**enc).logits
                     probs = torch.softmax(logits, dim=-1).cpu().numpy()
                     for (p1, p2), row in zip(chunk, probs):
-                        NLIWeights._pair_cache[(p1, p2)] = (
+                        scores = (
                             float(row[label_to_idx["entailment"]]),
                             float(row[label_to_idx["neutral"]]),
                             float(row[label_to_idx["contradiction"]]),
                         )
+                        NLIWeights._pair_cache[(p1, p2)] = scores
+                        new_rows.append((p1, p2, scores[0], scores[1], scores[2]))
 
             # Persist new scores immediately so they survive even if training
             # is interrupted before completing.
-            NLIWeights.save_pair_cache()
+            NLIWeights.save_pair_cache(new_rows)
 
         # Reconstruct the n×m matrices from the cache (no model call needed).
         row_e_all, row_n_all, row_c_all = [], [], []

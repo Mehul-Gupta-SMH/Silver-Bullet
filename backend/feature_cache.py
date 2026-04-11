@@ -1,32 +1,25 @@
-import json
-import os
-import hashlib
-from typing import Dict, Any
+"""Feature cache backed by SQLite via CacheDB.
+
+Replaces the old per-pair JSON file approach (cache/{md5}.json).
+The public interface (get_features / save_features) is unchanged so
+callers (train.py, precompute_features.py, predict.py) need no edits.
+"""
+
+from typing import Any, Dict
+
+from backend.cache_db import CacheDB
+
 
 class FeatureCache:
-    def __init__(self, cache_dir='cache'):
-        self.cache_dir = cache_dir
-        os.makedirs(cache_dir, exist_ok=True)
+    def __init__(self, cache_dir: str = "cache"):
+        # cache_dir kept for API compat but ignored — CacheDB owns the path.
+        self._db = CacheDB.get()
 
     def _generate_key(self, text1: str, text2: str) -> str:
-        """Generate a unique key for a pair of texts"""
-        combined = f"{text1}|||{text2}"
-        return hashlib.md5(combined.encode()).hexdigest()
+        return CacheDB._md5(text1, text2)
 
-    def get_features(self, text1: str, text2: str) -> Dict[str, Any]:
-        """Get features from cache if they exist"""
-        key = self._generate_key(text1, text2)
-        cache_file = os.path.join(self.cache_dir, f"{key}.json")
+    def get_features(self, text1: str, text2: str) -> Dict[str, Any] | None:
+        return self._db.get_features(text1, text2)
 
-        if os.path.exists(cache_file):
-            with open(cache_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return None
-
-    def save_features(self, text1: str, text2: str, features: Dict[str, Any]):
-        """Save features to cache"""
-        key = self._generate_key(text1, text2)
-        cache_file = os.path.join(self.cache_dir, f"{key}.json")
-
-        with open(cache_file, 'w', encoding='utf-8') as f:
-            json.dump(features, f, ensure_ascii=False, indent=2)
+    def save_features(self, text1: str, text2: str, features: Dict[str, Any]) -> None:
+        self._db.save_features(text1, text2, features)

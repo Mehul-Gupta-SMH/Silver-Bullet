@@ -1,20 +1,9 @@
-import json
 import numpy as np
-from pathlib import Path
 from sentence_transformers import SentenceTransformer
 from typing import List
 from tqdm import tqdm
 
-# One cache file per model, stored in cache/embeddings_{sanitised_name}/
-# Format: numpy .npz with two arrays:
-#   "sentences" — 1-D array of sentence strings (object dtype)
-#   "embeddings" — 2-D float32 array, shape (N, dim)
-_EMBED_CACHE_DIR = Path("cache/embeddings")
-
-
-def _cache_path(model_name: str) -> Path:
-    safe = model_name.replace("/", "__").replace("\\", "__")
-    return _EMBED_CACHE_DIR / f"{safe}.npz"
+from backend.cache_db import CacheDB
 
 
 class SemanticFeatures:
@@ -22,7 +11,7 @@ class SemanticFeatures:
     _model_cache = {}
     # Shared across all instances: model_name → {sentence: np.ndarray}
     _embedding_cache: dict = {}
-    # Guard: set of model names whose disk cache has been loaded this process
+    # Guard: set of model names whose SQLite cache has been loaded this process
     _disk_loaded: set = set()
 
     def __init__(self, text_list: List[str] = None):
@@ -55,39 +44,36 @@ class SemanticFeatures:
 
     @classmethod
     def load_embedding_cache(cls, model_name: str) -> None:
-        """Load persisted embeddings for *model_name* from disk (once per process)."""
+        """Bulk-load all embeddings for *model_name* from SQLite (once per process)."""
         if model_name in cls._disk_loaded:
             return
         cls._disk_loaded.add(model_name)
-
-        path = _cache_path(model_name)
-        if not path.exists():
-            return
         try:
-            data = np.load(path, allow_pickle=True)
-            sentences = data["sentences"].tolist()   # list of str
-            embeddings = data["embeddings"]           # (N, dim) float32
+            rows = CacheDB.get().load_all_embeddings(model_name)
             sent_cache = cls._embedding_cache.setdefault(model_name, {})
-            for s, e in zip(sentences, embeddings):
-                sent_cache[s] = e
-            print(f"[EmbedCache] loaded {len(sentences)} embeddings for {model_name}")
+            sent_cache.update(rows)
+            print(f"[EmbedCache] loaded {len(rows)} embeddings for {model_name} from SQLite")
         except Exception as ex:
             print(f"[EmbedCache] warning: could not load cache for {model_name} ({ex}) — starting fresh")
 
     @classmethod
-    def save_embedding_cache(cls, model_name: str) -> None:
-        """Persist current in-memory embeddings for *model_name* to disk."""
-        sent_cache = cls._embedding_cache.get(model_name, {})
-        if not sent_cache:
+    def save_embedding_cache(cls, model_name: str, new_sentences: list[str]) -> None:
+        """Persist newly computed embeddings for *model_name* to SQLite.
+
+        Args:
+            model_name: The embedding model identifier.
+            new_sentences: Sentences whose embeddings were just computed.
+        """
+        if not new_sentences:
             return
-        _EMBED_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        sentences = list(sent_cache.keys())
-        embeddings = np.stack([sent_cache[s] for s in sentences]).astype(np.float32)
-        np.savez_compressed(
-            _cache_path(model_name),
-            sentences=np.array(sentences, dtype=object),
-            embeddings=embeddings,
-        )
+        sent_cache = cls._embedding_cache.get(model_name, {})
+        embeddings = [sent_cache[s] for s in new_sentences if s in sent_cache]
+        if not embeddings:
+            return
+        try:
+            CacheDB.get().save_embeddings_batch(model_name, new_sentences, embeddings)
+        except Exception as ex:
+            print(f"[EmbedCache] warning: could not save embeddings for {model_name} ({ex})")
 
     # ------------------------------------------------------------------
 
@@ -128,7 +114,7 @@ class SemanticFeatures:
                     sent_cache[s] = emb
 
                 # Persist after each batch of new sentences
-                SemanticFeatures.save_embedding_cache(model_name)
+                SemanticFeatures.save_embedding_cache(model_name, new_sentences)
 
             self.features_dict[model_name] = [sent_cache[s] for s in self.text_list]
 

@@ -49,13 +49,10 @@ EntityMatch or RelationGrounding (different model name).
 from __future__ import annotations
 
 import difflib
-import json
-from pathlib import Path
 from typing import List
 
 from backend.Postprocess.__addpad import resize_matrix
-
-_RELEX_CACHE_FILE = Path("cache/relex_triplets.json")
+from backend.cache_db import CacheDB
 
 # ---------------------------------------------------------------------------
 # Relation types (zero-shot labels passed to the model at inference time)
@@ -163,28 +160,32 @@ class RelexGrounding:
 
     @classmethod
     def load_triplet_cache(cls) -> None:
-        """Load persisted relation triplets from disk. Called once per process."""
+        """Bulk-load all relation triplets from SQLite (once per process)."""
         if cls._disk_cache_loaded:
             return
         cls._disk_cache_loaded = True
-        if not _RELEX_CACHE_FILE.exists():
-            return
         try:
-            raw = json.loads(_RELEX_CACHE_FILE.read_text(encoding="utf-8"))
-            for sent, triplets in raw.items():
+            rows = CacheDB.get().load_all_triplets()
+            for sent, triplets in rows.items():
                 cls._triplet_cache[sent] = [tuple(t) for t in triplets]
-            print(f"[RelexCache] loaded {len(cls._triplet_cache)} persisted sentence triplets from disk")
+            print(f"[RelexCache] loaded {len(rows)} persisted sentence triplets from SQLite")
         except Exception as e:
             print(f"[RelexCache] warning: could not load persistent cache ({e}) — starting fresh")
 
     @classmethod
-    def save_triplet_cache(cls) -> None:
-        """Persist current triplet cache to disk."""
-        _RELEX_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        _RELEX_CACHE_FILE.write_text(
-            json.dumps(cls._triplet_cache, ensure_ascii=False),
-            encoding="utf-8",
-        )
+    def save_triplet_cache(cls, new_sentences: list[str]) -> None:
+        """Persist newly computed triplets to SQLite.
+
+        Args:
+            new_sentences: Sentences that were just computed and should be saved.
+        """
+        if not new_sentences:
+            return
+        try:
+            triplets_list = [list(cls._triplet_cache[s]) for s in new_sentences]
+            CacheDB.get().save_triplets_batch(new_sentences, triplets_list)
+        except Exception as e:
+            print(f"[RelexCache] warning: could not save to SQLite ({e})")
 
     def __init__(self):
         self._reset_state()
@@ -268,7 +269,7 @@ class RelexGrounding:
                     pass  # model inference failure → empty triplet list for this sentence
                 RelexGrounding._triplet_cache[trunc] = triplets
 
-            RelexGrounding.save_triplet_cache()
+            RelexGrounding.save_triplet_cache(truncated)
 
         return [RelexGrounding._triplet_cache.get(t[: self._MAX_CHARS], []) for t in texts]
 
