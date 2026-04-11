@@ -262,9 +262,9 @@ short inputs.
 | 2026-04-09 | [x] | EVAL RVG on 2580-pair model — AUC 0.8734 (+0.001 vs v5.3 baseline 0.872), Acc 78.1%, MCC 0.5634 | `test_reports/test_report_20260409_003536.json` |
 | 2026-04-11 | [x] | EVAL CVG on 3531-pair model — AUC 0.8529 (≈ v5.3 baseline), Acc 76.5%, MCC 0.530, AUPRC 0.869; balanced confusion (206/200) | `test_reports/test_report_20260411_093556.json` |
 | 2026-04-09 | [x] | UI: Add MedHallu/medical + RAG hallucination test cases to frontend; update CVG mode description | `frontend/src/data/testCases.ts`, `frontend/src/config/modes.ts` |
-| 2026-04-11 | [ ] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports | `models/*/best.pth`, `test_reports/`, `*.log` |
+| 2026-04-11 | [x] | COMMIT: checkpoints (CVG 3531-pair best.pth, RVG 2580-pair best.pth) + ablation logs + test reports — commit 0cbe1fd | `models/*/best.pth`, `test_reports/`, `*.log` |
 
-<!-- CURSOR: 2026-04-11 — CVG eval done (AUC 0.8529); update best.pth to 20260409_225448, then commit checkpoints + logs -->
+<!-- CURSOR: 2026-04-11 — Session complete. CVG AUC 0.8529, RVG AUC 0.8734. Next: decide on next experiment (relation features, jury mode, or MVM retrain) -->
 
 ## Session 2026-04-03 — Ablation v4.1 + new data sources
 
