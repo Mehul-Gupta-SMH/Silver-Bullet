@@ -39,7 +39,7 @@ The script:
   3. Samples up to --max-per-source pairs, balanced label=0/1.
   4. Caches raw downloads to data/external/.
   5. Merges with hand-crafted pairs from generate_data.py.
-  6. Re-saves train/validate/test splits (70/15/15) to data/ and data/{mode}/.
+  6. Re-saves train/validate/test splits (65/20/15) to data/ and data/{mode}/.
 
 Delete data/external/ and re-run to force a fresh download.
 """
@@ -606,6 +606,179 @@ def _load_medhallu(max_n: int, rng: random.Random) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# Validation-only benchmark loaders
+# These are NEVER merged into training splits — only written to
+# data/benchmarks/{name}.json for use by backend/benchmark_eval.py.
+# ---------------------------------------------------------------------------
+
+def _load_summeval(max_n: int, rng: random.Random) -> list[dict]:
+    """SummEval: human judgments (1–5 Likert) for CNN/DM summaries.
+
+    Consistency ≥ 3.5 → label=1 (faithful), < 3.5 → label=0.
+    text1 = source document, text2 = generated summary.
+    Maps to: reference-vs-generated.
+    Gold standard for summarization evaluator benchmarking.
+    """
+    print("  [SummEval] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("mteb/summeval", split="test")
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("google/summeval", split="test")
+        except Exception:
+            print("  [SummEval] WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for r in ds:
+        doc   = str(r.get("text",    r.get("document",    ""))).strip()
+        summ  = str(r.get("machine_summaries", r.get("summary", ""))).strip()
+        # SummEval stores multiple summaries per doc; handle list
+        if isinstance(r.get("machine_summaries"), list):
+            scores_raw = r.get("consistency", [])
+            for i, s in enumerate(r["machine_summaries"]):
+                score = float(scores_raw[i]) if i < len(scores_raw) else None
+                if score is None:
+                    continue
+                pairs.append({
+                    "text1": doc,
+                    "text2": str(s).strip(),
+                    "label": 1 if score >= 3.5 else 0,
+                    "human_score": score,
+                })
+        else:
+            score = float(r.get("consistency", r.get("score", -1)))
+            if score >= 0:
+                pairs.append({
+                    "text1": doc, "text2": summ,
+                    "label": 1 if score >= 3.5 else 0,
+                    "human_score": score,
+                })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [SummEval] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_factcc(max_n: int, rng: random.Random) -> list[dict]:
+    """FactCC: claim-level factuality on CNN/DM summaries.
+
+    CORRECT → label=1 (claim supported by source), INCORRECT → label=0.
+    text1 = source passage, text2 = generated claim.
+    Maps to: reference-vs-generated.
+    """
+    print("  [FactCC] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("mteb/factcc", split="test")
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("Zaid/factcc_annotated", split="test")
+        except Exception:
+            print("  [FactCC] WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for r in ds:
+        passage = str(r.get("text", r.get("passage", ""))).strip()
+        claim   = str(r.get("claim", "")).strip()
+        label_raw = str(r.get("label", "")).strip().upper()
+        if passage and claim and label_raw in ("CORRECT", "INCORRECT"):
+            pairs.append({
+                "text1": passage,
+                "text2": claim,
+                "label": 1 if label_raw == "CORRECT" else 0,
+            })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [FactCC] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_frank(max_n: int, rng: random.Random) -> list[dict]:
+    """FRANK: fine-grained faithfulness annotations on CNN/DM and XSum.
+
+    Any error type present → label=0 (unfaithful), no errors → label=1.
+    text1 = source article, text2 = generated summary.
+    Maps to: reference-vs-generated.
+    """
+    print("  [FRANK] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("Babelscape/FRANK", split="test")
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("frank", split="test")
+        except Exception:
+            print("  [FRANK] WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for r in ds:
+        article = str(r.get("article", r.get("document", ""))).strip()
+        summary = str(r.get("summary", "")).strip()
+        # FRANK stores error category annotations; any non-"NoE" → hallucinated
+        annotations = r.get("annotation", r.get("labels", []))
+        if isinstance(annotations, list) and annotations:
+            has_error = any(
+                str(a.get("error_type", a) if isinstance(a, dict) else a).strip() not in ("NoE", "", "no_error")
+                for a in annotations
+            )
+        else:
+            has_error = False
+        if article and summary:
+            pairs.append({
+                "text1": article,
+                "text2": summary,
+                "label": 0 if has_error else 1,
+            })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [FRANK] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_aggrefact(max_n: int, rng: random.Random) -> list[dict]:
+    """AggreFact: aggregated faithfulness labels across CNN/DM, XSum, SamSum.
+
+    Annotator majority → binary faithful/unfaithful.
+    text1 = source document, text2 = generated summary.
+    Maps to: reference-vs-generated.
+    """
+    print("  [AggreFact] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("lytang/AggreFact-Sota", split="test")
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("aggrefact", split="test")
+        except Exception:
+            print("  [AggreFact] WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for r in ds:
+        doc  = str(r.get("doc",  r.get("document", ""))).strip()
+        summ = str(r.get("summ", r.get("summary",  ""))).strip()
+        label_raw = r.get("label", r.get("faithful", None))
+        if doc and summ and label_raw is not None:
+            pairs.append({
+                "text1": doc,
+                "text2": summ,
+                "label": int(label_raw),
+            })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [AggreFact] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+# ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
 
@@ -625,12 +798,12 @@ def _save_cache(path: Path, pairs: list[dict]) -> None:
 # ---------------------------------------------------------------------------
 
 def _split_and_save(pairs: list[dict], out_dir: Path, rng: random.Random) -> None:
-    """Shuffle and save 70/15/15 train/validate/test JSON files."""
+    """Shuffle and save 65/20/15 train/validate/test JSON files."""
     shuffled = list(pairs)
     rng.shuffle(shuffled)
     n = len(shuffled)
-    n_train = int(n * 0.70)
-    n_val = int(n * 0.15)
+    n_train = int(n * 0.65)
+    n_val   = int(n * 0.20)
     splits = {
         "train":    shuffled[:n_train],
         "validate": shuffled[n_train:n_train + n_val],
@@ -658,12 +831,12 @@ def main() -> None:
         description="Fetch external NLP datasets and merge into SilverBullet training splits"
     )
     parser.add_argument(
-        "--max-per-source", type=int, default=400,
-        help="Max pairs sampled per non-HaluEval source, balanced label=0/1 (default: 400)",
+        "--max-per-source", type=int, default=1000,
+        help="Max pairs sampled per non-HaluEval source, balanced label=0/1 (default: 1000)",
     )
     parser.add_argument(
-        "--halueval-max", type=int, default=700,
-        help="Max pairs sampled per HaluEval source for cvg (default: 700). "
+        "--halueval-max", type=int, default=1000,
+        help="Max pairs sampled per HaluEval source for cvg (default: 1000). "
              "HaluEval is the only on-task cvg source so a higher limit is used.",
     )
     parser.add_argument("--seed", type=int, default=42)
@@ -710,6 +883,27 @@ def main() -> None:
     summac         = _get("summac",         _load_summac,                    n)
     medhallu       = _get("medhallu",       _load_medhallu,                  n)
     aporia_rag     = _get("aporia_rag",     _load_aporia_rag,                n)
+
+    # ── Validation benchmarks (never merged into training) ───────────────────
+
+    BENCHMARK_DIR = DATA_DIR / "benchmarks"
+    BENCHMARK_DIR.mkdir(parents=True, exist_ok=True)
+
+    def _get_benchmark(name: str, loader, limit: int) -> list[dict]:
+        cache = BENCHMARK_DIR / f"{name}.json"
+        if not args.force and cache.exists():
+            data = json.loads(cache.read_text(encoding="utf-8"))["data"]
+            print(f"  [{name.upper()}] loaded from cache ({len(data)} pairs)")
+            return data
+        pairs = loader(limit, rng)
+        cache.write_text(json.dumps({"data": pairs}, indent=2, ensure_ascii=False), encoding="utf-8")
+        return pairs
+
+    print("\n-- Validation benchmarks (held-out, not used for training) -------------")
+    _get_benchmark("summeval",  _load_summeval,  n)
+    _get_benchmark("factcc",    _load_factcc,    n)
+    _get_benchmark("frank",     _load_frank,     n)
+    _get_benchmark("aggrefact", _load_aggrefact, n)
 
     # ── Hand-crafted pairs ───────────────────────────────────────────────────
 

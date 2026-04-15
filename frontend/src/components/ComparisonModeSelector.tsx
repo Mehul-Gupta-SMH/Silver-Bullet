@@ -6,19 +6,27 @@ interface Props {
   onChange: (mode: ComparisonMode) => void;
 }
 
-const accent: Record<ComparisonMode, { ring: string; bg: string; dot: string }> = {
-  'model-vs-model': { ring: 'ring-blue-400', bg: 'bg-blue-50', dot: 'bg-blue-500' },
-  'reference-vs-generated': { ring: 'ring-emerald-400', bg: 'bg-emerald-50', dot: 'bg-emerald-500' },
-  'context-vs-generated': { ring: 'ring-violet-400', bg: 'bg-violet-50', dot: 'bg-violet-500' },
+const accent: Record<ComparisonMode, { color: string; dim: string; border: string }> = {
+  'model-vs-model':         { color: 'var(--mvm)', dim: 'rgba(59 130 246 / 0.1)',  border: 'rgba(59 130 246 / 0.4)' },
+  'reference-vs-generated': { color: 'var(--rvg)', dim: 'rgba(16 185 129 / 0.1)', border: 'rgba(16 185 129 / 0.4)' },
+  'context-vs-generated':   { color: 'var(--cvg)', dim: 'rgba(139 92 246 / 0.1)', border: 'rgba(139 92 246 / 0.4)' },
 };
 
 export function ComparisonModeSelector({ selected, onChange }: Props) {
   return (
     <div>
-      <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-3">
+      <div style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: 9,
+        fontWeight: 500,
+        color: 'var(--text-3)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.12em',
+        marginBottom: 12,
+      }}>
         Evaluation Mode
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
         {MODES.map((mode) => {
           const isSelected = selected === mode.id;
           const a = accent[mode.id];
@@ -26,23 +34,71 @@ export function ComparisonModeSelector({ selected, onChange }: Props) {
             <button
               key={mode.id}
               onClick={() => onChange(mode.id)}
-              className={`text-left p-4 rounded-2xl border-2 transition-all duration-150 ${
-                isSelected
-                  ? `ring-2 ${a.ring} ring-offset-1 border-transparent ${a.bg}`
-                  : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm'
-              }`}
+              style={{
+                textAlign: 'left',
+                padding: '14px 16px',
+                borderRadius: 12,
+                border: `1px solid ${isSelected ? a.border : 'var(--border)'}`,
+                background: isSelected ? a.dim : 'var(--bg-2)',
+                cursor: 'pointer',
+                transition: 'all 0.15s',
+                outline: isSelected ? `none` : 'none',
+                boxShadow: 'none',
+              }}
+              onMouseOver={e => {
+                if (!isSelected) {
+                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-2)';
+                  (e.currentTarget as HTMLElement).style.background = 'var(--bg-3)';
+                }
+              }}
+              onMouseOut={e => {
+                if (!isSelected) {
+                  (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLElement).style.background = 'var(--bg-2)';
+                }
+              }}
             >
-              <div className="flex items-start gap-3">
-                <span className="text-2xl leading-none mt-0.5">{mode.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-semibold text-slate-900 text-sm">{mode.label}</span>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                <span style={{ fontSize: 20, lineHeight: 1, marginTop: 1 }}>{mode.emoji}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                    <span style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: isSelected ? a.color : 'var(--text-1)',
+                      letterSpacing: '-0.01em',
+                    }}>
+                      {mode.label}
+                    </span>
                     {isSelected && (
-                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${a.dot}`} />
+                      <span style={{
+                        width: 5, height: 5, borderRadius: '50%',
+                        background: a.color,
+                        flexShrink: 0,
+                        opacity: 0.8,
+                      }} />
                     )}
                   </div>
-                  <p className="text-xs text-slate-500 font-medium">{mode.tagline}</p>
-                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">{mode.description}</p>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    fontWeight: 500,
+                    color: 'var(--text-2)',
+                    margin: 0,
+                    marginBottom: 4,
+                  }}>
+                    {mode.tagline}
+                  </p>
+                  <p style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    color: 'var(--text-3)',
+                    margin: 0,
+                    lineHeight: 1.5,
+                  }}>
+                    {mode.description}
+                  </p>
                 </div>
               </div>
             </button>

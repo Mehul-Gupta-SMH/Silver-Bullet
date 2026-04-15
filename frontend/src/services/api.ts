@@ -1,4 +1,4 @@
-import type { PredictionResult, BatchResponse, BreakdownResult, HealthResponse, ComparisonMode } from '../types';
+import type { PredictionResult, BatchResponse, BreakdownResult, HealthResponse, ComparisonMode, JuryResult, AdminStatus, TrainingJobStatus, TrainingLogsResponse } from '../types';
 
 const BASE_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api/v1';
 
@@ -42,3 +42,29 @@ export const predictBatch = (
     method: 'POST',
     body: JSON.stringify({ pairs, mode }),
   });
+
+export const predictJuryPair = (
+  text1: string,
+  text2: string,
+  mode: ComparisonMode,
+  juryModel?: string,
+): Promise<JuryResult> =>
+  request('/predict/jury/pair', {
+    method: 'POST',
+    body: JSON.stringify({ text1, text2, mode, ...(juryModel ? { jury_model: juryModel } : {}) }),
+  });
+
+export const getAdminStatus = (): Promise<AdminStatus> =>
+  request('/admin/status');
+
+export const startTraining = (mode: string): Promise<{ started: boolean; reason?: string; mode: string }> =>
+  request(`/admin/train/${mode}`, { method: 'POST' });
+
+export const stopTraining = (mode: string): Promise<{ stopped: boolean; reason?: string }> =>
+  request(`/admin/train/${mode}/stop`, { method: 'POST' });
+
+export const getTrainingStatus = (): Promise<Record<string, TrainingJobStatus>> =>
+  request('/admin/train/status');
+
+export const getTrainingLogs = (mode: string, offset = 0): Promise<TrainingLogsResponse> =>
+  request(`/admin/train/logs/${mode}?offset=${offset}`);

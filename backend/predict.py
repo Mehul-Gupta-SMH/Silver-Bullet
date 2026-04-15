@@ -113,6 +113,7 @@ class SimilarityPredictor:
         from backend.Features.EntityGroups.getOverlap import EntityMatch
         from backend.Features.LCS.getLCSweights import LCSWeights
         from backend.Features.Relations.getRelationWeights import RelationGrounding
+        from backend.Features.Relations.getRelexWeights import RelexGrounding
         from backend.feature_cache import FeatureCache
 
         sent1 = split_txt(text1)
@@ -133,6 +134,7 @@ class SimilarityPredictor:
                 ("entity",     EntityMatch),
                 ("lcs",        LCSWeights),
                 ("relations",  RelationGrounding),
+                ("relex",      RelexGrounding),
             ]
 
             def _run(name_cls):

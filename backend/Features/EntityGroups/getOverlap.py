@@ -6,6 +6,7 @@ from tqdm import tqdm
 
 from backend.feature_registry import ENTITY_TYPES, ENTITY_FEATURE_KEYS, ENTITY_VALUE_TYPES
 from backend.Postprocess.__addpad import resize_matrix
+from backend.cache_db import CacheDB
 
 # ---------------------------------------------------------------------------
 # Per-type fuzzy match thresholds (v5.2)
@@ -109,6 +110,38 @@ class EntityMatch:
     # Sentence-level string cache: sentence → {entity_type: [string1, string2, ...]}
     # Populated alongside _entity_cache. Used for entity_value_prec/rec features.
     _entity_strings_cache: dict = {}
+    _disk_cache_loaded: bool = False
+
+    @classmethod
+    def load_entity_cache(cls) -> None:
+        """Bulk-load all entity results from SQLite into in-memory caches (once per process)."""
+        if cls._disk_cache_loaded:
+            return
+        cls._disk_cache_loaded = True
+        try:
+            rows = CacheDB.get().load_all_entities()
+            for sent, (counts, strings) in rows.items():
+                cls._entity_cache[sent] = counts
+                cls._entity_strings_cache[sent] = strings
+            print(f"[EntityCache] loaded {len(rows)} persisted sentence results from SQLite")
+        except Exception as e:
+            print(f"[EntityCache] warning: could not load persistent cache ({e}) — starting fresh")
+
+    @classmethod
+    def save_entity_cache(cls, new_sentences: list[str]) -> None:
+        """Persist newly computed entity results to SQLite.
+
+        Args:
+            new_sentences: Sentences that were just computed and should be saved.
+        """
+        if not new_sentences:
+            return
+        try:
+            counts_list = [cls._entity_cache[s] for s in new_sentences]
+            strings_list = [cls._entity_strings_cache[s] for s in new_sentences]
+            CacheDB.get().save_entities_batch(new_sentences, counts_list, strings_list)
+        except Exception as e:
+            print(f"[EntityCache] warning: could not save to SQLite ({e})")
 
     def __init__(
         self,
@@ -154,6 +187,8 @@ class EntityMatch:
         Entity types are driven by ENTITY_TYPES from feature_registry.
         Long texts are truncated to _MAX_NER_CHARS before inference.
         """
+        EntityMatch.load_entity_cache()
+
         new_texts = [t for t in texts if t not in EntityMatch._entity_cache]
 
         if new_texts:
@@ -185,6 +220,8 @@ class EntityMatch:
                     if ent["label"] in strings:
                         strings[ent["label"]].append(ent["text"])
                 EntityMatch._entity_strings_cache[text] = strings
+
+            EntityMatch.save_entity_cache(new_texts)
 
         return [EntityMatch._entity_cache[t] for t in texts]
 

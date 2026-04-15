@@ -132,7 +132,7 @@ export function BatchScorer({ mode, onSave }: Props) {
   const defaultExpName = `Batch · ${cfg.label} · ${new Date().toLocaleDateString()}`;
 
   return (
-    <div className="space-y-5">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       {/* Test cases */}
       <TestCasePanel scope="batch" mode={mode} onLoad={handleLoadTestCase} />
 
@@ -146,49 +146,99 @@ export function BatchScorer({ mode, onSave }: Props) {
       />
 
       {/* Drop zone */}
-      <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">Upload JSON File</label>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 10,
+          color: 'var(--text-3)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}>
+          Upload JSON File
+        </div>
         <div
           onDrop={handleDrop}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragOver(true);
-          }}
+          onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
           onClick={() => fileRef.current?.click()}
-          className={`relative border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all duration-150 ${
-            dragOver
-              ? 'border-violet-400 bg-violet-50'
-              : 'border-slate-200 bg-white hover:border-violet-300 hover:bg-slate-50/50'
-          }`}
+          style={{
+            border: `2px dashed ${dragOver ? 'var(--accent)' : 'var(--border-2)'}`,
+            borderRadius: 12,
+            padding: '36px 24px',
+            textAlign: 'center',
+            cursor: 'pointer',
+            background: dragOver ? 'var(--accent-dim)' : 'var(--bg-3)',
+            transition: 'border-color 0.15s, background 0.15s',
+          }}
+          onMouseOver={e => { if (!dragOver) (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,229,204,0.35)'; }}
+          onMouseOut={e => { if (!dragOver) (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-2)'; }}
         >
           <input
             ref={fileRef}
             type="file"
             accept=".json"
             onChange={handleFileInput}
-            className="hidden"
+            style={{ display: 'none' }}
           />
           {fileName ? (
-            <div className="space-y-1.5">
-              <div className="text-4xl">📄</div>
-              <div className="font-semibold text-slate-800">{fileName}</div>
-              <div className="text-sm text-slate-500">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+              <div style={{ fontSize: 32 }}>📄</div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 13,
+                fontWeight: 500,
+                color: 'var(--text-1)',
+              }}>
+                {fileName}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                color: 'var(--text-3)',
+              }}>
                 {pairs.length} pairs ready · Click to replace
               </div>
             </div>
           ) : (
-            <div className="space-y-2">
-              <div className="text-4xl">📁</div>
-              <div className="font-semibold text-slate-700">Drop a JSON file or click to browse</div>
-              <div className="text-sm text-slate-400 space-y-1">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <div style={{ fontSize: 32, opacity: 0.5 }}>📁</div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 13,
+                fontWeight: 500,
+                color: 'var(--text-2)',
+              }}>
+                Drop a JSON file or click to browse
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                color: 'var(--text-3)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+              }}>
                 <div>Max 100 pairs per batch</div>
-                <div className="flex items-center justify-center gap-2 flex-wrap">
-                  <code className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs">
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <code style={{
+                    background: 'var(--bg-4)',
+                    color: 'var(--accent)',
+                    padding: '2px 7px',
+                    borderRadius: 4,
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 10,
+                    border: '1px solid var(--border)',
+                  }}>
                     {'[{"text1":"…","text2":"…"}]'}
                   </code>
-                  <span className="text-slate-300">or</span>
-                  <code className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-xs">
+                  <span style={{ color: 'var(--text-3)', fontSize: 11 }}>or</span>
+                  <code style={{
+                    background: 'var(--bg-4)',
+                    color: 'var(--accent)',
+                    padding: '2px 7px',
+                    borderRadius: 4,
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 10,
+                    border: '1px solid var(--border)',
+                  }}>
                     {'{"data":[{"text1":"…","text2":"…"}]}'}
                   </code>
                 </div>
@@ -201,10 +251,18 @@ export function BatchScorer({ mode, onSave }: Props) {
       <button
         onClick={handleBatch}
         disabled={loading || pairs.length === 0}
-        className="flex items-center gap-2.5 px-6 py-2.5 bg-violet-600 text-white rounded-xl font-semibold text-sm hover:bg-violet-700 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150 shadow-sm shadow-violet-200"
+        className="sb-btn-primary"
+        style={{ alignSelf: 'flex-start' }}
       >
         {loading && (
-          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <span style={{
+            width: 14, height: 14,
+            border: '2px solid rgba(4,6,7,0.3)',
+            borderTopColor: '#040607',
+            borderRadius: '50%',
+            display: 'inline-block',
+            animation: 'spin 0.7s linear infinite',
+          }} />
         )}
         {loading
           ? `Analysing ${pairs.length} pairs…`
@@ -212,15 +270,26 @@ export function BatchScorer({ mode, onSave }: Props) {
       </button>
 
       {error && (
-        <div className="flex items-start gap-2 rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
-          <span className="flex-1">{error}</span>
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 8,
+          background: 'rgba(239,68,68,0.08)',
+          border: '1px solid rgba(239,68,68,0.25)',
+          borderRadius: 10,
+          padding: '10px 14px',
+          fontFamily: 'var(--font-body)',
+          fontSize: 13,
+          color: '#F87171',
+        }}>
+          <span style={{ flex: 1 }}>{error}</span>
           <button
-            className="text-red-400 hover:text-red-600 font-bold text-base leading-none"
             onClick={() => setError(null)}
-            aria-label="Dismiss error"
-          >
-            ×
-          </button>
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: '#F87171', fontSize: 16, lineHeight: 1, padding: 0,
+              opacity: 0.6,
+            }}
+            aria-label="Dismiss"
+          >×</button>
         </div>
       )}
 

@@ -31,11 +31,9 @@ interface Props {
   }) => void;
 }
 
-const interpBg = { green: 'bg-emerald-50 border-emerald-200', yellow: 'bg-amber-50 border-amber-200', red: 'bg-red-50 border-red-200' } as const;
-const interpHeading = { green: 'text-emerald-700', yellow: 'text-amber-700', red: 'text-red-700' } as const;
-const interpBody = { green: 'text-emerald-600', yellow: 'text-amber-600', red: 'text-red-600' } as const;
-const interpDivider = { green: 'border-emerald-200', yellow: 'border-amber-200', red: 'border-red-200' } as const;
-const interpMuted = { green: 'text-emerald-500', yellow: 'text-amber-500', red: 'text-red-500' } as const;
+const INTERP_COLOR  = { green: '#34D399', yellow: '#F59E0B', red: '#F87171' } as const;
+const INTERP_BG     = { green: 'rgba(52,211,153,0.07)',  yellow: 'rgba(245,158,11,0.07)',  red: 'rgba(248,113,113,0.07)'  } as const;
+const INTERP_BORDER = { green: 'rgba(52,211,153,0.22)',  yellow: 'rgba(245,158,11,0.22)',  red: 'rgba(248,113,113,0.22)'  } as const;
 
 export function PairScorer({ mode, initData, onSave }: Props) {
   // When initData is provided (re-run from experiments), use it directly and persist it.
@@ -126,7 +124,7 @@ export function PairScorer({ mode, initData, onSave }: Props) {
   const defaultExpName = `${cfg.label} · ${new Date().toLocaleDateString()}`;
 
   return (
-    <div className="space-y-5">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       {/* Test case examples */}
       <TestCasePanel scope="pair" mode={mode} onLoad={handleLoadTestCase} />
 
@@ -140,29 +138,91 @@ export function PairScorer({ mode, initData, onSave }: Props) {
       />
 
       {/* Text inputs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-slate-700">{label1}</label>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <label style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+          }}>
+            {label1}
+          </label>
           <textarea
-            className="w-full h-44 p-3.5 border border-slate-200 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent placeholder:text-slate-300 font-mono leading-relaxed transition-shadow"
+            style={{
+              width: '100%',
+              height: 176,
+              padding: '12px 14px',
+              background: 'var(--bg-3)',
+              border: '1px solid var(--border-2)',
+              borderRadius: 10,
+              color: 'var(--text-1)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 12,
+              lineHeight: 1.65,
+              resize: 'none',
+              outline: 'none',
+              transition: 'border-color 0.15s, box-shadow 0.15s',
+              boxSizing: 'border-box',
+            }}
             placeholder={cfg.text1Placeholder}
             value={text1}
             onChange={(e) => setText1(e.target.value)}
+            onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px var(--accent-dim)'; }}
+            onBlur={e => { e.target.style.borderColor = 'var(--border-2)'; e.target.style.boxShadow = 'none'; }}
           />
-          <div className="text-xs text-slate-400 text-right tabular-nums">
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textAlign: 'right',
+            letterSpacing: '0.04em',
+          }}>
             {text1.length.toLocaleString()} / 10,000
           </div>
         </div>
 
-        <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-slate-700">{label2}</label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <label style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+          }}>
+            {label2}
+          </label>
           <textarea
-            className="w-full h-44 p-3.5 border border-slate-200 rounded-xl text-sm resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent placeholder:text-slate-300 font-mono leading-relaxed transition-shadow"
+            style={{
+              width: '100%',
+              height: 176,
+              padding: '12px 14px',
+              background: 'var(--bg-3)',
+              border: '1px solid var(--border-2)',
+              borderRadius: 10,
+              color: 'var(--text-1)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: 12,
+              lineHeight: 1.65,
+              resize: 'none',
+              outline: 'none',
+              transition: 'border-color 0.15s, box-shadow 0.15s',
+              boxSizing: 'border-box',
+            }}
             placeholder={cfg.text2Placeholder}
             value={text2}
             onChange={(e) => setText2(e.target.value)}
+            onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px var(--accent-dim)'; }}
+            onBlur={e => { e.target.style.borderColor = 'var(--border-2)'; e.target.style.boxShadow = 'none'; }}
           />
-          <div className="text-xs text-slate-400 text-right tabular-nums">
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textAlign: 'right',
+            letterSpacing: '0.04em',
+          }}>
             {text2.length.toLocaleString()} / 10,000
           </div>
         </div>
@@ -171,62 +231,121 @@ export function PairScorer({ mode, initData, onSave }: Props) {
       <button
         onClick={handleScore}
         disabled={loading || !text1.trim() || !text2.trim()}
-        className="flex items-center gap-2.5 px-6 py-2.5 bg-violet-600 text-white rounded-xl font-semibold text-sm hover:bg-violet-700 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150 shadow-sm shadow-violet-200"
+        className="sb-btn-primary"
+        style={{ alignSelf: 'flex-start' }}
       >
         {loading && (
-          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          <span style={{
+            width: 14, height: 14,
+            border: '2px solid rgba(4,6,7,0.3)',
+            borderTopColor: '#040607',
+            borderRadius: '50%',
+            display: 'inline-block',
+            animation: 'spin 0.7s linear infinite',
+          }} />
         )}
         {loading ? 'Analysing…' : 'Analyse Pair'}
       </button>
 
       {error && (
-        <div className="flex items-start gap-2 rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
-          <span className="flex-1">{error}</span>
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 8,
+          background: 'rgba(239,68,68,0.08)',
+          border: '1px solid rgba(239,68,68,0.25)',
+          borderRadius: 10,
+          padding: '10px 14px',
+          fontFamily: 'var(--font-body)',
+          fontSize: 13,
+          color: '#F87171',
+        }}>
+          <span style={{ flex: 1 }}>{error}</span>
           <button
-            className="text-red-400 hover:text-red-600 font-bold text-base leading-none"
             onClick={() => setError(null)}
-            aria-label="Dismiss error"
-          >
-            ×
-          </button>
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: '#F87171', fontSize: 16, lineHeight: 1, padding: 0,
+              opacity: 0.6,
+            }}
+            aria-label="Dismiss"
+          >×</button>
         </div>
       )}
 
       {result && interpretation && (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 16, alignItems: 'stretch' }}>
             <ScoreGauge probability={result.probability} prediction={result.prediction} />
-            <div className={`rounded-2xl border p-5 flex flex-col justify-center ${interpBg[interpretation.color]}`}>
-              <div className={`text-xl font-bold mb-2 ${interpHeading[interpretation.color]}`}>
+            <div style={{
+              background: INTERP_BG[interpretation.color],
+              border: `1px solid ${INTERP_BORDER[interpretation.color]}`,
+              borderRadius: 12,
+              padding: '20px 22px',
+              display: 'flex', flexDirection: 'column', justifyContent: 'center',
+              gap: 8,
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 20,
+                fontWeight: 700,
+                color: INTERP_COLOR[interpretation.color],
+                letterSpacing: '-0.01em',
+                lineHeight: 1.2,
+              }}>
                 {interpretation.headline}
               </div>
-              <p className={`text-sm leading-relaxed ${interpBody[interpretation.color]}`}>
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 13,
+                lineHeight: 1.65,
+                color: 'var(--text-2)',
+                margin: 0,
+              }}>
                 {interpretation.detail}
               </p>
-              <div className={`mt-4 pt-3 border-t ${interpDivider[interpretation.color]}`}>
-                <span className={`text-xs font-mono font-semibold uppercase tracking-wide ${interpMuted[interpretation.color]}`}>
-                  {comparisonLabel} · Score {result.probability.toFixed(3)}
+              <div style={{
+                marginTop: 8,
+                paddingTop: 10,
+                borderTop: `1px solid ${INTERP_BORDER[interpretation.color]}`,
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: INTERP_COLOR[interpretation.color],
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  opacity: 0.75,
+                }}>
+                  {comparisonLabel} · {result.probability.toFixed(3)}
                 </span>
               </div>
             </div>
           </div>
 
           {/* Drill-down trigger */}
-          <div className="flex items-center gap-3">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <button
               onClick={handleDrillDown}
               disabled={breakdownLoading}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-violet-300 bg-white text-violet-700 text-sm font-semibold hover:bg-violet-50 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+              className="sb-btn-ghost"
             >
               {breakdownLoading ? (
-                <span className="w-3.5 h-3.5 border-2 border-violet-400 border-t-transparent rounded-full animate-spin" />
+                <span style={{
+                  width: 12, height: 12,
+                  border: '1.5px solid var(--text-3)',
+                  borderTopColor: 'var(--text-2)',
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  animation: 'spin 0.7s linear infinite',
+                }} />
               ) : (
-                <span className="text-base">{showBreakdown ? '▲' : '▼'}</span>
+                <span style={{ fontSize: 11 }}>{showBreakdown ? '▲' : '▼'}</span>
               )}
               {breakdownLoading ? 'Running deep analysis…' : showBreakdown ? 'Hide Breakdown' : 'Drill Down — Impact & Divergence'}
             </button>
             {breakdownError && (
-              <span className="text-xs text-red-600">{breakdownError}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#F87171' }}>
+                {breakdownError}
+              </span>
             )}
           </div>
 

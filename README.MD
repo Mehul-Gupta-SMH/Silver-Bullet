@@ -63,7 +63,7 @@ TextSimilarityCNN  [B, F, 64, 64]  (F = 18–20, mode-specific)
 Score ∈ [0, 1]
 ```
 
-> **Bilinear resize vs zero-padding:** Each n×m matrix is resized to 32×32 using bilinear interpolation so every cell carries a real signal regardless of input length. Zero-padding (the previous approach) produced ~99% sparse maps for short texts, causing the CNN to deflate scores for short-but-similar inputs.
+> **Bilinear resize vs zero-padding:** Each n×m matrix is resized to 64×64 using bilinear interpolation so every cell carries a real signal regardless of input length. Zero-padding (the previous approach) produced ~99% sparse maps for short texts, causing the CNN to deflate scores for short-but-similar inputs.
 
 ---
 
@@ -90,7 +90,7 @@ Silver-Bullet/
 │   ├── Preprocess/coref/
 │   │   └── resolveEntity.py        # EntityResolver — GPT-4o-mini or local Gemma
 │   ├── Postprocess/
-│   │   └── __addpad.py             # resize_matrix() — bilinear resize n×m → 32×32
+│   │   └── __addpad.py             # resize_matrix() — bilinear resize n×m → 64×64
 │   ├── resources/
 │   │   ├── config.yaml             # API keys (gitignored — use env vars instead)
 │   │   ├── config.yaml.example     # Template — commit this, not config.yaml

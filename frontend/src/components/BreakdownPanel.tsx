@@ -7,24 +7,57 @@ interface Props {
 const THRESH_HIGH = 0.7;
 const THRESH_MID  = 0.4;
 
-function alignScore(score: number) {
-  if (score >= THRESH_HIGH) return { label: 'Aligned',  bg: 'bg-emerald-50', border: 'border-emerald-300', text: 'text-emerald-700', dot: 'bg-emerald-500' };
-  if (score >= THRESH_MID)  return { label: 'Partial',  bg: 'bg-amber-50',   border: 'border-amber-300',   text: 'text-amber-700',   dot: 'bg-amber-400' };
-  return                           { label: 'Divergent', bg: 'bg-red-50',     border: 'border-red-300',     text: 'text-red-700',     dot: 'bg-red-500' };
+type AlignTier = 'high' | 'mid' | 'low';
+
+function alignTier(score: number): AlignTier {
+  if (score >= THRESH_HIGH) return 'high';
+  if (score >= THRESH_MID)  return 'mid';
+  return 'low';
 }
 
-function barColor(score: number) {
-  if (score >= THRESH_HIGH) return 'bg-emerald-500';
-  if (score >= THRESH_MID)  return 'bg-amber-400';
-  return 'bg-red-500';
-}
+const ALIGN_COLOR: Record<AlignTier, string> = {
+  high: '#34D399',
+  mid:  '#F59E0B',
+  low:  '#F87171',
+};
 
-const SEVERITY_STYLES: Record<MisalignmentReason['severity'], {
-  border: string; bg: string; badge: string; badgeText: string; icon: string;
-}> = {
-  high:   { border: 'border-red-200',    bg: 'bg-red-50',    badge: 'bg-red-100',    badgeText: 'text-red-700',    icon: '⚠' },
-  medium: { border: 'border-amber-200',  bg: 'bg-amber-50',  badge: 'bg-amber-100',  badgeText: 'text-amber-700',  icon: '◆' },
-  low:    { border: 'border-slate-200',  bg: 'bg-slate-50',  badge: 'bg-slate-100',  badgeText: 'text-slate-600',  icon: '▸' },
+const ALIGN_BG: Record<AlignTier, string> = {
+  high: 'rgba(52,211,153,0.07)',
+  mid:  'rgba(245,158,11,0.07)',
+  low:  'rgba(248,113,113,0.07)',
+};
+
+const ALIGN_BORDER: Record<AlignTier, string> = {
+  high: 'rgba(52,211,153,0.22)',
+  mid:  'rgba(245,158,11,0.22)',
+  low:  'rgba(248,113,113,0.22)',
+};
+
+const ALIGN_LABEL: Record<AlignTier, string> = {
+  high: 'Aligned',
+  mid:  'Partial',
+  low:  'Divergent',
+};
+
+const SEVERITY_COLOR: Record<MisalignmentReason['severity'], string> = {
+  high:   '#F87171',
+  medium: '#F59E0B',
+  low:    '#60A5FA',
+};
+const SEVERITY_BG: Record<MisalignmentReason['severity'], string> = {
+  high:   'rgba(248,113,113,0.07)',
+  medium: 'rgba(245,158,11,0.07)',
+  low:    'rgba(96,165,250,0.07)',
+};
+const SEVERITY_BORDER: Record<MisalignmentReason['severity'], string> = {
+  high:   'rgba(248,113,113,0.22)',
+  medium: 'rgba(245,158,11,0.22)',
+  low:    'rgba(96,165,250,0.22)',
+};
+const SEVERITY_ICON: Record<MisalignmentReason['severity'], string> = {
+  high: '⚠',
+  medium: '◆',
+  low: '▸',
 };
 
 export function BreakdownPanel({ breakdown }: Props) {
@@ -39,7 +72,6 @@ export function BreakdownPanel({ breakdown }: Props) {
   const n = sentences1.length;
   const m = sentences2.length;
 
-  // Best alignment score for each sentence
   const maxRow = alignment.length > 0
     ? alignment.map(row => Math.max(...row))
     : [];
@@ -48,61 +80,138 @@ export function BreakdownPanel({ breakdown }: Props) {
     : [];
 
   const hasDivergence = divergent_in_1.length > 0 || divergent_in_2.length > 0;
+  const orphanCount = divergent_in_1.length + divergent_in_2.length;
 
   return (
-    <div className="space-y-6 rounded-2xl border border-violet-100 bg-violet-50/40 p-5">
+    <div style={{
+      background: 'var(--bg-2)',
+      border: '1px solid var(--border)',
+      borderRadius: 14,
+      padding: '20px 22px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 22,
+    }}>
 
-      {/* Header */}
-      <div className="flex items-center gap-2.5">
-        <span className="text-violet-700 text-base font-bold">Divergence Analysis</span>
+      {/* ── Header ─────────────────────────────────────────────── */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 10,
+          color: 'var(--text-3)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}>
+          Divergence Analysis
+        </span>
+
         {hasDivergence ? (
-          <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-700 text-xs font-semibold">
-            {divergent_in_1.length + divergent_in_2.length} orphaned sentence{divergent_in_1.length + divergent_in_2.length !== 1 ? 's' : ''}
+          <span style={{
+            padding: '2px 8px',
+            borderRadius: 99,
+            background: 'rgba(248,113,113,0.1)',
+            border: '1px solid rgba(248,113,113,0.25)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: '#F87171',
+            letterSpacing: '0.06em',
+          }}>
+            {orphanCount} orphan{orphanCount !== 1 ? 's' : ''}
           </span>
         ) : (
-          <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">
-            Full coverage
+          <span style={{
+            padding: '2px 8px',
+            borderRadius: 99,
+            background: 'rgba(52,211,153,0.1)',
+            border: '1px solid rgba(52,211,153,0.25)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: '#34D399',
+            letterSpacing: '0.06em',
+          }}>
+            full coverage
           </span>
         )}
       </div>
 
-      {/* Legend */}
-      <div className="flex items-center gap-4 text-xs text-slate-500">
-        {[
-          { dot: 'bg-emerald-500', label: `Aligned (≥ ${THRESH_HIGH})` },
-          { dot: 'bg-amber-400',   label: `Partial (${THRESH_MID}–${THRESH_HIGH})` },
-          { dot: 'bg-red-500',     label: `Divergent (< ${THRESH_MID})` },
-        ].map(({ dot, label }) => (
-          <span key={label} className="flex items-center gap-1.5">
-            <span className={`w-2 h-2 rounded-full ${dot}`} />
-            {label}
+      {/* ── Legend ─────────────────────────────────────────────── */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        {(['high', 'mid', 'low'] as AlignTier[]).map((tier) => (
+          <span key={tier} style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            letterSpacing: '0.05em',
+          }}>
+            <span style={{
+              width: 7, height: 7, borderRadius: '50%',
+              background: ALIGN_COLOR[tier],
+              display: 'inline-block',
+              boxShadow: `0 0 4px ${ALIGN_COLOR[tier]}`,
+            }} />
+            {ALIGN_LABEL[tier]}
           </span>
         ))}
       </div>
 
-      {/* Sentence columns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* ── Sentence columns ────────────────────────────────────── */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 16,
+      }}>
         {/* Text 1 */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            marginBottom: 2,
+          }}>
             Text 1 — {n} sentence{n !== 1 ? 's' : ''}
-          </p>
+          </div>
           {sentences1.length === 0 && (
-            <p className="text-sm text-slate-400 italic">No sentences detected.</p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-3)', fontStyle: 'italic' }}>
+              No sentences detected.
+            </p>
           )}
           {sentences1.map((s, i) => {
+            const tier = alignTier(maxRow[i] ?? 0);
             const score = maxRow[i] ?? 0;
-            const style = alignScore(score);
             return (
-              <div
-                key={i}
-                className={`rounded-xl border p-3 ${style.bg} ${style.border} space-y-1.5`}
-              >
-                <p className="text-sm leading-relaxed text-slate-800">{s}</p>
-                <div className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
-                  <span className={`text-xs font-semibold ${style.text}`}>
-                    {style.label} · best match {score.toFixed(2)}
+              <div key={i} style={{
+                background: ALIGN_BG[tier],
+                border: `1px solid ${ALIGN_BORDER[tier]}`,
+                borderRadius: 10,
+                padding: '10px 12px',
+                display: 'flex', flexDirection: 'column', gap: 7,
+              }}>
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 12,
+                  lineHeight: 1.6,
+                  color: 'var(--text-1)',
+                  margin: 0,
+                }}>
+                  {s}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{
+                    width: 5, height: 5, borderRadius: '50%',
+                    background: ALIGN_COLOR[tier],
+                    display: 'inline-block',
+                    flexShrink: 0,
+                  }} />
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 10,
+                    color: ALIGN_COLOR[tier],
+                    letterSpacing: '0.04em',
+                  }}>
+                    {ALIGN_LABEL[tier]} · {score.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -111,26 +220,56 @@ export function BreakdownPanel({ breakdown }: Props) {
         </div>
 
         {/* Text 2 */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            marginBottom: 2,
+          }}>
             Text 2 — {m} sentence{m !== 1 ? 's' : ''}
-          </p>
+          </div>
           {sentences2.length === 0 && (
-            <p className="text-sm text-slate-400 italic">No sentences detected.</p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-3)', fontStyle: 'italic' }}>
+              No sentences detected.
+            </p>
           )}
           {sentences2.map((s, j) => {
+            const tier = alignTier(maxCol[j] ?? 0);
             const score = maxCol[j] ?? 0;
-            const style = alignScore(score);
             return (
-              <div
-                key={j}
-                className={`rounded-xl border p-3 ${style.bg} ${style.border} space-y-1.5`}
-              >
-                <p className="text-sm leading-relaxed text-slate-800">{s}</p>
-                <div className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
-                  <span className={`text-xs font-semibold ${style.text}`}>
-                    {style.label} · best match {score.toFixed(2)}
+              <div key={j} style={{
+                background: ALIGN_BG[tier],
+                border: `1px solid ${ALIGN_BORDER[tier]}`,
+                borderRadius: 10,
+                padding: '10px 12px',
+                display: 'flex', flexDirection: 'column', gap: 7,
+              }}>
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 12,
+                  lineHeight: 1.6,
+                  color: 'var(--text-1)',
+                  margin: 0,
+                }}>
+                  {s}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{
+                    width: 5, height: 5, borderRadius: '50%',
+                    background: ALIGN_COLOR[tier],
+                    display: 'inline-block',
+                    flexShrink: 0,
+                  }} />
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 10,
+                    color: ALIGN_COLOR[tier],
+                    letterSpacing: '0.04em',
+                  }}>
+                    {ALIGN_LABEL[tier]} · {score.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -139,95 +278,223 @@ export function BreakdownPanel({ breakdown }: Props) {
         </div>
       </div>
 
-      {/* Divergence summary */}
+      {/* ── Divergence summary ──────────────────────────────────── */}
       {hasDivergence && (
-        <div className="rounded-xl border border-red-200 bg-red-50 p-4 space-y-2">
-          <p className="text-sm font-semibold text-red-700">Points of Divergence</p>
+        <div style={{
+          background: 'rgba(248,113,113,0.06)',
+          border: '1px solid rgba(248,113,113,0.2)',
+          borderRadius: 10,
+          padding: '12px 14px',
+          display: 'flex', flexDirection: 'column', gap: 10,
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: '#F87171',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}>
+            Points of Divergence
+          </div>
+
           {divergent_in_1.length > 0 && (
-            <div className="space-y-1">
-              <p className="text-xs text-red-500 font-medium">
-                {divergent_in_1.length} sentence{divergent_in_1.length !== 1 ? 's' : ''} in Text 1 have no strong counterpart in Text 2:
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 10,
+                color: 'rgba(248,113,113,0.7)',
+                letterSpacing: '0.04em',
+              }}>
+                {divergent_in_1.length} sentence{divergent_in_1.length !== 1 ? 's' : ''} in Text 1 unmatched:
+              </div>
               {divergent_in_1.map(i => (
-                <p key={i} className="text-xs font-mono text-red-700 bg-red-100 rounded px-2 py-1">
-                  [{i + 1}] {sentences1[i]}
-                </p>
+                <div key={i} style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 11,
+                  color: '#F87171',
+                  background: 'rgba(248,113,113,0.07)',
+                  border: '1px solid rgba(248,113,113,0.15)',
+                  borderRadius: 6,
+                  padding: '4px 8px',
+                }}>
+                  <span style={{ opacity: 0.5 }}>[{i + 1}]</span> {sentences1[i]}
+                </div>
               ))}
             </div>
           )}
+
           {divergent_in_2.length > 0 && (
-            <div className="space-y-1 mt-2">
-              <p className="text-xs text-red-500 font-medium">
-                {divergent_in_2.length} sentence{divergent_in_2.length !== 1 ? 's' : ''} in Text 2 have no strong counterpart in Text 1:
-              </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 10,
+                color: 'rgba(248,113,113,0.7)',
+                letterSpacing: '0.04em',
+              }}>
+                {divergent_in_2.length} sentence{divergent_in_2.length !== 1 ? 's' : ''} in Text 2 unmatched:
+              </div>
               {divergent_in_2.map(j => (
-                <p key={j} className="text-xs font-mono text-red-700 bg-red-100 rounded px-2 py-1">
-                  [{j + 1}] {sentences2[j]}
-                </p>
+                <div key={j} style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 11,
+                  color: '#F87171',
+                  background: 'rgba(248,113,113,0.07)',
+                  border: '1px solid rgba(248,113,113,0.15)',
+                  borderRadius: 6,
+                  padding: '4px 8px',
+                }}>
+                  <span style={{ opacity: 0.5 }}>[{j + 1}]</span> {sentences2[j]}
+                </div>
               ))}
             </div>
           )}
         </div>
       )}
 
-      {/* Feature scores */}
-      <div className="space-y-2">
-        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
-          What drove the score
-        </p>
-        <div className="space-y-2">
-          {Object.entries(feature_scores).map(([name, score]) => (
-            <div key={name} className="flex items-center gap-3">
-              <span className="text-xs text-slate-600 w-36 shrink-0 font-medium">{name}</span>
-              <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ${barColor(score)}`}
-                  style={{ width: `${Math.round(score * 100)}%` }}
-                />
+      {/* ── Feature scores ──────────────────────────────────────── */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 10,
+          color: 'var(--text-3)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}>
+          Signal breakdown
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          {Object.entries(feature_scores).map(([name, score]) => {
+            const tier = alignTier(score);
+            return (
+              <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: 'var(--text-2)',
+                  width: 140,
+                  flexShrink: 0,
+                  letterSpacing: '0.02em',
+                }}>
+                  {name}
+                </span>
+                <div style={{
+                  flex: 1,
+                  height: 4,
+                  background: 'var(--bg-4)',
+                  borderRadius: 99,
+                  overflow: 'hidden',
+                }}>
+                  <div style={{
+                    height: '100%',
+                    width: `${Math.round(score * 100)}%`,
+                    background: ALIGN_COLOR[tier],
+                    borderRadius: 99,
+                    transition: 'width 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    boxShadow: score > 0.3 ? `0 0 6px ${ALIGN_COLOR[tier]}60` : 'none',
+                  }} />
+                </div>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: ALIGN_COLOR[tier],
+                  width: 36,
+                  textAlign: 'right',
+                  flexShrink: 0,
+                  letterSpacing: '0.02em',
+                }}>
+                  {score.toFixed(2)}
+                </span>
               </div>
-              <span className="text-xs font-mono text-slate-500 w-10 text-right tabular-nums">
-                {score.toFixed(2)}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Misalignment reasons */}
+      {/* ── Misalignment reasons ────────────────────────────────── */}
       {misalignment_reasons.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-3)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+          }}>
             Misalignment Diagnostics
-          </p>
-          <div className="space-y-2">
-            {misalignment_reasons.map((reason, idx) => {
-              const s = SEVERITY_STYLES[reason.severity];
-              return (
-                <div
-                  key={idx}
-                  className={`rounded-xl border p-3 space-y-1 ${s.border} ${s.bg}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${s.badge} ${s.badgeText}`}>
-                      {s.icon} {reason.severity.toUpperCase()}
-                    </span>
-                    <span className="text-sm font-semibold text-slate-800">{reason.label}</span>
-                    <span className="ml-auto text-xs text-slate-400 shrink-0">{reason.signal}</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">{reason.description}</p>
-                </div>
-              );
-            })}
           </div>
+          {misalignment_reasons.map((reason, idx) => (
+            <div key={idx} style={{
+              background: SEVERITY_BG[reason.severity],
+              border: `1px solid ${SEVERITY_BORDER[reason.severity]}`,
+              borderRadius: 10,
+              padding: '10px 12px',
+              display: 'flex', flexDirection: 'column', gap: 5,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: SEVERITY_COLOR[reason.severity],
+                  letterSpacing: '0.06em',
+                }}>
+                  {SEVERITY_ICON[reason.severity]} {reason.severity.toUpperCase()}
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--text-1)',
+                }}>
+                  {reason.label}
+                </span>
+                <span style={{
+                  marginLeft: 'auto',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: 'var(--text-3)',
+                  flexShrink: 0,
+                }}>
+                  {reason.signal}
+                </span>
+              </div>
+              <p style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                color: 'var(--text-2)',
+                lineHeight: 1.55,
+                margin: 0,
+              }}>
+                {reason.description}
+              </p>
+            </div>
+          ))}
         </div>
       )}
 
       {misalignment_reasons.length === 0 && (
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3">
-          <p className="text-xs font-semibold text-emerald-700">No misalignment signals detected</p>
-          <p className="text-xs text-emerald-600 mt-0.5">
+        <div style={{
+          background: 'rgba(52,211,153,0.06)',
+          border: '1px solid rgba(52,211,153,0.2)',
+          borderRadius: 10,
+          padding: '10px 14px',
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: '#34D399',
+            letterSpacing: '0.06em',
+          }}>
+            No misalignment signals detected
+          </div>
+          <div style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 12,
+            color: 'rgba(52,211,153,0.6)',
+            marginTop: 4,
+          }}>
             All feature signals are within expected alignment thresholds.
-          </p>
+          </div>
         </div>
       )}
     </div>

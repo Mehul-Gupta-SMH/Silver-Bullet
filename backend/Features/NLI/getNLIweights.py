@@ -1,16 +1,16 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from backend.Postprocess.__addpad import resize_matrix
+from backend.cache_db import CacheDB
 
 
 class NLIWeights:
     # Shared across all instances — model loaded once per process
     _model_cache: dict = {}
     # Sentence-pair NLI cache: (sent1, sent2) → (entailment, neutral, contradiction)
-    # Populated by _prefill_nli_cache() in train.py before the per-pair training loop.
-    # Keyed on the raw sentence strings so pairs that repeat across training examples
-    # are never re-scored.
+    # Bulk-loaded from SQLite once per process; written back after each batch.
     _pair_cache: dict = {}
+    _disk_cache_loaded: bool = False
 
     def __init__(self, MODEL_NAME: str = "FacebookAI/roberta-large-mnli"):
         self.ModelName = MODEL_NAME
@@ -23,6 +23,39 @@ class NLIWeights:
         self.phrase_list1 = None
         self.phrase_list2 = None
         self.comparison_weights = {}
+
+    # ------------------------------------------------------------------
+    # Persistent pair cache — load / save
+    # ------------------------------------------------------------------
+
+    @classmethod
+    def load_pair_cache(cls) -> None:
+        """Bulk-load all NLI pair scores from SQLite into _pair_cache (once per process)."""
+        if cls._disk_cache_loaded:
+            return
+        cls._disk_cache_loaded = True
+        try:
+            rows = CacheDB.get().load_all_nli()
+            cls._pair_cache.update(rows)
+            print(f"[NLICache] loaded {len(rows)} persisted sentence-pair scores from SQLite")
+        except Exception as e:
+            print(f"[NLICache] warning: could not load persistent cache ({e}) — starting fresh")
+
+    @classmethod
+    def save_pair_cache(cls, new_rows: list) -> None:
+        """Persist new NLI rows to SQLite.
+
+        Args:
+            new_rows: [(sent1, sent2, entailment, neutral, contradiction), ...]
+        """
+        if not new_rows:
+            return
+        try:
+            CacheDB.get().save_nli_batch(new_rows)
+        except Exception as e:
+            print(f"[NLICache] warning: could not save to SQLite ({e})")
+
+    # ------------------------------------------------------------------
 
     def __load_model__(self):
         tok = AutoTokenizer.from_pretrained(
@@ -47,6 +80,9 @@ class NLIWeights:
         }
 
     def __calc_weights__(self):
+        # Ensure the persistent cache is loaded (no-op after first call).
+        NLIWeights.load_pair_cache()
+
         # Collect all (p1, p2) pairs that are not yet in the pair cache.
         uncached = [
             (p1, p2)
@@ -64,6 +100,7 @@ class NLIWeights:
             id2label = mdl.config.id2label
             label_to_idx = {v.lower(): k for k, v in id2label.items()}
 
+            new_rows: list[tuple] = []
             with torch.no_grad():
                 for start in range(0, len(uncached), self.__batch_size__):
                     chunk = uncached[start:start + self.__batch_size__]
@@ -77,11 +114,17 @@ class NLIWeights:
                     logits = mdl(**enc).logits
                     probs = torch.softmax(logits, dim=-1).cpu().numpy()
                     for (p1, p2), row in zip(chunk, probs):
-                        NLIWeights._pair_cache[(p1, p2)] = (
+                        scores = (
                             float(row[label_to_idx["entailment"]]),
                             float(row[label_to_idx["neutral"]]),
                             float(row[label_to_idx["contradiction"]]),
                         )
+                        NLIWeights._pair_cache[(p1, p2)] = scores
+                        new_rows.append((p1, p2, scores[0], scores[1], scores[2]))
+
+            # Persist new scores immediately so they survive even if training
+            # is interrupted before completing.
+            NLIWeights.save_pair_cache(new_rows)
 
         # Reconstruct the n×m matrices from the cache (no model call needed).
         row_e_all, row_n_all, row_c_all = [], [], []

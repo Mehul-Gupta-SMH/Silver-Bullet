@@ -54,3 +54,78 @@ export interface HealthResponse {
   model_loaded: boolean;
   models: Record<ComparisonMode, boolean>;
 }
+
+export interface JuryQuestion {
+  question: string;
+  answer: boolean;
+  reasoning: string;
+  weight: number;
+  weighted_score: number;
+}
+
+export interface JuryResult {
+  score: number;
+  verdict: 'faithful' | 'hallucinated';
+  questions: JuryQuestion[];
+  model?: string;
+}
+
+export interface CheckpointInfo {
+  path: string;
+  size_mb: number;
+  modified_ts: number;
+}
+
+export interface ModeAdminInfo {
+  loaded: boolean;
+  checkpoint: CheckpointInfo | null;
+}
+
+export interface TrainingSummary {
+  report_file: string;
+  best_val_loss: number | null;
+  best_epoch: number | null;
+  total_epochs: number | null;
+  timestamp: number;
+}
+
+export interface BenchmarkResult {
+  benchmark: string;
+  mode: string;
+  n: number;
+  roc_auc?: number;
+  pr_auc?: number;
+  accuracy?: number;
+  pearson_r_human?: number;
+  spearman_r_human?: number;
+  pearson_r_binary?: number;
+  spearman_r_binary?: number;
+}
+
+export interface CacheStats {
+  table_counts: Record<string, number>;
+  db_size_mb: number;
+}
+
+export interface AdminStatus {
+  models: Record<string, ModeAdminInfo>;
+  benchmark_results: BenchmarkResult[];
+  training_summaries: Record<string, TrainingSummary>;
+  cache_stats: CacheStats;
+  server_time: number;
+}
+
+export interface TrainingJobStatus {
+  status: 'idle' | 'running' | 'done' | 'error';
+  returncode: number | null;
+  started_at: number | null;
+  ended_at: number | null;
+  line_count: number;
+}
+
+export interface TrainingLogsResponse {
+  mode: string;
+  status: string;
+  offset: number;
+  lines: string[];
+}
