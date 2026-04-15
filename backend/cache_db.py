@@ -334,3 +334,25 @@ class CacheDB:
 
         if migrated:
             print(f"[CacheDB] migrated {migrated} entries from old file caches -> SQLite")
+
+    # ------------------------------------------------------------------
+    # Statistics
+    # ------------------------------------------------------------------
+
+    def stats(self) -> dict:
+        """Return row counts per table and database file size."""
+        conn = self._conn()
+        tables = ["embeddings", "nli_pairs", "entities", "triplets", "features"]
+        counts = {}
+        for t in tables:
+            try:
+                row = conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()
+                counts[t] = row[0] if row else 0
+            except Exception:
+                counts[t] = 0
+        size_mb = 0.0
+        try:
+            size_mb = round(self.db_path.stat().st_size / 1_048_576, 2)
+        except Exception:
+            pass
+        return {"table_counts": counts, "db_size_mb": size_mb}

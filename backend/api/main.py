@@ -2,16 +2,84 @@
 
 from __future__ import annotations
 
+import glob
+import json
 import os
+import sys
+import time
+import threading
+from collections import deque
 from contextlib import asynccontextmanager
 from pathlib import Path
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
+
+# ---------------------------------------------------------------------------
+# In-memory training job state
+# ---------------------------------------------------------------------------
+
+class _TrainingJob:
+    __slots__ = ("status", "lines", "proc", "returncode", "started_at", "ended_at")
+
+    def __init__(self) -> None:
+        self.status: str = "idle"          # idle | running | done | error
+        self.lines: deque[str] = deque(maxlen=2000)
+        self.proc = None
+        self.returncode: int | None = None
+        self.started_at: float | None = None
+        self.ended_at: float | None = None
+
+    def to_dict(self) -> dict:
+        return {
+            "status": self.status,
+            "returncode": self.returncode,
+            "started_at": self.started_at,
+            "ended_at": self.ended_at,
+            "lines": list(self.lines),
+        }
+
+
+_TRAIN_JOBS: dict[str, _TrainingJob] = {}
+
+
+def _run_training_thread(mode: str, root: Path) -> None:
+    """Background thread: run training, capture output, update job state."""
+    job = _TRAIN_JOBS[mode]
+    job.status = "running"
+    job.started_at = time.time()
+    job.lines.clear()
+    try:
+        import subprocess
+        proc = subprocess.Popen(
+            [sys.executable, "-m", "backend.train", "--mode", mode],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+            cwd=str(root),
+        )
+        job.proc = proc
+        for raw in proc.stdout:  # type: ignore[union-attr]
+            line = raw.rstrip("\n\r")
+            # Skip tqdm progress-bar lines (contain carriage returns or it/s)
+            if "\r" in raw or ("it/s" in line and "%" in line):
+                continue
+            if line:
+                job.lines.append(line)
+        proc.wait()
+        job.returncode = proc.returncode
+        job.status = "done" if proc.returncode == 0 else "error"
+    except Exception as exc:
+        job.status = "error"
+        job.lines.append(f"[launcher] ERROR: {exc}")
+    finally:
+        job.proc = None
+        job.ended_at = time.time()
 
 from backend.api.dependencies import _MODE_ENV, get_predictor
 from backend.api.middleware import LoggingMiddleware, RequestIDMiddleware
@@ -145,6 +213,156 @@ async def health() -> HealthResponse:
         except Exception:
             models[mode] = False
     return HealthResponse(status="ok", model_loaded=any(models.values()), models=models)
+
+
+@app.get("/api/v1/admin/status", tags=["admin"], summary="Admin dashboard status")
+async def admin_status() -> dict:
+    """Return extended status for the admin dashboard: per-mode checkpoint info,
+    latest benchmark results, latest training metrics, and cache statistics."""
+    _ROOT = Path(__file__).parent.parent.parent
+
+    # --- per-mode checkpoint info ---
+    mode_info: dict[str, dict] = {}
+    for mode in _MODE_ENV:
+        ckpt_path = Path(_ROOT / "models" / mode / "best.pth")
+        loaded = False
+        try:
+            get_predictor(mode)
+            loaded = True
+        except Exception:
+            pass
+        info: dict = {"loaded": loaded, "checkpoint": None}
+        if ckpt_path.exists():
+            stat = ckpt_path.stat()
+            info["checkpoint"] = {
+                "path": str(ckpt_path.relative_to(_ROOT)),
+                "size_mb": round(stat.st_size / 1_048_576, 2),
+                "modified_ts": stat.st_mtime,
+            }
+        mode_info[mode] = info
+
+    # --- latest benchmark report ---
+    benchmark_results: list[dict] = []
+    report_dir = _ROOT / "benchmark_reports"
+    if report_dir.exists():
+        reports = sorted(report_dir.glob("*.json"), reverse=True)
+        if reports:
+            try:
+                data = json.loads(reports[0].read_text(encoding="utf-8"))
+                benchmark_results = data.get("results", [])
+            except Exception:
+                pass
+
+    # --- latest training report per mode ---
+    training_summaries: dict[str, dict] = {}
+    training_dir = _ROOT / "training_reports"
+    if training_dir.exists():
+        for mode in _MODE_ENV:
+            mode_slug = mode.replace("-", "_")
+            # match both old and new naming conventions
+            candidates = sorted(
+                list(training_dir.glob(f"*{mode}*.json")) +
+                list(training_dir.glob(f"*{mode_slug}*.json")),
+                key=lambda p: p.stat().st_mtime,
+                reverse=True,
+            )
+            for c in candidates:
+                if "kfold" in c.name:
+                    continue
+                try:
+                    data = json.loads(c.read_text(encoding="utf-8"))
+                    metrics = data.get("training_metrics", {})
+                    training_summaries[mode] = {
+                        "report_file": c.name,
+                        "best_val_loss": metrics.get("best_val_loss"),
+                        "best_epoch": metrics.get("best_epoch"),
+                        "total_epochs": metrics.get("total_epochs"),
+                        "timestamp": c.stat().st_mtime,
+                    }
+                    break
+                except Exception:
+                    continue
+
+    # --- cache statistics ---
+    cache_stats: dict = {}
+    try:
+        from backend.cache_db import CacheDB
+        db = CacheDB.get()
+        cache_stats = db.stats() if hasattr(db, "stats") else {}
+    except Exception:
+        pass
+
+    return {
+        "models": mode_info,
+        "benchmark_results": benchmark_results,
+        "training_summaries": training_summaries,
+        "cache_stats": cache_stats,
+        "server_time": time.time(),
+    }
+
+
+@app.post("/api/v1/admin/train/{mode}", tags=["admin"], summary="Trigger model training")
+async def start_training(mode: str) -> dict:
+    """Spawn a training subprocess for *mode* in the background.
+    Returns immediately; poll /admin/train/status for progress."""
+    _ROOT = Path(__file__).parent.parent.parent
+    if mode not in _MODE_ENV:
+        raise HTTPException(status_code=400, detail=f"Unknown mode '{mode}'. Valid: {list(_MODE_ENV)}")
+
+    if mode not in _TRAIN_JOBS:
+        _TRAIN_JOBS[mode] = _TrainingJob()
+
+    job = _TRAIN_JOBS[mode]
+    if job.status == "running":
+        return {"started": False, "reason": "already_running", "mode": mode}
+
+    t = threading.Thread(target=_run_training_thread, args=(mode, _ROOT), daemon=True)
+    t.start()
+    return {"started": True, "mode": mode}
+
+
+@app.post("/api/v1/admin/train/{mode}/stop", tags=["admin"], summary="Stop a running training job")
+async def stop_training(mode: str) -> dict:
+    """Send SIGTERM to the training process for *mode*, if running."""
+    import signal as _signal
+    job = _TRAIN_JOBS.get(mode)
+    if not job or job.status != "running" or job.proc is None:
+        return {"stopped": False, "reason": "not_running"}
+    try:
+        job.proc.send_signal(_signal.SIGTERM)
+    except Exception:
+        job.proc.kill()
+    return {"stopped": True, "mode": mode}
+
+
+@app.get("/api/v1/admin/train/status", tags=["admin"], summary="Training job statuses")
+async def training_status() -> dict:
+    """Return current status + last log lines for all training jobs."""
+    return {
+        mode: {
+            "status": j.status,
+            "returncode": j.returncode,
+            "started_at": j.started_at,
+            "ended_at": j.ended_at,
+            "line_count": len(j.lines),
+        }
+        for mode, j in _TRAIN_JOBS.items()
+    }
+
+
+@app.get("/api/v1/admin/train/logs/{mode}", tags=["admin"], summary="Training log lines")
+async def training_logs(mode: str, offset: int = 0) -> dict:
+    """Return log lines for *mode* starting at *offset*."""
+    job = _TRAIN_JOBS.get(mode)
+    if not job:
+        return {"mode": mode, "offset": 0, "lines": [], "status": "idle"}
+    lines = list(job.lines)
+    return {
+        "mode": mode,
+        "status": job.status,
+        "offset": len(lines),
+        "lines": lines[offset:],
+    }
 
 
 @app.post(
