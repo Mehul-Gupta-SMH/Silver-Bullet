@@ -7,17 +7,19 @@ import { ComparisonModeSelector } from './components/ComparisonModeSelector';
 import { FeaturePanel } from './components/FeaturePanel';
 import { ExperimentsPanel } from './components/ExperimentsPanel';
 import { AdminPanel } from './components/AdminPanel';
+import { JuryScorer } from './components/JuryScorer';
 import { useExperiments } from './hooks/useExperiments';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { healthCheck } from './services/api';
 import type { ComparisonMode } from './types';
 import './index.css';
 
-type Tab = 'pair' | 'batch' | 'experiments' | 'admin';
+type Tab = 'pair' | 'batch' | 'jury' | 'experiments' | 'admin';
 
 const TABS: { id: Tab; label: string; icon: string; mono?: boolean }[] = [
   { id: 'pair',        label: 'Single Eval',   icon: '⚡' },
   { id: 'batch',       label: 'Batch Eval',    icon: '▦' },
+  { id: 'jury',        label: 'LLM Jury',      icon: '⚖' },
   { id: 'experiments', label: 'Experiments',   icon: '◈' },
   { id: 'admin',       label: 'Admin',         icon: '⬡', mono: true },
 ];
@@ -208,13 +210,13 @@ function App() {
       {/* ── Main ───────────────────────────────────────────────── */}
       <main style={{ maxWidth: 1140, margin: '0 auto', padding: '32px 24px', position: 'relative', zIndex: 1 }}>
 
-        {/* Mode selector + features — hide on admin/experiments */}
+        {/* Mode selector + features — hide on admin/experiments/jury */}
         {tab !== 'experiments' && tab !== 'admin' && (
           <div className="sb-fade-up sb-content-area" style={{ marginBottom: 28 }}>
             <ComparisonModeSelector selected={mode} onChange={setMode} />
           </div>
         )}
-        {tab !== 'experiments' && tab !== 'admin' && (
+        {tab !== 'experiments' && tab !== 'admin' && tab !== 'jury' && (
           <div className="sb-fade-up sb-content-area" style={{ marginBottom: 28, animationDelay: '40ms' }}>
             <FeaturePanel />
           </div>
@@ -264,6 +266,11 @@ function App() {
           {tab === 'batch' && (
             <ErrorBoundary>
               <BatchScorer mode={mode} onSave={saveBatchExperiment} />
+            </ErrorBoundary>
+          )}
+          {tab === 'jury' && (
+            <ErrorBoundary>
+              <JuryScorer mode={mode} />
             </ErrorBoundary>
           )}
           {tab === 'experiments' && (

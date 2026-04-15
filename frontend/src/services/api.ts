@@ -47,10 +47,11 @@ export const predictJuryPair = (
   text1: string,
   text2: string,
   mode: ComparisonMode,
+  juryModel?: string,
 ): Promise<JuryResult> =>
   request('/predict/jury/pair', {
     method: 'POST',
-    body: JSON.stringify({ text1, text2, mode }),
+    body: JSON.stringify({ text1, text2, mode, ...(juryModel ? { jury_model: juryModel } : {}) }),
   });
 
 export const getAdminStatus = (): Promise<AdminStatus> =>
