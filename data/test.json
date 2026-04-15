@@ -1,548 +1,13 @@
 {
   "data": [
     {
-      "text1": "The whole thing is absurd.\"",
-      "text2": "The entire thing is nonsense.",
-      "label": 1
-    },
-    {
-      "text1": "The 3{ hours of recordings include conversations between police, firefighters and other emergency workers, as well as media inquiries.",
-      "text2": "Among them are conversations between police, firefighters and other emergency workers, as well as media inquiries.",
-      "label": 1
-    },
-    {
-      "text1": "Three boys are running on the beach playing a game.",
-      "text2": "Two young boys and one young man run on a beach with water behind them.",
+      "text1": "A hash table provides average O(1) time complexity for lookups using a hash function.",
+      "text2": "A hash table provides O(n) time complexity for lookups in the average case, since collisions require scanning the entire chain.",
       "label": 0
     },
     {
-      "text1": "Questions or comments about GAO's Agency Protocols may be directed to Mr. Gene L. Dodaro, Chief Operating Officer, at (202) 512-5600 or via e-mail at AgencyProtocols@gao.gov.",
-      "text2": "Gene Dodaro has been the CEO for five years.",
-      "label": 0
-    },
-    {
-      "text1": "The oak shelving is original, as are the metal cages in which scholars were locked so as to prevent thefts.",
-      "text2": "Scholars were locked in metal cages to prevent thefts.",
-      "label": 1
-    },
-    {
-      "text1": "A kid is playing an instrument.",
-      "text2": "A young boy is playing a wind instrument.",
-      "label": 1
-    },
-    {
-      "text1": "Enclosed is our assessment of the Food and Drug Administration's compliance with the procedural steps required by sections 801(a)(1)(B)(i) through (iv) of title 5 with respect to the rule.",
-      "text2": "Our findings have found that the FDA's sections 801(a)(1)(B)(i) through (iv) of title 5 do not exist.",
-      "label": 0
-    },
-    {
-      "text1": "two puppies playing around in the grass",
-      "text2": "Two puppies play in the grass",
-      "label": 1
-    },
-    {
-      "text1": "Osmosis is the movement of water from low solute concentration to high solute concentration across a semi-permeable membrane.",
-      "text2": "Osmosis is the movement of solute molecules — not water — from low concentration to high concentration across a semi-permeable membrane.",
-      "label": 0
-    },
-    {
-      "text1": "Shares Move Higher on Wall Street",
-      "text2": "Sandy strengthens as nears coast; Wall Street shut",
-      "label": 0
-    },
-    {
-      "text1": "Considerable attention would be paid to demand and to prices that could be charged successfully.",
-      "text2": "The prices that could be successfully charged is a topic that would be given a lot of attention.",
-      "label": 1
-    },
-    {
-      "text1": "wait until they become more consistent and closer together.",
-      "text2": "wait for the contractions to get stronger and closer together.",
-      "label": 1
-    },
-    {
-      "text1": "Should I just tell her how I feel?",
-      "text2": "Should I just wait it out and see how it goes?",
-      "label": 0
-    },
-    {
-      "text1": "because of of their you know you can work with it a lot easier",
-      "text2": "They have a particular thing that eases working with it.",
-      "label": 1
-    },
-    {
-      "text1": "Boy laying on couch with dog.",
-      "text2": "The boy is lying on a couch with a puppy.",
-      "label": 1
-    },
-    {
-      "text1": "The government does not determine if you are married or not.",
-      "text2": "The government doesnt have to declare you married before you can be married.",
-      "label": 1
-    },
-    {
-      "text1": "On Saturday afternoons and evenings, the place is a teeming throng of humanity.",
-      "text2": "Saturn afternoons and evenings are the best times to experience the culture and humanity.",
-      "label": 1
-    },
-    {
-      "text1": "Iranian exiles report deaths in Iraq camp",
-      "text2": "At least 47 Iranian exiles killed at Iraq's Camp Ashraf",
-      "label": 0
-    },
-    {
-      "text1": "Tokyo shares open higher over buoyant U.S. market",
-      "text2": "Tokyo shares open higher tracing U.S. gains",
-      "label": 1
-    },
-    {
-      "text1": "The principle of innocent until proven guilty places the burden of proof on the prosecution, not the defendant, in criminal trials.",
-      "text2": "In criminal law, defendants are presumed innocent; it is the prosecution's responsibility to prove guilt beyond reasonable doubt.",
-      "label": 1
-    },
-    {
-      "text1": "4 foreign soldiers killed in Afghan east",
-      "text2": "4 French Soldiers Reported Killed in Afghanistan",
-      "label": 1
-    },
-    {
-      "text1": "Strong earthquake hits Mexico",
-      "text2": "Strong earthquake strikes near Acapulco",
-      "label": 1
-    },
-    {
-      "text1": "CIA Director George Tenet said the two men were \"defined by dedication and courage.\"",
-      "text2": "\"[They] were defined by dedication and courage,\" said the CIA's director George Tenet.",
-      "label": 1
-    },
-    {
-      "text1": "George W. Bush won the Iowa straw poll.",
-      "text2": "George W. Bush never won a single straw poll.",
-      "label": 0
-    },
-    {
-      "text1": "He was sure of it but he could not say why.",
-      "text2": "He was not sure of anything.",
-      "label": 0
-    },
-    {
-      "text1": "there are some big big tall oak trees one across",
-      "text2": "We don't have oaks or any type of american tree over here",
-      "label": 0
-    },
-    {
-      "text1": "German parliament overwhelmingly backs Greek rescue deal",
-      "text2": "German parliament endorses Greek bailout",
-      "label": 1
-    },
-    {
-      "text1": "Shakespeare's Hamlet explores themes of revenge, mortality, indecision, and the corruption of power through the story of a Danish prince.",
-      "text2": "Hamlet by Shakespeare follows a Danish prince navigating revenge, existential doubt, and the moral corruption of those around him.",
-      "label": 1
-    },
-    {
-      "text1": "There is reason to believe it shall stand forever, a massive top-to-toe restoration completed in 1999 has it looking rejuvenated and soot-free.",
-      "text2": "It received restoration work which was finished in 1999.",
-      "label": 1
-    },
-    {
-      "text1": "He was naturalized about fifteen years ago.",
-      "text2": "About fifteen years ago, he was naturalized.",
-      "label": 1
-    },
-    {
-      "text1": "He had been standing and reading a black leather book he had found.",
-      "text2": "He threw the book he'd found away.",
-      "label": 0
-    },
-    {
-      "text1": "Court in Bahrain rejects medics' last rally appeal",
-      "text2": "Bahrain rejects activists' appeal",
-      "label": 1
-    },
-    {
-      "text1": "Years before in Colombia, German had looked into the eyes of poor children and told himself he'd help if he was ever in a position to do so.",
-      "text2": "German told himself that he'd help if he could.",
-      "label": 1
-    },
-    {
-      "text1": "A group of people sitting around a table on a porch.",
-      "text2": "A group of people sitting around a table with food on it.",
-      "label": 1
-    },
-    {
-      "text1": "A herd of deer are crossing the street.",
-      "text2": "A herd of caribou are crossing a road.",
-      "label": 0
-    },
-    {
-      "text1": "um i had a friend who had fixed some uh chili buffalo chili and about a week before went to see the movie of course they raise them now you know to eat",
-      "text2": "About a week before fixing some buffalo chili he went to see the movie.",
-      "label": 1
-    },
-    {
-      "text1": "You'll probably often find yourself on this central pedestrian thoroughfare, crowded with shoppers, visitors, sightseers, and street entertainers.",
-      "text2": "Most of the time you'll find yourself in the crowded thoroughfare.",
-      "label": 1
-    },
-    {
-      "text1": "A car is moving through a road.",
-      "text2": "A car is driving down the road.",
-      "label": 1
-    },
-    {
-      "text1": "Close up of a bottle of water.",
-      "text2": "A close up view of a bottle of water.",
-      "label": 1
-    },
-    {
-      "text1": "British Archbishop of Canterbury changes career to Cambridge",
-      "text2": "Archbishop of Canterbury to step down amid rifts",
-      "label": 0
-    },
-    {
-      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
-      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
-      "label": 0
-    },
-    {
-      "text1": "Each of them had a small desert horse save Thorn and the Kal who rode larger stallions of dusty red.",
-      "text2": "Thorn and Kal had never been on a horse.",
-      "label": 0
-    },
-    {
-      "text1": "well i think the best thing he bought for me off of them is a Nintendo",
-      "text2": "The Nintendo was my favorite thing he bought me.",
-      "label": 1
-    },
-    {
-      "text1": "A small child smiling at the camera.",
-      "text2": "A cat looking at the camera.",
-      "label": 0
-    },
-    {
-      "text1": "Newton's first law: objects in motion stay in motion unless acted upon by an external force.",
-      "text2": "The Mediterranean diet is associated with reduced cardiovascular risk and longer lifespan.",
-      "label": 0
-    },
-    {
-      "text1": "In this cavernous emporium you'll have your pick of fresh Martinique pineapples, coconut slices, or the pungent baby limes so loved in the West Indies.",
-      "text2": "In addition to baby limes, coconuts and pineapples, the emporium also sells oranges and apples.",
-      "label": 0
-    },
-    {
-      "text1": "Not until then will we know whether this is real money or funny money--whether it will be worth a continental.",
-      "text2": "We will then know whether it's real money or funny money.",
-      "label": 1
-    },
-    {
-      "text1": "Market penetration strategy aims to increase market share for existing products in existing markets through competitive pricing, increased promotion, or improved distribution.",
-      "text2": "Penetrating an existing market with current product offerings — via price adjustments, advertising spend, or expanded distribution — is a market penetration approach designed to grow share without entering new segments.",
-      "label": 1
-    },
-    {
-      "text1": "you know just just for fresh i i'm really interested in the basic concept differences between west and east coast and the central parts of America",
-      "text2": "The differences between the major regions of America really interest me.",
-      "label": 1
-    },
-    {
-      "text1": "Franklin did nothing for a while, apparently ignorant of my presence.",
-      "text2": "Franklin didn't know I was here.",
-      "label": 1
-    },
-    {
-      "text1": "Suppose further that they can do this for 1.5 cents per piece and that this saves the Postal Service 4 cents per piece.",
-      "text2": "They can do this for 6 cents, which the Postal Service can do cheaper.",
-      "label": 0
-    },
-    {
-      "text1": "The man is playing the guitar.",
-      "text2": "A man is playing a guitar.",
-      "label": 1
-    },
-    {
-      "text1": "yeah i i buy them every once in a while and and i bought one and it was you know blah",
-      "text2": "I buy them occasionally and sometimes they are very bland.",
-      "label": 1
-    },
-    {
-      "text1": "Greece to vote on 2013 budget; protesters gather",
-      "text2": "Greece to vote on 2013 budget",
-      "label": 1
-    },
-    {
-      "text1": "Malaysia Airlines loses contact with plane carrying 239 to Beijing",
-      "text2": "Malaysia Airlines plane vanishes on flight to Beijing",
-      "label": 1
-    },
-    {
-      "text1": "Who supposedly operated the homicidal gas chambers?",
-      "text2": "Refresh your memory: Who supposedly operated the homicidal gas chambers?",
-      "label": 1
-    },
-    {
-      "text1": "The central limit theorem: sample means approach a normal distribution as sample size increases.",
-      "text2": "The central limit theorem states that population distributions become normal as the number of observations increases, regardless of the sample size used.",
-      "label": 0
-    },
-    {
-      "text1": "The monkeys could track their progress by watching a schematic representation of the arm and its motions on a video screen.",
-      "text2": "The arm was kept in a separate room, but the monkeys could track their progress by watching a representation of the arm and its motions on a video screen.",
-      "label": 1
-    },
-    {
-      "text1": "For example, if the prevalence declines by 25 percent with a drop in PM, then baseline incidence drops by 25 percent with the same drop in PM.",
-      "text2": "If the prevalence declines by 25% with a drop in PM, the baseline incidence goes down the same amount without fail, as they are directly related.",
-      "label": 0
-    },
-    {
-      "text1": "and one had been broken off",
-      "text2": "One had been severed.",
-      "label": 1
-    },
-    {
-      "text1": "Added Mr. Prodi: \"Maybe, but the old age helps us to understand our strengths and our weakness.\"",
-      "text2": "\"Maybe, but the old age helps us to understand our strength and our weakness and the reality of the world.",
-      "label": 0
-    },
-    {
-      "text1": "Evaluation case studies have covered shorter periods and involved less on-site investigation than research case studies characteristically do.",
-      "text2": "Evaluation case studies have covered shorter time periods and involved less on-site investigation than research case studies most likely do.",
-      "label": 0
-    },
-    {
-      "text1": "There was a string of obvious ritual commands in their sacred language.",
-      "text2": "The rituals were performed in modern English.",
-      "label": 0
-    },
-    {
-      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
-      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
-      "label": 1
-    },
-    {
-      "text1": "(Mitchell 1999) The amount of work that can be turned over in this way is quite large.",
-      "text2": "The amount of work that can be turned over in this way is quite small.",
-      "label": 0
-    },
-    {
-      "text1": "If a state does not participate (or is not certified by the Department of Labor as meeting Federal requirements): (i) the Federal unemployment tax is levied within the state at its maximum rate, (ii) the system does not pay any unemployment compensation benefits within the state, and (iii) the Federal Government provides no grants to state governments to pay for the costs of administration.",
-      "text2": "If a state does not participate, the federal government can only disallow grants.",
-      "label": 0
-    },
-    {
-      "text1": "Additional techniques for communicating information security policies are discussed in the next section on promoting awareness.",
-      "text2": "Several other techniques including information security polices are discussed in the next section.",
-      "label": 0
-    },
-    {
-      "text1": "The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
-      "text2": "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
-      "label": 0
-    },
-    {
-      "text1": "Wells’ other series include NBC’s ER and Third Watch.",
-      "text2": "Wells' other series include NBC's \"ER\" and \"Third Watch.\"",
-      "label": 1
-    },
-    {
-      "text1": "little place to live you know even just a little room or whatever",
-      "text2": "A small room sufficient for staying in or the likes of.",
-      "label": 1
-    },
-    {
-      "text1": "In addition, it offered the United States and Israel a way to work around Mr. Arafat.",
-      "text2": "When the prime minister's position was established in the spring, it offered the United States and Israel a way to work around Arafat.",
-      "label": 1
-    },
-    {
-      "text1": "While benefits, recognition, and challenging responsibilities are also useful in securing staff, leading organizations identify training as a major nonsalary incentive for attracting and retaining skilled IT professionals.",
-      "text2": "Training is a major incentive for attracting skilled IT professionals.",
-      "label": 1
-    },
-    {
-      "text1": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)",
-      "text2": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
-      "label": 1
-    },
-    {
-      "text1": "Porter's Five Forces framework evaluates competitive intensity across five dimensions: bargaining power of suppliers, bargaining power of buyers, threat of substitute products, threat of new entrants, and rivalry among existing competitors.",
-      "text2": "The Five Forces model analyses an industry's competitive landscape by examining supplier leverage, buyer leverage, substitute threats, barriers to new entry, and the intensity of existing competitive rivalry.",
-      "label": 1
-    },
-    {
-      "text1": "He felt that it would be a mistake to open this set of research recommendations with a recommendation that included screening for withdrawal or other conditions.",
-      "text2": "He thought it would be a bad idea to open this set of recommendations with a recommendation to withdraw.",
-      "label": 1
-    },
-    {
-      "text1": "SQL JOINs combine rows from multiple tables based on a shared column.",
-      "text2": "The placebo effect describes real symptom improvement after inert treatment, driven by expectation.",
-      "label": 0
-    },
-    {
-      "text1": "A potted plant in sunlight from a window.",
-      "text2": "A potted plant with only a few sprouting.",
-      "label": 0
-    },
-    {
-      "text1": "Thai political protests paralyse more ministries",
-      "text2": "Thai protesters besiege more ministries",
-      "label": 1
-    },
-    {
-      "text1": "Because we only have two attorneys per night right now, we can only see about 15 people each night, he said.",
-      "text2": "We have dozens of attorneys waiting to help clients every night.",
-      "label": 0
-    },
-    {
-      "text1": "The new loan raised their mortgage debt $100,000, to $360,000.",
-      "text2": "The new loan decreased the loan amount.",
-      "label": 0
-    },
-    {
-      "text1": "They videotape anything that moves and much that doesn't.",
-      "text2": "Anything that moves and as well as anything that does not move are videotaped.",
-      "label": 1
-    },
-    {
-      "text1": "The early works of Sean O'Casey and John Synge were written for the Abbey.",
-      "text2": "O'Casey wrote his works for the Abbey.",
-      "label": 1
-    },
-    {
-      "text1": "it seems like a lot of times the law is is totally on the criminal side and and isn't protecting the rest of the people",
-      "text2": "In most criminal cases, it seems like the law is protecting the public.",
-      "label": 0
-    },
-    {
-      "text1": "A black and white cow standing in a grassy field.",
-      "text2": "A black and white horned cow standing in a field.",
-      "label": 1
-    },
-    {
-      "text1": "Mall attackers used 'less is more' strategy",
-      "text2": "In Kenya, attackers used 'less is more' strategy",
-      "label": 0
-    },
-    {
-      "text1": "To defend market share, the strategy calls for short-term price matching to neutralise the new entrant, followed by a 12-month product refresh cycle and a loyalty programme targeting the top 20% of revenue-generating accounts.",
-      "text2": "To defend market share, the strategy calls for short-term price matching to neutralise the new entrant and launching a loyalty programme for high-value accounts.",
-      "label": 0
-    },
-    {
-      "text1": "It's the first such drill since the September 11 terrorist attacks on New York and Washington.",
-      "text2": "It is the nation's first large-scale counterterrorism exercise since the Sept. 11 terrorist attacks.",
-      "label": 1
-    },
-    {
-      "text1": "It discourages close scrutiny and too many questions.",
-      "text2": "Too many questions are discouraged, at least for now.",
-      "label": 0
-    },
-    {
-      "text1": "The French Revolution began in 1789 and culminated in the execution of Louis XVI in 1793.",
-      "text2": "The French Revolution began in 1799 with Napoleon's coup and culminated in the execution of Louis XVI, who had already died in 1793.",
-      "label": 0
-    },
-    {
-      "text1": "Tsunami warning issued for southern Alaska",
-      "text2": "Tsunami warning after Canada quake",
-      "label": 0
-    },
-    {
-      "text1": "That compared with $35.18 million, or 24 cents per share, in the year-ago period.",
-      "text2": "Earnings were affected by a non-recurring $8 million tax benefit in the year-ago period.",
-      "label": 0
-    },
-    {
-      "text1": "We conducted extensive Internet searcHe's for all 50 states to identify reports and other studies that identified states that had taken actions that appeared to identify and reduce improper payments.",
-      "text2": "Internet searches were performed for all 50 states.",
-      "label": 1
-    },
-    {
-      "text1": "Supply and demand determines market price: when supply exceeds demand, prices fall; when demand exceeds supply, prices rise.",
-      "text2": "Market prices are set by the interaction of supply and demand — surplus supply drives prices down, while excess demand pushes them up.",
-      "label": 1
-    },
-    {
-      "text1": "On the face of it, this seems crazy.",
-      "text2": "This looks like it will be great!",
-      "label": 0
-    },
-    {
-      "text1": "Navy Jet Crashes Into Apartment Building",
-      "text2": "US Navy Jet Crashes into Apartment Block",
-      "label": 1
-    },
-    {
-      "text1": "During 2002, we worked with national colleagues on specific activities.",
-      "text2": "Specific activities were worked on with national colleagues.",
-      "label": 1
-    },
-    {
-      "text1": "The dog is barking at the toy.",
-      "text2": "A dog is barking at a toy.",
-      "label": 1
-    },
-    {
-      "text1": "A century later, Lorenzo Ghiberti won the competition to design the great north and east doors, devoted respectively to the life of Jesus and scenes from the Old Testament.",
-      "text2": "Lorenzo Ghiberti designed the south doors because he won a competition.",
-      "label": 0
-    },
-    {
-      "text1": "Protests sweep Brazil despite concession",
-      "text2": "Protests planned across Brazil despite concessions",
-      "label": 1
-    },
-    {
-      "text1": "The central limit theorem states that the distribution of sample means approaches a normal distribution as sample size increases, regardless of the population's distribution.",
-      "text2": "As sample size grows, the CLT guarantees that the sampling distribution of the mean converges to a normal distribution, no matter what the underlying population looks like.",
-      "label": 1
-    },
-    {
-      "text1": "Tibetan monk dies after setting himself on fire in protest against Chinese rule",
-      "text2": "Teenage Tibetan monk dies after setting himself on fire in China",
-      "label": 1
-    },
-    {
-      "text1": "The stock market allows companies to raise capital by selling shares to public investors, who then own a fraction of the company.",
-      "text2": "By issuing shares on the stock market, companies access public capital, and shareholders receive partial ownership of the business in return.",
-      "label": 1
-    },
-    {
-      "text1": "He was in the middle of conveying a particularly choice morsel of Sole a la Jeanette to his mouth, when he caught sight of Julius entering the room.",
-      "text2": "Julius was eating with him.",
-      "label": 0
-    },
-    {
-      "text1": "A man and woman stand, smiling for camera.",
-      "text2": "A man and woman are posing for the camera.",
-      "label": 1
-    },
-    {
-      "text1": "and if it goes down then we're stuck all day",
-      "text2": "If it is to go under then we might be stuck all day",
-      "label": 1
-    },
-    {
-      "text1": "Glee star Cory Monteith found dead in hotel room in Canada",
-      "text2": "'Glee' star Cory Monteith found dead",
-      "label": 1
-    },
-    {
-      "text1": "The First Amendment protects free speech, religion, press, and assembly.",
-      "text2": "The Second Amendment protects the right to keep and bear arms, and has been the subject of significant US Supreme Court interpretation regarding individual versus collective rights.",
-      "label": 0
-    },
-    {
-      "text1": "The Mint is situated on the west bank of the Dojima River (opposite Sakuranomiya Park).",
-      "text2": "Walking trails can be found in Sakuranomiya Park.",
-      "label": 0
-    },
-    {
-      "text1": "\"Certainly what we know suggests that we should take what they're saying very seriously,\" he added.",
-      "text2": "\"We don't know everything [but] what we know suggests that we should take what they're saying seriously,\" he said.",
+      "text1": "Who killed Foxy Loxy?",
+      "text2": "Foxy Loxy was killed by whom?",
       "label": 1
     },
     {
@@ -551,29 +16,529 @@
       "label": 0
     },
     {
-      "text1": "He suggested we need research on how to get physicians to screen in the emergency department.",
-      "text2": "He pointed out that we need research on screening in the emergency department.",
-      "label": 1
-    },
-    {
-      "text1": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY salary DESC;",
-      "text2": "SELECT name, salary FROM employees WHERE department = 'Engineering' ORDER BY name ASC;",
+      "text1": "A brown and white dog with a pink collar is barking at a brown dog with a blue collar in the snow.",
+      "text2": "The dog with the red collar is bearing it's teeth at the dog with the blue collar.",
       "label": 0
     },
     {
-      "text1": "E-mail is making the workplace more egalitarian by enabling minions to send suggestions to higher-ups.",
-      "text2": "E-mail has only made communication between employess and bosses more difficult.",
+      "text1": "A cat swings on a ceiling fan.",
+      "text2": "A cat is spun around by a ceiling fan.",
+      "label": 1
+    },
+    {
+      "text1": "He felt that it would be a mistake to open this set of research recommendations with a recommendation that included screening for withdrawal or other conditions.",
+      "text2": "He thought it would be a bad idea to open this set of recommendations with a recommendation to withdraw.",
+      "label": 1
+    },
+    {
+      "text1": "These new LSC administrative provisions have been incorporated into each LSC appropriation since 1996, subject to some modifications made in the Departments of Commerce, Justice, and State, the Judiciary and Related Agencies Appropriations Act, 1998, Pub.",
+      "text2": "Since 1996, the LSC has had administrative provisions.",
+      "label": 1
+    },
+    {
+      "text1": "Vinnie Jones reveals cancer battle new",
+      "text2": "Vinnie Jones reveals he has skin cancer",
+      "label": 1
+    },
+    {
+      "text1": "2 Indian traders stranded in China sent back home",
+      "text2": "46 Indian nurses stranded in Iraq return home",
       "label": 0
     },
     {
-      "text1": "Just after he left, a new trauma victim rolled in--a 28-year-old who had been knocked unconscious in a high-speed head-on collision.",
-      "text2": "Just after he left, a new victim arrived.",
+      "text1": "Average boxes per mile differ by a factor of nine.",
+      "text2": "Average boxes per mile are the same",
+      "label": 0
+    },
+    {
+      "text1": "Mob kills man for burning Quran",
+      "text2": "Pakistani Mob Kills Man 'for Burning Koran'",
       "label": 1
     },
     {
-      "text1": "Photosynthesis is the process by which plants convert light energy into chemical energy stored as glucose, using carbon dioxide and water as inputs and releasing oxygen as a by-product.",
-      "text2": "Through photosynthesis, plants absorb CO₂ and water and use sunlight to produce glucose (chemical energy), releasing oxygen in the process.",
+      "text1": "A man is pouring oil into a pan.",
+      "text2": "A man is pouring oil into a skillet.",
       "label": 1
+    },
+    {
+      "text1": "Now, assume that information about Monica is published.",
+      "text2": "Now, suppose that details about Monica are published.",
+      "label": 1
+    },
+    {
+      "text1": "As noted previously, the Shopping Avenger is but one superhero, and he issues abject apologies to all those who did not receive personal responses.",
+      "text2": "The Shopping Avenger can't personally respond to everyone.",
+      "label": 1
+    },
+    {
+      "text1": "Yet not a single word has been murmured on his behalf.",
+      "text2": "Not a single word on his behalf has been said by anyone.",
+      "label": 0
+    },
+    {
+      "text1": "mexico wishes to guarantee citizens' safety.",
+      "text2": "mexico wishes to avoid more violence.",
+      "label": 1
+    },
+    {
+      "text1": "She says, according to the Post , the secret is opening your mouth 'really wide' when eating.",
+      "text2": "She also gave out other tips.",
+      "label": 0
+    },
+    {
+      "text1": "Israel frees Palestinian prisoners",
+      "text2": "Gov't committee approves release of 26 Palestinian prisoners",
+      "label": 0
+    },
+    {
+      "text1": "They passed through the Lemelson Medical, Educational and Research Foundation Limited Partnership in 2001 to Syndia.",
+      "text2": "It said the patents were \"allegedly\" assigned to Syndia in 2001 through the Lemelson Medical, Educational and Research Foundation Limited Partnership.",
+      "label": 0
+    },
+    {
+      "text1": "Three dogs standing in snow next to a blue fence.",
+      "text2": "Three dogs play in the shallows next to a rocky shore.",
+      "label": 0
+    },
+    {
+      "text1": "well i think the best thing he bought for me off of them is a Nintendo",
+      "text2": "The Nintendo was my favorite thing he bought me.",
+      "label": 1
+    },
+    {
+      "text1": "He turned to the Astronomer.",
+      "text2": "He spoke to the Astronomer.",
+      "label": 0
+    },
+    {
+      "text1": "Bayes' theorem: P(A|B) = P(B|A) · P(A) / P(B).",
+      "text2": "Bayes' theorem: P(A|B) = P(A) · P(B) / P(B|A).",
+      "label": 0
+    },
+    {
+      "text1": "sure and and and i don't have any doubt that through some back channels that we encouraged it",
+      "text2": "I am pretty sure that we encouraged it somehow.",
+      "label": 1
+    },
+    {
+      "text1": "The brand repositioning moves the company from a cost-leader position to a premium, sustainability-focused identity, supported by product reformulation, supply chain certification, and a revised marketing narrative emphasising environmental credentials.",
+      "text2": "The brand repositioning targets a premium identity, supported by product reformulation and a revised marketing narrative.",
+      "label": 0
+    },
+    {
+      "text1": "An additional reporting standard for financial audits performed in accordance with GAGAS",
+      "text2": "There was an additional report for financial audits performed.",
+      "label": 1
+    },
+    {
+      "text1": "Newsweek 's cover piece examines a new book claiming that parents have a scant role in shaping their children.",
+      "text2": "Newsweek said parents impact their kids more than anyone.",
+      "label": 0
+    },
+    {
+      "text1": "US astronaut Neil Armstrong dead at 82",
+      "text2": "US astronaut Neil Armstrong dies",
+      "label": 1
+    },
+    {
+      "text1": "A black and tan dog looks at a black sheep.",
+      "text2": "A black dog looking at a brown sheep in a pen.",
+      "label": 0
+    },
+    {
+      "text1": "the bigger and heavier the lawn mower the more macho the guy behind it so you know of course he wouldn't couldn't buy one of those little little tiny skinny ones that you can get at one of the uh one of the Aames or",
+      "text2": "He thought he had to look tough.",
+      "label": 0
+    },
+    {
+      "text1": "Tampering with medicine has been so lucrative that many of those arrested lived in million-dollar homes.",
+      "text2": "Tampering with medicine apparently was so lucrative, investigators said, that many of the suspects lived in million-dollar homes.",
+      "label": 1
+    },
+    {
+      "text1": "A person is squeezing through an opening in the rock face.",
+      "text2": "A medium sized brown dog is running through an open white wooded area.",
+      "label": 0
+    },
+    {
+      "text1": "A woman sings into a microphone by a guy playing a guitar.",
+      "text2": "A woman sings into a microphone with a guitar player in the background.",
+      "label": 1
+    },
+    {
+      "text1": "He slept most of the time, as if not daring to use his little strength even to think.",
+      "text2": "He was perpetually tired.",
+      "label": 0
+    },
+    {
+      "text1": "The 14th-century battlemented tower to the left is the remnant of an old abbey.",
+      "text2": "There was an old abbey that had a battlemented tower.",
+      "label": 1
+    },
+    {
+      "text1": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen.",
+      "text2": "Photosynthesis uses light, water, and CO₂ to produce glucose and releases oxygen. It takes place primarily in the roots of plants, where chlorophyll is most concentrated.",
+      "label": 0
+    },
+    {
+      "text1": "During 2002, we worked with national colleagues on specific activities.",
+      "text2": "Specific activities were worked on with national colleagues.",
+      "label": 1
+    },
+    {
+      "text1": "Metformin is a first-line treatment for type 2 diabetes. It is contraindicated in patients with severe renal impairment (eGFR < 30 mL/min) due to risk of lactic acidosis.",
+      "text2": "Metformin is a first-line treatment for type 2 diabetes. It is generally safe for patients with kidney disease of any severity and is also effective for type 1 diabetes.",
+      "label": 0
+    },
+    {
+      "text1": "Fitch upgrades Ford to investment grade",
+      "text2": "Fitch restores Ford credit to investment grade",
+      "label": 1
+    },
+    {
+      "text1": "Maryland has a surcharge on court filing fees that goes to legal services for the needy.",
+      "text2": "Maryland has no surcharge on court filing fees.",
+      "label": 0
+    },
+    {
+      "text1": "Photosynthesis: light-dependent reactions occur in the thylakoid membranes; the Calvin cycle occurs in the stroma.",
+      "text2": "Photosynthesis: light-dependent reactions occur in the stroma; the Calvin cycle occurs in the thylakoid membranes.",
+      "label": 0
+    },
+    {
+      "text1": "russia said the system is a clear threat to russian security.",
+      "text2": "it is a serious threat to international security.",
+      "label": 0
+    },
+    {
+      "text1": "Machine translation systems like Google Translate use neural networks trained on large bilingual corpora to convert text from one language to another.",
+      "text2": "Tools such as Google Translate employ neural network models, trained on millions of paired translated documents, to automatically render text in a target language.",
+      "label": 1
+    },
+    {
+      "text1": "And if you feel like being idle, France is full of quiet places where it's a simple joy to do absolutely nothing.",
+      "text2": "There are no quiet places in France to relax.",
+      "label": 0
+    },
+    {
+      "text1": "Someone is slicing an onion.",
+      "text2": "Someoen is peeling a potato.",
+      "label": 0
+    },
+    {
+      "text1": "Once a vast fortification of 49 turrets, it ranked alongside Osaka and Nagoya as one of the country's greatest impregnable bastions.",
+      "text2": "Unlike Osaka and Nagoya, the fortification was found to be wanting.",
+      "label": 0
+    },
+    {
+      "text1": "that's always a good thing vegetable trays always go over so well because i think people get tired of eating junk i mean i think they like to have healthy stuff too you know it's",
+      "text2": "Everyone would prefer a vegetable tray over junk food if given the choice.",
+      "label": 0
+    },
+    {
+      "text1": "35 \"Eh voila une table!\" cried Poirot.",
+      "text2": "Poirot spoke French.",
+      "label": 0
+    },
+    {
+      "text1": "A man jumps off of one rooftop onto another.",
+      "text2": "A young man jumps from one balcony to another.",
+      "label": 0
+    },
+    {
+      "text1": "Tornadoes rip through Midwest, killing 6 and devastating neighborhoods",
+      "text2": "Tornadoes, damaging storms hit U.S. Midwest, killing 5",
+      "label": 0
+    },
+    {
+      "text1": "they have but i really hate paying twenty two ninety five for an oil change",
+      "text2": "I love paying lots of money for oil changes.",
+      "label": 0
+    },
+    {
+      "text1": "Dark matter makes up approximately 27% of the universe's total energy content but cannot be directly observed — it only reveals itself through gravitational effects.",
+      "text2": "About 27% of the cosmos consists of dark matter, an unseen substance detectable only by its gravitational influence on visible matter and light.",
+      "label": 1
+    },
+    {
+      "text1": "They found molecules that can only be produced when ozone breaks down cholesterol.",
+      "text2": "And all of the samples contained molecules that can only be produced when cholesterol interacts with ozone.",
+      "label": 1
+    },
+    {
+      "text1": "but see but you're going there and you know what you're getting into",
+      "text2": "There will be crocodiles, just saying that now.",
+      "label": 0
+    },
+    {
+      "text1": "The estrangement of too many parents from John McCain's life.",
+      "text2": "There was no estrangement of parents in John McCain's life.",
+      "label": 0
+    },
+    {
+      "text1": "A boy runs away from his fishing line.",
+      "text2": "A boy is running in front of fish hanging on fishing rod.",
+      "label": 0
+    },
+    {
+      "text1": "Data on retention and recruitment over the past decade is gathered and made available by national organizations",
+      "text2": "National organizations have gathered and released data over the last decade.",
+      "label": 1
+    },
+    {
+      "text1": "Two Kenyan ministers among 6 killed in plane crash",
+      "text2": "Poland honors president killed in 2010 plane crash",
+      "label": 0
+    },
+    {
+      "text1": "Recursion without a proper base case leads to infinite recursion and a stack overflow error.",
+      "text2": "If a recursive function never reaches its base case, it calls itself indefinitely until the call stack overflows.",
+      "label": 1
+    },
+    {
+      "text1": "Napolitano elected for second term as Italy president",
+      "text2": "Italian President Napolitano elected for second term",
+      "label": 1
+    },
+    {
+      "text1": "A black and brown dog runs through the woods.",
+      "text2": "A dog running through the woods.",
+      "label": 1
+    },
+    {
+      "text1": "Close up of a bottle of water.",
+      "text2": "A close up view of a bottle of water.",
+      "label": 1
+    },
+    {
+      "text1": "executive director of the arms control association in washington daryl kimball stated that-- the iaea report is 1 in a series of bad signs.",
+      "text2": "executive director of the arms control association in washington daryl kimball stated the israeli document could affect the debate over india.",
+      "label": 1
+    },
+    {
+      "text1": "Thomas Cook accused of putting costs before customers",
+      "text2": "University of Florida frat accused of spitting on wounded war veterans",
+      "label": 0
+    },
+    {
+      "text1": "We can bring you fresh provisions for the return journey,\" said Severn.",
+      "text2": "Severn said they would return with supplies.",
+      "label": 1
+    },
+    {
+      "text1": "You can tour the pyramids on foot, or take a camel or horseback ride between the main sites.",
+      "text2": "Horses and camels are used for tourist trips at the pyramids.",
+      "label": 1
+    },
+    {
+      "text1": "yeah but i mean a a a lot of people would get involved and you know because there were all different organizations to do there was Big Brother Big Sister they had a yearly auction they had a dance marathon for charity or to to to support that group",
+      "text2": "Big Brother has been great for young men in the community.",
+      "label": 0
+    },
+    {
+      "text1": "43 In an ED study, BAC was a poor screen for alcohol abuse or dependence with a sensitivity of 20 percent, less sensitive than self-reported drinking.",
+      "text2": "BAC performed worse than self-reporting in the study.",
+      "label": 1
+    },
+    {
+      "text1": "estimates, the 8a level seems small, as does the gain of $32 million.",
+      "text2": "The gain of over 30 million dollars appears minor.",
+      "label": 1
+    },
+    {
+      "text1": "His particular obsession is that Hillary Clinton is, I kid you not, a Red.",
+      "text2": "According to his obsession Hillary Clinton is a Red.",
+      "label": 1
+    },
+    {
+      "text1": "A man is playing a guitar.",
+      "text2": "A man in a hat is playing a harp.",
+      "label": 0
+    },
+    {
+      "text1": "A person climbs up a snowy hill while their dog follows.",
+      "text2": "A person climbs a snowy hill while a black dog follows.",
+      "label": 1
+    },
+    {
+      "text1": "A group of sheep in a field.",
+      "text2": "A group of horses grazing in a field.",
+      "label": 0
+    },
+    {
+      "text1": "Out in the lagoon, Venetians have been manufacturing glass on the island of Murano since 1292, when the hazardous furnaces were moved away from the city center.",
+      "text2": "Glass making furnaces were moved from the city center to an island.",
+      "label": 1
+    },
+    {
+      "text1": "Yakuza members, who are six times more numerous than American Mafiosi, hand out business cards with gang names printed on them and frequently sport amputated pinkies (cut to atone for a misdeed).",
+      "text2": "Yakuza members have business cards with gang names.",
+      "label": 1
+    },
+    {
+      "text1": "While I see him claiming that permitting gay marriage is one more step along this path, I don't see him providing any argument that such unions are themselves bad or any worse than the other breakdowns of traditional marriage (such as interracial marriage, multiple divorces, prenuptial agreements, and so forth).",
+      "text2": "He does not have an opinion on the effect of permitting gay marriage.",
+      "label": 0
+    },
+    {
+      "text1": "Mumbai photojournalist gangrape case cracked, five accused arrested",
+      "text2": "Mumbai journalist gang-rape case: All five accused arrested",
+      "label": 1
+    },
+    {
+      "text1": "The state's population was 6,080,485 in 2000, according to the U.S. census.",
+      "text2": "Between 1960 and 2000, however, the state's population grew by 30.4 percent to 6,080,485.",
+      "label": 0
+    },
+    {
+      "text1": "Thermodynamics' second law states that the total entropy of an isolated system can never decrease over time.",
+      "text2": "According to the second law of thermodynamics, entropy in a closed system always tends to increase or remain constant — it cannot spontaneously decrease.",
+      "label": 1
+    },
+    {
+      "text1": "Cadbury Schweppes plc plans to cut 5500 jobs and shut factories after a 4.9 billion ($A11.9 billion) acquisition spree over the past three years inflated costs.",
+      "text2": "Cadbury Schweppes has unveiled plans to slash 5,500 jobs and 20 percent of its factories over four years to cut costs brought about by an acquisition spree.",
+      "label": 0
+    },
+    {
+      "text1": "\"I'm real excited to be a Cleveland Cavalier,\" James said.",
+      "text2": "\"I'm really excited about going to Cleveland,\" James told ESPN.com.",
+      "label": 1
+    },
+    {
+      "text1": "Newton's first law of motion states that an object at rest stays at rest, and an object in motion continues in motion at constant velocity unless acted upon by a net external force.",
+      "text2": "Newton's second law of motion states that force equals mass times acceleration (F = ma), and an object at rest stays at rest unless acted upon by a net external force.",
+      "label": 0
+    },
+    {
+      "text1": "So head first for the tourist office on the huge Place Bellecour, in the middle of the Presqu'ile, the peninsula between the two rivers.",
+      "text2": "The tourist office is on a mountain.",
+      "label": 0
+    },
+    {
+      "text1": "The technology-laced Nasdaq Composite Index .IXIC fell 23.54 points, or 1.42 percent, to 1,630.08.",
+      "text2": "The broader Standard & Poor's 500 Index .SPX gave up 11.91 points, or 1.19 percent, at 986.60.",
+      "label": 0
+    },
+    {
+      "text1": "Livingston changed my life, he says.",
+      "text2": "He was unimpressed with Livingston's accomplishments.",
+      "label": 0
+    },
+    {
+      "text1": "An Apple computer sitting on the floor.",
+      "text2": "A Macintosh computer sitting on the floor.",
+      "label": 1
+    },
+    {
+      "text1": "The settlement taking effect this week was reached less than two months after O'Malley took the helm of the nation's fourth-largest archdiocese.",
+      "text2": "The $85 million agreement was reached in September, less than two months after Archbishop Sean O'Malley took over as leader of the nation's fourth-largest diocese.",
+      "label": 0
+    },
+    {
+      "text1": "Thinking back later, I realized that he could have killed me while I was wrestling with the big man, but he didn't.",
+      "text2": "I don't think he could have killed me.",
+      "label": 0
+    },
+    {
+      "text1": "China stocks open lower on Wednesday",
+      "text2": "China's stocks close lower on Monday",
+      "label": 0
+    },
+    {
+      "text1": "Two dogs swim in a pool.",
+      "text2": "Dogs are swimming in a pool.",
+      "label": 1
+    },
+    {
+      "text1": "international atomic energy association is the united nations watchdog.",
+      "text2": "the international atomic energy agency is the u.n.'s nuclear watchdog.",
+      "label": 1
+    },
+    {
+      "text1": "One piece says the veep is likely to take credit for wiring school and libraries to the Internet--even though this wiring is subsidized by a universal service charge on everyone's phone bill.",
+      "text2": "The veep will pay out of pocket for schools and libraries to be connected to the internet.",
+      "label": 0
+    },
+    {
+      "text1": "31 Under any foreseeable circumstances, universal delivery would not cease.",
+      "text2": "It is very likely that universal delivery will continue, no matter what happens.",
+      "label": 1
+    },
+    {
+      "text1": "well and now the way they're uh treating those Kurds is that what they its terrible and we've just kind of backed off i don't understand that why we",
+      "text2": "We wish we could help those Kurds.",
+      "label": 0
+    },
+    {
+      "text1": "Homeostasis maintains stable internal body conditions like temperature and blood sugar.",
+      "text2": "Git is a distributed version control system that tracks changes in source code.",
+      "label": 0
+    },
+    {
+      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
+      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
+      "label": 1
+    },
+    {
+      "text1": "that water can get pretty cold though  if you go too early",
+      "text2": "The water is cold if you go too early.",
+      "label": 1
+    },
+    {
+      "text1": "The girls danced on the stage.",
+      "text2": "A girl is putting on makeup.",
+      "label": 0
+    },
+    {
+      "text1": "On Saturday afternoons and evenings, the place is a teeming throng of humanity.",
+      "text2": "Saturn afternoons and evenings are the best times to experience the culture and humanity.",
+      "label": 1
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed, only converted from one form to another.",
+      "text2": "Energy is neither created nor destroyed — it only transforms between forms such as kinetic, potential, thermal, or chemical energy.",
+      "label": 1
+    },
+    {
+      "text1": "GDPR gives individuals the right to access, correct, or delete their personal data.",
+      "text2": "Machine learning systems learn patterns from data without being explicitly programmed.",
+      "label": 0
+    },
+    {
+      "text1": "Didier Reynders on Syria",
+      "text2": "Obama's day: Prime time on Syria",
+      "label": 0
+    },
+    {
+      "text1": "Hume follows by asking whether this means that Starr's office is committed to eventually delivering a report (thereby indicating that Starr has credible evidence of impeachable malfeasance).",
+      "text2": "Hume doesn't inquire about the report.",
+      "label": 0
+    },
+    {
+      "text1": "Bunkhouse, feed store, and storage room, blacksmith shop, cookhouse, stables, main house, the quarters for the married men and their families all arranged to enclose a patio into which choice stock could be herded at the time of an attack, with a curbed well in the center.",
+      "text2": "There was no arranged place for the married men to stay.",
+      "label": 0
+    },
+    {
+      "text1": "i mean yeah i'm happy for that",
+      "text2": "That is something I'm happy about.",
+      "label": 1
+    },
+    {
+      "text1": "If I'm angry, it will show up in one of those scans..",
+      "text2": "If I'm hyper active, it will show up in one of those scans..",
+      "label": 0
+    },
+    {
+      "text1": "Newton's first law states that objects in motion stay in motion unless acted upon by an external force.",
+      "text2": "Newton's third law states that for every action there is an equal and opposite reaction, explaining how rockets propel themselves in space.",
+      "label": 0
+    },
+    {
+      "text1": "The more fantastic grow the evening gowns on the runway, the more uniform grows the garb of the crowds on the subway.",
+      "text2": "People enjoy seeing the evening gowns on the runway.",
+      "label": 0
     },
     {
       "text1": "The Moors were expelled from the town, but they remained in control of southern Spain for almost four centuries.",
@@ -581,83 +546,58 @@
       "label": 0
     },
     {
-      "text1": "Few cities have so perfected the art of socializing eating and drinking in public.",
-      "text2": "The crime-ridden streets suggest staying indoors is to be preferred at all times.",
+      "text1": "Then Shuman claims that free software is less tested than commercial software.",
+      "text2": "Free software is claimed by Shuman as more tested than commercial software.",
       "label": 0
     },
     {
-      "text1": "A couple posing for a picture on a couch.",
-      "text2": "Young couple sitting on couch.",
+      "text1": "A man  is driving a car.",
+      "text2": "A woman dips a shrimp in batter.",
+      "label": 0
+    },
+    {
+      "text1": "Book especially early for Christmas and New Year's (when most hotels charge a huge supplement) and for smaller hotels throughout the year.",
+      "text2": "Hotels fill up fast for major holidays.",
+      "label": 0
+    },
+    {
+      "text1": "A close-up view of a horse's head.",
+      "text2": "A close-up of a brown horse's head.",
       "label": 1
     },
     {
-      "text1": "Bangladesh court sentences first lawmaker to death for war crimes",
-      "text2": "British PM pushes Sri Lanka on war crimes",
+      "text1": "These initiatives are included in the enclosure to this letter, which provides a more detailed presentation of pertinent information extracted from the FFC study relating to the changing facilities acquisition environment confronting federal agencies today, facility acquisition practices and trends, and best practices.",
+      "text2": "The initatives are 2 pages long.",
       "label": 0
     },
     {
-      "text1": "WikiLeaks begins publishing two million Syria emails",
-      "text2": "WikiLeaks Releasing Trove of Syria Documents",
-      "label": 0
-    },
-    {
-      "text1": "A few miles further east is Tehuacan, where corn may first have been domesticated 4,000 years ago.",
-      "text2": "A few miles west are the pyramids of Teotihuacan, where corn may first have been domesticated 4,000 years ago.",
+      "text1": "Senate confirms Yellen as Fed head",
+      "text2": "US Senate confirms Yellen as Fed's next chair",
       "label": 1
     },
     {
-      "text1": "A woman is dancing in the rain.",
-      "text2": "A woman is adding oil to a dish.",
+      "text1": "A woman is cutting a tomato.",
+      "text2": "A woman is slicing a potato.",
       "label": 0
     },
     {
-      "text1": "Their restaurants feature internationally renowned chefs who create dishes using some of the finest meat, game, and fish in the world.",
-      "text2": "Meat, game, and fish are not incorporated into the dishes.",
+      "text1": "Nerves Calmed -- For Now : Markets Jump on Relief over Spanish Bank Bailout",
+      "text2": "Focus Shifts to Greece After Spain Secures Bank Bailout",
       "label": 0
     },
     {
-      "text1": "Now he was disturbed that Shannon could prick him so.",
-      "text2": "He was disturbed by Shannon.",
-      "label": 1
-    },
-    {
-      "text1": "so that's it gets expensive around here to do a lawn because you're always you know buying the fertilizer and the you know the bug killers and weed killers yeah",
-      "text2": "The supplies to do are lawn are very expensive.",
-      "label": 1
-    },
-    {
-      "text1": ", the Globe and Mail lamented the state of Canada's road system.",
-      "text2": "The Globe and Mail spoke recently about the current state of Canada's road system.",
-      "label": 1
-    },
-    {
-      "text1": "Renewable energy sources do not emit greenhouse gases during operation.",
-      "text2": "Cognitive dissonance is the mental discomfort of holding two contradictory beliefs.",
+      "text1": "no i don't i did it by hand uh-huh it wasn't too much of a job really like i say it's just",
+      "text2": "It's too much work to do by hand.",
       "label": 0
     },
     {
-      "text1": "The district also sent letters yesterday informing parents of the situation.",
-      "text2": "Parents received letters informing them of the possible contamination yesterday.",
-      "label": 0
-    },
-    {
-      "text1": "SQL's JOIN clause combines rows from two or more tables based on a related column, enabling relational queries across multiple datasets.",
-      "text2": "In SQL, JOIN merges records from multiple tables using a shared column, allowing queries to retrieve related data from different tables simultaneously.",
+      "text1": "The man is using a sledghammer to break the concrete block that is on the other man.",
+      "text2": "A man breaks a slab of concrete that is lying on a prone man with a sledge hammer.",
       "label": 1
     },
     {
-      "text1": "Captain Bayliss strode in, powdery white dust graying his blue blouse, his face redder and more sun peeled than ever.",
-      "text2": "Captain Bayliss wore a blue blouse.",
-      "label": 1
-    },
-    {
-      "text1": "Two skinny young boys playing with sand in the water.",
-      "text2": "Two dogs are shaking water off.",
-      "label": 0
-    },
-    {
-      "text1": "Hollande 'threatens legal action' after affair allegations",
-      "text2": "François Hollande threatens legal action over affair claims",
+      "text1": "When fully operational, the facility is expected to employ up to 1,000 people.",
+      "text2": "The plant would employ 1,000 people when fully built out, the company said.",
       "label": 1
     },
     {
@@ -666,48 +606,698 @@
       "label": 1
     },
     {
-      "text1": "Sleep is essential for memory consolidation, immune function, and emotional regulation; adults generally need 7–9 hours per night.",
-      "text2": "Adults typically need 7 to 9 hours of sleep nightly to support memory formation, immune health, and emotional well-being.",
-      "label": 1
-    },
-    {
-      "text1": "A linked list is a data structure where each element (node) contains a value and a pointer to the next node in the sequence.",
-      "text2": "In a linked list, each node stores data plus a reference to the next node, forming a chain rather than a contiguous memory block.",
-      "label": 1
-    },
-    {
-      "text1": "Antibiotics kill bacteria or inhibit their growth; they are ineffective against viral infections such as the common cold or influenza.",
-      "text2": "Antibiotic drugs target bacterial cells and are useless against viruses — colds and flu, caused by viruses, do not respond to antibiotic treatment.",
-      "label": 1
-    },
-    {
-      "text1": "Google releases Nexus 5 phone with Kit Kat",
-      "text2": "Google redesigns search results on PCs",
+      "text1": "yes and uh good luck on on some other calls",
+      "text2": "Good luck on those important calls you're getting today.",
       "label": 0
     },
     {
-      "text1": "Israeli military court rejects appeal of Palestinian hunger striker",
-      "text2": "Israel reaches deal with Palestinian hunger strikers",
-      "label": 0
-    },
-    {
-      "text1": "The Eiffel Tower was built between 1887 and 1889 as the entrance arch for the 1889 World's Fair, designed by Gustave Eiffel.",
-      "text2": "Designed by Gustave Eiffel and constructed from 1887 to 1889, the Eiffel Tower was originally the grand entrance gate for the Paris World's Fair of 1889.",
+      "text1": "yeah sure have how about you",
+      "text2": "Yeah okay, what about you?",
       "label": 1
     },
     {
-      "text1": "Two people are walking through some water.",
-      "text2": "Two girls are walking by a tree in front of a brick building.",
+      "text1": "Mr. Sweeney outlined plans for the campaign in a speech last night in Philadelphia at the annual meeting of the American Political Science Association.",
+      "text2": "Sweeney was to outline plans for the campaign in a speech on Saturday night at the annual meeting of the American Political Science Association.",
+      "label": 1
+    },
+    {
+      "text1": "in fact yeah uh we i can understand that predicament um they they've um you know they've they've made them too easy and too accessible at everything to to buy",
+      "text2": "They have made them too easy and accessible to buy, so we can understand the predicament.",
+      "label": 1
+    },
+    {
+      "text1": "Vietnam detects signals from missing plane",
+      "text2": "China expands search area for missing plane",
       "label": 0
     },
     {
-      "text1": "well uh what do you know what the last repair was uh that that you had done to your car",
-      "text2": "Your car doesn't need a repair, currently.",
+      "text1": "Global average temperatures have risen approximately 1.1 °C above pre-industrial levels as of 2023.",
+      "text2": "Global average temperatures have risen approximately 2.5 °C above pre-industrial levels as of 2023, already exceeding the Paris Agreement target.",
       "label": 0
     },
     {
-      "text1": "Miss Howard will have engineered her quarrel, and departed from the house.",
-      "text2": "Miss Howard would have created her argument, and left the house.",
+      "text1": "Sleep supports memory consolidation, immune function, and emotional regulation.",
+      "text2": "The Amazon rainforest covers 5.5 million km² and absorbs 2 billion tonnes of CO₂ annually.",
+      "label": 0
+    },
+    {
+      "text1": "That led me easily to a box score, photographs, a game summary, half-a-dozen audio clips of post-game interviews, a 10-second QuickTime movie of the Bruins running a fast break, a comprehensive scouting report on both teams, and an online chat room where Bruins fans were whooping it up.",
+      "text2": "I found a game summary, box score, photographs, a 10-second QuickTime movie of the Bruins running a fast break and many other things.",
+      "label": 1
+    },
+    {
+      "text1": "In the preamble to the Notice of Proposed Rulemaking (59 Fed.",
+      "text2": "In the preliminary statement to the notice of proposed rule making.",
+      "label": 1
+    },
+    {
+      "text1": "There must be, we cannot be created for this sort of suffering.",
+      "text2": "There should be something more to this pain.",
+      "label": 1
+    },
+    {
+      "text1": "Antibiotics resistance arises when bacteria evolve mechanisms to survive exposure to drugs that previously killed them.",
+      "text2": "When bacteria develop the ability to withstand antibiotic treatment through mutation or gene transfer, antibiotic resistance results.",
+      "label": 1
+    },
+    {
+      "text1": "Plaza de Armas, which surrounds a statue of the patriot Cespedes and is ringed by shaded marble benches and second-hand booksellers, is Havana's oldest square.",
+      "text2": "Plaza de Armas is Havana's oldest square and contains many booksellers.",
+      "label": 1
+    },
+    {
+      "text1": "Chrysler's elaborate system of dealerships might, in theory, help Mercedes crack the U.S. market, where its share is now less than 1 percent.",
+      "text2": "Mercedes is the top selling car in America.",
+      "label": 0
+    },
+    {
+      "text1": "\"We condemn and denounce the Governing Council, which is headed by the United States,\" Moqtada al-Sadr said.",
+      "text2": "\"We condemn the Governing Council headed by the United States,\" Sadr said in a fiery sermon at Koufa mosque near Najaf.",
+      "label": 0
+    },
+    {
+      "text1": "Several people are sitting around a fire at night.",
+      "text2": "A group of people are standing and sitting around on the ground at night.",
+      "label": 0
+    },
+    {
+      "text1": "He even called it--this T &amp",
+      "text2": "He had no intention of calling it.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is running on the beach.",
+      "text2": "A dog is swimming in a pool.",
+      "label": 0
+    },
+    {
+      "text1": "Two terriers play on the wood floor of their home.",
+      "text2": "Two puppies play with a red chew toy in a field.",
+      "label": 0
+    },
+    {
+      "text1": "um-hum  yeah there's uh Biraporetti's is one of our favorites it's real nice it's Italian",
+      "text2": "Biraporetti's is one of our favorites.",
+      "label": 1
+    },
+    {
+      "text1": "The peer-review process ensures scientific findings are evaluated by experts before publication.",
+      "text2": "A hash table provides O(1) average-case lookups using a hash function.",
+      "label": 0
+    },
+    {
+      "text1": "CNNs apply convolutional filters to detect spatial features in images.",
+      "text2": "The principle of innocent until proven guilty places the burden of proof on the prosecution.",
+      "label": 0
+    },
+    {
+      "text1": "Tibetan monk dies after setting himself on fire in protest against Chinese rule",
+      "text2": "Teenage Tibetan monk dies after setting himself on fire in China",
+      "label": 1
+    },
+    {
+      "text1": "The woman is putting paste into a dish.",
+      "text2": "A woman is pulling some kind of sticky goo out of a bowl.",
+      "label": 0
+    },
+    {
+      "text1": "From here, the panorama sweeps round and takes in the entire valley (though even at 3,608 m/1,100 ft you'll still be close enough to hear the bell of the village church).",
+      "text2": "The church in the village had a bell.",
+      "label": 1
+    },
+    {
+      "text1": "His body was dressed in shabby clothes, and the face disfigured to prevent identification.",
+      "text2": "He was a poor man since he had bad clothes",
+      "label": 0
+    },
+    {
+      "text1": "Maybe, if all of the men you brought here to work on the problem were to pool their knowledge, we might still find the answer.",
+      "text2": "We could find the answer with more knowledge.",
+      "label": 1
+    },
+    {
+      "text1": "Chicago Shooting Shows Gap in Stepped-up Policing",
+      "text2": "Chicago shooting shows gap in stepped-up policing",
+      "label": 1
+    },
+    {
+      "text1": "Repsol blasts Argentina over nationalization of YPF",
+      "text2": "Repsol blasts Argentina over oil nationalization",
+      "label": 0
+    },
+    {
+      "text1": "A living room with table, chair and sofa alongside a large palm.",
+      "text2": "A living room with a blue sofa, camp bed, wooden bench and dresser.",
+      "label": 0
+    },
+    {
+      "text1": "As a result, 24 players broke par in the first round.",
+      "text2": "Twenty-four players broke par in the first round, the third highest figure in U.S. Open history.",
+      "label": 0
+    },
+    {
+      "text1": "They never found Vrenna's sword, nor her body.",
+      "text2": "The body was hidden along with the weapon.",
+      "label": 0
+    },
+    {
+      "text1": "This required the product design to include many new and unproven technologies, designs, and manufacturing processes.",
+      "text2": "The product design was quite advanced for the time.",
+      "label": 0
+    },
+    {
+      "text1": "because if they turn around they can get away they get away with it and they get away with it and they get away with it and then they do something worse and they get a slap on the wrist they get thirty days in jail and they finally get up to where they kill somebody else and they go through fourteen appeals and",
+      "text2": "They will never get away with it because of justice.",
+      "label": 0
+    },
+    {
+      "text1": "Navy Jet Crashes Into Apartment Building",
+      "text2": "US Navy Jet Crashes into Apartment Block",
+      "label": 1
+    },
+    {
+      "text1": "4 French Soldiers Reported Killed in Afghanistan",
+      "text2": "British Soldier Killed In Afghanistan",
+      "label": 0
+    },
+    {
+      "text1": "Butter is melting in a pan.",
+      "text2": "A man is melting butter in a pan.",
+      "label": 1
+    },
+    {
+      "text1": "A dog with floppy ears walking towards the camera in the woods.",
+      "text2": "A child in front of his own reflection turning towards the camera and smiling.",
+      "label": 0
+    },
+    {
+      "text1": "and that's not what they're paying",
+      "text2": "that is not what they are paying",
+      "label": 1
+    },
+    {
+      "text1": "Do you notice the nonsensical things you are saying?",
+      "text2": "And to be fair, do you notice the nonsensical things you are saying?",
+      "label": 1
+    },
+    {
+      "text1": "US gov't officially designates Haqqani network as terrorists",
+      "text2": "US designates Haqqani network as terrorists",
+      "label": 1
+    },
+    {
+      "text1": "A person holding a net is standing in the water.",
+      "text2": "A black woman and two black children are sitting in a thatched tent.",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines deliver messenger RNA that instructs cells to produce a protein triggering immunity.",
+      "text2": "mRNA vaccines deliver DNA that is first transcribed into mRNA in the cell nucleus, then translated into the target protein to trigger immunity.",
+      "label": 0
+    },
+    {
+      "text1": "Its beautiful Amida Buddha statue is, unusually, turning to look back over its shoulder.",
+      "text2": "The Amida Buddha statue is made out of bronze.",
+      "label": 0
+    },
+    {
+      "text1": "The British writer Richard Susskind calls these potential clients the latent market.",
+      "text2": "Susskin said there were no defining characteristics of potential clients.",
+      "label": 0
+    },
+    {
+      "text1": "Cross-entropy loss measures the difference between a predicted probability distribution and the true distribution, commonly used for classification tasks.",
+      "text2": "For classification, cross-entropy loss quantifies how far the model's predicted probabilities diverge from the actual one-hot labels.",
+      "label": 1
+    },
+    {
+      "text1": "This modernization is OPM's central strategy to meet the long-term customer service and financial management objectives for CSRS and FERS.",
+      "text2": "There is nothing in place for OPM to meet customer service and financial management goals.",
+      "label": 0
+    },
+    {
+      "text1": "A car is moving through a road.",
+      "text2": "A car is driving down the road.",
+      "label": 1
+    },
+    {
+      "text1": "Russian lawmakers pass new bill restricting Internet",
+      "text2": "Russia says ballistic 'objects' fired in Mediterranean",
+      "label": 0
+    },
+    {
+      "text1": "council tax Hasn't council tax been frozen for most people?",
+      "text2": "Hasn't council tax been frozen for most people?",
+      "label": 1
+    },
+    {
+      "text1": "Four seriously injured in M23 motorway crash",
+      "text2": "Four injured in motorway crash",
+      "label": 1
+    },
+    {
+      "text1": "Big-O notation describes the upper-bound worst-case time or space complexity of an algorithm as a function of input size.",
+      "text2": "Big-O expresses how an algorithm's resource usage scales in the worst case as the input grows larger.",
+      "label": 1
+    },
+    {
+      "text1": "Also, FSIS held seven informational briefings, three scientific and technical conferences, a 2-day",
+      "text2": "FSIS held fourteen informational briefings, and seventeen scientific and technical conferences.",
+      "label": 0
+    },
+    {
+      "text1": "Boko Haram disrupts Nigerian elections",
+      "text2": "Press awash with Nigeria\\'s general elections",
+      "label": 0
+    },
+    {
+      "text1": "The competitive response plan has three phases: a 90-day containment phase (price matching, accelerated roadmap), a six-month differentiation phase (exclusive features, enterprise SLAs), and a 12-month consolidation phase (account lock-in through multi-year contracts).",
+      "text2": "The competitive response begins with a 90-day containment phase involving price matching and an accelerated product roadmap.",
+      "label": 0
+    },
+    {
+      "text1": "The answer says everything about what Evans has become.",
+      "text2": "Everything that Evans has become was said in the answer.",
+      "label": 1
+    },
+    {
+      "text1": "A double decker bus drives on a city street.",
+      "text2": "A red double decker bus driving down a street.",
+      "label": 1
+    },
+    {
+      "text1": "I have  years of \"Neener Neener\" rights I use lettuce too.",
+      "text2": "I have  years of \"Neener Neener\" rights Hi Wiggies!",
+      "label": 0
+    },
+    {
+      "text1": "Ukrainian Prime Minister resigns amid protests",
+      "text2": "Turkish Prime Minister signals return to hardline on protesters",
+      "label": 0
+    },
+    {
+      "text1": "Prosecutors did an about-face in May and asked that the autopsy reports be unsealed after portions of Conner Peterson's autopsy report favorable to the defense were leaked to the media.",
+      "text2": "They asked that the autopsy reports be unsealed after portions of the autopsy report on Peterson's unborn son that were favorable to the defense were leaked to the media.",
+      "label": 1
+    },
+    {
+      "text1": "North of Luxor temple, in the streets behind the Mosque of Abu El Haggag, is the bustling souk or market where you'll find a mixture of tourist souvenirs and local products such as food or textiles.",
+      "text2": "There is no temple in the north of Luxor.",
+      "label": 0
+    },
+    {
+      "text1": "The atmosphere of 19th-century Canton is best evoked on Shamian Island, a haunting, nostalgic place in the Pearl River.",
+      "text2": "Shamian Island is located away from the Pearl River.",
+      "label": 0
+    },
+    {
+      "text1": "It ends within the week.",
+      "text2": "It will end before next week.",
+      "label": 1
+    },
+    {
+      "text1": "The city center lies within the walls of a vast fortress started by the Venetians and reinforced by the Turks.",
+      "text2": "The Venetians built a fortress which surrounds the city center.",
+      "label": 1
+    },
+    {
+      "text1": "The Provost's House on the southwest corner of College Green was built in the late 18th century and is one of the finest houses in the city.",
+      "text2": "The Provost's House is one of the finest houses in the city.",
+      "label": 1
+    },
+    {
+      "text1": "any woman that wants birth control can get it.",
+      "text2": "Any woman that wants and abortion can get one.",
+      "label": 0
+    },
+    {
+      "text1": "A young child rides a horse.",
+      "text2": "The little girl rode a horse.",
+      "label": 0
+    },
+    {
+      "text1": "Even the walls might have ears, whispered the other.",
+      "text2": "The other person spoke loudly.",
+      "label": 0
+    },
+    {
+      "text1": "A black vehicle parked with a vies of low-lying mountains.",
+      "text2": "A black car parked in the dirt out in the country.",
+      "label": 0
+    },
+    {
+      "text1": "Lance Armstrong confesses all to Oprah",
+      "text2": "Lance Armstrong confesses to doping in Oprah interview",
+      "label": 1
+    },
+    {
+      "text1": "Few would argue that the goal of reducing improper payments is not a worthy one.",
+      "text2": "The idea to reduce improper payments was unable to gain much traction.",
+      "label": 0
+    },
+    {
+      "text1": "Hagel, Dempsey face Congress over defense budget",
+      "text2": "Hagel laments \"political\" changes to US defence budget",
+      "label": 1
+    },
+    {
+      "text1": "Additionally, the h2210’s cradle has room to charge a second battery.",
+      "text2": "The cradle for the h2200 has space for recharging a second battery.",
+      "label": 1
+    },
+    {
+      "text1": "Andy Murray deserves knighthood, David Cameron says",
+      "text2": "David Cameron: Andy Murray deserves a knighthood",
+      "label": 1
+    },
+    {
+      "text1": "In part, this is because Las Vegas has itself become one of the world's most powerful brand names.",
+      "text2": "They wanted to trademark the city's name.",
+      "label": 0
+    },
+    {
+      "text1": "Someone is boiling okra in a pot.",
+      "text2": "Someone is cooking okra in a pan.",
+      "label": 1
+    },
+    {
+      "text1": "Case  Transforming an Organization's Central Security Focal Point",
+      "text2": "Case Transforming an Organization's Data Security.",
+      "label": 0
+    },
+    {
+      "text1": "A man is riding on a horse.",
+      "text2": "A girl is riding a horse.",
+      "label": 0
+    },
+    {
+      "text1": "Prince George is christened at St James's Palace",
+      "text2": "Prince George christened in London",
+      "label": 1
+    },
+    {
+      "text1": "Hollande defeats Sarkozy in French presidency vote",
+      "text2": "Polls open across France in presidential election",
+      "label": 0
+    },
+    {
+      "text1": "There was nothing to say.",
+      "text2": "Nothing could be said about it.",
+      "label": 1
+    },
+    {
+      "text1": "and you don't have to put up with all the B S that the lawyers have to so that's that's what i'm pursuing right now",
+      "text2": "What I'm going for is nowhere near as bad as what the lawyers go through.",
+      "label": 1
+    },
+    {
+      "text1": "A skateboarder attempts a trick on the side of a low wall.",
+      "text2": "A boy does skateboard tricks on a railing.",
+      "label": 1
+    },
+    {
+      "text1": "The acquisition rationale rests on three factors: access to the target's proprietary technology, elimination of a key competitor, and capturing $40M in annual cost synergies through shared infrastructure.",
+      "text2": "The acquisition is justified by the target's proprietary technology and the opportunity to eliminate a direct competitor from the market.",
+      "label": 0
+    },
+    {
+      "text1": "The federal government of the United States-the largest and most complex organization in the world-expended approximately $1.",
+      "text2": "The us government didn't expend any money",
+      "label": 0
+    },
+    {
+      "text1": "Pollock pointed out that proving the cost-effectiveness of a specified, well-described service in a clinical setting is a critical consideration in moving a new practice from a research endeavor to a reimbursable service.",
+      "text2": "Pollock pointed out that proving how cost-effective something was is very important.",
+      "label": 1
+    },
+    {
+      "text1": "Einstein's mass-energy equivalence formula E = mc² states that energy equals mass multiplied by the square of the speed of light.",
+      "text2": "The equation E = mc² expresses that mass and energy are interconvertible: a small amount of mass corresponds to an enormous amount of energy, scaled by c².",
+      "label": 1
+    },
+    {
+      "text1": "Egyptians vote on divisive constitution",
+      "text2": "Egyptians vote on constitution change",
+      "label": 1
+    },
+    {
+      "text1": "well okay well hey i appreciate the call you too bye-bye",
+      "text2": "I am grateful for the call, goodbye.",
+      "label": 1
+    },
+    {
+      "text1": "West of here is the Via della Vigna Nuova, where the spill-over of Tornabuoni's most exclusive stores continues.",
+      "text2": "It is the most visited place by tourists in the region.",
+      "label": 0
+    },
+    {
+      "text1": "GAO has been asked by several federal agencies to review electronic signature systems used in financial management systems and to discuss how such systems should be evaluated.",
+      "text2": "the GAO has also been asked for other things over the course of their existence.",
+      "label": 0
+    },
+    {
+      "text1": "He put both hands to his middle where more than one of the pile-driver knocks had landed, and tried to understand what was happening.",
+      "text2": "He put his hands to his head, as he understood exactly what just happened.",
+      "label": 0
+    },
+    {
+      "text1": "Works include those by Picasso, Marcel Duchamp, Magritte, Kandinsky, and Klee, but it is known above all for Jackson Pollock, Mark Rothko, and Robert Motherwell.",
+      "text2": "Despite having a plethora of work from many famous artists, it is most famous for the works of only three.",
+      "label": 1
+    },
+    {
+      "text1": "Ernst & Young admitted no wrongdoing with the settlement.",
+      "text2": "Ernst & Young spokesman Kenneth Kerrigan said the firm admits no wrongdoing.",
+      "label": 1
+    },
+    {
+      "text1": "My Dad said to get rid of them.",
+      "text2": "My mom said to kiss them.",
+      "label": 0
+    },
+    {
+      "text1": "A girl is playing a piano.",
+      "text2": "A boy is doing push ups.",
+      "label": 0
+    },
+    {
+      "text1": "Bunt is named for an elder brother who died in infancy, and both Betty and Bunt seem to feel that he is only a stand-in for his predecessor.",
+      "text2": "Bunt was expected to replace the son that was lost.",
+      "label": 0
+    },
+    {
+      "text1": "Full Episode: Nightline 6/29: Katie Holmes, Tom Cruise to Divorce",
+      "text2": "Custody, images at stake in Cruise-Holmes divorce",
+      "label": 0
+    },
+    {
+      "text1": "mRNA vaccines work by delivering messenger RNA into cells, instructing them to produce a protein that triggers an immune response.",
+      "text2": "In mRNA vaccination, synthetic messenger RNA is introduced into the body's cells; the cells read it and produce an antigen that primes the immune system.",
+      "label": 1
+    },
+    {
+      "text1": "Road access may be difficult, with the last 8 km (5 miles) along a winding, narrow roadway where an alternating, one-way traffic system is in place.",
+      "text2": "Road access is quite easy.",
+      "label": 0
+    },
+    {
+      "text1": "A cat is drinking milk.",
+      "text2": "A kitten is drinking milk.",
+      "label": 1
+    },
+    {
+      "text1": "Adrin knelt to one knee and smiled at Susan.",
+      "text2": "Susan ran away from Adrin.",
+      "label": 0
+    },
+    {
+      "text1": "China to investigate EU wine exports",
+      "text2": "Christie investigation heats up",
+      "label": 0
+    },
+    {
+      "text1": "yeah see that's what",
+      "text2": "No, thats not what I mean.",
+      "label": 0
+    },
+    {
+      "text1": "As an independent regulatory agency, the Commission is not subject to title II of the Unfunded Mandates Reform Act of 1995.",
+      "text2": "The Commission is bound by title II of the act.",
+      "label": 0
+    },
+    {
+      "text1": "The two men did a funny skit with a boxer in front of a crowd of people.",
+      "text2": "Boys are dancing in front of people.",
+      "label": 0
+    },
+    {
+      "text1": "Scuba diver submerged in water.",
+      "text2": "The scuba diver is underwater.",
+      "label": 1
+    },
+    {
+      "text1": "def is_palindrome(s):\n    return s == s[::-1]",
+      "text2": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        if s[left] != s[right]:\n            return False\n        left += 1; right -= 1\n    return True",
+      "label": 1
+    },
+    {
+      "text1": "Algerian government parties dominate elections",
+      "text2": "Algerian national turnout of parliamentary vote reaches 44.38 pct",
+      "label": 0
+    },
+    {
+      "text1": "Stop him! he shouted to the mercenary who continued to lean on the pillar.",
+      "text2": "The mercenary was leaning on his horse.",
+      "label": 0
+    },
+    {
+      "text1": "They weren't really staring at you.",
+      "text2": "They actually weren't staring at you.",
+      "label": 1
+    },
+    {
+      "text1": "here if you get someone who's very good at selecting it's okay but sometimes they kind of get on a a a binge and they play the same sort of thing over and over again without really necessarily quality",
+      "text2": "Sometimes they play the same thing over and over again with no regards to quality.",
+      "label": 1
+    },
+    {
+      "text1": "lets assume we have % white and % black.",
+      "text2": "Imagine a place that's % white and % black.",
+      "label": 1
+    },
+    {
+      "text1": "The narrow streets bordering the river are full of interesting antique stores, coffee shops, and restaurants.",
+      "text2": "The many shops and restaurants that fill the narrow streets are of low quality.",
+      "label": 0
+    },
+    {
+      "text1": "6.1-magnitude quake strikes Indonesia",
+      "text2": "6.1-magnitude quake hits Papua, Indonesia -- USGS",
+      "label": 1
+    },
+    {
+      "text1": "A man stares out a window.",
+      "text2": "A man looks out the window.",
+      "label": 1
+    },
+    {
+      "text1": "Two boys on a couch are playing video games.",
+      "text2": "Two boys are playing a video game.",
+      "label": 1
+    },
+    {
+      "text1": "The central limit theorem guarantees convergence of sample means to a normal distribution.",
+      "text2": "Statins lower LDL cholesterol by inhibiting HMG-CoA reductase in the liver.",
+      "label": 0
+    },
+    {
+      "text1": "Sometimes I fantasize about having power.",
+      "text2": "Sometimes I, too, fantasise about bending people before my demented will.",
+      "label": 1
+    },
+    {
+      "text1": "so they called me in uh just a few months ago",
+      "text2": "They haven't called back every since.",
+      "label": 0
+    },
+    {
+      "text1": "It is important to note the fundamental differences between health care wants, which are virtually unlimited; needs, which should be defined and addressed; and overall affordability, which has a limit.",
+      "text2": "Demand for healthcare is limited and easily defined.",
+      "label": 0
+    },
+    {
+      "text1": "In 2001 and 2002, wire transfers from 4 of the company's 40 accounts totaled more than $3.2 billion, prosecutors said.",
+      "text2": "Wire transfers from four of the 40 accounts open at Beacon Hill totaled more than $3.2 billion from 2001 to 2002, Morgenthau said.",
+      "label": 1
+    },
+    {
+      "text1": "Two people paddling a red canoe are reflected in the still water.",
+      "text2": "Two people paddling in a red canoe with trees in the background.",
+      "label": 0
+    },
+    {
+      "text1": "The myth of John Malone was built around the image of someone able to see the value inherent in a future that no one else could grasp.",
+      "text2": "No one else could grasp the future that John Malone could see.",
+      "label": 1
+    },
+    {
+      "text1": "Gingrich has a point.",
+      "text2": "Gingrich has brought up several examples that support his point extremely well,",
+      "label": 1
+    },
+    {
+      "text1": "For example, if the prevalence declines by 25 percent with a drop in PM, then baseline incidence drops by 25 percent with the same drop in PM.",
+      "text2": "If the prevalence declines by 25% with a drop in PM, the baseline incidence goes down the same amount without fail, as they are directly related.",
+      "label": 0
+    },
+    {
+      "text1": "Two dogs are playing around in the dirt.",
+      "text2": "A dancer posing for the camera in a red and white dress.",
+      "label": 0
+    },
+    {
+      "text1": "The woman is putting makeup on the man.",
+      "text2": "A woman is painting the face of a man.",
+      "label": 0
+    },
+    {
+      "text1": "I played with the idea… .",
+      "text2": "I refused to even consider the idea.",
+      "label": 0
+    },
+    {
+      "text1": "Two killed, 19 injured in Toronto shooting",
+      "text2": "Two dead, 7 injured in Finland shooting",
+      "label": 0
+    },
+    {
+      "text1": "Nobel author Doris Lessing dies at 94",
+      "text2": "Nobel laureate Doris Lessing dies at 94",
+      "label": 1
+    },
+    {
+      "text1": "Items exemplifying the artist's campy humor (his massive Barbie Doll collection, his teen-age scrapbook of celebrity photos) are said to be scarce.",
+      "text2": "Each doll in the collection was signed by the artist on the ride arm.",
+      "label": 0
+    },
+    {
+      "text1": "Pride of place at the site is taken by the Step Pyramid built by architect Imhotep for his ruler King Djoser c2670 b.c.",
+      "text2": "Imhotep was an architect for King Djoser around 2670 BC",
+      "label": 1
+    },
+    {
+      "text1": "and Management of Scientific Studies in Natural",
+      "text2": "Mismanagement of natural science studies",
+      "label": 0
+    },
+    {
+      "text1": "A herd of deer are crossing the street.",
+      "text2": "A herd of caribou are crossing a road.",
+      "label": 0
+    },
+    {
+      "text1": "so it's supposed to be real bad driving tomorrow afternoon",
+      "text2": "Tomorrow evening will not be conducive to driving.",
+      "label": 1
+    },
+    {
+      "text1": "World stocks fall before Greek debt deal deadline",
+      "text2": "Asia stocks fall ahead of Greek debt deal deadline",
+      "label": 0
+    },
+    {
+      "text1": "two puppies playing around in the grass",
+      "text2": "Two puppies play in the grass",
+      "label": 1
+    },
+    {
+      "text1": "Three bottles are on a table.",
+      "text2": "Old green bottle sitting on a table.",
+      "label": 0
+    },
+    {
+      "text1": "The stars move with the sky over the world as a unity.\"  Dave grunted at his own stupidity.",
+      "text2": "The sky is moved by the stars.",
       "label": 1
     },
     {
@@ -716,53 +1306,363 @@
       "label": 1
     },
     {
-      "text1": "Bayes' theorem describes the probability of an event based on prior knowledge of conditions related to the event: P(A|B) = P(B|A)·P(A)/P(B).",
-      "text2": "Bayes' theorem updates the probability of a hypothesis given new evidence: P(A|B) = P(B|A) × P(A) / P(B).",
-      "label": 1
-    },
-    {
-      "text1": "All rooms have either ocean or mountain view, air conditioning, balcony or patio, king-sized beds, satellite TV, compact disc/cassette players, and in-room safes.",
-      "text2": "All the rooms have great views.",
-      "label": 1
-    },
-    {
-      "text1": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment.",
-      "text2": "Antibiotic resistance arises when bacteria evolve mechanisms to survive antibiotic treatment. Studies show resistance rates have increased by 300% since 2005, and penicillin now remains fully effective against all common strains.",
+      "text1": "DNA is a double-helix molecule with adenine pairing with thymine and guanine pairing with cytosine.",
+      "text2": "DNA is a double-helix molecule where adenine pairs with cytosine and guanine pairs with thymine — held together by hydrogen bonds.",
       "label": 0
     },
     {
-      "text1": "An hour later, an Israeli helicopter fired missiles at a car in Gaza City, killing two Hamas officials and at least five other people.",
-      "text2": "An hour later Israeli attack helicopters rained missiles on a car in Gaza City, killing seven people, Palestinian sources said.",
+      "text1": "A society fraying at the edges",
+      "text2": "Old TV alignments crack at the edges",
+      "label": 0
+    },
+    {
+      "text1": "kim myong-chol warned that if there was an interdiction of north korean vessels the north korean government would retaliate with a nuclear missile attack on major cities such as new york and washington.",
+      "text2": "kim myong-chol stated that north korea would retaliate with a nuclear missile attack on major cities such as new york and washington dc.",
       "label": 1
     },
     {
-      "text1": "Asian markets hit 3-wk high on hopes of US debt deal",
-      "text2": "Asian stocks hit three-week highs on hopes of U.S. debt deal",
+      "text1": "In fiscal year 2000, GAO helped achieve about $23.",
+      "text2": "GAO only helped make a little less than $25.",
       "label": 1
     },
     {
-      "text1": "I know I'd hate to be him.",
-      "text2": "I'd hate to be him too.",
+      "text1": "A man is fishing in the river.",
+      "text2": "A man is singing while walking down the sidewalk.",
+      "label": 0
+    },
+    {
+      "text1": "The redesigned Finder also features search, coloured labels for customized organization of documents and projects and dynamic browsing of the network for Mac, Windows and UNIX file servers.",
+      "text2": "It also supports coloured labels to better organise documents, and dynamic browsing of the network for Mac, Windows and Unix file servers.",
+      "label": 0
+    },
+    {
+      "text1": "Small, cheap souvenirs are readily available in the forms of pottery, sculpture, jewelry, and clothing.",
+      "text2": "Cheap pottery,sculptures,jewelry, and clothes are readily available souvenirs.",
       "label": 1
     },
     {
-      "text1": "Why am I so eager for the connection?",
-      "text2": "Why do I want the connection so badly?",
+      "text1": "I must walk a bit, I think.",
+      "text2": "I'm going to go for a walk for about half an hour.",
+      "label": 0
+    },
+    {
+      "text1": "Westgate mall attackers spent four months planning in Nairobi",
+      "text2": "Westgate attackers spent four months planning in Nairobi, says official",
       "label": 1
     },
     {
-      "text1": "A neural network is a computational model inspired by the brain, consisting of layers of interconnected nodes (neurons) that learn patterns from data.",
-      "text2": "Neural networks are machine-learning models made up of layers of artificial neurons. They learn by adjusting weights based on training data.",
+      "text1": "Syria welcomes Iran's nuclear deal",
+      "text2": "Iran, six world powers clinch breakthrough nuclear deal",
+      "label": 0
+    },
+    {
+      "text1": "The leading actress nod went to energetic newcomer Marissa Jaret Winokur as Edna's daughter Tracy.",
+      "text2": "Marissa Jaret Winokur, as Tracy, won for best actress in a musical.",
       "label": 1
     },
     {
-      "text1": "Homeostasis is the body's ability to maintain stable internal conditions (temperature, pH, blood sugar) despite changes in the external environment.",
-      "text2": "Through homeostasis, living organisms regulate internal variables — body temperature, blood pH, glucose levels — within narrow ranges regardless of external changes.",
+      "text1": "Edited by LashL: Edited to properly mask profanity.",
+      "text2": "Edited by LashL: Edited to properly mask profanity in quoted post.",
       "label": 1
     },
     {
-      "text1": "Maybe it was a prophecy.",
-      "text2": "It could have been a prophecy.",
+      "text1": "The broader Standard & Poor's 500 Index <.SPX> was 0.46 points lower, or 0.05 percent, at 997.02.",
+      "text2": "The technology-laced Nasdaq Composite Index .IXIC was up 7.42 points, or 0.45 percent, at 1,653.44.",
+      "label": 0
+    },
+    {
+      "text1": "Two people are walking through some water.",
+      "text2": "Two girls are walking by a tree in front of a brick building.",
+      "label": 0
+    },
+    {
+      "text1": "Adding states with 1 percent unfiled rates to the pool would not add larger states, however, since these are Iowa, Maine, Montana, North Dakota, and South Dakota.",
+      "text2": "The states with 1 percent rates are smaller.",
+      "label": 1
+    },
+    {
+      "text1": "The BJP's role in provoking the 1992 demolition by Hindus of a mosque in Ayodhya, said to have been built on ground sacred to them, and the widespread racial violence which ensued caused PM Rao to ban the BJP.",
+      "text2": "PM Rao banned the BJP because of widespread racial violence.",
+      "label": 1
+    },
+    {
+      "text1": "China's new PM rejects US hacking claims",
+      "text2": "China Premier Li rejects 'groundless' US hacking accusations",
+      "label": 1
+    },
+    {
+      "text1": "yeah well some people get lucky and i guess if you're persistent enough sometimes it works out",
+      "text2": "I think if you keep on trying, it could work.",
+      "label": 1
+    },
+    {
+      "text1": "On the waterfront sits the Doges' Palace (Palazzo Ducale), for 900 years the focus of Venice's uncontested power and pomp, evoked in the imposing elegance of its delicate pink marble and white limestone facades with their airy arcades and loggias.",
+      "text2": "For one year it was the focus of Venice's uncontested power and pomp.",
+      "label": 0
+    },
+    {
+      "text1": "It became fashionable in the 17th century and wealthy Parisians built luxurious private homes (h??tels) here.",
+      "text2": "Parisians built homes in East Paris in the 17th Century.",
+      "label": 0
+    },
+    {
+      "text1": "yeah yeah but uh those overhangs and things do have to be painted you know every four or five years and i bought a uh a power roller that uh it's really designed for indoor use but it's got an uh you know an extension and a pump you just put your can of paint down in the in this pump and it pumps the paint up through the roller",
+      "text2": "Those overhangs never need to be repainted.",
+      "label": 0
+    },
+    {
+      "text1": "Pro-Russians forces enter Ukrainian naval base in Crimea",
+      "text2": "Crimean forces storm Ukrainian navy headquarters",
+      "label": 1
+    },
+    {
+      "text1": "A train sitting on the tracks near a field.",
+      "text2": "A baby is sitting in the grass.",
+      "label": 0
+    },
+    {
+      "text1": "A cow is eating grass.",
+      "text2": "A cow is eating hay.",
+      "label": 1
+    },
+    {
+      "text1": "Osama Bin Laden Wives to Be Jailed",
+      "text2": "Osama Bin Laden movie to be filmed in India",
+      "label": 0
+    },
+    {
+      "text1": "chinese authorities were not immediately available for comment.",
+      "text2": "godzhayev and godzhayev's lawyers were not immediately available to comment.",
+      "label": 0
+    },
+    {
+      "text1": "The Pythagorean theorem: a² + b² = c² for right triangles.",
+      "text2": "Regular aerobic exercise significantly reduces risk of cardiovascular disease and depression.",
+      "label": 0
+    },
+    {
+      "text1": "A couple posing for a picture on a couch.",
+      "text2": "Young couple sitting on couch.",
+      "label": 1
+    },
+    {
+      "text1": "Dozens feared trapped in India building collapse",
+      "text2": "Rescuers race to find 20 still trapped in India building collapse",
+      "label": 0
+    },
+    {
+      "text1": "Critical to the product development process were activities that enabled the capture of specific design and manufacturing knowledge and decision reviews to determine if the knowledge captured would support the increased investment necessary to move to the next development phase or into production.",
+      "text2": "The knowledge captured would determine if the next step was further development or production.",
+      "label": 1
+    },
+    {
+      "text1": "India bans bulk texts after riots",
+      "text2": "Tunisia lifts curfew after riots",
+      "label": 0
+    },
+    {
+      "text1": "The government does not determine if you are married or not.",
+      "text2": "The government doesnt have to declare you married before you can be married.",
+      "label": 1
+    },
+    {
+      "text1": "Other participants believed that there is no shortage of qualified board members willing to serve and that the board needed to look beyond the list of usual suspects.",
+      "text2": "Some people think that there are plenty of qualified board members available.",
+      "label": 1
+    },
+    {
+      "text1": "Vatican Embassy in Syria hit by mortar fire",
+      "text2": "Vatican embassy in Syria hit by mortar; no injuries",
+      "label": 1
+    },
+    {
+      "text1": "If the gamblers play along with this commission's timid recommendations, they'll be safe for another 20 years.",
+      "text2": "The gamblers are currently on the outs, so they should follow the recommendations.",
+      "label": 0
+    },
+    {
+      "text1": "The human immune system consists of innate and adaptive components.",
+      "text2": "Docker containers package applications and dependencies for consistent deployment across environments.",
+      "label": 0
+    },
+    {
+      "text1": "n.r. mohanty stated that an agreement had been signed between the defense research and development organisation, hindustan aeronautics limited and the indian air force to upgrade india's ageing fleet of mig-27 m aircraft.",
+      "text2": "mohanty stated that the upgrade will be done soon as it has almost been finalised by the defense research and development organisation, hindustan aeronautics limited and the indian air force.",
+      "label": 0
+    },
+    {
+      "text1": "But he shore thinks th' world an' all of Johnny, raising him up from a li'l cub.",
+      "text2": "He holds Johnny in high a esteem after raising him.",
+      "label": 1
+    },
+    {
+      "text1": "yeah i do that myself too i i really don't appreciate them calling me up all the time to try to push their services on me",
+      "text2": "They are constantly trying to sell me something.",
+      "label": 1
+    },
+    {
+      "text1": "So I actually read the OP and guess what I found out.",
+      "text2": "Furthermore I found this: So I actually read the OP and guess what I found out.",
+      "label": 1
+    },
+    {
+      "text1": "This --not all that other stuff--is what's important.",
+      "text2": "This is more important that everything else.",
+      "label": 1
+    },
+    {
+      "text1": "Who supposedly operated the homicidal gas chambers?",
+      "text2": "Refresh your memory: Who supposedly operated the homicidal gas chambers?",
+      "label": 1
+    },
+    {
+      "text1": "Suspected Boko Haram suicide bombers in Nigeria kill 24",
+      "text2": "Suspected Boko Haram attacks kill dozens in Nigeria",
+      "label": 1
+    },
+    {
+      "text1": "The bear is a symbol of Madrid, while the T?­o Pepe sign, an advertisement for one of Spain's most famous brands of sherry, has become the unofficial symbol of the Puerta del Sol.",
+      "text2": "Madrid uses a bear as its symbol while Puerta del Sol used the Tio Pepe.",
+      "label": 1
+    },
+    {
+      "text1": "Yemen suicide bombing kills soldiers",
+      "text2": "Female suicide bomber kills 16 at Russian station",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing the drums.",
+      "text2": "A man plays the drum.",
+      "label": 1
+    },
+    {
+      "text1": "A small dog looking up at the camera while standing on grass.",
+      "text2": "A man and women smiling at the camera while standing in a kitchen.",
+      "label": 0
+    },
+    {
+      "text1": "(Various sites, among them MSNBC, provide CIA video of the reconstruction of the crash of TWA Flight 800.)",
+      "text2": "TWA Flight 800 crashed and the incident was caught on camera.",
+      "label": 1
+    },
+    {
+      "text1": "and you didn't want that to happen and to me it had always been that way i mean what happens is you have a government right and this government controls everything right",
+      "text2": "You slave your entire life at school just to enslave yourself to a corporation that enslaves you to money that enslaves you to debt.",
+      "label": 0
+    },
+    {
+      "text1": "The black dog is walking through the tall grass.",
+      "text2": "The black dog is running through the grass.",
+      "label": 1
+    },
+    {
+      "text1": "Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem until a base case is reached.",
+      "text2": "A recursive function solves a problem by breaking it into smaller sub-problems of the same type and calling itself until it hits a stopping condition (base case).",
+      "label": 1
+    },
+    {
+      "text1": "Obama meets Mandela family as icon remains in hospital",
+      "text2": "Obamas to meet Mandela family wont visit hospital",
+      "label": 0
+    },
+    {
+      "text1": "From this point on, anything  Smell the wines first, smell the standards, start to see which terms describe which wine, writes Noble.",
+      "text2": "Noble has never smelled wine.",
+      "label": 0
+    },
+    {
+      "text1": "Merkel Vies 3rd Term in Office in Germany Elections",
+      "text2": "Merkel Wins Big in Germany Election",
+      "label": 0
+    },
+    {
+      "text1": "We will camp up the road and meet you in the morning.",
+      "text2": "The campsite is hidden in the woods.",
+      "label": 0
+    },
+    {
+      "text1": "Imagine a place that's % white and % black.",
+      "text2": "Imagine a place with % men and % women.",
+      "label": 0
+    },
+    {
+      "text1": "The greenhouse effect occurs when gases like CO₂, methane, and water vapour trap heat in the atmosphere, warming the Earth's surface.",
+      "text2": "Greenhouse gases — CO₂, methane, water vapour — absorb outgoing infrared radiation and re-radiate it back toward the surface, raising global temperatures.",
+      "label": 1
+    },
+    {
+      "text1": "assistance for a total reduction of $2.",
+      "text2": "A reduction of $2 doesn't requires assistance.",
+      "label": 0
+    },
+    {
+      "text1": "the bill proposing the new law allowing the use of space programs for defense was already approved by the lower house of japan's government last week.",
+      "text2": "the bill for the new law was already approved by the japanese government's lower house last week.",
+      "label": 0
+    },
+    {
+      "text1": "I've never accused him of over-milligraming, nothing.",
+      "text2": "I've never accused him of doctoring a baseball.",
+      "label": 0
+    },
+    {
+      "text1": ". What is your definition of \"life force\"?",
+      "text2": "What is your definition of \"soul\"?",
+      "label": 1
+    },
+    {
+      "text1": "World War II lasted from 1939 to 1945, involved most of the world's nations, and resulted in approximately 70-85 million deaths.",
+      "text2": "World War II lasted from 1941 to 1945 — after the US entered the conflict — and resulted in approximately 40 million deaths, most of them military personnel.",
+      "label": 0
+    },
+    {
+      "text1": "The law of conservation of energy states that energy cannot be created or destroyed.",
+      "text2": "The law of energy conservation states that energy can be created in nuclear reactions and destroyed in chemical reactions, but not in mechanical systems.",
+      "label": 0
+    },
+    {
+      "text1": "Few cities have so perfected the art of socializing eating and drinking in public.",
+      "text2": "The crime-ridden streets suggest staying indoors is to be preferred at all times.",
+      "label": 0
+    },
+    {
+      "text1": "A man is playing a keyboard.",
+      "text2": "A man plays a keyboard.",
+      "label": 1
+    },
+    {
+      "text1": "China news agency: Still hope for Syria peace",
+      "text2": "China state news agency: There's still hope for Syria peace",
+      "label": 1
+    },
+    {
+      "text1": "Do you notice the nonsensical things you are saying?",
+      "text2": "And to be fair, do you notice the nonsensical things you are saying?",
+      "label": 1
+    },
+    {
+      "text1": "A woman covers a piece of meat with flour.",
+      "text2": "A woman is seasoning a piece of meat.",
+      "label": 0
+    },
+    {
+      "text1": "July 1st is the sixth anniversary of Hong Kong's return to Chinese rule.",
+      "text2": "The rally overshadowed ceremonies marking the sixth anniversary of Hong Kong's return to China on 1 July 1997.",
+      "label": 0
+    },
+    {
+      "text1": "The broader Standard & Poor's 500 Index .SPX gained 3 points, or 0.39 percent, at 924.",
+      "text2": "The technology-laced Nasdaq Composite Index <.IXIC> rose 6 points, or 0.41 percent, to 1,498.",
+      "label": 0
+    },
+    {
+      "text1": "Object-oriented programming organises software around objects — data structures that combine state (attributes) and behaviour (methods).",
+      "text2": "OOP models software as collections of objects, each encapsulating its own data (fields) and operations (methods) that act on that data.",
+      "label": 1
+    },
+    {
+      "text1": "The shooting victim was taken to Kings County Hospital Center, where he later died, the police said.",
+      "text2": "The victim, who was not identified, was taken to Kings County Hospital where he was pronounced dead.",
       "label": 1
     }
   ]
