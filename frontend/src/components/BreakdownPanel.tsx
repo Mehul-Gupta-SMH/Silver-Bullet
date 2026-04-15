@@ -65,6 +65,8 @@ export function BreakdownPanel({ breakdown }: Props) {
     sentences1, sentences2,
     alignment,
     divergent_in_1, divergent_in_2,
+    min_alignment = 0,
+    min_alignment_pair = [],
     feature_scores,
     misalignment_reasons = [],
   } = breakdown;
@@ -130,6 +132,27 @@ export function BreakdownPanel({ breakdown }: Props) {
             letterSpacing: '0.06em',
           }}>
             full coverage
+          </span>
+        )}
+
+        {/* Min alignment — weakest link indicator */}
+        {alignment.length > 0 && (
+          <span
+            title={min_alignment_pair.length === 2 ? `Weakest pair: s${min_alignment_pair[0]+1} ↔ s${min_alignment_pair[1]+1}` : 'Weakest link score'}
+            style={{
+              marginLeft: 'auto',
+              padding: '2px 8px',
+              borderRadius: 99,
+              background: min_alignment < 0.3 ? 'rgba(248,113,113,0.1)' : min_alignment < 0.6 ? 'rgba(252,211,77,0.1)' : 'rgba(52,211,153,0.1)',
+              border: `1px solid ${min_alignment < 0.3 ? 'rgba(248,113,113,0.25)' : min_alignment < 0.6 ? 'rgba(252,211,77,0.25)' : 'rgba(52,211,153,0.25)'}`,
+              fontFamily: 'var(--font-mono)',
+              fontSize: 10,
+              color: min_alignment < 0.3 ? '#F87171' : min_alignment < 0.6 ? '#FCD34D' : '#34D399',
+              letterSpacing: '0.06em',
+              cursor: 'default',
+            }}
+          >
+            min {min_alignment.toFixed(2)}
           </span>
         )}
       </div>

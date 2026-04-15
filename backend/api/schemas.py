@@ -99,6 +99,14 @@ class BreakdownResponse(BaseModel):
         ...,
         description="Indices into sentences2 whose best alignment to any sentence in text1 is below 0.5",
     )
+    min_alignment: float = Field(
+        0.0,
+        description="Minimum alignment score across all sentence pairs (weakest link)",
+    )
+    min_alignment_pair: list[int] = Field(
+        default_factory=list,
+        description="[i, j] indices of the weakest-aligned sentence pair",
+    )
     feature_scores: dict[str, float] = Field(
         ...,
         description="Per-feature-group mean best-match score (higher = more similar)",

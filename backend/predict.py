@@ -177,11 +177,18 @@ class SimilarityPredictor:
         THRESH = 0.5
         divergent_in_1: list[int] = []
         divergent_in_2: list[int] = []
+        min_alignment: float = 0.0
+        min_alignment_pair: list[int] = []
         if alignment:
             max_row = [max(row) for row in alignment]
             max_col = [max(alignment[i][j] for i in range(n_crop)) for j in range(m_crop)]
             divergent_in_1 = [i for i, s in enumerate(max_row) if s < THRESH]
             divergent_in_2 = [j for j, s in enumerate(max_col) if s < THRESH]
+            all_scores = [(alignment[i][j], i, j) for i in range(n_crop) for j in range(m_crop)]
+            if all_scores:
+                min_val, mi, mj = min(all_scores, key=lambda x: x[0])
+                min_alignment = round(min_val, 4)
+                min_alignment_pair = [mi, mj]
 
         # --- per-feature group scores: mean best-match score across sentences in text1 ---
         def _mean_max_row(key: str) -> float:
@@ -221,6 +228,8 @@ class SimilarityPredictor:
             "alignment":            alignment,
             "divergent_in_1":       divergent_in_1,
             "divergent_in_2":       divergent_in_2,
+            "min_alignment":        min_alignment,
+            "min_alignment_pair":   min_alignment_pair,
             "feature_scores":       feature_scores,
             "misalignment_reasons": misalignment_reasons,
         }

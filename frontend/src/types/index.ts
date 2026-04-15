@@ -41,6 +41,8 @@ export interface BreakdownResult {
   alignment: number[][];
   divergent_in_1: number[];
   divergent_in_2: number[];
+  min_alignment: number;
+  min_alignment_pair: number[];
   feature_scores: Record<string, number>;
   misalignment_reasons: MisalignmentReason[];
 }
