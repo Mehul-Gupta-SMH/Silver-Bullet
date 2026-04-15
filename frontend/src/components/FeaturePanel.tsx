@@ -1,68 +1,141 @@
 import { useState } from 'react';
+import type { ComparisonMode } from '../types';
 
-const TOTAL_MAPS = 16;
+interface FeatureGroup {
+  name: string;
+  abbr: string;
+  maps: number;
+  color: string;
+  bg: string;
+  border: string;
+  models: string[];
+  signals: string[];
+  description: string;
+}
 
-const FEATURES = [
-  {
-    name: 'Semantic',
-    abbr: 'SEM',
-    maps: 6,
-    color: '#A78BFA',
-    bg: 'rgba(167,139,250,0.08)',
-    border: 'rgba(167,139,250,0.2)',
-    models: ['mxbai-embed-large-v1', 'Qwen3-Embedding-0.6B'],
-    signals: ['Cosine sim', 'Soft row align', 'Soft col align'],
-    description: 'Two embedding models vote to reduce single-model bias. Dense vectors capture meaning beyond surface form.',
-  },
-  {
-    name: 'Lexical',
-    abbr: 'LEX',
-    maps: 4,
-    color: '#60A5FA',
-    bg: 'rgba(96,165,250,0.08)',
-    border: 'rgba(96,165,250,0.2)',
+const BASE_GROUPS = {
+  lexical: {
+    name: 'Lexical', abbr: 'LEX', maps: 4,
+    color: '#60A5FA', bg: 'rgba(96,165,250,0.08)', border: 'rgba(96,165,250,0.2)',
     models: ['SentencePiece tokenizer'],
-    signals: ['Jaccard', 'Dice', 'Cosine', 'ROUGE'],
-    description: 'Token-overlap statistics with zero model inference overhead.',
+    signals: ['Jaccard', 'Dice', 'ROUGE-3', 'ROUGE'],
+    description: 'Token-overlap statistics at multiple granularities. Zero model inference cost.',
   },
-  {
-    name: 'NLI',
-    abbr: 'NLI',
-    maps: 3,
-    color: '#FCD34D',
-    bg: 'rgba(252,211,77,0.08)',
-    border: 'rgba(252,211,77,0.2)',
+  semantic: {
+    name: 'Semantic', abbr: 'SEM', maps: 4,
+    color: '#A78BFA', bg: 'rgba(167,139,250,0.08)', border: 'rgba(167,139,250,0.2)',
+    models: ['mxbai-embed-large-v1', 'Qwen3-Embedding-0.6B'],
+    signals: ['mxbai Cosine', 'mxbai Precision', 'mxbai Recall', 'Qwen3 Precision'],
+    description: 'Two embedding models with precision/recall asymmetry — reduces single-model bias.',
+  },
+  nli: {
+    name: 'NLI', abbr: 'NLI', maps: 3,
+    color: '#FCD34D', bg: 'rgba(252,211,77,0.08)', border: 'rgba(252,211,77,0.2)',
     models: ['roberta-large-mnli'],
     signals: ['Entailment', 'Neutral', 'Contradiction'],
     description: 'Directional logical inference — the backbone of faithfulness scoring.',
   },
-  {
-    name: 'Entity',
-    abbr: 'ENT',
-    maps: 1,
-    color: '#F87171',
-    bg: 'rgba(248,113,113,0.08)',
-    border: 'rgba(248,113,113,0.2)',
-    models: ['modern-gliner-bi-base-v1.0'],
-    signals: ['NER mismatch'],
-    description: 'Named entity overlap catches factual grounding — same people, places, numbers?',
-  },
-  {
-    name: 'LCS',
-    abbr: 'LCS',
-    maps: 2,
-    color: '#34D399',
-    bg: 'rgba(52,211,153,0.08)',
-    border: 'rgba(52,211,153,0.2)',
+  lcs: {
+    name: 'LCS', abbr: 'LCS', maps: 2,
+    color: '#34D399', bg: 'rgba(52,211,153,0.08)', border: 'rgba(52,211,153,0.2)',
     models: ['Built-in DP'],
-    signals: ['LCS token', 'LCS char'],
-    description: 'Longest Common Subsequence at both token and character levels. Zero cost, structural signal.',
+    signals: ['LCS Token', 'LCS Char'],
+    description: 'Longest Common Subsequence at token and character levels. Structural signal, zero cost.',
   },
-] as const;
+  numeric: {
+    name: 'Numeric', abbr: 'NUM', maps: 1,
+    color: '#FB923C', bg: 'rgba(251,146,60,0.08)', border: 'rgba(251,146,60,0.2)',
+    models: ['Regex extractor'],
+    signals: ['Numeric Jaccard'],
+    description: 'Numeric value overlap — flags hallucinated quantities even when surrounding text matches.',
+  },
+  grounding: {
+    name: 'Grounding', abbr: 'GND', maps: 1,
+    color: '#F87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.2)',
+    models: ['modern-gliner-bi-base-v1.0'],
+    signals: ['Entity Grounding Recall'],
+    description: 'Fraction of source entities covered in the generated text — measures factual anchoring.',
+  },
+  triplet: {
+    name: 'Triplet', abbr: 'TRP', maps: 1,
+    color: '#2DD4BF', bg: 'rgba(45,212,191,0.08)', border: 'rgba(45,212,191,0.2)',
+    models: ['gliner-relex-base-v1.0'],
+    signals: ['Relation Triplet Recall'],
+    description: 'Subject-predicate-object relation recall — catches predicate flips and argument swaps.',
+  },
+} satisfies Record<string, FeatureGroup>;
 
-export function FeaturePanel() {
+// Per-mode Entity group — signals and map counts differ across modes
+const ENTITY_BY_MODE: Record<ComparisonMode, FeatureGroup> = {
+  'context-vs-generated': {
+    name: 'Entity', abbr: 'ENT', maps: 3,
+    color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
+    models: ['modern-gliner-bi-base-v1.0'],
+    signals: ['Value Precision', 'Value Recall', 'Product Value Prec'],
+    description: 'Named entity overlap with value-level scoring. Product entity precision catches context-specific factual errors.',
+  },
+  'reference-vs-generated': {
+    name: 'Entity', abbr: 'ENT', maps: 4,
+    color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
+    models: ['modern-gliner-bi-base-v1.0'],
+    signals: ['Value Precision', 'Value Recall', 'Product Count', 'Percentage Count'],
+    description: 'Entity overlap with type-count signals for products and percentages — critical for reference faithfulness.',
+  },
+  'model-vs-model': {
+    name: 'Entity', abbr: 'ENT', maps: 5,
+    color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
+    models: ['modern-gliner-bi-base-v1.0'],
+    signals: ['Value Precision', 'Value Recall', 'Pct Count', 'Pct Value Prec', 'Pct Value Rec'],
+    description: 'Percentage entity signals dominate model agreement. Tracks both presence and value-level parity.',
+  },
+};
+
+const FEATURES_BY_MODE: Record<ComparisonMode, FeatureGroup[]> = {
+  'context-vs-generated': [
+    BASE_GROUPS.lexical,
+    BASE_GROUPS.semantic,
+    BASE_GROUPS.nli,
+    ENTITY_BY_MODE['context-vs-generated'],
+    BASE_GROUPS.lcs,
+    BASE_GROUPS.numeric,
+    BASE_GROUPS.grounding,
+    BASE_GROUPS.triplet,
+  ],
+  'reference-vs-generated': [
+    BASE_GROUPS.lexical,
+    BASE_GROUPS.semantic,
+    BASE_GROUPS.nli,
+    ENTITY_BY_MODE['reference-vs-generated'],
+    BASE_GROUPS.lcs,
+    BASE_GROUPS.numeric,
+    BASE_GROUPS.grounding,
+    BASE_GROUPS.triplet,
+  ],
+  'model-vs-model': [
+    BASE_GROUPS.lexical,
+    BASE_GROUPS.semantic,
+    BASE_GROUPS.nli,
+    ENTITY_BY_MODE['model-vs-model'],
+    BASE_GROUPS.lcs,
+    BASE_GROUPS.numeric,
+    BASE_GROUPS.grounding,
+    BASE_GROUPS.triplet,
+  ],
+};
+
+const SPATIAL_SIZE = 32;
+
+interface FeaturePanelProps {
+  mode: ComparisonMode;
+}
+
+export function FeaturePanel({ mode }: FeaturePanelProps) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
+
+  const features = FEATURES_BY_MODE[mode];
+  const totalMaps = features.reduce((sum, f) => sum + f.maps, 0);
+  const numFamilies = features.length;
 
   return (
     <div style={{
@@ -109,7 +182,7 @@ export function FeaturePanel() {
             overflow: 'hidden',
             gap: 1,
           }}>
-            {FEATURES.map(f => (
+            {features.map(f => (
               <div key={f.abbr} style={{
                 flex: f.maps,
                 background: f.color,
@@ -124,7 +197,7 @@ export function FeaturePanel() {
             color: 'var(--text-3)',
             letterSpacing: '0.04em',
           }}>
-            {TOTAL_MAPS} maps · 5 families
+            {totalMaps} maps · {numFamilies} families
           </span>
         </div>
 
@@ -150,7 +223,7 @@ export function FeaturePanel() {
               overflow: 'hidden',
               gap: 2,
             }}>
-              {FEATURES.map(f => {
+              {features.map(f => {
                 const isHov = hovered === f.abbr;
                 return (
                   <div
@@ -169,7 +242,7 @@ export function FeaturePanel() {
                       borderRadius: 3,
                     }}
                   >
-                    {(f.maps / TOTAL_MAPS > 0.12) && (
+                    {(f.maps / totalMaps > 0.10) && (
                       <span style={{
                         fontFamily: 'var(--font-mono)',
                         fontSize: 9,
@@ -188,7 +261,7 @@ export function FeaturePanel() {
 
             {/* Map count labels */}
             <div style={{ display: 'flex', marginTop: 4, gap: 2 }}>
-              {FEATURES.map(f => (
+              {features.map(f => (
                 <div key={f.abbr} style={{
                   flex: f.maps,
                   display: 'flex',
@@ -211,10 +284,10 @@ export function FeaturePanel() {
           {/* ── Feature cards ─────────────────────────────────────── */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 8,
           }}>
-            {FEATURES.map(f => {
+            {features.map(f => {
               const isHov = hovered === f.abbr;
               return (
                 <div
@@ -332,7 +405,7 @@ export function FeaturePanel() {
             gap: 6,
             justifyContent: 'center',
           }}>
-            {['Text Pair', '→', 'Feature Extraction', '→', `${TOTAL_MAPS} × [64×64]`, '→', 'Conv2D Head', '→', 'Score [0,1]'].map((seg, i) => (
+            {['Text Pair', '→', 'Feature Extraction', '→', `${totalMaps} × [${SPATIAL_SIZE}×${SPATIAL_SIZE}]`, '→', 'Conv2D Head', '→', 'Score [0,1]'].map((seg, i) => (
               <span key={i} style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: 9,

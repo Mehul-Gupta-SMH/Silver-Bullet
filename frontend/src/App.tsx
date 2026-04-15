@@ -218,7 +218,7 @@ function App() {
         )}
         {tab !== 'experiments' && tab !== 'admin' && tab !== 'jury' && (
           <div className="sb-fade-up sb-content-area" style={{ marginBottom: 28, animationDelay: '40ms' }}>
-            <FeaturePanel />
+            <FeaturePanel mode={mode} />
           </div>
         )}
 
@@ -311,7 +311,7 @@ function App() {
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
           }}>
-            SilverBullet · Conv2D · 19–21 signal maps · v5.5
+            SilverBullet · Conv2D · 19–21 signal maps · 8 families · v5.5
           </span>
           <a
             href="http://localhost:8000/api/v1/docs"
