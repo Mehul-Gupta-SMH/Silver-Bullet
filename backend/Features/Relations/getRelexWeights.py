@@ -51,6 +51,7 @@ from __future__ import annotations
 import difflib
 from typing import List
 
+from tqdm import tqdm
 from backend.Postprocess.__addpad import resize_matrix
 from backend.cache_db import CacheDB
 
@@ -147,7 +148,7 @@ class RelexGrounding:
             → {"relation_triplet_recall": Tensor[32, 32]}
     """
 
-    MODEL: str = "knowledgator/gliner-relex-large-v1.0"
+    MODEL: str = "knowledgator/gliner-relex-base-v1.0"
     ENTITY_THRESHOLD: float = 0.3
     RELATION_THRESHOLD: float = 0.5
     _MAX_CHARS: int = 512
@@ -215,59 +216,73 @@ class RelexGrounding:
     def _extract_triplets(self, texts: list[str]) -> list[list[tuple[str, str, str]]]:
         """Return (head, relation_type, tail) triplets for each sentence.
 
+        Uses GLiNERRelationExtractor for fully-batched NER + RE:
+          - Step 1: model.run(texts, ENTITY_TYPES) — batched NER
+          - Step 2: model.run(prompts, per_text_labels) — batched RE
+            where per_text_labels = ["entity <> relation", ...] per text
+
         Results are cached by sentence text to avoid redundant inference.
-
-        Args:
-            texts: List of sentence strings.
-
-        Returns:
-            List of triplet lists, one per input sentence.
         """
         RelexGrounding.load_triplet_cache()
 
-        new_texts = [t for t in texts if t not in RelexGrounding._triplet_cache]
+        # Check against the TRUNCATED key — cache stores t[:_MAX_CHARS], not full text.
+        new_texts = [t for t in texts if t[:self._MAX_CHARS] not in RelexGrounding._triplet_cache]
 
         if new_texts:
             self._ensure_model()
             model = RelexGrounding._model_cache[self.MODEL]
             truncated = [t[: self._MAX_CHARS] for t in new_texts]
 
-            # Step 1: batch entity extraction across all new sentences at once.
             try:
-                if hasattr(model, "batch_predict_entities"):
-                    batch_entities = model.batch_predict_entities(
-                        truncated, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD
-                    )
-                else:
-                    batch_entities = [
-                        model.predict_entities(t, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD)
-                        for t in truncated
-                    ]
-            except Exception:
-                batch_entities = [[] for _ in truncated]
+                from gliner.multitask.relation_extraction import GLiNERRelationExtractor
+                extractor = GLiNERRelationExtractor(model=model)
+                print(f"[RelexGrounding] batched NER+RE: {len(truncated)} sentences")
+                batch_results = extractor(
+                    truncated,
+                    relations=RELATION_TYPES,
+                    entities=ENTITY_TYPES,
+                    ner_threshold=self.ENTITY_THRESHOLD,
+                    rel_threshold=self.RELATION_THRESHOLD,
+                    batch_size=16,
+                )
+                # batch_results: list[list[{source, relation, target, score}]]
+                for trunc, rels in tqdm(
+                    zip(truncated, batch_results),
+                    total=len(truncated),
+                    desc="Relex parse",
+                ):
+                    triplets: list[tuple[str, str, str]] = []
+                    for rel in rels:
+                        head  = rel.get("source", "").strip()
+                        rtype = rel.get("relation", "").strip()
+                        tail  = rel.get("target", "").strip()
+                        if head and rtype and tail:
+                            triplets.append((head, rtype, tail))
+                    RelexGrounding._triplet_cache[trunc] = triplets
 
-            # Step 2: relation extraction per sentence (requires per-text entity list).
-            # predict_relations is inherently per-text so this loop is unavoidable,
-            # but entity inference (the expensive transformer pass) is batched above.
-            for trunc, entities in zip(truncated, batch_entities):
-                triplets: list[tuple[str, str, str]] = []
+            except Exception as exc:
+                # Fallback: per-sentence predict_relations (original approach)
+                print(f"[RelexGrounding] batched RE failed ({exc}), falling back to per-sentence")
+                # NER batch
                 try:
-                    if entities and hasattr(model, "predict_relations"):
-                        relations = model.predict_relations(
-                            trunc,
-                            entities,
-                            RELATION_TYPES,
-                            threshold=self.RELATION_THRESHOLD,
-                        )
-                        for rel in relations:
-                            head = rel.get("head_text", rel.get("head", {}).get("text", ""))
-                            tail = rel.get("tail_text", rel.get("tail", {}).get("text", ""))
-                            rtype = rel.get("relation_text", rel.get("relation", ""))
-                            if head and tail and rtype:
-                                triplets.append((head, rtype, tail))
+                    batch_entities = model.run(truncated, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD)
                 except Exception:
-                    pass  # model inference failure → empty triplet list for this sentence
-                RelexGrounding._triplet_cache[trunc] = triplets
+                    batch_entities = [[] for _ in truncated]
+                for trunc, entities in tqdm(
+                    zip(truncated, batch_entities), total=len(truncated), desc="Relex RE (fallback)"
+                ):
+                    triplets = []
+                    try:
+                        if entities and hasattr(model, "predict_relations"):
+                            for rel in model.predict_relations(trunc, entities, RELATION_TYPES, threshold=self.RELATION_THRESHOLD):
+                                head  = rel.get("head_text", rel.get("head",  {}).get("text", ""))
+                                tail  = rel.get("tail_text", rel.get("tail",  {}).get("text", ""))
+                                rtype = rel.get("relation_text", rel.get("relation", ""))
+                                if head and tail and rtype:
+                                    triplets.append((head, rtype, tail))
+                    except Exception:
+                        pass
+                    RelexGrounding._triplet_cache[trunc] = triplets
 
             RelexGrounding.save_triplet_cache(truncated)
 

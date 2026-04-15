@@ -341,9 +341,13 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None",
     models_to_prefill = dummy.feature_model_local_list[:1]
     for model_meta in tqdm(models_to_prefill, desc="Pre-encoding models"):
         model_name = model_meta["model"]
+        # Load SQLite cache BEFORE checking new_sentences — otherwise all sentences
+        # appear new because the in-memory dict is empty at process start.
+        SemanticFeatures.load_embedding_cache(model_name)
         sent_cache = SemanticFeatures._embedding_cache.setdefault(model_name, {})
         new_sentences = [s for s in sentences if s not in sent_cache]
         if not new_sentences:
+            print(f"[SemanticCache] all {len(sentences)} sentences already cached for {model_name} — skipping encode.")
             continue
 
         try:
@@ -356,6 +360,11 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None",
             )
             for s, emb in zip(new_sentences, embeddings):
                 sent_cache[s] = emb
+
+            # Persist new embeddings to SQLite now — the per-pair loop will find
+            # them in-memory and skip encoding, so save_embedding_cache() won't be
+            # called again for these sentences during the training loop.
+            SemanticFeatures.save_embedding_cache(model_name, new_sentences)
 
             # Explicitly unload after encoding to free RAM before the next model loads.
             # Keeps embeddings in sent_cache (numpy arrays) but drops the model weights.
@@ -399,8 +408,12 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
         for sent in split_txt(pair[0]) + split_txt(pair[1]):
             unique_sentences.add(sent)
 
+    # Load SQLite cache BEFORE filtering — avoids treating all sentences as new
+    # when the in-memory dict is empty at process start.
+    EntityMatch.load_entity_cache()
     new_sentences = [s for s in unique_sentences if s not in EntityMatch._entity_cache]
     if not new_sentences:
+        print(f"[EntityCache] all {len(unique_sentences)} sentences already cached — skipping NER.")
         return
 
     print(f"[EntityCache] pre-running NER on {len(new_sentences)} unique sentences…")
@@ -430,6 +443,10 @@ def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
     if not any(k in ("entailment", "neutral", "contradiction") for k in keys):
         return
 
+    # Load SQLite cache BEFORE building unique_pairs — otherwise every pair
+    # appears uncached because the in-memory dict is empty at process start.
+    NLIWeights.load_pair_cache()
+
     # Collect all unique sentence pairs from pairs that still need NLI computation.
     unique_pairs: set[tuple[str, str]] = set()
     for pair in paragraph_pairs:
@@ -445,6 +462,7 @@ def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
                     unique_pairs.add((s1, s2))
 
     if not unique_pairs:
+        print(f"[NLICache] all pairs already cached — skipping NLI prefill.")
         return
 
     all_pairs = list(unique_pairs)
@@ -479,14 +497,73 @@ def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
             ).to(device)
             logits = mdl(**enc).logits
             probs = torch.softmax(logits, dim=-1).cpu().numpy()
+            batch_rows: list[tuple] = []
             for (s1, s2), row in zip(chunk, probs):
-                NLIWeights._pair_cache[(s1, s2)] = (
+                scores = (
                     float(row[label_to_idx["entailment"]]),
                     float(row[label_to_idx["neutral"]]),
                     float(row[label_to_idx["contradiction"]]),
                 )
+                NLIWeights._pair_cache[(s1, s2)] = scores
+                batch_rows.append((s1, s2, scores[0], scores[1], scores[2]))
+            # Persist each batch immediately — crash-safe.
+            NLIWeights.save_pair_cache(batch_rows)
 
     print(f"[NLICache] done — pair cache now covers {len(NLIWeights._pair_cache)} sentence pairs.")
+
+
+def _prefill_relex_cache(paragraph_pairs, cache: "FeatureCache | None",
+                         feature_keys: list[str] | None = None) -> None:
+    """Pre-run RelexGrounding (gliner-relex) on all unique sentences before the per-pair loop.
+
+    Without this, any pair missing 'relation_triplet_recall' in its cache entry
+    will invoke the relex model sequentially inside the training loop — one pair
+    at a time — rather than batching all new sentences in a single pass.
+
+    Uses the same batched entity-extraction path as RelexGrounding._extract_triplets(),
+    which issues one batch_predict_entities() call for all new sentences and then
+    runs predict_relations() per sentence (unavoidable — it needs per-sentence entities).
+    """
+    from backend.Features.Relations.getRelexWeights import RelexGrounding
+
+    keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+    if "relation_triplet_recall" not in keys:
+        return
+
+    unique_sentences: set[str] = set()
+    for pair in paragraph_pairs:
+        if cache is not None:
+            entry = cache.get_features(pair[0], pair[1])
+            if entry is not None and "relations" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
+                continue
+        for sent in split_txt(pair[0]) + split_txt(pair[1]):
+            unique_sentences.add(sent)
+
+    _MAX = RelexGrounding._MAX_CHARS
+    # Load SQLite cache BEFORE filtering — otherwise all sentences appear new
+    # because the in-memory dict is empty at process start.
+    RelexGrounding.load_triplet_cache()
+    new_sentences = [
+        s for s in unique_sentences
+        if s[:_MAX] not in RelexGrounding._triplet_cache
+    ]
+    if not new_sentences:
+        print(f"[RelexCache] all {len(unique_sentences)} sentences already cached — skipping prefill.")
+        return
+
+    print(f"[RelexCache] pre-extracting triplets for {len(new_sentences)} unique sentences…")
+    dummy = RelexGrounding()
+    # Process in chunks so (a) tqdm shows chunk-level progress and
+    # (b) results are persisted to SQLite after each chunk — crash-safe.
+    # Chunk=32 (was 128) to stay within GPU/RAM budget — gliner-relex is ~3 GB peak.
+    # gc.collect() after each chunk forces Python to release intermediate tensors so
+    # PyTorch's CPU allocator doesn't accumulate fragmented blocks across chunks.
+    import gc as _gc_relex
+    _CHUNK = 32
+    for i in tqdm(range(0, len(new_sentences), _CHUNK), desc="Relex prefill"):
+        dummy._extract_triplets(new_sentences[i : i + _CHUNK])
+        _gc_relex.collect()
+    print(f"[RelexCache] done — triplet cache now covers {len(RelexGrounding._triplet_cache)} sentences.")
 
 
 class TextSimilarityDataset(Dataset):
@@ -521,6 +598,7 @@ class TextSimilarityDataset(Dataset):
         _prefill_semantic_cache(paragraph_pairs, self.cache, self.feature_keys)
         _prefill_entity_cache(paragraph_pairs, self.cache, self.feature_keys)
         _prefill_nli_cache(paragraph_pairs, self.cache, self.feature_keys)
+        _prefill_relex_cache(paragraph_pairs, self.cache, self.feature_keys)
 
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):
@@ -604,6 +682,56 @@ class TextSimilarityDataset(Dataset):
         print(f"Feature tensor shape : {self.features.shape}")
         print(f"Labels shape         : {self.labels.shape}")
 
+        # Free extractor models — called as a separate method so its local
+        # imports live in their own scope and cannot shadow any name used above.
+        self._free_extractor_models()
+
+    def _free_extractor_models(self) -> None:
+        """Free all feature-extractor model weights from RAM.
+
+        Called once after self.features is fully constructed. Clears both the
+        extractor instances on self and the class-level model caches that hold
+        the actual weight tensors (~5–8 GB total). Frees memory before the CNN
+        training loop starts.
+
+        Implemented as a separate method — NOT inline in __init__ — so that
+        the ``import X as alias`` statements here live in their own local scope
+        and cannot cause Python to treat module-level names (e.g. NLIWeights)
+        as unbound locals in __init__.
+        """
+        import gc
+
+        del self.lexical, self.semantic, self.nli, self.entity
+        del self.lcs, self.numeric, self.relations, self.relex
+
+        try:
+            import backend.Features.Semantic.__generate_semantic_features as _sem
+            _sem.SemanticFeatures._model_cache.clear()
+        except Exception:
+            pass
+        try:
+            import backend.Features.NLI.getNLIweights as _nli
+            _nli.NLIWeights._model = None
+            _nli.NLIWeights._tokenizer = None
+            _nli.NLIWeights._disk_cache_loaded = False
+        except Exception:
+            pass
+        try:
+            import backend.Features.EntityGroups.getOverlap as _ent
+            _ent.EntityMatch._model_cache.clear()
+            _ent.EntityMatch._disk_cache_loaded = False
+        except Exception:
+            pass
+        try:
+            import backend.Features.Relations.getRelexWeights as _relex
+            _relex.RelexGrounding._model_cache.clear()
+            _relex.RelexGrounding._disk_cache_loaded = False
+        except Exception:
+            pass
+
+        gc.collect()
+        print("[MemClean] Feature extractor models freed — starting CNN training loop.")
+
     @property
     def num_features(self) -> int:
         return self.features.shape[1]
@@ -615,9 +743,9 @@ class TextSimilarityDataset(Dataset):
         return self.features[idx], self.lengths[idx], self.labels[idx]
 
 
-def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.0003,
-                patience=8, min_delta=0.001, best_ckpt='best_model.pth', mode='general',
-                label_smooth=0.05, feature_keys: list[str] | None = None):
+def train_model(model, train_loader, val_loader, num_epochs=75, learning_rate=0.0003,
+                patience=15, min_delta=0.001, best_ckpt='best_model.pth', mode='general',
+                label_smooth=0.05, warmup_epochs=5, feature_keys: list[str] | None = None):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -629,9 +757,10 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
         'batch_size':                train_loader.batch_size,
         'optimizer':                 'AdamW',
         'weight_decay':              1e-4,
-        'lr_schedule':               'CosineAnnealingLR',
+        'lr_schedule':               f'LinearWarmup({warmup_epochs}ep)+CosineAnnealingLR',
         'loss_function':             'MSELoss',
         'label_smooth':              label_smooth,
+        'warmup_epochs':             warmup_epochs,
         'early_stopping_patience':   patience,
         'early_stopping_min_delta':  min_delta,
         'num_feature_channels':      num_features,
@@ -649,7 +778,17 @@ def train_model(model, train_loader, val_loader, num_epochs=50, learning_rate=0.
     model     = model.to(device)
     criterion = nn.MSELoss()
     optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=1e-4)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs, eta_min=1e-6)
+    # Warmup: ramp from lr*0.1 → lr over warmup_epochs, then cosine decay to eta_min.
+    # Longer schedule (75ep default) + wider patience (15) prevents early stopping on val noise.
+    _warmup = torch.optim.lr_scheduler.LinearLR(
+        optimizer, start_factor=0.1, end_factor=1.0, total_iters=warmup_epochs
+    )
+    _cosine = torch.optim.lr_scheduler.CosineAnnealingLR(
+        optimizer, T_max=max(num_epochs - warmup_epochs, 1), eta_min=1e-6
+    )
+    scheduler = torch.optim.lr_scheduler.SequentialLR(
+        optimizer, schedulers=[_warmup, _cosine], milestones=[warmup_epochs]
+    )
 
     best_val_loss      = float('inf')
     patience_counter   = 0
