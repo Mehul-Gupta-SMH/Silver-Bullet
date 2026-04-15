@@ -13,12 +13,14 @@ interface JurorModel {
 }
 
 const JUROR_MODELS: JurorModel[] = [
-  { id: 'gpt-4o-mini',      label: 'GPT-4o mini',    vendor: 'openai',    tier: 'fast',     tagline: 'Quick deliberation' },
-  { id: 'gpt-4o',           label: 'GPT-4o',         vendor: 'openai',    tier: 'powerful', tagline: 'Deep reasoning' },
-  { id: 'gpt-4-turbo',      label: 'GPT-4 Turbo',    vendor: 'openai',    tier: 'balanced', tagline: 'Balanced judgment' },
-  { id: 'claude-3-5-haiku-20241022', label: 'Claude Haiku', vendor: 'anthropic', tier: 'fast',     tagline: 'Efficient verdict' },
-  { id: 'claude-3-5-sonnet-20241022', label: 'Claude Sonnet', vendor: 'anthropic', tier: 'balanced', tagline: 'Nuanced review' },
-  { id: 'claude-opus-4-5',   label: 'Claude Opus',   vendor: 'anthropic', tier: 'powerful', tagline: 'Supreme judgment' },
+  // OpenAI
+  { id: 'gpt-4o-mini',            label: 'GPT-4o mini',      vendor: 'openai',    tier: 'fast',     tagline: 'Quick deliberation' },
+  { id: 'gpt-4o',                 label: 'GPT-4o',           vendor: 'openai',    tier: 'balanced', tagline: 'Strong reasoning' },
+  { id: 'o4-mini',                label: 'o4-mini',          vendor: 'openai',    tier: 'powerful', tagline: 'Deep chain-of-thought' },
+  // Anthropic
+  { id: 'claude-haiku-4-5',       label: 'Claude Haiku 4.5', vendor: 'anthropic', tier: 'fast',     tagline: 'Efficient verdict' },
+  { id: 'claude-sonnet-4-5',      label: 'Claude Sonnet 4.5',vendor: 'anthropic', tier: 'balanced', tagline: 'Nuanced review' },
+  { id: 'claude-opus-4-5',        label: 'Claude Opus 4.5',  vendor: 'anthropic', tier: 'powerful', tagline: 'Supreme judgment' },
 ];
 
 const VENDOR_COLORS = {
@@ -35,7 +37,274 @@ const MODE_CONFIG: Record<ComparisonMode, { label: string; t1: string; t2: strin
   'model-vs-model':         { label: 'Model vs Model',         t1: 'Model A Output',             t2: 'Model B Output',      color: 'var(--mvm)' },
 };
 
+// ─── Example cases ───────────────────────────────────────────────────────────
+
+type ExpectedVerdict = 'faithful' | 'hallucinated' | 'ambiguous';
+
+interface JuryExample {
+  id: string;
+  mode: ComparisonMode;
+  title: string;
+  description: string;
+  expected: ExpectedVerdict;
+  tags: string[];
+  text1: string;
+  text2: string;
+}
+
+const JURY_EXAMPLES: JuryExample[] = [
+  // ── Context vs Generated ─────────────────────────────────────────────
+  {
+    id: 'cvg-faithful',
+    mode: 'context-vs-generated',
+    title: 'Earnings Report — Grounded Summary',
+    description: 'LLM accurately summarises all key figures from the source.',
+    expected: 'faithful',
+    tags: ['finance', 'summary'],
+    text1: `Acme Corp reported Q3 2024 revenue of $4.2 billion, up 12% year-over-year. Net income was $380 million, representing a net margin of 9.0%. The company added 1.2 million new subscribers, bringing total subscribers to 18.7 million. Operating cash flow was $610 million. Management raised full-year guidance to $16.5–16.8 billion.`,
+    text2: `Acme Corp posted strong Q3 2024 results with $4.2B in revenue, a 12% annual increase. Net income reached $380M (9% margin), and the subscriber base grew by 1.2M to 18.7M total. Free cash flow came in at $610M, prompting management to lift full-year guidance to the $16.5–16.8B range.`,
+  },
+  {
+    id: 'cvg-hallucinated',
+    mode: 'context-vs-generated',
+    title: 'Drug Trial — Fabricated Efficacy',
+    description: 'LLM inverts the trial result — source shows no benefit, answer claims success.',
+    expected: 'hallucinated',
+    tags: ['medical', 'hallucination', 'negation'],
+    text1: `The Phase III trial of compound XR-77 enrolled 2,400 patients over 18 months. The primary endpoint — reduction in cardiovascular events — was not met. The treatment group showed a 4.1% event rate versus 3.9% in placebo (p=0.61). The trial was discontinued after interim analysis showed no benefit.`,
+    text2: `The Phase III trial of XR-77 demonstrated a statistically significant reduction in cardiovascular events. The treatment group achieved a 4.1% event rate compared to 3.9% in placebo, confirming the drug's efficacy. Regulatory submission is planned for Q1 2025.`,
+  },
+  {
+    id: 'cvg-ambiguous',
+    mode: 'context-vs-generated',
+    title: 'Policy Memo — Partial Coverage',
+    description: 'Answer is faithful for half the content but omits a critical constraint.',
+    expected: 'ambiguous',
+    tags: ['policy', 'omission'],
+    text1: `Effective January 1, 2025, remote work is approved for roles classified as Tier-2 or above, subject to manager approval and a minimum of two in-office days per week. Employees in client-facing roles are excluded. The policy applies only to domestic locations.`,
+    text2: `Starting January 2025, Tier-2 and above employees may work remotely with manager approval, with a requirement of at least two days per week in the office.`,
+  },
+  // ── Reference vs Generated ───────────────────────────────────────────
+  {
+    id: 'rvg-faithful',
+    mode: 'reference-vs-generated',
+    title: 'Climate Abstract — Faithful Paraphrase',
+    description: 'Generated abstract preserves all key claims from the reference.',
+    expected: 'faithful',
+    tags: ['science', 'paraphrase'],
+    text1: `Global mean surface temperature increased by 1.1°C above pre-industrial levels as of 2022. Arctic warming is occurring at four times the global average rate. Sea level has risen 20 cm since 1900, with the rate accelerating to 3.7 mm/year over the past decade. Extreme weather events have increased in frequency and intensity.`,
+    text2: `As of 2022, Earth's average surface temperature is 1.1°C warmer than pre-industrial baselines. The Arctic is heating four times faster than the global mean. Since 1900, sea levels are up 20 cm, now rising at 3.7 mm/year — an accelerating trend — while extreme weather events grow more frequent and severe.`,
+  },
+  {
+    id: 'rvg-hallucinated',
+    mode: 'reference-vs-generated',
+    title: 'Legal Ruling — Wrong Precedent',
+    description: 'Generated text cites the correct case name but inverts the ruling.',
+    expected: 'hallucinated',
+    tags: ['legal', 'entity-subst', 'hallucination'],
+    text1: `In Brown v. Board of Education (1954), the Supreme Court unanimously ruled that racial segregation in public schools was unconstitutional, overturning the "separate but equal" doctrine established in Plessy v. Ferguson (1896).`,
+    text2: `In Brown v. Board of Education (1954), the Supreme Court ruled 5-4 that while racial segregation in public schools was undesirable, it did not violate the Constitution, affirming the separate but equal doctrine from Plessy v. Ferguson.`,
+  },
+  // ── Model vs Model ───────────────────────────────────────────────────
+  {
+    id: 'mvm-agreement',
+    mode: 'model-vs-model',
+    title: 'Sorting Algorithms — Strong Agreement',
+    description: 'Two models explain quicksort with the same key facts.',
+    expected: 'faithful',
+    tags: ['cs', 'algorithms', 'agreement'],
+    text1: `Quicksort is a divide-and-conquer sorting algorithm with average-case time complexity of O(n log n). It selects a pivot element, partitions the array into elements less than and greater than the pivot, and recursively sorts each partition. Worst-case complexity is O(n²), occurring when the pivot is always the smallest or largest element.`,
+    text2: `Quicksort works by picking a pivot and partitioning the input into two groups — values below and above the pivot — then recursively sorting each group. Average time complexity is O(n log n), making it fast in practice. However, poor pivot selection (e.g., always choosing the minimum) degrades performance to O(n²).`,
+  },
+  {
+    id: 'mvm-divergence',
+    mode: 'model-vs-model',
+    title: 'Monetary Policy — Opposing Conclusions',
+    description: 'Two models reach opposite recommendations on rate policy.',
+    expected: 'hallucinated',
+    tags: ['economics', 'divergence', 'opinion'],
+    text1: `Given persistently elevated inflation at 3.8% and a strong labor market with unemployment at 3.7%, the Fed should maintain a restrictive stance and hold rates at current levels. Cutting prematurely risks re-igniting inflation expectations that took considerable effort to anchor.`,
+    text2: `With inflation declining toward the 2% target and real rates well into restrictive territory, the Fed has room to begin cutting rates. Maintaining elevated rates unnecessarily could trigger a labor market deterioration, and the cost of waiting too long outweighs the risk of a modest easing.`,
+  },
+];
+
+const EXPECTED_CONFIG: Record<ExpectedVerdict, { label: string; color: string; bg: string; border: string }> = {
+  faithful:    { label: 'Faithful',    color: 'var(--green)',  bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.22)' },
+  hallucinated:{ label: 'Hallucinated',color: 'var(--red)',    bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.22)'  },
+  ambiguous:   { label: 'Ambiguous',   color: 'var(--amber)',  bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.22)' },
+};
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
+
+function ExamplesBar({
+  mode,
+  onLoad,
+}: {
+  mode: ComparisonMode;
+  onLoad: (text1: string, text2: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const cases = JURY_EXAMPLES.filter(e => e.mode === mode);
+  if (cases.length === 0) return null;
+
+  return (
+    <div style={{
+      background: 'var(--bg-2)',
+      border: '1px solid var(--border)',
+      borderRadius: 12,
+      overflow: 'hidden',
+    }}>
+      {/* Toggle header */}
+      <button
+        onClick={() => setOpen(v => !v)}
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '10px 16px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          color: 'var(--text-2)',
+        }}
+      >
+        <span style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 18,
+          height: 18,
+          borderRadius: 4,
+          background: 'var(--bg-4)',
+          fontSize: 9,
+          fontFamily: 'var(--font-mono)',
+          color: 'var(--amber)',
+          transition: 'transform 0.2s',
+          transform: open ? 'rotate(90deg)' : 'none',
+          flexShrink: 0,
+        }}>▶</span>
+        <span style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 10,
+          letterSpacing: '0.10em',
+          textTransform: 'uppercase',
+          color: 'var(--text-3)',
+        }}>Example Cases</span>
+        <span style={{
+          marginLeft: 'auto',
+          fontFamily: 'var(--font-mono)',
+          fontSize: 9,
+          color: 'var(--text-3)',
+          background: 'var(--bg-4)',
+          padding: '2px 6px',
+          borderRadius: 4,
+        }}>{cases.length}</span>
+      </button>
+
+      {open && (
+        <div style={{
+          borderTop: '1px solid var(--border)',
+          padding: '12px 14px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+        }}>
+          {cases.map(ex => {
+            const ec = EXPECTED_CONFIG[ex.expected];
+            return (
+              <button
+                key={ex.id}
+                onClick={() => { onLoad(ex.text1, ex.text2); setOpen(false); }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: 12,
+                  padding: '10px 12px',
+                  background: 'var(--bg-3)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 9,
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'border-color 0.15s, background 0.15s',
+                  width: '100%',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = ec.border;
+                  (e.currentTarget as HTMLButtonElement).style.background = ec.bg;
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-3)';
+                }}
+              >
+                {/* Expected verdict dot */}
+                <div style={{
+                  width: 8, height: 8,
+                  borderRadius: '50%',
+                  background: ec.color,
+                  flexShrink: 0,
+                  marginTop: 5,
+                  boxShadow: `0 0 6px ${ec.color}`,
+                }} />
+
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3, flexWrap: 'wrap' }}>
+                    <span style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: 'var(--text-1)',
+                    }}>{ex.title}</span>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 9,
+                      color: ec.color,
+                      background: ec.bg,
+                      border: `1px solid ${ec.border}`,
+                      padding: '1px 6px',
+                      borderRadius: 4,
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      flexShrink: 0,
+                    }}>→ {ec.label}</span>
+                  </div>
+                  <div style={{
+                    fontSize: 11,
+                    color: 'var(--text-3)',
+                    lineHeight: 1.4,
+                    marginBottom: 6,
+                  }}>{ex.description}</div>
+                  <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+                    {ex.tags.map(tag => (
+                      <span key={tag} style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 9,
+                        color: 'var(--text-3)',
+                        background: 'var(--bg-4)',
+                        padding: '1px 5px',
+                        borderRadius: 3,
+                        letterSpacing: '0.04em',
+                      }}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Load arrow */}
+                <span style={{
+                  fontSize: 14,
+                  color: 'var(--text-3)',
+                  flexShrink: 0,
+                  marginTop: 2,
+                }}>→</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function VendorDot({ vendor }: { vendor: JurorModel['vendor'] }) {
   const c = VENDOR_COLORS[vendor];
@@ -458,6 +727,12 @@ export function JuryScorer({ mode }: Props) {
           </span>
         </div>
       </section>
+
+      {/* ── Example cases ────────────────────────────────────────── */}
+      <ExamplesBar
+        mode={mode}
+        onLoad={(t1, t2) => { setText1(t1); setText2(t2); setResult(null); }}
+      />
 
       {/* ── Text inputs ───────────────────────────────────────────── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
