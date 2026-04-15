@@ -13,3 +13,9 @@ Thought 2: [→ IMPLEMENTED: v5.1 entity_value_prec/rec + v5.2 per-type value ov
 the features based on actaully comparing entities against each other makes sense and was an intended feature that was added intially but dropped. We should  
 bring that back based on what all types gliner can extract safely and compare them against each other. Spawn a new agent for this.
 -----------
+[→ IMPLEMENTED: CURRENT.md created as RAM file]
+To manage better the memory, we will start using task.md as ROM while a 
+secondary file will only contain the current actions tasks which will act as ram. 
+This will allow to restart process without claude memory run over by tokens unneeded.
+Also this can be used to fill in task.md later with more details and information as we go along.
+Once done, the secondary file removes the actions completed and only keeps the pending ones. This way we can have a better overview of what is left to do and what has been done.

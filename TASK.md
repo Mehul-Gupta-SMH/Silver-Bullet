@@ -288,7 +288,48 @@ short inputs.
 | 2026-04-11 | [ ] | EVAL all 3 modes v5.5 after retrain; compare vs v5.4 | `test_reports/` |
 | 2026-04-11 | [ ] | COMMIT v5.5 checkpoints + test logs; push; update PR #40 | `models/*/best.pth` |
 
-<!-- CURSOR: 2026-04-11 — v5.5 (relation_triplet_recall) training in background (bqzcbqmgb); CVG=19/RVG=20/MVM=21 features; next: eval all 3, commit, update PR #40 -->
+## Session 2026-04-12 — SQLite cache + training pipeline fixes
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-12 | [x] | INFRA: Unified SQLite cache (cache/silverbullet.db) — replaces nli_pairs.json, entity_sentences.json, relex_triplets.json, embeddings/*.npz, cache/{md5}.json; WAL mode; thread-local connections; auto-migration | `backend/cache_db.py` (new), `backend/feature_cache.py`, `getNLIweights.py`, `getOverlap.py`, `getRelexWeights.py`, `__generate_semantic_features.py` |
+| 2026-04-12 | [x] | FIX: Add `_prefill_relex_cache()` to train.py — without it, gliner-relex ran per-pair sequentially in the extraction loop | `backend/train.py` |
+| 2026-04-12 | [x] | FIX: Prefill functions now persist to SQLite explicitly — semantic prefill calls `save_embedding_cache()`, NLI prefill calls `save_pair_cache()` per batch | `backend/train.py` |
+| 2026-04-12 | [x] | FIX: Batched RE — `_extract_triplets` now uses `GLiNERRelationExtractor` for fully-batched NER+RE (two `model.run()` calls); per-sentence fallback preserved | `backend/Features/Relations/getRelexWeights.py` |
+| 2026-04-12 | [x] | ADD: tqdm progress bars for relex prefill (`Relex prefill X/N`) and RE step (`Relex parse`); chunked prefill at 128 sentences/chunk for crash-safety | `backend/train.py`, `backend/Features/Relations/getRelexWeights.py` |
+| 2026-04-12 | [x] | RETRAIN CVG v5.5 — completed 2026-04-12 02:41, 19 features, best val loss 0.1992 @ epoch 10 | `models/context-vs-generated/20260412_024151_best.pth` |
+
+## Session 2026-04-13 — Prefill cache-miss root cause + frontend redesign
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-13 | [x] | FIX: All 4 prefill functions called load_*_cache() AFTER filtering → every sentence appeared new; added load before filter in `_prefill_semantic_cache`, `_prefill_entity_cache`, `_prefill_nli_cache`, `_prefill_relex_cache` | `backend/train.py` |
+| 2026-04-13 | [x] | FIX: Relex cache key mismatch — `_extract_triplets` checked full text against truncated [:512] keys; fixed to `t[:_MAX_CHARS] not in _triplet_cache` | `backend/Features/Relations/getRelexWeights.py` |
+| 2026-04-13 | [x] | UI: Frontend redesign — dark telemetry aesthetic; Syne + DM Mono + DM Sans; grid texture; CSS vars; dark overrides for all Tailwind classes | `frontend/src/index.css`, `frontend/src/App.tsx` |
+| 2026-04-13 | [x] | UI: Admin tab — ModelCard (per-mode accent), TrainingPanel (live logs, start/stop), BenchmarkTable, CacheStats, CLI reference with click-to-copy | `frontend/src/components/AdminPanel.tsx` |
+| 2026-04-13 | [x] | API: Training job management endpoints — POST /admin/train/{mode}, POST /admin/train/{mode}/stop, GET /admin/train/status, GET /admin/train/logs/{mode}?offset=N | `backend/api/main.py` |
+| 2026-04-13 | [x] | TYPES: TrainingJobStatus, TrainingLogsResponse; services: startTraining, stopTraining, getTrainingStatus, getTrainingLogs | `frontend/src/types/index.ts`, `frontend/src/services/api.ts` |
+| 2026-04-13 | [~] | RETRAIN RVG v5.5 — PID 8892 (.sbvenv); NLI prefill ~38/46 when session resumed; 20 features | `models/reference-vs-generated/best.pth`, `train_rvg.log` |
+| 2026-04-13 | [ ] | RETRAIN MVM v5.5 — chain after RVG completes; 21 features | `models/model-vs-model/best.pth`, `train_mvm.log` |
+| 2026-04-13 | [ ] | EVAL all 3 modes v5.5 | `test_reports/` |
+| 2026-04-13 | [ ] | COMMIT v5.5 checkpoints + test logs; push; update PR #40 | `models/*/best.pth` |
+
+| 2026-04-14 | [x] | STABILITY: patience 8→15, num_epochs 50→75, warmup_epochs=5; LinearLR warmup + SequentialLR + CosineAnnealingLR — prevents early stopping on val noise peaks | `backend/train.py` |
+| 2026-04-14 | [ ] | STABILITY: Stratified val split by dataset source — high variance from mixing STS-B/MNLI/HaluEval in same val batches | `backend/fetch_external_data.py`, `backend/train.py` |
+| 2026-04-14 | [ ] | STABILITY: Per-source loss weighting — normalize calibration differences across external dataset label distributions | `backend/train.py` |
+| 2026-04-14 | [ ] | STABILITY: Augment MVM val set to ≥600 samples — only 334 val samples → 11 batches → very high gradient variance | `backend/fetch_external_data.py`, `data/model-vs-model/` |
+
+| 2026-04-14 | [x] | FIX: UnboundLocalError on NLIWeights — moved memory cleanup to `_free_extractor_models()` method (separate scope, imports cannot shadow __init__ names) | `backend/train.py` |
+| 2026-04-14 | [x] | FIX: Chainer false-positive abort — now checks last 500 bytes only, not full new_text | `backend/chain_train.py` |
+| 2026-04-14 | [x] | FIX: Stray processes — launch via Python subprocess.Popen instead of bash &; PID files written for each step | `backend/chain_train.py` |
+| 2026-04-14 | [x] | SWITCH: relex model large→base (`knowledgator/gliner-relex-base-v1.0`); batch_size=16; cleared triplet cache | `backend/Features/Relations/getRelexWeights.py` |
+
+<!-- CURSOR: 2026-04-14 — All 4 fixes applied; RVG training PID 21880 running (relex-base, fresh log); chainer PID 19900 watching; see CURRENT.md for queue -->
+| 2026-04-12 | [x] | BENCHMARK: Add validation benchmark loaders to fetch_external_data.py — SummEval, FactCC, FRANK, AggreFact; written to data/benchmarks/ (never merged into training) | `backend/fetch_external_data.py` |
+| 2026-04-12 | [x] | BENCHMARK: New benchmark_eval.py — runs SilverBullet on held-out benchmarks; reports ROC-AUC, PR-AUC, Pearson r, Spearman ρ vs. human labels; saves to benchmark_reports/ | `backend/benchmark_eval.py` (new) |
+| 2026-04-12 | [ ] | BENCHMARK: Fetch benchmark data — `python -m backend.fetch_external_data --force` to download SummEval/FactCC/FRANK/AggreFact into data/benchmarks/ | `data/benchmarks/` |
+| 2026-04-12 | [ ] | BENCHMARK: Run first evaluation after v5.5 training completes — `python -m backend.benchmark_eval`; target: ROC-AUC ≥ 0.85, Pearson r ≥ 0.65 (beats SummaC baseline) | `benchmark_reports/` |
+| 2026-04-12 | [ ] | PERF: Pre-split + cache sentence lists — `split_txt()` is called per-pair in the extraction loop (creates fresh EntityResolver each time = ~500ms/pair); fix: pre-split all texts once before the loop and store in a dict; eliminate coref-resolver overhead at training time | `backend/train.py`, `backend/Splitter/sentence_splitter.py` |
 
 ## Session 2026-04-10 — Feature pattern analysis
 
@@ -318,6 +359,58 @@ short inputs.
 | 2026-04-03 | [x] | DATA: Implement loaders for RAGTruth, FaithDial, ANLI-R3, WiCE, SummaC in fetch_external_data.py; field-name probing + graceful fallback for each | `backend/fetch_external_data.py` — commit 4305597 |
 | 2026-04-03 | [ ] | DATA: Run python -m backend.fetch_external_data to pull new datasets and rebuild splits | `data/`, `data/external/` — requires re-run after v4.1 training complete |
 | 2026-04-03 | [ ] | TRAINING: Retrain all 3 modes on expanded dataset (after fetch_external_data re-run) — delete ./cache/ first to recompute features for new pairs | `models/*/`, `./cache/` |
+
+## Feature Roadmap — v6 Architecture Ideas (2026-04-15)
+
+> Three directions that came out of reasoning about what the current architecture misses.
+> None require retraining from scratch — each is additive to the existing inference pipeline.
+
+### v6-A: Min-alignment readout (catch partial hallucinations)
+
+> **Problem:** A generated text that's 90% faithful but has one fabricated fact scores ~0.9.
+> In production, "90% faithful with one critical lie" is a failure, not a success.
+> **Fix:** Surface `min_alignment` (minimum cell value in the cross-attention matrix) alongside
+> `avg_alignment`. If any generated sentence can't be grounded to any source sentence,
+> flag it regardless of the aggregate score. Two numbers instead of one.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-15 | [ ] | IMPL: Add `min_alignment` to breakdown response — find the minimum value in the sentence-pair alignment matrix; return alongside `probability` in all breakdown endpoints | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [ ] | IMPL: Add `min_alignment_pair` to breakdown — (i, j) indices of the weakest sentence pair, so the caller knows exactly which generated sentence is least supported | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [ ] | FRONTEND: Render min-alignment indicator in BreakdownPanel — highlight the weakest cell in the alignment heatmap; show `min_alignment` score with a "weakest link" label | `frontend/src/components/BreakdownPanel.tsx` |
+
+### v6-B: Hallucination type classifier (explain *how*, not just *where*)
+
+> **Problem:** Sentence-level localization tells you *which* sentence is wrong, not *why*.
+> The per-cell feature values already encode the answer — NLI contradiction → negation;
+> high cosine + low entity overlap → entity substitution; triplet predicate mismatch → predicate flip;
+> low everything → topic drift. It just isn't surfaced.
+> **Fix:** 4-class classifier over the 16 feature values at each divergent cell.
+> Training labels are implicit in HaluEval + RAGTruth annotations.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-15 | [ ] | DESIGN: Define hallucination type taxonomy — 4 classes: `NEGATION` (NLI contradiction high), `ENTITY_SUBST` (cosine high + entity overlap low), `PREDICATE_FLIP` (triplet subjects match, predicates differ), `TOPIC_DRIFT` (all signals low); define thresholds per class | `backend/Features/` (new `hallucination_type.py`) |
+| 2026-04-15 | [ ] | DATA: Extract per-cell labels from HaluEval + RAGTruth — use annotator comments to assign type labels to divergent sentence pairs; build small labeled dataset (~500 pairs) | `data/hallucination_types/` (new) |
+| 2026-04-15 | [ ] | IMPL: Train tiny 4-class classifier (16 features → 4 classes) on labeled cell data; pickle alongside main model | `backend/hallucination_type_classifier.py` (new) |
+| 2026-04-15 | [ ] | INTEGRATE: Add `hallucination_type` field to breakdown response for divergent sentences — run classifier on the (i,j) cell of each divergent sentence; return type + confidence | `backend/predict.py`, `backend/api/schemas.py` |
+
+### v6-C: Adversarial hard-negative generation (fix the data, not the architecture)
+
+> **Problem:** The model has seen too few adversarial pairs — high semantic similarity, low faithfulness.
+> Ablation shows NLI entailment + relation triplets carry the most signal on hard cases,
+> but semantic similarity is *adversarial* (near-1 cosine for logical opposites).
+> The model can learn to down-weight semantic sim on hard negatives — but only if it's seen enough.
+> **Fix:** Targeted adversarial pair generation for each of the 4 failure types.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-15 | [ ] | IMPL: `backend/generate_adversarial.py` — for each label=1 pair in training data, generate one adversarial label=0 variant per failure type: (1) negate a key verb; (2) swap one entity; (3) invert a relation predicate; (4) substitute an adjacent topic sentence | `backend/generate_adversarial.py` (new) |
+| 2026-04-15 | [ ] | IMPL: Use GPT-4o-mini for adversarial transforms — prompt: "Modify this sentence to change exactly [entity/predicate/negation] while keeping all other text identical"; validate with NLI that entailment score drops | `backend/generate_adversarial.py` |
+| 2026-04-15 | [ ] | DATA: Generate ~200 adversarial pairs per mode per failure type (→ ~800 new pairs per mode); merge into training splits; retrain and compare AUC on hard-negative subset specifically | `data/*/train.json`, `backend/train.py` |
+| 2026-04-15 | [ ] | EVAL: After retrain, specifically measure performance on original hard-negative subset (pairs where score was 0.35–0.65 before adversarial training) — the aggregate AUC may barely move while the hard-case accuracy jumps significantly | `backend/test.py`, `test_reports/` |
+
+---
 
 ## Feature Roadmap — Active Learning Loop
 
