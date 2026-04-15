@@ -1,36 +1,57 @@
 import { useState } from 'react';
-import { getTestCases, OUTCOME_LABEL, OUTCOME_COLOR } from '../data/testCases';
+import { getTestCases } from '../data/testCases';
 import type { PairTestCase, BatchTestCase } from '../data/testCases';
 import type { ComparisonMode } from '../types';
 
-// ── Pair scorer callback ──────────────────────────────────────────────────────
 interface PairLoadProps {
   scope: 'pair';
   mode: ComparisonMode;
   onLoad: (tc: PairTestCase) => void;
 }
-
-// ── Batch scorer callback ─────────────────────────────────────────────────────
 interface BatchLoadProps {
   scope: 'batch';
   mode: ComparisonMode;
   onLoad: (tc: BatchTestCase) => void;
 }
-
 type Props = PairLoadProps | BatchLoadProps;
 
-const TAG_COLORS: Record<string, string> = {
-  hallucination: 'bg-red-50 text-red-600',
-  grounded: 'bg-emerald-50 text-emerald-600',
-  faithful: 'bg-emerald-50 text-emerald-600',
-  agreement: 'bg-blue-50 text-blue-600',
-  divergence: 'bg-rose-50 text-rose-600',
-  code: 'bg-violet-50 text-violet-700',
-  batch: 'bg-slate-100 text-slate-600',
+// Outcome badge — inline-style color maps
+const OUTCOME_LABEL: Record<string, string> = {
+  high:   'Expected: High ≥ 0.7',
+  medium: 'Expected: Medium 0.4–0.7',
+  low:    'Expected: Low < 0.4',
+  mixed:  'Mixed distribution',
+};
+const OUTCOME_COLOR: Record<string, string> = {
+  high:   '#34D399',
+  medium: '#F59E0B',
+  low:    '#F87171',
+  mixed:  'var(--text-3)',
+};
+const OUTCOME_BG: Record<string, string> = {
+  high:   'rgba(52,211,153,0.1)',
+  medium: 'rgba(245,158,11,0.1)',
+  low:    'rgba(248,113,113,0.1)',
+  mixed:  'var(--bg-4)',
+};
+const OUTCOME_BORDER: Record<string, string> = {
+  high:   'rgba(52,211,153,0.25)',
+  medium: 'rgba(245,158,11,0.25)',
+  low:    'rgba(248,113,113,0.25)',
+  mixed:  'var(--border-2)',
 };
 
-const tagClass = (tag: string) =>
-  TAG_COLORS[tag] ?? 'bg-slate-100 text-slate-500';
+// Tag pill colors
+const TAG_COLOR: Record<string, { color: string; bg: string }> = {
+  hallucination: { color: '#F87171', bg: 'rgba(248,113,113,0.10)' },
+  grounded:      { color: '#34D399', bg: 'rgba(52,211,153,0.10)' },
+  faithful:      { color: '#34D399', bg: 'rgba(52,211,153,0.10)' },
+  agreement:     { color: '#60A5FA', bg: 'rgba(96,165,250,0.10)' },
+  divergence:    { color: '#F87171', bg: 'rgba(248,113,113,0.10)' },
+  code:          { color: 'var(--cvg)', bg: 'rgba(139,92,246,0.10)' },
+  batch:         { color: 'var(--text-3)', bg: 'var(--bg-4)' },
+};
+const defaultTag = { color: 'var(--text-3)', bg: 'var(--bg-4)' };
 
 export function TestCasePanel(props: Props) {
   const [open, setOpen] = useState(false);
@@ -39,86 +60,200 @@ export function TestCasePanel(props: Props) {
   if (cases.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+    <div style={{
+      background: 'var(--bg-2)',
+      border: '1px solid var(--border)',
+      borderRadius: 12,
+      overflow: 'hidden',
+    }}>
+      {/* ── Collapse header ────────────────────────────────────── */}
       <button
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-slate-50 transition-colors"
+        onClick={() => setOpen(v => !v)}
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '11px 16px',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          transition: 'background 0.12s',
+        }}
+        onMouseOver={e => (e.currentTarget.style.background = 'var(--bg-3)')}
+        onMouseOut={e => (e.currentTarget.style.background = 'none')}
       >
-        <div className="flex items-center gap-2.5">
-          <span className="text-sm font-semibold text-slate-700">📖 Example Test Cases</span>
-          <span className="text-xs bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full font-medium">
-            {cases.length} examples
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--text-2)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+          }}>
+            Example Test Cases
+          </span>
+          <span style={{
+            padding: '1px 7px',
+            borderRadius: 99,
+            background: 'var(--accent-dim)',
+            border: '1px solid rgba(0 196 173 / 0.2)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 10,
+            color: 'var(--accent)',
+            letterSpacing: '0.04em',
+          }}>
+            {cases.length}
           </span>
         </div>
-        <span
-          className={`text-slate-400 text-xs transition-transform duration-200 select-none ${
-            open ? 'rotate-180' : ''
-          }`}
-        >
+        <span style={{
+          color: 'var(--text-3)',
+          fontSize: 10,
+          display: 'inline-block',
+          transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.2s',
+          userSelect: 'none',
+        }}>
           ▼
         </span>
       </button>
 
+      {/* ── Cards ──────────────────────────────────────────────── */}
       {open && (
-        <div className="border-t border-slate-100 p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-          {cases.map((tc) => (
-            <div
-              key={tc.id}
-              className="rounded-xl border border-slate-100 bg-slate-50/60 p-3.5 flex flex-col gap-2.5"
-            >
-              {/* Header */}
-              <div className="flex items-start gap-2">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-slate-800 leading-tight">{tc.title}</p>
-                  <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{tc.description}</p>
-                </div>
-              </div>
+        <div style={{
+          borderTop: '1px solid var(--border)',
+          padding: 14,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+          gap: 10,
+        }}>
+          {cases.map((tc) => {
+            const outColor  = OUTCOME_COLOR[tc.expectedOutcome]  ?? 'var(--text-3)';
+            const outBg     = OUTCOME_BG[tc.expectedOutcome]     ?? 'var(--bg-4)';
+            const outBorder = OUTCOME_BORDER[tc.expectedOutcome] ?? 'var(--border-2)';
 
-              {/* Expected outcome badge */}
-              <span
-                className={`self-start text-xs font-semibold px-2 py-0.5 rounded-full ${OUTCOME_COLOR[tc.expectedOutcome]}`}
-              >
-                {OUTCOME_LABEL[tc.expectedOutcome]}
-              </span>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1">
-                {tc.tags.map((t) => (
-                  <span key={t} className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${tagClass(t)}`}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              {/* Model names if present */}
-              {(tc.name1 ?? tc.name2) && (
-                <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                  <span className="font-mono bg-white border border-slate-200 px-1.5 py-0.5 rounded text-[11px]">
-                    {tc.name1 ?? '—'}
-                  </span>
-                  <span className="text-slate-300">vs</span>
-                  <span className="font-mono bg-white border border-slate-200 px-1.5 py-0.5 rounded text-[11px]">
-                    {tc.name2 ?? '—'}
-                  </span>
-                </div>
-              )}
-
-              {/* Load button */}
-              <button
-                onClick={() => {
-                  if (props.scope === 'pair') {
-                    props.onLoad(tc as PairTestCase);
-                  } else {
-                    props.onLoad(tc as BatchTestCase);
-                  }
-                  setOpen(false);
+            return (
+              <div
+                key={tc.id}
+                style={{
+                  background: 'var(--bg-3)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 10,
+                  padding: '12px 13px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 9,
                 }}
-                className="mt-auto w-full py-1.5 text-xs font-semibold bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
               >
-                Load Example →
-              </button>
-            </div>
-          ))}
+                {/* Title + description */}
+                <div>
+                  <div style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: 'var(--text-1)',
+                    lineHeight: 1.35,
+                    marginBottom: 3,
+                  }}>
+                    {tc.title}
+                  </div>
+                  <div style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    color: 'var(--text-3)',
+                    lineHeight: 1.5,
+                  }}>
+                    {tc.description}
+                  </div>
+                </div>
+
+                {/* Outcome badge */}
+                <span style={{
+                  alignSelf: 'flex-start',
+                  padding: '2px 8px',
+                  borderRadius: 99,
+                  background: outBg,
+                  border: `1px solid ${outBorder}`,
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  color: outColor,
+                  letterSpacing: '0.04em',
+                }}>
+                  {OUTCOME_LABEL[tc.expectedOutcome] ?? tc.expectedOutcome}
+                </span>
+
+                {/* Tags */}
+                {tc.tags.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                    {tc.tags.map(tag => {
+                      const t = TAG_COLOR[tag] ?? defaultTag;
+                      return (
+                        <span key={tag} style={{
+                          padding: '1px 6px',
+                          borderRadius: 4,
+                          background: t.bg,
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: 10,
+                          color: t.color,
+                          letterSpacing: '0.03em',
+                        }}>
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Model name chips */}
+                {(tc.name1 ?? tc.name2) && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 10,
+                      color: 'var(--text-2)',
+                      background: 'var(--bg-4)',
+                      border: '1px solid var(--border-2)',
+                      padding: '1px 6px',
+                      borderRadius: 4,
+                    }}>
+                      {tc.name1 ?? '—'}
+                    </span>
+                    <span style={{ color: 'var(--text-3)', fontSize: 10 }}>vs</span>
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 10,
+                      color: 'var(--text-2)',
+                      background: 'var(--bg-4)',
+                      border: '1px solid var(--border-2)',
+                      padding: '1px 6px',
+                      borderRadius: 4,
+                    }}>
+                      {tc.name2 ?? '—'}
+                    </span>
+                  </div>
+                )}
+
+                {/* Load button */}
+                <button
+                  onClick={() => {
+                    if (props.scope === 'pair') props.onLoad(tc as PairTestCase);
+                    else props.onLoad(tc as BatchTestCase);
+                    setOpen(false);
+                  }}
+                  className="sb-btn-ghost"
+                  style={{
+                    marginTop: 'auto',
+                    width: '100%',
+                    justifyContent: 'center',
+                    fontSize: 10,
+                    padding: '6px 10px',
+                  }}
+                >
+                  Load Example →
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
