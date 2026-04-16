@@ -51,7 +51,7 @@ export const predictJuryPair = (
 ): Promise<JuryResult> =>
   request('/predict/jury/pair', {
     method: 'POST',
-    body: JSON.stringify({ text1, text2, mode, ...(juryModel ? { jury_model: juryModel } : {}) }),
+    body: JSON.stringify({ text1, text2, mode, ...(juryModel ? { model: juryModel } : {}) }),
   });
 
 export const getAdminStatus = (): Promise<AdminStatus> =>

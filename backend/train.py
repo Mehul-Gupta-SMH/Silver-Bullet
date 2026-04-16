@@ -384,6 +384,104 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None",
           f"{sum(len(v) for v in SemanticFeatures._embedding_cache.values())} sentence-model entries.")
 
 
+# ---------------------------------------------------------------------------
+# Subprocess workers for GLiNER-based prefills
+#
+# These MUST be defined at module level — Windows 'spawn' multiprocessing
+# requires the target function to be importable (not a closure/nested func).
+# Each worker processes all sentences in one subprocess so the GLiNER model
+# loads only once.  Progress is reported through a multiprocessing.Queue so
+# a watchdog in the main process can kill the subprocess if it stalls.
+# ---------------------------------------------------------------------------
+
+def _entity_prefill_worker(sentences: list, progress_queue) -> None:  # noqa: ANN001
+    """Subprocess worker: run GLiNER NER prefill and report chunk-level progress."""
+    import gc
+    from backend.Features.EntityGroups.getOverlap import EntityMatch
+    dummy = EntityMatch()
+    _CHUNK = 16
+    for i in range(0, len(sentences), _CHUNK):
+        try:
+            dummy._batch_get_entities(sentences[i : i + _CHUNK])
+        except Exception:
+            pass
+        gc.collect()
+        progress_queue.put(min(i + _CHUNK, len(sentences)))  # sentences done so far
+    progress_queue.put(-1)  # sentinel: all done
+
+
+def _relex_prefill_worker(sentences: list, progress_queue) -> None:  # noqa: ANN001
+    """Subprocess worker: run gliner-relex triplet prefill and report chunk-level progress."""
+    import gc
+    from backend.Features.Relations.getRelexWeights import RelexGrounding
+    dummy = RelexGrounding()
+    _CHUNK = 16
+    for i in range(0, len(sentences), _CHUNK):
+        try:
+            dummy._extract_triplets(sentences[i : i + _CHUNK])
+        except Exception:
+            pass
+        gc.collect()
+        progress_queue.put(min(i + _CHUNK, len(sentences)))
+    progress_queue.put(-1)
+
+
+def _run_prefill_subprocess(worker_fn, sentences: list, desc: str,
+                            watchdog_timeout: int = 120) -> None:
+    """Run a prefill worker in a subprocess with a progress watchdog.
+
+    Spawns *worker_fn(sentences, queue)* as a subprocess.  If no progress
+    message arrives within *watchdog_timeout* seconds, the subprocess is
+    killed via SIGTERM / .kill().  After the call the caller must reload
+    the relevant SQLite cache to pick up whatever was written before the kill.
+    """
+    import multiprocessing as _mp
+    import time
+    from queue import Empty
+
+    ctx = _mp.get_context("spawn")
+    q: _mp.Queue = ctx.Queue()
+    p = ctx.Process(target=worker_fn, args=(sentences, q), daemon=True)
+    p.start()
+
+    last_progress = time.monotonic()
+    done_count = 0
+    pbar = tqdm(total=len(sentences), desc=desc, unit="sent")
+
+    while True:
+        try:
+            msg = q.get(timeout=2)
+            if msg == -1:
+                pbar.update(len(sentences) - done_count)
+                break
+            pbar.update(msg - done_count)
+            done_count = msg
+            last_progress = time.monotonic()
+        except Empty:
+            pass
+
+        if not p.is_alive():
+            break
+
+        elapsed_since_progress = time.monotonic() - last_progress
+        if elapsed_since_progress > watchdog_timeout:
+            print(
+                f"\n[{desc}] WARNING: no progress for {watchdog_timeout:.0f}s — "
+                f"killing subprocess (sentences processed so far: {done_count}/{len(sentences)})."
+            )
+            p.terminate()
+            p.join(timeout=10)
+            if p.is_alive():
+                p.kill()
+                p.join(timeout=5)
+            break
+
+    pbar.close()
+    if p.is_alive():
+        p.terminate()
+        p.join(timeout=5)
+
+
 def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
                           feature_keys: list[str] | None = None) -> None:
     """Pre-run GLiNER NER on all unique sentences from uncached pairs in one batch.
@@ -417,11 +515,15 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
         return
 
     print(f"[EntityCache] pre-running NER on {len(new_sentences)} unique sentences…")
-    dummy = EntityMatch()
-    # Process in chunks to avoid exhausting RAM on large/long-document datasets
-    _CHUNK = 64
-    for i in tqdm(range(0, len(new_sentences), _CHUNK), desc="Entity pre-encoding"):
-        dummy._batch_get_entities(new_sentences[i : i + _CHUNK])
+    # Run in a subprocess with a 120-second-per-chunk watchdog.  GLiNER can
+    # deadlock on certain CPU batches; OS-level SIGTERM is the only reliable
+    # way to unblock.  Results are persisted to SQLite inside the subprocess;
+    # we reload the cache here to pick up whatever was written before any kill.
+    _run_prefill_subprocess(
+        _entity_prefill_worker, new_sentences,
+        desc="Entity pre-encoding", watchdog_timeout=120,
+    )
+    EntityMatch.load_entity_cache()
     print(f"[EntityCache] done — entity cache now covers {len(EntityMatch._entity_cache)} sentences.")
 
 
@@ -552,17 +654,14 @@ def _prefill_relex_cache(paragraph_pairs, cache: "FeatureCache | None",
         return
 
     print(f"[RelexCache] pre-extracting triplets for {len(new_sentences)} unique sentences…")
-    dummy = RelexGrounding()
-    # Process in chunks so (a) tqdm shows chunk-level progress and
-    # (b) results are persisted to SQLite after each chunk — crash-safe.
-    # Chunk=32 (was 128) to stay within GPU/RAM budget — gliner-relex is ~3 GB peak.
-    # gc.collect() after each chunk forces Python to release intermediate tensors so
-    # PyTorch's CPU allocator doesn't accumulate fragmented blocks across chunks.
-    import gc as _gc_relex
-    _CHUNK = 32
-    for i in tqdm(range(0, len(new_sentences), _CHUNK), desc="Relex prefill"):
-        dummy._extract_triplets(new_sentences[i : i + _CHUNK])
-        _gc_relex.collect()
+    # Run in a subprocess with a 180-second watchdog.  gliner-relex is slower
+    # than NER (adds per-sentence relation prediction on top of NER) and can
+    # deadlock on CPU — subprocess + SIGTERM is the only reliable unblock.
+    _run_prefill_subprocess(
+        _relex_prefill_worker, new_sentences,
+        desc="Relex prefill", watchdog_timeout=180,
+    )
+    RelexGrounding.load_triplet_cache()
     print(f"[RelexCache] done — triplet cache now covers {len(RelexGrounding._triplet_cache)} sentences.")
 
 

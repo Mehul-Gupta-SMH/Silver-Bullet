@@ -324,7 +324,12 @@ short inputs.
 | 2026-04-14 | [x] | FIX: Stray processes — launch via Python subprocess.Popen instead of bash &; PID files written for each step | `backend/chain_train.py` |
 | 2026-04-14 | [x] | SWITCH: relex model large→base (`knowledgator/gliner-relex-base-v1.0`); batch_size=16; cleared triplet cache | `backend/Features/Relations/getRelexWeights.py` |
 
-<!-- CURSOR: 2026-04-14 — All 4 fixes applied; RVG training PID 21880 running (relex-base, fresh log); chainer PID 19900 watching; see CURRENT.md for queue -->
+<!-- CURSOR: 2026-04-16 — CVG eval+train running with subprocess watchdog fix; jury model selection wired end-to-end; next: wait for CVG eval to complete, run benchmark_eval -->
+| 2026-04-16 | [x] | FIX: GLiNER prefill deadlock — replaced ThreadPoolExecutor (can't kill C-ext threads) with multiprocessing.Process + 120s watchdog; module-level _entity_prefill_worker + _relex_prefill_worker for Windows spawn compat | `backend/train.py` |
+| 2026-04-16 | [x] | FIX: Jury model selection — added `model: str | None` to JuryRequest schema; wired to JuryEvaluator(model=body.model); fixed frontend types (answer boolean→string, model→model_used, weight→confidence) | `backend/api/schemas.py`, `backend/api/main.py`, `frontend/src/types/index.ts`, `frontend/src/services/api.ts`, `frontend/src/components/JuryScorer.tsx`, `frontend/src/components/JuryPanel.tsx` |
+| 2026-04-16 | [x] | FIX: TruthfulQA dataset URL — updated to truthfulqa/truthful_qa; improved FactCC/FRANK/AggreFact fallback chains | `backend/fetch_external_data.py` |
+| 2026-04-16 | [~] | CVG eval — running with subprocess watchdog; entity+NLI fully cached, relex 714 sentences in progress | PID 42148 |
+| 2026-04-16 | [~] | CVG train — running; semantic cache warm; entity prefill starting | PID 6724 |
 | 2026-04-12 | [x] | BENCHMARK: Add validation benchmark loaders to fetch_external_data.py — SummEval, FactCC, FRANK, AggreFact; written to data/benchmarks/ (never merged into training) | `backend/fetch_external_data.py` |
 | 2026-04-12 | [x] | BENCHMARK: New benchmark_eval.py — runs SilverBullet on held-out benchmarks; reports ROC-AUC, PR-AUC, Pearson r, Spearman ρ vs. human labels; saves to benchmark_reports/ | `backend/benchmark_eval.py` (new) |
 | 2026-04-12 | [ ] | BENCHMARK: Fetch benchmark data — `python -m backend.fetch_external_data --force` to download SummEval/FactCC/FRANK/AggreFact into data/benchmarks/ | `data/benchmarks/` |
@@ -375,9 +380,9 @@ short inputs.
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
-| 2026-04-15 | [ ] | IMPL: Add `min_alignment` to breakdown response — find the minimum value in the sentence-pair alignment matrix; return alongside `probability` in all breakdown endpoints | `backend/predict.py`, `backend/api/schemas.py` |
-| 2026-04-15 | [ ] | IMPL: Add `min_alignment_pair` to breakdown — (i, j) indices of the weakest sentence pair, so the caller knows exactly which generated sentence is least supported | `backend/predict.py`, `backend/api/schemas.py` |
-| 2026-04-15 | [ ] | FRONTEND: Render min-alignment indicator in BreakdownPanel — highlight the weakest cell in the alignment heatmap; show `min_alignment` score with a "weakest link" label | `frontend/src/components/BreakdownPanel.tsx` |
+| 2026-04-15 | [x] | IMPL: Add `min_alignment` to breakdown response — find the minimum value in the sentence-pair alignment matrix; return alongside `probability` in all breakdown endpoints | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [x] | IMPL: Add `min_alignment_pair` to breakdown — (i, j) indices of the weakest sentence pair, so the caller knows exactly which generated sentence is least supported | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [x] | FRONTEND: Render min-alignment indicator in BreakdownPanel — highlight the weakest cell in the alignment heatmap; show `min_alignment` score with a "weakest link" label | `frontend/src/components/BreakdownPanel.tsx` |
 
 ### v6-B: Hallucination type classifier (explain *how*, not just *where*)
 

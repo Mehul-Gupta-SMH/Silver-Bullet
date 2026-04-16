@@ -509,11 +509,12 @@ function VerdictCard({ result, model }: { result: JuryResult; model: string }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {result.questions.map((q, i) => {
               const visible = questionReveal[i];
-              const qColor = q.answer ? 'var(--green)' : 'var(--red)';
-              const qBg = q.answer
+              const isYes = q.answer === 'yes';
+              const qColor = isYes ? 'var(--green)' : 'var(--red)';
+              const qBg = isYes
                 ? 'rgba(16,185,129,0.06)'
                 : 'rgba(239,68,68,0.06)';
-              const qBorder = q.answer
+              const qBorder = isYes
                 ? 'rgba(16,185,129,0.2)'
                 : 'rgba(239,68,68,0.2)';
               return (
@@ -554,12 +555,12 @@ function VerdictCard({ result, model }: { result: JuryResult; model: string }) {
                         fontWeight: 700,
                         color: qColor,
                         letterSpacing: '0.06em',
-                      }}>{q.answer ? 'YES' : 'NO'}</span>
+                      }}>{isYes ? 'YES' : 'NO'}</span>
                       <span style={{
                         fontFamily: 'var(--font-mono)',
                         fontSize: 9,
                         color: 'var(--text-3)',
-                      }}>w={q.weight.toFixed(1)} · {(q.weighted_score).toFixed(2)}</span>
+                      }}>conf={q.confidence.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

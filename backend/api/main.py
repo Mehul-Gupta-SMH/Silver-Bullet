@@ -482,7 +482,7 @@ async def predict_jury_pair(
     from backend.jury.jury_evaluator import JuryEvaluator
 
     try:
-        evaluator = JuryEvaluator()
+        evaluator = JuryEvaluator(model=body.model)
     except ValueError as exc:
         raise HTTPException(
             status_code=503,

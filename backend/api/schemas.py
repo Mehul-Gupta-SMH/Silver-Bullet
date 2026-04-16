@@ -210,6 +210,14 @@ class JuryRequest(BaseModel):
         "context-vs-generated",
         description=_MODE_DESCRIPTION,
     )
+    model: str | None = Field(
+        None,
+        description=(
+            "LLM to use as the jury (e.g. 'gpt-4o-mini', 'gpt-4o', 'o4-mini'). "
+            "Defaults to SB_JURY_MODEL env var or 'gpt-4o-mini'."
+        ),
+        examples=["gpt-4o-mini"],
+    )
 
 
 class JuryBatchRequest(BaseModel):

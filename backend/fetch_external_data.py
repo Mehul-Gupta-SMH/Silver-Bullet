@@ -673,14 +673,16 @@ def _load_factcc(max_n: int, rng: random.Random) -> list[dict]:
     Maps to: reference-vs-generated.
     """
     print("  [FactCC] downloading…")
-    try:
-        ds = hf_datasets.load_dataset("mteb/factcc", split="test")
-    except Exception:
+    # Canonical dataset is "pminervini/FactCC" (mirrored from the official repo)
+    for repo_id in ("pminervini/FactCC", "mteb/factcc", "Zaid/factcc_annotated"):
         try:
-            ds = hf_datasets.load_dataset("Zaid/factcc_annotated", split="test")
+            ds = hf_datasets.load_dataset(repo_id, split="test")
+            break
         except Exception:
-            print("  [FactCC] WARNING: dataset not found — skipping.")
-            return []
+            continue
+    else:
+        print("  [FactCC] WARNING: dataset not found on HuggingFace Hub — skipping.")
+        return []
 
     pairs = []
     for r in ds:
@@ -709,14 +711,19 @@ def _load_frank(max_n: int, rng: random.Random) -> list[dict]:
     Maps to: reference-vs-generated.
     """
     print("  [FRANK] downloading…")
-    try:
-        ds = hf_datasets.load_dataset("Babelscape/FRANK", split="test")
-    except Exception:
+    for repo_id, split in (
+        ("Babelscape/FRANK", "test"),
+        ("artidoro/FRANK", "test"),
+        ("frank", "test"),
+    ):
         try:
-            ds = hf_datasets.load_dataset("frank", split="test")
+            ds = hf_datasets.load_dataset(repo_id, split=split)
+            break
         except Exception:
-            print("  [FRANK] WARNING: dataset not found — skipping.")
-            return []
+            continue
+    else:
+        print("  [FRANK] WARNING: dataset not found on HuggingFace Hub — skipping.")
+        return []
 
     pairs = []
     for r in ds:
@@ -753,14 +760,15 @@ def _load_aggrefact(max_n: int, rng: random.Random) -> list[dict]:
     Maps to: reference-vs-generated.
     """
     print("  [AggreFact] downloading…")
-    try:
-        ds = hf_datasets.load_dataset("lytang/AggreFact-Sota", split="test")
-    except Exception:
+    for repo_id in ("lytang/AggreFact-Sota", "lytang/MIX-Hallucination", "aggrefact"):
         try:
-            ds = hf_datasets.load_dataset("aggrefact", split="test")
+            ds = hf_datasets.load_dataset(repo_id, split="test")
+            break
         except Exception:
-            print("  [AggreFact] WARNING: dataset not found — skipping.")
-            return []
+            continue
+    else:
+        print("  [AggreFact] WARNING: dataset not found on HuggingFace Hub — skipping.")
+        return []
 
     pairs = []
     for r in ds:
@@ -790,10 +798,14 @@ def _load_truthfulqa(max_n: int, rng: random.Random) -> list[dict]:
     """
     print("  [TruthfulQA] downloading…")
     try:
-        ds = hf_datasets.load_dataset("truthful_qa", "generation", split="validation")
+        # Dataset was moved from "truthful_qa" to "truthfulqa/truthful_qa" on HF Hub
+        ds = hf_datasets.load_dataset("truthfulqa/truthful_qa", "generation", split="validation")
     except Exception:
-        print("  [TruthfulQA] WARNING: dataset not found — skipping.")
-        return []
+        try:
+            ds = hf_datasets.load_dataset("truthful_qa", "generation", split="validation")
+        except Exception:
+            print("  [TruthfulQA] WARNING: dataset not found — skipping.")
+            return []
 
     pairs = []
     for r in ds:

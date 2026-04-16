@@ -236,7 +236,6 @@ class RelexGrounding:
             try:
                 from gliner.multitask.relation_extraction import GLiNERRelationExtractor
                 extractor = GLiNERRelationExtractor(model=model)
-                print(f"[RelexGrounding] batched NER+RE: {len(truncated)} sentences")
                 batch_results = extractor(
                     truncated,
                     relations=RELATION_TYPES,
@@ -246,6 +245,12 @@ class RelexGrounding:
                     batch_size=16,
                 )
                 # batch_results: list[list[{source, relation, target, score}]]
+                # Guard: extractor sometimes returns fewer results than inputs
+                if not isinstance(batch_results, list) or len(batch_results) < len(truncated):
+                    raise ValueError(
+                        f"Extractor returned {len(batch_results) if isinstance(batch_results, list) else type(batch_results)} "
+                        f"results for {len(truncated)} inputs — falling back."
+                    )
                 for trunc, rels in tqdm(
                     zip(truncated, batch_results),
                     total=len(truncated),
@@ -260,9 +265,9 @@ class RelexGrounding:
                             triplets.append((head, rtype, tail))
                     RelexGrounding._triplet_cache[trunc] = triplets
 
-            except Exception as exc:
+            except Exception:
                 # Fallback: per-sentence predict_relations (original approach)
-                print(f"[RelexGrounding] batched RE failed ({exc}), falling back to per-sentence")
+                # The GLiNERRelationExtractor batch API is unstable; fallback is expected.
                 # NER batch
                 try:
                     batch_entities = model.run(truncated, ENTITY_TYPES, threshold=self.ENTITY_THRESHOLD)

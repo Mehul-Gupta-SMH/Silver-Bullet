@@ -59,17 +59,16 @@ export interface HealthResponse {
 
 export interface JuryQuestion {
   question: string;
-  answer: boolean;
+  answer: 'yes' | 'no';
+  confidence: number;
   reasoning: string;
-  weight: number;
-  weighted_score: number;
 }
 
 export interface JuryResult {
   score: number;
   verdict: 'faithful' | 'hallucinated';
   questions: JuryQuestion[];
-  model?: string;
+  model_used: string;
 }
 
 export interface CheckpointInfo {
