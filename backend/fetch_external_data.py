@@ -16,13 +16,16 @@ Datasets
     SummaC               – document+summary pairs; multi-source faithfulness consistency
     MedHallu             – medical QA hallucination benchmark; Knowledge+(GroundTruth/HallucinatedAnswer)
     AporiaRAG            – 1000 RAG context+answer pairs; boolean is_hallucination label
+    TruthfulQA           – question + best_answer(1) vs incorrect_answers(0); LLM answer grounding
 
   reference-vs-generated (faithfulness eval):
-    QNLI   – question-answer entailment, 0=entailment→1
-    PAWS   – adversarial paraphrases (surface-similar but semantically distinct)
-    ANLI   – adversarially constructed NLI, R3 (hardest round); entailment→1, contradiction→0
-    WiCE   – Wikipedia claim+evidence; supported→1, partial→0 (conservative), refuted→0
-    SummaC – shared with cvg above
+    QNLI      – question-answer entailment, 0=entailment→1
+    PAWS      – adversarial paraphrases (surface-similar but semantically distinct)
+    ANLI      – adversarially constructed NLI, R3 (hardest round); entailment→1, contradiction→0
+    WiCE      – Wikipedia claim+evidence; supported→1, partial→0 (conservative), refuted→0
+    SummaC    – shared with cvg above
+    VitaminC  – counterfactual Wikipedia revisions; SUPPORTS→1, REFUTES→0 (hard negatives)
+    FEVER     – claim verification vs Wikipedia evidence; SUPPORTS→1, REFUTES→0
 
   model-vs-model (agreement scoring):
     QQP    – duplicate question pairs, 1=duplicate
@@ -778,6 +781,127 @@ def _load_aggrefact(max_n: int, rng: random.Random) -> list[dict]:
     return sampled
 
 
+def _load_truthfulqa(max_n: int, rng: random.Random) -> list[dict]:
+    """TruthfulQA: question + correct/incorrect answer pairs.
+
+    Uses the 'generation' config: best_answer (label=1) vs incorrect_answers (label=0).
+    text1 = question + correct context, text2 = model answer.
+    Maps to: context-vs-generated (LLM answer grounding).
+    """
+    print("  [TruthfulQA] downloading…")
+    try:
+        ds = hf_datasets.load_dataset("truthful_qa", "generation", split="validation")
+    except Exception:
+        print("  [TruthfulQA] WARNING: dataset not found — skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        question  = str(r.get("question", "")).strip()
+        best      = str(r.get("best_answer", "")).strip()
+        incorrect = r.get("incorrect_answers", []) or []
+        if not question or not best:
+            continue
+        # Positive: question as context, best answer as generated
+        pairs.append({"text1": question, "text2": best, "label": 1})
+        # Negatives: question as context, each incorrect answer
+        for ans in incorrect[:2]:
+            ans = str(ans).strip()
+            if ans:
+                pairs.append({"text1": question, "text2": ans, "label": 0})
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [TruthfulQA] {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_vitaminc(max_n: int, rng: random.Random) -> list[dict]:
+    """VitaminC: claim + Wikipedia evidence pairs with SUPPORTS/REFUTES/NOT ENOUGH INFO labels.
+
+    Counterfactual revisions make this a strong hard-negative source for faithfulness.
+    SUPPORTS → label=1, REFUTES → label=0. NOT ENOUGH INFO dropped.
+    text1 = evidence passage, text2 = claim.
+    Maps to: reference-vs-generated.
+    """
+    print("  [VitaminC]   downloading…")
+    try:
+        ds = hf_datasets.load_dataset("tals/vitaminc", split="train")
+    except Exception:
+        print("  [VitaminC]   WARNING: dataset not found — skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        evidence = str(r.get("evidence", "")).strip()
+        claim    = str(r.get("claim", "")).strip()
+        label_raw = str(r.get("label", "")).upper()
+        if not evidence or not claim or label_raw == "NOT ENOUGH INFO":
+            continue
+        pairs.append({
+            "text1": evidence,
+            "text2": claim,
+            "label": 1 if label_raw == "SUPPORTS" else 0,
+        })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [VitaminC]   {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_fever(max_n: int, rng: random.Random) -> list[dict]:
+    """FEVER: claim verification against Wikipedia evidence.
+
+    SUPPORTS → label=1, REFUTES → label=0. NOT ENOUGH INFO dropped.
+    text1 = evidence sentence, text2 = claim.
+    Maps to: reference-vs-generated (claim faithfulness).
+    Hard negatives: REFUTES pairs share entities/topic but differ in polarity.
+    """
+    print("  [FEVER]      downloading…")
+    try:
+        ds = hf_datasets.load_dataset("fever", "v1.0", split="train")
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("fever", split="train")
+        except Exception:
+            print("  [FEVER]      WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for r in ds:
+        claim     = str(r.get("claim", "")).strip()
+        label_raw = str(r.get("label", "")).upper()
+        evidence_sets = r.get("evidence", []) or []
+        if not claim or label_raw == "NOT ENOUGH INFO":
+            continue
+        # Flatten evidence: take first sentence from first evidence set
+        evidence = ""
+        for ev_set in evidence_sets:
+            for ev in ev_set:
+                text = str(ev[-1] if isinstance(ev, (list, tuple)) and len(ev) > 0 else ev).strip()
+                if text and len(text) > 20:
+                    evidence = text
+                    break
+            if evidence:
+                break
+        if not evidence:
+            continue
+        pairs.append({
+            "text1": evidence,
+            "text2": claim,
+            "label": 1 if label_raw == "SUPPORTS" else 0,
+        })
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [FEVER]      {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
 # ---------------------------------------------------------------------------
 # Cache helpers
 # ---------------------------------------------------------------------------
@@ -883,6 +1007,9 @@ def main() -> None:
     summac         = _get("summac",         _load_summac,                    n)
     medhallu       = _get("medhallu",       _load_medhallu,                  n)
     aporia_rag     = _get("aporia_rag",     _load_aporia_rag,                n)
+    truthfulqa     = _get("truthfulqa",     _load_truthfulqa,                n)
+    vitaminc       = _get("vitaminc",       _load_vitaminc,                  n)
+    fever          = _get("fever",          _load_fever,                     n)
 
     # ── Validation benchmarks (never merged into training) ───────────────────
 
@@ -923,16 +1050,24 @@ def main() -> None:
         # ANLI-R3: adversarially constructed NLI (harder than MNLI/QNLI)
         # WiCE: Wikipedia claim+evidence fine-grained entailment
         # SummaC: document+summary factual consistency
-        "reference-vs-generated": qnli + paws + anli + wice + summac,
+        # QNLI: question-answer entailment (reference faithfulness proxy)
+        # PAWS: paraphrase adversarial (generated matches reference or diverges)
+        # ANLI-R3: adversarially constructed NLI (harder than MNLI/QNLI)
+        # WiCE: Wikipedia claim+evidence fine-grained entailment
+        # SummaC: document+summary factual consistency
+        # VitaminC: counterfactual Wikipedia revisions — strong hard negatives
+        # FEVER: claim verification vs Wikipedia evidence — polarity hard negatives
+        "reference-vs-generated": qnli + paws + anli + wice + summac + vitaminc + fever,
         # HaluEval QA/Sum/Dial: core on-task hallucination detection sources.
         # RAGTruth: real LLM outputs (GPT-4/Llama2/Mistral) across task types.
         # FaithDial: dialogue grounded to Wikipedia knowledge snippets.
         # SummaC: shared with rvg — abstractive summary faithfulness.
         # MedHallu: medical QA hallucination benchmark — Knowledge+GroundTruth/Hallucinated pairs.
         # AporiaRAG: 1000 context+answer pairs with boolean is_hallucination label.
+        # TruthfulQA: LLM-generated correct vs incorrect answers — direct CVG proxy.
         # STS-B and MNLI are excluded from cvg: they measure similarity / logical
         # entailment, not context-grounding, producing label noise for this mode.
-        "context-vs-generated":   halueval + halueval_sum + halueval_dial + ragtruth + faithdial + summac + medhallu + aporia_rag,
+        "context-vs-generated":   halueval + halueval_sum + halueval_dial + ragtruth + faithdial + summac + medhallu + aporia_rag + truthfulqa,
     }
     general_external = stsb + mnli
     # STS-B + MNLI are valid general proxies for rvg/mvm but noise for cvg.
