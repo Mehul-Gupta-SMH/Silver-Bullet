@@ -28,7 +28,8 @@ from backend.Features.EntityGroups.getOverlap import EntityMatch
 from backend.Features.LCS.getLCSweights import LCSWeights
 from backend.Features.Numeric.getNumericGrounding import NumericGrounding
 from backend.Features.Relations.getRelationWeights import RelationGrounding
-from backend.Features.Relations.getRelexWeights import RelexGrounding
+from backend.Features.Relations.getSVOWeights import SVOGrounding
+from backend.Features.Factual.getFactualGrounding import EFGGrounding
 from backend.feature_cache import FeatureCache
 from backend.feature_registry import FEATURE_KEYS, SPATIAL_SIZE, build_manifest, get_feature_keys
 from backend.training_report import TrainingReport
@@ -228,7 +229,11 @@ def load_json_data(file_path):
     return pairs, labels
 
 
-def feature_map_to_tensor(feature_map: dict, feature_keys: list[str] | None = None) -> torch.Tensor:
+def feature_map_to_tensor(
+    feature_map: dict,
+    feature_keys: list[str] | None = None,
+    fill_missing: bool = False,
+) -> torch.Tensor:
     """Stack feature maps into a single [F, S, S] tensor.
 
     Maps are stacked in the canonical order defined by *feature_keys* (defaults to
@@ -239,9 +244,10 @@ def feature_map_to_tensor(feature_map: dict, feature_keys: list[str] | None = No
     Args:
         feature_map: Dict mapping feature key → 2-D array/tensor (SPATIAL_SIZE×SPATIAL_SIZE).
         feature_keys: Ordered list of keys to stack. Defaults to the global FEATURE_KEYS.
+        fill_missing: If True, replace missing keys with zero tensors instead of raising.
 
     Raises:
-        KeyError: If feature_map is missing any key listed in feature_keys.
+        KeyError: If feature_map is missing any key listed in feature_keys and fill_missing=False.
 
     Returns:
         torch.Tensor: shape [len(feature_keys), SPATIAL_SIZE, SPATIAL_SIZE]
@@ -249,15 +255,20 @@ def feature_map_to_tensor(feature_map: dict, feature_keys: list[str] | None = No
     keys = feature_keys if feature_keys is not None else FEATURE_KEYS
     missing = set(keys) - set(feature_map)
     if missing:
-        raise KeyError(f"feature_map is missing expected keys: {sorted(missing)}")
+        if not fill_missing:
+            raise KeyError(f"feature_map is missing expected keys: {sorted(missing)}")
+        tqdm.write(f"  [WARN] filling {len(missing)} missing feature(s) with zeros: {sorted(missing)}")
 
     maps = []
     for key in keys:
-        val = feature_map[key]
-        if isinstance(val, torch.Tensor):
-            maps.append(val.float())
+        if key not in feature_map:
+            maps.append(torch.zeros(SPATIAL_SIZE, SPATIAL_SIZE, dtype=torch.float32))
         else:
-            maps.append(torch.tensor(val, dtype=torch.float32))
+            val = feature_map[key]
+            if isinstance(val, torch.Tensor):
+                maps.append(val.float())
+            else:
+                maps.append(torch.tensor(val, dtype=torch.float32))
     return torch.stack(maps, dim=0)  # [F, S, S]
 
 
@@ -287,8 +298,12 @@ def _missing_groups(entry: dict, feature_keys: list[str] | None = None) -> set[s
             groups.add("nli")
         elif k == "numeric_jaccard":
             groups.add("numeric")
-        elif k in ("entity_grounding_recall", "relation_triplet_recall"):
+        elif k == "entity_grounding_recall":
             groups.add("relations")
+        elif k == "svo_triplet_recall":
+            groups.add("svo")
+        elif k.startswith("efg_"):
+            groups.add("efg")
         elif k.startswith("entity_"):
             groups.add("entity")
         elif k in ("lcs_token", "lcs_char"):
@@ -396,7 +411,9 @@ def _prefill_semantic_cache(paragraph_pairs, cache: "FeatureCache | None",
 
 def _entity_prefill_worker(sentences: list, progress_queue) -> None:  # noqa: ANN001
     """Subprocess worker: run GLiNER NER prefill and report chunk-level progress."""
-    import gc
+    import os, gc
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
     from backend.Features.EntityGroups.getOverlap import EntityMatch
     dummy = EntityMatch()
     _CHUNK = 16
@@ -410,19 +427,6 @@ def _entity_prefill_worker(sentences: list, progress_queue) -> None:  # noqa: AN
     progress_queue.put(-1)  # sentinel: all done
 
 
-def _relex_prefill_worker(sentences: list, progress_queue) -> None:  # noqa: ANN001
-    """Subprocess worker: run gliner-relex triplet prefill and report chunk-level progress."""
-    import gc
-    from backend.Features.Relations.getRelexWeights import RelexGrounding
-    dummy = RelexGrounding()
-    _CHUNK = 16
-    for i in range(0, len(sentences), _CHUNK):
-        try:
-            dummy._extract_triplets(sentences[i : i + _CHUNK])
-        except Exception:
-            pass
-        gc.collect()
-        progress_queue.put(min(i + _CHUNK, len(sentences)))
     progress_queue.put(-1)
 
 
@@ -527,6 +531,48 @@ def _prefill_entity_cache(paragraph_pairs, cache: "FeatureCache | None",
     print(f"[EntityCache] done — entity cache now covers {len(EntityMatch._entity_cache)} sentences.")
 
 
+def _nli_prefill_worker(pairs: list, q) -> None:
+    """Subprocess worker: score NLI pairs in batches, persist each batch, report progress."""
+    from backend.Features.NLI.getNLIweights import NLIWeights
+    import torch
+
+    dummy = NLIWeights()
+    if dummy.ModelName not in NLIWeights._model_cache:
+        dummy.__load_model__()
+
+    mc = NLIWeights._model_cache[dummy.ModelName]
+    tok, mdl, device = mc["tokenizer"], mc["model"], mc["device"]
+    id2label = mdl.config.id2label
+    label_to_idx = {v.lower(): k for k, v in id2label.items()}
+
+    _BS = dummy.__batch_size__
+    done = 0
+    with torch.no_grad():
+        for start in range(0, len(pairs), _BS):
+            chunk = pairs[start:start + _BS]
+            enc = tok(
+                [p[0] for p in chunk],
+                [p[1] for p in chunk],
+                padding=True, truncation=True,
+                max_length=dummy.__max_len__,
+                return_tensors="pt",
+            ).to(device)
+            logits = mdl(**enc).logits
+            probs = torch.softmax(logits, dim=-1).cpu().numpy()
+            batch_rows: list[tuple] = []
+            for (s1, s2), row in zip(chunk, probs):
+                scores = (
+                    float(row[label_to_idx["entailment"]]),
+                    float(row[label_to_idx["neutral"]]),
+                    float(row[label_to_idx["contradiction"]]),
+                )
+                batch_rows.append((s1, s2, scores[0], scores[1], scores[2]))
+            NLIWeights.save_pair_cache(batch_rows)
+            done += len(chunk)
+            q.put(done)
+    q.put(-1)
+
+
 def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
                        feature_keys: list[str] | None = None) -> None:
     """Pre-score all unique sentence pairs with NLI in one large batched pass.
@@ -570,99 +616,105 @@ def _prefill_nli_cache(paragraph_pairs, cache: "FeatureCache | None",
     all_pairs = list(unique_pairs)
     print(f"[NLICache] pre-scoring {len(all_pairs)} unique sentence pairs…")
 
-    dummy = NLIWeights()
-    dummy.phrase_list1 = [p[0] for p in all_pairs]
-    dummy.phrase_list2 = [p[1] for p in all_pairs]
-    # Run __calc_weights__ with a flat 1×N layout so all pairs go through the
-    # batched inference path and land in _pair_cache.  We don't use the resulting
-    # matrices — the cache population is the side-effect we want.
-    # Re-use the existing batched inference logic by treating each pair as a 1×1 cell.
-    if dummy.ModelName not in NLIWeights._model_cache:
-        dummy.__load_model__()
-
-    mc = NLIWeights._model_cache[dummy.ModelName]
-    tok, mdl, device = mc["tokenizer"], mc["model"], mc["device"]
-    id2label = mdl.config.id2label
-    label_to_idx = {v.lower(): k for k, v in id2label.items()}
-
-    import torch
-    _BS = dummy.__batch_size__
-    with torch.no_grad():
-        for start in tqdm(range(0, len(all_pairs), _BS), desc="NLI pre-scoring"):
-            chunk = all_pairs[start:start + _BS]
-            enc = tok(
-                [p[0] for p in chunk],
-                [p[1] for p in chunk],
-                padding=True, truncation=True,
-                max_length=dummy.__max_len__,
-                return_tensors="pt",
-            ).to(device)
-            logits = mdl(**enc).logits
-            probs = torch.softmax(logits, dim=-1).cpu().numpy()
-            batch_rows: list[tuple] = []
-            for (s1, s2), row in zip(chunk, probs):
-                scores = (
-                    float(row[label_to_idx["entailment"]]),
-                    float(row[label_to_idx["neutral"]]),
-                    float(row[label_to_idx["contradiction"]]),
-                )
-                NLIWeights._pair_cache[(s1, s2)] = scores
-                batch_rows.append((s1, s2, scores[0], scores[1], scores[2]))
-            # Persist each batch immediately — crash-safe.
-            NLIWeights.save_pair_cache(batch_rows)
+    # Run in a subprocess with a 120-second-per-batch watchdog.  roberta-large-mnli
+    # can deadlock on specific pair batches (observed hanging for hours on CPU).
+    # Results are persisted to SQLite inside the subprocess; we reload after.
+    _run_prefill_subprocess(
+        _nli_prefill_worker,
+        all_pairs,          # list of (s1, s2) tuples — _run_prefill_subprocess accepts any list
+        desc="NLI pre-scoring",
+        watchdog_timeout=120,
+    )
+    NLIWeights.load_pair_cache()  # pick up whatever was written before any kill
 
     print(f"[NLICache] done — pair cache now covers {len(NLIWeights._pair_cache)} sentence pairs.")
 
 
-def _prefill_relex_cache(paragraph_pairs, cache: "FeatureCache | None",
-                         feature_keys: list[str] | None = None) -> None:
-    """Pre-run RelexGrounding (gliner-relex) on all unique sentences before the per-pair loop.
+def _efg_prefill_worker(pairs: list, q) -> None:
+    """Subprocess worker: score EFG pairs in batches, persist each batch, report progress."""
+    from backend.Features.Factual.getFactualGrounding import EFGGrounding
+    import torch
 
-    Without this, any pair missing 'relation_triplet_recall' in its cache entry
-    will invoke the relex model sequentially inside the training loop — one pair
-    at a time — rather than batching all new sentences in a single pass.
+    dummy = EFGGrounding()
+    if dummy.model_name not in EFGGrounding._model_cache:
+        dummy.__load_model__()
 
-    Uses the same batched entity-extraction path as RelexGrounding._extract_triplets(),
-    which issues one batch_predict_entities() call for all new sentences and then
-    runs predict_relations() per sentence (unavoidable — it needs per-sentence entities).
+    mc = EFGGrounding._model_cache[dummy.model_name]
+    tok, mdl, device = mc["tokenizer"], mc["model"], mc["device"]
+    id2label = mdl.config.id2label
+    label_to_idx = {v.lower(): k for k, v in id2label.items()}
+    ent_idx = label_to_idx.get("entailment", 0)
+    ref_idx = label_to_idx.get("contradiction", 2)
+    nei_idx = label_to_idx.get("neutral", 1)
+
+    EFGGrounding.load_pair_cache()
+    uncached = [(s1, s2) for s1, s2 in pairs if (s1, s2) not in EFGGrounding._pair_cache]
+    done = 0
+    BATCH = 32
+    for start in range(0, len(uncached), BATCH):
+        chunk = uncached[start : start + BATCH]
+        with torch.no_grad():
+            enc = tok(
+                [p for p, _ in chunk],
+                [h for _, h in chunk],
+                padding=True, truncation=True, max_length=256,
+                return_tensors="pt",
+            ).to(device)
+            logits = mdl(**enc).logits
+            probs = torch.softmax(logits, dim=-1).cpu().numpy()
+        batch_rows = []
+        for (s1, s2), row in zip(chunk, probs):
+            batch_rows.append((s1, s2, float(row[ent_idx]), float(row[ref_idx]), float(row[nei_idx])))
+        EFGGrounding.save_pair_cache(batch_rows)
+        done += len(chunk)
+        q.put(done)
+
+
+def _prefill_efg_cache(paragraph_pairs, cache: "FeatureCache | None",
+                       feature_keys: list[str] | None = None) -> None:
+    """Pre-score all unique sentence pairs (both directions) with EFG in one batched pass.
+
+    Fills EFGGrounding._pair_cache with (sent1, sent2) → (supports, refutes, nei) scores
+    for both the forward and backward directions needed for efg_factual_delta.
     """
-    from backend.Features.Relations.getRelexWeights import RelexGrounding
+    from backend.Features.Factual.getFactualGrounding import EFGGrounding
 
     keys = feature_keys if feature_keys is not None else FEATURE_KEYS
-    if "relation_triplet_recall" not in keys:
+    if not any(k.startswith("efg_") for k in keys):
         return
 
-    unique_sentences: set[str] = set()
+    EFGGrounding.load_pair_cache()
+
+    unique_pairs: set[tuple[str, str]] = set()
     for pair in paragraph_pairs:
         if cache is not None:
             entry = cache.get_features(pair[0], pair[1])
-            if entry is not None and "relations" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
+            if entry is not None and "efg" not in _missing_groups(entry, feature_keys) if isinstance(entry, dict) else False:
                 continue
-        for sent in split_txt(pair[0]) + split_txt(pair[1]):
-            unique_sentences.add(sent)
+        sents1 = split_txt(pair[0])
+        sents2 = split_txt(pair[1])
+        for s1 in sents1:
+            for s2 in sents2:
+                if (s1, s2) not in EFGGrounding._pair_cache:
+                    unique_pairs.add((s1, s2))
+                if (s2, s1) not in EFGGrounding._pair_cache:
+                    unique_pairs.add((s2, s1))
 
-    _MAX = RelexGrounding._MAX_CHARS
-    # Load SQLite cache BEFORE filtering — otherwise all sentences appear new
-    # because the in-memory dict is empty at process start.
-    RelexGrounding.load_triplet_cache()
-    new_sentences = [
-        s for s in unique_sentences
-        if s[:_MAX] not in RelexGrounding._triplet_cache
-    ]
-    if not new_sentences:
-        print(f"[RelexCache] all {len(unique_sentences)} sentences already cached — skipping prefill.")
+    all_pairs = list(unique_pairs)
+    if not all_pairs:
+        print(f"[EFGCache] all sentence pairs already cached — skipping.")
         return
 
-    print(f"[RelexCache] pre-extracting triplets for {len(new_sentences)} unique sentences…")
-    # Run in a subprocess with a 180-second watchdog.  gliner-relex is slower
-    # than NER (adds per-sentence relation prediction on top of NER) and can
-    # deadlock on CPU — subprocess + SIGTERM is the only reliable unblock.
+    print(f"[EFGCache] pre-scoring {len(all_pairs)} sentence pairs (both directions) …")
     _run_prefill_subprocess(
-        _relex_prefill_worker, new_sentences,
-        desc="Relex prefill", watchdog_timeout=180,
+        _efg_prefill_worker,
+        all_pairs,
+        desc="EFG pre-scoring",
+        watchdog_timeout=120,
     )
-    RelexGrounding.load_triplet_cache()
-    print(f"[RelexCache] done — triplet cache now covers {len(RelexGrounding._triplet_cache)} sentences.")
+    EFGGrounding.load_pair_cache()
+
+    print(f"[EFGCache] done — EFG cache now covers {len(EFGGrounding._pair_cache)} sentence pairs.")
 
 
 class TextSimilarityDataset(Dataset):
@@ -690,14 +742,35 @@ class TextSimilarityDataset(Dataset):
         self.lcs       = LCSWeights()
         self.numeric   = NumericGrounding()
         self.relations = RelationGrounding()
-        self.relex     = RelexGrounding()
+        self.svo       = SVOGrounding()
+        self.efg       = EFGGrounding()
 
         # Pre-encode / pre-run all sentence-level models in one large batch before
         # the per-pair loop so each getFeatureMap() call hits the in-memory cache only.
         _prefill_semantic_cache(paragraph_pairs, self.cache, self.feature_keys)
         _prefill_entity_cache(paragraph_pairs, self.cache, self.feature_keys)
         _prefill_nli_cache(paragraph_pairs, self.cache, self.feature_keys)
-        _prefill_relex_cache(paragraph_pairs, self.cache, self.feature_keys)
+        _prefill_efg_cache(paragraph_pairs, self.cache, self.feature_keys)
+        import concurrent.futures as _cf
+
+        def _safe_extract(extractors_map: dict, sg1: list, sg2: list,
+                          timeout: int = 90) -> dict:
+            """Run one extractor group in a thread; return empty dict on timeout."""
+            results: dict = {}
+            for name, fn in extractors_map.items():
+                with _cf.ThreadPoolExecutor(max_workers=1) as pool:
+                    fut = pool.submit(fn, sg1, sg2)
+                    try:
+                        results.update(fut.result(timeout=timeout))
+                    except _cf.TimeoutError:
+                        tqdm.write(f"  [WARN] {name} timed out after {timeout}s — skipping for this pair")
+                    except Exception as exc:
+                        tqdm.write(f"  [WARN] {name} raised {exc!r} — skipping")
+            return results
+
+        def _truncate_sents(sents: list, max_chars: int = 400) -> list:
+            """Cap sentence length to prevent absurdly long NLI/entity inputs."""
+            return [s[:max_chars] for s in sents]
 
         tensors = []
         for pair in tqdm(paragraph_pairs, desc="Extracting features"):
@@ -713,24 +786,24 @@ class TextSimilarityDataset(Dataset):
                             continue
                         # Incomplete dict — run only missing extractor groups, merge, re-save
                         groups = _missing_groups(cached, self.feature_keys)
-                        sent_group1 = split_txt(pair[0])
-                        sent_group2 = split_txt(pair[1])
+                        sent_group1 = _truncate_sents(split_txt(pair[0]))
+                        sent_group2 = _truncate_sents(split_txt(pair[1]))
                         patch: dict = {}
                         if "lexical"   in groups: patch.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
                         if "semantic"  in groups: patch.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
-                        if "nli"       in groups: patch.update(self.nli.getFeatureMap(sent_group1, sent_group2))
-                        if "entity"    in groups: patch.update(self.entity.getFeatureMap(sent_group1, sent_group2))
+                        if "nli"       in groups: patch.update(_safe_extract({"nli": self.nli.getFeatureMap}, sent_group1, sent_group2))
+                        if "entity"    in groups: patch.update(_safe_extract({"entity": self.entity.getFeatureMap}, sent_group1, sent_group2))
                         if "lcs"       in groups: patch.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
                         if "numeric"   in groups: patch.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
-                        if "relations" in groups:
-                            patch.update(self.relations.getFeatureMap(sent_group1, sent_group2))
-                            patch.update(self.relex.getFeatureMap(sent_group1, sent_group2))
+                        if "relations" in groups: patch.update(self.relations.getFeatureMap(sent_group1, sent_group2))
+                        if "svo"       in groups: patch.update(_safe_extract({"svo": self.svo.getFeatureMap}, sent_group1, sent_group2))
+                        if "efg"       in groups: patch.update(_safe_extract({"efg": self.efg.getFeatureMap}, sent_group1, sent_group2))
                         merged = dict(cached)
                         merged.update({k: v.tolist() if isinstance(v, torch.Tensor) else v for k, v in patch.items()})
                         if use_cache:
                             self.cache.save_features(pair[0], pair[1], merged)
                         fm = {k: torch.tensor(v, dtype=torch.float32) for k, v in merged.items()}
-                        tensors.append(feature_map_to_tensor(fm, self.feature_keys))
+                        tensors.append(feature_map_to_tensor(fm, self.feature_keys, fill_missing=True))
                         continue
                     else:
                         # Legacy format: stacked tensor as flat list — only use if
@@ -743,22 +816,23 @@ class TextSimilarityDataset(Dataset):
                         # Shape mismatch — fall through to full recompute
 
             # ---- full compute (no usable cache entry) ----
-            sent_group1 = split_txt(pair[0])
-            sent_group2 = split_txt(pair[1])
+            sent_group1 = _truncate_sents(split_txt(pair[0]))
+            sent_group2 = _truncate_sents(split_txt(pair[1]))
 
-            # Always compute all 5 extractor groups so the cache entry is complete
+            # Always compute all extractor groups so the cache entry is complete
             # for all future modes (cache is mode-agnostic — stores all features).
             feature_map = {}
             feature_map.update(self.lexical.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.semantic.getFeatureMap(sent_group1, sent_group2))
-            feature_map.update(self.nli.getFeatureMap(sent_group1, sent_group2))
-            feature_map.update(self.entity.getFeatureMap(sent_group1, sent_group2))
+            feature_map.update(_safe_extract({"nli": self.nli.getFeatureMap}, sent_group1, sent_group2))
+            feature_map.update(_safe_extract({"entity": self.entity.getFeatureMap}, sent_group1, sent_group2))
             feature_map.update(self.lcs.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.numeric.getFeatureMap(sent_group1, sent_group2))
             feature_map.update(self.relations.getFeatureMap(sent_group1, sent_group2))
-            feature_map.update(self.relex.getFeatureMap(sent_group1, sent_group2))
+            feature_map.update(_safe_extract({"svo": self.svo.getFeatureMap}, sent_group1, sent_group2))
+            feature_map.update(_safe_extract({"efg": self.efg.getFeatureMap}, sent_group1, sent_group2))
 
-            stacked = feature_map_to_tensor(feature_map, self.feature_keys)  # [F, S, S]
+            stacked = feature_map_to_tensor(feature_map, self.feature_keys, fill_missing=True)  # [F, S, S]
 
             # ---- cache save (always store full feature set) ----
             if use_cache:
@@ -801,7 +875,7 @@ class TextSimilarityDataset(Dataset):
         import gc
 
         del self.lexical, self.semantic, self.nli, self.entity
-        del self.lcs, self.numeric, self.relations, self.relex
+        del self.lcs, self.numeric, self.relations, self.svo, self.efg
 
         try:
             import backend.Features.Semantic.__generate_semantic_features as _sem
@@ -822,12 +896,11 @@ class TextSimilarityDataset(Dataset):
         except Exception:
             pass
         try:
-            import backend.Features.Relations.getRelexWeights as _relex
-            _relex.RelexGrounding._model_cache.clear()
-            _relex.RelexGrounding._disk_cache_loaded = False
+            import backend.Features.Factual.getFactualGrounding as _efg
+            _efg.EFGGrounding._model_cache.clear()
+            _efg.EFGGrounding._disk_cache_loaded = False
         except Exception:
             pass
-
         gc.collect()
         print("[MemClean] Feature extractor models freed — starting CNN training loop.")
 

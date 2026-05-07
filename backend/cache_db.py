@@ -63,6 +63,15 @@ CREATE TABLE IF NOT EXISTS triplets (
     data     TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS efg_pairs (
+    sent1    TEXT NOT NULL,
+    sent2    TEXT NOT NULL,
+    supports REAL NOT NULL,
+    refutes  REAL NOT NULL,
+    nei      REAL NOT NULL,
+    PRIMARY KEY (sent1, sent2)
+);
+
 CREATE TABLE IF NOT EXISTS features (
     md5   TEXT PRIMARY KEY NOT NULL,
     text1 TEXT,
@@ -156,6 +165,28 @@ class CacheDB:
         conn.executemany(
             "INSERT OR REPLACE INTO nli_pairs "
             "(sent1, sent2, entailment, neutral, contradiction) VALUES (?,?,?,?,?)",
+            rows,
+        )
+        conn.commit()
+
+    # ------------------------------------------------------------------
+    # EFG (External Factual Grounding) pair cache
+    # ------------------------------------------------------------------
+
+    def load_all_efg(self) -> dict[tuple[str, str], tuple[float, float, float]]:
+        rows = self._conn().execute(
+            "SELECT sent1, sent2, supports, refutes, nei FROM efg_pairs"
+        ).fetchall()
+        return {(r[0], r[1]): (r[2], r[3], r[4]) for r in rows}
+
+    def save_efg_batch(
+        self, rows: list[tuple[str, str, float, float, float]]
+    ) -> None:
+        """rows: [(sent1, sent2, supports, refutes, nei), ...]"""
+        conn = self._conn()
+        conn.executemany(
+            "INSERT OR REPLACE INTO efg_pairs "
+            "(sent1, sent2, supports, refutes, nei) VALUES (?,?,?,?,?)",
             rows,
         )
         conn.commit()
@@ -342,7 +373,7 @@ class CacheDB:
     def stats(self) -> dict:
         """Return row counts per table and database file size."""
         conn = self._conn()
-        tables = ["embeddings", "nli_pairs", "entities", "triplets", "features"]
+        tables = ["embeddings", "nli_pairs", "efg_pairs", "entities", "triplets", "features"]
         counts = {}
         for t in tables:
             try:
