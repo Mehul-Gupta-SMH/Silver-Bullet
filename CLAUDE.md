@@ -31,15 +31,20 @@ Silver-Bullet/
 │   ├── Features/
 │   │   ├── Semantic/
 │   │   │   ├── __generate_semantic_features.py   # SemanticFeatures — SentenceTransformer encoding
-│   │   │   └── getSemanticWeights.py             # SemanticWeights.getFeatureMap() → 6 padded 64×64 tensors
+│   │   │   └── getSemanticWeights.py             # SemanticWeights.getFeatureMap() → 4 maps (mxbai cosine+PREC+REC, Qwen PREC)
 │   │   ├── Lexical/
-│   │   │   └── getLexicalWeights.py              # LexicalWeights.getFeatureMap() → 4 padded 64×64 tensors
+│   │   │   └── getLexicalWeights.py              # LexicalWeights.getFeatureMap() → 4 maps (jaccard, dice, rouge, rouge3)
 │   │   ├── NLI/
-│   │   │   └── getNLIweights.py                  # NLIWeights.getFeatureMap() → 3 padded 64×64 tensors
+│   │   │   └── getNLIweights.py                  # NLIWeights.getFeatureMap() → 3 maps (entailment, neutral, contradiction)
 │   │   ├── EntityGroups/
-│   │   │   └── getOverlap.py                     # EntityMatch.getFeatureMap() → 1 padded 64×64 tensor
-│   │   └── LCS/
-│   │       └── getLCSweights.py                  # LCSWeights.getFeatureMap() → 2 padded 64×64 tensors
+│   │   │   └── getOverlap.py                     # EntityMatch.getFeatureMap() → up to 9 maps (type-count + value overlap)
+│   │   ├── LCS/
+│   │   │   └── getLCSweights.py                  # LCSWeights.getFeatureMap() → 2 maps (lcs_token, lcs_char)
+│   │   ├── Numeric/
+│   │   │   └── getNumericGrounding.py            # NumericGrounding.getFeatureMap() → 1 map (numeric_jaccard)
+│   │   └── Relations/
+│   │       ├── getRelationWeights.py             # RelationGrounding.getFeatureMap() → 1 map (entity_grounding_recall)
+│   │       └── getSVOWeights.py                  # SVOGrounding.getFeatureMap() → 1 map (svo_triplet_recall)
 │   │
 │   ├── Splitter/
 │   │   └── sentence_splitter.py      # split_txt(text) → List[str]  (regex split + coref per sentence)
@@ -49,8 +54,8 @@ Silver-Bullet/
 │   │       └── resolveEntity.py      # EntityResolver — pronoun → named entity via GPT-4o-mini or local LLM
 │   │
 │   ├── Postprocess/
-│   │   ├── __addpad.py               # pad_matrix(mat, target_size=64) → torch.Tensor [64,64]
-│   │   └── postprocess.py            # thin wrapper around pad_matrix
+│   │   ├── __addpad.py               # resize_matrix(mat, target_size=32) → torch.Tensor [32,32] (bilinear)
+│   │   └── postprocess.py            # thin wrapper around resize_matrix
 │   │
 │   ├── resources/
 │   │   ├── config.yaml               # API keys (gitignored — use env vars)
@@ -61,12 +66,14 @@ Silver-Bullet/
 │   ├── train.py                      # TextSimilarityDataset + train_model(); --mode arg; MLflow _Tracker
 │   ├── test.py                       # TestReport + test_model(); --mode arg; MLflow test metric logging
 │   ├── predict.py                    # SimilarityPredictor — single/batch/breakdown inference
-│   ├── feature_cache.py              # FeatureCache — MD5-keyed JSON cache in ./cache/
-│   ├── feature_registry.py           # FEATURE_KEYS (16 ordered keys) + build_manifest() + validate_manifest()
+│   ├── cache_db.py                   # CacheDB — SQLite unified cache (cache/silverbullet.db); WAL mode
+│   ├── feature_cache.py              # FeatureCache — thin wrapper over CacheDB
+│   ├── feature_registry.py           # FEATURE_KEYS (36 global) + FEATURE_KEYS_BY_MODE (CVG=19,RVG=20,MVM=21) + VERSION="5.7"
 │   ├── training_report.py            # TrainingReport — per-epoch JSON + Markdown reports
 │   ├── generate_data.py              # Generates data/ + data/{mode}/ splits (hand-crafted pairs)
-│   ├── fetch_external_data.py        # Downloads STS-B/MNLI/QQP/QNLI/HaluEval; merges into data splits
+│   ├── fetch_external_data.py        # Downloads STS-B/MNLI/QQP/QNLI/HaluEval/FEVER/SNLI/SciTail; merges into data splits
 │   ├── precompute_features.py        # Pre-fills feature cache for all splits before training
+│   ├── shap_analysis.py              # SHAP GradientExplainer analysis — per-feature importance per mode
 │   └── example.py                    # Manual feature pipeline demo (no model)
 │
 ├── frontend/                         # React + TypeScript + Vite UI
@@ -119,33 +126,40 @@ Raw text pair (text1, text2)  +  mode
          │
          ▼
   Feature Extraction  (all run on sent_group1 × sent_group2 → n×m matrices)
-    ┌─ SemanticWeights.getFeatureMap()
-    │    mxbai-embed-large-v1    → cosine sim, SOFT_ROW, SOFT_COL   (3 maps)
-    │    Qwen3-Embedding-0.6B    → cosine sim, SOFT_ROW, SOFT_COL   (3 maps)
-    ├─ LexicalWeights.getFeatureMap()
-    │    SentencePiece tokens    → jaccard, dice, cosine, rouge      (4 maps)
-    ├─ NLIWeights.getFeatureMap()
-    │    roberta-large-mnli      → entailment, neutral, contradiction (3 maps)
-    ├─ EntityMatch.getFeatureMap()
-    │    GLiNER NER              → EntityMismatch                    (1 map)
-    └─ LCSWeights.getFeatureMap()
-         built-in DP             → lcs_token, lcs_char              (2 maps)
-                                                           TOTAL: 16 maps
+    ┌─ LexicalWeights.getFeatureMap()
+    │    SentencePiece tokens    → jaccard, dice, rouge, rouge3      (4 maps)
+    ├─ SemanticWeights.getFeatureMap()
+    │    mxbai-embed-large-v1   → cosine, PREC, REC                  (3 maps)
+    │    Qwen3-Embedding-0.6B   → PREC                               (1 map)
+    ├─ NLIWeights.getFeatureMap()              [_safe_extract, 90s timeout]
+    │    roberta-large-mnli     → entailment, neutral, contradiction  (3 maps)
+    ├─ EntityMatch.getFeatureMap()             [_safe_extract, 90s timeout]
+    │    GLiNER NER             → type-count + value overlap          (up to 9 maps, mode-specific)
+    ├─ LCSWeights.getFeatureMap()
+    │    built-in DP            → lcs_token, lcs_char                (2 maps)
+    ├─ NumericGrounding.getFeatureMap()
+    │    regex                  → numeric_jaccard                     (1 map)
+    ├─ RelationGrounding.getFeatureMap()
+    │    GLiNER (shared cache)  → entity_grounding_recall            (1 map)
+    └─ SVOGrounding.getFeatureMap()            [_safe_extract, 90s timeout]
+         spaCy dep-tree         → svo_triplet_recall                 (1 map)
+                              TOTAL global: 36 maps | per mode: CVG=19, RVG=20, MVM=21
          │
          ▼
-  pad_matrix() — each n×m → 64×64 zero-padded tensor
-  stack all maps → [F=16, 64, 64] tensor (canonical order from FEATURE_KEYS)
+  resize_matrix() — each n×m → 32×32 bilinear interpolation
+  stack mode-specific maps → [F, 32, 32] tensor (canonical order from FEATURE_KEYS_BY_MODE)
+  missing features (extractor timeout) → zero tensor [32, 32]
          │
          ▼
   TextSimilarityCNN (backend/model.py)
-    Conv2d: [F, 64, 64] → [128, 32, 32] → [64, 16, 16] → [32, 8, 8]
-    flatten → [batch, 2048]
-    FC:  2048 → 128 → 1
+    Conv2d: [F, 32, 32] → [128, 16, 16] → [64, 8, 8] → [32, 4, 4]
+    flatten → [batch, 512]
+    FC:  512 → 128 → 1
     sigmoid → score ∈ [0, 1]
 ```
 
-> `num_features` (F) and the feature manifest are serialised into every checkpoint.
-> `predict.py` validates the manifest on load. Do not hardcode `num_features`.
+> `num_features` (F), `spatial_size`, and the feature manifest are serialised into every checkpoint.
+> `predict.py` validates the manifest on load. Do not hardcode `num_features` or spatial_size.
 
 ---
 
@@ -270,18 +284,21 @@ Per-mode datasets add 15–18 mode-specific hard negatives on top of the general
 
 Downloads and merges public NLP corpora, balanced 50/50 label=0/label=1:
 
-| Source | Mapped to | Mode |
-|--------|-----------|------|
-| STS-B (score ≥ 3.5 → 1) | general | all |
-| MNLI (entailment → 1) | general | all |
-| QQP (duplicate → 1) | model-vs-model | model agreement |
-| QNLI (entailment → 1) | reference-vs-generated | faithfulness |
-| HaluEval QA (hallucination=yes → 0) | context-vs-generated | hallucination |
+| Source | Mode | label=1 | Notes |
+|--------|------|---------|-------|
+| STS-B (score ≥ 3.5) | general | paraphrase | all modes |
+| MNLI (entailment) | general | entailment | all modes |
+| QQP (duplicate) | model-vs-model | equivalent | model agreement |
+| QNLI (entailment) | reference-vs-generated | faithful | faithfulness |
+| HaluEval QA | context-vs-generated | non-hallucinated | hallucination=yes → 0 |
+| FEVER (`copenlu/fever_gold_evidence`) | CVG + RVG | supported claim | +1000 each; `fever/v1.0` broken in datasets≥3.x |
+| SNLI | reference-vs-generated | entailment | contradiction → 0 |
+| SciTail (`allenai/scitail`) | reference-vs-generated | entails | tsv_format; neutral → 0 |
 
-After fetch, each mode has ~1 400 pairs (1001 train / 214 val / 216 test).
+After fetch: CVG ~7,941 / RVG ~9,676 / MVM ~7,000 pairs.
 
 To rebuild: `python -m backend.generate_data && python -m backend.fetch_external_data`.
-Delete `./cache/` before retraining if feature extractors changed.
+Do NOT delete `cache/silverbullet.db` unless feature extractors changed — cache is incremental.
 
 ---
 
@@ -311,7 +328,8 @@ Per-mode model checkpoint env vars:
 | Semantic embedding | `Qwen/Qwen3-Embedding-0.6B` | `SemanticFeatures` via `sentence_transformers` |
 | Lexical tokenizer | `mixedbread-ai/mxbai-embed-large-v1` (tokenizer only) | `LexicalWeights` via `AutoTokenizer` |
 | NLI | `FacebookAI/roberta-large-mnli` | `NLIWeights` via `AutoModelForSequenceClassification` |
-| NER | `knowledgator/modern-gliner-bi-base-v1.0` | `EntityMatch` via `GLiNER` |
+| NER | `knowledgator/modern-gliner-bi-base-v1.0` | `EntityMatch` + `RelationGrounding` via `GLiNER` (shared cache) |
+| SVO extraction | `en_core_web_sm` (spaCy) | `SVOGrounding` — dep-tree parse |
 | Coref resolution | `gpt-4o-mini` (default) or `google/gemma-3-270m` | `EntityResolver` |
 
 All HuggingFace models cache to subdirectories under `backend/Features/`.
@@ -339,12 +357,14 @@ MSELoss is used during training — continuous float labels (e.g. 0.7) are also 
 
 - Python 3.10+, standard library + requirements.txt
 - All backend code lives under `backend/` — import as `from backend.X import Y`
-- Each feature extractor: `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]`
-- All feature matrices padded to `64×64` before leaving `Features/` layer
-- Model inputs are `[batch, F, 64, 64]` float32 tensors stacked by `feature_map_to_tensor()` in `backend/train.py`
-- Feature keys must match `FEATURE_KEYS` in `backend/feature_registry.py` exactly
+- Each feature extractor: `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[32,32]]`
+- All feature matrices bilinear-resized to `32×32` (`SPATIAL_SIZE`) before leaving `Features/` layer
+- Model inputs are `[batch, F, 32, 32]` float32 tensors stacked by `feature_map_to_tensor()` in `backend/train.py`
+- Feature keys must match `FEATURE_KEYS_BY_MODE[mode]` in `backend/feature_registry.py` exactly
+- `feature_map_to_tensor(..., fill_missing=True)` fills timed-out extractor channels with zeros — use in training/test
+- Slow extractors (NLI, entity, SVO) wrapped in `_safe_extract(timeout=90)` in `TextSimilarityDataset.__getitem__`
+- Cache: SQLite at `cache/silverbullet.db` (CacheDB) — safe to delete to force full recompute
 - Reports saved as `.json` + `.md` to `training_reports/` and `test_reports/`
-- Feature cache in `./cache/{md5}.json` — safe to delete to force recompute
 - No hardcoded absolute paths; use relative paths or `Path(__file__).parent`
 
 ---
@@ -352,7 +372,8 @@ MSELoss is used during training — continuous float labels (e.g. 0.7) are also 
 ## Known Issues
 
 1. **Coref resolver overhead**: `split_txt()` creates a fresh `EntityResolver` per call. Disable during training or pass a shared resolver instance.
-2. **64-sentence cap**: `pad_matrix` silently truncates inputs exceeding 64 sentences.
+2. **Extractor timeout noise**: `_safe_extract` returns empty dict on timeout → `fill_missing=True` fills with zeros. Zero-filled channels add training noise — reducing timeout (90s → 20s) would fail faster with less noise.
+3. **Qwen3 no bulk prefill**: Only mxbai is bulk-prefilled in `train.py`. Qwen3 encodes lazily per-pair during extraction — slow on first pass of new sentences.
 3. **config.yaml secrets**: Use env vars (`SB_HF_TOKEN`, `SB_OPENAI_TOKEN`) — never commit the YAML file.
 
 ---

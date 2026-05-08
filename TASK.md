@@ -324,7 +324,29 @@ short inputs.
 | 2026-04-14 | [x] | FIX: Stray processes — launch via Python subprocess.Popen instead of bash &; PID files written for each step | `backend/chain_train.py` |
 | 2026-04-14 | [x] | SWITCH: relex model large→base (`knowledgator/gliner-relex-base-v1.0`); batch_size=16; cleared triplet cache | `backend/Features/Relations/getRelexWeights.py` |
 
-<!-- CURSOR: 2026-04-14 — All 4 fixes applied; RVG training PID 21880 running (relex-base, fresh log); chainer PID 19900 watching; see CURRENT.md for queue -->
+| 2026-04-23 | [x] | ABLATION: Drop relation_triplet_recall (Relex) — SHAP ~0 all modes, 98.6% trivial-1.0, gliner-relex-base extracts nothing; VERSION 5.6→5.7 | `backend/feature_registry.py`, `backend/train.py`, `backend/predict.py`, `backend/precompute_features.py` |
+| 2026-04-23 | [x] | DATA: Add SVO-friendly datasets — FEVER (copenlu/fever_gold_evidence 1000), SNLI (1000), SciTail (1000); +2000 RVG pairs (+1000 CVG); fetch_external_data.py updated | `backend/fetch_external_data.py`, `data/*/` |
+| 2026-04-23 | [x] | TRAIN v5.7: CVG → RVG → MVM chain complete | `models/*/best.pth` |
+| 2026-04-23 | [x] | TEST v5.7: CVG 0.8053/71.98% (↓ vs v5.6), RVG 0.9001/81.54% (↑), MVM 0.8919/81.66% (↓) | `test_cvg_v57.log`, `test_rvg_v57.log`, `test_mvm_v57.log` |
+| 2026-05-07 | [x] | SHAP v5.7: CVG top=entailment/contradiction/lcs_char; drop entity_product_value_prec. RVG top=entailment/contradiction/jaccard; drop entity_percentage (7e-7, constant). MVM top=entailment/contradiction/jaccard; drop entity_percentage (6.7e-7). SVO rank 9/11/14 across modes — keep. | `shap_reports/` |
+| 2026-05-07 | [x] | FEATURE v5.8: EFG (External Factual Grounding) extractor — DeBERTa-v3-base-mnli-fever-anli; 3 maps: efg_supports, efg_refutes, efg_factual_delta; SQLite cache; _prefill_efg_cache in train.py; all 3 modes; drop entity_product_value_prec (CVG), entity_percentage (RVG+MVM) | `backend/Features/Factual/getFactualGrounding.py`, `backend/feature_registry.py`, `backend/train.py`, `backend/cache_db.py`, `backend/precompute_features.py`, `backend/predict.py` |
+| 2026-05-07 | [~] | TRAIN v5.8: CVG (21F) → RVG (22F) → MVM (23F) chain; EFG prefill first run will take ~2h on CPU | `train_cvg_v58.log`, `train_rvg_v58.log`, `train_mvm_v58.log` |
+| 2026-05-07 | [ ] | TEST v5.8: all 3 modes; compare vs v5.7 baseline (CVG 0.8053/71.98%, RVG 0.9001/81.54%, MVM 0.8919/81.66%) | `test_cvg_v58.log`, `test_rvg_v58.log`, `test_mvm_v58.log` |
+<!-- CURSOR: 2026-05-07 — CVG v5.8 training started; EFG prefill running (DeBERTa-FEVER, slow first run); wait for CVG done, then RVG, then MVM; baseline: CVG 0.8053, RVG 0.9001, MVM 0.8919 -->
+| 2026-04-22 | [x] | SHAP: shap_analysis.py written — GradientExplainer, per-feature mean|SHAP|, bar+beeswarm plots, cross-mode summary table; shap==0.51.0 installed | `backend/shap_analysis.py`, `requirements.txt` |
+| 2026-04-22 | [ ] | SHAP: Run analysis — `python -m backend.shap_analysis --mode all`; outputs to `shap_reports/{mode}/` | `shap_reports/` |
+| 2026-04-22 | [x] | TEST: CVG v5.6 — ROC-AUC 0.8203, acc 0.7414 (↑ from v5.5: 0.8010 / 0.7362) | `test_cvg_v56.log` |
+| 2026-04-22 | [~] | TRAIN: RVG v5.6 — running; SVO prefill warm | `train_rvg_v56.log` |
+| 2026-04-22 | [ ] | TRAIN: MVM v5.6 — queued after RVG | `train_mvm_v56.log` |
+| 2026-04-22 | [ ] | TEST: RVG v5.6 — after retrain | `test_rvg_v56b.log` |
+| 2026-04-22 | [ ] | TEST: MVM v5.6 — after retrain | `test_mvm_v56b.log` |
+| 2026-04-22 | [ ] | ABLATION: run ablation on all 3 v5.6 checkpoints | `ablation_reports/` |
+| 2026-04-16 | [x] | FIX: GLiNER prefill deadlock — replaced ThreadPoolExecutor (can't kill C-ext threads) with multiprocessing.Process + 120s watchdog; module-level _entity_prefill_worker + _relex_prefill_worker for Windows spawn compat | `backend/train.py` |
+| 2026-04-16 | [x] | FIX: Jury model selection — added `model: str | None` to JuryRequest schema; wired to JuryEvaluator(model=body.model); fixed frontend types (answer boolean→string, model→model_used, weight→confidence) | `backend/api/schemas.py`, `backend/api/main.py`, `frontend/src/types/index.ts`, `frontend/src/services/api.ts`, `frontend/src/components/JuryScorer.tsx`, `frontend/src/components/JuryPanel.tsx` |
+| 2026-04-16 | [x] | FIX: TruthfulQA dataset URL — updated to truthfulqa/truthful_qa; improved FactCC/FRANK/AggreFact fallback chains | `backend/fetch_external_data.py` |
+| 2026-04-22 | [x] | CVG v5.6 train — completed, epoch 45 early stop; checkpoint 20260422_010340_best.pth | `train_cvg_v56.log` |
+| 2026-04-16 | [x] | RVG v5.5 train — completed, epoch 30 early stop; checkpoint 20260415_180204_best.pth | `train_rvg.log` |
+| 2026-04-15 | [x] | MVM v5.5 train — completed; checkpoint 20260415_232310_best.pth | `train_mvm_v55.log` |
 | 2026-04-12 | [x] | BENCHMARK: Add validation benchmark loaders to fetch_external_data.py — SummEval, FactCC, FRANK, AggreFact; written to data/benchmarks/ (never merged into training) | `backend/fetch_external_data.py` |
 | 2026-04-12 | [x] | BENCHMARK: New benchmark_eval.py — runs SilverBullet on held-out benchmarks; reports ROC-AUC, PR-AUC, Pearson r, Spearman ρ vs. human labels; saves to benchmark_reports/ | `backend/benchmark_eval.py` (new) |
 | 2026-04-12 | [ ] | BENCHMARK: Fetch benchmark data — `python -m backend.fetch_external_data --force` to download SummEval/FactCC/FRANK/AggreFact into data/benchmarks/ | `data/benchmarks/` |
@@ -375,9 +397,9 @@ short inputs.
 
 | Date | Status | Task | Files / Notes |
 |------|--------|------|---------------|
-| 2026-04-15 | [ ] | IMPL: Add `min_alignment` to breakdown response — find the minimum value in the sentence-pair alignment matrix; return alongside `probability` in all breakdown endpoints | `backend/predict.py`, `backend/api/schemas.py` |
-| 2026-04-15 | [ ] | IMPL: Add `min_alignment_pair` to breakdown — (i, j) indices of the weakest sentence pair, so the caller knows exactly which generated sentence is least supported | `backend/predict.py`, `backend/api/schemas.py` |
-| 2026-04-15 | [ ] | FRONTEND: Render min-alignment indicator in BreakdownPanel — highlight the weakest cell in the alignment heatmap; show `min_alignment` score with a "weakest link" label | `frontend/src/components/BreakdownPanel.tsx` |
+| 2026-04-15 | [x] | IMPL: Add `min_alignment` to breakdown response — find the minimum value in the sentence-pair alignment matrix; return alongside `probability` in all breakdown endpoints | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [x] | IMPL: Add `min_alignment_pair` to breakdown — (i, j) indices of the weakest sentence pair, so the caller knows exactly which generated sentence is least supported | `backend/predict.py`, `backend/api/schemas.py` |
+| 2026-04-15 | [x] | FRONTEND: Render min-alignment indicator in BreakdownPanel — highlight the weakest cell in the alignment heatmap; show `min_alignment` score with a "weakest link" label | `frontend/src/components/BreakdownPanel.tsx` |
 
 ### v6-B: Hallucination type classifier (explain *how*, not just *where*)
 
@@ -394,6 +416,25 @@ short inputs.
 | 2026-04-15 | [ ] | DATA: Extract per-cell labels from HaluEval + RAGTruth — use annotator comments to assign type labels to divergent sentence pairs; build small labeled dataset (~500 pairs) | `data/hallucination_types/` (new) |
 | 2026-04-15 | [ ] | IMPL: Train tiny 4-class classifier (16 features → 4 classes) on labeled cell data; pickle alongside main model | `backend/hallucination_type_classifier.py` (new) |
 | 2026-04-15 | [ ] | INTEGRATE: Add `hallucination_type` field to breakdown response for divergent sentences — run classifier on the (i,j) cell of each divergent sentence; return type + confidence | `backend/predict.py`, `backend/api/schemas.py` |
+
+### v6-D: SVO extractor alongside Relex — ablation comparison
+
+> **Observation:** `gliner-relex-base` is O(n²) per sentence — 8-12h prefill for CVG,
+> 90s watchdog fires constantly. spaCy SVO via `token.dep_` runs in milliseconds.
+> **Goal:** Add SVO as a second relation feature (`svo_triplet_recall`) alongside the
+> existing `relation_triplet_recall` (Relex), retrain, and compare per-feature contribution
+> via ablation. If SVO adds independent signal → keep both. If SVO substitutes Relex signal
+> with negligible AUC loss → swap. Data decides.
+
+| Date | Status | Task | Files / Notes |
+|------|--------|------|---------------|
+| 2026-04-21 | [x] | IMPL: `backend/Features/Relations/getSVOWeights.py` — spaCy `en_core_web_sm` SVO extractor; key `svo_triplet_recall`; same `getFeatureMap()` interface as `getRelexWeights.py` | `backend/Features/Relations/getSVOWeights.py` (new) |
+| 2026-04-21 | [x] | REGISTER: Add `svo_triplet_recall` to `FEATURE_KEYS` and all 3 mode baskets in `feature_registry.py`; bumped VERSION to 5.6 | `backend/feature_registry.py` |
+| 2026-04-21 | [x] | WIRE: SVOGrounding added to `_missing_groups` (new "svo" group), TextSimilarityDataset, patch path, full compute, cleanup in `train.py`; extractors list in `predict.py` and `precompute_features.py` | `backend/train.py`, `backend/predict.py`, `backend/precompute_features.py` |
+| 2026-04-21 | [~] | TRAIN: CVG v5.6 training running — feature extraction 86%/4158 pairs; Relex prefill stalled at 160/1090 (watchdog fired), fallback to per-pair Relex; ~2-3h to epoch start | `train_cvg_v56.log` |
+| 2026-04-21 | [x] | TEST: RVG v5.5 — Acc 80.52% [77.93, 83.10] / AUC 0.8936 [0.873, 0.913] / AUPRC 0.8802 / MCC 0.611 | `test_rvg_v56.log`, `test_reports/` |
+| 2026-04-21 | [x] | TEST: MVM v5.5 — Acc 82.95% [80.15, 85.62] / AUC 0.8943 [0.870, 0.917] / AUPRC 0.8793 / MCC 0.660 | `test_mvm_v56.log`, `test_reports/` |
+| 2026-04-21 | [ ] | ABLATION: Retrain all 3 modes with both features; run ablation dropping each independently — compare AUC(with Relex, without SVO) vs AUC(with SVO, without Relex) vs AUC(both) | `ablation_reports/` |
 
 ### v6-C: Adversarial hard-negative generation (fix the data, not the architecture)
 

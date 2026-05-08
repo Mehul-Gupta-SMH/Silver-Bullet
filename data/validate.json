@@ -1,6 +1,561 @@
 {
   "data": [
     {
+      "text1": "A year of watching American Bandstand every day after school and practicing in front of the TV.",
+      "text2": "They watched CNN as soon as they got home everyday.",
+      "label": 0
+    },
+    {
+      "text1": "German parliament overwhelmingly backs Greek rescue deal",
+      "text2": "German parliament endorses Greek bailout",
+      "label": 1
+    },
+    {
+      "text1": "Now that's a Flytrap remedy even Clinton's worst enemies can love.",
+      "text2": "The Flytrap remedy is the main reason clinton has opposition.",
+      "label": 0
+    },
+    {
+      "text1": "When I saw that, I knew that I was in bad trouble.",
+      "text2": "I felt like I was in danger when I saw that.",
+      "label": 1
+    },
+    {
+      "text1": "Druce is still being held at the prison and is now in isolation, she said.",
+      "text2": "Druce last night was held in isolation at the same prison.",
+      "label": 1
+    },
+    {
+      "text1": "i said forget it i can live with it you know if the car's",
+      "text2": "No, I cannot live with that.",
+      "label": 0
+    },
+    {
+      "text1": "Hanson found himself being lifted by a couple of the other slaves to the shoulders of a third.",
+      "text2": "The slaves helped him up so they could hang him on a noose.",
+      "label": 0
+    },
+    {
+      "text1": "The Mint is situated on the west bank of the Dojima River (opposite Sakuranomiya Park).",
+      "text2": "Walking trails can be found in Sakuranomiya Park.",
+      "label": 0
+    },
+    {
+      "text1": "The Industrial Revolution, which began in Britain in the late 18th century, marked the transition from agrarian economies to manufacturing-based ones, powered by steam and coal.",
+      "text2": "Beginning in late-18th-century Britain, the Industrial Revolution shifted economies from farming to factory production, driven primarily by steam engines and coal.",
+      "label": 1
+    },
+    {
+      "text1": "there are some big big tall oak trees one across",
+      "text2": "We don't have oaks or any type of american tree over here",
+      "label": 0
+    },
+    {
+      "text1": "Golden coins spilled out.",
+      "text2": "He didn't have any money.",
+      "label": 0
+    },
+    {
+      "text1": "Reinforcement learning trains an agent to make decisions by rewarding desired behaviours and penalising undesired ones through trial and error.",
+      "text2": "An RL agent learns an optimal policy by interacting with its environment — earning rewards for good actions and penalties for bad ones.",
+      "label": 1
+    },
+    {
+      "text1": "The digital transformation roadmap covers five workstreams: customer data platform implementation, ERP migration, AI-assisted demand forecasting, e-commerce channel buildout, and employee upskilling in data literacy.",
+      "text2": "The digital transformation roadmap prioritises customer data platform implementation and ERP migration as the two foundational workstreams.",
+      "label": 0
+    },
+    {
+      "text1": "and it's it's not something that necessarily happens at school but just in their their uh relationships as they after school times and the like",
+      "text2": "It doesn't always happen at school, I guess.",
+      "label": 1
+    },
+    {
+      "text1": "oh it was completely i mean it literally the two dissimilar floor level floor coverings were not level and at first after it happened i thought maybe that's a handicap access and then i said no that's just the way it's constructed",
+      "text2": "there's a purpose behind the uneven floor, it's not a mistake",
+      "label": 0
+    },
+    {
+      "text1": "The American people are the only ones who have been taken in by Clinton and Adam Sandler.",
+      "text2": "Americans like CLinton and Sandler.",
+      "label": 1
+    },
+    {
+      "text1": "Sens. John Kerry and Bob Graham declined invitations to speak.",
+      "text2": "The no-shows were Sens. John Kerry of Massachusetts and Bob Graham of Florida.",
+      "label": 1
+    },
+    {
+      "text1": "The other holds a gun to your head every day.",
+      "text2": "They lost while playing Russian roulette.",
+      "label": 0
+    },
+    {
+      "text1": "TCP/IP is the foundational protocol suite of the internet, governing how data is packaged, addressed, transmitted, routed, and received.",
+      "text2": "The internet runs on TCP/IP — a set of rules that defines how data is broken into packets, addressed, transmitted across networks, and reassembled at the destination.",
+      "label": 1
+    },
+    {
+      "text1": "What involvement did other key players have in connection with these accountability failures?",
+      "text2": "Nobody was concerned about the failures.",
+      "label": 0
+    },
+    {
+      "text1": "The Berlin Wall, built in 1961 to divide East and West Berlin, fell on 9 November 1989 as a symbol of the Cold War's end.",
+      "text2": "Erected in 1961 to separate Communist East Berlin from West Berlin, the Berlin Wall came down on 9 November 1989, marking the effective end of the Cold War.",
+      "label": 1
+    },
+    {
+      "text1": "This has led scientists to believe that the population escaped before the disaster took place.",
+      "text2": "Scientists believe that the population was wiped out by the disaster.",
+      "label": 0
+    },
+    {
+      "text1": "The mystery surrounding its origins does nothing to undermine the power of its simplicity.",
+      "text2": "There are many things that are mysterious about its origin like how it got there.",
+      "label": 0
+    },
+    {
+      "text1": "Tropical Storm Karen targets US Gulf Coast",
+      "text2": "Tropical Storm Karen poised to make landfall",
+      "label": 1
+    },
+    {
+      "text1": "Iran dissidents 'killed in Iraq'",
+      "text2": "France loses influence in Europe",
+      "label": 0
+    },
+    {
+      "text1": "A black and white dog is running through the field.",
+      "text2": "A black and white dog is running in the grass.",
+      "label": 1
+    },
+    {
+      "text1": "To make such a trip you will need either a Chinese visa or a special group-tour permit for Tibet.",
+      "text2": "You will not need any documentation of any kind to make such a trip.",
+      "label": 0
+    },
+    {
+      "text1": "Doctors say one or both boys may die, and that some brain damage is possible if they survive.",
+      "text2": "Doctors said that one or both of the boys may die and that if they survive, some brain damage is possible.",
+      "label": 1
+    },
+    {
+      "text1": "There are occasional bullfights at the Plazas de Torosen Alcadia, Felanitx, Inca, and Muro; Menorca has no bullfights.",
+      "text2": "Menorca is a great place to visit to see bullfights.",
+      "label": 0
+    },
+    {
+      "text1": "Climb the narrow staircase to the roof of the mosque for a fine view of the fort.",
+      "text2": "Take the time to ascend the stairs of the mosque to get a vantage point of the fort.",
+      "label": 0
+    },
+    {
+      "text1": "Boeing airliner crashes in Russia, 50 killed",
+      "text2": "Boeing airliner crashes in Russian city of Kazan, 50 killed",
+      "label": 1
+    },
+    {
+      "text1": "Slutstamp! A dear friend from Ohio sent me this.",
+      "text2": "A dear friend from Ohio sent me this.",
+      "label": 1
+    },
+    {
+      "text1": "To characterize a lie as an economy of truth would be a Jesuitical formulation.",
+      "text2": "Some Jesuits might believe that lies are an economy of truth.",
+      "label": 1
+    },
+    {
+      "text1": "A brown dog about to catch a green Frisbee.",
+      "text2": "A brown dog waits for the Frisbee to come down before catching it.",
+      "label": 1
+    },
+    {
+      "text1": "It was also the time when the region was the homeland of the Canaanites and other tribes familiar from the Bible, which is still the best source of knowledge about ancient Israel.",
+      "text2": "There is no better source of knowledge about ancient Israel than the Bible.",
+      "label": 1
+    },
+    {
+      "text1": "and i love the mystery series",
+      "text2": "I love the Sherlock Holmes mini-series.",
+      "label": 0
+    },
+    {
+      "text1": "US drone strike kills 5 militants in Pakistan",
+      "text2": "U.S. drone strikes kill 16 suspected militants in Yemen",
+      "label": 0
+    },
+    {
+      "text1": "A man is drawing a picture.",
+      "text2": "A person is drawing.",
+      "label": 1
+    },
+    {
+      "text1": "Indian troops kill Pakistani soldier along Kashmir line of control",
+      "text2": "Indian troops raid Pakistani military post",
+      "label": 0
+    },
+    {
+      "text1": "This question is too hard.",
+      "text2": "This is too difficult of a question.",
+      "label": 1
+    },
+    {
+      "text1": "Black holes are regions where gravity is so strong that not even light can escape past the event horizon.",
+      "text2": "Black holes are regions where gravity is so strong that light is slowed but not stopped — it can escape, but significantly redshifted.",
+      "label": 0
+    },
+    {
+      "text1": "In Austria, there used to be customs about when businesses could operate, says Dusty Sprengnagel, who owns a shop called Neon Line and whose book on neon will reach store shelves later this year.",
+      "text2": "There used to be standards for when businesses could run in Austria.",
+      "label": 1
+    },
+    {
+      "text1": "Facility operation and maintenance plans are implemented, tested, and refined as appropriate.",
+      "text2": "When it is deemed appropriate, facility operation and maintenance plans are implemented.",
+      "label": 1
+    },
+    {
+      "text1": "\"Then the captain was gone.",
+      "text2": "Then the captain came back.",
+      "label": 0
+    },
+    {
+      "text1": "We need a certifiable pay as you go budget by mid-July or schools wont open in September, Strayhorn said.",
+      "text2": "Texas lawmakers must close a $185.9 million budget gap by the middle of July or the schools wont open in September, Comptroller Carole Keeton Strayhorn said Thursday.",
+      "label": 0
+    },
+    {
+      "text1": "They made a similar discovery in Houston on another aircraft, Dallas-based Southwest said in a statement.",
+      "text2": "The airline said a similar discovery was made on the plane in Houston.",
+      "label": 0
+    },
+    {
+      "text1": "Operant conditioning is a learning process where behaviour is shaped by rewards (positive reinforcement) and punishments.",
+      "text2": "In operant conditioning, behaviours increase when followed by rewards and decrease when followed by punishments — a key concept in behavioural psychology.",
+      "label": 1
+    },
+    {
+      "text1": "State justice communities examine leadership within a multicultural framework and use the results in staff and leadership training.",
+      "text2": "State justice communities do not examine anything when creating training.",
+      "label": 0
+    },
+    {
+      "text1": "we're we we fight that that battle every day here at work uh",
+      "text2": "It is a daily struggle here at work.",
+      "label": 1
+    },
+    {
+      "text1": "(Mitchell 1999) The amount of work that can be turned over in this way is quite large.",
+      "text2": "The amount of work that can be turned over in this way is quite small.",
+      "label": 0
+    },
+    {
+      "text1": "One dead, 11 hurt in LA car chaos",
+      "text2": "6 dead, 33 hurt in Cotabato blast",
+      "label": 0
+    },
+    {
+      "text1": "Previously, it had reported a profit of $12 million, or 0 cents a share, for that period.",
+      "text2": "Previously, it had reported a small profit of $12 million, or break-even on a per-share basis, for the period.",
+      "label": 1
+    },
+    {
+      "text1": "For those plants where EPA projects SCR retrofits will occur, EPA's projections reflect that these facilities will typically have 1 to 4 boilers retrofit per site.",
+      "text2": "EPA projects that there will be boilers retrofitted in their plants.",
+      "label": 1
+    },
+    {
+      "text1": "BTW he had appropriate deferments for the time.",
+      "text2": "Appropriate deferments for the time, eh?",
+      "label": 0
+    },
+    {
+      "text1": "So... Bozena asked half-bored, because Robi, Martyna's second husband didn't interest her in the least bit.",
+      "text2": "Bozena was bored with Robi.",
+      "label": 1
+    },
+    {
+      "text1": "we're we're now civilized now you can no longer you you cannot drink beer and drive but uh but it was it was actually legal",
+      "text2": "Though you could do it in the past, it is now illegal to drink beer and drive.",
+      "label": 1
+    },
+    {
+      "text1": "A big green ball knocks a potato over.",
+      "text2": "A large green ball hits a potato.",
+      "label": 1
+    },
+    {
+      "text1": "A man playing fetch with two brown dogs.",
+      "text2": "A woman plays with a brown dog.",
+      "label": 0
+    },
+    {
+      "text1": "A Mediterranean diet, rich in vegetables, whole grains, olive oil, and fish, is associated with reduced risk of heart disease and longer lifespan.",
+      "text2": "Research links the Mediterranean diet — high in vegetables, whole grains, fish, and olive oil — with lower cardiovascular risk and improved longevity.",
+      "label": 1
+    },
+    {
+      "text1": "i hope he got busted",
+      "text2": "I hope he got away with his crime",
+      "label": 0
+    },
+    {
+      "text1": "Quotes from leaders, family at Mandela memorial",
+      "text2": "World unites for Mandela memorial",
+      "label": 0
+    },
+    {
+      "text1": "The New York Mets then selected outfielder Lastings Milledge from Lakewood Ranch High School in Florida.",
+      "text2": "The Mets took Lastings Milledge, an outfielder from Florida, with the 12th pick.",
+      "label": 1
+    },
+    {
+      "text1": "He suggested that the recommendation be worded in such a manner that this effort does not seem to be a parallel activity.",
+      "text2": "He insisted all both activities be clearly described as parallel activities.",
+      "label": 0
+    },
+    {
+      "text1": "A woman is cutting up a chicken.",
+      "text2": "A woman is slicing meat.",
+      "label": 0
+    },
+    {
+      "text1": "A man plays the flute.",
+      "text2": "A man is playing a flute.",
+      "label": 1
+    },
+    {
+      "text1": "nice talking to you too bye-bye",
+      "text2": "I enjoyed speaking with you.",
+      "label": 1
+    },
+    {
+      "text1": "Obama condemns Egypt violence, cancels military exercises",
+      "text2": "Pakistan condemns violence in Egypt",
+      "label": 0
+    },
+    {
+      "text1": "We'll make tracks for the depot right away. A little frown had settled on Sir James's brow.",
+      "text2": "Sir James had a small frown to show that he was upset.",
+      "label": 1
+    },
+    {
+      "text1": "Behind the red facade is a structure of masonry hauled from the Portuguese citadel.",
+      "text2": "The masonry behind the facade was hauled from a Portuguese citadel.",
+      "label": 1
+    },
+    {
+      "text1": "You are our best hope.",
+      "text2": "We have no other options.",
+      "label": 0
+    },
+    {
+      "text1": "Four other men who were also charged in June have already pleaded guilty.",
+      "text2": "Four of the defendants have pleaded guilty to weapons charges and other counts.",
+      "label": 0
+    },
+    {
+      "text1": "In an E-mail statement to the Knoxville News Sentinel, Shumaker said, ''I am not giving any consideration to resignation.",
+      "text2": "I am not giving any consideration to resignation,\" Shumaker said in a statement.",
+      "label": 1
+    },
+    {
+      "text1": "US teen held in Chicago 'jihad' car bomb plot",
+      "text2": "Chicago teen arrested in Chicago car bomb plot",
+      "label": 0
+    },
+    {
+      "text1": "The mitochondria are often called the powerhouse of the cell because they produce ATP through cellular respiration.",
+      "text2": "Mitochondria generate ATP — the cell's primary energy currency — via cellular respiration, earning them the nickname 'powerhouse of the cell'.",
+      "label": 1
+    },
+    {
+      "text1": "yeah well kids nowadays they want to start out with a",
+      "text2": "Kids these days just want to start from nothing.",
+      "label": 0
+    },
+    {
+      "text1": "U.S. resumes search for missing British sailors after public",
+      "text2": "US Coast Guard suspends search for missing British sailors",
+      "label": 0
+    },
+    {
+      "text1": "The new study does not support your claim.",
+      "text2": "The physical evidence does not support your claim.",
+      "label": 0
+    },
+    {
+      "text1": "The Apollo 11 mission successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon on 20 July 1969, with Armstrong becoming the first human to walk on the lunar surface.",
+      "text2": "On 20 July 1969, Apollo 11 touched down on the Moon; Neil Armstrong stepped onto the surface first, followed by Buzz Aldrin — making history as the first crewed lunar landing.",
+      "label": 1
+    },
+    {
+      "text1": "is that for designs or is that for the regular seam in the fabric or",
+      "text2": "Is it for designs or for the regular seem in the fabric.",
+      "label": 1
+    },
+    {
+      "text1": "i was just going to say that you should see those first uh first if you can",
+      "text2": "Watch those after all the rest.",
+      "label": 0
+    },
+    {
+      "text1": "French forces attack al-Qaeda's Mali allies",
+      "text2": "A battle to retake north Mali: Hundreds of French troops drive back al-Qaida-linked rebels",
+      "label": 0
+    },
+    {
+      "text1": "Pataki praised Abraham's decision, and LIPA Chairman Richard Kessel said the cable should be kept in operation permanently.",
+      "text2": "LIPA Chairman Richard Kessel said that meant the cable could be used \"as we see fit.",
+      "label": 0
+    },
+    {
+      "text1": "BP sells some Gulf of Mexico assets for $5.55 bil",
+      "text2": "BP sells Gulf of Mexico assets to Plains for $5.55 bn",
+      "label": 1
+    },
+    {
+      "text1": "The French Revolution began in 1789 and culminated in the execution of Louis XVI in 1793.",
+      "text2": "The French Revolution began in 1799 with Napoleon's coup and culminated in the execution of Louis XVI, who had already died in 1793.",
+      "label": 0
+    },
+    {
+      "text1": "Three boys are running on the beach playing a game.",
+      "text2": "Two young boys and one young man run on a beach with water behind them.",
+      "label": 0
+    },
+    {
+      "text1": "The white and brown dog runs across the grass.",
+      "text2": "Three dogs are running on the grass.",
+      "label": 0
+    },
+    {
+      "text1": "Their contract will expire at 12:01 a.m. Wednesday instead of 12:01 a.m. Sunday, said Rian Wathen, organizing director for United Food and Commercial Workers Local 700.",
+      "text2": "\"It has outraged the membership,\" said Rian Wathen, organizing director of United Food and Commercial Workers Local 700.",
+      "label": 0
+    },
+    {
+      "text1": "First post office savings bank ATM opens in Chennai",
+      "text2": "India's first post office savings bank ATM inaugurated in Chennai",
+      "label": 1
+    },
+    {
+      "text1": "A man is sweeping the floor of a house using a long broom.",
+      "text2": "The man swept the empty living room.",
+      "label": 0
+    },
+    {
+      "text1": "Tsunami warning issued for southern Alaska",
+      "text2": "Tsunami warning after Canada quake",
+      "label": 0
+    },
+    {
+      "text1": "Although it was established some 1,700 years ago, the main shrine you'll see today was erected in 1993.",
+      "text2": "The main shrine that you can see today was built in the 1800s.",
+      "label": 0
+    },
+    {
+      "text1": "Jon thought he knew what the man meant.",
+      "text2": "Jon had no idea what the man meant.",
+      "label": 0
+    },
+    {
+      "text1": "These include the use of computer-assisted activities ranging from simple comparative analyses.",
+      "text2": "Simple comparative analyses can be a computer assisted activity.",
+      "label": 1
+    },
+    {
+      "text1": "Microsoft has been awarded a patent for a feature in instant messaging that alerts a user when the person they are communicating with is inputting a message.",
+      "text2": "Microsoft has been awarded a patent on a popular instant-messaging feature that shows users when the person on the other end of the conversation is typing a message.",
+      "label": 1
+    },
+    {
+      "text1": "It also displays the collection of Impres?­sion?­ists and their followers transferred from the Jeu de Paume museum, which is now used for temporary exhibitions .",
+      "text2": "There is a collection of impressionists on display.",
+      "label": 1
+    },
+    {
+      "text1": "Talabani told him the Governing Council would \"need UN assistance and advice in implementing the new decisions which have been taken.\"",
+      "text2": "Talabani told him Iraqi leaders would \"need U.N. assistance and advice in implementing the new decisions which have been taken\" on organising an interim Iraqi government by June.",
+      "label": 0
+    },
+    {
+      "text1": "They are NOT as sovereign as they were before.",
+      "text2": "to repeat: They are NOT as sovereign as they were before.",
+      "label": 1
+    },
+    {
+      "text1": "I'm so sorry to hear this Kelly.",
+      "text2": "I'm so sorry, Kelly.",
+      "label": 1
+    },
+    {
+      "text1": "The American had announced his immediate departure, there would be no fear of running up against him.",
+      "text2": "The American announced that he would be leaving in a month.",
+      "label": 0
+    },
+    {
+      "text1": "Blood pressure: systolic (during heartbeat) over diastolic (between heartbeats).",
+      "text2": "Blood pressure: diastolic (during heartbeat) over systolic (between heartbeats) — both measured in mmHg.",
+      "label": 0
+    },
+    {
+      "text1": "Joy to the World We are all vessels filled with many wonders.",
+      "text2": "The theme song to Cheers: We are all vessels filled with many wonders.",
+      "label": 0
+    },
+    {
+      "text1": "you don't use the search button much, do you?",
+      "text2": "you don't use the search button AT ALL, do you?",
+      "label": 1
+    },
+    {
+      "text1": "The ideology was built around violent expansion, so yes - VIOLENT expansion.",
+      "text2": "The ideology was built around violent expansion and race superiority.",
+      "label": 1
+    },
+    {
+      "text1": "A black dog is biting a light brown dogs ear in a playful manner.",
+      "text2": "A black dog playfully bits another dog in a living room setting",
+      "label": 1
+    },
+    {
+      "text1": "The settlement includes $4.1 million in attorneys' fees and expenses.",
+      "text2": "Plaintiffs' attorneys would get $4.1 million of the settlement.",
+      "label": 1
+    },
+    {
+      "text1": "Even the burning of the venom was gone.",
+      "text2": "He knew he was getting better now that even the venom has dissipated.",
+      "label": 0
+    },
+    {
+      "text1": "but we're trying our best not to not to add any you know credit card debt to our structure here",
+      "text2": "\"We are moving heaven and earth not to add anymore credit card debt.\"",
+      "label": 1
+    },
+    {
+      "text1": "GDPR requires explicit consent before collecting personal data and gives rights to access or delete data.",
+      "text2": "CCPA (California Consumer Privacy Act) requires businesses to disclose data collection practices and allows consumers to opt out of data sales, applying only to California residents.",
+      "label": 0
+    },
+    {
+      "text1": "Small boat going down a creek.",
+      "text2": "a boat moving in a river.",
+      "label": 0
+    },
+    {
+      "text1": "Customers that pay the $1,219 entrance fee get SMS 2003 with 10 device client access licenses.",
+      "text2": "Retail pricing for SMS 2003 with 10 device client access licenses is $1,219.",
+      "label": 1
+    },
+    {
+      "text1": "World's oldest man dies at 116",
+      "text2": "World's oldest ever man dies aged 116",
+      "label": 1
+    },
+    {
       "text1": "Should further revelations warrant impeachment, Congress may have lost the necessary credibility.",
       "text2": "Future revelations may show that Congress might lose vital credibility.",
       "label": 1

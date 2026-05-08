@@ -99,6 +99,14 @@ class BreakdownResponse(BaseModel):
         ...,
         description="Indices into sentences2 whose best alignment to any sentence in text1 is below 0.5",
     )
+    min_alignment: float = Field(
+        0.0,
+        description="Minimum alignment score across all sentence pairs (weakest link)",
+    )
+    min_alignment_pair: list[int] = Field(
+        default_factory=list,
+        description="[i, j] indices of the weakest-aligned sentence pair",
+    )
     feature_scores: dict[str, float] = Field(
         ...,
         description="Per-feature-group mean best-match score (higher = more similar)",
@@ -201,6 +209,14 @@ class JuryRequest(BaseModel):
     mode: EvaluationMode = Field(
         "context-vs-generated",
         description=_MODE_DESCRIPTION,
+    )
+    model: str | None = Field(
+        None,
+        description=(
+            "LLM to use as the jury (e.g. 'gpt-4o-mini', 'gpt-4o', 'o4-mini'). "
+            "Defaults to SB_JURY_MODEL env var or 'gpt-4o-mini'."
+        ),
+        examples=["gpt-4o-mini"],
     )
 
 

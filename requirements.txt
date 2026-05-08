@@ -12,6 +12,7 @@ sentencepiece==0.2.1
 
 # Feature extractors
 gliner==0.2.22
+spacy==3.8.14
 
 # Config
 PyYAML==6.0.2
@@ -31,6 +32,9 @@ httpx==0.28.1
 # Experiment tracking & monitoring
 mlflow>=2.0
 prometheus-client>=0.20
+
+# Explainability
+shap>=0.46.0
 
 # Testing
 pytest==9.0.2

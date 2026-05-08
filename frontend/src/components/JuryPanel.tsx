@@ -9,6 +9,7 @@ export function JuryPanel({ result }: Props) {
   const [expanded, setExpanded] = useState(false);
   const pct = Math.round(result.score * 100);
   const isFaithful = result.verdict === 'faithful';
+  const modelLabel = result.model_used;
 
   const verdictColor  = isFaithful ? 'text-emerald-600' : 'text-red-500';
   const barColor      = isFaithful ? 'bg-emerald-500'   : 'bg-red-500';
@@ -21,9 +22,9 @@ export function JuryPanel({ result }: Props) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold text-slate-600">LLM Jury Score</span>
-          {result.model && (
+          {modelLabel && (
             <span className="text-[10px] text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full font-mono">
-              {result.model}
+              {modelLabel}
             </span>
           )}
         </div>
@@ -68,7 +69,7 @@ export function JuryPanel({ result }: Props) {
                 <div
                   key={i}
                   className={`rounded-xl border p-3 text-xs ${
-                    q.answer
+                    q.answer === 'yes'
                       ? 'border-emerald-200 bg-emerald-50'
                       : 'border-red-200 bg-red-50'
                   }`}
@@ -76,10 +77,10 @@ export function JuryPanel({ result }: Props) {
                   <div className="flex items-start justify-between gap-3 mb-1.5">
                     <span className="font-medium text-slate-700 leading-snug">{q.question}</span>
                     <div className="flex items-center gap-1.5 shrink-0">
-                      <span className={`font-bold ${q.answer ? 'text-emerald-600' : 'text-red-500'}`}>
-                        {q.answer ? 'YES' : 'NO'}
+                      <span className={`font-bold ${q.answer === 'yes' ? 'text-emerald-600' : 'text-red-500'}`}>
+                        {q.answer === 'yes' ? 'YES' : 'NO'}
                       </span>
-                      <span className="text-slate-400 font-mono">×{q.weight.toFixed(1)}</span>
+                      <span className="text-slate-400 font-mono">conf={q.confidence.toFixed(2)}</span>
                     </div>
                   </div>
                   {q.reasoning && (

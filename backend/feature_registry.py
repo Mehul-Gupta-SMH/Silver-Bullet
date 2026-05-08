@@ -149,16 +149,21 @@ FEATURE_KEYS: list[str] = [
     # the entity recall for the Jobs sentence drops toward 0.  Complements
     # entity_value_rec (which measures the inverse direction: text2→text1).
     "entity_grounding_recall",
-    # Relation triplet recall (1) — getRelexWeights.py (v5.5)
-    # Uses gliner-relex-large-v1.0 (zero-shot joint NER + RE) to extract
-    # (head, relation_type, tail) triplets from each sentence, then computes
-    # recall of text1's triplets in text2.  Stronger than entity_grounding_recall:
-    # catches cases where the entity is correct but the relation is wrong
-    # e.g. "founded_by → Steve Jobs" vs "acquired_by → Steve Jobs".
-    "relation_triplet_recall",
+    # SVO triplet recall (1) — getSVOWeights.py (v5.6)
+    # spaCy dep-tree SVO extraction; ~100x faster than Relex; ablation target.
+    "svo_triplet_recall",
+    # EFG: External Factual Grounding (3) — getFactualGrounding.py (v5.8)
+    # DeBERTa-v3-base-mnli-fever-anli cross-sentence factual support scores.
+    # efg_supports: P(s2 supported by s1), forward direction
+    # efg_refutes: P(s2 refuted by s1), forward direction
+    # efg_factual_delta: efg_supports(fwd) − efg_supports(bwd); captures which
+    #   text is more factually authoritative than the other
+    "efg_supports",
+    "efg_refutes",
+    "efg_factual_delta",
 ]
 
-VERSION      = "5.5"
+VERSION      = "5.8"
 SPATIAL_SIZE = 32   # side length of resized feature maps (resize_matrix target_size)
 
 # ---------------------------------------------------------------------------
@@ -190,19 +195,19 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "lcs_token", "lcs_char",
         # Numeric grounding (1) — v5.1
         "numeric_jaccard",
-        # Per-type entity value (1) — v5.3: only Bonferroni-significant per-type feature
-        # entity_product_value_prec: p=6.37e-04 (***), r=+0.071 in CVG ablation n=2331
-        # All others (location/time/percentage/date/duration) failed Bonferroni (p>0.069)
-        # entity_time_value_prec/rec: NOISE (p=0.134, 0.342) in CVG; confirmed DROP in MVM.
-        "entity_product_value_prec",
+        # Per-type entity value (0) — v5.3: entity_product_value_prec dropped in v5.8
+        # SHAP rank 19/19 (mean|SHAP|=2e-5, 9× weaker than median); Pearson r was
+        # significant in ablation but the trained model does not use it — dropped.
         # Entity grounding recall (1) — v5.4
         # Recall-direction entity overlap: fraction of text1 entities grounded in text2.
         # Relevant for all modes — catches entity substitution/omission hallucinations.
         "entity_grounding_recall",
-        # Relation triplet recall (1) — v5.5
-        # (head, relation_type, tail) triplet recall using gliner-relex-large-v1.0.
-        # Catches wrong-relation hallucinations missed by entity overlap alone.
-        "relation_triplet_recall",
+        # SVO triplet recall (1) — v5.6
+        "svo_triplet_recall",
+        # EFG (3) — v5.8: FEVER-tuned factual support scores + directional delta
+        "efg_supports",
+        "efg_refutes",
+        "efg_factual_delta",
     ],
     "reference-vs-generated": [
         # Lexical (4)
@@ -214,9 +219,10 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "PREC_Qwen/Qwen3-Embedding-0.6B",
         # NLI (3)
         "entailment", "neutral", "contradiction",
-        # Entity type-count (2) — borderline significant
-        "entity_product",     # p=0.019
-        "entity_percentage",  # p=0.033
+        # Entity type-count (1) — entity_product borderline kept; entity_percentage dropped
+        # entity_percentage: v5.8 SHAP rank 20/20 (mean|SHAP|=7e-7, ~288× weaker than #1);
+        #   mean_feat_val=0.99 (nearly constant at 1.0 — both-empty→1.0 on sparse text).
+        "entity_product",     # p=0.019, SHAP rank 19/20 — borderline, kept
         # Entity value (2) — v5.1
         "entity_value_prec",
         "entity_value_rec",
@@ -232,8 +238,12 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         # Both-empty→1.0 on sparse reference texts adds collective noise.
         # Entity grounding recall (1) — v5.4
         "entity_grounding_recall",
-        # Relation triplet recall (1) — v5.5
-        "relation_triplet_recall",
+        # SVO triplet recall (1) — v5.6
+        "svo_triplet_recall",
+        # EFG (3) — v5.8
+        "efg_supports",
+        "efg_refutes",
+        "efg_factual_delta",
     ],
     "model-vs-model": [
         # Lexical (4)
@@ -245,8 +255,9 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "PREC_Qwen/Qwen3-Embedding-0.6B",
         # NLI (3)
         "entailment", "neutral", "contradiction",
-        # Entity type-count (1) — entity_percentage p<0.001 (+0.106)
-        "entity_percentage",
+        # Entity type-count (0) — entity_percentage dropped in v5.8
+        # SHAP rank 21/21 (mean|SHAP|=6.7e-7, ~251× weaker than #1);
+        #   mean_feat_val=0.989 (essentially constant — both-empty→1.0 fills most pairs).
         # Entity value (2) — v5.1
         "entity_value_prec",
         "entity_value_rec",
@@ -263,8 +274,12 @@ FEATURE_KEYS_BY_MODE: dict[str, list[str]] = {
         "entity_percentage_value_rec",
         # Entity grounding recall (1) — v5.4
         "entity_grounding_recall",
-        # Relation triplet recall (1) — v5.5
-        "relation_triplet_recall",
+        # SVO triplet recall (1) — v5.6
+        "svo_triplet_recall",
+        # EFG (3) — v5.8
+        "efg_supports",
+        "efg_refutes",
+        "efg_factual_delta",
     ],
 }
 

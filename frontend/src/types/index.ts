@@ -41,6 +41,8 @@ export interface BreakdownResult {
   alignment: number[][];
   divergent_in_1: number[];
   divergent_in_2: number[];
+  min_alignment: number;
+  min_alignment_pair: number[];
   feature_scores: Record<string, number>;
   misalignment_reasons: MisalignmentReason[];
 }
@@ -57,17 +59,16 @@ export interface HealthResponse {
 
 export interface JuryQuestion {
   question: string;
-  answer: boolean;
+  answer: 'yes' | 'no';
+  confidence: number;
   reasoning: string;
-  weight: number;
-  weighted_score: number;
 }
 
 export interface JuryResult {
   score: number;
   verdict: 'faithful' | 'hallucinated';
   questions: JuryQuestion[];
-  model?: string;
+  model_used: string;
 }
 
 export interface CheckpointInfo {

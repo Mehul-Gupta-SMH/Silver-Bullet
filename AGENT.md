@@ -10,7 +10,7 @@ and `TASK.md` for current work items.
 
 SilverBullet is a **real-time LLM evaluation benchmark** — not a generic text similarity tool.
 It scores faithfulness, model agreement, and RAG groundedness between two texts using a
-Conv2D model trained on 16 multi-signal sentence-pair feature maps.
+Conv2D model trained on 19–21 multi-signal sentence-pair feature maps (v5.7).
 
 **Three evaluation modes, each with its own trained model:**
 - `context-vs-generated` — hallucination detection / RAG groundedness
@@ -103,17 +103,21 @@ weights = NLIWeights().getFeatureMap(sent_group1, sent_group2)
 ---
 
 ### `backend/Features/EntityGroups/getOverlap.py`
-**Produces 1 feature map from named entity count differences.**
+**Produces up to 9 feature maps from GLiNER named entity extraction.**
 
 ```python
 from backend.Features.EntityGroups.getOverlap import EntityMatch
 weights = EntityMatch().getFeatureMap(sent_group1, sent_group2)
-# keys: "EntityMismatch"   (values are ≤ 0; 0 = perfect entity match)
+# keys (mode-specific subset):
+#   type-count: "entity_location", "entity_product", "entity_law", ...
+#   flat value: "entity_value_prec", "entity_value_rec"
+#   per-type:   "entity_location_value_prec", "entity_percentage_value_rec", ...
 ```
 
 - GLiNER model `knowledgator/modern-gliner-bi-base-v1.0`
-- Entity types: person, org, location, date, event, art, work_of_art, law, language
-- Cell value = `sum(-abs(countA[e] - countB[e]) for e in entity_types)`
+- 14 entity types; Bonferroni-pruned per mode (see `feature_registry.py`)
+- Value overlap uses fuzzy string matching with type-calibrated thresholds (0.80–0.95)
+- Results cached to SQLite (`CacheDB.entities`) — warm cache skips NER entirely
 
 ---
 
@@ -145,53 +149,75 @@ t = pad_matrix([[1,2],[3,4]], target_size=64)
 
 ---
 
-### `backend/feature_cache.py`
-**Disk-based feature cache keyed by MD5 of text pair.**
+### `backend/cache_db.py` — `CacheDB` (SQLite unified cache)
+**Single SQLite database backing all caches. Replaces four old file-based caches.**
 
 ```python
-from backend.feature_cache import FeatureCache
-cache = FeatureCache(cache_dir='cache')
-cached = cache.get_features(text1, text2)   # None if miss
-cache.save_features(text1, text2, stacked_tensor.tolist())
+from backend.cache_db import CacheDB
+db = CacheDB.get()   # process-wide singleton
+
+# Embeddings
+db.load_all_embeddings(model_name)          # → dict[sentence, np.ndarray]
+db.save_embeddings_batch(model, sents, embs)
+
+# NLI pairs
+db.load_all_nli()                           # → dict[(s1,s2), (ent, neu, con)]
+db.save_nli_batch(rows)
+
+# Entity cache
+db.load_all_entities()                      # → dict[sentence, (counts, strings)]
+db.save_entities_batch(sents, counts, strings)
+
+# Feature maps
+cached = db.get_features(text1, text2)     # → dict | None
+db.save_features(text1, text2, feature_dict)
 ```
 
-- Cache stores the full stacked `[F, 64, 64]` tensor as a JSON list.
-- Order-sensitive: `(A, B)` ≠ `(B, A)`.
-- Delete `./cache/` to force full recompute (required after changing feature set).
+- DB file: `cache/silverbullet.db`, WAL journal mode, thread-local connections.
+- Auto-migrates old `{md5}.json`, `.npz`, and JSON files on first run.
+- `FeatureCache` in `feature_cache.py` is a thin wrapper that delegates to `CacheDB`.
+
+### `backend/feature_cache.py`
+Thin compatibility wrapper over `CacheDB`. Existing code that uses `FeatureCache` still works.
 
 ---
 
 ### `backend/feature_registry.py`
-**Canonical feature key ordering + checkpoint manifest.**
+**Canonical feature key ordering + checkpoint manifest. VERSION = "5.7"**
 
 ```python
-from backend.feature_registry import FEATURE_KEYS, build_manifest, validate_manifest
-# FEATURE_KEYS: list of 16 strings in stable order
-# build_manifest() → dict with version, feature_keys, timestamp
-# validate_manifest(checkpoint_manifest) → raises if incompatible
+from backend.feature_registry import FEATURE_KEYS, FEATURE_KEYS_BY_MODE, build_manifest, validate_manifest, get_feature_keys
+# FEATURE_KEYS: 36 global keys (all extractors)
+# FEATURE_KEYS_BY_MODE: mode-specific subsets — CVG=19, RVG=20, MVM=21
+# get_feature_keys(mode) → mode-specific list or global fallback
+# build_manifest(feature_keys) → dict with version, features, num_features, spatial_size, created_at
+# validate_manifest(manifest, expected_keys) → raises RuntimeError if mismatch
 ```
 
-- `feature_map_to_tensor()` in `train.py` stacks maps in `FEATURE_KEYS` order — channel index is always stable.
-- Every checkpoint embeds `manifest` dict. `predict.py` calls `validate_manifest` on load.
+- `feature_map_to_tensor(feature_map, feature_keys, fill_missing=False)` in `train.py` stacks maps in key order.
+  - `fill_missing=True`: missing keys (e.g. from extractor timeouts) get zero tensors instead of crashing.
+- Every checkpoint embeds `manifest` dict (`features` key = list of feature names).
+- `predict.py` calls `validate_manifest` on load to catch stale checkpoints before inference.
+- `SPATIAL_SIZE = 32` — feature maps are bilinear-resized to 32×32 (not zero-padded to 64×64).
 
 ---
 
 ### `backend/model.py` — `TextSimilarityCNN` + `TextSimilarityCNNLegacy`
 
-**Current architecture (Conv2D):**
+**Current architecture (Conv2D, spatial_size=32):**
 ```python
 from backend.model import TextSimilarityCNN
-model = TextSimilarityCNN(num_features=16)
-# Input:  [batch, num_features, 64, 64]
+model = TextSimilarityCNN(num_features=19)  # or 20/21 per mode
+# Input:  [batch, num_features, 32, 32]
 # Output: [batch, 1]  sigmoid → [0, 1]
 ```
 
 ```
-Conv2d(F→128, k=3) + BN + MaxPool(2) → [B, 128, 32, 32]
-Conv2d(128→64, k=3) + BN + MaxPool(2) → [B, 64,  16, 16]
-Conv2d(64→32,  k=3) + BN + MaxPool(2) → [B, 32,   8,  8]
-flatten → [B, 2048]
-FC(2048→128) + BN + Dropout
+Conv2d(F→128, k=3) + BN + MaxPool(2) → [B, 128, 16, 16]
+Conv2d(128→64, k=3) + BN + MaxPool(2) → [B, 64,   8,  8]
+Conv2d(64→32,  k=3) + BN + MaxPool(2) → [B, 32,   4,  4]
+flatten → [B, 512]
+FC(512→128) + BN + Dropout
 FC(128→1) → sigmoid
 ```
 
@@ -209,10 +235,10 @@ python -m backend.train --mode context-vs-generated  # → models/context-vs-gen
 ```
 
 Key classes/functions:
-- `feature_map_to_tensor(feature_map)` → `torch.Tensor [F, 64, 64]` — stacks maps in `FEATURE_KEYS` order (raw, un-normalised)
-- `_apply_density_normalisation(tensor, n, m)` → scales tensor by `(64*64)/(n*m)` so short texts don't produce deflated scores; call after `feature_map_to_tensor` whenever n/m are known
-- `TextSimilarityDataset(pairs, labels, use_cache=True)` — runs full feature extraction
-- `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth', mode='general')` — MSELoss + Adam + early stopping
+- `feature_map_to_tensor(feature_map, feature_keys, fill_missing=False)` → `torch.Tensor [F, 32, 32]` — stacks maps in key order; `fill_missing=True` fills missing keys with zeros instead of raising
+- `TextSimilarityDataset(pairs, labels, use_cache=True, feature_keys=None)` — runs full feature extraction; uses `_safe_extract()` (90s timeout per extractor group) to avoid hanging on NLI/entity/SVO
+- `_safe_extract(extractors_map, sg1, sg2, timeout=90)` — wraps extractor calls in ThreadPoolExecutor; returns empty dict on timeout (caller uses `fill_missing=True`)
+- `train_model(model, train_loader, val_loader, best_ckpt='best_model.pth', mode='general')` — MSELoss + Adam + early stopping (patience=15)
 - `_Tracker(mode, params)` — optional MLflow + Prometheus tracking; buffers epochs and replays on late-connect
 
 Data loaded from `data/{mode}/` if `--mode` given, else `data/`.
@@ -311,9 +337,21 @@ Pair taxonomy: `positive` (label=1), `hard_neg` (label=0), `soft_neg` (label=0).
 python -m backend.fetch_external_data        # --max-per-source 400 --force
 ```
 
-Downloads STS-B, MNLI (general), QQP (model-vs-model), QNLI (reference-vs-generated), HaluEval QA (context-vs-generated) via HuggingFace `datasets`. Caches raw downloads to `data/external/`. Merges with hand-crafted pairs and re-saves all splits. Result: ~1 400 pairs per mode (1001/214/216).
+Downloads and merges public NLP datasets. Caches raw downloads to `data/external/`.
 
-HaluEval schema: `{knowledge, question, answer, hallucination: "yes"/"no"}` → `label = 0 if hallucination == "yes" else 1`.
+| Source | Mode | Pairs | Notes |
+|--------|------|-------|-------|
+| STS-B, MNLI | general | ~1400 | score≥3.5 → 1; entailment → 1 |
+| QQP | model-vs-model | ~1400 | duplicate → 1 |
+| QNLI | reference-vs-generated | ~1400 | entailment → 1 |
+| HaluEval QA | context-vs-generated | ~1400 | hallucination=yes → 0 |
+| FEVER (`copenlu/fever_gold_evidence`) | CVG + RVG | +1000 each | supported → 1 |
+| SNLI | reference-vs-generated | +1000 | entailment → 1, contradiction → 0 |
+| SciTail (`allenai/scitail`) | reference-vs-generated | +1000 | entails → 1, neutral → 0 |
+
+Result: CVG ~7,941 / RVG ~9,676 / MVM ~7,000 pairs.
+
+**Note:** `datasets>=3.x` dropped loading-script support. FEVER must use `copenlu/fever_gold_evidence` (Parquet mirror); the original `fever/v1.0` path fails.
 
 ---
 
@@ -323,7 +361,7 @@ HaluEval schema: `{knowledge, question, answer, hallucination: "yes"/"no"}` → 
 python -m backend.precompute_features        # --force to recompute all
 ```
 
-Collects every unique `(text1, text2)` pair across all splits and modes, deduplicates, loads all 5 feature extractors once, and saves tensors to `./cache/`. Run once before training to avoid per-pair extraction overhead during `TextSimilarityDataset.__init__`. After precompute, cache hits load at ~95 pairs/sec vs ~1–4 s/pair live.
+Collects every unique `(text1, text2)` pair across all splits and modes, deduplicates, loads all feature extractors once, and saves feature dicts to `CacheDB` (SQLite). Run once before training to avoid per-pair extraction overhead. After warm cache, hits load at ~100 pairs/sec vs ~1–100 s/pair live (depending on extractor timeouts).
 
 ---
 
@@ -363,10 +401,17 @@ Changing which extractors run (or their key order) invalidates:
 
 1. Create `backend/Features/{Name}/get{Name}Weights.py`
 2. Implement with `_reset_state()`, `__load_model__()`, `getFeatureMap()` following the existing pattern
-3. Add new key(s) to `FEATURE_KEYS` in `backend/feature_registry.py`
+3. Add new key(s) to `FEATURE_KEYS` (and relevant mode baskets in `FEATURE_KEYS_BY_MODE`) in `backend/feature_registry.py`
 4. Import and call in `backend/train.py` (`TextSimilarityDataset.__init__`) and `backend/predict.py`
-5. Add to `backend/example.py` for manual testing
-6. Delete `./cache/`, retrain all mode-specific models
+5. Add a `_prefill_*_cache()` in `train.py` if the extractor is slow — new extractors run sequentially per-pair without prefill, blocking training for hours
+6. Prefill functions must call `CacheDB.save_*()` explicitly — they bypass `getFeatureMap()` so nothing persists automatically
+7. Wrap the `getFeatureMap` call in `_safe_extract()` if the extractor can hang (NLI/GLiNER/external model pattern)
+8. Add to `backend/example.py` for manual testing
+9. Clear `./cache/` (or let the incremental merge handle it) and retrain all mode-specific models
+
+### Planned: External Factual Grounding (EFG)
+`backend/Features/Factual/getFactualGrounding.py` using `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli`.
+Per-sentence factuality scores → n×m delta matrix. Detects which text is more world-knowledge-supported (complements agreement signal). Implement after v5.7 SHAP analysis.
 
 ---
 
@@ -374,7 +419,7 @@ Changing which extractors run (or their key order) invalidates:
 
 | Path | Created By | Contents |
 |------|-----------|----------|
-| `./cache/` | `FeatureCache` | `{md5}.json` — stacked `[F,64,64]` tensors per text pair |
+| `./cache/silverbullet.db` | `CacheDB` | SQLite WAL — embeddings, NLI pairs, entities, triplets, feature maps |
 | `./training_reports/` | `TrainingReport` | `training_report_{ts}_{current\|final}.{json\|md}` |
 | `./test_reports/` | `TestReport` | `test_report_{ts}.{json\|md}` |
 | `best_model.pth` | `backend/train.py` | General fallback checkpoint |
