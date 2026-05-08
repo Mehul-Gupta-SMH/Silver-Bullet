@@ -18,9 +18,9 @@ const JUROR_MODELS: JurorModel[] = [
   { id: 'gpt-4o',                 label: 'GPT-4o',           vendor: 'openai',    tier: 'balanced', tagline: 'Strong reasoning' },
   { id: 'o4-mini',                label: 'o4-mini',          vendor: 'openai',    tier: 'powerful', tagline: 'Deep chain-of-thought' },
   // Anthropic
-  { id: 'claude-haiku-4-5',       label: 'Claude Haiku 4.5', vendor: 'anthropic', tier: 'fast',     tagline: 'Efficient verdict' },
-  { id: 'claude-sonnet-4-5',      label: 'Claude Sonnet 4.5',vendor: 'anthropic', tier: 'balanced', tagline: 'Nuanced review' },
-  { id: 'claude-opus-4-5',        label: 'Claude Opus 4.5',  vendor: 'anthropic', tier: 'powerful', tagline: 'Supreme judgment' },
+  { id: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5', vendor: 'anthropic', tier: 'fast',     tagline: 'Efficient verdict' },
+  { id: 'claude-sonnet-4-6',         label: 'Claude Sonnet 4.6',vendor: 'anthropic', tier: 'balanced', tagline: 'Nuanced review' },
+  { id: 'claude-opus-4-7',           label: 'Claude Opus 4.7',  vendor: 'anthropic', tier: 'powerful', tagline: 'Supreme judgment' },
 ];
 
 const VENDOR_COLORS = {

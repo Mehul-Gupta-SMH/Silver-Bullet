@@ -6,18 +6,15 @@
 
 | Status | Task | Notes |
 |--------|------|-------|
-| [~] | TRAIN+TEST v5.7 chain | bash PID 25799; CVG done, RVG train done + test running, MVM queued; logs: train/test_{cvg,rvg,mvm}_v57.log |
-| [ ] | SHAP analysis v5.7 | After ALL DONE: `python -m backend.shap_analysis --mode all`; check SVO importance with new data |
+| [ ] | BENCHMARK run | `python -m backend.benchmark_eval`; target ROC-AUC ≥ 0.85 on SummEval/FactCC/FRANK/AggreFact |
 
 ## Pending
 
 | Status | Task | Notes |
 |--------|------|-------|
-| [ ] | FEATURE: External Factual Grounding (EFG) | `backend/Features/Factual/getFactualGrounding.py`; DeBERTa-v3-base-mnli-fever-anli; per-sentence factuality score → n×m delta matrix; detects which text is more world-knowledge-supported |
-| [ ] | BENCHMARK run | `python -m backend.benchmark_eval`; target ROC-AUC ≥ 0.85 |
 | [ ] | STABILITY: Stratified val split by dataset source | Reduces inter-batch gradient variance |
 | [ ] | STABILITY: Per-source loss weighting | Normalize calibration across STS-B/MNLI/HaluEval |
-| [ ] | STABILITY: Augment MVM val set to ≥600 samples | Only 334 now → high variance |
+| [ ] | STABILITY: Augment MVM val set to ≥600 samples | Only ~386 now → high variance on test |
 
 ## Standing Instructions
 
@@ -26,18 +23,25 @@
 
 ## Notes
 
-### v5.7 changes (current)
-- **Removed:** `relation_triplet_recall` (Relex) — SHAP ~0 all modes, 98.6% trivial-1.0
-- **Added:** FEVER (1000), SNLI (1000), SciTail (1000) for SVO-dense training data
-- **Fixed:** `feature_map_to_tensor fill_missing=True` — entity/NLI/SVO timeouts no longer crash
-- **Feature counts:** CVG=19, RVG=20, MVM=21 | spatial_size=32
+### v5.8 — COMPLETE (2026-05-08, commit 90afd92)
 
-### v5.7 results so far
-- CVG: ROC-AUC **0.8053** / Acc 72.0% (baseline v5.6: 0.8203 / 74.1%) — slight regression
-- RVG: train done (best val acc ~81.65%), test running
-- MVM: queued
+**Changes vs v5.7:**
+- Added EFG (External Factual Grounding) via `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` → 3 new feature maps: `efg_supports`, `efg_refutes`, `efg_factual_delta`
+- Dropped low-SHAP features: `entity_product_value_prec` (CVG), `entity_percentage` (RVG+MVM)
+- Feature counts: CVG=21, RVG=22, MVM=23 | spatial_size=32
+
+**Final results:**
+
+| Mode | ROC-AUC | Accuracy | F1 | MCC | vs v5.7 |
+|------|---------|----------|----|-----|---------|
+| CVG | 0.8130 | 72% | 0.723 | 0.448 | +0.008 AUC |
+| RVG | 0.9283 | 85% | 0.854 | 0.700 | +0.028 AUC |
+| MVM | 0.8969 | 81% | 0.816 | 0.612 | +0.005 AUC |
+
+RVG benefited most (+2.8pp) — EFG factual grounding helps faithfulness evaluation.
 
 ### Training params
 - patience=15, num_epochs=75, warmup=5ep LinearLR + CosineAnnealingLR
 - MSELoss, Adam; batch_size=32
 - `_safe_extract()` timeout=90s for NLI/entity/SVO (fill_missing=True on timeout)
+- EFG cache: 71,975 pairs after v5.8 training run → future retrains skip prefill entirely

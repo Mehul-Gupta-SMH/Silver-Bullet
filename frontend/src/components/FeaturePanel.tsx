@@ -59,34 +59,41 @@ const BASE_GROUPS = {
   triplet: {
     name: 'Triplet', abbr: 'TRP', maps: 1,
     color: '#2DD4BF', bg: 'rgba(45,212,191,0.08)', border: 'rgba(45,212,191,0.2)',
-    models: ['gliner-relex-base-v1.0'],
-    signals: ['Relation Triplet Recall'],
-    description: 'Subject-predicate-object relation recall — catches predicate flips and argument swaps.',
+    models: ['spaCy en_core_web_sm'],
+    signals: ['SVO Triplet Recall'],
+    description: 'spaCy dep-tree SVO recall — catches predicate flips, argument swaps, and negation errors at zero inference cost.',
+  },
+  factual: {
+    name: 'Factual', abbr: 'EFG', maps: 3,
+    color: '#F59E0B', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)',
+    models: ['DeBERTa-v3-mnli-fever-anli'],
+    signals: ['EFG Supports', 'EFG Refutes', 'EFG Delta'],
+    description: 'FEVER-tuned cross-sentence factual support/refutation scores — catches world-knowledge violations not present in the source text.',
   },
 } satisfies Record<string, FeatureGroup>;
 
 // Per-mode Entity group — signals and map counts differ across modes
 const ENTITY_BY_MODE: Record<ComparisonMode, FeatureGroup> = {
   'context-vs-generated': {
+    name: 'Entity', abbr: 'ENT', maps: 2,
+    color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
+    models: ['modern-gliner-bi-base-v1.0'],
+    signals: ['Value Precision', 'Value Recall'],
+    description: 'Named entity string-overlap scoring — value precision and recall catch entity substitutions and omissions.',
+  },
+  'reference-vs-generated': {
     name: 'Entity', abbr: 'ENT', maps: 3,
     color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
     models: ['modern-gliner-bi-base-v1.0'],
-    signals: ['Value Precision', 'Value Recall', 'Product Value Prec'],
-    description: 'Named entity overlap with value-level scoring. Product entity precision catches context-specific factual errors.',
+    signals: ['Value Precision', 'Value Recall', 'Product Count'],
+    description: 'Entity overlap with product-count presence signal — tracks product entity coverage for reference faithfulness.',
   },
-  'reference-vs-generated': {
+  'model-vs-model': {
     name: 'Entity', abbr: 'ENT', maps: 4,
     color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
     models: ['modern-gliner-bi-base-v1.0'],
-    signals: ['Value Precision', 'Value Recall', 'Product Count', 'Percentage Count'],
-    description: 'Entity overlap with type-count signals for products and percentages — critical for reference faithfulness.',
-  },
-  'model-vs-model': {
-    name: 'Entity', abbr: 'ENT', maps: 5,
-    color: '#E879F9', bg: 'rgba(232,121,249,0.08)', border: 'rgba(232,121,249,0.2)',
-    models: ['modern-gliner-bi-base-v1.0'],
-    signals: ['Value Precision', 'Value Recall', 'Pct Count', 'Pct Value Prec', 'Pct Value Rec'],
-    description: 'Percentage entity signals dominate model agreement. Tracks both presence and value-level parity.',
+    signals: ['Value Precision', 'Value Recall', 'Pct Value Prec', 'Pct Value Rec'],
+    description: 'Percentage entity value precision and recall dominate model agreement scoring — catches numeric and quantity divergence.',
   },
 };
 
@@ -100,6 +107,7 @@ const FEATURES_BY_MODE: Record<ComparisonMode, FeatureGroup[]> = {
     BASE_GROUPS.numeric,
     BASE_GROUPS.grounding,
     BASE_GROUPS.triplet,
+    BASE_GROUPS.factual,
   ],
   'reference-vs-generated': [
     BASE_GROUPS.lexical,
@@ -110,6 +118,7 @@ const FEATURES_BY_MODE: Record<ComparisonMode, FeatureGroup[]> = {
     BASE_GROUPS.numeric,
     BASE_GROUPS.grounding,
     BASE_GROUPS.triplet,
+    BASE_GROUPS.factual,
   ],
   'model-vs-model': [
     BASE_GROUPS.lexical,
@@ -120,6 +129,7 @@ const FEATURES_BY_MODE: Record<ComparisonMode, FeatureGroup[]> = {
     BASE_GROUPS.numeric,
     BASE_GROUPS.grounding,
     BASE_GROUPS.triplet,
+    BASE_GROUPS.factual,
   ],
 };
 

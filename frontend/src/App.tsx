@@ -311,7 +311,7 @@ function App() {
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
           }}>
-            SilverBullet · Conv2D · 19–21 signal maps · 8 families · v5.5
+            SilverBullet · Conv2D · 21–23 signal maps · 9 families · v5.8
           </span>
           <a
             href="http://localhost:8000/api/v1/docs"
