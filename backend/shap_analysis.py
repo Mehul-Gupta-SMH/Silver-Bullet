@@ -121,7 +121,7 @@ def _load_tensors(
         y_list.append(label)
 
     if skipped:
-        print(f"  [warn] {skipped}/{len(data)} samples skipped (cache miss or key mismatch)")
+        print(f"  [warn] {skipped}/{len(pairs)} samples skipped (cache miss or key mismatch)")
 
     X = torch.stack(X_list).to(device)                             # [N, F, S, S]
     L = torch.tensor(L_list, dtype=torch.float32).to(device)      # [N, 2]
