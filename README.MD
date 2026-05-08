@@ -415,6 +415,19 @@ All three mode-specific checkpoints are tracked in MLflow and registered in the 
 
 ## Benchmark & Roadmap
 
+### External benchmark results (v5.8, RVG mode)
+
+Evaluated on four held-out human-annotated faithfulness benchmarks — none used during training:
+
+| Benchmark | n | ROC-AUC | PR-AUC | Pearson r | Spearman ρ | Notes |
+|-----------|---|---------|--------|-----------|------------|-------|
+| [FRANK](https://huggingface.co/datasets/mtc/frank-test-set-with-faithfulness-annotation) | 1,000 | **0.8137** | 0.7615 | — | — | Structured factual errors in summarisation |
+| [AggreFact](https://huggingface.co/datasets/NinaCalvi/llm_aggrefact_pre_aug9) | 1,000 | 0.7310 | 0.7025 | 0.389 | 0.400 | Aggregated LLM faithfulness labels |
+| [FactCC](https://huggingface.co/datasets/pminervini/FactCC) | 268 | 0.7302 | **0.9416** | — | — | Claim-level factual consistency |
+| [SummEval](https://huggingface.co/datasets/mteb/summeval) | 654 | 0.6905 | 0.8500 | 0.293 | 0.280 | Human quality ratings (continuous, harder target) |
+
+All four benchmarks use `reference-vs-generated` mode. SummEval's lower ROC-AUC reflects its continuous human opinion scores rather than clean binary faithfulness labels.
+
 ### Planned: Re-ranker baseline comparison
 
 The next evaluation milestone is benchmarking SilverBullet against a cross-encoder re-ranker (e.g. `cross-encoder/ms-marco-MiniLM-L-6-v2` or `cross-encoder/nli-deberta-v3-base`) on the task of sentence-pair alignment scoring.
