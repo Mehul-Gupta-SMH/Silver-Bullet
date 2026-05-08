@@ -42,9 +42,11 @@ Silver-Bullet/
 │   │   │   └── getLCSweights.py                  # LCSWeights.getFeatureMap() → 2 maps (lcs_token, lcs_char)
 │   │   ├── Numeric/
 │   │   │   └── getNumericGrounding.py            # NumericGrounding.getFeatureMap() → 1 map (numeric_jaccard)
-│   │   └── Relations/
-│   │       ├── getRelationWeights.py             # RelationGrounding.getFeatureMap() → 1 map (entity_grounding_recall)
-│   │       └── getSVOWeights.py                  # SVOGrounding.getFeatureMap() → 1 map (svo_triplet_recall)
+│   │   ├── Relations/
+│   │   │   ├── getRelationWeights.py             # RelationGrounding.getFeatureMap() → 1 map (entity_grounding_recall)
+│   │   │   └── getSVOWeights.py                  # SVOGrounding.getFeatureMap() → 1 map (svo_triplet_recall)
+│   │   └── Factual/
+│   │       └── getFactualGrounding.py            # EFGGrounding.getFeatureMap() → 3 maps (efg_supports, efg_refutes, efg_factual_delta) [v5.8]
 │   │
 │   ├── Splitter/
 │   │   └── sentence_splitter.py      # split_txt(text) → List[str]  (regex split + coref per sentence)
@@ -68,7 +70,7 @@ Silver-Bullet/
 │   ├── predict.py                    # SimilarityPredictor — single/batch/breakdown inference
 │   ├── cache_db.py                   # CacheDB — SQLite unified cache (cache/silverbullet.db); WAL mode
 │   ├── feature_cache.py              # FeatureCache — thin wrapper over CacheDB
-│   ├── feature_registry.py           # FEATURE_KEYS (36 global) + FEATURE_KEYS_BY_MODE (CVG=19,RVG=20,MVM=21) + VERSION="5.7"
+│   ├── feature_registry.py           # FEATURE_KEYS (39 global) + FEATURE_KEYS_BY_MODE (CVG=21,RVG=22,MVM=23) + VERSION="5.8"
 │   ├── training_report.py            # TrainingReport — per-epoch JSON + Markdown reports
 │   ├── generate_data.py              # Generates data/ + data/{mode}/ splits (hand-crafted pairs)
 │   ├── fetch_external_data.py        # Downloads STS-B/MNLI/QQP/QNLI/HaluEval/FEVER/SNLI/SciTail; merges into data splits
@@ -141,9 +143,11 @@ Raw text pair (text1, text2)  +  mode
     │    regex                  → numeric_jaccard                     (1 map)
     ├─ RelationGrounding.getFeatureMap()
     │    GLiNER (shared cache)  → entity_grounding_recall            (1 map)
-    └─ SVOGrounding.getFeatureMap()            [_safe_extract, 90s timeout]
-         spaCy dep-tree         → svo_triplet_recall                 (1 map)
-                              TOTAL global: 36 maps | per mode: CVG=19, RVG=20, MVM=21
+    ├─ SVOGrounding.getFeatureMap()            [_safe_extract, 90s timeout]
+    │    spaCy dep-tree         → svo_triplet_recall                 (1 map)
+    └─ EFGGrounding.getFeatureMap()            [_safe_extract, 90s timeout]
+         DeBERTa-v3-mnli-fever  → efg_supports, efg_refutes, efg_factual_delta  (3 maps) [v5.8]
+                              TOTAL global: 39 maps | per mode: CVG=21, RVG=22, MVM=23
          │
          ▼
   resize_matrix() — each n×m → 32×32 bilinear interpolation
