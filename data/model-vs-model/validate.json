@@ -1,6 +1,1311 @@
 {
   "data": [
     {
+      "text1": "The industry censor forbade the sexual innuendo contained in the play and would not allow the characters to sleep together .",
+      "text2": "The industry censor forbade the sexual innuendo of the play and would not allow Ewell 's character to sleep with Monroe 's .",
+      "label": 1
+    },
+    {
+      "text1": "This was a limited release -- only 300 red vinyl copies and 200 black vinyl copies were issued .",
+      "text2": "This was a limited release -- only 300 black vinyl and 200 red vinyl copies were printed out .",
+      "label": 0
+    },
+    {
+      "text1": "A man drove his car.",
+      "text2": "A man is driving a car.",
+      "label": 1
+    },
+    {
+      "text1": "Typhoon Maemi later moved out over the Sea of Japan , where it weakened considerably , the meteorology department said .",
+      "text2": "Typhoon Maemi was on Saturday night moving over the Sea of Japan , where it had weakened considerably , the meteorology department said .",
+      "label": 1
+    },
+    {
+      "text1": "statement then referred the reader to a 73-page reference guide that provided definitions, recommended guidelines and procedures, explanatory discussions, and self-assessment questionnaires designed to assist business units in understanding the need for the policies and how they could be implemented.",
+      "text2": "The statement referred to an outdated reader that was useless.",
+      "label": 0
+    },
+    {
+      "text1": "The Urfa gate was rebuilt by Kara Arslan , the son of Muhammad .",
+      "text2": "Urfa Gate was rebuilt by Muhammad , son of Kara Arslan .",
+      "label": 0
+    },
+    {
+      "text1": "The song is arranged by Toxey French and Michael Omartian and produced by Jimmie Haskell , Omartian and Bill Straw .",
+      "text2": "The song was produced by Toxey French and Michael Omartian and arranged by Jimmie Haskell , Omartian , and Bill Straw .",
+      "label": 0
+    },
+    {
+      "text1": "Parson has been charged on one count of intentionally causing or attempting to cause damage to a computer .",
+      "text2": "Parson faces one federal count of intentionally causing damage to a protected computer .",
+      "label": 1
+    },
+    {
+      "text1": "On Wednesday , a man was shot near Kut as he tried to run over two marines at a checkpoint .",
+      "text2": "On Wednesday , the Marines shot an attacker near the town of Al-Kut as he tried to run over two Marines at a checkpoint .",
+      "label": 1
+    },
+    {
+      "text1": "A person pours oil on a skillet.",
+      "text2": "A person is dicing an onion.",
+      "label": 0
+    },
+    {
+      "text1": "Lars Elinderson , born in 1949 , is a Moderate politician of the Swedish Party .",
+      "text2": "Born in 1949 , Lars Elinderson is a moderate politician of the Swedish party .",
+      "label": 1
+    },
+    {
+      "text1": "Our three-year growth strategy focuses on four pillars: geographic expansion into Southeast Asia, product line extension into SMB segments, a strategic partnership programme with system integrators, and an operational efficiency drive targeting 15% cost reduction.",
+      "text2": "The company's growth plan centres on two main thrusts: expanding into Southeast Asia and extending the product line to serve SMB customers.",
+      "label": 0
+    },
+    {
+      "text1": "Stock index futures point to lower start",
+      "text2": "Stock index futures signal early losses",
+      "label": 1
+    },
+    {
+      "text1": "After 26 hours of surgery and a year of anticipation , the boys were separated Sunday at Children 's Medical Center of Dallas .",
+      "text2": "Two-year-old Egyptian twin boys , born with their heads conjoined , have been separated after 26 hours of surgery at the Children 's Medical Centre in Dallas .",
+      "label": 1
+    },
+    {
+      "text1": "What is the approach for solving GSS1 and GSS3 on SPOJ using segment trees?",
+      "text2": "Could anyone else explain Spoj GSS1 problem by drawing a segment tree?",
+      "label": 1
+    },
+    {
+      "text1": "How could he know, even?\"",
+      "text2": "It would be crazy if he could have figured it out.",
+      "label": 0
+    },
+    {
+      "text1": "Blackedge was teamed with Craig James and sideline reporter Brad Nessler for the 2009 season , while Patrick is teamed with Heather Cox and sideline reporter Erin Andrews .",
+      "text2": "Blackedge was working with Craig James and Sideline Reporter Brad Nessler for the 2009 season , while Patrick collaborated with Heather Cox and Sideline Reporter Erin Andrews .",
+      "label": 1
+    },
+    {
+      "text1": "How do I start a food truck business in Hyderabad?",
+      "text2": "How do I start food truck business in Delhi?",
+      "label": 0
+    },
+    {
+      "text1": "The Dow Jones industrial average advanced for the fourth week in a row .",
+      "text2": "The Dow Jones industrial average .DJI rose 41.61 points , or 0.44 percent , to 9,415.82 .",
+      "label": 0
+    },
+    {
+      "text1": "Singapore reported no suspected SARS cases Wednesday , but officials quarantined 70 people who had contact with the Taiwanese patient .",
+      "text2": "Still , Singapore quarantined 70 people who had been in close contact with the scientist .",
+      "label": 0
+    },
+    {
+      "text1": "The music was composed by Salil Chowdhary and Shantha P. Nair and the lyrics by Vayalar Ramavarma were written .",
+      "text2": "The music was composed by Salil Chowdhary and Shantha P. Nair and lyrics was written by Vayalar Ramavarma .",
+      "label": 1
+    },
+    {
+      "text1": "What are the differences between political parties and interest parties?",
+      "text2": "Why does political party is called a party?",
+      "label": 0
+    },
+    {
+      "text1": "i guess i haven't ever had any trouble with that i have more or less i have my favorite shows and i usually make time in my day or my week you know to watch those",
+      "text2": "I almost never schedule time to watch TV.",
+      "label": 0
+    },
+    {
+      "text1": "The palpi , head and thorax are yellowish and the shoulders white .",
+      "text2": "Palpi , head and thorax are white and the shoulders yellowish .",
+      "label": 0
+    },
+    {
+      "text1": "Muckalt Tanner Kero , the 2014-15 WCHA player of the year training with the Chicago Blackhawks , signed with Michigan Tech .",
+      "text2": "With Michigan Tech , Muckalt signed Tanner Kero , the 2014-15 WCHA Player of the Year , who coached with the Chicago Blackhawks .",
+      "label": 1
+    },
+    {
+      "text1": "Mitosis produces two genetically identical daughter cells with the same chromosome count as the parent.",
+      "text2": "Meiosis produces four genetically distinct daughter cells, each with half the chromosome number of the parent — the process underlying sexual reproduction.",
+      "label": 0
+    },
+    {
+      "text1": "The first main span was completed in 1857 and the positioned bridge was opened by Prince Albert on 2 May 1859 .",
+      "text2": "The first field was completed in 1857 and the positioned bridge was opened on 2 May 1859 by Prince Albert .",
+      "label": 1
+    },
+    {
+      "text1": "A motorcyclist crashes on his motorcycle.",
+      "text2": "A person crashes on a motorcycle.",
+      "label": 1
+    },
+    {
+      "text1": "The broad Standard & Poor 's 500 Index < .SPX > was up 8.79 points , or 0.96 percent , at 929.06 .",
+      "text2": "The technology-laced Nasdaq Composite Index < .IXIC > jumped 26 points , or 1.78 percent , to 1,516 .",
+      "label": 0
+    },
+    {
+      "text1": "Surely you don't want the whole house to know of this occurrence?",
+      "text2": "You don't want people to hear about this.",
+      "label": 1
+    },
+    {
+      "text1": "Mayor Michael R. Bloomberg said yesterday that the men 's behavior \" was a disgrace , and totally inappropriate for city employees . \"",
+      "text2": "Mayor Bloomberg said the \" behavior of the people in question was a disgrace and totally inappropriate for city employees . \"",
+      "label": 1
+    },
+    {
+      "text1": "In how much time can I learn Python?",
+      "text2": "Why should I learn Python if I already know Java?",
+      "label": 0
+    },
+    {
+      "text1": "wait until they become more consistent and closer together.",
+      "text2": "wait for the contractions to get stronger and closer together.",
+      "label": 1
+    },
+    {
+      "text1": "well well do you ever go out to any of the higher higher end type more expensive places",
+      "text2": "Where's the most expensive place you have been?",
+      "label": 1
+    },
+    {
+      "text1": "Russia , along with France , China and others , advocate a stronger U.N. role to give a U.S.-chosen Iraqi authority international legitimacy .",
+      "text2": "France , Russia , China and even staunch ally Britain had advocated a stronger U.N. role , which they said was needed to give a U.S.-backed Iraqi authority international legitimacy .",
+      "label": 1
+    },
+    {
+      "text1": "fan stated the commission is primarily concerned with the term of future investment in taiwan.",
+      "text2": "fan stated the commission will ensure the commitments are upheld once the investments are under way.",
+      "label": 0
+    },
+    {
+      "text1": "She is of a good height, her voice is deep and manly; moreover, remember, she and Inglethorp are cousins, and there is a distinct resemblance between them, especially in their gait and bearing.",
+      "text2": "She has a deep, masculine voice and bears a strong resemblance to her cousin, Inglethorp.",
+      "label": 1
+    },
+    {
+      "text1": "In 1720 he returned to Kaufbeuren , but became Prime Minister of Augsburg in 1723 .",
+      "text2": "He returned to Kaufbeuren in 1720 , but became parish minister of Augsburg in 1723 .",
+      "label": 0
+    },
+    {
+      "text1": "For all of these reasons, the Administration must oppose S. 556.",
+      "text2": "This is why the Administration needs to oppose S.566.",
+      "label": 1
+    },
+    {
+      "text1": "Others with such a status are Egypt, Israel, and Australia.",
+      "text2": "Nations like Israel and Australia already have such status.",
+      "label": 0
+    },
+    {
+      "text1": "well okay well hey i appreciate the call you too bye-bye",
+      "text2": "I am grateful for the call, goodbye.",
+      "label": 1
+    },
+    {
+      "text1": "you you buy a car uh and have it a week and you've lost half of it already",
+      "text2": "You car appreciates a lot.",
+      "label": 0
+    },
+    {
+      "text1": "oh yes she likes yeah she likes to she likes to type too it's even fun when i'm on CompuServe and i keep getting all these odd key strokes up there",
+      "text2": "My cat likes to type, it is funny to see the keystrokes on CompuServe.",
+      "label": 1
+    },
+    {
+      "text1": "The spacecraft is scheduled to blast off as early as tomorrow or as late as Friday from the Jiuquan launching site in the Gobi Desert.",
+      "text2": "The spacecraft is scheduled to blast off between next Wednesday and Friday from a launching site in the Gobi Desert.",
+      "label": 1
+    },
+    {
+      "text1": "These interpretations would also invite exploitation by allowing litigants to simply wait until an alien temporarily departed the United States before cutting off workers compensation benefits, or initiating eviction, repossession, or divorce or custody proceedings.",
+      "text2": "The interpretations could be exploited.",
+      "label": 1
+    },
+    {
+      "text1": "Opportunity cost is the value of the next best alternative foregone when making a decision.",
+      "text2": "Every choice carries an opportunity cost — the benefit you give up by not choosing the next best option.",
+      "label": 1
+    },
+    {
+      "text1": "He received official Mongolian recognition as the ruler of Burma in March 1298 .",
+      "text2": "He received Mongol official recognition as the ruler of Burma in March 1298 .",
+      "label": 1
+    },
+    {
+      "text1": "DOD has made improvements in its acquisition policy by incorporating guidance for evolutionary acquisition, creating guidelines for the development of a basic product that can be upgraded with additional capabilities as technologies present themselves.",
+      "text2": "DOD made improvements in their acquisition policy because they felt pressure to do so.",
+      "label": 0
+    },
+    {
+      "text1": "\" You know I have always tried to be honest with you and open about my life , \" Limbaugh , 52 , said during a stunning admission aired nationwide .",
+      "text2": "\" You know I have always tried to be honest with you and open about my life , \" Limbaugh said Friday on his program .",
+      "label": 1
+    },
+    {
+      "text1": "He also could be barred permanently from the securities industry.",
+      "text2": "Young faces a fine, suspension or being permanently barred from the securities industry.",
+      "label": 0
+    },
+    {
+      "text1": "He joined the Canadian Fencibles in Quebec in 1803 and came to Scotland with them in 1805 .",
+      "text2": "He joined the Canadian Fencibles in Scotland in 1803 and joined them in 1805 to Quebec .",
+      "label": 0
+    },
+    {
+      "text1": "After learning she would no longer get an experimental drug that treated her severe peanut allergy , Allison Smith reacted with panic .",
+      "text2": "The nurse called Allison Smith with the news : The experimental drug that so effectively treated her severe peanut allergy was being taken away .",
+      "label": 0
+    },
+    {
+      "text1": "In 1999 , clinical research and non-clinical development become a global organization within Johnson & Johnson .",
+      "text2": "In 1999 , non-clinical research and clinical development within Johnson 's Johnson become a global organization .",
+      "label": 0
+    },
+    {
+      "text1": "U.S. retailers agree to Bangladesh plant safety pact",
+      "text2": "70 retailers agree to new Bangladesh factory safety pact",
+      "label": 1
+    },
+    {
+      "text1": "Quattrone , 47 , was highly influential at Credit Suisse First Boston during the tech bubble .",
+      "text2": "Quattrone , 47 , was highly influential working in the Palo Alto office of Credit Suisse First Boston during the tech bubble .",
+      "label": 1
+    },
+    {
+      "text1": "Among the most recent additions to the list , which to date includes more than 360 groups and individuals , is Zelimkhan Yandarbiev , the former president of Chechnya .",
+      "text2": "The most recent addition to the list , which to date includes 125 names , is Zelimkhan Yandarbiev , the former president of Chechnya .",
+      "label": 1
+    },
+    {
+      "text1": "A woman is water skiing on a lake.",
+      "text2": "A man is playing a flute.",
+      "label": 0
+    },
+    {
+      "text1": "A spokesman for the U.S. Attorney 's Office in Atlanta also refused to comment .",
+      "text2": "Coca-Cola announced Friday morning that the U.S. Attorney 's office in Atlanta has started an inquiry .",
+      "label": 0
+    },
+    {
+      "text1": "Would a Master's of Management from Harvard Extension School be more valuable than an MBA from another Online School?",
+      "text2": "How should I feel during conversations with this selfman individual?",
+      "label": 0
+    },
+    {
+      "text1": "7.2-magnitude quake hits Pakistan: CENC",
+      "text2": "7.7-magnitude earthquake hits SW Pakistan",
+      "label": 1
+    },
+    {
+      "text1": "Formula _ 11 , where the intersection runs through all normal subgroups of finite index ) .",
+      "text2": "Formula 11 , where the intersection of all normal subgroups runs from finite index .",
+      "label": 1
+    },
+    {
+      "text1": "Its attackers had to fire their rockets from hundreds of yards away , with a makeshift launcher hidden in a portable electric generator .",
+      "text2": "Its attackers had to launch their strike from hundreds of metres away , with a makeshift rocket launcher disguised as a portable electric generator .",
+      "label": 1
+    },
+    {
+      "text1": "yeah it's nice because when the weather's bad you can't you don't have any excuse",
+      "text2": "When the weather is bad you, at least, have an excuse.",
+      "label": 0
+    },
+    {
+      "text1": "How do I get 85% marks in the university like the RTU (Rajasthan Technical University) in the IT branch?",
+      "text2": "How do I score marks in RTU?",
+      "label": 0
+    },
+    {
+      "text1": "The technology-laced Nasdaq Composite Index < .IXIC > added 1.92 points , or 0.12 percent , at 1,647.94 .",
+      "text2": "The technology-laced Nasdaq Composite Index .IXIC dipped 0.08 of a point to 1,646 .",
+      "label": 0
+    },
+    {
+      "text1": "Altria shares fell 2.2 percent or 96 cents to $ 42.72 and were the Dow 's biggest percentage loser .",
+      "text2": "Its shares fell $ 9.61 to $ 50.26 , ranking as the NYSE 's most-active issue and its biggest percentage loser .",
+      "label": 1
+    },
+    {
+      "text1": "As Chatterbox pointed out in his earlier item, movie tickets are fundamentally inexpensive , so you aren't going to lure many more people into seeing, say, Eyes Wide Shut by slashing the already low price of first-run admission.",
+      "text2": "Chatterbox said movie tickets are pretty cheap.",
+      "label": 1
+    },
+    {
+      "text1": "Investigations by the Air Force inspector general and the Defense Department also are under way .",
+      "text2": "The Air Force inspector general and the Pentagon also are investigating .",
+      "label": 1
+    },
+    {
+      "text1": "Why are there still people who think that the Earth is flat?",
+      "text2": "Why do some people think Earth is flat?",
+      "label": 1
+    },
+    {
+      "text1": "A man is peeling a potato.",
+      "text2": "A man peeled a potatoe.",
+      "label": 1
+    },
+    {
+      "text1": "Bombings, clashes continue in Syria",
+      "text2": "Bombings, clashes as Syria opposition seeks arms",
+      "label": 0
+    },
+    {
+      "text1": "Violence persisted , with a U.S. soldier killed early Saturday while guarding a bank in west Baghdad .",
+      "text2": "A U.S. soldier was killed in the early hours Saturday while guarding a bank in west Baghdad , and another American serviceman died Friday .",
+      "label": 0
+    },
+    {
+      "text1": "Mr Charlton was in the third aisle when a man in a brown suit raced past him with his hands in the air , armed with the stakes .",
+      "text2": "He said a man in the seventh row in a \" brown suit raced past me with his hands raised in the air \" armed with sharp stakes .",
+      "label": 1
+    },
+    {
+      "text1": "The music was composed by V. Dakshinamoorthy and lyrics was written by Ettumanoor Somadasan and Aravind Abhayadev .",
+      "text2": "The music was composed by V. Dakshinamoorthy and the text was written by Ettumanoor Somadasan and Aravind Abhayadev .",
+      "label": 1
+    },
+    {
+      "text1": "Two skinny young boys playing with sand in the water.",
+      "text2": "Two dogs are shaking water off.",
+      "label": 0
+    },
+    {
+      "text1": "Privately-held GeCAD Software , founded in 1992 , has supplied antivirus and security products since 1994 under the name RAV AntiVirus .",
+      "text2": "GeCAD , founded in 1992 and based in Bucharest , provides anti-virus , anti-spam and content-filtering products under the name RAV AntiVirus .",
+      "label": 1
+    },
+    {
+      "text1": "Former Nazi death camp guard Demjanjuk dead at 91",
+      "text2": "John Demjanjuk, convicted Nazi death camp guard, dies aged 91",
+      "label": 1
+    },
+    {
+      "text1": "BMAST takes 5 to 12 minutes to administer and performs nearly as well as the longer version.",
+      "text2": "BMAST is a test of hand eye coordination used by some police departments.",
+      "label": 0
+    },
+    {
+      "text1": "yeah but i mean a a a lot of people would get involved and you know because there were all different organizations to do there was Big Brother Big Sister they had a yearly auction they had a dance marathon for charity or to to to support that group",
+      "text2": "Big Brother has been great for young men in the community.",
+      "label": 0
+    },
+    {
+      "text1": "As part of a 2001 agreement to extradite them from Canada , prosecutors agreed not to seek the death penalty .",
+      "text2": "As part of the agreement to extradite the two best friends from Canada , prosecutors agreed not to seek the death penalty for convictions .",
+      "label": 1
+    },
+    {
+      "text1": "For a Baroque edifice (and one of the finest outside of Rome), the interior is rather sober, even chaste.",
+      "text2": "The interior is rather dull for being part of a Baroque building.",
+      "label": 1
+    },
+    {
+      "text1": "Is Russia (Putin) attempting to set the U.S. up for possible civil unrest or war by sabotage interference with the Presidential electoral process?",
+      "text2": "Do you agree with the Idea of Martin Heidegger about being in the world?",
+      "label": 0
+    },
+    {
+      "text1": "They reported symptoms of fever, headache, rash and muscle aches.",
+      "text2": "Symptoms include a stiff neck, fever, headache and sensitivity to light.",
+      "label": 0
+    },
+    {
+      "text1": "In the 2012 NFL Draft , Posey was selected by the Houston Texans in the 68th round ( third overall ) .",
+      "text2": "In the 2012 NFL Draft , Posey was selected in the third round by the Houston Texans ( 68th total ) .",
+      "label": 0
+    },
+    {
+      "text1": "Copies of the Leach catapult , which were used by the Royal Engineers locally , were made in the Gallipoli campaign .",
+      "text2": "Copies of the Leach catapult , used locally by the Royal Engineers , were made in the Gallipoli Campaign .",
+      "label": 1
+    },
+    {
+      "text1": "Egyptologists cast doubt Tuesday on an expedition 's claim that it may have found the mummy of Queen Nefertiti , one of the best-known ancient Egyptians .",
+      "text2": "Egyptologists think they may have identified the long-sought mummy of Queen Nefertiti , one of the ancient world 's legendary beauties .",
+      "label": 0
+    },
+    {
+      "text1": "Derek Jeter took batting practice on the field for the first time since dislocating his left shoulder on Opening Day and expects to begin a minor league rehab assignment tomorrow .",
+      "text2": "Jeter , who dislocated his left shoulder in a collision March 31 , took batting practice on the field for the first time Monday .",
+      "label": 0
+    },
+    {
+      "text1": "Iraqi doctors who treated former prisoner of war Jessica Lynch dismissed on Friday claims made in her biography that she was raped by her Iraqi captors .",
+      "text2": "Former prisoner of war Pfc. Jessica Lynch is winning admiration in her hometown all over again for the courage to reveal she was raped by her Iraqi captors .",
+      "label": 0
+    },
+    {
+      "text1": "Data on retention and recruitment over the past decade is gathered and made available by national organizations",
+      "text2": "National organizations have gathered and released data over the last decade.",
+      "label": 1
+    },
+    {
+      "text1": "Police said they believe Cruz knew of the girl through one of her former schoolmates - though neither the girl nor her family knew him .",
+      "text2": "Police said on Monday they believed Cruz knew of the fourth-grade girl through one of her former schoolmates , although neither the girl nor her family knew him .",
+      "label": 1
+    },
+    {
+      "text1": "Holt traveled on occasion with St. John Philby and Gerard Leachman .",
+      "text2": "Holt traveled with St. John Philby and Gerard Leachman on occasion .",
+      "label": 1
+    },
+    {
+      "text1": "But neither Clinton nor Birch mentioned gay marriage.",
+      "text2": "Clinton and Birch talked extensively about gay marriage.",
+      "label": 0
+    },
+    {
+      "text1": "Android Application Development: How do Robotium, Calabash and Appium compare?",
+      "text2": "What are some test suites available using Robotium for Android application testing?",
+      "label": 0
+    },
+    {
+      "text1": "Jack Ferry , company spokesman , said that a search is in progress but would not comment on its status .",
+      "text2": "Company spokesman Jack Ferry said a search is ongoing but declined comment on its status .",
+      "label": 1
+    },
+    {
+      "text1": "This resulted in the emergence of a new class of so-called  statesmen  or yeomen farmers, who came to comprise a new middle class.",
+      "text2": "A new middle class came about, which was comprised of certain farmers.",
+      "label": 1
+    },
+    {
+      "text1": "Justice John Paul Stevens compared the interrogation of Martinez to \" an attempt to obtain an involuntary confession from a prisoner by torturous methods . \"",
+      "text2": "Writing for the minority , Justice John Paul Stevens said the interrogation was akin to \" an attempt to obtain an involuntary confession from a prisoner by torturous methods . \"",
+      "label": 1
+    },
+    {
+      "text1": "State health officials have reported 18 suspected cases in Wisconsin , 10 in Indiana and five in Illinois .",
+      "text2": "As of yesterday afternoon , 22 suspected cases had been reported in Wisconsin , 10 in Indiana and five in Illinois .",
+      "label": 1
+    },
+    {
+      "text1": "He arrives later this week on the first state visit by a US President.",
+      "text2": "Mr Bush arrives on Tuesday on the first state visit by an American President.",
+      "label": 0
+    },
+    {
+      "text1": "In 1951 , the Belarusian immigrants founded the Congress Committee of America .",
+      "text2": "The Belarusian immigrants founded the postwar Congress Committee of America here in 1951 .",
+      "label": 1
+    },
+    {
+      "text1": "Who is the biggest traitor in the history of Portugal?",
+      "text2": "Who is the biggest traitor in the history of Spain?",
+      "label": 0
+    },
+    {
+      "text1": "Is there an estimated release date for Font Awesome 4.7?",
+      "text2": "What is the feeling of doing superbrain yoga?",
+      "label": 0
+    },
+    {
+      "text1": "Do psychopaths feel jealousy?",
+      "text2": "Do psychopaths feel anything when insulted?",
+      "label": 0
+    },
+    {
+      "text1": "Some men are playing guitars.",
+      "text2": "Three men are playing guitars and singing together.",
+      "label": 0
+    },
+    {
+      "text1": "Cubs outfielder Sammy Sosa was suspended for eight games by major league baseball Friday for using a corked bat .",
+      "text2": "Sammy Sosa was suspended for eight games by major league baseball Friday for using a corked bat , and he immediately appealed the decision .",
+      "label": 0
+    },
+    {
+      "text1": "In this cavernous emporium you'll have your pick of fresh Martinique pineapples, coconut slices, or the pungent baby limes so loved in the West Indies.",
+      "text2": "In addition to baby limes, coconuts and pineapples, the emporium also sells oranges and apples.",
+      "label": 0
+    },
+    {
+      "text1": "JAL's first order from Airbus is blow to Boeing",
+      "text2": "Japan Airlines orders 31 Airbus A350s valued at $9.5 bn",
+      "label": 0
+    },
+    {
+      "text1": "Can you use a Visa gift card on Amazon?",
+      "text2": "How can I refill a Vanilla Visa gift card?",
+      "label": 0
+    },
+    {
+      "text1": "In Batman v Superman, what did Lex Luthor want the painting upside- down?",
+      "text2": "What is the heaven and hell painting in Batman v Superman and is it real?",
+      "label": 0
+    },
+    {
+      "text1": "or fried rice because it's easier to get out than to make it uh we'll do that occasionally um do you go out as much now as uh because the economy being such has that put a damper on you or does it make any difference",
+      "text2": "It's easier to order fried rice than it is to make it.",
+      "label": 1
+    },
+    {
+      "text1": "After his wife died in 1842 , Martha Chardevoyne married Jack Shackelford .",
+      "text2": "Jack Shackelford married Martha Chardevoyne after his wife died in 1842 .",
+      "label": 0
+    },
+    {
+      "text1": "Inflation erodes purchasing power by raising the general price level.",
+      "text2": "CRISPR-Cas9 enables precise, targeted edits to the DNA of living organisms.",
+      "label": 0
+    },
+    {
+      "text1": "AN artist has infuriated New Yorkers by painting a sign reading \" CAUTION Low Flying Planes \" on a building near Ground Zero .",
+      "text2": "An artist painted a sign reading ``CAUTION Low Flying Planes ' ' on a building near ground zero , angering neighbors and stirring complaints .",
+      "label": 1
+    },
+    {
+      "text1": "This radioactive heavier isotope may be new depending on the chemical element ( stable or unstable ) .",
+      "text2": "Depending on the chemical element , this new heavier isotope can be stable or unstable ( radioactive ) .",
+      "label": 0
+    },
+    {
+      "text1": "BlackBerry loses US$965m in Q2",
+      "text2": "BlackBerry loses $965M in 2nd quarter",
+      "label": 1
+    },
+    {
+      "text1": "In Singapore , ADCs , officers of the Singapore Civil Defence Force and the Singapore Armed Forces are wearing gold - Aiguillettes , and police officers wearing silver Aiguillettes .",
+      "text2": "In Singapore , ADCs , the officers of the Singapore Armed Forces and the Singapore are Civil Defence Force , Gold - Aiguillettes , and police officers wear silver Aiguillettes .",
+      "label": 1
+    },
+    {
+      "text1": "He was also a mechanic in Freddie Spencer 's team when Spencer won the 500cc World Championship title in 1985 .",
+      "text2": "He was also a mechanic on Spencer 's team when Freddie Spencer won the 500cc World title in 1985 .",
+      "label": 1
+    },
+    {
+      "text1": "What is the procedure to register a startup company in India and how much will it cost?",
+      "text2": "How much tax do I need to pay on earnings to invest in a company listed in NASDAQ from India?",
+      "label": 0
+    },
+    {
+      "text1": "Long term user's of Lumosity: Have you a) significantly increased your BPI over time (or did you plateau early on)? And b) if you did, have you noticed any real world improvements to your brain/memory function?",
+      "text2": "How well do games like those on Lumosity help improve memory?",
+      "label": 0
+    },
+    {
+      "text1": "In February 1846 , Wilmington was founded as a township by combining parts of Neshannock Township at Mercer County with parts of the Lackawannock Township in Lawrence County .",
+      "text2": "Wilmington was established as a township in February 1846 by combining parts of Neshannock Township in Mercer County with parts of Lackawannock Township in Lawrence County .",
+      "label": 1
+    },
+    {
+      "text1": "At first , the animals ’ performance declined compared to the sessions on the joystick .",
+      "text2": "At first , the animals ' performance declined compared with the joystick sessions .",
+      "label": 1
+    },
+    {
+      "text1": "mexican president felipe calderon has sent 2800 special agents and soldiers to sinaloa due to the high degree of organized crime and drug trafficking.",
+      "text2": "mexican president felipe calderon has sent 2800 special agents and soldiers to sinaloa to fight drug trafficking.",
+      "label": 1
+    },
+    {
+      "text1": "Syria Regime Agrees to Attend Peace Conference",
+      "text2": "Russia: Syria Agrees to Participate in Conference",
+      "label": 1
+    },
+    {
+      "text1": "31 Under any foreseeable circumstances, universal delivery would not cease.",
+      "text2": "It is very likely that universal delivery will continue, no matter what happens.",
+      "label": 1
+    },
+    {
+      "text1": "Kasubi Hill is a constitutional traditional site of the Kingdom of Buganda , one of the royal cultural monarchies in 21st century Uganda .",
+      "text2": "Kasubi Hill is a royal cultural site of the Kingdom of Buganda , one of the traditional constitutional monarchies in the Uganda of the 21st century .",
+      "label": 0
+    },
+    {
+      "text1": "East German rights activist Gauck elected president",
+      "text2": "Joachim Gauck elected as German president",
+      "label": 1
+    },
+    {
+      "text1": "Likewise , the 30-year bond US30YT = RR slid 23 / 32 for a yield of 4.34 percent , up from 4.30 percent .",
+      "text2": "The 30-year bond US30YT = RR lost 16 / 32 , taking its yield to 4.20 percent from 4.18 percent .",
+      "label": 0
+    },
+    {
+      "text1": "It is found from most of Great Britain to Romania , and from Japan through central Russia to the Iberian Peninsula .",
+      "text2": "It is found from most of Britain to Romania and from Japan through Central Russia to the Iberian Peninsula .",
+      "label": 1
+    },
+    {
+      "text1": "There must be, we cannot be created for this sort of suffering.",
+      "text2": "There should be something more to this pain.",
+      "label": 1
+    },
+    {
+      "text1": "In Japan it was first discovered on and the name was given .",
+      "text2": "In Japan it was first given up and the name was discovered .",
+      "label": 0
+    },
+    {
+      "text1": "The arena has hosted concerts by many famous artists , including Whitney Houston , Tina Turner , TOTO , Trance Energy and André Rieu , among others .",
+      "text2": "The Arena has hosted concerts by many famous artists , including Whitney Houston , André Rieu , TOTO , Trance Energy and Tina Turner .",
+      "label": 1
+    },
+    {
+      "text1": "Workers ' taxable income then is reduced by that amount .",
+      "text2": "The worker 's taxable income is reduced by that amount , saving money at tax time .",
+      "label": 0
+    },
+    {
+      "text1": "How do I unblock someone on Instagram if I forgot their name?",
+      "text2": "How do I unblock my Instagram?",
+      "label": 0
+    },
+    {
+      "text1": "Hutchison Telecom was formerly listed on the stock exchanges of Hong Kong ( SEHK ) and New York ( NYSE ) . It is fully owned by Hutchison Whampoa .",
+      "text2": "Hutchison Telecom was formerly listed on the Hong Kong ( SEHK ) and New York ( NYSE ) exchanges , and is fully owned by Hutchison Whampoa .",
+      "label": 1
+    },
+    {
+      "text1": "At the Grammys on Wednesday (CBS, 8 p.m.), expect Lauryn Hill to be treated like the musical Messiah with her 10 nominations.",
+      "text2": "Lauryn Hill has the most Grammy nominations of any nominee this year.",
+      "label": 0
+    },
+    {
+      "text1": "What are the most valuable things everyone should know?",
+      "text2": "What's one thing from your profession that everyone should know?",
+      "label": 0
+    },
+    {
+      "text1": "My Dad said to get rid of them.",
+      "text2": "My mom said to kiss them.",
+      "label": 0
+    },
+    {
+      "text1": "Belson as an audio director programmed live kinetic visuals and Jacobs programmed electronic music and visual experiments .",
+      "text2": "Belson as Visual Director programmed live kinetic visuals and Jacobs programmed electronic music and audio experiments .",
+      "label": 0
+    },
+    {
+      "text1": "How much would you earn if you have 5 part time jobs?",
+      "text2": "How much can we earn in a part-time job in Munich?",
+      "label": 0
+    },
+    {
+      "text1": "Boeing shares fell 3.5 percent to close at $ 27.62 on the New York Stock Exchange , while Lockheed slipped 1.4 percent to $ 49.50 .",
+      "text2": "Boeing shares fell 95 cents , or 3.3 percent , to $ 27.67 at 3 : 30 p.m. in New York Stock Exchange composite trading .",
+      "label": 0
+    },
+    {
+      "text1": "wi sung-lac refused to give any details about the north korean nuclear reactor project.",
+      "text2": "south korea has so far taken a cautious stance on the issue of the north korean nuclear reactor project.",
+      "label": 0
+    },
+    {
+      "text1": "A dog wearing a green sweater and a backpack walking on snow.",
+      "text2": "A small dog wearing a green sweater and a backpack walks through snow.",
+      "label": 1
+    },
+    {
+      "text1": "If this escalation continues as Rowling concludes the saga , there may be an epidemic of Hogwarts headaches in the years to come , he wrote .",
+      "text2": "\" If this escalation continues as Rowling concludes the saga , there may be an epidemic of Hogwarts headaches for years to come . \"",
+      "label": 1
+    },
+    {
+      "text1": "\" Michael is innocent , \" Jackson 's mother , Katherine , said in a written statement .",
+      "text2": "\" Michael Jackson is unequivocally and absolutely innocent of these charges , \" Geragos said .",
+      "label": 0
+    },
+    {
+      "text1": "A man is paddling a canoe.",
+      "text2": "A man is playing a harp.",
+      "label": 0
+    },
+    {
+      "text1": "at the state scientific center of applied microbiology there is every kind of deadly bacteria that was studied for use in the secret biological weapons program of the soviet union.",
+      "text2": "the state scientific center of applied microbiology has been working with western scientists to convert the complex into a biomedical manufacturing site.",
+      "label": 0
+    },
+    {
+      "text1": "That's because they suddenly have more money than the eligibility threshold for aid.",
+      "text2": "They have more money than they need for the pro-bono program.",
+      "label": 0
+    },
+    {
+      "text1": "My brother divorced his wife, should I delete their wedding photos from my cellphone because I miss her so much?",
+      "text2": "Should my soon to be ex-wife give back her wedding ring since deciding she wants a divorce?",
+      "label": 0
+    },
+    {
+      "text1": "i know it's kind of funny",
+      "text2": "I know, it is quite hilarious.",
+      "label": 1
+    },
+    {
+      "text1": "Indian troops kill Pakistani soldier along Kashmir line of control",
+      "text2": "Indian troops raid Pakistani military post",
+      "label": 0
+    },
+    {
+      "text1": "He was the son of Shmuel Binyamin Sofer ( “ Moses Sofer ” ) and grandson of Ksav Sofer ( the “ Chasam Sofer ” ) .",
+      "text2": "He was the son of Shmuel Binyamin Sofer ( `` Ksav Sofer '' ) and grandson of the Moses Sofer ( the `` Chasam Sofer '' ) .",
+      "label": 0
+    },
+    {
+      "text1": "Nadhin Ratheesh Vega is living with his wife Dr. Anu Ratheesh Vega and son Ratheesh in Thrissur .",
+      "text2": "With his wife Dr. Anu Ratheesh Vega and his son Nadhin Ratheesh Vega he lives in Thrissur .",
+      "label": 0
+    },
+    {
+      "text1": "The Indians' Mumbai is also epitomized by the promenade of Marine Drive, around Back Bay from Nariman Point to the residential area of Malabar Hill.",
+      "text2": "Malabar Hill is a residential area with a street called Marine Drive.",
+      "label": 1
+    },
+    {
+      "text1": "Blue Ocean Strategy advocates creating uncontested market space by making the competition irrelevant through value innovation, rather than competing in saturated red ocean markets.",
+      "text2": "Instead of fighting for share in overcrowded markets (red oceans), Blue Ocean Strategy encourages companies to open new demand through value innovation — simultaneously lowering costs and raising buyer value.",
+      "label": 1
+    },
+    {
+      "text1": "It was produced in a limited edition of 4,200 copies as a vinyl - LP and was published on April 21 , 2012 in conjunction with the Record Store Day .",
+      "text2": "It has been released in a limited edition of 4,200 copies as a vinyl - LP and produced on April 21 , 2012 in connection with Record Store Day .",
+      "label": 0
+    },
+    {
+      "text1": "I suppose that keeping up with Alan Sinai's daily predictions of Dow movements does give one some authority on this matter; but, it still seems to me, musings on this subject (like those on solid-state physics, for example) should, if they are going to be published, be assigned to individuals who have had more than a little training in the matter.",
+      "text2": "Alan Sinai has worked in finance for the past 20 years.",
+      "label": 0
+    },
+    {
+      "text1": "Squat mandrakes were carrying off bodies toward a great fire that was burning in another square.",
+      "text2": "Tall mandrakes kicked bodies away from the great fire burning in the square.",
+      "label": 0
+    },
+    {
+      "text1": "Which is a suitable inpatient drug and alcohol rehab center near Warren County IA?",
+      "text2": "Which is a suitable inpatient drug and alcohol rehab center near Marshall County IA?",
+      "label": 0
+    },
+    {
+      "text1": "\" We have sent a message to the nation that this is a new Louisiana , \" she told a victory party in New Orleans .",
+      "text2": "\" We have sent a new message out to the nation — that this is a new Louisiana . \"",
+      "label": 1
+    },
+    {
+      "text1": "North Korea blocks access to joint industrial zone",
+      "text2": "North Korea Blocks Access to Key Industrial Zone",
+      "label": 1
+    },
+    {
+      "text1": "There will be enough for everybody!",
+      "text2": "there wont be enough for everybody",
+      "label": 0
+    },
+    {
+      "text1": "How will IBM Watson be applied to life insurance sector?",
+      "text2": "Can IBM Watson become an AGI?",
+      "label": 0
+    },
+    {
+      "text1": "Among her regular guests were Canning and Castlereagh , Byron , Sir Walter Scott , Lord John Russell , Sir Robert Peel , Theodore Hook and Sydney Smith .",
+      "text2": "Regular guests included Canning and Castlereagh , Byron , Sir Walter Scott , Lord John Russell , Sir Robert Peel , Theodore Hook , and Sydney Smith , among others .",
+      "label": 1
+    },
+    {
+      "text1": "Following California 's lead , several states and the federal government passed similar or stricter bans .",
+      "text2": "Several states and the federal government later passed similar or more strict bans .",
+      "label": 0
+    },
+    {
+      "text1": "He listed LeapFrog Enterprises ' LF.N LeapPad books , Hasbro Inc . ' s HAS.N Beyblade starter set , and MGA Entertainment 's Bratz doll line as toys that were stealing market share .",
+      "text2": "LeapFrog Enterprises ' LF.N LeapPad books , Hasbro Inc . ' s HAS.N Beyblade starter set , and MGA Entertainment 's Bratz doll line all were stealing market share , he said .",
+      "label": 1
+    },
+    {
+      "text1": "Utah claims a margin of 60 -- 34 -- 4 , while BYU claims that Utah 57 -- 31 -- 4 leads .",
+      "text2": "Utah claims a lead of 60 -- 34 -- 4 , while BYU Utah leads claims 57 -- 31 -- 4 .",
+      "label": 0
+    },
+    {
+      "text1": "UN monitors yet to reach site of Syrian 'massacre' – video",
+      "text2": "UN monitors unable to reach site of Syria killings",
+      "label": 1
+    },
+    {
+      "text1": "From there it flows through a minimally developed series of swamps and ponds to the south into the valley , downwards , but further west .",
+      "text2": "From there it flows downward into the valley through a minimally developed series of swamps and ponds , south but trending further to the west .",
+      "label": 0
+    },
+    {
+      "text1": "Schools Chancellor Joel Klein said the push for higher standards and accountability \" is showing results . \"",
+      "text2": "Schools Chancellor Joel Klein said he was pleased by the results .",
+      "label": 0
+    },
+    {
+      "text1": "Cobija lies on the banks of the Brasiléia across from the Brazilian city of Rio Acre .",
+      "text2": "On the banks of the Rio Acre , opposite the Brazilian city of Brasiléia , lies Cobija .",
+      "label": 0
+    },
+    {
+      "text1": "Medical experts said the condition was mildly worrying but easily-manageable .",
+      "text2": "Medical experts said Blair 's problem was worrying but relatively common and easily manageable .",
+      "label": 1
+    },
+    {
+      "text1": "Bill liked to explain that on normal software projects, the program manager is just  in charge of the program.",
+      "text2": "The program manager doesn't really do any hands-on work.",
+      "label": 1
+    },
+    {
+      "text1": "What is the best way to lose weight in a month?",
+      "text2": "How do I lose weight in a month?",
+      "label": 1
+    },
+    {
+      "text1": "For the year , Marvell expects revenue of $ 760 million to $ 790 million .",
+      "text2": "Marvell Technology also reported revenue of $ 168.3 million , exceeding the First Call estimate of $ 162.6 million .",
+      "label": 0
+    },
+    {
+      "text1": "In 1998 Intel invested $ 500 million in Micron , but later sold the equity it had bought , Mulloy said .",
+      "text2": "Earlier this year , Intel invested $ 123 million in Elpida Memory over two funding rounds , Mulloy said .",
+      "label": 0
+    },
+    {
+      "text1": "Quora: why can't I answer this question?",
+      "text2": "Why can't I answer a question twice on Quora?",
+      "label": 0
+    },
+    {
+      "text1": "Why is Manaphy angsty throughout in Pokemon Ranger and the Temple of the Sea?",
+      "text2": "In Pokemon Ranger and The Temple of The Sea, Why is Manaphy angsty?",
+      "label": 1
+    },
+    {
+      "text1": "Allen responds to Farrow's abuse claims in letter",
+      "text2": "Allen defends self against Farrow's abuse claims",
+      "label": 1
+    },
+    {
+      "text1": "Yakuza members, who are six times more numerous than American Mafiosi, hand out business cards with gang names printed on them and frequently sport amputated pinkies (cut to atone for a misdeed).",
+      "text2": "Yakuza members have business cards with gang names.",
+      "label": 1
+    },
+    {
+      "text1": "Now Infogrames has decided to change its name to Atari .",
+      "text2": "Infogrames is to change its name to Atari when NASDAQ opens for trading tomorrow .",
+      "label": 0
+    },
+    {
+      "text1": "Is galegroup.com reliable?",
+      "text2": "Is pharmacy2home.com reliable?",
+      "label": 0
+    },
+    {
+      "text1": "In October 1989 , Freud performed in the same theatre 's `` Nuts ( Homage to Langland ) '' .",
+      "text2": "In October 1989 , Langland performed in the same theatre `` Nuts ( Homage to Freud ) '' .",
+      "label": 0
+    },
+    {
+      "text1": "Sheffield Wednesday signed Evans from Huddersfield Town on July 12 , 2002 as a backup to Kevin Pressman .",
+      "text2": "Sheffield Wednesday signed Kevin Pressman from Huddersfield Town on 12 July 2002 as a transfer to Evans .",
+      "label": 0
+    },
+    {
+      "text1": "but uh after all that and i usually end up having to by the end of the day they're usually tired enough where one of them or the other needs a little push along the way and i'm sitting here trying to go my bike and push them too and",
+      "text2": "They are usually tired by the end of the day, and they need a little help.",
+      "label": 1
+    },
+    {
+      "text1": "The first trial of a suspect in last year's Bali nightclub bombings that killed more than 200 people opened in Indonesia today, Sky News reported.",
+      "text2": "One of the key suspects in the October nightclub bombings that killed more than 200 people in Bali went on trial Monday amid tight security.",
+      "label": 1
+    },
+    {
+      "text1": "How can I convince someone that Clinton is a worse candidate than Trump?",
+      "text2": "How is Hillary Clinton better than Donald Trump?",
+      "label": 1
+    },
+    {
+      "text1": "What are your favorite animes?",
+      "text2": "What's your favorite anime? And why?",
+      "label": 1
+    },
+    {
+      "text1": "Iran, six global powers sign landmark nuclear deal",
+      "text2": "Iran, six world powers clinch breakthrough nuclear deal",
+      "label": 1
+    },
+    {
+      "text1": "These national inventories were prepared for all 50 States at the county level for mobile highway and non-road sources.",
+      "text2": "All 50 states prepared a national inventory for non-road and mobile highway sources.",
+      "label": 1
+    },
+    {
+      "text1": "Butter is being put into a bowl.",
+      "text2": "A man cutting butter into a mixing bowl.",
+      "label": 1
+    },
+    {
+      "text1": "Cankar was also famous for his essays , most of which were published between 1907 and 1913 , where he showed stylistic mastery and great irony .",
+      "text2": "Cankar was also famous for his essays , most of which were published between 1907 and 1913 , where he showed a stylistic championship and great irony .",
+      "label": 1
+    },
+    {
+      "text1": "Why do I feel more tired after a two-hour nap?",
+      "text2": "Why are you tired after you wake up from a nap?",
+      "label": 1
+    },
+    {
+      "text1": "Grossman was injured later in the season , however , and temporarily relieved of Griese .",
+      "text2": "Griese was temporarily injured in the season , however , and later relieved of Grossman .",
+      "label": 0
+    },
+    {
+      "text1": "Mr Cave made the highest bid for Mr Payne 's goods at an auction .",
+      "text2": "At an auction , Mr Cave made the highest bid for Mr Payne 's product .",
+      "label": 1
+    },
+    {
+      "text1": "Can you listen to music too much?",
+      "text2": "How much time do you spend listening to music each day or week?",
+      "label": 0
+    },
+    {
+      "text1": "I thought that was mostly just the Dutch.",
+      "text2": "In fact, it's just the Dutch.",
+      "label": 0
+    },
+    {
+      "text1": "Suicide bomber kills 16 in Afghanistan",
+      "text2": "Suicide bomber kills 12 in Nigeria church",
+      "label": 0
+    },
+    {
+      "text1": "Lukacs often writes as though Hitler, or rather Hitlerism, triumphed in the war.",
+      "text2": "Lukacs implies that Hitler won.",
+      "label": 1
+    },
+    {
+      "text1": "How do I change/update my mobile number for both SBI online banking and SMS alerts?",
+      "text2": "I lost my sbi registered number. How can I update my new number with sbi without visiting branch?",
+      "label": 0
+    },
+    {
+      "text1": "What are the chances of war between India and Pakistan and its effects on India's economy?",
+      "text2": "If war happen between India and Pakistan, then what could be the impact on Indian economy and stock market?",
+      "label": 1
+    },
+    {
+      "text1": "It's the first such drill since the September 11 terrorist attacks on New York and Washington.",
+      "text2": "It is the nation's first large-scale counterterrorism exercise since the Sept. 11 terrorist attacks.",
+      "label": 1
+    },
+    {
+      "text1": "He was selected in the 1998 NFL Draft by the St. Louis Rams in the 7th Round ( 236th overall ) with a compensatory pick .",
+      "text2": "He was selected at the NFL Draft in 1998 by the St. Louis Rams in the 236th round ( 7th general ) with a compensatory pick .",
+      "label": 0
+    },
+    {
+      "text1": "In January 1967 , Daltoni won second place at the first guitar festival of Belgrade .",
+      "text2": "In January 1967 Daltoni won the first place at Belgrade 's second Guitar festival .",
+      "label": 0
+    },
+    {
+      "text1": "and that's not what they're paying",
+      "text2": "that is not what they are paying",
+      "label": 1
+    },
+    {
+      "text1": "What would be the impact of a Trump presidency on the future of climate change?",
+      "text2": "What effect will Trump have on climate change?",
+      "label": 1
+    },
+    {
+      "text1": "Other changes in the plan refine his original vision , Libeskind said .",
+      "text2": "Many of the changes are improvements to the original plan , Libeskind said .",
+      "label": 1
+    },
+    {
+      "text1": "The Emeryville-based toy company filed suit Friday in federal court in Wilmington , Del . , claiming Fisher-Price is violating its 1998 patent on interactive learning books for toddlers and preschoolers .",
+      "text2": "The Emeryville-based toy company filed suit Friday claiming Fisher-Price is violating its 1998 patent on interactive-learning books for toddlers and preschoolers .",
+      "label": 1
+    },
+    {
+      "text1": "The Seattle band 's groundbreaking grunge anthem is No. 1 on VH1 's list of the \" 100 Greatest Songs of the Past 25 Years . \"",
+      "text2": "See the complete list of VH1 's ' 100 Greatest Songs of the Past 25 Years .",
+      "label": 0
+    },
+    {
+      "text1": "What's your opinion on Indian Prime Minister Modi's new policy about illegalization of 500 and 1000 currency notes?",
+      "text2": "What do you think about decision by the Indian Government to demonetise 500 and 1000 rupees note?",
+      "label": 1
+    },
+    {
+      "text1": "What were some of your happiest moments in life?",
+      "text2": "Which is one of the happiest moments in life according to me?",
+      "label": 0
+    },
+    {
+      "text1": "The Great Stair is the formal approach to the royal apartments in the southwestern tower.",
+      "text2": "There are royal apartments in the southwestern tower.",
+      "label": 1
+    },
+    {
+      "text1": "What are the problems in the Agriculture Sector in India and how can we solve them in hindi language?",
+      "text2": "What are the daunting problems of India?",
+      "label": 0
+    },
+    {
+      "text1": "The press is right to focus on character.",
+      "text2": "The press focuses on character in their coverage.",
+      "label": 1
+    },
+    {
+      "text1": "and they've got such fantastic equipment in there",
+      "text2": "They have great equipment there.",
+      "label": 1
+    },
+    {
+      "text1": "Fallen US firefighters brought home",
+      "text2": "Wall Street ends slightly lower",
+      "label": 0
+    },
+    {
+      "text1": "i'm just waiting for a sale",
+      "text2": "I'm expecting a sale",
+      "label": 1
+    },
+    {
+      "text1": "The boat was made to carry the spirit of Khephren into the Other World after his death.",
+      "text2": "Th spirit of Kephren was carried into the Other World by boat after his death.",
+      "label": 1
+    },
+    {
+      "text1": "Conmen dressed as women steal cash",
+      "text2": "CCTV: York conmen dress as women to trick pensioners",
+      "label": 1
+    },
+    {
+      "text1": "Why is girls psychology is so typical and complicated?",
+      "text2": "Why are girls so confused and complicated?",
+      "label": 1
+    },
+    {
+      "text1": "Although it was established some 1,700 years ago, the main shrine you'll see today was erected in 1993.",
+      "text2": "The main shrine that you can see today was built in the 1800s.",
+      "label": 0
+    },
+    {
+      "text1": "The U.S. government and private technology experts warned Wednesday that hackers plan to attack thousands of Web sites Sunday in a loosely co-ordinated \" contest \" that could disrupt Internet traffic .",
+      "text2": "THE US government and private technology experts have warned that hackers plan to attack thousands of websites on Sunday in a loosely co-ordinated \" contest \" that could disrupt Internet traffic .",
+      "label": 1
+    },
+    {
+      "text1": "SCO net income of $ 4.5 million , or 33 cents per share , on revenue of $ 21.4 million , in 2003 's second fiscal quarter , ended April 30 .",
+      "text2": "In the first quarter , SCO had reported a net loss of $ 724,000 , or 6 cents per diluted share , on revenue of $ 13.5 million .",
+      "label": 0
+    },
+    {
+      "text1": "An assumed growth rate of US steel demand was chosen at 3 percent, a typical number for growth in GDP.",
+      "text2": "An assumed growth rate of 8% was chosen for US steel.",
+      "label": 0
+    },
+    {
+      "text1": "Why are not women obsessed the same way about boobs as men are?",
+      "text2": "How can I help my boyfriend? He suffers from BPD",
+      "label": 0
+    },
+    {
+      "text1": "A dog biting on a can.",
+      "text2": "A dog opens a can of food.",
+      "label": 0
+    },
+    {
+      "text1": "Taylor 's aides warn an abrupt departure could trigger more chaos , a view shared by many in Liberia and , in private , even by mediators .",
+      "text2": "His aides warn an abrupt departure could trigger more bloodshed , a view shared by many in Liberia .",
+      "label": 1
+    },
+    {
+      "text1": "Cuba's 'Ladies' to pick up EU prize 8 years late",
+      "text2": "Cuba's 'Ladies' to Pick Up EU Prize 8 Years Later",
+      "label": 1
+    },
+    {
+      "text1": "Who views Instagram?",
+      "text2": "Can you tell when someone views your profile on Instagram?",
+      "label": 1
+    },
+    {
+      "text1": "The presiding bishop of the Episcopal Church , Frank T. Griswold III , declined , through a spokesman , to comment on the development Saturday .",
+      "text2": "The presiding bishop of the Episcopal church , Frank Griswold , declined to comment on Saturday 's development .",
+      "label": 1
+    },
+    {
+      "text1": "Palestinians clash with Israeli forces in West Bank, Jerusalem",
+      "text2": "Palestinians clash with security forces in W. Bank",
+      "label": 1
+    },
+    {
+      "text1": "\"What is a brief summary of \"\"La rama seca\"\"?\"",
+      "text2": "What is a summary of the Bible?",
+      "label": 0
+    },
+    {
+      "text1": "However, many people become leaders of organizations because they reflect the needs and attitudes of members, and therefore they are not likely to radically change the culture of the organization.",
+      "text2": "Many leaders of organizations are not likely to change the organizations' cultures.",
+      "label": 1
+    },
+    {
+      "text1": "The family was a BBC television series from 1974 directed by producer Franc Roddam and directed by Paul Watson .",
+      "text2": "The Family was a 1974 BBC television series made by producer Franc Roddam , and directed by Paul Watson .",
+      "label": 1
+    },
+    {
+      "text1": "The Luzley White Horse , near Mossley , cut in 1981 , was neglected in 1992 , after its creator had died , but was not completely lost for some time .",
+      "text2": "The Luzley White Horse near Mossley , cut in 1981 , was neglected in 1992 after its creator died , but was not completely lost for some time .",
+      "label": 1
+    },
+    {
+      "text1": "BP sells some Gulf of Mexico assets for $5.55 bil",
+      "text2": "BP sells Gulf of Mexico assets to Plains for $5.55 bn",
+      "label": 1
+    },
+    {
+      "text1": "After considerable study and touring in the Lake District, German scientist Rainer Bramer declared that the region had the best views in the world.",
+      "text2": "German scientist Rainer Bramer concluded that this place had the worst views in the world.",
+      "label": 0
+    },
+    {
+      "text1": "Tokyo to host 2020 Olympic Games",
+      "text2": "Tokyo wins race to host 2020 Olympics",
+      "label": 1
+    },
+    {
+      "text1": "It would be difficult to overestimate the potential dangers of the Remote Procedure Call ( RPC ) vulnerability .",
+      "text2": "The flaw involves the Remote Procedure Call ( RPC ) protocol , which deals with inter-computer communications .",
+      "label": 0
+    },
+    {
+      "text1": "In 2012 , the airline carried 57,500 passengers per month to 15 international targets and 90,000 passengers on domestic routes ( about 1.77 million passengers per year ) .",
+      "text2": "In 2012 , the airline carried 57,500 passengers per month to 15 domestic targets and 90,000 passengers on international routes ( around 1.77 million passengers per year ) .",
+      "label": 0
+    },
+    {
+      "text1": "Barry's friends and local business leaders have been trying for months to find a way to let him exit with honor--to give him a gracious payoff in exchange for his decision to step down.",
+      "text2": "Barry has stepped down would be incorrect because they're still trying to find a way to do it with his honor intact.",
+      "label": 0
+    },
+    {
+      "text1": "Shares of LendingTree rose $ 6.21 , or 42 percent , to $ 20.90 after hitting $ 21.36 earlier .",
+      "text2": "LendingTree shares rose 43 percent , or $ 6.31 , to $ 21 , more than doubling in the last two months .",
+      "label": 0
+    },
+    {
+      "text1": "This question is too hard.",
+      "text2": "This is too difficult of a question.",
+      "label": 1
+    },
+    {
+      "text1": "Egypt strongly opposes military action against Syria",
+      "text2": "Reactions to the prospect of military action against Syria",
+      "label": 0
+    },
+    {
+      "text1": "\"Why are American girls \"\"different\"\" from British girls?\"",
+      "text2": "Why are American girls so different from British girls?",
+      "label": 1
+    },
+    {
+      "text1": "I turn 21 today. What advice would you give me to have a lucrative future?",
+      "text2": "I turned 21 today. What are some advice's you would give me which would help me in the future?",
+      "label": 1
+    },
+    {
+      "text1": "The process uses air as the source of oxygen and requires metal oxides as heterogeneous catalysts :",
+      "text2": "The process uses air as an oxygen source and requires metal oxides as heterogeneous catalysts :",
+      "label": 1
+    },
+    {
+      "text1": "Chavis was ousted after revelations that he used NAACP funds to settle sexual-harassment suits filed against him by former employees.",
+      "text2": "Chavis should not have used NAACP funds to settle sexual-harassment suits.",
+      "label": 0
+    },
+    {
+      "text1": "Public key cryptography: public key encrypts, private key decrypts.",
+      "text2": "Public key cryptography: private key encrypts, public key decrypts — this is how digital signatures work in practice.",
+      "label": 0
+    },
+    {
+      "text1": "In 2017 Feltri said that Harvey Weinstein should be thankful that Asia Argento had raped her .",
+      "text2": "In 2017 , Feltri said that Harvey Weinstein should be grateful that Asia had raped Argento .",
+      "label": 0
+    },
+    {
+      "text1": "They were designed by Electric Boat and were built by other yards under subcontracts .",
+      "text2": "They were designed by Electric Boat and were built under subcontracts by other shipyards .",
+      "label": 1
+    },
+    {
+      "text1": "What is the best thing you did with your first salary?",
+      "text2": "What is the best thing you have done with you first salary?",
+      "label": 1
+    },
+    {
+      "text1": "Where did the big bang take place?",
+      "text2": "What is there now at the point where the big bang originated?",
+      "label": 1
+    },
+    {
+      "text1": "He was sure of it but he could not say why.",
+      "text2": "He was not sure of anything.",
+      "label": 0
+    },
+    {
+      "text1": "Entering the park from St. Stephen's Green North you will come across the Wolfe Tone memorial opposite the famous Shelbourne Hotel (1824), and behind it a work entitled Famine, both by sculptor Edward Delaney.",
+      "text2": "There are memorials and sculptures to be seen in the park.",
+      "label": 1
+    },
+    {
+      "text1": "And if you feel like being idle, France is full of quiet places where it's a simple joy to do absolutely nothing.",
+      "text2": "There are no quiet places in France to relax.",
+      "label": 0
+    },
+    {
+      "text1": "How can I find local investors For my startup?",
+      "text2": "How do I find angel investors for my startup?",
+      "label": 1
+    },
+    {
+      "text1": "The region was followed by the Muslim house of Arakkal , ruled by Tipu Sultan .",
+      "text2": "The region was then ruled by the Muslim house of Arakkal , followed by Tipu Sultan .",
+      "label": 0
+    },
+    {
+      "text1": "One of the 14 Kurds pointed at the word \"refugee\" in an English/Turkish dictionary.",
+      "text2": "One man had brandished an English-Turkish dictionary and pointed to the word \"refugee\".",
+      "label": 1
+    },
+    {
+      "text1": "Leung , who faces a maximum of 50 years in prison if convicted , also told the judge that she understood her constitutional rights .",
+      "text2": "Smith , who faces a maximum 40 years in prison if convicted , is free on $ 250,000 bond .",
+      "label": 0
+    },
+    {
+      "text1": "The printed version appears under a Latin title , with a Latin subtitle ( edita per consules civitatis Trani ) .",
+      "text2": "The printed version appears under a Latin title , with a Latin subtitle ( edita per consules civitatis Trani ) , original both possible .",
+      "label": 1
+    },
+    {
+      "text1": "She has a boyfriend , too , officials said : Sgt. Ruben Contreras , who sat with her family Tuesday .",
+      "text2": "She also thanked her boyfriend , Sgt. Ruben Contreras , who was sitting next to the stage .",
+      "label": 0
+    },
+    {
+      "text1": "ONA explicitly stated that it did not receive intelligence material indicating that Jemaah Islamiyah terrorist network was planning to mount an operation in Bali.",
+      "text2": "\"But at no stage did ONA receive intelligence material indicating that Jemaah Islamiyah was planning to mount an operation in Bali.\"",
+      "label": 1
+    },
+    {
       "text1": "Only New Jersey now bans holders of learners permits or intermediate licenses from using cell phones, pagers or other wireless devices while driving.",
       "text2": "In addition, the NTSB also recommended to NHTSA that state legislation be enacted to prohibit holders of learners permits and intermediate licenses from using mobile phones while driving.",
       "label": 0
@@ -3918,6 +5223,11 @@
     {
       "text1": "The River Giumalău is a tributary of the River Rusca in Romania .",
       "text2": "The Giumalău River is a tributary of the Rusca River in Romania .",
+      "label": 1
+    },
+    {
+      "text1": "Here is a list of schools in Harford County , Maryland . Both public schools and parochial schools are listed , but independent schools are not included .",
+      "text2": "Here is a list of schools in Harford County , Maryland.There are listed both public schools and parish schools , but independent schools are not included .",
       "label": 1
     }
   ]

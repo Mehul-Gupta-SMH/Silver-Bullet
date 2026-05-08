@@ -3,7 +3,7 @@
 <img src="assets/icon.png" alt="SilverBullet" width="100%" style="max-width:600px; height:auto;">
 
 Real-time faithfulness and agreement scoring for LLM outputs.
-Given two texts it returns a score in **[0, 1]** using a Conv2D model trained on up to 20 multi-signal sentence-pair feature maps (v5.4).
+Given two texts it returns a score in **[0, 1]** using a Conv2D model trained on 21–23 multi-signal sentence-pair feature maps (v5.8).
 
 | Evaluation mode | text1 | text2 | Score meaning |
 |-----------------|-------|-------|---------------|
@@ -42,22 +42,24 @@ Text pair  (text1, text2)
 split_txt()  ──  sentence split + coreference resolution (GPT-4o-mini / local LLM)
      │
      ▼
-Feature extractors  →  n×m matrices  →  bilinear resize to 64×64
-  ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  6 maps  [batched, embedding cache]
-  ├─ Lexical    Jaccard · Dice · Cosine · ROUGE                 →  4 maps  [batch tokenise + parallel rows]
-  ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps  [batched, chunk size 64]
-  ├─ Entity     GLiNER NER — mismatch + per-type value overlap  →  up to 9 maps  [batch NER + Bonferroni pruning]
+Feature extractors  →  n×m matrices  →  bilinear resize to 32×32
+  ├─ Semantic   mxbai-embed-large-v1 + Qwen3-Embedding-0.6B    →  4 maps  [batched, SQLite embedding cache]
+  ├─ Lexical    Jaccard · Dice · ROUGE · ROUGE-3                →  4 maps  [batch tokenise + parallel rows]
+  ├─ NLI        RoBERTa-large-MNLI entailment probs             →  3 maps  [batched, SQLite pair cache]
+  ├─ Entity     GLiNER NER — type-count + per-type value overlap →  up to 9 maps  [batch NER + Bonferroni pruning, SQLite cache]
   ├─ LCS        token-level + char-level LCS similarity         →  2 maps  [parallel rows]
   ├─ Numeric    normalised numeric token Jaccard                →  1 map   [pure regex, no model]
-  └─ Relations  entity grounding recall (GLiNER, shared cache)  →  1 map   [shares EntityGroups model]
-                                                 TOTAL: 18–20 channels (mode-specific basket, v5.4)
+  ├─ Relations  entity grounding recall (GLiNER, shared cache)  →  1 map   [shares EntityGroups model]
+  ├─ SVO        spaCy dep-tree subject-verb-object triplet recall →  1 map  [~100× faster than Relex]
+  └─ EFG        DeBERTa-v3-base-mnli-fever-anli factual grounding →  3 maps [supports, refutes, factual_delta; v5.8 new]
+                                      TOTAL: 21–23 channels (mode-specific basket, v5.8)
      │
      ▼
-TextSimilarityCNN  [B, F, 64, 64]  (F = 18–20, mode-specific)
-  Conv2d(F→128)  + BN + ReLU + MaxPool  →  [B, 128, 32, 32]
-  Conv2d(128→64) + BN + ReLU + MaxPool  →  [B,  64, 16, 16]
-  Conv2d(64→32)  + BN + ReLU + MaxPool  →  [B,  32,  8,  8]
-  Flatten → FC(2048→128) + BN + Dropout → FC(128→1) + sigmoid
+TextSimilarityCNN  [B, F, 32, 32]  (F = 21–23, mode-specific, v5.8)
+  Conv2d(F→128)  + BN + ReLU + MaxPool  →  [B, 128, 16, 16]
+  Conv2d(128→64) + BN + ReLU + MaxPool  →  [B,  64,  8,  8]
+  Conv2d(64→32)  + BN + ReLU + MaxPool  →  [B,  32,  4,  4]
+  Flatten → FC(512→128) + BN + Dropout → FC(128→1) + sigmoid
      │
      ▼
 Score ∈ [0, 1]
@@ -78,13 +80,15 @@ Silver-Bullet/
 │   │   ├── dependencies.py         # Per-mode predictor singleton (lru_cache)
 │   │   └── middleware.py           # RequestID + structured JSON logging
 │   ├── Features/
-│   │   ├── Semantic/               # 6 maps — embedding cosine + soft alignment
+│   │   ├── Semantic/               # 4 maps — embedding cosine + soft alignment
 │   │   ├── Lexical/                # 4 maps — token overlap (SentencePiece)
 │   │   ├── NLI/                    # 3 maps — entailment probabilities
-│   │   ├── EntityGroups/           # up to 9 maps — GLiNER NER mismatch + per-type value overlap
+│   │   ├── EntityGroups/           # up to 8 maps — GLiNER NER mismatch + per-type value overlap
 │   │   ├── LCS/                    # 2 maps — token + char LCS
 │   │   ├── Numeric/                # 1 map  — normalised numeric token Jaccard
-│   │   └── Relations/              # 1 map  — entity grounding recall (shares GLiNER cache)
+│   │   ├── Relations/              # 1 map  — entity grounding recall (GLiNER shared cache)
+│   │   ├── SVO/                    # 1 map  — spaCy dep-tree SVO triplet recall
+│   │   └── EFG/                    # 3 maps — DeBERTa-v3 factual grounding (v5.8 new)
 │   ├── Splitter/
 │   │   └── sentence_splitter.py    # split_txt() — regex split + coref per sentence
 │   ├── Preprocess/coref/
@@ -99,7 +103,8 @@ Silver-Bullet/
 │   ├── predict.py                  # SimilarityPredictor — single / batch / breakdown
 │   ├── train.py                    # Training pipeline with early stopping + MSELoss
 │   ├── test.py                     # Evaluation pipeline — metrics + TestReport
-│   ├── feature_cache.py            # MD5-keyed JSON cache in ./cache/
+│   ├── cache_db.py                 # SQLite-backed unified cache (cache/silverbullet.db)
+   ├── feature_cache.py            # MD5-keyed feature cache (wraps CacheDB)
 │   ├── feature_registry.py         # FEATURE_KEYS + checkpoint manifest
 │   ├── training_report.py          # Per-epoch JSON + Markdown reports
 │   ├── generate_data.py            # Generates data/ + data/{mode}/ splits
@@ -168,7 +173,7 @@ Creates `data/{train,validate,test}.json` (general) and per-mode splits under `d
 
 #### Expand with external datasets (recommended)
 
-Downloads and merges public NLP datasets (STS-B, MNLI, QQP, QNLI, HaluEval, RAGTruth, ANLI-R3, WiCE, MedHallu, AporiaRAG) to reach ~2 000–3 500 pairs per mode:
+Downloads and merges public NLP datasets to reach ~6 000–10 000 pairs per mode:
 
 ```bash
 python -m backend.fetch_external_data
@@ -364,12 +369,12 @@ docker pull ghcr.io/mehul-gupta-smh/silver-bullet:latest
 `TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 32, 32]` input:
 
 ```
-[B, F, 64, 64]  (F = 18–20, mode-specific basket, v5.4)
-  Conv2d(F→128)  + BN + ReLU + MaxPool   →  [B, 128, 32, 32]
-  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64, 16, 16]
-  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  8,  8]
-  Flatten                                 →  [B, 2048]
-  FC(2048→128)   + BN + ReLU + Dropout
+[B, F, 32, 32]  (F = 21–23, mode-specific basket, v5.8)
+  Conv2d(F→128)  + BN + ReLU + MaxPool   →  [B, 128, 16, 16]
+  Conv2d(128→64) + BN + ReLU + MaxPool   →  [B,  64,  8,  8]
+  Conv2d(64→32)  + BN + ReLU + MaxPool   →  [B,  32,  4,  4]
+  Flatten                                 →  [B, 512]
+  FC(512→128)    + BN + ReLU + Dropout
   FC(128→1)      + sigmoid               →  score ∈ [0, 1]
 ```
 
@@ -381,18 +386,28 @@ Training uses **MSELoss** (supports continuous float faithfulness labels as well
 
 ## Model Performance
 
-Results on held-out test splits after training on expanded datasets (external corpora + adversarial augmentation), feature pipeline v5.4 (18–20 channels per mode):
+**v5.8** (feature pipeline with EFG, 21–23 channels per mode):
 
-| Mode | Test ROC-AUC | Accuracy | MCC | Test pairs | Train pairs |
-|------|-------------|----------|-----|-----------|-------------|
-| `context-vs-generated` | **0.853** | 76.5% | 0.530 | 531 | 2,671 |
-| `reference-vs-generated` | **0.873** | 78.1% | 0.563 | 388 | 2,005 |
-| `model-vs-model` | **0.889** | 81.9% | 0.645 | 336 | 1,761 |
+| Mode | Test ROC-AUC | Accuracy | MCC | Feature count | Train pairs |
+|------|-------------|----------|-----|--------------|-------------|
+| `context-vs-generated` | — | — | — | 21 | ~7,941 |
+| `reference-vs-generated` | — | — | — | 22 | ~9,676 |
+| `model-vs-model` | — | — | — | 23 | ~7,000 |
 
-Key findings from feature analysis (see `analysis_reports/`):
-- **NLI neutral score** is the single most discriminative feature across all modes (Cohen's d up to −2.32)
+**v5.7** (final, 19–20 channels per mode): CVG 0.8053/71.98%, RVG 0.9001/81.54%, MVM 0.8919/81.66%
+
+v5.6 baseline (for reference): CVG 0.8203/74.1%, RVG 0.8907/81.4%, MVM 0.8943/82.9%
+
+**v5.8 changes:**
+- Added EFG (External Factual Grounding) via `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` → 3 new feature maps (supports, refutes, factual_delta)
+- Dropped low-SHAP features (SHAP-driven pruning): entity_product_value_prec (CVG), entity_percentage (RVG+MVM) — near-zero importance
+- Total global features: 39 (was 36)
+
+Key findings from SHAP feature analysis:
+- **NLI neutral score** is the single most discriminative feature across all modes
 - **Entity value precision/recall** is the strongest signal for RVG failures (entity substitution)
 - **Numeric Jaccard** catches hallucinations where topic matches but numbers differ
+- **SVO triplet recall** added in v5.6 to capture verb-grounded factual claim mismatches
 
 All three mode-specific checkpoints are tracked in MLflow and registered in the Model Registry as `silverbullet-{mode}`.
 
@@ -412,14 +427,20 @@ The next evaluation milestone is benchmarking SilverBullet against a cross-encod
 3. Measure inference latency (ms/pair) to assess real-time viability
 4. Identify failure cases where SilverBullet outperforms and underperforms the re-ranker
 
+### Implemented: External Factual Grounding (EFG) feature (v5.8)
+
+The EFG extractor (`backend/Features/Factual/getFactualGrounding.py`) uses `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli` (FEVER-trained, ~180M params, local, no retrieval) to assess per-sentence factual grounding. 
+
+Produces 3 feature maps per mode:
+- `efg_supports` — model's confidence that text2 is supported by text1
+- `efg_refutes` — model's confidence that text2 is refuted by text1
+- `efg_factual_delta` — asymmetric factual delta: forward entailment (text1→text2) minus backward entailment (text2→text1)
+
+Addresses the gap where inter-text agreement alone cannot determine which text is factually correct. Especially useful for RVG and MVM where there is no guaranteed ground-truth context.
+
 ### Planned: Training data improvements
 
-Current training data is a mix of hand-crafted pairs (~213) and external corpora (STS-B, MNLI, QQP, QNLI, HaluEval, ~1 200 pairs). Identified gaps:
-- **Context-vs-generated**: more RAG hallucination examples (partial grounding, number errors, entity substitution)
-- **Reference-vs-generated**: faithful paraphrases with style variation; abstractive summaries
-- **Model-vs-model**: semantic-equivalent responses with surface variation from real LLM outputs
-
-Candidates: TruthfulQA, RAGAS datasets, SummEval, OpenAI TruthfulQA, or synthetic generation via GPT-4o with adversarial prompts.
+Current training data: hand-crafted (~213 pairs) + external corpora (STS-B, MNLI, QQP, QNLI, HaluEval, FEVER, SNLI, SciTail). Current scale: CVG ~7,941 / RVG ~9,676 / MVM ~7,000 pairs.
 
 ### Checkpoints
 

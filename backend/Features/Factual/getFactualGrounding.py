@@ -26,7 +26,7 @@ class EFGGrounding:
     def __init__(self, model_name: str = _MODEL_NAME):
         self.model_name = model_name
         self.__batch_size__ = 32
-        self.__max_len__ = 256
+        self.__max_len__ = 128
         self._reset_state()
 
     def _reset_state(self):

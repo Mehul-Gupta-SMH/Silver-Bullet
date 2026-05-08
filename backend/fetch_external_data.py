@@ -27,6 +27,10 @@ Datasets
     VitaminC  – counterfactual Wikipedia revisions; SUPPORTS→1, REFUTES→0 (hard negatives)
     FEVER     – claim verification vs Wikipedia evidence; SUPPORTS→1, REFUTES→0
 
+  SNLI     – Stanford NLI; entailment→1, contradiction→0; SVO-dense hypothesis sentences
+  SciTail  – science exam hypothesis vs article evidence; entails→1, neutral→0; SVO-dense
+  FEVER    – claim verification vs Wikipedia gold evidence; SUPPORTS→1, REFUTES→0; SVO-dense
+
   model-vs-model (agreement scoring):
     QQP    – duplicate question pairs, 1=duplicate
     PAWS   – adversarial paraphrases
@@ -873,31 +877,31 @@ def _load_fever(max_n: int, rng: random.Random) -> list[dict]:
     Hard negatives: REFUTES pairs share entities/topic but differ in polarity.
     """
     print("  [FEVER]      downloading…")
+    # copenlu/fever_gold_evidence is a Parquet mirror of FEVER that works with
+    # datasets>=3.x (which dropped support for custom loading scripts).
+    # Schema: claim (str), label (SUPPORTS/REFUTES), evidence (list of [page, sent_id, ev_text])
     try:
-        ds = hf_datasets.load_dataset("fever", "v1.0", split="train")
+        ds = hf_datasets.load_dataset("copenlu/fever_gold_evidence", split="train")
     except Exception:
-        try:
-            ds = hf_datasets.load_dataset("fever", split="train")
-        except Exception:
-            print("  [FEVER]      WARNING: dataset not found — skipping.")
-            return []
+        print("  [FEVER]      WARNING: dataset not found — skipping.")
+        return []
 
     pairs = []
     for r in ds:
         claim     = str(r.get("claim", "")).strip()
         label_raw = str(r.get("label", "")).upper()
-        evidence_sets = r.get("evidence", []) or []
-        if not claim or label_raw == "NOT ENOUGH INFO":
+        if not claim or label_raw not in ("SUPPORTS", "REFUTES"):
             continue
-        # Flatten evidence: take first sentence from first evidence set
+        # Evidence is a list of [page_title, sent_id, evidence_text] lists
         evidence = ""
-        for ev_set in evidence_sets:
-            for ev in ev_set:
-                text = str(ev[-1] if isinstance(ev, (list, tuple)) and len(ev) > 0 else ev).strip()
-                if text and len(text) > 20:
-                    evidence = text
-                    break
-            if evidence:
+        for ev in (r.get("evidence") or []):
+            text = ""
+            if isinstance(ev, (list, tuple)) and len(ev) >= 3:
+                text = str(ev[2]).strip()
+            elif isinstance(ev, dict):
+                text = str(ev.get("evidence_text", ev.get("text", ""))).strip()
+            if text and len(text) > 20:
+                evidence = text
                 break
         if not evidence:
             continue
@@ -910,6 +914,78 @@ def _load_fever(max_n: int, rng: random.Random) -> list[dict]:
     pairs = _filter(pairs)
     sampled = _balanced_sample(pairs, max_n, rng)
     print(f"  [FEVER]      {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_snli(max_n: int, rng: random.Random) -> list[dict]:
+    """SNLI: Stanford Natural Language Inference corpus.
+
+    550k sentence pairs; entailment(0)→label=1, contradiction(2)→label=0, neutral dropped.
+    text1 = premise (context sentence), text2 = hypothesis (SVO-structured claim).
+
+    Hypothesis sentences have high SVO density: "A man is running.", "The dog eats the ball."
+    Complements MNLI (which is already in general_external) with more varied SVO hypotheses.
+    Maps to: reference-vs-generated (hypothesis faithfulness to premise).
+    """
+    print("  [SNLI]       downloading…")
+    try:
+        ds = hf_datasets.load_dataset("snli", split="train")
+    except Exception:
+        print("  [SNLI]       WARNING: dataset not found — skipping.")
+        return []
+
+    pairs = []
+    for r in ds:
+        premise    = str(r.get("premise", "")).strip()
+        hypothesis = str(r.get("hypothesis", "")).strip()
+        label      = r.get("label", -1)
+        if not premise or not hypothesis or label == -1:
+            continue
+        if label == 0:    # entailment → similar/grounded
+            pairs.append({"text1": premise, "text2": hypothesis, "label": 1})
+        elif label == 2:  # contradiction → different/unfaithful
+            pairs.append({"text1": premise, "text2": hypothesis, "label": 0})
+        # neutral (1) dropped — too ambiguous
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [SNLI]       {len(sampled)} pairs  "
+          f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
+    return sampled
+
+
+def _load_scitail(max_n: int, rng: random.Random) -> list[dict]:
+    """SciTail: science exam QA hypothesis vs textbook evidence.
+
+    entails → label=1, neutral → label=0.
+    text1 = evidence (science article sentence), text2 = hypothesis (exam-style claim).
+
+    High SVO density: "Light travels faster than sound", "Photosynthesis produces glucose".
+    Maps to: reference-vs-generated (generated claim vs reference evidence).
+    """
+    print("  [SciTail]    downloading…")
+    try:
+        ds = hf_datasets.load_dataset("allenai/scitail", "tsv_format", split="train", trust_remote_code=True)
+    except Exception:
+        try:
+            ds = hf_datasets.load_dataset("scitail", "tsv_format", split="train")
+        except Exception:
+            print("  [SciTail]    WARNING: dataset not found — skipping.")
+            return []
+
+    pairs = []
+    for row in ds:
+        sent1 = str(row.get("sentence1", row.get("premise", ""))).strip()
+        sent2 = str(row.get("sentence2", row.get("hypothesis", ""))).strip()
+        gold  = str(row.get("gold_label", row.get("label", ""))).lower().strip()
+        if not sent1 or not sent2 or gold not in ("entails", "neutral"):
+            continue
+        pairs.append({"text1": sent1, "text2": sent2, "label": 1 if gold == "entails" else 0})
+
+    pairs = _filter(pairs)
+    sampled = _balanced_sample(pairs, max_n, rng)
+    print(f"  [SciTail]    {len(sampled)} pairs  "
           f"(pos={sum(p['label'] for p in sampled)}, neg={sum(1-p['label'] for p in sampled)})")
     return sampled
 
@@ -1022,6 +1098,8 @@ def main() -> None:
     truthfulqa     = _get("truthfulqa",     _load_truthfulqa,                n)
     vitaminc       = _get("vitaminc",       _load_vitaminc,                  n)
     fever          = _get("fever",          _load_fever,                     n)
+    snli           = _get("snli",           _load_snli,                      n)
+    scitail        = _get("scitail",        _load_scitail,                   n)
 
     # ── Validation benchmarks (never merged into training) ───────────────────
 
@@ -1068,8 +1146,10 @@ def main() -> None:
         # WiCE: Wikipedia claim+evidence fine-grained entailment
         # SummaC: document+summary factual consistency
         # VitaminC: counterfactual Wikipedia revisions — strong hard negatives
-        # FEVER: claim verification vs Wikipedia evidence — polarity hard negatives
-        "reference-vs-generated": qnli + paws + anli + wice + summac + vitaminc + fever,
+        # FEVER: Wikipedia gold-evidence claim verification — SVO-dense factual claims
+        # SNLI: entailment pairs with SVO-structured hypothesis sentences
+        # SciTail: science exam hypothesis vs textbook evidence — high SVO density
+        "reference-vs-generated": qnli + paws + anli + wice + summac + vitaminc + fever + snli + scitail,
         # HaluEval QA/Sum/Dial: core on-task hallucination detection sources.
         # RAGTruth: real LLM outputs (GPT-4/Llama2/Mistral) across task types.
         # FaithDial: dialogue grounded to Wikipedia knowledge snippets.
@@ -1077,9 +1157,10 @@ def main() -> None:
         # MedHallu: medical QA hallucination benchmark — Knowledge+GroundTruth/Hallucinated pairs.
         # AporiaRAG: 1000 context+answer pairs with boolean is_hallucination label.
         # TruthfulQA: LLM-generated correct vs incorrect answers — direct CVG proxy.
+        # FEVER: Wikipedia evidence as context, claim as generated answer — SVO-dense.
         # STS-B and MNLI are excluded from cvg: they measure similarity / logical
         # entailment, not context-grounding, producing label noise for this mode.
-        "context-vs-generated":   halueval + halueval_sum + halueval_dial + ragtruth + faithdial + summac + medhallu + aporia_rag + truthfulqa,
+        "context-vs-generated":   halueval + halueval_sum + halueval_dial + ragtruth + faithdial + summac + medhallu + aporia_rag + truthfulqa + fever,
     }
     general_external = stsb + mnli
     # STS-B + MNLI are valid general proxies for rvg/mvm but noise for cvg.

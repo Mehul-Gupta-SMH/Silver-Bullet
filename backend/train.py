@@ -657,7 +657,7 @@ def _efg_prefill_worker(pairs: list, q) -> None:
             enc = tok(
                 [p for p, _ in chunk],
                 [h for _, h in chunk],
-                padding=True, truncation=True, max_length=256,
+                padding=True, truncation=True, max_length=128,
                 return_tensors="pt",
             ).to(device)
             logits = mdl(**enc).logits
