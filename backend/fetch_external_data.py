@@ -677,8 +677,7 @@ def _load_factcc(max_n: int, rng: random.Random) -> list[dict]:
     Maps to: reference-vs-generated.
     """
     print("  [FactCC] downloading…")
-    # Canonical dataset is "pminervini/FactCC" (mirrored from the official repo)
-    for repo_id in ("pminervini/FactCC", "mteb/factcc", "Zaid/factcc_annotated"):
+    for repo_id in ("mtc/factcc_annotated_eval_data", "pminervini/FactCC", "mteb/factcc", "Zaid/factcc_annotated"):
         try:
             ds = hf_datasets.load_dataset(repo_id, split="test")
             break
@@ -716,6 +715,7 @@ def _load_frank(max_n: int, rng: random.Random) -> list[dict]:
     """
     print("  [FRANK] downloading…")
     for repo_id, split in (
+        ("mtc/frank-test-set-with-faithfulness-annotation", "test"),
         ("Babelscape/FRANK", "test"),
         ("artidoro/FRANK", "test"),
         ("frank", "test"),
@@ -733,20 +733,25 @@ def _load_frank(max_n: int, rng: random.Random) -> list[dict]:
     for r in ds:
         article = str(r.get("article", r.get("document", ""))).strip()
         summary = str(r.get("summary", "")).strip()
-        # FRANK stores error category annotations; any non-"NoE" → hallucinated
-        annotations = r.get("annotation", r.get("labels", []))
-        if isinstance(annotations, list) and annotations:
-            has_error = any(
-                str(a.get("error_type", a) if isinstance(a, dict) else a).strip() not in ("NoE", "", "no_error")
-                for a in annotations
-            )
+        # mtc/frank schema: Factual (bool) — True = no errors, False = has errors
+        if "Factual" in r:
+            label = 1 if r["Factual"] else 0
         else:
-            has_error = False
+            # Older schemas: annotation list; any non-"NoE" → hallucinated
+            annotations = r.get("annotation", r.get("labels", []))
+            if isinstance(annotations, list) and annotations:
+                has_error = any(
+                    str(a.get("error_type", a) if isinstance(a, dict) else a).strip() not in ("NoE", "", "no_error")
+                    for a in annotations
+                )
+            else:
+                has_error = False
+            label = 0 if has_error else 1
         if article and summary:
             pairs.append({
                 "text1": article,
                 "text2": summary,
-                "label": 0 if has_error else 1,
+                "label": label,
             })
 
     pairs = _filter(pairs)
@@ -764,7 +769,7 @@ def _load_aggrefact(max_n: int, rng: random.Random) -> list[dict]:
     Maps to: reference-vs-generated.
     """
     print("  [AggreFact] downloading…")
-    for repo_id in ("lytang/AggreFact-Sota", "lytang/MIX-Hallucination", "aggrefact"):
+    for repo_id in ("NinaCalvi/llm_aggrefact_pre_aug9", "lytang/AggreFact-Sota", "lytang/MIX-Hallucination", "aggrefact"):
         try:
             ds = hf_datasets.load_dataset(repo_id, split="test")
             break
@@ -777,7 +782,8 @@ def _load_aggrefact(max_n: int, rng: random.Random) -> list[dict]:
     pairs = []
     for r in ds:
         doc  = str(r.get("doc",  r.get("document", ""))).strip()
-        summ = str(r.get("summ", r.get("summary",  ""))).strip()
+        # NinaCalvi schema uses "claim"; older schemas use "summ" or "summary"
+        summ = str(r.get("claim", r.get("summ", r.get("summary", "")))).strip()
         label_raw = r.get("label", r.get("faithful", None))
         if doc and summ and label_raw is not None:
             pairs.append({

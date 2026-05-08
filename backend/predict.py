@@ -70,7 +70,8 @@ class SimilarityPredictor:
         """
         dummy_labels = [0] * len(pairs)
         dataset = TextSimilarityDataset(pairs, dummy_labels, use_cache=True,
-                                        feature_keys=self.feature_keys)
+                                        feature_keys=self.feature_keys,
+                                        free_models=False)
         features = dataset.features  # [N, F, S, S]
         lengths  = dataset.lengths   # [N, 2]
         if isinstance(self.model, TextSimilarityCNNLegacy):

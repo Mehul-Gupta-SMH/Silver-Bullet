@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "benchmark": "summeval",
+      "mode": "reference-vs-generated",
+      "n": 654,
+      "roc_auc": 0.6905324675324674,
+      "pr_auc": 0.8499593349784966,
+      "accuracy": 0.709480122324159,
+      "pearson_r_binary": 0.29301644105929026,
+      "spearman_r_binary": 0.28004504955906695
+    },
+    {
+      "benchmark": "factcc",
+      "mode": "reference-vs-generated",
+      "n": 268,
+      "roc_auc": 0.7302,
+      "pr_auc": 0.9416
+    },
+    {
+      "benchmark": "frank",
+      "mode": "reference-vs-generated",
+      "n": 1000,
+      "roc_auc": 0.8137,
+      "pr_auc": 0.7615
+    },
+    {
+      "benchmark": "aggrefact",
+      "mode": "reference-vs-generated",
+      "n": 1000,
+      "roc_auc": 0.730958,
+      "pr_auc": 0.7025469571218148,
+      "accuracy": 0.667,
+      "pearson_r_binary": 0.3893661791404545,
+      "spearman_r_binary": 0.40003119163023276
+    }
+  ]
+}

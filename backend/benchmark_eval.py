@@ -31,7 +31,7 @@ from scipy.stats import pearsonr, spearmanr
 from sklearn.metrics import roc_auc_score, average_precision_score, accuracy_score
 from tqdm import tqdm
 
-from backend.predict import SimilarityPredictor
+from backend.api.dependencies import get_predictor
 
 _ROOT       = Path(__file__).parent.parent
 BENCHMARK_DIR = _ROOT / "data" / "benchmarks"
@@ -63,21 +63,22 @@ def _run_benchmark(name: str, mode: str | None, predictor_cache: dict) -> dict:
 
     if resolved_mode not in predictor_cache:
         print(f"  Loading predictor for mode: {resolved_mode}")
-        predictor_cache[resolved_mode] = SimilarityPredictor(mode=resolved_mode)
+        predictor_cache[resolved_mode] = get_predictor(resolved_mode)
     predictor = predictor_cache[resolved_mode]
 
     print(f"\n[{name}] {len(pairs)} pairs  mode={resolved_mode}")
 
-    scores, labels, human_scores = [], [], []
-    for pair in tqdm(pairs, desc=f"  Scoring {name}"):
-        try:
-            prob = predictor.predict_pair(pair["text1"], pair["text2"])
-        except Exception:
-            prob = 0.5
-        scores.append(float(prob))
-        labels.append(int(pair["label"]))
-        if "human_score" in pair:
-            human_scores.append(float(pair["human_score"]))
+    text_pairs  = [[p["text1"], p["text2"]] for p in pairs]
+    labels      = [int(p["label"]) for p in pairs]
+    human_scores = [float(p["human_score"]) for p in pairs if "human_score" in p]
+
+    print(f"  Batching {len(text_pairs)} pairs through feature pipeline…")
+    try:
+        results = predictor.predict_batch(text_pairs)
+        scores  = [r["probability"] for r in results]
+    except Exception as exc:
+        print(f"  [ERROR] predict_batch failed: {exc} — falling back to 0.5 scores")
+        scores = [0.5] * len(text_pairs)
 
     scores  = np.array(scores)
     labels  = np.array(labels)

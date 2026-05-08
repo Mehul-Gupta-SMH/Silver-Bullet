@@ -335,7 +335,10 @@ short inputs.
 | 2026-05-08 | [x] | COMMIT v5.8 results — commit b8bd97f | `models/*/best.pth`, `backend/`, `data/` |
 | 2026-05-08 | [x] | HOUSEKEEPING: Frontend v5.8 — FeaturePanel EFG group (3 maps), entity counts updated (CVG 3→2, RVG 4→3, MVM 5→4), triplet model spaCy, footer v5.8; modes.ts CVG description; App.tsx footer 21–23 maps/9 families | `frontend/src/components/FeaturePanel.tsx`, `frontend/src/App.tsx`, `frontend/src/config/modes.ts` |
 | 2026-05-08 | [x] | HOUSEKEEPING: Docs — README.MD Tensor[64→32], AGENT.md EFG section + Tensor[64→32], CURRENT.md benchmark target updated | `README.MD`, `AGENT.md`, `CURRENT.md` |
-<!-- CURSOR: 2026-05-08 — housekeeping complete; frontend + docs reflect v5.8; next: BENCHMARK run (python -m backend.benchmark_eval) -->
+| 2026-05-08 | [x] | BENCHMARK partial: summeval ROC-AUC 0.6905, factcc 0.7302, frank 0.8137 (all RVG) — aggrefact killed at 20% by Bun crash | `benchmark_full.log`, `benchmark_reports/2026-05-08.json` |
+| 2026-05-08 | [x] | BENCHMARK aggrefact: ROC-AUC 0.7310, PR-AUC 0.7025, acc 0.667, Pearson 0.389, Spearman 0.400 (RVG, n=1000) | `benchmark_reports/2026-05-08.json` |
+| 2026-05-08 | [x] | BENCHMARK full v5.8 (RVG): summeval 0.6905, factcc 0.7302, frank 0.8137, aggrefact 0.7310 — consolidated in 2026-05-08.json | `benchmark_reports/2026-05-08.json` |
+<!-- CURSOR: 2026-05-08 — all 4 RVG benchmarks complete; frank best at 0.8137, aggrefact 0.7310; next: run CVG+MVM benchmarks or LinkedIn post -->
 | 2026-04-22 | [x] | SHAP: shap_analysis.py written — GradientExplainer, per-feature mean|SHAP|, bar+beeswarm plots, cross-mode summary table; shap==0.51.0 installed | `backend/shap_analysis.py`, `requirements.txt` |
 | 2026-04-22 | [ ] | SHAP: Run analysis — `python -m backend.shap_analysis --mode all`; outputs to `shap_reports/{mode}/` | `shap_reports/` |
 | 2026-04-22 | [x] | TEST: CVG v5.6 — ROC-AUC 0.8203, acc 0.7414 (↑ from v5.5: 0.8010 / 0.7362) | `test_cvg_v56.log` |

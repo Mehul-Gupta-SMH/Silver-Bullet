@@ -730,10 +730,12 @@ class TextSimilarityDataset(Dataset):
     """
 
     def __init__(self, paragraph_pairs, labels, use_cache=True,
-                 feature_keys: list[str] | None = None):
+                 feature_keys: list[str] | None = None,
+                 free_models: bool = True):
         self.labels       = labels
         self.cache        = FeatureCache() if use_cache else None
         self.feature_keys = feature_keys if feature_keys is not None else FEATURE_KEYS
+        self._free_models = free_models
 
         self.lexical   = LexicalWeights()
         self.semantic  = SemanticWeights()
@@ -855,9 +857,10 @@ class TextSimilarityDataset(Dataset):
         print(f"Feature tensor shape : {self.features.shape}")
         print(f"Labels shape         : {self.labels.shape}")
 
-        # Free extractor models — called as a separate method so its local
-        # imports live in their own scope and cannot shadow any name used above.
-        self._free_extractor_models()
+        # Free extractor models (training only — skip during inference to avoid
+        # reloading weights on every predict call).
+        if self._free_models:
+            self._free_extractor_models()
 
     def _free_extractor_models(self) -> None:
         """Free all feature-extractor model weights from RAM.
