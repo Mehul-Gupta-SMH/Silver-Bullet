@@ -20,7 +20,7 @@ This will allow to restart process without claude memory run over by tokens unne
 Also this can be used to fill in task.md later with more details and information as we go along.
 Once done, the secondary file removes the actions completed and only keeps the pending ones. This way we can have a better overview of what is left to do and what has been done.
 -----------
-Thought 3: [→ TASK.md 2026-05-07: Feature Roadmap — External Factual Grounding (EFG)]
+Thought 3: [→ IMPLEMENTED: v5.8 EFG feature — commit 90afd92, 2026-05-08]
 Current pipeline measures inter-text agreement, but both texts can be wrong. We don't know which text is
 actually telling the truth. To understand what was said, is it actually true or not? Mismatch is one thing,
 but which one actually said the truth? Nobody knows right now.

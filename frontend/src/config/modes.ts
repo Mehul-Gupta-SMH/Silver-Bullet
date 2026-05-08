@@ -72,7 +72,7 @@ export const MODES: ModeConfig[] = [
     label: 'Context vs Generated',
     emoji: '📚',
     tagline: 'Detect hallucinations against source context',
-    description: 'Verify every claim in a generated answer is grounded in the retrieved context — RAG evaluation at inference speed. Trained on HaluEval, RAGTruth, MedHallu, and general RAG hallucination benchmarks.',
+    description: 'Verify every claim in a generated answer is grounded in the retrieved context — RAG evaluation at inference speed. Trained on HaluEval, FEVER, and general NLI/faithfulness benchmarks.',
     text1Label: 'Source Context',
     text2Label: 'Generated Answer',
     text1Placeholder: 'Paste the source document or context provided to the model…',

@@ -10,7 +10,7 @@ and `TASK.md` for current work items.
 
 SilverBullet is a **real-time LLM evaluation benchmark** — not a generic text similarity tool.
 It scores faithfulness, model agreement, and RAG groundedness between two texts using a
-Conv2D model trained on 19–21 multi-signal sentence-pair feature maps (v5.7).
+Conv2D model trained on 21–23 multi-signal sentence-pair feature maps (v5.8).
 
 **Three evaluation modes, each with its own trained model:**
 - `context-vs-generated` — hallucination detection / RAG groundedness
@@ -62,10 +62,11 @@ resolved = resolver.resolve("He went to the store.")
 ```python
 from backend.Features.Semantic.getSemanticWeights import SemanticWeights
 weights = SemanticWeights().getFeatureMap(sent_group1, sent_group2)
-# keys: "mixedbread-ai/mxbai-embed-large-v1",
-#       "Qwen/Qwen3-Embedding-0.6B",
-#       "SOFT_ROW_<model>", "SOFT_COL_<model>"
-# values: torch.Tensor shape [64, 64]
+# keys (4 maps): "mixedbread-ai/mxbai-embed-large-v1",
+#                "PREC_mixedbread-ai/mxbai-embed-large-v1",
+#                "REC_mixedbread-ai/mxbai-embed-large-v1",
+#                "PREC_Qwen/Qwen3-Embedding-0.6B"
+# values: torch.Tensor shape [32, 32]
 ```
 
 - `SemanticFeatures` uses a **class-level `_model_cache`** — loaded once per process.
@@ -79,7 +80,7 @@ weights = SemanticWeights().getFeatureMap(sent_group1, sent_group2)
 ```python
 from backend.Features.Lexical.getLexicalWeights import LexicalWeights
 weights = LexicalWeights().getFeatureMap(sent_group1, sent_group2)
-# keys: "jaccard", "dice", "cosine", "rouge"
+# keys: "jaccard", "dice", "rouge3", "rouge"
 ```
 
 - Class-level `_tokenizer_cache` — tokenizer loaded once per process.
@@ -136,16 +137,16 @@ weights = LCSWeights().getFeatureMap(sent_group1, sent_group2)
 ---
 
 ### `backend/Postprocess/__addpad.py`
-**Pads any n×m matrix to 64×64.**
+**Bilinear-resizes any n×m matrix to 32×32.**
 
 ```python
-from backend.Postprocess.__addpad import pad_matrix
-t = pad_matrix([[1,2],[3,4]], target_size=64)
-# → torch.Tensor shape [64, 64]
+from backend.Postprocess.__addpad import resize_matrix
+t = resize_matrix([[1,2],[3,4]], target_size=32)
+# → torch.Tensor shape [32, 32]
 ```
 
-- Truncates inputs with > 64 rows or > 64 columns (silently drops overflow sentences).
-- **Hard constraint:** texts are limited to 64 sentences each.
+- Uses `torch.nn.functional.interpolate` (bilinear) — every cell carries signal regardless of text length.
+- No hard sentence cap; very short texts (1×1) and long texts (50×50) are both supported.
 
 ---
 
@@ -183,12 +184,12 @@ Thin compatibility wrapper over `CacheDB`. Existing code that uses `FeatureCache
 ---
 
 ### `backend/feature_registry.py`
-**Canonical feature key ordering + checkpoint manifest. VERSION = "5.7"**
+**Canonical feature key ordering + checkpoint manifest. VERSION = "5.8"**
 
 ```python
 from backend.feature_registry import FEATURE_KEYS, FEATURE_KEYS_BY_MODE, build_manifest, validate_manifest, get_feature_keys
-# FEATURE_KEYS: 36 global keys (all extractors)
-# FEATURE_KEYS_BY_MODE: mode-specific subsets — CVG=19, RVG=20, MVM=21
+# FEATURE_KEYS: 39 global keys (all extractors)
+# FEATURE_KEYS_BY_MODE: mode-specific subsets — CVG=21, RVG=22, MVM=23
 # get_feature_keys(mode) → mode-specific list or global fallback
 # build_manifest(feature_keys) → dict with version, features, num_features, spatial_size, created_at
 # validate_manifest(manifest, expected_keys) → raises RuntimeError if mismatch
@@ -207,7 +208,7 @@ from backend.feature_registry import FEATURE_KEYS, FEATURE_KEYS_BY_MODE, build_m
 **Current architecture (Conv2D, spatial_size=32):**
 ```python
 from backend.model import TextSimilarityCNN
-model = TextSimilarityCNN(num_features=19)  # or 20/21 per mode
+model = TextSimilarityCNN(num_features=21)  # or 22/23 per mode (v5.8)
 # Input:  [batch, num_features, 32, 32]
 # Output: [batch, 1]  sigmoid → [0, 1]
 ```
@@ -384,7 +385,7 @@ This breaks the `hasattr` guard — model reloads on every call.
 def getFeatureMap(self, list1: List[str], list2: List[str]) -> Dict[str, torch.Tensor]:
     self._reset_state()
     ...
-    return self.comparison_weights   # dict of {name: Tensor[64,64]}
+    return self.comparison_weights   # dict of {name: Tensor[32,32]}
 ```
 
 ### PITFALL: Key collisions in `feature_map.update()`
@@ -409,9 +410,10 @@ Changing which extractors run (or their key order) invalidates:
 8. Add to `backend/example.py` for manual testing
 9. Clear `./cache/` (or let the incremental merge handle it) and retrain all mode-specific models
 
-### Planned: External Factual Grounding (EFG)
+### Implemented: External Factual Grounding (EFG) — v5.8
 `backend/Features/Factual/getFactualGrounding.py` using `MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli`.
-Per-sentence factuality scores → n×m delta matrix. Detects which text is more world-knowledge-supported (complements agreement signal). Implement after v5.7 SHAP analysis.
+3 maps: `efg_supports`, `efg_refutes`, `efg_factual_delta`. Detects which text is more world-knowledge-supported.
+EFG is the largest single-version gain — RVG +2.8pp ROC-AUC in v5.8.
 
 ---
 

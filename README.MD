@@ -65,7 +65,7 @@ TextSimilarityCNN  [B, F, 32, 32]  (F = 21–23, mode-specific, v5.8)
 Score ∈ [0, 1]
 ```
 
-> **Bilinear resize vs zero-padding:** Each n×m matrix is resized to 64×64 using bilinear interpolation so every cell carries a real signal regardless of input length. Zero-padding (the previous approach) produced ~99% sparse maps for short texts, causing the CNN to deflate scores for short-but-similar inputs.
+> **Bilinear resize vs zero-padding:** Each n×m matrix is resized to 32×32 using bilinear interpolation so every cell carries a real signal regardless of input length. Zero-padding (the previous approach) produced ~99% sparse maps for short texts, causing the CNN to deflate scores for short-but-similar inputs.
 
 ---
 
@@ -83,18 +83,18 @@ Silver-Bullet/
 │   │   ├── Semantic/               # 4 maps — embedding cosine + soft alignment
 │   │   ├── Lexical/                # 4 maps — token overlap (SentencePiece)
 │   │   ├── NLI/                    # 3 maps — entailment probabilities
-│   │   ├── EntityGroups/           # up to 8 maps — GLiNER NER mismatch + per-type value overlap
+│   │   ├── EntityGroups/           # up to 9 maps — GLiNER NER mismatch + per-type value overlap
 │   │   ├── LCS/                    # 2 maps — token + char LCS
 │   │   ├── Numeric/                # 1 map  — normalised numeric token Jaccard
 │   │   ├── Relations/              # 1 map  — entity grounding recall (GLiNER shared cache)
 │   │   ├── SVO/                    # 1 map  — spaCy dep-tree SVO triplet recall
-│   │   └── EFG/                    # 3 maps — DeBERTa-v3 factual grounding (v5.8 new)
+│   │   └── Factual/                # 3 maps — DeBERTa-v3 factual grounding (v5.8 new)
 │   ├── Splitter/
 │   │   └── sentence_splitter.py    # split_txt() — regex split + coref per sentence
 │   ├── Preprocess/coref/
 │   │   └── resolveEntity.py        # EntityResolver — GPT-4o-mini or local Gemma
 │   ├── Postprocess/
-│   │   └── __addpad.py             # resize_matrix() — bilinear resize n×m → 64×64
+│   │   └── __addpad.py             # resize_matrix() — bilinear resize n×m → 32×32
 │   ├── resources/
 │   │   ├── config.yaml             # API keys (gitignored — use env vars instead)
 │   │   ├── config.yaml.example     # Template — commit this, not config.yaml
@@ -366,7 +366,7 @@ docker pull ghcr.io/mehul-gupta-smh/silver-bullet:latest
 
 ## Model Architecture
 
-`TextSimilarityCNN` takes stacked feature maps as `[batch, 16, 32, 32]` input:
+`TextSimilarityCNN` takes stacked feature maps as `[batch, F, 32, 32]` input (F = 21–23, mode-specific):
 
 ```
 [B, F, 32, 32]  (F = 21–23, mode-specific basket, v5.8)
@@ -388,11 +388,11 @@ Training uses **MSELoss** (supports continuous float faithfulness labels as well
 
 **v5.8** (feature pipeline with EFG, 21–23 channels per mode):
 
-| Mode | Test ROC-AUC | Accuracy | MCC | Feature count | Train pairs |
-|------|-------------|----------|-----|--------------|-------------|
-| `context-vs-generated` | — | — | — | 21 | ~7,941 |
-| `reference-vs-generated` | — | — | — | 22 | ~9,676 |
-| `model-vs-model` | — | — | — | 23 | ~7,000 |
+| Mode | Test ROC-AUC | Accuracy | F1 | MCC | Feature count | Train pairs |
+|------|-------------|----------|----|-----|--------------|-------------|
+| `context-vs-generated` | 0.8130 | 72% | 0.723 | 0.448 | 21 | ~7,941 |
+| `reference-vs-generated` | 0.9283 | 85% | 0.854 | 0.700 | 22 | ~9,676 |
+| `model-vs-model` | 0.8969 | 81% | 0.816 | 0.612 | 23 | ~7,000 |
 
 **v5.7** (final, 19–20 channels per mode): CVG 0.8053/71.98%, RVG 0.9001/81.54%, MVM 0.8919/81.66%
 
@@ -458,7 +458,7 @@ Every checkpoint embeds `num_features` and a feature manifest so the model can b
 ## Adding a New Feature Extractor
 
 1. Create `backend/Features/{Name}/get{Name}Weights.py`
-2. Implement `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[64,64]]` using the `_reset_state()` pattern (see `AGENT.md`)
+2. Implement `getFeatureMap(list1, list2) -> dict[str, torch.Tensor[32,32]]` using the `_reset_state()` pattern (see `AGENT.md`)
 3. Register the new feature keys in `backend/feature_registry.py` → `FEATURE_KEYS`
 4. Add the extractor to `backend/train.py` and `backend/example.py`
 5. Retrain — the cache is incremental and does not need to be cleared. Missing keys are computed and merged per entry on the first training run.
